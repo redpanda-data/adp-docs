@@ -1,0 +1,71 @@
+name: replace-this # Required. This is the URL compliant name of the product. This will appear in the URL for this product's docs.
+title: Replace this # Required. This is the name of the product. This will appear in the navbar as well as the product selector and home page.
+version: # Required. If the product is versioned, add a version. Otherwise, use ~
+start_page: home:index.adoc # Do not modify. This is the resource ID of the home page.
+nav:
+- modules/ROOT/nav.adoc # Do not modify. This is the path to the nav tree source.
+asciidoc:
+  attributes:
+    # Only read from the latest version (if the docs are versioned)
+    page-header-data:
+      order: # Required. This is the order in which the product will appear in the navbar. Use a number.
+      color: # Required. This is the color of the navbar for this product doc set. For example '#107569'
+    # Name of the Redpanda UI used in content that is single-sourced with Redpanda Cloud.
+    ui: Redpanda Console@
+    # Fallback versions
+    # We try to fetch the latest from GitHub at build time
+    # --
+    full-version: 24.2.2
+    latest-release-commit: '72ba3d3'
+    latest-operator-version: 'v2.2.0-24.2.2'
+    latest-redpanda-helm-chart-version: 5.8.3
+    redpanda-beta-version: 24.2.2-rc5
+    # --
+    badge-deprecated: 'image:https://img.shields.io/badge/-Deprecated-red.svg[xref=upgrade:deprecated/index.adoc]'
+    removals-without-aliases:
+    # Data for the home page
+    page-home-intro:
+    page-home-image: panda.png # images must be in modules/ROOT/images
+    page-home-intro-learn-more: # Antora resource ID. For example get-started:intro-to-events.adoc
+    page-home-primary-row-title: # for example 'Deploy'
+    page-home-primary-row:
+      - title: ""
+        description: ""
+        url: # Antora resource ID. For example get-started:intro-to-events.adoc
+        link-text: # for example 'Get started'
+      - title: ""
+        description: ""
+        url: # Antora resource ID. For example get-started:intro-to-events.adoc
+        link-text: # for example 'Get started' or 'Learn more'
+      - title: ""
+        description: ""
+        url: # Antora resource ID. For example get-started:intro-to-events.adoc
+        link-text: # for example 'Get started'
+    page-home-secondary-row-title: # for example 'Popular topics'
+    page-home-secondary-row:
+      - title: ""
+        description: ""
+        url: ""
+        link-text: ""
+      - title: ""
+        description: ""
+        url: ""
+        link-text: ""
+      - title: ""
+        description: ""
+        url: ""
+        link-text: ""
+      - title: ""
+        description: ""
+        url: ""
+        link-text: ""
+    page-home-tertiary-row-title: ""
+    page-home-tertiary-row:
+      - title: ""
+        url: ""
+      - title: ""
+        url: ""
+      - title: ""
+        url: ""
+      - title: ""
+        url: ""
