@@ -6,7 +6,7 @@
 :learning-objective-2: Route your first request through AI Gateway and verify it works
 :learning-objective-3: Verify request routing and token usage in the gateway overview
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 Redpanda AI Gateway keeps your AI-powered applications running and your costs under control by routing all LLM and MCP traffic through a single managed layer with automatic failover and budget enforcement. This quickstart walks you through configuring your first gateway and routing requests through it.
 
@@ -372,7 +372,7 @@ Guard for field existence:
 has(request.body.max_tokens) && request.body.max_tokens > 1000
 ----
 
-For more CEL examples, see xref:ai-agents:ai-gateway/cel-routing-cookbook.adoc[].
+For more CEL examples, see xref:ai-gateway/cel-routing-cookbook.adoc[].
 
 == Connect AI tools to your gateway
 
@@ -431,7 +431,7 @@ Alternatively, edit `~/.claude/config.json`:
 ----
 
 ifdef::integrations-available[]
-For detailed Claude Code setup, see xref:ai-agents:ai-gateway/integrations/claude-code-user.adoc[].
+For detailed Claude Code setup, see xref:ai-gateway/integrations/claude-code-user.adoc[].
 endif::[]
 
 === Continue.dev
@@ -468,7 +468,7 @@ Edit your Continue config file (`~/.continue/config.json`):
 ----
 
 ifdef::integrations-available[]
-For detailed Continue setup, see xref:ai-agents:ai-gateway/integrations/continue-user.adoc[].
+For detailed Continue setup, see xref:ai-gateway/integrations/continue-user.adoc[].
 endif::[]
 
 === Cursor IDE
@@ -483,7 +483,7 @@ Configure Cursor in Settings (*Cursor* → *Settings* or `Cmd+,`):
 ----
 
 ifdef::integrations-available[]
-For detailed Cursor setup, see xref:ai-agents:ai-gateway/integrations/cursor-user.adoc[].
+For detailed Cursor setup, see xref:ai-gateway/integrations/cursor-user.adoc[].
 endif::[]
 
 === Custom applications
@@ -530,13 +530,13 @@ const openai = new OpenAI({
 
 Explore advanced AI Gateway features:
 
-* xref:ai-agents:ai-gateway/cel-routing-cookbook.adoc[]: Advanced CEL routing patterns for traffic distribution and cost optimization
-* xref:ai-agents:ai-gateway/mcp-aggregation-guide.adoc[]: Configure MCP server aggregation and deferred tool loading
+* xref:ai-gateway/cel-routing-cookbook.adoc[]: Advanced CEL routing patterns for traffic distribution and cost optimization
+* xref:ai-gateway/mcp-aggregation-guide.adoc[]: Configure MCP server aggregation and deferred tool loading
 ifdef::integrations-available[]
-* xref:ai-agents:ai-gateway/integrations/index.adoc[]: Connect more AI development tools
+* xref:ai-gateway/integrations/index.adoc[]: Connect more AI development tools
 endif::[]
 
 Learn about the architecture:
 
-* xref:ai-agents:ai-gateway/gateway-architecture.adoc[]: Technical architecture, request lifecycle, and deployment models
-* xref:ai-agents:ai-gateway/what-is-ai-gateway.adoc[]: Problems AI Gateway solves and common use cases
+* xref:ai-gateway/gateway-architecture.adoc[]: Technical architecture, request lifecycle, and deployment models
+* xref:ai-gateway/what-is-ai-gateway.adoc[]: Problems AI Gateway solves and common use cases

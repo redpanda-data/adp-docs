@@ -6,7 +6,7 @@
 :learning-objective-2: Set up multi-provider backends with native format routing
 :learning-objective-3: Deploy MCP tool aggregation for Continue.dev tool discovery
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 Configure Redpanda AI Gateway to support Continue.dev clients accessing multiple LLM providers and MCP tools through flexible, native-format endpoints.
 
@@ -21,7 +21,7 @@ After reading this page, you will be able to:
 * AI Gateway deployed on a BYOC cluster running Redpanda version 25.3 or later
 * Administrator access to the AI Gateway UI
 * API keys for at least one LLM provider (Anthropic, OpenAI, or others)
-* Understanding of xref:ai-agents:ai-gateway/gateway-architecture.adoc[AI Gateway concepts]
+* Understanding of xref:ai-gateway/gateway-architecture.adoc[AI Gateway concepts]
 
 == About Continue.dev
 
@@ -324,7 +324,7 @@ Enable Continue.dev to discover and use tools from multiple MCP servers through 
 |Descriptive name (for example, `redpanda-data-catalog`, `code-search-tools`)
 
 |Endpoint URL
-|MCP server endpoint (for example, xref:ai-agents:mcp/remote/overview.adoc[Remote MCP server] URL)
+|MCP server endpoint (for example, xref:mcp/remote/overview.adoc[Remote MCP server] URL)
 
 |Authentication
 |Bearer token or other authentication mechanism
@@ -483,7 +483,7 @@ transport:
     Authorization: Bearer YOUR_API_TOKEN
 ----
 +
-IMPORTANT: For production deployments, use environment variable interpolation with `${{ secrets.VARIABLE }}` syntax instead of hardcoding tokens. See xref:ai-agents:ai-gateway/integrations/continue-user.adoc#configure-env-vars[Configure with environment variables] in the user guide for details.
+IMPORTANT: For production deployments, use environment variable interpolation with `${{ secrets.VARIABLE }}` syntax instead of hardcoding tokens. See xref:ai-gateway/integrations/continue-user.adoc#configure-env-vars[Configure with environment variables] in the user guide for details.
 
 Continue.dev automatically discovers MCP server configurations in this directory.
 
@@ -737,5 +737,5 @@ This is expected behavior, not a configuration issue:
 
 == Next steps
 
-* xref:ai-agents:ai-gateway/cel-routing-cookbook.adoc[]: Implement advanced routing rules
-* xref:ai-agents:mcp/remote/overview.adoc[]: Deploy Remote MCP servers for custom tools
+* xref:ai-gateway/cel-routing-cookbook.adoc[]: Implement advanced routing rules
+* xref:mcp/remote/overview.adoc[]: Deploy Remote MCP servers for custom tools

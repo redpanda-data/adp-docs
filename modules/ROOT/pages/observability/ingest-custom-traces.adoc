@@ -5,7 +5,7 @@
 :learning-objective-2: Validate trace data format and compatibility with existing MCP server traces
 :learning-objective-3: Secure the ingestion endpoint using authentication mechanisms
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 You can extend Redpanda's transcript observability to custom agents built with frameworks like LangChain or instrumented with OpenTelemetry SDKs. By ingesting traces from external applications into the `redpanda.otel_traces` topic, you gain unified visibility across all agent executions, from Redpanda's declarative agents, Remote MCP servers, to your own custom implementations.
 
@@ -59,7 +59,7 @@ For non-LangChain applications or custom instrumentation, continue with the sect
 
 Custom agents are applications with OpenTelemetry instrumentation that operate independently of Redpanda's Remote MCP servers or declarative agents (such as LangChain, CrewAI, or manually instrumented applications).
 
-When these agents send traces to `redpanda.otel_traces`, you gain unified observability alongside Remote MCP server and declarative agent traces. See xref:ai-agents:observability/concepts.adoc#cross-service-transcripts[Cross-service transcripts] for details on how traces correlate across services.
+When these agents send traces to `redpanda.otel_traces`, you gain unified observability alongside Remote MCP server and declarative agent traces. See xref:observability/concepts.adoc#cross-service-transcripts[Cross-service transcripts] for details on how traces correlate across services.
 
 === Trace format requirements
 
@@ -95,7 +95,7 @@ Optional but recommended fields:
 - `parentSpanId` for hierarchical traces
 - `attributes` for contextual information
 
-For complete trace structure details, see xref:ai-agents:observability/concepts.adoc#understand-the-transcript-structure[Understand the transcript structure].
+For complete trace structure details, see xref:observability/concepts.adoc#understand-the-transcript-structure[Understand the transcript structure].
 
 == Configure the ingestion pipeline
 
@@ -568,7 +568,7 @@ After your custom agent sends traces through the pipeline, they appear in your c
 
 ==== Identify custom agent transcripts
 
-Custom agent transcripts are identified by the `service.name` resource attribute, which differs from Redpanda's built-in services (`ai-agent` for declarative agents, `mcp-{server-id}` for MCP servers). See xref:ai-agents:observability/concepts.adoc#cross-service-transcripts[Cross-service transcripts] to understand how the `service.name` attribute identifies transcript sources.
+Custom agent transcripts are identified by the `service.name` resource attribute, which differs from Redpanda's built-in services (`ai-agent` for declarative agents, `mcp-{server-id}` for MCP servers). See xref:observability/concepts.adoc#cross-service-transcripts[Cross-service transcripts] to understand how the `service.name` attribute identifies transcript sources.
 
 Your custom agent transcripts display with:
 
@@ -576,7 +576,7 @@ Your custom agent transcripts display with:
 * **Agent name** in span details (from the `gen_ai.agent.name` attribute)
 * **Operation names** like `"invoke_agent my-assistant"` indicating agent executions
 
-For detailed instructions on filtering, searching, and navigating transcripts in the UI, see xref:ai-agents:observability/transcripts.adoc[View Transcripts].
+For detailed instructions on filtering, searching, and navigating transcripts in the UI, see xref:observability/transcripts.adoc[View Transcripts].
 
 ==== Token usage tracking
 
@@ -614,7 +614,7 @@ If requests succeed but traces do not appear in `redpanda.otel_traces`:
 
 == Next steps
 
-* xref:ai-agents:observability/transcripts.adoc[]
-* xref:ai-agents:agents/monitor-agents.adoc[Observability for declarative agents]
+* xref:observability/transcripts.adoc[]
+* xref:agents/monitor-agents.adoc[Observability for declarative agents]
 * xref:develop:connect/components/inputs/otlp_http.adoc[OTLP HTTP input reference] - Complete configuration options for the `otlp_http` component
 * xref:develop:connect/components/inputs/otlp_grpc.adoc[OTLP gRPC input reference] - Alternative gRPC-based trace ingestion

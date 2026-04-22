@@ -6,7 +6,7 @@
 :learning-objective-2: Apply tool orchestration patterns to handle multi-step workflows
 :learning-objective-3: Evaluate how system prompt design affects agent tool selection
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 This tutorial shows you how to build a customer support agent to learn how agents orchestrate multiple tools, make context-aware decisions, and handle incomplete data.
 
@@ -39,7 +39,7 @@ The challenge: users phrase requests differently ("Where's my package?", "Track 
 == Prerequisites
 
 * A xref:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
-* xref:ai-agents:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
+* xref:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
 
 == Design the MCP tools
 
@@ -81,7 +81,7 @@ This tool uses the `mapping` processor to return mock data. The mock approach en
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/get_order_status.yaml[]
+include::ROOT:example$mcp-tools/processors/get_order_status.yaml[]
 ----
 
 get_shipping_info::
@@ -90,7 +90,7 @@ This tool demonstrates conditional data: it only returns tracking information wh
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/get_shipping_info.yaml[]
+include::ROOT:example$mcp-tools/processors/get_shipping_info.yaml[]
 ----
 
 get_customer_history::
@@ -99,7 +99,7 @@ This tool returns multiple orders, demonstrating list-handling. The agent must f
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/get_customer_history.yaml[]
+include::ROOT:example$mcp-tools/processors/get_customer_history.yaml[]
 ----
 ====
 
@@ -256,7 +256,7 @@ This demonstrates error recovery without hallucination. The "Never make up track
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:ai-agents:agents/troubleshooting.adoc[].
+For comprehensive troubleshooting guidance, see xref:agents/troubleshooting.adoc[].
 
 === Test with mock data
 
@@ -269,7 +269,7 @@ Use these documented test IDs when testing the agent. If you replace the mock to
 
 == Next steps
 
-* xref:ai-agents:mcp/remote/tool-patterns.adoc#call-external-apis[Call external APIs]
-* xref:ai-agents:agents/prompt-best-practices.adoc[]
-* xref:ai-agents:agents/architecture-patterns.adoc[]
-* xref:ai-agents:agents/troubleshooting.adoc[]
+* xref:mcp/remote/tool-patterns.adoc#call-external-apis[Call external APIs]
+* xref:agents/prompt-best-practices.adoc[]
+* xref:agents/architecture-patterns.adoc[]
+* xref:agents/troubleshooting.adoc[]

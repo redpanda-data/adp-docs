@@ -3,4 +3,4 @@
 :page-layout: index
 :personas: platform_admin, app_developer, evaluator
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]

@@ -1,6 +1,7 @@
 = MCP Tool Execution and Components
 :description: Understand how MCP tools execute requests, choose the right Redpanda Connect component type, and use traces for observability.
-:page-aliases: ai-agents:mcp/remote/understanding-mcp-tools.adoc
+// TODO: Add 'redpanda-cloud:ai-agents:mcp/remote/concepts.adoc' after ai-agents removed from cloud-docs
+:page-aliases: redpanda-cloud:ai-agents:mcp/remote/understanding-mcp-tools.adoc
 :page-topic-type: concepts
 :personas: agent_developer, streaming_developer
 // Reader journey: "I want to understand how it works"
@@ -23,7 +24,7 @@ include::redpanda-connect:ai-agents:partial$mcp/concepts/component-mapping.adoc[
 // Execution model - single-sourced from partial
 include::redpanda-connect:ai-agents:partial$mcp/concepts/execution-model.adoc[]
 
-MCP tools use an agent-initiated execution model where agents invoke tools on-demand. Redpanda also supports pipeline-initiated integration where pipelines call agents using the `a2a_message` processor. For guidance on choosing between these patterns, see xref:ai-agents:agents/integration-overview.adoc[].
+MCP tools use an agent-initiated execution model where agents invoke tools on-demand. Redpanda also supports pipeline-initiated integration where pipelines call agents using the `a2a_message` processor. For guidance on choosing between these patterns, see xref:agents/integration-overview.adoc[].
 
 [[component-selection]]
 == Choose the right component type
@@ -33,15 +34,15 @@ include::redpanda-connect:ai-agents:partial$mcp/concepts/component-selection.ado
 
 == Observability
 
-MCP servers automatically emit OpenTelemetry traces for monitoring and debugging. For detailed information about traces, spans, and the trace structure, see xref:ai-agents:observability/concepts.adoc[].
+MCP servers automatically emit OpenTelemetry traces for monitoring and debugging. For detailed information about traces, spans, and the trace structure, see xref:observability/concepts.adoc[].
 
-To monitor MCP server activity, consume traces, and debug failures, see xref:ai-agents:mcp/remote/monitor-mcp-servers.adoc[].
+To monitor MCP server activity, consume traces, and debug failures, see xref:mcp/remote/monitor-mcp-servers.adoc[].
 
 include::partial$service-account-authorization.adoc[]
 
 == Next steps
 
-* xref:ai-agents:mcp/remote/create-tool.adoc[]
-* xref:ai-agents:mcp/remote/best-practices.adoc[]
-* xref:ai-agents:mcp/remote/tool-patterns.adoc[]
-* xref:ai-agents:mcp/remote/troubleshooting.adoc[]
+* xref:mcp/remote/create-tool.adoc[]
+* xref:mcp/remote/best-practices.adoc[]
+* xref:mcp/remote/tool-patterns.adoc[]
+* xref:mcp/remote/troubleshooting.adoc[]

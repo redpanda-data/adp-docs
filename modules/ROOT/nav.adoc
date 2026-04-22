@@ -1,0 +1,53 @@
+* xref:index.adoc[Overview]
+** xref:adp-overview.adoc[ADP Overview]
+* Get Started
+** xref:agents/quickstart.adoc[Build Your First Agent]
+** xref:mcp/remote/quickstart.adoc[Remote MCP Quickstart]
+** xref:ai-gateway/gateway-quickstart.adoc[AI Gateway Quickstart]
+* Agents
+** xref:agents/overview.adoc[Overview]
+** xref:agents/concepts.adoc[Concepts]
+** xref:agents/create-agent.adoc[Create an Agent]
+** xref:agents/prompt-best-practices.adoc[System Prompt Best Practices]
+** xref:agents/architecture-patterns.adoc[Architecture Patterns] badge:BYOC[]
+** xref:agents/monitor-agents.adoc[Monitor Agents]
+** xref:agents/troubleshooting.adoc[Troubleshoot] badge:BYOC[]
+** Tutorials
+*** xref:agents/tutorials/customer-support-agent.adoc[Multi-Tool Orchestration]
+*** xref:agents/tutorials/transaction-dispute-resolution.adoc[Multi-Agent Systems]
+** Integrations
+*** xref:agents/integration-overview.adoc[Integration Patterns]
+*** xref:agents/pipeline-integration-patterns.adoc[Pipeline to Agent]
+*** xref:agents/a2a-concepts.adoc[A2A Protocol]
+* MCP Servers
+** xref:mcp/overview.adoc[Overview]
+** Remote MCP
+*** xref:mcp/remote/overview.adoc[Overview]
+*** xref:mcp/remote/concepts.adoc[Concepts]
+*** xref:mcp/remote/quickstart.adoc[Quickstart]
+*** xref:mcp/remote/create-tool.adoc[Create a Tool]
+*** xref:mcp/remote/best-practices.adoc[Best Practices]
+*** xref:mcp/remote/tool-patterns.adoc[Tool Patterns]
+*** xref:mcp/remote/manage-servers.adoc[Manage Servers]
+*** xref:mcp/remote/monitor-mcp-servers.adoc[Monitor MCP Servers]
+*** xref:mcp/remote/scale-resources.adoc[Scale Resources] badge:BYOC[]
+*** xref:mcp/remote/troubleshooting.adoc[Troubleshoot]
+** Local MCP
+*** xref:mcp/local/overview.adoc[Overview]
+*** xref:mcp/local/quickstart.adoc[Quickstart]
+*** xref:mcp/local/configuration.adoc[Configure]
+* AI Gateway
+** xref:ai-gateway/what-is-ai-gateway.adoc[Overview]
+** xref:ai-gateway/gateway-quickstart.adoc[Quickstart]
+** xref:ai-gateway/gateway-architecture.adoc[Architecture]
+** For Administrators
+*** xref:ai-gateway/admin/setup-guide.adoc[Setup Guide]
+** For Builders
+*** xref:ai-gateway/builders/discover-gateways.adoc[Discover Gateways]
+*** xref:ai-gateway/builders/connect-your-agent.adoc[Connect Your Agent]
+*** xref:ai-gateway/cel-routing-cookbook.adoc[CEL Routing Patterns] badge:BYOC[]
+*** xref:ai-gateway/mcp-aggregation-guide.adoc[MCP Gateway] badge:BYOC[]
+* Observability
+** xref:observability/concepts.adoc[Concepts]
+** xref:observability/transcripts.adoc[View Transcripts]
+** xref:observability/ingest-custom-traces.adoc[Ingest Traces from Custom Agents]

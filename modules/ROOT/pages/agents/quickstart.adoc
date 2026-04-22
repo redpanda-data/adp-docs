@@ -6,7 +6,7 @@
 :learning-objective-2: Configure the agent with a system prompt and model selection
 :learning-objective-3: Test the agent by generating and publishing events through natural language
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 This quickstart helps you build your first AI agent in Redpanda Cloud. You'll create an agent that understands natural language requests and uses MCP tools to generate and publish event data to Redpanda topics.
 
@@ -20,9 +20,9 @@ After completing this quickstart, you will be able to:
 
 * A xref:get-started:cluster-types/byoc/index.adoc[BYOC cluster] (agents are not available on Dedicated or Serverless clusters)
 
-* xref:ai-agents:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, or Google AI)
+* xref:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, or Google AI)
 
-* Completed the xref:ai-agents:mcp/remote/quickstart.adoc[Remote MCP Quickstart] to create an MCP server with the following tools deployed:
+* Completed the xref:mcp/remote/quickstart.adoc[Remote MCP Quickstart] to create an MCP server with the following tools deployed:
 +
 ** `generate_input`: Generates fake user event data
 ** `redpanda_output`: Publishes data to Redpanda topics
@@ -99,7 +99,7 @@ Response format:
 
 . Review your configuration and click *Create Agent*.
 +
-TIP: A service account is automatically created to authenticate your agent with cluster resources. For details about default permissions and how to manage service accounts, see xref:ai-agents:agents/concepts.adoc#service-account-authorization[Service account authorization].
+TIP: A service account is automatically created to authenticate your agent with cluster resources. For details about default permissions and how to manage service accounts, see xref:agents/concepts.adoc#service-account-authorization[Service account authorization].
 
 . Wait for the agent status to change from *Starting* to *Running*.
 
@@ -170,7 +170,7 @@ Try modifying the agent to change its behavior:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:ai-agents:agents/troubleshooting.adoc[].
+For comprehensive troubleshooting guidance, see xref:agents/troubleshooting.adoc[].
 
 Common quickstart issue:
 
@@ -180,8 +180,8 @@ Common quickstart issue:
 
 You've created an agent that orchestrates MCP tools through natural language. Explore more:
 
-* xref:ai-agents:agents/overview.adoc[]
-* xref:ai-agents:agents/create-agent.adoc[]
-* xref:ai-agents:agents/prompt-best-practices.adoc[]
-* xref:ai-agents:agents/architecture-patterns.adoc[]
-* xref:ai-agents:mcp/remote/tool-patterns.adoc[]
+* xref:agents/overview.adoc[]
+* xref:agents/create-agent.adoc[]
+* xref:agents/prompt-best-practices.adoc[]
+* xref:agents/architecture-patterns.adoc[]
+* xref:mcp/remote/tool-patterns.adoc[]

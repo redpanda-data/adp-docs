@@ -6,7 +6,7 @@
 :learning-objective-2: Verify gateway connectivity and compare performance metrics
 :learning-objective-3: Roll back to direct integration if issues arise during migration
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 This guide helps you migrate existing applications from direct LLM provider integrations (OpenAI, Anthropic, and others) to Redpanda AI Gateway. Design the migration to be incremental and reversible, allowing you to test thoroughly before fully committing.
 
@@ -875,5 +875,5 @@ A/B testing
 
 == Next steps
 
-* xref:ai-agents:ai-gateway/cel-routing-cookbook.adoc[]: Configure advanced routing policies.
-* xref:ai-agents:ai-gateway/mcp-aggregation-guide.adoc[]: Explore MCP aggregation.
+* xref:ai-gateway/cel-routing-cookbook.adoc[]: Configure advanced routing policies.
+* xref:ai-gateway/mcp-aggregation-guide.adoc[]: Explore MCP aggregation.

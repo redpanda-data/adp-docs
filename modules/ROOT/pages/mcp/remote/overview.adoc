@@ -54,7 +54,7 @@ Here's a minimal example that returns weather data:
 
 [source,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/get_weather_simple.yaml[tag=complete,indent=0]
+include::ROOT:example$mcp-tools/processors/get_weather_simple.yaml[tag=complete,indent=0]
 ----
 
 When an AI client asks about weather, it calls this tool with the city name. The tool fetches data from the weather API and returns it.
@@ -64,9 +64,9 @@ include::redpanda-connect:ai-agents:partial$mcp/overview/specification-support.a
 
 == Next steps
 
-* xref:ai-agents:mcp/remote/quickstart.adoc[]
-* xref:ai-agents:agents/overview.adoc[]
-* xref:ai-agents:mcp/remote/concepts.adoc[]
-* xref:ai-agents:mcp/remote/create-tool.adoc[]
+* xref:mcp/remote/quickstart.adoc[]
+* xref:agents/overview.adoc[]
+* xref:mcp/remote/concepts.adoc[]
+* xref:mcp/remote/create-tool.adoc[]
 * link:https://modelcontextprotocol.io/[Model Context Protocol documentation^]
 

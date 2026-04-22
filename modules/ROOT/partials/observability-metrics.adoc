@@ -6,7 +6,7 @@
 :learning-objective-2: Compare model and provider performance using latency and cost metrics
 :learning-objective-3: Configure alerts for budget thresholds and performance degradation
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 AI Gateway provides aggregate metrics and analytics dashboards to help you understand usage patterns, costs, performance, and errors across all your LLM traffic.
 
@@ -24,7 +24,7 @@ Use metrics for:
 * Capacity planning
 * Model/provider comparison
 
-Use logs for: Debugging specific requests, viewing full prompts/responses. See xref:ai-agents:ai-gateway/observability-logs.adoc[].
+Use logs for: Debugging specific requests, viewing full prompts/responses. See xref:ai-gateway/observability-logs.adoc[].
 
 == Where to find metrics
 
@@ -852,9 +852,9 @@ Possible causes:
 Solution:
 
 1. Remove filters, widen time range
-2. Send test request (see xref:ai-agents:ai-gateway/gateway-quickstart.adoc[])
+2. Send test request (see xref:ai-gateway/gateway-quickstart.adoc[])
 3. Check permissions with admin
 
 == Next steps
 
-* xref:ai-agents:ai-gateway/observability-logs.adoc[]: View individual requests and debug issues.
+* xref:ai-gateway/observability-logs.adoc[]: View individual requests and debug issues.

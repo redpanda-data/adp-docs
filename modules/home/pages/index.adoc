@@ -1,3 +1,0 @@
-= Redpanda {page-component-title} Documentation
-:page-role: component-home-v2
-:description: Home page for the Redpanda {page-component-title} docs.
