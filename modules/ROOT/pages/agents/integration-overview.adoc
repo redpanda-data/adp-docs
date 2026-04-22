@@ -6,7 +6,7 @@
 :learning-objective-2: Apply appropriate authentication for internal versus external integration
 :learning-objective-3: Select the right communication protocol for your integration scenario
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 Redpanda Cloud supports multiple integration patterns for agents, pipelines, and external applications. Choose the pattern that matches your integration scenario.
 
@@ -27,17 +27,17 @@ Redpanda Cloud supports three primary integration scenarios based on who initiat
 | Agent needs capabilities
 | Your agent invokes MCP tools to fetch data, call APIs, or access external systems on-demand
 | Agent-initiated, synchronous, interactive workflows
-| xref:ai-agents:mcp/remote/tool-patterns.adoc[]
+| xref:mcp/remote/tool-patterns.adoc[]
 
 | Pipeline processes events
 | Your Redpanda Connect pipeline invokes agents for each event in a stream using the `a2a_message` processor
 | Event-driven, automated, high-volume stream processing
-| xref:ai-agents:agents/pipeline-integration-patterns.adoc[]
+| xref:agents/pipeline-integration-patterns.adoc[]
 
 | External system calls agent
 | Your application or agent (hosted outside Redpanda Cloud) calls Redpanda Cloud agents using the A2A protocol
 | Backend services, CLI tools, custom UIs, multi-platform agent workflows
-| xref:ai-agents:agents/a2a-concepts.adoc[]
+| xref:agents/a2a-concepts.adoc[]
 |===
 
 == Common use cases by pattern
@@ -55,7 +55,7 @@ This pattern works well for interactive workflows: customer support lookups, app
 
 Avoid MCP tools for high-volume stream processing or automated workflows without user interaction. Use pipeline-initiated integration instead.
 
-For implementation details, see xref:ai-agents:mcp/remote/tool-patterns.adoc[].
+For implementation details, see xref:mcp/remote/tool-patterns.adoc[].
 
 [[pipeline-processes-events]]
 === Pipeline processes events (`a2a_message`)
@@ -66,7 +66,7 @@ The pipeline controls when agents execute. This pattern is ideal for automated, 
 
 Common scenarios include real-time fraud detection, sentiment scoring for customer reviews, and content moderation that classifies and routes content.
 
-For implementation details, see xref:ai-agents:agents/pipeline-integration-patterns.adoc[].
+For implementation details, see xref:agents/pipeline-integration-patterns.adoc[].
 
 === External system calls agent
 
@@ -76,7 +76,7 @@ External systems send requests using the A2A protocol and receive responses sync
 
 Common scenarios include backend services analyzing data as part of workflows, CLI tools invoking agents for batch tasks, custom UIs displaying agent responses, CRM agents coordinating with Redpanda agents, and multi-platform workflows spanning different infrastructure.
 
-To learn how the A2A protocol enables this integration, see xref:ai-agents:agents/a2a-concepts.adoc[].
+To learn how the A2A protocol enables this integration, see xref:agents/a2a-concepts.adoc[].
 
 == Pattern comparison
 
@@ -125,6 +125,6 @@ Access tokens grant full access to the agent. Anyone with a valid token can send
 
 == Next steps
 
-* xref:ai-agents:agents/a2a-concepts.adoc[]
-* xref:ai-agents:mcp/remote/tool-patterns.adoc[]
-* xref:ai-agents:agents/pipeline-integration-patterns.adoc[]
+* xref:agents/a2a-concepts.adoc[]
+* xref:mcp/remote/tool-patterns.adoc[]
+* xref:agents/pipeline-integration-patterns.adoc[]

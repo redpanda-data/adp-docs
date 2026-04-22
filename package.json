@@ -1,7 +1,7 @@
 {
-  "name": "redpanda-docs-playbook",
+  "name": "adp-docs",
   "version": "1.0.0",
-  "description": "Redpanda documentation",
+  "description": "Redpanda Agentic Data Plane documentation",
   "license": "ISC",
   "scripts": {
     "build": "antora --to-dir docs --fetch local-antora-playbook.yml",

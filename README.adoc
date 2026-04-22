@@ -1,4 +1,4 @@
-:product: <product-name>
+:product: Agentic Data Plane
 = {product} Documentation
 :url-playbook: https://github.com/redpanda-data/docs-site
 
@@ -7,7 +7,7 @@ image:https://img.shields.io/twitter/follow/redpandadata.svg?style=social&label=
 
 ++++
 <p>
-<a href="https://docs.redpanda.com">
+<a href="https://docs.redpanda.com/redpanda-adp">
 <object type="image/svg+xml">
   <img src="https://raw.githubusercontent.com/redpanda-data/docs-ui/main/src/img/redpanda-docs-logo.svg"/>
 </object>
@@ -16,33 +16,37 @@ image:https://img.shields.io/twitter/follow/redpandadata.svg?style=social&label=
 
 This repository hosts the documentation content for Redpanda {product}.
 
+== About Agentic Data Plane
+
+Redpanda Agentic Data Plane (ADP) provides enterprise-grade infrastructure for building, deploying, and governing AI agents at scale. Key capabilities include:
+
+* **Model Context Protocol (MCP)** - Tool integration for connecting agents to business systems
+* **AI Gateway** - Centralized routing and governance for multi-agent systems
+* **Declarative Agents** - Build production-ready agents with YAML configuration
+* **Observability & Transcripts** - Compliance-grade audit trails and monitoring
+* **Trust & Governance** - Guardrails, token budgets, and kill switches
+
+== Content Types
+
+This documentation includes content for both deployment models:
+
+* **Cloud** - Managed ADP on Redpanda Cloud
+* **BYOC** - Bring Your Own Cloud deployment with additional enterprise features
+
+Pages are tagged with `badge:Cloud[]` or `badge:BYOC[]` to indicate which deployment model they apply to. Pages without badges apply to both.
+
 == Contribute
 
 The Redpanda docs are open source, and we welcome your contributions!
 
 Before you add or edit content, consult the Redpanda https://github.com/redpanda-data/docs-site/blob/main/meta-docs/STYLE-GUIDE.adoc[Style Guide] for product documentation guidelines.
 
-To contribute to the Redpanda docs, you have the following options:
-
-|===
-|Option|Description
-
-|<<Open an issue>>
-|Suggest a change by opening an issue on GitHub.
-
-|<<Contribute content>>
-|Make changes directly to the documentation and submit them through a pull request.
-
-|===
-
 === Open an issue
 
-The Redpanda docs team uses GitHub issues to track, plan, and prioritize tasks. To suggest changes, you can create an issue, which the team will then evaluate:
+The Redpanda docs team uses GitHub issues to track, plan, and prioritize tasks. To suggest changes:
 
-. Verify whether a similar issue already exists in that repository to avoid duplication.
+. Verify whether a similar issue already exists to avoid duplication.
 . Go to **Issues** > **New Issue** to create a new issue.
-
-You have the option to assign the issue to yourself or leave the assignee field blank. The Redpanda docs team triages all new issues and will allocate a writer if one isn't already assigned.
 
 If you are a Redpanda employee, submit doc issues in `redpanda-data/documentation-private`.
 
@@ -53,62 +57,58 @@ You have two options to contribute to the documentation:
 . Directly edit a page on GitHub by selecting **Make a contribution** > **Edit on GitHub** located at the bottom of a documentation page.
 . Clone the docs repository to make changes locally on your machine. For a guide, see {url-playbook}/blob/main/meta-docs/CONTRIBUTING.adoc[Submit your first contribution].
 
-Check the open docs issues. If you find an issue you'd like to work on:
-
-- If the issue is already assigned to someone else, please consider another one.
-- If the issue is unassigned, add a comment expressing your interest in working on it.
-
 == Local development
 
-If you want to run the website locally, install and update the packages:
+Build and preview the docs locally:
 
-```bash
+[source,bash]
+----
 npm update
-```
-
-Then, build the docs and start a local web server:
-
-```bash
 npm run start
-```
+----
 
-This command opens a browser window. Most changes are reflected live without having to restart the server.
+This command opens a browser window with live reload enabled. Changes are reflected automatically.
 
 === Build the site
 
-To build the files, run:
+To build static files:
 
-```bash
+[source,bash]
+----
 npm run build
-```
+----
 
-This command generates static content in the `docs` directory and can be served using any hosting service.
+This generates static content in the `docs` directory.
 
-You can serve the static files on a local web server using:
+To serve the static files locally:
 
-```bash
+[source,bash]
+----
 npm run serve
-```
-
-== Versioning
-
-Versioned content is stored in branches that track the version of Redpanda {product}. Production branches use the *v/x.y* naming pattern. For example, branch `v/22.3` hosts the content for version 22.3.x of Redpanda {product}. The `main` branch always contains docs for the latest release.
-
-The production {url-playbook}[docs site playbook] instructs Antora to automatically aggregate content in the following branches:
-
-- `main`: Content for the latest version of Redpanda {product}.
+----
 
 == Repository Structure
 
-The documentation content is stored in the `modules/` directory, where each module represents a top-level label in the documentation nav tree.
-
-Each module has a `pages/` directory that stores the documentation pages in Asciidoc format. Some modules also include a `partials/` directory that contains single-sourced documentation that can be shared and referenced by any documentation pages across any module.
-
-The `shared` module stores the images, attachments, and partials that do not belong to a single module and can be referenced by any documentation pages across any module.
+This repository does NOT use versioning. The `main` branch contains the current documentation.
 
 ....
-modules/shared
-├── attachments
-├── images
-└── partials
+adp-docs/
+├── antora.yml                    # Antora component configuration
+├── local-antora-playbook.yml     # Local development playbook
+├── package.json                  # npm configuration
+├── README.adoc                   # This file
+└── modules/ROOT/
+    ├── nav.adoc                  # Navigation structure
+    ├── pages/                    # AsciiDoc documentation pages
+    ├── partials/                 # Reusable content snippets
+    ├── examples/                 # YAML configurations and examples
+    └── images/                   # Documentation images
 ....
+
+== Related Repositories
+
+* https://github.com/redpanda-data/docs-site[docs-site] - Antora playbook and site build
+* https://github.com/redpanda-data/docs-ui[docs-ui] - UI theme and components
+* https://github.com/redpanda-data/cloud-docs[cloud-docs] - Redpanda Cloud documentation
+* https://github.com/redpanda-data/docs[docs] - Redpanda self-managed documentation
+* https://github.com/redpanda-data/rp-connect-docs[rp-connect-docs] - Redpanda Connect documentation

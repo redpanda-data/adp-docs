@@ -6,7 +6,7 @@
 :learning-objective-2: Interpret log fields to diagnose performance and cost issues
 :learning-objective-3: Export logs for compliance auditing or long-term analysis
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 AI Gateway logs every LLM request that passes through it, capturing the full request/response history, token usage, cost, latency, and routing decisions. This page explains how to find, filter, and interpret request logs.
 
@@ -24,7 +24,7 @@ Use logs for:
 * Understanding which provider handled a request
 * Investigating latency spikes or errors for specific users
 
-Use metrics for: Aggregate analytics, trends, cost tracking across time. See xref:ai-agents:ai-gateway/observability-metrics.adoc[].
+Use metrics for: Aggregate analytics, trends, cost tracking across time. See xref:ai-gateway/observability-metrics.adoc[].
 
 == Where to find logs
 
@@ -626,7 +626,7 @@ Retention period: // PLACEHOLDER: e.g., 30 days, 90 days, configurable
 After retention period:
 
 * Logs are deleted automatically
-* Aggregate metrics retained longer (see xref:ai-agents:ai-gateway/observability-metrics.adoc[])
+* Aggregate metrics retained longer (see xref:ai-gateway/observability-metrics.adoc[])
 
 Export logs (if needed for longer retention):
 
@@ -769,4 +769,4 @@ Note: Cost estimates are approximate. Use provider invoices for billing.
 
 == Next steps
 
-* xref:ai-agents:ai-gateway/observability-metrics.adoc[]: Aggregate analytics and cost tracking.
+* xref:ai-gateway/observability-metrics.adoc[]: Aggregate analytics and cost tracking.

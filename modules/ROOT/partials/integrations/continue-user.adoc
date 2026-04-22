@@ -6,9 +6,9 @@
 :learning-objective-2: Set up MCP server integration through AI Gateway
 :learning-objective-3: Optimize Continue.dev settings for cost and performance
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
-After xref:ai-agents:ai-gateway/gateway-quickstart.adoc[configuring your AI Gateway], set up Continue.dev to route LLM requests and access MCP tools through the gateway's unified endpoints.
+After xref:ai-gateway/gateway-quickstart.adoc[configuring your AI Gateway], set up Continue.dev to route LLM requests and access MCP tools through the gateway's unified endpoints.
 
 After reading this page, you will be able to:
 
@@ -24,8 +24,8 @@ Before configuring Continue.dev, ensure you have:
 ** VS Code: Search for "Continue" in Extensions
 ** JetBrains IDEs: Install from the JetBrains Marketplace
 * An active Redpanda AI Gateway with:
-** At least one LLM provider enabled (see xref:ai-agents:ai-gateway/gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
-** A gateway created and configured (see xref:ai-agents:ai-gateway/gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
+** At least one LLM provider enabled (see xref:ai-gateway/gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
+** A gateway created and configured (see xref:ai-gateway/gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
 * Your AI Gateway credentials:
 ** Gateway endpoint URL (for example, `\https://gw.ai.panda.com`)
 ** API key with access to the gateway
@@ -684,7 +684,7 @@ Reduce `maxTokens` in `completionOptions` to limit response length:
 
 . **MCP overhead**
 +
-If not using deferred tool loading, all tools load with every request. Enable deferred tool loading in your AI Gateway configuration (see xref:ai-agents:ai-gateway/mcp-aggregation-guide.adoc[]).
+If not using deferred tool loading, all tools load with every request. Enable deferred tool loading in your AI Gateway configuration (see xref:ai-gateway/mcp-aggregation-guide.adoc[]).
 
 === Configuration changes not taking effect
 
@@ -840,12 +840,12 @@ Autocomplete rarely needs more than 256 tokens, while chat responses can vary.
 
 == Next steps
 
-* xref:ai-agents:ai-gateway/mcp-aggregation-guide.adoc[]: Configure deferred tool loading to reduce token costs
-* xref:ai-agents:ai-gateway/cel-routing-cookbook.adoc[]: Use CEL expressions to route Continue.dev requests based on context
+* xref:ai-gateway/mcp-aggregation-guide.adoc[]: Configure deferred tool loading to reduce token costs
+* xref:ai-gateway/cel-routing-cookbook.adoc[]: Use CEL expressions to route Continue.dev requests based on context
 
 == Related pages
 
-* xref:ai-agents:ai-gateway/gateway-quickstart.adoc[]: Create and configure your AI Gateway
-* xref:ai-agents:ai-gateway/gateway-architecture.adoc[]: Learn about AI Gateway architecture and benefits
-* xref:ai-agents:ai-gateway/integrations/claude-code-user.adoc[]: Configure Claude Code with AI Gateway
-* xref:ai-agents:ai-gateway/integrations/cline-user.adoc[]: Configure Cline with AI Gateway
+* xref:ai-gateway/gateway-quickstart.adoc[]: Create and configure your AI Gateway
+* xref:ai-gateway/gateway-architecture.adoc[]: Learn about AI Gateway architecture and benefits
+* xref:ai-gateway/integrations/claude-code-user.adoc[]: Configure Claude Code with AI Gateway
+* xref:ai-gateway/integrations/cline-user.adoc[]: Configure Cline with AI Gateway

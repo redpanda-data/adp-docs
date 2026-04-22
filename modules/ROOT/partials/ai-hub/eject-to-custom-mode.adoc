@@ -6,7 +6,7 @@
 :learning-objective-2: Prepare for ejection by documenting current configuration
 :learning-objective-3: Execute the ejection process and configure the gateway post-ejection
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 Ejecting a gateway from AI Hub mode to Custom mode is a one-way transition that gives you full control over all routing rules, backend pools, and policies. After ejection, the gateway behaves exactly like a Custom mode gateway.
 
@@ -95,7 +95,7 @@ Before ejecting, verify:
 
 * [ ] AI Hub's 17 routing rules cannot accommodate your requirements
 * [ ] The 6 user preference toggles provide insufficient control
-* [ ] You've reviewed xref:ai-agents:ai-gateway/gateway-modes.adoc[] to understand alternatives
+* [ ] You've reviewed xref:ai-gateway/gateway-modes.adoc[] to understand alternatives
 * [ ] Your team can maintain custom routing rules and backend pools
 * [ ] You've documented the business justification for ejection
 
@@ -298,7 +298,7 @@ request.body.messages.size() > 100000 ? "anthropic/claude-opus-4.6" : request.bo
   : request.body.model
 ----
 
-For CEL routing patterns, see xref:ai-agents:ai-gateway/cel-routing-cookbook.adoc[].
+For CEL routing patterns, see xref:ai-gateway/cel-routing-cookbook.adoc[].
 
 === Implement custom routing rules
 
@@ -395,6 +395,6 @@ To get back to AI Hub mode:
 
 Now that you've ejected to Custom mode:
 
-* xref:ai-agents:ai-gateway/admin/setup-guide.adoc[Complete Custom mode configuration] - Configure routing rules and backend pools
-* xref:ai-agents:ai-gateway/cel-routing-cookbook.adoc[Learn CEL routing patterns] - Write powerful routing expressions
-* xref:ai-agents:ai-gateway/gateway-architecture.adoc[Understand architecture] - Deep dive into Custom mode architecture
+* xref:ai-gateway/admin/setup-guide.adoc[Complete Custom mode configuration] - Configure routing rules and backend pools
+* xref:ai-gateway/cel-routing-cookbook.adoc[Learn CEL routing patterns] - Write powerful routing expressions
+* xref:ai-gateway/gateway-architecture.adoc[Understand architecture] - Deep dive into Custom mode architecture

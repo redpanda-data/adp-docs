@@ -6,7 +6,7 @@
 :learning-objective-2: Configure user preference toggles to customize routing behavior
 :learning-objective-3: Manage provider credentials for OpenAI, Anthropic, and Google Gemini
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 AI Hub mode provides instant, pre-configured access to OpenAI, Anthropic, and Google Gemini with zero setup complexity. Platform admins add provider credentials, and all teams immediately benefit from intelligent routing.
 
@@ -180,7 +180,7 @@ This multi-tier evaluation ensures requests always reach the correct provider an
 
 While routing rules are immutable, you can customize routing behavior through user preference toggles.
 
-include::ai-agents:partial$ai-hub-preference-toggles.adoc[]
+include::ROOT:partial$ai-hub-preference-toggles.adoc[]
 
 === Set preferences via Console
 
@@ -316,7 +316,7 @@ Protected resources ensure that:
 
 === How to gain control
 
-If you need to modify backend pools or routing rules, eject the gateway to Custom mode. See xref:ai-agents:ai-gateway/admin/eject-to-custom-mode.adoc[] for details.
+If you need to modify backend pools or routing rules, eject the gateway to Custom mode. See xref:ai-gateway/admin/eject-to-custom-mode.adoc[] for details.
 
 == Monitor usage
 
@@ -425,12 +425,12 @@ Consider ejecting to Custom mode when:
 
 Most organizations start with AI Hub and eject only when they outgrow its capabilities.
 
-For ejection instructions, see xref:ai-agents:ai-gateway/admin/eject-to-custom-mode.adoc[].
+For ejection instructions, see xref:ai-gateway/admin/eject-to-custom-mode.adoc[].
 
 == Next steps
 
 Now that you've configured your AI Hub gateway:
 
-* xref:ai-agents:ai-gateway/builders/use-ai-hub-gateway.adoc[Share this guide with builders] - Help your teams connect to the gateway
-* xref:ai-agents:ai-gateway/admin/eject-to-custom-mode.adoc[Learn about ejecting to Custom mode] - Understand the transition path if you need more control
-* xref:ai-agents:ai-gateway/gateway-architecture.adoc[Deep dive into architecture] - Understand how AI Hub routing works
+* xref:ai-gateway/builders/use-ai-hub-gateway.adoc[Share this guide with builders] - Help your teams connect to the gateway
+* xref:ai-gateway/admin/eject-to-custom-mode.adoc[Learn about ejecting to Custom mode] - Understand the transition path if you need more control
+* xref:ai-gateway/gateway-architecture.adoc[Deep dive into architecture] - Understand how AI Hub routing works

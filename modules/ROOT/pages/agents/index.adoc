@@ -2,4 +2,4 @@
 :page-layout: index
 :description: Declare agent behavior using built-in connectors in Redpanda Cloud. No custom agent code required.
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]

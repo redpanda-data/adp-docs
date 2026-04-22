@@ -6,7 +6,7 @@
 :learning-objective-2: Connect your application to an AI Hub gateway using the OpenAI SDK
 :learning-objective-3: Describe how intelligent routing directs requests to providers
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 AI Hub mode gateways provide instant access to OpenAI, Anthropic, and Google Gemini with pre-configured intelligent routing. As a builder, you benefit from zero-configuration access while your administrator manages provider credentials and routing policies.
 
@@ -28,7 +28,7 @@ After reading this page, you will be able to:
 
 Gateways can operate in two modes: AI Hub mode or Custom mode. Understanding which mode your gateway uses helps you know what to expect.
 
-include::ai-agents:partial$ai-hub-mode-indicator.adoc[]
+include::ROOT:partial$ai-hub-mode-indicator.adoc[]
 
 == Understanding intelligent routing
 
@@ -424,6 +424,6 @@ Discuss your requirements with your administrator. They can either:
 
 Now that you're using an AI Hub gateway:
 
-* xref:ai-agents:ai-gateway/builders/connect-your-agent.adoc[Connect Your Agent] - Integrate AI agents with advanced patterns
-* xref:ai-agents:ai-gateway/builders/discover-gateways.adoc[Discover Gateways] - Find other available gateways
-* xref:ai-agents:ai-gateway/mcp-aggregation-guide.adoc[MCP Aggregation] - Use tool aggregation with AI agents
+* xref:ai-gateway/builders/connect-your-agent.adoc[Connect Your Agent] - Integrate AI agents with advanced patterns
+* xref:ai-gateway/builders/discover-gateways.adoc[Discover Gateways] - Find other available gateways
+* xref:ai-gateway/mcp-aggregation-guide.adoc[MCP Aggregation] - Use tool aggregation with AI agents

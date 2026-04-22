@@ -6,7 +6,7 @@
 :learning-objective-2: Apply constraint patterns to prevent unintended agent behavior
 :learning-objective-3: Evaluate system prompts for clarity and completeness
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 Write system prompts that produce reliable, predictable agent behavior. Good prompts define scope, specify constraints, and guide tool usage.
 
@@ -292,7 +292,7 @@ Guide agents to:
 * Avoid redundant tool calls (check context before calling)
 * Stop when the task completes (don't continue exploring)
 
-For cost management strategies including iteration limits and monitoring, see xref:ai-agents:agents/concepts.adoc[].
+For cost management strategies including iteration limits and monitoring, see xref:agents/concepts.adoc[].
 
 == Example: System prompt with all best practices
 
@@ -421,6 +421,6 @@ Decision criteria enable reliable tool selection based on request context.
 
 == Next steps
 
-* xref:ai-agents:agents/quickstart.adoc[]
-* xref:ai-agents:agents/overview.adoc[]
-* xref:ai-agents:mcp/remote/best-practices.adoc[]
+* xref:agents/quickstart.adoc[]
+* xref:agents/overview.adoc[]
+* xref:mcp/remote/best-practices.adoc[]

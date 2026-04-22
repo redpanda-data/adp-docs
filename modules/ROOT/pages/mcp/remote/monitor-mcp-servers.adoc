@@ -14,16 +14,16 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-For conceptual background on traces, spans, and the trace data structure, see xref:ai-agents:observability/concepts.adoc[].
+For conceptual background on traces, spans, and the trace data structure, see xref:observability/concepts.adoc[].
 
 == Prerequisites
 
-You must have an existing MCP server. If you do not have one, see xref:ai-agents:mcp/remote/quickstart.adoc[].
+You must have an existing MCP server. If you do not have one, see xref:mcp/remote/quickstart.adoc[].
 
 == View transcripts in the Cloud Console
 
 :context: mcp
-include::ai-agents:partial$transcripts-ui-guide.adoc[]
+include::ROOT:partial$transcripts-ui-guide.adoc[]
 
 == Analyze traces programmatically
 
@@ -99,6 +99,6 @@ Check `status.message` for error details and the `events` array for error events
 
 == Next steps
 
-* xref:ai-agents:observability/concepts.adoc[]
-* xref:ai-agents:mcp/remote/troubleshooting.adoc[]
-* xref:ai-agents:mcp/remote/manage-servers.adoc[]
+* xref:observability/concepts.adoc[]
+* xref:mcp/remote/troubleshooting.adoc[]
+* xref:mcp/remote/manage-servers.adoc[]

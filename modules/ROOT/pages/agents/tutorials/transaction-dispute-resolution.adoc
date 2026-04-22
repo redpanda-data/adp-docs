@@ -8,7 +8,7 @@
 
 This tutorial shows you how to build a transaction dispute resolution system using multi-agent architecture, secure data handling, and execution monitoring.
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 After completing this tutorial, you will be able to:
 
@@ -18,7 +18,7 @@ After completing this tutorial, you will be able to:
 
 == What you'll learn
 
-This tutorial advances from xref:ai-agents:agents/tutorials/customer-support-agent.adoc[basic multi-tool orchestration] to multi-agent systems. You'll build a transaction dispute resolution system where a root agent delegates to specialized sub-agents (account, fraud, merchant, compliance), each with focused responsibilities and PII-protected data access. You'll also monitor execution using glossterm:transcript[,transcripts] and process disputes from transaction streams for automated detection.
+This tutorial advances from xref:agents/tutorials/customer-support-agent.adoc[basic multi-tool orchestration] to multi-agent systems. You'll build a transaction dispute resolution system where a root agent delegates to specialized sub-agents (account, fraud, merchant, compliance), each with focused responsibilities and PII-protected data access. You'll also monitor execution using glossterm:transcript[,transcripts] and process disputes from transaction streams for automated detection.
 
 These patterns apply beyond banking to any domain requiring specialized expertise and data security: healthcare systems, insurance claims processing, or regulatory compliance workflows.
 
@@ -35,9 +35,9 @@ When a customer calls saying "I see a $247.83 charge from 'ACME CORP' but I neve
 == Prerequisites
 
 * A xref:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
-* xref:ai-agents:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI GPT-5.2 or Claude Sonnet 4.5 for reasoning).
+* xref:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI GPT-5.2 or Claude Sonnet 4.5 for reasoning).
 * The xref:manage:rpk/rpk-install.adoc[Redpanda CLI (`rpk`)] installed (for testing the pipeline with sample data).
-* Completed xref:ai-agents:agents/tutorials/customer-support-agent.adoc[] (foundational multi-tool concepts).
+* Completed xref:agents/tutorials/customer-support-agent.adoc[] (foundational multi-tool concepts).
 
 == Create MCP tools for each domain
 
@@ -66,7 +66,7 @@ This mock tool returns account data with sensitive fields already protected. Car
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/get_customer_account.yaml[]
+include::ROOT:example$mcp-tools/processors/get_customer_account.yaml[]
 ----
 
 get_transaction_details::
@@ -75,7 +75,7 @@ This tool returns complete transaction details including merchant information, l
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/get_transaction_details.yaml[]
+include::ROOT:example$mcp-tools/processors/get_transaction_details.yaml[]
 ----
 
 get_transaction_history::
@@ -84,7 +84,7 @@ This tool returns aggregated spending patterns instead of raw transaction lists.
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/get_transaction_history.yaml[]
+include::ROOT:example$mcp-tools/processors/get_transaction_history.yaml[]
 ----
 ====
 
@@ -94,7 +94,7 @@ Wait for the server status to show *Running*.
 
 [NOTE]
 ====
-This tutorial uses XSmall resource tier for all MCP servers because the mock tools run lightweight Bloblang transformations. Production deployments with external API calls require larger tiers based on throughput needs. See xref:ai-agents:mcp/remote/scale-resources.adoc[].
+This tutorial uses XSmall resource tier for all MCP servers because the mock tools run lightweight Bloblang transformations. Production deployments with external API calls require larger tiers based on throughput needs. See xref:mcp/remote/scale-resources.adoc[].
 ====
 
 === Fraud tools
@@ -118,7 +118,7 @@ This tool implements multi-factor fraud scoring with location risk (0-35 for int
 +
 [,yaml,role="no-placeholders"]
 ----
-include::ai-agents:example$mcp-tools/processors/calculate_fraud_score.yaml[]
+include::ROOT:example$mcp-tools/processors/calculate_fraud_score.yaml[]
 ----
 
 get_risk_indicators::
@@ -127,7 +127,7 @@ This tool provides detailed fraud signals with severity levels. Each indicator i
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/get_risk_indicators.yaml[]
+include::ROOT:example$mcp-tools/processors/get_risk_indicators.yaml[]
 ----
 ====
 
@@ -156,7 +156,7 @@ This tool returns reputation scores, fraud report counts, business verification 
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/verify_merchant.yaml[]
+include::ROOT:example$mcp-tools/processors/verify_merchant.yaml[]
 ----
 
 get_merchant_category::
@@ -165,7 +165,7 @@ This tool decodes MCC (Merchant Category Codes) and provides typical transaction
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/get_merchant_category.yaml[]
+include::ROOT:example$mcp-tools/processors/get_merchant_category.yaml[]
 ----
 ====
 
@@ -194,7 +194,7 @@ This tool creates audit records for every investigation. In production, this wou
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/log_audit_event.yaml[]
+include::ROOT:example$mcp-tools/processors/log_audit_event.yaml[]
 ----
 
 check_regulatory_requirements::
@@ -203,7 +203,7 @@ This tool returns applicable regulations, customer rights, bank obligations, and
 +
 [,yaml]
 ----
-include::ai-agents:example$mcp-tools/processors/check_regulatory_requirements.yaml[]
+include::ROOT:example$mcp-tools/processors/check_regulatory_requirements.yaml[]
 ----
 ====
 
@@ -236,7 +236,7 @@ Sub-agents inherit the LLM provider, model, resource tier, and max iterations fr
 +
 [source,text]
 ----
-include::ai-agents:example$agents/dispute-root-agent-prompt.txt[]
+include::ROOT:example$agents/dispute-root-agent-prompt.txt[]
 ----
 
 . Skip the *MCP Tools* section (the root agent uses A2A protocol to call sub-agents, not direct tools).
@@ -256,7 +256,7 @@ The account agent retrieves customer account and transaction data.
 +
 [source,text]
 ----
-include::ai-agents:example$agents/account-agent-prompt.txt[]
+include::ROOT:example$agents/account-agent-prompt.txt[]
 ----
 
 . In the subagent's *MCP Tools* section, select `account-tools`.
@@ -275,7 +275,7 @@ The fraud agent calculates fraud risk scores and identifies fraud indicators.
 +
 [source,text]
 ----
-include::ai-agents:example$agents/fraud-agent-prompt.txt[]
+include::ROOT:example$agents/fraud-agent-prompt.txt[]
 ----
 
 . In the subagent's *MCP Tools* section, select `fraud-tools`.
@@ -294,7 +294,7 @@ The merchant agent verifies merchant legitimacy and reputation.
 +
 [source,text]
 ----
-include::ai-agents:example$agents/merchant-agent-prompt.txt[]
+include::ROOT:example$agents/merchant-agent-prompt.txt[]
 ----
 
 . In the subagent's *MCP Tools* section, select `merchant-tools`.
@@ -313,7 +313,7 @@ The compliance agent handles audit logging and regulatory requirements.
 +
 [source,text]
 ----
-include::ai-agents:example$agents/compliance-agent-prompt.txt[]
+include::ROOT:example$agents/compliance-agent-prompt.txt[]
 ----
 
 . In the subagent's *MCP Tools* section, select `compliance-tools`.
@@ -388,7 +388,7 @@ This visibility helps you:
 * Identify slow sub-agents that need optimization
 * Track costs per investigation for budgeting
 
-For detailed trace structure, see xref:ai-agents:observability/concepts.adoc#agent-trace-hierarchy[Agent trace hierarchy].
+For detailed trace structure, see xref:observability/concepts.adoc#agent-trace-hierarchy[Agent trace hierarchy].
 
 == Integrate with streaming pipeline
 
@@ -504,7 +504,7 @@ The Service Account is required for the `a2a_message` processor to authenticate 
 +
 [,yaml,role="no-placeholders"]
 ----
-include::ai-agents:example$pipelines/dispute-pipeline.yaml[]
+include::ROOT:example$pipelines/dispute-pipeline.yaml[]
 ----
 
 This pipeline:
@@ -643,7 +643,7 @@ In the transcript details, you'll see:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:ai-agents:agents/troubleshooting.adoc[].
+For comprehensive troubleshooting guidance, see xref:agents/troubleshooting.adoc[].
 
 === Test with mock data
 
@@ -658,8 +658,8 @@ For production deployments, replace the mock tools with API calls to your accoun
 
 == Next steps
 
-* xref:ai-agents:agents/architecture-patterns.adoc[]
-* xref:ai-agents:agents/integration-overview.adoc[]
-* xref:ai-agents:agents/pipeline-integration-patterns.adoc[]
-* xref:ai-agents:agents/monitor-agents.adoc[]
-* xref:ai-agents:mcp/remote/best-practices.adoc[]
+* xref:agents/architecture-patterns.adoc[]
+* xref:agents/integration-overview.adoc[]
+* xref:agents/pipeline-integration-patterns.adoc[]
+* xref:agents/monitor-agents.adoc[]
+* xref:mcp/remote/best-practices.adoc[]

@@ -6,7 +6,7 @@
 :learning-objective-2: pass:q[Design event-driven agent invocation using the `a2a_message` processor]
 :learning-objective-3: Implement streaming enrichment with AI-generated fields
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 Build Redpanda Connect pipelines that invoke agents for automated, event-driven processing. Pipelines use the `a2a_message` processor to call agents for each event in a stream when you need AI reasoning, classification, or enrichment at scale.
 
@@ -16,11 +16,11 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-This page focuses on pipelines calling agents (pipeline-initiated integration). For agents invoking MCP tools, see xref:ai-agents:agents/integration-overview.adoc#agent-needs-capabilities[Agent needs capabilities]. For external applications calling agents, see xref:ai-agents:agents/integration-overview.adoc#external-system-calls-agent[External system calls agent].
+This page focuses on pipelines calling agents (pipeline-initiated integration). For agents invoking MCP tools, see xref:agents/integration-overview.adoc#agent-needs-capabilities[Agent needs capabilities]. For external applications calling agents, see xref:agents/integration-overview.adoc#external-system-calls-agent[External system calls agent].
 
 == How pipelines invoke agents
 
-Pipelines use the xref:develop:connect/components/processors/a2a_message.adoc[`a2a_message`] processor to invoke agents for each event in a stream. The processor uses the xref:ai-agents:agents/a2a-concepts.adoc[A2A protocol] to discover and communicate with agents.
+Pipelines use the xref:develop:connect/components/processors/a2a_message.adoc[`a2a_message`] processor to invoke agents for each event in a stream. The processor uses the xref:agents/a2a-concepts.adoc[A2A protocol] to discover and communicate with agents.
 
 When the `a2a_message` processor receives an event, it sends the event data to the specified agent along with any prompt you provide. The agent processes the event using its reasoning capabilities and returns a response. The processor then adds the agent's response to the event for further processing or output.
 
@@ -48,10 +48,10 @@ Invoke agents automatically for each event:
 
 [source,yaml]
 ----
-include::ai-agents:example$pipelines/event-driven-invocation.yaml[]
+include::ROOT:example$pipelines/event-driven-invocation.yaml[]
 ----
 
-Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:ai-agents:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
+Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
 
 **Use case:** Real-time fraud detection on every transaction.
 
@@ -61,10 +61,10 @@ Add AI-generated metadata to events:
 
 [source,yaml]
 ----
-include::ai-agents:example$pipelines/streaming-enrichment.yaml[tag=processors,indent=0]
+include::ROOT:example$pipelines/streaming-enrichment.yaml[tag=processors,indent=0]
 ----
 
-Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:ai-agents:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
+Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
 
 **Use case:** Add sentiment scores to every customer review in real-time.
 
@@ -74,10 +74,10 @@ Process events in the background:
 
 [source,yaml]
 ----
-include::ai-agents:example$pipelines/async-workflows.yaml[tag=pipeline,indent=0]
+include::ROOT:example$pipelines/async-workflows.yaml[tag=pipeline,indent=0]
 ----
 
-Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:ai-agents:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
+Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
 
 **Use case:** Nightly batch summarization of reports where latency is acceptable.
 
@@ -87,10 +87,10 @@ Chain multiple agents in sequence:
 
 [source,yaml]
 ----
-include::ai-agents:example$pipelines/multi-agent-orchestration.yaml[tag=processors,indent=0]
+include::ROOT:example$pipelines/multi-agent-orchestration.yaml[tag=processors,indent=0]
 ----
 
-Replace the agent URL variables with your actual agent card URLs. See xref:ai-agents:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
+Replace the agent URL variables with your actual agent card URLs. See xref:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
 
 **Use case:** Translate feedback, analyze sentiment, then route to appropriate team.
 
@@ -100,10 +100,10 @@ Use agent reasoning for complex transformations:
 
 [source,yaml]
 ----
-include::ai-agents:example$pipelines/agent-transformation.yaml[tag=processors,indent=0]
+include::ROOT:example$pipelines/agent-transformation.yaml[tag=processors,indent=0]
 ----
 
-Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:ai-agents:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
+Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
 
 **Use case:** Convert natural language queries to SQL for downstream processing.
 
@@ -115,7 +115,7 @@ Do not use the `a2a_message` processor when:
 * The transformation is simple and does not require AI reasoning.
 * Agents need to dynamically decide what data to fetch based on context.
 
-For a detailed comparison between pipeline-initiated and agent-initiated integration patterns, see xref:ai-agents:agents/integration-overview.adoc#pattern-comparison[Pattern comparison].
+For a detailed comparison between pipeline-initiated and agent-initiated integration patterns, see xref:agents/integration-overview.adoc#pattern-comparison[Pattern comparison].
 
 == Example: Real-time fraud detection
 
@@ -125,10 +125,10 @@ This example shows a complete pipeline that analyzes every transaction with an a
 
 [source,yaml]
 ----
-include::ai-agents:example$pipelines/fraud-detection-routing.yaml[]
+include::ROOT:example$pipelines/fraud-detection-routing.yaml[]
 ----
 
-Replace `AGENT_CARD_URL` with your agent card URL. See xref:ai-agents:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
+Replace `AGENT_CARD_URL` with your agent card URL. See xref:agents/a2a-concepts.adoc#agent-card-location[Agent card location].
 
 This pipeline:
 
@@ -139,7 +139,7 @@ This pipeline:
 
 == Next steps
 
-* xref:ai-agents:mcp/remote/tool-patterns.adoc[]
-* xref:ai-agents:agents/integration-overview.adoc[]
-* xref:ai-agents:agents/a2a-concepts.adoc[]
+* xref:mcp/remote/tool-patterns.adoc[]
+* xref:agents/integration-overview.adoc[]
+* xref:agents/a2a-concepts.adoc[]
 * xref:develop:connect/components/processors/about.adoc[]

@@ -6,7 +6,7 @@
 :learning-objective-2: Set up OpenAI-compatible transforms for multi-provider routing
 :learning-objective-3: Deploy multi-tenant authentication strategies for Cursor clients
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 Configure Redpanda AI Gateway to support Cursor IDE clients accessing multiple LLM providers and MCP tools through OpenAI-compatible endpoints.
 
@@ -21,7 +21,7 @@ After reading this page, you will be able to:
 * AI Gateway deployed on a BYOC cluster running Redpanda version 25.3 or later
 * Administrator access to the AI Gateway UI
 * API keys for at least one LLM provider (Anthropic, OpenAI, or others)
-* Understanding of xref:ai-agents:ai-gateway/gateway-architecture.adoc[AI Gateway concepts]
+* Understanding of xref:ai-gateway/gateway-architecture.adoc[AI Gateway concepts]
 
 == About Cursor IDE
 
@@ -272,7 +272,7 @@ Enable Cursor to discover and use tools from multiple MCP servers through a sing
 |Descriptive name (for example, `redpanda-data-tools`, `code-search-tools`)
 
 |Endpoint URL
-|MCP server endpoint (for example, xref:ai-agents:mcp/remote/overview.adoc[Remote MCP server] URL)
+|MCP server endpoint (for example, xref:mcp/remote/overview.adoc[Remote MCP server] URL)
 
 |Authentication
 |Bearer token or other authentication mechanism
@@ -810,5 +810,5 @@ Causes and solutions:
 
 == Next steps
 
-* xref:ai-agents:ai-gateway/cel-routing-cookbook.adoc[]: Implement advanced routing rules for model prefix routing
-* xref:ai-agents:mcp/remote/overview.adoc[]: Deploy Remote MCP servers for custom tools
+* xref:ai-gateway/cel-routing-cookbook.adoc[]: Implement advanced routing rules for model prefix routing
+* xref:mcp/remote/overview.adoc[]: Deploy Remote MCP servers for custom tools

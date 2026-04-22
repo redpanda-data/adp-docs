@@ -6,7 +6,7 @@
 :learning-objective-2: Determine which mode suits your use case based on configuration needs
 :learning-objective-3: Identify which mode a gateway is running in using Console or API
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 AI Gateway supports two modes to accommodate different organizational needs: AI Hub mode for zero-configuration access and Custom mode for full control over routing and policies.
 
@@ -98,7 +98,7 @@ These rules are immutable and managed by Redpanda. You cannot modify or delete t
 
 While routing rules are managed, you can customize behavior through 6 preference toggles:
 
-include::ai-agents:partial$ai-hub-preference-toggles.adoc[]
+include::ROOT:partial$ai-hub-preference-toggles.adoc[]
 
 These preferences influence routing decisions without requiring you to write or maintain routing rules.
 
@@ -218,7 +218,7 @@ Use this decision matrix to choose the right mode for your use case:
 
 You can identify which mode a gateway is running in through the Console or API.
 
-include::ai-agents:partial$ai-hub-mode-indicator.adoc[]
+include::ROOT:partial$ai-hub-mode-indicator.adoc[]
 
 == Eject to Custom mode
 
