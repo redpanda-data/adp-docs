@@ -5,15 +5,6 @@
 image:https://img.shields.io/badge/slack-purple[Slack, link="https://redpanda.com/slack"]
 image:https://img.shields.io/twitter/follow/redpandadata.svg?style=social&label=Follow[Twitter, link="https://twitter.com/intent/follow?screen_name=redpandadata"]
 
-++++
-<p>
-<a href="https://docs.redpanda.com/redpanda-adp">
-<object type="image/svg+xml">
-  <img src="https://raw.githubusercontent.com/redpanda-data/docs-ui/main/src/img/redpanda-docs-logo.svg"/>
-</object>
-</p></a>
-++++
-
 This repository hosts the documentation content for Redpanda {product}.
 
 == About Agentic Data Plane
