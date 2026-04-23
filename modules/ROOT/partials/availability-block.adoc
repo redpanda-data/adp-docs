@@ -1,0 +1,28 @@
+// Availability indicator for ADP pages
+// Shows which platforms support this feature
+ifdef::page-byoc[]
+ifndef::page-cloud-only[]
+[.availability-block]
+****
+*Available in:* BYOC
+****
+endif::[]
+endif::[]
+
+ifdef::page-cloud-only[]
+ifndef::page-byoc[]
+[.availability-block]
+****
+*Available in:* Cloud
+****
+endif::[]
+endif::[]
+
+ifndef::page-byoc[]
+ifndef::page-cloud-only[]
+[.availability-block]
+****
+*Available in:* Cloud, BYOC
+****
+endif::[]
+endif::[]

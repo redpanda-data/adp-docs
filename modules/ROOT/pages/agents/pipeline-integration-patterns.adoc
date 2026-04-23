@@ -20,7 +20,7 @@ This page focuses on pipelines calling agents (pipeline-initiated integration). 
 
 == How pipelines invoke agents
 
-Pipelines use the xref:develop:connect/components/processors/a2a_message.adoc[`a2a_message`] processor to invoke agents for each event in a stream. The processor uses the xref:agents/a2a-concepts.adoc[A2A protocol] to discover and communicate with agents.
+Pipelines use the xref:redpanda-cloud:develop:connect/components/processors/a2a_message.adoc[`a2a_message`] processor to invoke agents for each event in a stream. The processor uses the xref:agents/a2a-concepts.adoc[A2A protocol] to discover and communicate with agents.
 
 When the `a2a_message` processor receives an event, it sends the event data to the specified agent along with any prompt you provide. The agent processes the event using its reasoning capabilities and returns a response. The processor then adds the agent's response to the event for further processing or output.
 
@@ -142,4 +142,4 @@ This pipeline:
 * xref:mcp/remote/tool-patterns.adoc[]
 * xref:agents/integration-overview.adoc[]
 * xref:agents/a2a-concepts.adoc[]
-* xref:develop:connect/components/processors/about.adoc[]
+* xref:redpanda-cloud:develop:connect/components/processors/about.adoc[]

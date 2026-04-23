@@ -1,4 +1,5 @@
 = AI Gateway Quickstart
+:page-aliases: redpanda-cloud:ai-agents:ai-gateway/gateway-quickstart.adoc
 :description: Get started with AI Gateway. Configure providers, create your first gateway with failover and budget controls, and route your first request.
 :page-topic-type: quickstart
 :personas: evaluator, app_developer, platform_admin

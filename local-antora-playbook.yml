@@ -1,6 +1,6 @@
 site:
   title: Redpanda Docs
-  start_page: ROOT:get-started:intro-to-events.adoc
+  start_page: redpanda-adp:ROOT:index.adoc
   url: http://localhost:5002
   robots: disallow
   keys:
@@ -14,18 +14,18 @@ content:
   sources:
   - url: .
     branches: HEAD
-  - url: https://github.com/redpanda-data/docs
+  - url: ../docs
     branches: [main, v/*, api, shared, site-search,'!v-end-of-life/*']
-  - url: https://github.com/redpanda-data/cloud-docs
-    branches: main
+  - url: ../cloud-docs
+    branches: HEAD
   - url: https://github.com/redpanda-data/redpanda-labs
     branches: main
     start_paths: [docs,'*/docs']
-  - url: https://github.com/redpanda-data/rp-connect-docs
-    branches: main
+  - url: ../rp-connect-docs
+    branches: HEAD
 ui:
   bundle:
-    url: https://github.com/redpanda-data/docs-ui/releases/latest/download/ui-bundle.zip
+    url: ../docs-ui/build/ui-bundle.zip
     snapshot: true
 asciidoc:
   attributes:
@@ -35,6 +35,7 @@ asciidoc:
   - '@redpanda-data/docs-extensions-and-macros/macros/glossary'
   - '@redpanda-data/docs-extensions-and-macros/macros/config-ref'
   - '@redpanda-data/docs-extensions-and-macros/macros/helm-ref'
+  - '@redpanda-data/docs-extensions-and-macros/macros/badge'
   - '@redpanda-data/docs-extensions-and-macros/asciidoc-extensions/add-line-numbers-highlights'
 antora:
   extensions:

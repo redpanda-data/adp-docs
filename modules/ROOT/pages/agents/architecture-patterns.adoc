@@ -1,5 +1,6 @@
 = Agent Architecture Patterns
 :description: Design maintainable agent systems with single-agent and multi-agent patterns based on domain complexity.
+:page-byoc: true
 :page-topic-type: best-practices
 :personas: agent_developer, streaming_developer
 :learning-objective-1: Evaluate single-agent versus multi-agent architectures for your use case

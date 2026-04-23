@@ -1,5 +1,6 @@
 = Troubleshoot AI Agents
 :description: Diagnose and fix common issues with AI agents including deployment failures, runtime behavior problems, and tool execution errors.
+:page-byoc: true
 :page-topic-type: troubleshooting
 :personas: agent_developer, app_developer, streaming_developer
 :learning-objective-1: Diagnose deployment failures and resource allocation errors

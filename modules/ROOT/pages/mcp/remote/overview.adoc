@@ -1,4 +1,5 @@
 = Remote MCP Server Overview
+:page-aliases: redpanda-cloud:ai-agents:mcp/remote/overview.adoc
 :description: Build and host MCP tools that connect AI agents to your business systems without writing glue code, using Redpanda's proven connectors.
 :page-topic-type: overview
 :personas: evaluator, agent_developer
@@ -27,7 +28,7 @@ Remote MCP lets you build and host MCP servers in your Redpanda Cloud clusters. 
 
 * *Always-on availability:* No local process to run. Your tools are hosted and managed by Redpanda Cloud.
 * *Proximity to data:* Tools execute next to your cluster for lower latency and simpler networking.
-* *Secure secrets management:* Use the xref:develop:connect/configuration/secret-management.adoc[Secrets Store] instead of hardcoding credentials.
+* *Secure secrets management:* Use the xref:redpanda-cloud:develop:connect/configuration/secret-management.adoc[Secrets Store] instead of hardcoding credentials.
 * *Fast iteration:* Define tools as YAML, deploy, and your AI agents can use them immediately.
 
 // MCP tools vs pipelines - single-sourced from rp-connect-docs partial

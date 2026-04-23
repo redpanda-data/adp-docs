@@ -11,7 +11,8 @@ asciidoc:
     page-adp: true
     # Header configuration
     page-header-data:
-      order: 5
+      order: 1
       color: '#F77923'
+      text-color: '#ffffff'
     # UI name for single-sourced content
     ui: Redpanda Cloud

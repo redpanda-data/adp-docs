@@ -22,7 +22,7 @@ After completing this guide, you will be able to:
 +
 If not, see xref:ai-gateway/builders/discover-gateways.adoc[].
 
-* You have a service account with OIDC client credentials. See xref:security:cloud-authentication.adoc[].
+* You have a service account with OIDC client credentials. See xref:redpanda-cloud:security:cloud-authentication.adoc[].
 * You have a development environment with your chosen programming language.
 
 == Integration overview
@@ -42,7 +42,7 @@ AI Gateway uses OIDC through service accounts that can be used as a `client_cred
 . In the Redpanda Cloud UI, go to https://cloud.redpanda.com/organization-iam?tab=service-accounts[*Organization IAM* > *Service account*^].
 . Create a new service account and note the *Client ID* and *Client Secret*.
 
-For details, see xref:security:cloud-authentication.adoc#authenticate-to-the-cloud-api[Authenticate to the Cloud API].
+For details, see xref:redpanda-cloud:security:cloud-authentication.adoc#authenticate-to-the-cloud-api[Authenticate to the Cloud API].
 
 === Configure your OIDC client
 

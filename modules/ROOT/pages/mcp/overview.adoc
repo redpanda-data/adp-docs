@@ -1,4 +1,5 @@
 = MCP Servers for Redpanda Cloud Overview
+:page-aliases: redpanda-cloud:ai-agents:mcp/overview.adoc
 :description: Connect AI agents to your databases, queues, CRMs, and other business systems without writing glue code, using Redpanda's proven connectors.
 :page-topic-type: overview
 :personas: evaluator, ai_agent_developer

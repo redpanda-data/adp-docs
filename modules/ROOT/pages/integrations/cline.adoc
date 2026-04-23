@@ -1,0 +1,4 @@
+= Cline Integration
+:description: Integrate Redpanda ADP with Cline.
+
+// TODO: Add content

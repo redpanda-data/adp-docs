@@ -54,13 +54,13 @@ Use the link:/api/doc/cloud-dataplane/operation/operation-mcpserverservice_creat
 [[yaml-structure]]
 == Add the tool structure
 
-An MCP tool wraps a xref:develop:connect/components/about.adoc[Redpanda Connect component] and exposes it to AI clients. Each tool has three parts:
+An MCP tool wraps a xref:redpanda-cloud:develop:connect/components/about.adoc[Redpanda Connect component] and exposes it to AI clients. Each tool has three parts:
 
 * **Label**: The tool name AI clients see
 * **Component configuration**: A Redpanda Connect component (processor, input, output, or cache) that does the work
 * **MCP metadata**: Describes the tool's purpose and parameters for AI clients
 
-Here's an example using the xref:develop:connect/components/processors/sql_select.adoc[`sql_select` processor]:
+Here's an example using the xref:redpanda-cloud:develop:connect/components/processors/sql_select.adoc[`sql_select` processor]:
 
 [source,yaml]
 ----
@@ -81,7 +81,7 @@ include::redpanda-connect:ai-agents:partial$mcp/create-tool/label-naming-rules.a
 
 === Component types
 
-xref:develop:connect/components/processors/about.adoc[Processors] transform, filter, or enrich data. Use a `processors:` array with one or more processors:
+xref:redpanda-cloud:develop:connect/components/processors/about.adoc[Processors] transform, filter, or enrich data. Use a `processors:` array with one or more processors:
 
 .Processor tool
 [source,yaml]
@@ -89,7 +89,7 @@ xref:develop:connect/components/processors/about.adoc[Processors] transform, fil
 include::ROOT:example$mcp-tools/processors/enrich_order.yaml[tag=complete,indent=0]
 ----
 
-xref:develop:connect/components/inputs/about.adoc[Inputs] read data from sources, xref:develop:connect/components/outputs/about.adoc[outputs] write data to destinations, and xref:develop:connect/components/caches/about.adoc[caches] store and retrieve data. Define these components directly at the top level:
+xref:redpanda-cloud:develop:connect/components/inputs/about.adoc[Inputs] read data from sources, xref:redpanda-cloud:develop:connect/components/outputs/about.adoc[outputs] write data to destinations, and xref:redpanda-cloud:develop:connect/components/caches/about.adoc[caches] store and retrieve data. Define these components directly at the top level:
 
 .Input tool
 [source,yaml]
@@ -142,7 +142,7 @@ include::redpanda-connect:ai-agents:partial$mcp/create-tool/property-restriction
 [[parameter-mapping]]
 == Map parameters to component fields
 
-When an AI client calls your tool, the `arguments` object becomes the message body. You can access these arguments using xref:develop:connect/guides/bloblang/about.adoc[Bloblang], but the syntax depends on where you're using it:
+When an AI client calls your tool, the `arguments` object becomes the message body. You can access these arguments using xref:redpanda-cloud:develop:connect/guides/bloblang/about.adoc[Bloblang], but the syntax depends on where you're using it:
 
 * **Inside Bloblang contexts** (mutation, mapping, args_mapping): Use `this.field_name`
 * **Inside string fields** (URLs, topics, headers): Use interpolation `${! json("field_name") }`
@@ -177,7 +177,7 @@ include::ROOT:example$mcp-tools/snippets/interpolation.yaml[tag=redpanda_topic,i
 <1> `$\{VAR}` without `!` is environment variable substitution, not Bloblang.
 <2> `${! ... }` with `!` is Bloblang interpolation that accesses message data.
 
-TIP: For more on Bloblang syntax, see xref:develop:connect/guides/bloblang/about.adoc[]. For interpolation details, see xref:develop:connect/configuration/interpolation.adoc[].
+TIP: For more on Bloblang syntax, see xref:redpanda-cloud:develop:connect/guides/bloblang/about.adoc[]. For interpolation details, see xref:redpanda-cloud:develop:connect/configuration/interpolation.adoc[].
 
 === Provide defaults for optional parameters
 
@@ -198,7 +198,7 @@ include::ROOT:example$mcp-tools/snippets/defaults.yaml[tag=properties,indent=0]
 [[secrets]]
 == Use the Secrets Store
 
-Never hardcode credentials, API keys, or connection strings in your tool configurations. Use the xref:develop:connect/configuration/secret-management.adoc[Secrets Store] to securely manage sensitive values.
+Never hardcode credentials, API keys, or connection strings in your tool configurations. Use the xref:redpanda-cloud:develop:connect/configuration/secret-management.adoc[Secrets Store] to securely manage sensitive values.
 
 Reference secrets using `${secrets.SECRET_NAME}` syntax:
 
@@ -257,4 +257,4 @@ include::ROOT:example$mcp-tools/processors/get_weather_complete.yaml[tag=complet
 * xref:mcp/remote/best-practices.adoc[]
 * xref:mcp/remote/tool-patterns.adoc[]
 * xref:mcp/remote/troubleshooting.adoc[]
-* xref:develop:connect/components/about.adoc[]
+* xref:redpanda-cloud:develop:connect/components/about.adoc[]

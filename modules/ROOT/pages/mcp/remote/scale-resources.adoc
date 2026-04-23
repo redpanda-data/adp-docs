@@ -1,5 +1,6 @@
 = Scale Remote MCP Server Resources
 :description: Learn how to scale MCP server resources up or down to match workload demands and optimize costs.
+:page-byoc: true
 :page-topic-type: how-to
 :personas: platform_admin
 // Reader journey: "I optimize costs and performance"
@@ -8,7 +9,7 @@
 :learning-objective-2: Choose appropriate resource sizes for workloads
 :learning-objective-3: Optimize costs through resource management
 
-After creating an MCP server, you can scale its resources up or down to match your workload needs. Resource allocation affects your xref:billing:billing.adoc#remote-mcp-billing-metrics[billing costs], which are charged per compute unit hour.
+After creating an MCP server, you can scale its resources up or down to match your workload needs. Resource allocation affects your xref:redpanda-cloud:billing:billing.adoc#remote-mcp-billing-metrics[billing costs], which are charged per compute unit hour.
 
 After reading this page, you will be able to:
 
@@ -71,5 +72,5 @@ Redpanda makes the updated resources available immediately.
 
 [TIP]
 ====
-Monitor your MCP server's performance and adjust resources as needed. You can scale up during peak usage periods and scale down during quieter times to optimize costs. For compute unit definitions and pricing, see xref:billing:billing.adoc#remote-mcp-billing-metrics[MCP billing metrics].
+Monitor your MCP server's performance and adjust resources as needed. You can scale up during peak usage periods and scale down during quieter times to optimize costs. For compute unit definitions and pricing, see xref:redpanda-cloud:billing:billing.adoc#remote-mcp-billing-metrics[MCP billing metrics].
 ====
