@@ -1,5 +1,6 @@
 = MCP Gateway
 :description: Learn how to use the MCP Gateway to aggregate MCP servers, configure deferred tool loading, create orchestrator workflows, and manage security.
+:page-byoc: true
 :page-topic-type: guide
 :personas: app_developer, platform_admin
 :learning-objective-1: Configure MCP aggregation with deferred tool loading to reduce token costs

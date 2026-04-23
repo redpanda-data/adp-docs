@@ -1,4 +1,5 @@
 = View Transcripts
+:page-aliases: redpanda-cloud:ai-agents:observability/transcripts.adoc
 :description: Filter and navigate the Transcripts interface to investigate end-to-end agent execution records stored on Redpanda's immutable log.
 :page-topic-type: how-to
 :personas: agent_developer, platform_admin

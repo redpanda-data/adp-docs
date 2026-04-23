@@ -1,4 +1,5 @@
 = AI Agent Quickstart
+:page-aliases: redpanda-cloud:ai-agents:agents/quickstart.adoc
 :description: Create your first AI agent in Redpanda Cloud that generates and publishes event data through natural language commands.
 :page-topic-type: tutorial
 :personas: agent_developer, evaluator
@@ -18,7 +19,7 @@ After completing this quickstart, you will be able to:
 
 == Prerequisites
 
-* A xref:get-started:cluster-types/byoc/index.adoc[BYOC cluster] (agents are not available on Dedicated or Serverless clusters)
+* A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC cluster] (agents are not available on Dedicated or Serverless clusters)
 
 * xref:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, or Google AI)
 

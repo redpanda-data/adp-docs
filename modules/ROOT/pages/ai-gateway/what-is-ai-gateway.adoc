@@ -1,4 +1,5 @@
 = What is an AI Gateway?
+:page-aliases: redpanda-cloud:ai-agents:ai-gateway/what-is-ai-gateway.adoc
 :description: Understand how AI Gateway keeps AI-powered apps highly available across providers and prevents runaway AI spend with centralized cost governance.
 :page-topic-type: concept
 :personas: evaluator, app_developer, platform_admin

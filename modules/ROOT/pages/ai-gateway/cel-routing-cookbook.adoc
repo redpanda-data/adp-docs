@@ -1,5 +1,6 @@
 = CEL Routing Cookbook
 :description: CEL routing cookbook for Redpanda AI Gateway with common patterns, examples, and best practices.
+:page-byoc: true
 :page-topic-type: cookbook
 :personas: app_developer, platform_admin
 :learning-objective-1: Write CEL expressions to route requests based on user tier or custom headers

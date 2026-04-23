@@ -1,5 +1,6 @@
 = Redpanda Agentic Data Plane Overview
 :description: Enterprise-grade infrastructure for building, deploying, and governing AI agents at scale with compliance-grade audit trails.
+:page-aliases: redpanda-cloud:ai-agents:adp-overview.adoc
 :page-topic-type: overview
 :page-categories: AI, Agentic AI
 :personas: evaluator, ai_agent_developer, platform_admin
@@ -25,7 +26,7 @@ After reading this page, you will be able to:
 
 With Redpanda AI agents, you declare the agent behavior you want and Redpanda handles execution and orchestration. Instead of writing Python or JavaScript, you define behaviors in YAML. You can orchestrate multiple specialized glossterm:subagent[,sub-agents], or bring your own frameworks like LangChain or LlamaIndex.
 
-What makes this practical at scale is xref:develop:connect/about.adoc[Redpanda Connect]. More than 300 connectors with built-in filtering, enrichment, and routing give declarative definitions real power. Upcoming templates will provide default behaviors for common domains such as customer success, legal, and finance.
+What makes this practical at scale is xref:redpanda-cloud:develop:connect/about.adoc[Redpanda Connect]. More than 300 connectors with built-in filtering, enrichment, and routing give declarative definitions real power. Upcoming templates will provide default behaviors for common domains such as customer success, legal, and finance.
 
 The result is faster time-to-production, lower maintenance (declarative definitions instead of imperative code), and organizational consistency across teams.
 
@@ -35,7 +36,7 @@ For more information, see xref:agents/overview.adoc[].
 
 glossterm:MCP server[,MCP servers] translate agent intent into connections to databases, queues, HRIS, CRMs, and other business systems. They are the simplest way to give agents context and capabilities without writing glue code.
 
-Under the hood, MCP servers wrap the same proven connectors that power some of the world's largest e-commerce, EV, electricity, and AI companies. Built on xref:develop:connect/about.adoc[Redpanda Connect], they are lightweight, support OIDC-based authentication, and enforce deterministic policies at the tool level. You define tools in YAML, and policy enforcement programmatically prevents prompt injection, SQL injection, and other agent-based attacks.
+Under the hood, MCP servers wrap the same proven connectors that power some of the world's largest e-commerce, EV, electricity, and AI companies. Built on xref:redpanda-cloud:develop:connect/about.adoc[Redpanda Connect], they are lightweight, support OIDC-based authentication, and enforce deterministic policies at the tool level. You define tools in YAML, and policy enforcement programmatically prevents prompt injection, SQL injection, and other agent-based attacks.
 
 With over 300 connectors and real-time debugging capabilities, you reduce integration time while getting enterprise-grade security. You can reuse your existing infrastructure and data sources rather than building new integrations from scratch.
 

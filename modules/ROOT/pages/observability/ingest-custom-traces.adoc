@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 
 * A BYOC cluster
 * Ability to manage secrets in Redpanda Cloud
-* The latest version of xref:manage:rpk/rpk-install.adoc[`rpk`] installed
+* The latest version of xref:redpanda-cloud:manage:rpk/rpk-install.adoc[`rpk`] installed
 * Custom agent or application instrumented with OpenTelemetry SDK
 * Basic understanding of the https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/[OpenTelemetry span format^] and https://opentelemetry.io/docs/specs/otlp/[OpenTelemetry Protocol (OTLP)^]
 
@@ -63,7 +63,7 @@ When these agents send traces to `redpanda.otel_traces`, you gain unified observ
 
 === Trace format requirements
 
-Custom agents must emit traces in OTLP format. The xref:develop:connect/components/inputs/otlp_http.adoc[`otlp_http`] input accepts both OTLP Protobuf (`application/x-protobuf`) and JSON (`application/json`) payloads. For <<use-grpc,gRPC transport>>, use the xref:develop:connect/components/inputs/otlp_grpc.adoc[`otlp_grpc`] input.
+Custom agents must emit traces in OTLP format. The xref:redpanda-cloud:develop:connect/components/inputs/otlp_http.adoc[`otlp_http`] input accepts both OTLP Protobuf (`application/x-protobuf`) and JSON (`application/json`) payloads. For <<use-grpc,gRPC transport>>, use the xref:redpanda-cloud:develop:connect/components/inputs/otlp_grpc.adoc[`otlp_grpc`] input.
 
 Each trace must follow the OTLP specification with these required fields:
 
@@ -616,5 +616,5 @@ If requests succeed but traces do not appear in `redpanda.otel_traces`:
 
 * xref:observability/transcripts.adoc[]
 * xref:agents/monitor-agents.adoc[Observability for declarative agents]
-* xref:develop:connect/components/inputs/otlp_http.adoc[OTLP HTTP input reference] - Complete configuration options for the `otlp_http` component
-* xref:develop:connect/components/inputs/otlp_grpc.adoc[OTLP gRPC input reference] - Alternative gRPC-based trace ingestion
+* xref:redpanda-cloud:develop:connect/components/inputs/otlp_http.adoc[OTLP HTTP input reference] - Complete configuration options for the `otlp_http` component
+* xref:redpanda-cloud:develop:connect/components/inputs/otlp_grpc.adoc[OTLP gRPC input reference] - Alternative gRPC-based trace ingestion

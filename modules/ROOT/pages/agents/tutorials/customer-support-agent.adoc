@@ -38,7 +38,7 @@ The challenge: users phrase requests differently ("Where's my package?", "Track 
 
 == Prerequisites
 
-* A xref:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
+* A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
 * xref:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
 
 == Design the MCP tools

@@ -1,0 +1,4 @@
+= Monitor Agents
+:description: Monitor AI agent performance and behavior in Redpanda ADP.
+
+// TODO: Add content

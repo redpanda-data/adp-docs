@@ -1,4 +1,5 @@
 = Remote MCP Server Quickstart
+:page-aliases: redpanda-cloud:ai-agents:mcp/remote/quickstart.adoc
 :description: Build and deploy your first MCP tools to connect AI agents to your Redpanda data without writing custom integration code.
 :page-topic-type: tutorial
 :personas: agent_developer, streaming_developer, evaluator
@@ -23,8 +24,8 @@ TIP: For background on how MCP tools work and when to use each component type, s
 == Prerequisites
 
 * A Redpanda Cloud cluster with *Remote MCP* enabled.
-* Access to the xref:develop:connect/configuration/secret-management.adoc[Secrets Store] for storing credentials.
-* At least version 25.2.5 of the xref:manage:rpk/rpk-install.adoc[Redpanda CLI (`rpk`)] installed on your computer.
+* Access to the xref:redpanda-cloud:develop:connect/configuration/secret-management.adoc[Secrets Store] for storing credentials.
+* At least version 25.2.5 of the xref:redpanda-cloud:manage:rpk/rpk-install.adoc[Redpanda CLI (`rpk`)] installed on your computer.
 * link:https://docs.anthropic.com/en/docs/claude-code/setup[Claude Code] installed.
 
 == Prepare your cluster

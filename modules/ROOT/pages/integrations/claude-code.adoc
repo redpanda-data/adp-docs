@@ -1,0 +1,4 @@
+= Claude Code Integration
+:description: Integrate Redpanda ADP with Claude Code.
+
+// TODO: Add content

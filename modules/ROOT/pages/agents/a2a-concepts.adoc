@@ -60,7 +60,7 @@ For integration pattern guidance, see xref:agents/integration-overview.adoc[].
 
 === Internal pipeline-to-agent integration
 
-Redpanda Connect pipelines use the xref:develop:connect/components/processors/a2a_message.adoc[`a2a_message`] processor to invoke agents for each event in a stream. This enables real-time interaction between streaming data and AI agents, enabling use cases like:
+Redpanda Connect pipelines use the xref:redpanda-cloud:develop:connect/components/processors/a2a_message.adoc[`a2a_message`] processor to invoke agents for each event in a stream. This enables real-time interaction between streaming data and AI agents, enabling use cases like:
 
 * Real-time fraud detection on every transaction.
 * Streaming data enrichment with AI-generated fields.
@@ -106,7 +106,7 @@ This flow ensures:
 
 External applications must authenticate using the service account credentials. Each agent has its own service account.
 
-For step-by-step authentication instructions, see xref:security:cloud-authentication.adoc[].
+For step-by-step authentication instructions, see xref:redpanda-cloud:security:cloud-authentication.adoc[].
 
 === Internal integration
 

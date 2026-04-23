@@ -2,6 +2,7 @@
 // TODO: Add 'redpanda-cloud:ai-agents:mcp/remote/tool-patterns.adoc' after ai-agents removed from cloud-docs
 :page-aliases: redpanda-cloud:ai-agents:mcp/remote/pipeline-patterns.adoc
 :description: Catalog of patterns for MCP server tools in Redpanda Cloud.
+:page-byoc: true
 :page-topic-type: cookbook
 :personas: agent_developer, data_engineer
 // Reader journey: "I need an example for X"
@@ -20,7 +21,7 @@ After reading this page, you will be able to:
 [[read-data]]
 == Read data
 
-Use xref:develop:connect/components/inputs/about.adoc[inputs] to create tools that read from data sources or generate sample data.
+Use xref:redpanda-cloud:develop:connect/components/inputs/about.adoc[inputs] to create tools that read from data sources or generate sample data.
 
 [[data-generators]]
 === Generate test data
@@ -34,7 +35,7 @@ Use xref:develop:connect/components/inputs/about.adoc[inputs] to create tools th
 include::ROOT:example$mcp-tools/inputs/generate_input.yaml[]
 ----
 
-See also: xref:develop:connect/components/inputs/generate.adoc[`generate` input component]
+See also: xref:redpanda-cloud:develop:connect/components/inputs/generate.adoc[`generate` input component]
 
 [[consume-from-redpanda]]
 === Consume from Redpanda topics
@@ -48,7 +49,7 @@ See also: xref:develop:connect/components/inputs/generate.adoc[`generate` input 
 include::ROOT:example$mcp-tools/inputs/consume_redpanda.yaml[tag=component,indent=0]
 ----
 
-See also: xref:develop:connect/components/inputs/redpanda.adoc[`redpanda` input]
+See also: xref:redpanda-cloud:develop:connect/components/inputs/redpanda.adoc[`redpanda` input]
 
 [[stream-processing]]
 === Process streaming data
@@ -62,12 +63,12 @@ See also: xref:develop:connect/components/inputs/redpanda.adoc[`redpanda` input]
 include::ROOT:example$mcp-tools/inputs/stream_processing.yaml[tag=component,indent=0]
 ----
 
-See also: xref:develop:connect/components/inputs/redpanda.adoc[`redpanda` input]
+See also: xref:redpanda-cloud:develop:connect/components/inputs/redpanda.adoc[`redpanda` input]
 
 [[call-external-services]]
 == Call external services
 
-Use xref:develop:connect/components/processors/about.adoc[processors] to fetch data from external APIs, databases, or AI services.
+Use xref:redpanda-cloud:develop:connect/components/processors/about.adoc[processors] to fetch data from external APIs, databases, or AI services.
 
 [[external-api-calls]]
 === Call REST APIs
@@ -81,7 +82,7 @@ Use xref:develop:connect/components/processors/about.adoc[processors] to fetch d
 include::ROOT:example$mcp-tools/processors/http_processor.yaml[]
 ----
 
-See also: xref:develop:connect/components/processors/http.adoc[`http` processor], xref:develop:connect/components/processors/mutation.adoc[`mutation` processor]
+See also: xref:redpanda-cloud:develop:connect/components/processors/http.adoc[`http` processor], xref:redpanda-cloud:develop:connect/components/processors/mutation.adoc[`mutation` processor]
 
 [[database-queries]]
 === Query databases
@@ -95,7 +96,7 @@ See also: xref:develop:connect/components/processors/http.adoc[`http` processor]
 include::ROOT:example$mcp-tools/processors/gcp_bigquery_select_processor.yaml[]
 ----
 
-See also: xref:develop:connect/components/processors/gcp_bigquery_select.adoc[`gcp_bigquery_select` processor], xref:develop:connect/components/processors/sql_select.adoc[`sql_select` processor]
+See also: xref:redpanda-cloud:develop:connect/components/processors/gcp_bigquery_select.adoc[`gcp_bigquery_select` processor], xref:redpanda-cloud:develop:connect/components/processors/sql_select.adoc[`sql_select` processor]
 
 [[jira-queries]]
 === Query Jira issues
@@ -111,7 +112,7 @@ NOTE: The `jira` processor is available on Dedicated and BYOC clusters.
 include::ROOT:example$mcp-tools/processors/search_jira.yaml[tag=complete,indent=0]
 ----
 
-For more patterns including pagination, custom fields, and creating issues via the HTTP processor, see xref:develop:connect/cookbooks/jira.adoc[].
+For more patterns including pagination, custom fields, and creating issues via the HTTP processor, see xref:redpanda-cloud:develop:connect/cookbooks/jira.adoc[].
 
 [[ai-llm-integration]]
 === Integrate with AI/LLM services
@@ -127,7 +128,7 @@ For more patterns including pagination, custom fields, and creating issues via t
 include::ROOT:example$mcp-tools/processors/openai_chat.yaml[tag=component,indent=0]
 ----
 
-See also: xref:develop:connect/components/processors/openai_chat_completion.adoc[`openai_chat_completion`], xref:develop:connect/components/processors/openai_embeddings.adoc[`openai_embeddings`]
+See also: xref:redpanda-cloud:develop:connect/components/processors/openai_chat_completion.adoc[`openai_chat_completion`], xref:redpanda-cloud:develop:connect/components/processors/openai_embeddings.adoc[`openai_embeddings`]
 
 ==== Generate embeddings
 
@@ -136,12 +137,12 @@ See also: xref:develop:connect/components/processors/openai_chat_completion.adoc
 include::ROOT:example$mcp-tools/processors/openai_embeddings.yaml[tag=component,indent=0]
 ----
 
-See also: xref:develop:connect/components/processors/cohere_embeddings.adoc[`cohere_embeddings`], xref:develop:connect/components/processors/gcp_vertex_ai_embeddings.adoc[`gcp_vertex_ai_embeddings`]
+See also: xref:redpanda-cloud:develop:connect/components/processors/cohere_embeddings.adoc[`cohere_embeddings`], xref:redpanda-cloud:develop:connect/components/processors/gcp_vertex_ai_embeddings.adoc[`gcp_vertex_ai_embeddings`]
 
 [[write-data]]
 == Write data
 
-Use xref:develop:connect/components/outputs/about.adoc[outputs] to write data to Redpanda topics or cache stores.
+Use xref:redpanda-cloud:develop:connect/components/outputs/about.adoc[outputs] to write data to Redpanda topics or cache stores.
 
 [[publish-to-redpanda]]
 === Publish to Redpanda topics
@@ -155,7 +156,7 @@ Use xref:develop:connect/components/outputs/about.adoc[outputs] to write data to
 include::ROOT:example$mcp-tools/outputs/redpanda_output.yaml[]
 ----
 
-See also: xref:develop:connect/components/outputs/redpanda.adoc[`redpanda` output]
+See also: xref:redpanda-cloud:develop:connect/components/outputs/redpanda.adoc[`redpanda` output]
 
 ==== Outputs with processors
 
@@ -187,7 +188,7 @@ include::ROOT:example$mcp-tools/caches/redpanda_cache.yaml[]
 include::ROOT:example$mcp-tools/caches/memory_cache.yaml[]
 ----
 
-See also: xref:develop:connect/components/caches/memory.adoc[`memory` cache], xref:develop:connect/components/outputs/redpanda.adoc[`redpanda` output]
+See also: xref:redpanda-cloud:develop:connect/components/caches/memory.adoc[`memory` cache], xref:redpanda-cloud:develop:connect/components/outputs/redpanda.adoc[`redpanda` output]
 
 [[transform-data]]
 == Transform data
@@ -206,7 +207,7 @@ Use Bloblang and processors to transform, validate, and route data.
 include::ROOT:example$mcp-tools/processors/transform_validate.yaml[tag=mapping,indent=0]
 ----
 
-See also: xref:develop:connect/components/processors/mapping.adoc[`mapping` processor], xref:develop:connect/guides/bloblang/about.adoc[Bloblang guide]
+See also: xref:redpanda-cloud:develop:connect/components/processors/mapping.adoc[`mapping` processor], xref:redpanda-cloud:develop:connect/guides/bloblang/about.adoc[Bloblang guide]
 
 [[event-driven-workflows]]
 === Build event-driven workflows
@@ -220,7 +221,7 @@ See also: xref:develop:connect/components/processors/mapping.adoc[`mapping` proc
 include::ROOT:example$mcp-tools/inputs/event_driven_workflow.yaml[tag=component,indent=0]
 ----
 
-See also: xref:develop:connect/components/inputs/redpanda.adoc[`redpanda` input]
+See also: xref:redpanda-cloud:develop:connect/components/inputs/redpanda.adoc[`redpanda` input]
 
 [[production-readiness]]
 == Production readiness

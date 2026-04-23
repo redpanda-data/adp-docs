@@ -1,0 +1,4 @@
+= Pipeline Examples
+:description: Example pipelines for common AI agent use cases.
+
+// TODO: Add content
