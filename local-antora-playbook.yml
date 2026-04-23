@@ -12,21 +12,20 @@ output:
   clean: true
 content:
   sources:
-  - url: .
-    branches: HEAD
-  - url: ../docs
+  - url: https://github.com/redpanda-data/adp-docs
+    branches: feature/initial-setup
+  - url: https://github.com/redpanda-data/docs
     branches: [main, v/*, api, shared, site-search,'!v-end-of-life/*']
-  - url: ../cloud-docs
-    branches: HEAD
+  - url: https://github.com/redpanda-data/cloud-docs
+    branches: feature/remove-ai-agents
   - url: https://github.com/redpanda-data/redpanda-labs
     branches: main
     start_paths: [docs,'*/docs']
-  - url: ../rp-connect-docs
-    branches: HEAD
+  - url: https://github.com/redpanda-data/rp-connect-docs
+    branches: main
 ui:
   bundle:
-    url: ../docs-ui/build/ui-bundle.zip
-    snapshot: true
+    url: https://github.com/redpanda-data/docs-ui/releases/download/v2.14.0-adp.1/ui-bundle.zip
 asciidoc:
   attributes:
   extensions:
