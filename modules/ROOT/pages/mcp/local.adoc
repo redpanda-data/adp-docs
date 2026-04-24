@@ -1,4 +1,0 @@
-= Local MCP
-:description: Run MCP servers locally for development and testing.
-
-// TODO: Add content

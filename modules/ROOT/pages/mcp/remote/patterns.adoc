@@ -1,4 +1,0 @@
-= MCP Patterns
-:description: Common patterns for building MCP servers and tools.
-
-// TODO: Add content

@@ -1,4 +1,0 @@
-= Logs
-:description: Access and analyze AI agent logs.
-
-// TODO: Add content

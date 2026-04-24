@@ -1,4 +1,0 @@
-= System Prompt Best Practices
-:description: Guidelines for writing effective system prompts for AI agents.
-
-// TODO: Add content

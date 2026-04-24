@@ -1,4 +1,0 @@
-= Token Budgets and Limits
-:description: Control AI costs with token budgets and rate limits.
-
-// TODO: Add content

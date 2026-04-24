@@ -1,4 +1,0 @@
-= Connect Your Agent
-:description: Connect your AI agent to Redpanda AI Gateway.
-
-// TODO: Add content

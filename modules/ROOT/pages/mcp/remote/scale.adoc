@@ -1,4 +1,0 @@
-= Scaling MCP Servers
-:description: Scale your MCP servers for production workloads.
-
-// TODO: Add content

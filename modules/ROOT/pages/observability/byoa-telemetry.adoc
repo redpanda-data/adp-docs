@@ -1,4 +1,0 @@
-= BYOA Telemetry (OpenTelemetry)
-:description: Send telemetry from your own agents to Redpanda ADP using OpenTelemetry.
-
-// TODO: Add content

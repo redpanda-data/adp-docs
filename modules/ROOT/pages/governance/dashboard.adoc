@@ -1,4 +1,0 @@
-= Governance Dashboard
-:description: Monitor and manage AI agent governance from a central dashboard.
-
-// TODO: Add content
