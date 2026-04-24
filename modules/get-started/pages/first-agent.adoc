@@ -1,0 +1,4 @@
+= Build Your First Agent
+:description: Create and deploy your first AI agent with Redpanda ADP.
+
+// TODO: Add content

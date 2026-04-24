@@ -1,0 +1,4 @@
+= Cursor Integration
+:description: Integrate Redpanda ADP with Cursor IDE.
+
+// TODO: Add content

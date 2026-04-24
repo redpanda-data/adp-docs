@@ -1,0 +1,4 @@
+= Kill Switch
+:description: Emergency controls to stop AI agent operations.
+
+// TODO: Add content
