@@ -46,7 +46,7 @@ For example, if your agent URL is `\https://my-agent.ai-agents.abc123.cloud.redp
 
 The `.well-known` path follows internet standards for service discovery, making agents discoverable without configuration.
 
-To configure the agent card, see xref:agents/create-agent.adoc#configure-a2a-discovery-metadata-optional[Configure A2A discovery metadata].
+To configure the agent card, see xref:create-agent.adoc#configure-a2a-discovery-metadata-optional[Configure A2A discovery metadata].
 
 == Where A2A is used in Redpanda Cloud
 
@@ -56,7 +56,7 @@ Redpanda Cloud uses the A2A protocol in two contexts:
 
 External applications and agents hosted outside Redpanda Cloud use A2A to call Redpanda Cloud agents. This includes backend services, CLI tools, custom UIs, and agents hosted on other platforms.
 
-For integration pattern guidance, see xref:agents/integration-overview.adoc[].
+For integration pattern guidance, see xref:integration-overview.adoc[].
 
 === Internal pipeline-to-agent integration
 
@@ -66,7 +66,7 @@ Redpanda Connect pipelines use the xref:redpanda-cloud:develop:connect/component
 * Streaming data enrichment with AI-generated fields.
 * Event-driven agent invocation for automated processing.
 
-The `a2a_message` processor uses the A2A protocol internally to discover and call agents. For pipeline patterns, see xref:agents/pipeline-integration-patterns.adoc[].
+The `a2a_message` processor uses the A2A protocol internally to discover and call agents. For pipeline patterns, see xref:pipeline-integration-patterns.adoc[].
 
 == How agents discover each other
 
@@ -118,6 +118,6 @@ The A2A protocol uses semantic versioning (major.minor.patch). Agents declare th
 
 == Next steps
 
-* xref:agents/integration-overview.adoc[]
-* xref:agents/create-agent.adoc[]
+* xref:integration-overview.adoc[]
+* xref:create-agent.adoc[]
 * link:https://a2a.ag/spec[A2A Protocol Specification^]

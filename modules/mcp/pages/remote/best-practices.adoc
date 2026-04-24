@@ -8,7 +8,7 @@
 :learning-objective-2: Define input properties with appropriate types and constraints
 :learning-objective-3: Design focused tools that complete quickly
 
-After xref:mcp/remote/create-tool.adoc[creating your first tool], apply these design guidelines so AI clients can discover, understand, and invoke your tools correctly.
+After xref:remote/create-tool.adoc[creating your first tool], apply these design guidelines so AI clients can discover, understand, and invoke your tools correctly.
 
 After reading this page, you will be able to:
 
@@ -37,6 +37,6 @@ include::redpanda-connect:ai-agents:example$best-practices/mcp-metadata/search-c
 
 == Next steps
 
-* xref:mcp/remote/create-tool.adoc#secrets[Use secrets for credentials]
-* xref:mcp/remote/tool-patterns.adoc[]
-* xref:mcp/remote/troubleshooting.adoc[]
+* xref:remote/create-tool.adoc#secrets[Use secrets for credentials]
+* xref:remote/tool-patterns.adoc[]
+* xref:remote/troubleshooting.adoc[]

@@ -69,7 +69,7 @@ NEVER respond about order status without calling the tool first.
 **Prevention:**
 
 * Write explicit tool selection criteria in system prompts
-* Test agents with the xref:agents/prompt-best-practices.adoc#evaluation-and-testing[systematic testing approach]
+* Test agents with the xref:agents:prompt-best-practices.adoc#evaluation-and-testing[systematic testing approach]
 * Use models appropriate for your task complexity
 
 === Calling wrong tools
@@ -103,7 +103,7 @@ Use get_shipping_info when:
 
 **Prevention:**
 
-* Follow tool design patterns in xref:mcp/remote/tool-patterns.adoc[]
+* Follow tool design patterns in xref:mcp:remote/tool-patterns.adoc[]
 * Limit each agent to 10-15 tools maximum
 * Test boundary cases where multiple tools might apply
 
@@ -146,7 +146,7 @@ If a tool fails after 2 attempts:
 **Prevention:**
 
 * Design tools to return complete information in one call
-* Set max iterations appropriate for task complexity (see xref:agents/concepts.adoc#why-iterations-matter[Why iterations matter])
+* Set max iterations appropriate for task complexity (see xref:agents:concepts.adoc#why-iterations-matter[Why iterations matter])
 * Test with ambiguous requests that might cause loops
 
 === Making up information
@@ -276,7 +276,7 @@ Efficiency guidelines:
 * Set appropriate max iterations (10-20 for simple, 30-40 for complex)
 * Design tools to return minimal necessary data
 * Monitor token usage trends
-* See cost calculation guidance in xref:agents/concepts.adoc#cost-calculation[Cost calculation]
+* See cost calculation guidance in xref:agents:concepts.adoc#cost-calculation[Cost calculation]
 
 == Tool execution issues
 
@@ -440,7 +440,7 @@ The agent card is always available at `/.well-known/agent-card.json` according t
 
 * Always append `/.well-known/agent-card.json` to the agent endpoint URL
 * Test the agent card URL in a browser before using it in pipeline configuration
-* See xref:agents/a2a-concepts.adoc#agent-card-location[Agent card location] for details
+* See xref:agents:a2a-concepts.adoc#agent-card-location[Agent card location] for details
 
 === Pipeline integration failures
 
@@ -474,15 +474,15 @@ processors:
 
 * Test pipeline-agent integration with low volume first
 * Size agent resources appropriately for event rate
-* See integration patterns in xref:agents/pipeline-integration-patterns.adoc[]
+* See integration patterns in xref:agents:pipeline-integration-patterns.adoc[]
 
 == Monitor and debug agents
 
-For comprehensive guidance on monitoring agent activity, analyzing conversation history, tracking token usage, and debugging issues, see xref:agents/monitor-agents.adoc[].
+For comprehensive guidance on monitoring agent activity, analyzing conversation history, tracking token usage, and debugging issues, see xref:agents:monitor-agents.adoc[].
 
 == Next steps
 
-* xref:agents/prompt-best-practices.adoc[]
-* xref:agents/concepts.adoc[]
-* xref:mcp/remote/tool-patterns.adoc[]
-* xref:agents/architecture-patterns.adoc[]
+* xref:agents:prompt-best-practices.adoc[]
+* xref:agents:concepts.adoc[]
+* xref:mcp:remote/tool-patterns.adoc[]
+* xref:agents:architecture-patterns.adoc[]

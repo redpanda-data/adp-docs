@@ -19,7 +19,7 @@ By completing this quickstart, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-TIP: For background on how MCP tools work and when to use each component type, see xref:mcp/remote/concepts.adoc[].
+TIP: For background on how MCP tools work and when to use each component type, see xref:remote/concepts.adoc[].
 
 == Prerequisites
 
@@ -192,7 +192,7 @@ This page shows a list of existing servers.
 * *Description*: Explain what the server does. For example, `Generates fake user event data and publishes it to Redpanda topics`.
 * *Tags*: Add key/value tags such as `owner=platform` or `env=demo`. The tag names `service_account_id` and `secret_id` are reserved and cannot be used.
 * *Resources*: Choose a size (XSmall / Small / Medium / Large / XLarge). Larger sizes allow more concurrent requests and faster processing, but cost more. You can change this later.
-* *Service Account*: A service account is automatically created for authenticating the MCP server to your cluster. The name is pre-filled but you can customize it. For details about default permissions and how to manage service accounts, see xref:mcp/remote/concepts.adoc#service-account-authorization[Service account authorization].
+* *Service Account*: A service account is automatically created for authenticating the MCP server to your cluster. The name is pre-filled but you can customize it. For details about default permissions and how to manage service accounts, see xref:remote/concepts.adoc#service-account-authorization[Service account authorization].
 
 . Click *Next* to define tools.
 +
@@ -379,16 +379,16 @@ If you encounter issues during this quickstart:
 - **Connection issues**: Verify you're logged in with `rpk cloud login` and that your server status shows *Running*.
 - **Publishing failures**: Verify the `events` topic exists with `rpk topic list`.
 
-For detailed solutions, see xref:mcp/remote/troubleshooting.adoc[].
+For detailed solutions, see xref:remote/troubleshooting.adoc[].
 
 == Next steps
 
 You've deployed an MCP server and connected Claude Code to your Redpanda cluster. Here's where to go next:
 
-* xref:agents/quickstart.adoc[]
-* xref:mcp/remote/concepts.adoc[]
-* xref:mcp/remote/create-tool.adoc[]
-* xref:mcp/remote/best-practices.adoc[]
-* xref:mcp/remote/tool-patterns.adoc[]
-* xref:mcp/remote/troubleshooting.adoc[]
-* xref:mcp/remote/admin-guide.adoc[]
+* xref:agents:quickstart.adoc[]
+* xref:remote/concepts.adoc[]
+* xref:remote/create-tool.adoc[]
+* xref:remote/best-practices.adoc[]
+* xref:remote/tool-patterns.adoc[]
+* xref:remote/troubleshooting.adoc[]
+* xref:remote/admin-guide.adoc[]

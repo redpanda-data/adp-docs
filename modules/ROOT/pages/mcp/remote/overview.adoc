@@ -65,9 +65,9 @@ include::redpanda-connect:ai-agents:partial$mcp/overview/specification-support.a
 
 == Next steps
 
-* xref:mcp/remote/quickstart.adoc[]
-* xref:agents/overview.adoc[]
-* xref:mcp/remote/concepts.adoc[]
-* xref:mcp/remote/create-tool.adoc[]
+* xref:mcp:remote/quickstart.adoc[]
+* xref:agents:overview.adoc[]
+* xref:mcp:remote/concepts.adoc[]
+* xref:mcp:remote/create-tool.adoc[]
 * link:https://modelcontextprotocol.io/[Model Context Protocol documentation^]
 

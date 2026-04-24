@@ -154,7 +154,7 @@ curl ${GATEWAY_ENDPOINT}/mcp/tools \
 
 With deferred loading enabled, you'll receive search and orchestrator tools initially. You can then query for specific tools as needed.
 
-// See xref:ai-gateway/builders/use-mcp-tools.adoc[] for more details.
+// See xref:builders/use-mcp-tools.adoc[] for more details.
 
 ifdef::ai-hub-available[]
 == Identify gateway mode
@@ -171,7 +171,7 @@ include::ROOT:partial$ai-hub-mode-indicator.adoc[]
 * Models are automatically routed based on system-managed rules
 * You cannot see or modify routing rules (they're managed by Redpanda)
 * Limited customization via administrator-configured preference toggles
-* See xref:ai-gateway/builders/use-ai-hub-gateway.adoc[] for AI Hub-specific guidance
+* See xref:builders/use-ai-hub-gateway.adoc[] for AI Hub-specific guidance
 
 *Custom Mode:*
 
@@ -304,7 +304,7 @@ echo -e "\n=== Gateway validated successfully ==="
 
 == Next steps
 
-* xref:ai-gateway/builders/connect-your-agent.adoc[Connect Your Agent] - Integrate your application
-// * xref:ai-gateway/builders/available-models.adoc[Available Models] - Learn about model selection and routing
-// * xref:ai-gateway/builders/use-mcp-tools.adoc[Use MCP Tools] - Access tools from MCP servers
-// * xref:ai-gateway/builders/monitor-your-usage.adoc[Monitor Your Usage] - Track requests and costs
+* xref:builders/connect-your-agent.adoc[Connect Your Agent] - Integrate your application
+// * xref:builders/available-models.adoc[Available Models] - Learn about model selection and routing
+// * xref:builders/use-mcp-tools.adoc[Use MCP Tools] - Access tools from MCP servers
+// * xref:builders/monitor-your-usage.adoc[Monitor Your Usage] - Track requests and costs

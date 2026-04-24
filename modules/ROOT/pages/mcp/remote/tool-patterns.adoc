@@ -10,7 +10,7 @@
 :learning-objective-2: Apply validation and error handling patterns for production robustness
 :learning-objective-3: Format responses consistently for AI client consumption
 
-When building tools, use these patterns as starting points for common scenarios. For step-by-step instructions, see xref:mcp/remote/create-tool.adoc[]. For design guidelines, see xref:mcp/remote/best-practices.adoc[].
+When building tools, use these patterns as starting points for common scenarios. For step-by-step instructions, see xref:mcp:remote/create-tool.adoc[]. For design guidelines, see xref:mcp:remote/best-practices.adoc[].
 
 After reading this page, you will be able to:
 
@@ -254,7 +254,7 @@ include::redpanda-connect:ai-agents:partial$mcp/tool-patterns/production-workflo
 
 == Next steps
 
-* xref:agents/integration-overview.adoc[]
-* xref:mcp/remote/create-tool.adoc[]
-* xref:mcp/remote/best-practices.adoc[]
-* xref:mcp/remote/troubleshooting.adoc[]
+* xref:agents:integration-overview.adoc[]
+* xref:mcp:remote/create-tool.adoc[]
+* xref:mcp:remote/best-practices.adoc[]
+* xref:mcp:remote/troubleshooting.adoc[]

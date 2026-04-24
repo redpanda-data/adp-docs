@@ -18,12 +18,12 @@ For conceptual background on traces, spans, and the trace data structure, see xr
 
 == Prerequisites
 
-You must have an existing MCP server. If you do not have one, see xref:mcp/remote/quickstart.adoc[].
+You must have an existing MCP server. If you do not have one, see xref:remote/quickstart.adoc[].
 
 == View transcripts in the Cloud Console
 
 :context: mcp
-include::ROOT:partial$transcripts-ui-guide.adoc[]
+include::observability:partial$transcripts-ui-guide.adoc[]
 
 == Analyze traces programmatically
 
@@ -100,5 +100,5 @@ Check `status.message` for error details and the `events` array for error events
 == Next steps
 
 * xref:observability/concepts.adoc[]
-* xref:mcp/remote/troubleshooting.adoc[]
-* xref:mcp/remote/manage-servers.adoc[]
+* xref:remote/troubleshooting.adoc[]
+* xref:remote/manage-servers.adoc[]

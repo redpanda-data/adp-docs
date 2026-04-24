@@ -21,9 +21,9 @@ After completing this quickstart, you will be able to:
 
 * A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC cluster] (agents are not available on Dedicated or Serverless clusters)
 
-* xref:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, or Google AI)
+* xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, or Google AI)
 
-* Completed the xref:mcp/remote/quickstart.adoc[Remote MCP Quickstart] to create an MCP server with the following tools deployed:
+* Completed the xref:mcp:remote/quickstart.adoc[Remote MCP Quickstart] to create an MCP server with the following tools deployed:
 +
 ** `generate_input`: Generates fake user event data
 ** `redpanda_output`: Publishes data to Redpanda topics
@@ -100,7 +100,7 @@ Response format:
 
 . Review your configuration and click *Create Agent*.
 +
-TIP: A service account is automatically created to authenticate your agent with cluster resources. For details about default permissions and how to manage service accounts, see xref:agents/concepts.adoc#service-account-authorization[Service account authorization].
+TIP: A service account is automatically created to authenticate your agent with cluster resources. For details about default permissions and how to manage service accounts, see xref:agents:concepts.adoc#service-account-authorization[Service account authorization].
 
 . Wait for the agent status to change from *Starting* to *Running*.
 
@@ -171,7 +171,7 @@ Try modifying the agent to change its behavior:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:agents/troubleshooting.adoc[].
+For comprehensive troubleshooting guidance, see xref:agents:troubleshooting.adoc[].
 
 Common quickstart issue:
 
@@ -181,8 +181,8 @@ Common quickstart issue:
 
 You've created an agent that orchestrates MCP tools through natural language. Explore more:
 
-* xref:agents/overview.adoc[]
-* xref:agents/create-agent.adoc[]
-* xref:agents/prompt-best-practices.adoc[]
-* xref:agents/architecture-patterns.adoc[]
-* xref:mcp/remote/tool-patterns.adoc[]
+* xref:agents:overview.adoc[]
+* xref:agents:create-agent.adoc[]
+* xref:agents:prompt-best-practices.adoc[]
+* xref:agents:architecture-patterns.adoc[]
+* xref:mcp:remote/tool-patterns.adoc[]

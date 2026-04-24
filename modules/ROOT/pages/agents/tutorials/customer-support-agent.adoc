@@ -39,7 +39,7 @@ The challenge: users phrase requests differently ("Where's my package?", "Track 
 == Prerequisites
 
 * A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
-* xref:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
+* xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
 
 == Design the MCP tools
 
@@ -256,7 +256,7 @@ This demonstrates error recovery without hallucination. The "Never make up track
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:agents/troubleshooting.adoc[].
+For comprehensive troubleshooting guidance, see xref:agents:troubleshooting.adoc[].
 
 === Test with mock data
 
@@ -269,7 +269,7 @@ Use these documented test IDs when testing the agent. If you replace the mock to
 
 == Next steps
 
-* xref:mcp/remote/tool-patterns.adoc#call-external-apis[Call external APIs]
-* xref:agents/prompt-best-practices.adoc[]
-* xref:agents/architecture-patterns.adoc[]
-* xref:agents/troubleshooting.adoc[]
+* xref:mcp:remote/tool-patterns.adoc#call-external-apis[Call external APIs]
+* xref:agents:prompt-best-practices.adoc[]
+* xref:agents:architecture-patterns.adoc[]
+* xref:agents:troubleshooting.adoc[]

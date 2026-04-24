@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-You must have an existing MCP server. If you do not have one, see xref:mcp/remote/quickstart.adoc[].
+You must have an existing MCP server. If you do not have one, see xref:mcp:remote/quickstart.adoc[].
 
 == Scale resources
 

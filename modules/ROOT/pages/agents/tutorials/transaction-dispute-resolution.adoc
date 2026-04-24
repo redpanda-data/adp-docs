@@ -18,7 +18,7 @@ After completing this tutorial, you will be able to:
 
 == What you'll learn
 
-This tutorial advances from xref:agents/tutorials/customer-support-agent.adoc[basic multi-tool orchestration] to multi-agent systems. You'll build a transaction dispute resolution system where a root agent delegates to specialized sub-agents (account, fraud, merchant, compliance), each with focused responsibilities and PII-protected data access. You'll also monitor execution using glossterm:transcript[,transcripts] and process disputes from transaction streams for automated detection.
+This tutorial advances from xref:agents:tutorials/customer-support-agent.adoc[basic multi-tool orchestration] to multi-agent systems. You'll build a transaction dispute resolution system where a root agent delegates to specialized sub-agents (account, fraud, merchant, compliance), each with focused responsibilities and PII-protected data access. You'll also monitor execution using glossterm:transcript[,transcripts] and process disputes from transaction streams for automated detection.
 
 These patterns apply beyond banking to any domain requiring specialized expertise and data security: healthcare systems, insurance claims processing, or regulatory compliance workflows.
 
@@ -35,9 +35,9 @@ When a customer calls saying "I see a $247.83 charge from 'ACME CORP' but I neve
 == Prerequisites
 
 * A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
-* xref:ai-gateway/gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI GPT-5.2 or Claude Sonnet 4.5 for reasoning).
+* xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI GPT-5.2 or Claude Sonnet 4.5 for reasoning).
 * The xref:redpanda-cloud:manage:rpk/rpk-install.adoc[Redpanda CLI (`rpk`)] installed (for testing the pipeline with sample data).
-* Completed xref:agents/tutorials/customer-support-agent.adoc[] (foundational multi-tool concepts).
+* Completed xref:agents:tutorials/customer-support-agent.adoc[] (foundational multi-tool concepts).
 
 == Create MCP tools for each domain
 
@@ -94,7 +94,7 @@ Wait for the server status to show *Running*.
 
 [NOTE]
 ====
-This tutorial uses XSmall resource tier for all MCP servers because the mock tools run lightweight Bloblang transformations. Production deployments with external API calls require larger tiers based on throughput needs. See xref:mcp/remote/scale-resources.adoc[].
+This tutorial uses XSmall resource tier for all MCP servers because the mock tools run lightweight Bloblang transformations. Production deployments with external API calls require larger tiers based on throughput needs. See xref:mcp:remote/scale-resources.adoc[].
 ====
 
 === Fraud tools
@@ -388,7 +388,7 @@ This visibility helps you:
 * Identify slow sub-agents that need optimization
 * Track costs per investigation for budgeting
 
-For detailed trace structure, see xref:observability/concepts.adoc#agent-trace-hierarchy[Agent trace hierarchy].
+For detailed trace structure, see xref:observability:concepts.adoc#agent-trace-hierarchy[Agent trace hierarchy].
 
 == Integrate with streaming pipeline
 
@@ -643,7 +643,7 @@ In the transcript details, you'll see:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:agents/troubleshooting.adoc[].
+For comprehensive troubleshooting guidance, see xref:agents:troubleshooting.adoc[].
 
 === Test with mock data
 
@@ -658,8 +658,8 @@ For production deployments, replace the mock tools with API calls to your accoun
 
 == Next steps
 
-* xref:agents/architecture-patterns.adoc[]
-* xref:agents/integration-overview.adoc[]
-* xref:agents/pipeline-integration-patterns.adoc[]
-* xref:agents/monitor-agents.adoc[]
-* xref:mcp/remote/best-practices.adoc[]
+* xref:agents:architecture-patterns.adoc[]
+* xref:agents:integration-overview.adoc[]
+* xref:agents:pipeline-integration-patterns.adoc[]
+* xref:agents:monitor-agents.adoc[]
+* xref:mcp:remote/best-practices.adoc[]

@@ -8,7 +8,7 @@
 :learning-objective-2: Map MCP parameters to component configuration fields using Bloblang
 :learning-objective-3: Test tools using the MCP Inspector
 
-After xref:mcp/remote/quickstart.adoc[deploying your first MCP server], create custom tools that AI clients can discover and invoke. This guide walks you through the process using any Redpanda Connect component.
+After xref:remote/quickstart.adoc[deploying your first MCP server], create custom tools that AI clients can discover and invoke. This guide walks you through the process using any Redpanda Connect component.
 
 After reading this page, you will be able to:
 
@@ -19,8 +19,8 @@ After reading this page, you will be able to:
 == Prerequisites
 
 * A Redpanda Cloud cluster with *Remote MCP* enabled.
-* You can describe the MCP execution model (see xref:mcp/remote/concepts.adoc#execution-model[The MCP execution model])
-* You have chosen the right component type for your use case (see xref:mcp/remote/concepts.adoc#component-selection[Choose the right component type])
+* You can describe the MCP execution model (see xref:remote/concepts.adoc#execution-model[The MCP execution model])
+* You have chosen the right component type for your use case (see xref:remote/concepts.adoc#component-selection[Choose the right component type])
 
 == Create the tool
 
@@ -118,7 +118,7 @@ Outputs can include a `processors:` section to transform data before publishing:
 include::ROOT:example$mcp-tools/outputs/publish_with_timestamp.yaml[tag=complete,indent=0]
 ----
 
-See xref:mcp/remote/tool-patterns.adoc#outputs-with-processors[outputs with processors] for more examples.
+See xref:remote/tool-patterns.adoc#outputs-with-processors[outputs with processors] for more examples.
 
 Do not wrap components in `input:`, `output:`, or `cache:` blocks. This syntax is for pipelines, not MCP tools.
 
@@ -215,7 +215,7 @@ When you add secret references to your tool configuration, the Cloud Console aut
 * Rotate secrets periodically.
 * Follow the principle of least privilege. Only request the scopes and roles your tool actually needs.
 
-See xref:mcp/remote/best-practices.adoc#secrets[Secrets management] for more guidance.
+See xref:remote/best-practices.adoc#secrets[Secrets management] for more guidance.
 
 == Test the tool
 
@@ -253,8 +253,8 @@ include::ROOT:example$mcp-tools/processors/get_weather_complete.yaml[tag=complet
 
 == Next steps
 
-* xref:agents/quickstart.adoc[]
-* xref:mcp/remote/best-practices.adoc[]
-* xref:mcp/remote/tool-patterns.adoc[]
-* xref:mcp/remote/troubleshooting.adoc[]
+* xref:agents:quickstart.adoc[]
+* xref:remote/best-practices.adoc[]
+* xref:remote/tool-patterns.adoc[]
+* xref:remote/troubleshooting.adoc[]
 * xref:redpanda-cloud:develop:connect/components/about.adoc[]

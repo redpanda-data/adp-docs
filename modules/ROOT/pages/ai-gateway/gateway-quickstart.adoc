@@ -65,7 +65,7 @@ When creating a gateway, you choose between two modes:
 * *AI Hub Mode*: Zero-configuration with pre-configured routing and backend pools. Just add provider credentials and start routing requests. Ideal for quickstarts and standard use cases.
 * *Custom Mode*: Full control over all routing rules, backend pools, and policies. Requires manual configuration. Ideal for custom routing logic and specialized requirements.
 
-See xref:ai-gateway/gateway-modes.adoc[] to understand which mode fits your needs. This quickstart focuses on Custom mode configuration.
+See xref:ai-gateway:gateway-modes.adoc[] to understand which mode fits your needs. This quickstart focuses on Custom mode configuration.
 ====
 endif::[]
 
@@ -74,7 +74,7 @@ endif::[]
 +
 ifdef::ai-hub-available[]
 . Select the gateway mode:
-* *AI Hub*: Choose this for pre-configured intelligent routing (see xref:ai-gateway/admin/configure-ai-hub.adoc[] for setup)
+* *AI Hub*: Choose this for pre-configured intelligent routing (see xref:ai-gateway:admin/configure-ai-hub.adoc[] for setup)
 * *Custom*: Choose this for full configuration control
 endif::[]
 . Configure the gateway:
@@ -373,7 +373,7 @@ Guard for field existence:
 has(request.body.max_tokens) && request.body.max_tokens > 1000
 ----
 
-For more CEL examples, see xref:ai-gateway/cel-routing-cookbook.adoc[].
+For more CEL examples, see xref:ai-gateway:cel-routing-cookbook.adoc[].
 
 == Connect AI tools to your gateway
 
@@ -432,7 +432,7 @@ Alternatively, edit `~/.claude/config.json`:
 ----
 
 ifdef::integrations-available[]
-For detailed Claude Code setup, see xref:ai-gateway/integrations/claude-code-user.adoc[].
+For detailed Claude Code setup, see xref:ai-gateway:integrations/claude-code-user.adoc[].
 endif::[]
 
 === Continue.dev
@@ -469,7 +469,7 @@ Edit your Continue config file (`~/.continue/config.json`):
 ----
 
 ifdef::integrations-available[]
-For detailed Continue setup, see xref:ai-gateway/integrations/continue-user.adoc[].
+For detailed Continue setup, see xref:ai-gateway:integrations/continue-user.adoc[].
 endif::[]
 
 === Cursor IDE
@@ -484,7 +484,7 @@ Configure Cursor in Settings (*Cursor* → *Settings* or `Cmd+,`):
 ----
 
 ifdef::integrations-available[]
-For detailed Cursor setup, see xref:ai-gateway/integrations/cursor-user.adoc[].
+For detailed Cursor setup, see xref:ai-gateway:integrations/cursor-user.adoc[].
 endif::[]
 
 === Custom applications
@@ -531,13 +531,13 @@ const openai = new OpenAI({
 
 Explore advanced AI Gateway features:
 
-* xref:ai-gateway/cel-routing-cookbook.adoc[]: Advanced CEL routing patterns for traffic distribution and cost optimization
-* xref:ai-gateway/mcp-aggregation-guide.adoc[]: Configure MCP server aggregation and deferred tool loading
+* xref:ai-gateway:cel-routing-cookbook.adoc[]: Advanced CEL routing patterns for traffic distribution and cost optimization
+* xref:ai-gateway:mcp-aggregation-guide.adoc[]: Configure MCP server aggregation and deferred tool loading
 ifdef::integrations-available[]
-* xref:ai-gateway/integrations/index.adoc[]: Connect more AI development tools
+* xref:ai-gateway:integrations/index.adoc[]: Connect more AI development tools
 endif::[]
 
 Learn about the architecture:
 
-* xref:ai-gateway/gateway-architecture.adoc[]: Technical architecture, request lifecycle, and deployment models
-* xref:ai-gateway/what-is-ai-gateway.adoc[]: Problems AI Gateway solves and common use cases
+* xref:ai-gateway:gateway-architecture.adoc[]: Technical architecture, request lifecycle, and deployment models
+* xref:ai-gateway:what-is-ai-gateway.adoc[]: Problems AI Gateway solves and common use cases

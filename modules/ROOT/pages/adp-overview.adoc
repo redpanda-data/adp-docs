@@ -30,7 +30,7 @@ What makes this practical at scale is xref:redpanda-cloud:develop:connect/about.
 
 The result is faster time-to-production, lower maintenance (declarative definitions instead of imperative code), and organizational consistency across teams.
 
-For more information, see xref:agents/overview.adoc[].
+For more information, see xref:agents:overview.adoc[].
 
 == MCP servers
 
@@ -40,7 +40,7 @@ Under the hood, MCP servers wrap the same proven connectors that power some of t
 
 With over 300 connectors and real-time debugging capabilities, you reduce integration time while getting enterprise-grade security. You can reuse your existing infrastructure and data sources rather than building new integrations from scratch.
 
-For more information, see xref:mcp/overview.adoc[MCP Servers Overview].
+For more information, see xref:mcp:overview.adoc[MCP Servers Overview].
 
 == Transcripts
 
@@ -50,7 +50,7 @@ Transcripts are the keystone of agent governance. They are built on Redpanda's i
 
 Redpanda captures 100% of agent actions through OpenTelemetry standards, with end-to-end lineage across the entire execution chain. You can materialize execution logs to Iceberg tables for long-term retention and analysis, or replay them to evaluate and improve agent performance over time.
 
-For more information, see xref:observability/concepts.adoc[Transcripts Overview].
+For more information, see xref:observability:concepts.adoc[Transcripts Overview].
 
 == AI Gateway
 
@@ -60,7 +60,7 @@ For high availability, the gateway provides provider-agnostic routing with intel
 
 The gateway also supports tenancy modeling for teams, individuals, applications, and service accounts, giving you chargeback transparency for internal cost allocation. You can proxy both models and MCP gateways, centralizing compliance for all LLM interactions without locking into any single provider.
 
-For more information, see xref:ai-gateway/what-is-ai-gateway.adoc[AI Gateway Overview].
+For more information, see xref:ai-gateway:what-is-ai-gateway.adoc[AI Gateway Overview].
 
 == Enterprise governance
 
@@ -84,7 +84,7 @@ Some ways organizations can leverage Redpanda ADP include:
 
 == Next steps
 
-* xref:agents/overview.adoc[AI Agents Overview]
-* xref:mcp/overview.adoc[MCP Server Overview]
-* xref:observability/concepts.adoc[Transcripts Overview]
-* xref:ai-gateway/what-is-ai-gateway.adoc[AI Gateway Overview]
+* xref:agents:overview.adoc[AI Agents Overview]
+* xref:mcp:overview.adoc[MCP Server Overview]
+* xref:observability:concepts.adoc[Transcripts Overview]
+* xref:ai-gateway:what-is-ai-gateway.adoc[AI Gateway Overview]

@@ -39,8 +39,8 @@ include::redpanda-connect:ai-agents:partial$mcp/troubleshooting/debugging-techni
 
 If you're still experiencing issues:
 
-* xref:mcp/remote/create-tool.adoc[]
-* xref:mcp/remote/best-practices.adoc[]
-* xref:mcp/remote/concepts.adoc[]
+* xref:remote/create-tool.adoc[]
+* xref:remote/best-practices.adoc[]
+* xref:remote/concepts.adoc[]
 
 For protocol-level troubleshooting, see the link:https://modelcontextprotocol.io/[MCP documentation^].

@@ -292,7 +292,7 @@ Guide agents to:
 * Avoid redundant tool calls (check context before calling)
 * Stop when the task completes (don't continue exploring)
 
-For cost management strategies including iteration limits and monitoring, see xref:agents/concepts.adoc[].
+For cost management strategies including iteration limits and monitoring, see xref:agents:concepts.adoc[].
 
 == Example: System prompt with all best practices
 
@@ -421,6 +421,6 @@ Decision criteria enable reliable tool selection based on request context.
 
 == Next steps
 
-* xref:agents/quickstart.adoc[]
-* xref:agents/overview.adoc[]
-* xref:mcp/remote/best-practices.adoc[]
+* xref:agents:quickstart.adoc[]
+* xref:agents:overview.adoc[]
+* xref:mcp:remote/best-practices.adoc[]

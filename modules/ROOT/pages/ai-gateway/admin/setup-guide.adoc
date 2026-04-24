@@ -90,14 +90,14 @@ Before creating a gateway, decide which mode fits your needs.
 
 [TIP]
 ====
-You can start with AI Hub mode and later eject to Custom mode if you need more control. Ejection is a one-way transition. See xref:ai-gateway/admin/eject-to-custom-mode.adoc[].
+You can start with AI Hub mode and later eject to Custom mode if you need more control. Ejection is a one-way transition. See xref:ai-gateway:admin/eject-to-custom-mode.adoc[].
 ====
 
-For detailed comparison, see xref:ai-gateway/gateway-modes.adoc[].
+For detailed comparison, see xref:ai-gateway:gateway-modes.adoc[].
 
 *Next sections:*
 
-* *AI Hub Mode*: See xref:ai-gateway/admin/configure-ai-hub.adoc[] for setup instructions
+* *AI Hub Mode*: See xref:ai-gateway:admin/configure-ai-hub.adoc[] for setup instructions
 * *Custom Mode*: Continue with "Create a gateway" below for manual configuration
 endif::[]
 
@@ -207,7 +207,7 @@ Provider pools define which LLM providers handle requests, with support for prim
 +
 For simple routing, select *Route all requests to primary pool*.
 +
-For advanced routing based on request properties, use CEL expressions. See xref:ai-gateway/cel-routing-cookbook.adoc[] for examples.
+For advanced routing based on request properties, use CEL expressions. See xref:ai-gateway:cel-routing-cookbook.adoc[] for examples.
 +
 Example CEL expression for tier-based routing:
 +
@@ -299,7 +299,7 @@ Rate limits for MCP work the same way as LLM rate limits.
 
 Repeat for each MCP server you want to aggregate.
 
-See xref:ai-gateway/mcp-aggregation-guide.adoc[] for detailed information about MCP aggregation.
+See xref:ai-gateway:mcp-aggregation-guide.adoc[] for detailed information about MCP aggregation.
 
 === Configure the MCP orchestrator
 
@@ -376,15 +376,15 @@ Now that your gateway is configured, share access with users (builders):
 . (Optional) Document available models and any routing policies
 . (Optional) Share rate limits and budget information
 
-Users can then discover and connect to the gateway using the information provided. See xref:ai-gateway/builders/discover-gateways.adoc[] for user documentation.
+Users can then discover and connect to the gateway using the information provided. See xref:ai-gateway:builders/discover-gateways.adoc[] for user documentation.
 
 == Next steps
 
 *Configure and optimize:*
 
-// * xref:ai-gateway/admin/manage-gateways.adoc[Manage Gateways] - List, edit, and delete gateways
-* xref:ai-gateway/cel-routing-cookbook.adoc[CEL Routing Cookbook] - Advanced routing patterns
-// * xref:ai-gateway/admin/networking-configuration.adoc[Networking Configuration] - Configure private endpoints and connectivity
+// * xref:ai-gateway:admin/manage-gateways.adoc[Manage Gateways] - List, edit, and delete gateways
+* xref:ai-gateway:cel-routing-cookbook.adoc[CEL Routing Cookbook] - Advanced routing patterns
+// * xref:ai-gateway:admin/networking-configuration.adoc[Networking Configuration] - Configure private endpoints and connectivity
 
 //*Monitor and observe:*
 //
@@ -392,5 +392,5 @@ Users can then discover and connect to the gateway using the information provide
 ifdef::integrations-available[]
 *Integrate tools:*
 
-* xref:ai-gateway/integrations/index.adoc[Integrations] - Admin guides for Claude Code, Cursor, and other tools
+* xref:ai-gateway:integrations/index.adoc[Integrations] - Admin guides for Claude Code, Cursor, and other tools
 endif::[]

@@ -27,18 +27,18 @@ When you create an agent, you configure the components through the Redpanda Clou
 
 * *System prompt*: Defines the agent's role, responsibilities, and constraints
 * *LLM*: Interprets user intent and decides which tools to invoke
-* *Tools*: External capabilities exposed through the xref:mcp/remote/overview.adoc[Model Context Protocol (MCP)]
+* *Tools*: External capabilities exposed through the xref:mcp:remote/overview.adoc[Model Context Protocol (MCP)]
 * *Context*: Conversation history, tool results, and real-time events from Redpanda topics
 
 Agents can invoke Redpanda Connect components as tools on-demand. Redpanda Connect pipelines can also invoke agents for event-driven processing. This bidirectional integration supports both interactive workflows and automated streaming.
 
 When a user makes a request, the LLM receives the system prompt and context, decides which tools to invoke, and processes the results. This cycle repeats until the task completes.
 
-For a deeper understanding of how agents execute, manage context, and maintain state, see xref:agents/concepts.adoc[].
+For a deeper understanding of how agents execute, manage context, and maintain state, see xref:agents:concepts.adoc[].
 
 == Key benefits
 
-A declarative approach means you configure agent behavior instead of coding it, with access to 300+ built-in Redpanda Connect connectors for data sources, APIs, and services. Real-time streaming data ensures agents access live events instead of batch snapshots. xref:mcp/remote/overview.adoc[Remote MCP] support enables standardized tool access. Managed infrastructure handles deployment, scaling, and security for you. Low-latency execution means tools run close to your data. Integrated secrets management securely stores API keys and credentials.
+A declarative approach means you configure agent behavior instead of coding it, with access to 300+ built-in Redpanda Connect connectors for data sources, APIs, and services. Real-time streaming data ensures agents access live events instead of batch snapshots. xref:mcp:remote/overview.adoc[Remote MCP] support enables standardized tool access. Managed infrastructure handles deployment, scaling, and security for you. Low-latency execution means tools run close to your data. Integrated secrets management securely stores API keys and credentials.
 
 == Use cases
 
@@ -64,8 +64,8 @@ Process every event with AI reasoning at scale. Invoke agents automatically from
 
 == Next steps
 
-* xref:agents/quickstart.adoc[]
-* xref:agents/concepts.adoc[]
-* xref:agents/architecture-patterns.adoc[]
-* xref:agents/integration-overview.adoc[]
-* xref:agents/create-agent.adoc[]
+* xref:agents:quickstart.adoc[]
+* xref:agents:concepts.adoc[]
+* xref:agents:architecture-patterns.adoc[]
+* xref:agents:integration-overview.adoc[]
+* xref:agents:create-agent.adoc[]

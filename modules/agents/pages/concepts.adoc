@@ -25,7 +25,7 @@ Every agent request follows a reasoning loop. The agent doesn't execute all tool
 The following diagram shows how agents process requests through iterative reasoning:
 
 .Agent reasoning loop with tool integration
-image::agent-reasoning-loop.png[Diagram showing the agent reasoning loop: User Request flows to LLM Receives Context, then to LLM Decision which branches to Tool Executes, Request Clarification, or Return Response to User]
+image::ROOT:agent-reasoning-loop.png[Diagram showing the agent reasoning loop: User Request flows to LLM Receives Context, then to LLM Decision which branches to Tool Executes, Request Clarification, or Return Response to User]
 
 When an agent receives a request:
 
@@ -38,7 +38,7 @@ When an agent receives a request:
 The loop continues until one of these conditions is met:
 
 .Reasoning loop exit conditions
-image::agent-exit-conditions.png[Diagram showing exit conditions: Task Complete returns response, Max Iterations returns partial result, Unrecoverable Error returns error, otherwise continue loop]
+image::ROOT:agent-exit-conditions.png[Diagram showing exit conditions: Task Complete returns response, Max Iterations returns partial result, Unrecoverable Error returns error, otherwise continue loop]
 
 * Agent completes the task and responds to the user
 * Agent reaches max iterations limit
@@ -132,7 +132,7 @@ Tool design affects agent behavior. Coarse-grained tools that do many things res
 
 Choose granularity based on how often you'll reuse tool logic across workflows, whether intermediate results help with debugging, and how much control you want over tool invocation order.
 
-For tool design guidance, see xref:mcp/remote/best-practices.adoc[].
+For tool design guidance, see xref:mcp:remote/best-practices.adoc[].
 
 == Context and state management
 
@@ -152,11 +152,11 @@ When context exceeds the limit, the oldest tool results get truncated, the agent
 
 Design workflows to complete within context limits. Avoid unbounded tool chaining.
 
-include::partial$service-account-authorization.adoc[]
+include::ROOT:partial$service-account-authorization.adoc[]
 
 == Next steps
 
-* xref:agents/architecture-patterns.adoc[]
-* xref:agents/quickstart.adoc[]
-* xref:agents/prompt-best-practices.adoc[]
-* xref:mcp/remote/best-practices.adoc[]
+* xref:architecture-patterns.adoc[]
+* xref:quickstart.adoc[]
+* xref:prompt-best-practices.adoc[]
+* xref:mcp:remote/best-practices.adoc[]

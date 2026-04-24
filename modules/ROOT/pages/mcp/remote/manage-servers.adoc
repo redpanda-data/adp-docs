@@ -20,7 +20,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-You must have an existing MCP server. If you do not have one, see xref:mcp/remote/quickstart.adoc[].
+You must have an existing MCP server. If you do not have one, see xref:mcp:remote/quickstart.adoc[].
 
 == Edit an MCP server
 
@@ -163,6 +163,6 @@ Deletion is immediate and permanent. Make sure you have backed up any important 
 
 == Next steps
 
-* xref:mcp/remote/scale-resources.adoc[]
-* xref:mcp/remote/monitor-mcp-servers.adoc[]
-* xref:mcp/remote/best-practices.adoc[]
+* xref:mcp:remote/scale-resources.adoc[]
+* xref:mcp:remote/monitor-mcp-servers.adoc[]
+* xref:mcp:remote/best-practices.adoc[]

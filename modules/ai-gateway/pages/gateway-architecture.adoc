@@ -8,7 +8,7 @@
 
 include::ROOT:partial$adp-la.adoc[]
 
-This page provides technical details about AI Gateway's architecture, request processing, and capabilities. For an overview of AI Gateway, see xref:ai-gateway/what-is-ai-gateway.adoc[]
+This page provides technical details about AI Gateway's architecture, request processing, and capabilities. For an overview of AI Gateway, see xref:what-is-ai-gateway.adoc[]
 
 == Architecture overview
 
@@ -128,7 +128,7 @@ Built-in fallback behavior when primary providers are unavailable (configurable 
 
 *6 User Preference Toggles:*
 
-Configurable preferences that influence routing without modifying rules (see xref:ai-gateway/admin/configure-ai-hub.adoc[] for details).
+Configurable preferences that influence routing without modifying rules (see xref:admin/configure-ai-hub.adoc[] for details).
 
 Configurable preferences that influence routing without modifying rules.
 
@@ -163,7 +163,7 @@ Gateways can be ejected from AI Hub mode to Custom mode in a one-way transition.
 
 This allows organizations to start with zero-configuration simplicity and graduate to full control when needed.
 
-See xref:ai-gateway/admin/eject-to-custom-mode.adoc[] for the ejection process.
+See xref:admin/eject-to-custom-mode.adoc[] for the ejection process.
 endif::[]
 
 // == Supported features
@@ -217,5 +217,5 @@ endif::[]
 
 == Next steps
 
-* xref:ai-gateway/gateway-quickstart.adoc[]: Route your first request through AI Gateway
-* xref:ai-gateway/mcp-aggregation-guide.adoc[]: Configure MCP server aggregation for AI agents
+* xref:gateway-quickstart.adoc[]: Route your first request through AI Gateway
+* xref:mcp-aggregation-guide.adoc[]: Configure MCP server aggregation for AI agents

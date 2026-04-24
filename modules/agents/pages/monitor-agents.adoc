@@ -16,18 +16,18 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-For conceptual background on traces and observability, see xref:observability/concepts.adoc[].
+For conceptual background on traces and observability, see xref:observability:concepts.adoc[].
 
 == Prerequisites
 
-You must have a running agent. If you do not have one, see xref:agents/quickstart.adoc[].
+You must have a running agent. If you do not have one, see xref:quickstart.adoc[].
 
 == Debug agent execution with Transcripts
 
 The *Transcripts* view shows execution traces with detailed timing, errors, and performance metrics. Use this view to debug issues, verify agent behavior, and monitor performance in real-time.
 
 :context: agent
-include::ROOT:partial$transcripts-ui-guide.adoc[]
+include::observability:partial$transcripts-ui-guide.adoc[]
 
 === Check agent health
 
@@ -73,7 +73,7 @@ Cost = (input_tokens x input_price) + (output_tokens x output_price)
 
 Example: GPT-5.2 with 4,302 input tokens and 1,340 output tokens at $0.00000175 per input token and $0.000014 per output token costs $0.026 per request.
 
-For cost optimization strategies, see xref:agents/concepts.adoc#cost-calculation[Cost calculation].
+For cost optimization strategies, see xref:concepts.adoc#cost-calculation[Cost calculation].
 
 == Test agent behavior with Inspector
 
@@ -96,6 +96,6 @@ Monitor iteration counts during complex requests to ensure they complete within 
 
 == Next steps
 
-* xref:observability/concepts.adoc[]
-* xref:agents/troubleshooting.adoc[]
-* xref:agents/concepts.adoc[]
+* xref:observability:concepts.adoc[]
+* xref:troubleshooting.adoc[]
+* xref:concepts.adoc[]

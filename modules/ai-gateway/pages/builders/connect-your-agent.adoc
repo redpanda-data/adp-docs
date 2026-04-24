@@ -20,7 +20,7 @@ After completing this guide, you will be able to:
 
 * You have discovered an available gateway and noted its Gateway ID and endpoint.
 +
-If not, see xref:ai-gateway/builders/discover-gateways.adoc[].
+If not, see xref:builders/discover-gateways.adoc[].
 
 * You have a service account with OIDC client credentials. See xref:redpanda-cloud:security:cloud-authentication.adoc[].
 * You have a development environment with your chosen programming language.
@@ -276,7 +276,7 @@ response = client.chat.completions.create(
 )
 ----
 
-// To see which models are available in your gateway, see xref:ai-gateway/builders/available-models.adoc[].
+// To see which models are available in your gateway, see xref:builders/available-models.adoc[].
 
 == Handle responses
 
@@ -453,7 +453,7 @@ def test_models():
 // . Filter by your request timestamp
 // . Verify your requests are logged with correct model, tokens, and cost
 
-// See xref:ai-gateway/builders/monitor-your-usage.adoc[] for details.
+// See xref:builders/monitor-your-usage.adoc[] for details.
 
 == Integrate with AI development tools
 
@@ -487,7 +487,7 @@ Or edit `~/.claude/config.json`:
 ----
 +
 ifdef::integrations-available[]
-See xref:ai-gateway/integrations/claude-code-user.adoc[] for complete setup.
+See xref:integrations/claude-code-user.adoc[] for complete setup.
 endif::[]
 
 VS Code Continue Extension::
@@ -510,7 +510,7 @@ Edit `~/.continue/config.json`:
 ----
 +
 ifdef::integrations-available[]
-See xref:ai-gateway/integrations/continue-user.adoc[] for complete setup.
+See xref:integrations/continue-user.adoc[] for complete setup.
 endif::[]
 
 Cursor IDE::
@@ -527,7 +527,7 @@ Cursor IDE::
 ----
 +
 ifdef::integrations-available[]
-See xref:ai-gateway/integrations/cursor-user.adoc[] for complete setup.
+See xref:integrations/cursor-user.adoc[] for complete setup.
 endif::[]
 ====
 
@@ -589,7 +589,7 @@ for request in requests:
 print(f"Total tokens: {total_tokens} across {request_count} requests")
 ----
 
-// See xref:ai-gateway/builders/monitor-your-usage.adoc[] for detailed monitoring.
+// See xref:builders/monitor-your-usage.adoc[] for detailed monitoring.
 
 === Handle rate limits gracefully
 
@@ -628,7 +628,7 @@ Problem: 404 Model not found
 Solutions:
 
 * Verify the model name uses `vendor/model_id` format
-// * Check available models: See xref:ai-gateway/builders/available-models.adoc[]
+// * Check available models: See xref:builders/available-models.adoc[]
 * Confirm the model is enabled in your gateway (contact administrator)
 
 === "Rate limit exceeded"
@@ -657,9 +657,9 @@ Solutions:
 
 //Now that your agent is connected:
 
-// * xref:ai-gateway/builders/available-models.adoc[Available Models] - Learn about model selection and routing
-// * xref:ai-gateway/builders/use-mcp-tools.adoc[Use MCP Tools] - Access tools from MCP servers (if enabled)
-// * xref:ai-gateway/builders/monitor-your-usage.adoc[Monitor Your Usage] - Track requests and costs
+// * xref:builders/available-models.adoc[Available Models] - Learn about model selection and routing
+// * xref:builders/use-mcp-tools.adoc[Use MCP Tools] - Access tools from MCP servers (if enabled)
+// * xref:builders/monitor-your-usage.adoc[Monitor Your Usage] - Track requests and costs
 ifdef::integrations-available[]
-* xref:ai-gateway/integrations/index.adoc[Integrations] - Configure specific tools and IDEs
+* xref:integrations/index.adoc[Integrations] - Configure specific tools and IDEs
 endif::[]

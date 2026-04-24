@@ -11,7 +11,7 @@ include::ROOT:partial$adp-la.adoc[]
 
 Use the Transcripts view to filter, inspect, and debug agent execution records. Filter by operation type, time range, or service to isolate specific executions, then drill into span hierarchies to trace request flow and identify where failures or performance bottlenecks occur.
 
-For conceptual background on spans and trace structure, see xref:observability/concepts.adoc[].
+For conceptual background on spans and trace structure, see xref:concepts.adoc[].
 
 After reading this page, you will be able to:
 
@@ -21,7 +21,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* xref:agents/create-agent.adoc[Running agent] or xref:mcp/remote/quickstart.adoc[MCP server] with at least one execution
+* xref:agents:create-agent.adoc[Running agent] or xref:mcp/remote/quickstart.adoc[MCP server] with at least one execution
 * Access to the Transcripts view (requires appropriate permissions to read the `redpanda.otel_traces` glossterm:topic[])
 
 == Navigate the Transcripts interface
@@ -75,12 +75,12 @@ The transcript table shows:
 * **Span**: Span type and name with hierarchical tree structure
 * **Duration**: Total time or relative duration shown as visual bars
 
-To view nested operations, expand any parent span. To learn more about span hierarchies and cross-service traces, see xref:observability/concepts.adoc[].
+To view nested operations, expand any parent span. To learn more about span hierarchies and cross-service traces, see xref:concepts.adoc[].
 
 Click any span to view details in the panel:
 
 * **Summary tab**: High-level overview with token usage, operation counts, and conversation history.
-* **Attributes tab**: Structured metadata for debugging (see xref:observability/concepts.adoc#key-attributes-by-layer[standard attributes by layer]).
+* **Attributes tab**: Structured metadata for debugging (see xref:concepts.adoc#key-attributes-by-layer[standard attributes by layer]).
 * **Raw data tab**: Complete glossterm:OpenTelemetry[] span in JSON format. You can also view raw transcript data in the `redpanda.otel_traces` topic.
 
 [NOTE]
@@ -128,6 +128,6 @@ The following patterns demonstrate how to use the Transcripts view for understan
 
 == Next steps
 
-* xref:agents/monitor-agents.adoc[]
+* xref:agents:monitor-agents.adoc[]
 * xref:mcp/remote/monitor-mcp-servers.adoc[]
-* xref:agents/troubleshooting.adoc[]
+* xref:agents:troubleshooting.adoc[]
