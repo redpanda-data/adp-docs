@@ -17,6 +17,8 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
+image::shared:cloud-mcp.gif[A terminal window showing Claude Code invoking the Redpanda Cloud Management MCP Server to list topics in a cluster.]
+
 == What you can do
 
 MCP provides controlled access to:
