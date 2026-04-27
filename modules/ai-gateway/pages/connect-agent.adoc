@@ -1,52 +1,64 @@
 = Connect Your Agent
-:description: Integrate your AI agent or application with Redpanda Agentic Data Plan for unified LLM access.
+:description: Point your application or AI agent at an AI Gateway provider's proxy URL. Covers the URL shape, OIDC authentication, and SDK examples for OpenAI, Anthropic, Google Gemini, AWS Bedrock, and OpenAI-compatible endpoints.
 :page-topic-type: how-to
 :personas: app_developer
-:learning-objective-1: Configure your application to use AI Gateway with OpenAI-compatible SDKs
-:learning-objective-2: Make LLM requests through the gateway and handle responses appropriately
-:learning-objective-3: Validate your integration end-to-end
+:page-aliases: ai-gateway/builders/connect-your-agent.adoc
+:learning-objective-1: Construct the proxy URL for an LLM provider you have configured
+:learning-objective-2: Authenticate to AI Gateway with an OIDC service account token
+:learning-objective-3: Send requests through the proxy URL with the SDK of your choice
 
-include::ROOT:partial$adp-la.adoc[]
+include::ai-agents:partial$adp-la.adoc[]
 
-This guide shows you how to connect your glossterm:AI agent[] or application to Redpanda Agentic Data Plan. This is also called "Bring Your Own Agent" (BYOA). You'll configure your client SDK, make your first request, and validate the integration.
+This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You'll construct the proxy URL for a provider you have already created, authenticate with an OIDC service account, and send your first request with the SDK of your choice.
 
 After completing this guide, you will be able to:
 
-* [ ] Configure your application to use AI Gateway with OpenAI-compatible SDKs
-* [ ] Make LLM requests through the gateway and handle responses appropriately
-* [ ] Validate your integration end-to-end
+* [ ] Construct the proxy URL for an LLM provider you have configured
+* [ ] Authenticate to AI Gateway with an OIDC service account token
+* [ ] Send requests through the proxy URL with the SDK of your choice
 
 == Prerequisites
 
-* You have discovered an available gateway and noted its Gateway ID and endpoint.
-+
-If not, see xref:builders/discover-gateways.adoc[].
+* A configured LLM provider. If you haven't created one yet, see xref:ai-agents:ai-gateway/configure-provider.adoc[].
+* A Redpanda Cloud service account with OIDC client credentials. See xref:security:cloud-authentication.adoc[].
+* A development environment with your chosen programming language.
 
-* You have a service account with OIDC client credentials. See xref:redpanda-cloud:security:cloud-authentication.adoc[].
-* You have a development environment with your chosen programming language.
+== Proxy URL anatomy
 
-== Integration overview
+Every provider you create in AI Gateway gets its own proxy URL:
 
-Connecting to AI Gateway requires two configuration changes:
+[source,text]
+----
+<gateway-base>/llm/v1/providers/<provider-name>/<upstream-path>
+----
 
-. *Change the base URL*: Point to the gateway endpoint instead of the provider's API. The gateway ID is embedded in the endpoint URL.
-. *Add authentication*: Use an OIDC access token from your service account instead of provider API keys.
+* `<gateway-base>`: the AI Gateway base URL for your ADP environment. Copy it from the provider's *Overview* tab.
+* `<provider-name>`: the name you gave the provider when you created it, for example `my-openai` or `prod-anthropic`.
+* `<upstream-path>`: the upstream provider's native API path (for example, `v1/chat/completions` for OpenAI, `v1/messages` for Anthropic).
+
+AI Gateway forwards the request to the upstream provider, attaches the configured credentials, and records the request for observability. Your application never sees the upstream API key.
+
+TIP: The *API Examples* tab on each provider's detail page in the Cloud UI generates ready-to-run curl, Python, Node, and Claude Code snippets pre-filled with the correct proxy URL and paths. When in doubt, copy from there.
 
 [[authenticate-with-oidc]]
 == Authenticate with OIDC
 
-AI Gateway uses OIDC through service accounts that can be used as a `client_credentials` grant to authenticate and exchange for access and ID tokens.
+AI Gateway uses OIDC service accounts with the `client_credentials` grant to mint short-lived access tokens.
 
 === Create a service account
+
+// TODO: confirm where service accounts are managed once ADP is a standalone product (current link points to Redpanda Cloud Organization IAM; ADP may host its own IAM or share Cloud's).
 
 . In the Redpanda Cloud UI, go to https://cloud.redpanda.com/organization-iam?tab=service-accounts[*Organization IAM* > *Service account*^].
 . Create a new service account and note the *Client ID* and *Client Secret*.
 
-For details, see xref:redpanda-cloud:security:cloud-authentication.adoc#authenticate-to-the-cloud-api[Authenticate to the Cloud API].
+For details, see xref:security:cloud-authentication.adoc#authenticate-to-the-cloud-api[Authenticate to the Cloud API].
 
-=== Configure your OIDC client
+=== Fetch an access token
 
-Use the following OIDC configuration:
+// TODO: confirm the OIDC discovery URL and audience for ADP once the standalone UI launches. Values below are the current Redpanda Cloud endpoints.
+
+Use an OIDC client library that supports discovery (such as `openid-client` for Node.js or `authlib` for Python). Your library resolves endpoints automatically from the discovery URL.
 
 [cols="1,2", options="header"]
 |===
@@ -65,10 +77,8 @@ Use the following OIDC configuration:
 |`client_credentials`
 |===
 
-The discovery URL returns OIDC metadata, including the token endpoint and other configuration details. Use an OIDC client library that supports metadata discovery (such as `openid-client` for Node.js) so that endpoints are resolved automatically. If your library does not support discovery, you can fetch the discovery URL directly and extract the required endpoints from the JSON response.
-
 [tabs]
-====
+======
 cURL::
 +
 --
@@ -92,21 +102,21 @@ Python (authlib)::
 [source,python]
 ----
 from authlib.integrations.requests_client import OAuth2Session
-
-client = OAuth2Session(
-    client_id="<client-id>",
-    client_secret="<client-secret>",
-)
+import requests
 
 # Discover token endpoint from OIDC metadata
-import requests
 metadata = requests.get(
     "https://auth.prd.cloud.redpanda.com/.well-known/openid-configuration"
 ).json()
 token_endpoint = metadata["token_endpoint"]
 
+client = OAuth2Session(
+    client_id="<client-id>",
+    client_secret="<client-secret>",
+    token_endpoint=token_endpoint,
+)
+
 token = client.fetch_token(
-    token_endpoint,
     grant_type="client_credentials",
     audience="cloudv2-production.redpanda.cloud",
 )
@@ -114,7 +124,7 @@ token = client.fetch_token(
 access_token = token["access_token"]
 ----
 
-This example performs a one-time token fetch. For automatic token renewal on subsequent requests, pass `token_endpoint` to the `OAuth2Session` constructor. Note that for `client_credentials` grants, `authlib` obtains a new token rather than using a refresh token.
+Passing `token_endpoint` to the `OAuth2Session` constructor lets `authlib` handle renewal automatically. For `client_credentials` grants, it fetches a new token rather than using a refresh token.
 --
 
 Node.js (openid-client)::
@@ -139,51 +149,50 @@ const tokenSet = await client.grant({
 
 const accessToken = tokenSet.access_token;
 ----
-====
+======
 
-=== Make authenticated requests
+=== Token lifecycle management
 
-Requests require two headers:
+IMPORTANT: Your client is responsible for refreshing tokens before they expire. OIDC access tokens have a limited TTL set by the identity provider and are not automatically renewed by AI Gateway. Check the `expires_in` field in the token response for the exact duration.
 
-* `Authorization: Bearer <token>` - your OIDC access token
-* `rp-aigw-id: <gateway-id>` - your AI Gateway ID
+* Proactively refresh at ~80% of the token's TTL to avoid failed requests.
+* `authlib` (Python) handles renewal automatically when you pass `token_endpoint` to `OAuth2Session`.
+* For other languages, cache the token and its expiry, then request a new token before the current one expires.
 
-Set these environment variables for consistent configuration:
+== Send requests with your SDK
+
+Set these environment variables. The examples in this section use them throughout:
 
 [source,bash]
 ----
-export REDPANDA_GATEWAY_URL="<your-gateway-endpoint>"
-export REDPANDA_GATEWAY_ID="<your-gateway-id>"
+export PROXY_URL="<your-gateway-base>/llm/v1/providers/<provider-name>"
+export AUTH_TOKEN="<oidc-access-token>"
 ----
 
 [tabs]
-====
-Python (OpenAI SDK)::
+======
+OpenAI SDK::
 +
 [source,python]
 ----
 import os
 from openai import OpenAI
 
-# Configure client to use AI Gateway with OIDC token
 client = OpenAI(
-    base_url=os.getenv("REDPANDA_GATEWAY_URL"),
-    api_key=access_token,  # OIDC access token from Step 2
+    base_url=os.environ["PROXY_URL"],       # .../llm/v1/providers/my-openai
+    api_key=os.environ["AUTH_TOKEN"],        # OIDC access token
 )
 
-# Make a request
 response = client.chat.completions.create(
-    model="openai/gpt-5.2-mini",  # Note: vendor/model_id format
-    messages=[{"role": "user", "content": "Hello, AI Gateway!"}],
-    max_tokens=100
+    model="gpt-4o",                          # native OpenAI model ID
+    messages=[{"role": "user", "content": "Hello from AI Gateway"}],
 )
-
 print(response.choices[0].message.content)
 ----
-
-Python (Anthropic SDK)::
 +
-The Anthropic SDK can also route through AI Gateway using the OpenAI-compatible endpoint:
+The OpenAI SDK calls the proxy's `/v1/chat/completions` path, which AI Gateway forwards to OpenAI unchanged. Use it with any OpenAI provider and, with a different `base_url`, with any OpenAI-compatible provider (vLLM, Ollama, LM Studio, etc.).
+
+Anthropic SDK::
 +
 [source,python]
 ----
@@ -191,475 +200,165 @@ import os
 from anthropic import Anthropic
 
 client = Anthropic(
-    base_url=os.getenv("REDPANDA_GATEWAY_URL"),
-    api_key=access_token,  # OIDC access token from Step 2
+    base_url=os.environ["PROXY_URL"],       # .../llm/v1/providers/my-anthropic
+    auth_token=os.environ["AUTH_TOKEN"],     # OIDC access token
 )
 
-# Make a request
 message = client.messages.create(
-    model="anthropic/claude-sonnet-4.5",
-    max_tokens=100,
-    messages=[{"role": "user", "content": "Hello, AI Gateway!"}]
+    model="claude-sonnet-4-5",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello from AI Gateway"}],
 )
-
 print(message.content[0].text)
 ----
-
-Node.js (OpenAI SDK)::
 +
-[source,javascript]
-----
-import OpenAI from 'openai';
+The Anthropic SDK hits `v1/messages` on the proxy, which AI Gateway forwards to Anthropic. If the provider is configured with *Authorization passthrough*, use your own Anthropic `Authorization` header instead of the OIDC token. AI Gateway forwards it unchanged.
 
-const openai = new OpenAI({
-  baseURL: process.env.REDPANDA_GATEWAY_URL,
-  apiKey: accessToken,  // OIDC access token from Step 2
-});
-
-// Make a request
-const response = await openai.chat.completions.create({
-  model: 'openai/gpt-5.2-mini',
-  messages: [{ role: 'user', content: 'Hello, AI Gateway!' }],
-  max_tokens: 100
-});
-
-console.log(response.choices[0].message.content);
-----
-
-cURL::
+Google Gemini SDK::
 +
-[source,bash]
+[source,python]
 ----
-curl ${REDPANDA_GATEWAY_URL}/chat/completions \
-  -H "Authorization: Bearer ${AUTH_TOKEN}" \
-  -H "Content-Type: application/json" \
-  -H "rp-aigw-id: ${REDPANDA_GATEWAY_ID}" \
-  -d '{
-    "model": "openai/gpt-5.2-mini",
-    "messages": [{"role": "user", "content": "Hello, AI Gateway!"}],
-    "max_tokens": 100
-  }'
+import os
+from google import genai
+
+client = genai.Client(
+    api_key=os.environ["AUTH_TOKEN"],        # forwarded as x-goog-api-key
+    http_options={"base_url": os.environ["PROXY_URL"]},  # .../llm/v1/providers/my-google
+)
+
+response = client.models.generate_content(
+    model="gemini-2.0-flash",
+    contents="Hello from AI Gateway",
+)
+print(response.text)
 ----
++
+[IMPORTANT]
+====
+Gemini authenticates with the `x-goog-api-key` header, not `Authorization: Bearer`. Most Google SDKs set `x-goog-api-key` automatically from the `api_key` parameter. If you hand-roll the request, set the header yourself.
 ====
 
-=== Token lifecycle management
-
-IMPORTANT: Your agent is responsible for refreshing tokens before they expire. OIDC access tokens have a limited time-to-live (TTL), determined by the identity provider, and are not automatically renewed by the AI Gateway. Check the `expires_in` field in the token response for the exact duration.
-
-* Proactively refresh tokens at approximately 80% of the token's TTL to avoid failed requests.
-* `authlib` (Python) can handle token renewal automatically when you pass `token_endpoint` to the `OAuth2Session` constructor. For `client_credentials` grants, it obtains a new token rather than using a refresh token.
-* For other languages, cache the token and its expiry time, then request a new token before the current one expires.
-
-== Model naming convention
-
-When making requests through AI Gateway, use the `vendor/model_id` format for the model parameter:
-
-* `openai/gpt-5.2`
-* `openai/gpt-5.2-mini`
-* `anthropic/claude-sonnet-4.5`
-* `anthropic/claude-opus-4.6`
-
-This format tells AI Gateway which provider to route the request to. For example:
-
+AWS Bedrock::
++
+Bedrock is different: SigV4 signing is performed *server-side* by AI Gateway using the credentials on the provider. Your client only needs to call the proxy URL with an OIDC token.
++
 [source,python]
 ----
-# Route to OpenAI
-response = client.chat.completions.create(
-    model="openai/gpt-5.2",
-    messages=[...]
+import os, httpx
+
+response = httpx.post(
+    f"{os.environ['PROXY_URL']}/model/anthropic.claude-3-5-sonnet-20241022-v2:0/invoke",
+    headers={"Authorization": f"Bearer {os.environ['AUTH_TOKEN']}"},
+    json={
+        "anthropic_version": "bedrock-2023-05-31",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "max_tokens": 1024,
+    },
 )
-
-# Route to Anthropic (same client, different model)
-response = client.chat.completions.create(
-    model="anthropic/claude-sonnet-4.5",
-    messages=[...]
-)
+print(response.json())
 ----
++
+// TODO: verify Bedrock request shape end-to-end on adp-production once credentials are available; replace placeholder model ID if the provider gates a different set.
 
-// To see which models are available in your gateway, see xref:builders/available-models.adoc[].
-
-== Handle responses
-
-Responses from AI Gateway follow the OpenAI API format:
-
-[source,python]
-----
-response = client.chat.completions.create(
-    model="openai/gpt-5.2-mini",
-    messages=[{"role": "user", "content": "Explain AI Gateway"}],
-    max_tokens=200
-)
-
-# Access the response
-message_content = response.choices[0].message.content
-finish_reason = response.choices[0].finish_reason  # 'stop', 'length', etc.
-
-# Token usage
-prompt_tokens = response.usage.prompt_tokens
-completion_tokens = response.usage.completion_tokens
-total_tokens = response.usage.total_tokens
-
-print(f"Response: {message_content}")
-print(f"Tokens: {prompt_tokens} prompt + {completion_tokens} completion = {total_tokens} total")
-----
-
-== Handle errors
-
-AI Gateway returns standard HTTP status codes:
-
-[source,python]
-----
-from openai import OpenAI, OpenAIError
-
-client = OpenAI(
-    base_url=os.getenv("REDPANDA_GATEWAY_URL"),
-    api_key=access_token,  # OIDC access token
-)
-
-try:
-    response = client.chat.completions.create(
-        model="openai/gpt-5.2-mini",
-        messages=[{"role": "user", "content": "Hello"}]
-    )
-    print(response.choices[0].message.content)
-
-except OpenAIError as e:
-    if e.status_code == 400:
-        print("Bad request - check model name and parameters")
-    elif e.status_code == 401:
-        print("Authentication failed - check OIDC token")
-    elif e.status_code == 404:
-        print("Model not found - check available models")
-    elif e.status_code == 429:
-        print("Rate limit exceeded - slow down requests")
-    elif e.status_code >= 500:
-        print("Gateway or provider error - retry with exponential backoff")
-    else:
-        print(f"Error: {e}")
-----
-
-Common error codes:
-
-* *400*: Bad request (invalid parameters, malformed JSON)
-* *401*: Authentication failed (invalid or expired OIDC token)
-* *403*: Forbidden (no access to this gateway)
-* *404*: Model not found (model not enabled in gateway)
-* *429*: Rate limit exceeded (too many requests)
-* *500/502/503*: Server error (gateway or provider issue)
-
-== Streaming responses
-
-AI Gateway supports streaming for real-time token generation:
-
-[source,python]
-----
-response = client.chat.completions.create(
-    model="openai/gpt-5.2-mini",
-    messages=[{"role": "user", "content": "Write a short poem"}],
-    stream=True  # Enable streaming
-)
-
-# Process chunks as they arrive
-for chunk in response:
-    if chunk.choices[0].delta.content:
-        print(chunk.choices[0].delta.content, end='', flush=True)
-
-print()  # New line after streaming completes
-----
-
-== Switch between providers
-
-One of AI Gateway's key benefits is easy provider switching without code changes:
-
-[source,python]
-----
-# Try OpenAI
-response = client.chat.completions.create(
-    model="openai/gpt-5.2",
-    messages=[{"role": "user", "content": "Explain quantum computing"}]
-)
-
-# Try Anthropic (same code, different model)
-response = client.chat.completions.create(
-    model="anthropic/claude-sonnet-4.5",
-    messages=[{"role": "user", "content": "Explain quantum computing"}]
-)
-----
-
-Compare responses, latency, and cost to determine the best model for your use case.
-
-== Validate your integration
-
-=== Test connectivity
-
+OpenAI-compatible::
++
+Use the OpenAI SDK with the proxy URL of the OpenAI-compatible provider and whatever model identifier the upstream exposes:
++
 [source,python]
 ----
 import os
 from openai import OpenAI
 
-def test_gateway_connection(access_token):
-    """Test basic connectivity to AI Gateway"""
-    client = OpenAI(
-        base_url=os.getenv("REDPANDA_GATEWAY_URL"),
-        api_key=access_token,  # OIDC access token
-    )
+client = OpenAI(
+    base_url=os.environ["PROXY_URL"],       # .../llm/v1/providers/my-vllm
+    api_key=os.environ["AUTH_TOKEN"],
+)
 
-    try:
-        # Simple test request
-        response = client.chat.completions.create(
-            model="openai/gpt-5.2-mini",
-            messages=[{"role": "user", "content": "test"}],
-            max_tokens=10
-        )
-        print("✓ Gateway connection successful")
-        return True
-    except Exception as e:
-        print(f"✗ Gateway connection failed: {e}")
-        return False
-
-if __name__ == "__main__":
-    token = get_oidc_token()  # Your OIDC token retrieval
-    test_gateway_connection(token)
+response = client.chat.completions.create(
+    model="meta-llama/Llama-3.3-70B-Instruct",  # as exposed by your vLLM/Ollama endpoint
+    messages=[{"role": "user", "content": "Hello"}],
+)
 ----
+======
 
-=== Test multiple models
+== Streaming responses
+
+Streaming passes through unchanged. Use the SDK's native streaming API; the proxy forwards the stream byte-for-byte.
 
 [source,python]
 ----
-def test_models():
-    """Test multiple models through the gateway"""
-    models = [
-        "openai/gpt-5.2-mini",
-        "anthropic/claude-sonnet-4.5"
-    ]
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Write a short poem"}],
+    stream=True,
+)
 
-    for model in models:
-        try:
-            response = client.chat.completions.create(
-                model=model,
-                messages=[{"role": "user", "content": "Say hello"}],
-                max_tokens=10
-            )
-            print(f"✓ {model}: {response.choices[0].message.content}")
-        except Exception as e:
-            print(f"✗ {model}: {e}")
+for chunk in response:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end="", flush=True)
 ----
 
-// === Check request logs
-//
-// After making requests, verify they appear in observability:
-//
-// . Navigate to *AI Gateway* → *Gateways* → Select your gateway → *Logs*
-// . Filter by your request timestamp
-// . Verify your requests are logged with correct model, tokens, and cost
+== Handle errors
 
-// See xref:builders/monitor-your-usage.adoc[] for details.
+AI Gateway returns standard HTTP status codes. The upstream provider's error body passes through, so your existing SDK error handling works:
 
-== Integrate with AI development tools
+[cols="1,3"]
+|===
+|Status |Meaning
 
-[tabs]
-====
-Claude Code::
-+
-Configure Claude Code to use AI Gateway:
-+
-[source,bash]
-----
-claude mcp add --transport http redpanda-aigateway ${REDPANDA_GATEWAY_URL}/mcp \
-  --header "Authorization: Bearer ${AUTH_TOKEN}"
-----
-+
-Or edit `~/.claude/config.json`:
-+
-[source,json]
-----
-{
-  "mcpServers": {
-    "redpanda-ai-gateway": {
-      "transport": "http",
-      "url": "<your-gateway-endpoint>/mcp",
-      "headers": {
-        "Authorization": "Bearer <oidc-access-token>"
-      }
-    }
-  }
-}
-----
-+
-ifdef::integrations-available[]
-See xref:integrations/claude-code-user.adoc[] for complete setup.
-endif::[]
+|400
+|Bad request. Invalid parameters or malformed JSON.
 
-VS Code Continue Extension::
-+
-Edit `~/.continue/config.json`:
-+
-[source,json]
-----
-{
-  "models": [
-    {
-      "title": "AI Gateway - GPT-5.2",
-      "provider": "openai",
-      "model": "openai/gpt-5.2",
-      "apiBase": "<your-gateway-endpoint>",
-      "apiKey": "<oidc-access-token>"
-    }
-  ]
-}
-----
-+
-ifdef::integrations-available[]
-See xref:integrations/continue-user.adoc[] for complete setup.
-endif::[]
+|401
+|Authentication failed. OIDC token invalid, expired, or (for Gemini) sent in the wrong header.
 
-Cursor IDE::
-+
-. Open Cursor Settings (*Cursor* → *Settings* or `Cmd+,`)
-. Navigate to *AI* settings
-. Add custom OpenAI-compatible provider:
-+
-[source,json]
-----
-{
-  "cursor.ai.providers.openai.apiBase": "<your-gateway-endpoint>"
-}
-----
-+
-ifdef::integrations-available[]
-See xref:integrations/cursor-user.adoc[] for complete setup.
-endif::[]
-====
+|403
+|Forbidden. The service account lacks the required role, or the provider is disabled.
+
+|404
+|Provider or model not found. Verify the provider name in the URL and the model identifier.
+
+|429
+|Rate limited. Either by the upstream provider or (when configured) by AI Gateway itself. Respect `Retry-After` if present.
+
+|5xx
+|Upstream or gateway error. Retry with exponential backoff.
+|===
 
 == Best practices
 
-=== Use environment variables
-
-Store configuration in environment variables, not hardcoded in code:
-
-[source,python]
-----
-# Good
-base_url = os.getenv("REDPANDA_GATEWAY_URL")
-
-# Bad
-base_url = "https://gw.ai.panda.com"  # Don't hardcode URLs or credentials
-----
-
-=== Implement retry logic
-
-Implement exponential backoff for transient errors:
-
-[source,python]
-----
-import time
-from openai import OpenAI, OpenAIError
-
-def make_request_with_retry(client, max_retries=3):
-    for attempt in range(max_retries):
-        try:
-            return client.chat.completions.create(
-                model="openai/gpt-5.2-mini",
-                messages=[{"role": "user", "content": "Hello"}]
-            )
-        except OpenAIError as e:
-            if e.status_code >= 500 and attempt < max_retries - 1:
-                wait_time = 2 ** attempt  # Exponential backoff
-                print(f"Retrying in {wait_time}s...")
-                time.sleep(wait_time)
-            else:
-                raise
-----
-
-=== Monitor your usage
-
-Regularly check your usage to avoid unexpected costs:
-
-[source,python]
-----
-# Track tokens in your application
-total_tokens = 0
-request_count = 0
-
-for request in requests:
-    response = client.chat.completions.create(...)
-    total_tokens += response.usage.total_tokens
-    request_count += 1
-
-print(f"Total tokens: {total_tokens} across {request_count} requests")
-----
-
-// See xref:builders/monitor-your-usage.adoc[] for detailed monitoring.
-
-=== Handle rate limits gracefully
-
-Respect rate limits and implement backoff:
-
-[source,python]
-----
-try:
-    response = client.chat.completions.create(...)
-except OpenAIError as e:
-    if e.status_code == 429:
-        # Rate limited - wait and retry
-        retry_after = int(e.response.headers.get('Retry-After', 60))
-        print(f"Rate limited. Waiting {retry_after}s...")
-        time.sleep(retry_after)
-        # Retry request
-----
+* *Use environment variables* for the proxy URL and token; never hard-code them.
+* *Implement retry with exponential backoff* for 5xx and timeout conditions.
+* *Respect `Retry-After`* on 429 responses.
+* *Rotate service account credentials* on a schedule your organization accepts.
+* *Observe usage* through the Cloud UI. Requests and token counts appear on the provider's *Overview* tab.
 
 == Troubleshooting
 
-=== "Authentication failed"
+=== 401 Unauthorized
 
-Problem: 401 Unauthorized
+* Check the OIDC token hasn't expired and refresh it.
+* Verify the audience is `cloudv2-production.redpanda.cloud`.
+* Confirm the `Authorization` header is formatted `Bearer <token>`.
+* For Gemini: ensure the token is sent as `x-goog-api-key`, not `Authorization`.
+* For Anthropic with passthrough: ensure the client is sending a valid Anthropic `Authorization` header.
 
-Solutions:
+=== 404 Not found
 
-* Check that your OIDC token has not expired and refresh it if necessary
-* Verify the audience is set to `cloudv2-production.redpanda.cloud`
-* Check that the service account has access to the specified gateway
-* Ensure the `Authorization` header is formatted correctly: `Bearer <token>`
+* Re-check the provider name in the proxy URL. The segment after `/providers/` must match the provider's `Name` exactly.
+* For model-not-found: confirm the model identifier is one your upstream actually serves. OpenAI-compatible endpoints accept whatever model IDs the upstream exposes.
 
-=== "Model not found"
+=== 403 Forbidden
 
-Problem: 404 Model not found
+* The service account may lack the required roles. Ask an admin to grant `dataplane_adp_llmprovider_get` at minimum.
+* The provider may be disabled. Check the *Enabled* toggle on its detail page.
 
-Solutions:
+=== Connection timeout or reset
 
-* Verify the model name uses `vendor/model_id` format
-// * Check available models: See xref:builders/available-models.adoc[]
-* Confirm the model is enabled in your gateway (contact administrator)
+* Verify the proxy URL is correct (copy directly from the provider's *Overview* tab).
+* Check that the provider isn't pointing at a private base URL your client can't reach (OpenAI-compatible providers only).
+* Confirm the upstream provider's status page.
 
-=== "Rate limit exceeded"
+== Next steps
 
-Problem: 429 Too Many Requests
-
-Solutions:
-
-* Reduce request rate
-* Implement exponential backoff
-* Contact administrator to review rate limits
-* Consider using a different gateway if available
-
-=== "Connection timeout"
-
-Problem: Request times out
-
-Solutions:
-
-* Check network connectivity to the gateway endpoint
-* Verify the gateway endpoint URL is correct
-* Check if the gateway is operational (contact administrator)
-* Increase client timeout if processing complex requests
-
-//== Next steps
-
-//Now that your agent is connected:
-
-// * xref:builders/available-models.adoc[Available Models] - Learn about model selection and routing
-// * xref:builders/use-mcp-tools.adoc[Use MCP Tools] - Access tools from MCP servers (if enabled)
-// * xref:builders/monitor-your-usage.adoc[Monitor Your Usage] - Track requests and costs
-ifdef::integrations-available[]
-* xref:integrations/index.adoc[Integrations] - Configure specific tools and IDEs
-endif::[]
+* xref:ai-agents:ai-gateway/configure-provider.adoc[Configure an LLM provider]. Add another provider to your ADP environment.
