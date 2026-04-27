@@ -192,4 +192,4 @@ AI Gateway may not be necessary if:
 *For Builders:*
 
 * xref:builders/discover-gateways.adoc[Discover Available Gateways] - Find which gateways you can access
-* xref:builders/connect-your-agent.adoc[Connect Your Agent] - Integrate your application
+* xref:connect-agent.adoc[Connect Your Agent] - Integrate your application

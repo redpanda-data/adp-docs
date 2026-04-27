@@ -23,8 +23,8 @@
 //     Valid values: "agent" | "mcp"
 //
 // DEPENDENCIES:
-//   - xref:observability/concepts.adoc#agent-trace-hierarchy[]
-//   - xref:observability/concepts.adoc#mcp-server-trace-hierarchy[]
+//   - xref:observability:concepts.adoc#agent-trace-hierarchy[]
+//   - xref:observability:concepts.adoc#mcp-server-trace-hierarchy[]
 //
 // CONTENT TYPE:
 //   UI navigation and interface explanation (procedural context for how-to pages)
@@ -66,10 +66,10 @@ The trace list shows nested operations with visual duration bars indicating how 
 
 // Link to appropriate concepts section based on context
 ifeval::["{context}" == "agent"]
-For details on span types, see xref:observability/concepts.adoc#agent-trace-hierarchy[Agent trace hierarchy].
+For details on span types, see xref:observability:concepts.adoc#agent-trace-hierarchy[Agent trace hierarchy].
 endif::[]
 ifeval::["{context}" == "mcp"]
-For details on span types, see xref:observability/concepts.adoc#mcp-server-trace-hierarchy[MCP server trace hierarchy].
+For details on span types, see xref:observability:concepts.adoc#mcp-server-trace-hierarchy[MCP server trace hierarchy].
 endif::[]
 
 ==== Summary panel

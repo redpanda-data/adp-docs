@@ -14,7 +14,7 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-For conceptual background on traces, spans, and the trace data structure, see xref:observability/concepts.adoc[].
+For conceptual background on traces, spans, and the trace data structure, see xref:observability:concepts.adoc[].
 
 == Prerequisites
 
@@ -99,6 +99,6 @@ Check `status.message` for error details and the `events` array for error events
 
 == Next steps
 
-* xref:observability/concepts.adoc[]
+* xref:observability:concepts.adoc[]
 * xref:remote/troubleshooting.adoc[]
 * xref:remote/manage-servers.adoc[]

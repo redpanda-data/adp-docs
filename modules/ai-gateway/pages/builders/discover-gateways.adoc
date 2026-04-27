@@ -304,7 +304,7 @@ echo -e "\n=== Gateway validated successfully ==="
 
 == Next steps
 
-* xref:builders/connect-your-agent.adoc[Connect Your Agent] - Integrate your application
+* xref:connect-agent.adoc[Connect Your Agent] - Integrate your application
 // * xref:builders/available-models.adoc[Available Models] - Learn about model selection and routing
 // * xref:builders/use-mcp-tools.adoc[Use MCP Tools] - Access tools from MCP servers
 // * xref:builders/monitor-your-usage.adoc[Monitor Your Usage] - Track requests and costs

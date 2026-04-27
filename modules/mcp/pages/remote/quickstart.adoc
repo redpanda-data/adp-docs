@@ -389,6 +389,6 @@ You've deployed an MCP server and connected Claude Code to your Redpanda cluster
 * xref:remote/concepts.adoc[]
 * xref:remote/create-tool.adoc[]
 * xref:remote/best-practices.adoc[]
-* xref:remote/tool-patterns.adoc[]
+* xref:patterns.adoc[]
 * xref:remote/troubleshooting.adoc[]
-* xref:remote/admin-guide.adoc[]
+* xref:manage-servers.adoc[]

@@ -21,7 +21,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* xref:agents:create-agent.adoc[Running agent] or xref:mcp/remote/quickstart.adoc[MCP server] with at least one execution
+* xref:agents:create-agent.adoc[Running agent] or xref:mcp:remote/quickstart.adoc[MCP server] with at least one execution
 * Access to the Transcripts view (requires appropriate permissions to read the `redpanda.otel_traces` glossterm:topic[])
 
 == Navigate the Transcripts interface
@@ -129,5 +129,5 @@ The following patterns demonstrate how to use the Transcripts view for understan
 == Next steps
 
 * xref:agents:monitor.adoc[]
-* xref:mcp/remote/monitor-mcp-servers.adoc[]
+* xref:mcp:remote/monitor-mcp-servers.adoc[]
 * xref:agents:troubleshoot.adoc[]

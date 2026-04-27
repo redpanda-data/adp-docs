@@ -60,7 +60,7 @@ For high availability, the gateway provides provider-agnostic routing with intel
 
 The gateway also supports tenancy modeling for teams, individuals, applications, and service accounts, giving you chargeback transparency for internal cost allocation. You can proxy both models and MCP gateways, centralizing compliance for all LLM interactions without locking into any single provider.
 
-For more information, see xref:ai-gateway:what-is-ai-gateway.adoc[AI Gateway Overview].
+For more information, see xref:ai-gateway:overview.adoc[AI Gateway Overview].
 
 == Enterprise governance
 
@@ -87,4 +87,4 @@ Some ways organizations can leverage Redpanda ADP include:
 * xref:agents:overview.adoc[AI Agents Overview]
 * xref:mcp:overview.adoc[MCP Server Overview]
 * xref:observability:concepts.adoc[Transcripts Overview]
-* xref:ai-gateway:what-is-ai-gateway.adoc[AI Gateway Overview]
+* xref:ai-gateway:overview.adoc[AI Gateway Overview]

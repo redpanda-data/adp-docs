@@ -34,7 +34,7 @@ include::redpanda-connect:ai-agents:partial$mcp/concepts/component-selection.ado
 
 == Observability
 
-MCP servers automatically emit OpenTelemetry traces for monitoring and debugging. For detailed information about traces, spans, and the trace structure, see xref:observability/concepts.adoc[].
+MCP servers automatically emit OpenTelemetry traces for monitoring and debugging. For detailed information about traces, spans, and the trace structure, see xref:observability:concepts.adoc[].
 
 To monitor MCP server activity, consume traces, and debug failures, see xref:remote/monitor-mcp-servers.adoc[].
 
@@ -44,5 +44,5 @@ include::ROOT:partial$service-account-authorization.adoc[]
 
 * xref:remote/create-tool.adoc[]
 * xref:remote/best-practices.adoc[]
-* xref:remote/tool-patterns.adoc[]
+* xref:patterns.adoc[]
 * xref:remote/troubleshooting.adoc[]
