@@ -158,5 +158,5 @@ include::ROOT:partial$service-account-authorization.adoc[]
 
 * xref:architecture-patterns.adoc[]
 * xref:quickstart.adoc[]
-* xref:prompt-best-practices.adoc[]
+* xref:system-prompts.adoc[]
 * xref:mcp:remote/best-practices.adoc[]

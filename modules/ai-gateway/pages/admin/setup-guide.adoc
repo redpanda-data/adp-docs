@@ -207,7 +207,7 @@ Provider pools define which LLM providers handle requests, with support for prim
 +
 For simple routing, select *Route all requests to primary pool*.
 +
-For advanced routing based on request properties, use CEL expressions. See xref:cel-routing-cookbook.adoc[] for examples.
+For advanced routing based on request properties, use CEL expressions. See xref:routing-cel.adoc[] for examples.
 +
 Example CEL expression for tier-based routing:
 +
@@ -299,7 +299,7 @@ Rate limits for MCP work the same way as LLM rate limits.
 
 Repeat for each MCP server you want to aggregate.
 
-See xref:mcp-aggregation-guide.adoc[] for detailed information about MCP aggregation.
+See xref:aggregation.adoc[] for detailed information about MCP aggregation.
 
 === Configure the MCP orchestrator
 
@@ -383,7 +383,7 @@ Users can then discover and connect to the gateway using the information provide
 *Configure and optimize:*
 
 // * xref:admin/manage-gateways.adoc[Manage Gateways] - List, edit, and delete gateways
-* xref:cel-routing-cookbook.adoc[CEL Routing Cookbook] - Advanced routing patterns
+* xref:routing-cel.adoc[CEL Routing Cookbook] - Advanced routing patterns
 // * xref:admin/networking-configuration.adoc[Networking Configuration] - Configure private endpoints and connectivity
 
 //*Monitor and observe:*

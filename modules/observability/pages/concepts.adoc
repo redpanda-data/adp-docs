@@ -341,5 +341,5 @@ Transcripts are optimized for execution-level observability and governance. For 
 == Next steps
 
 * xref:transcripts.adoc[]
-* xref:agents:monitor-agents.adoc[]
+* xref:agents:monitor.adoc[]
 * xref:mcp/remote/monitor-mcp-servers.adoc[]

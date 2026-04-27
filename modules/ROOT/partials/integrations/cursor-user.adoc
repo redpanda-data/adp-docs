@@ -8,7 +8,7 @@
 
 include::ROOT:partial$adp-la.adoc[]
 
-After xref:ai-gateway/gateway-quickstart.adoc[configuring your AI Gateway], set up Cursor IDE to route LLM requests and access MCP tools through the gateway's unified endpoints.
+After xref:ai-gateway:gateway-quickstart.adoc[configuring your AI Gateway], set up Cursor IDE to route LLM requests and access MCP tools through the gateway's unified endpoints.
 
 After reading this page, you will be able to:
 
@@ -22,8 +22,8 @@ Before configuring Cursor IDE, ensure you have:
 
 * Cursor IDE installed (download from https://cursor.sh[cursor.sh^])
 * An active Redpanda AI Gateway with:
-** At least one LLM provider enabled (see xref:ai-gateway/gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
-** A gateway created and configured (see xref:ai-gateway/gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
+** At least one LLM provider enabled (see xref:ai-gateway:gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
+** A gateway created and configured (see xref:ai-gateway:gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
 * Your AI Gateway credentials:
 ** Gateway endpoint URL (for example, `\https://gw.ai.panda.com/v1/gateways/gateway-abc123`)
 ** API key with access to the gateway
@@ -259,7 +259,7 @@ AI Gateway solves this through deferred tool loading:
 * Agent queries for specific tools only when needed
 * 80-90% token reduction, depending on configuration
 
-See xref:ai-gateway/mcp-aggregation-guide.adoc[] for details on configuring deferred tool loading.
+See xref:ai-gateway:aggregation.adoc[] for details on configuring deferred tool loading.
 
 === Add MCP server connection
 
@@ -686,7 +686,7 @@ Verify you're using fast models for autocomplete:
 
 . **MCP tool aggregation overhead**
 +
-Aggregating tools from multiple MCP servers adds processing time. Use deferred tool loading to reduce this overhead (see xref:ai-gateway/mcp-aggregation-guide.adoc[]).
+Aggregating tools from multiple MCP servers adds processing time. Use deferred tool loading to reduce this overhead (see xref:ai-gateway:aggregation.adoc[]).
 
 === Configuration changes not taking effect
 
@@ -807,12 +807,12 @@ This sends only search + orchestrator tools initially, reducing token usage sign
 
 == Next steps
 
-* xref:ai-gateway/mcp-aggregation-guide.adoc[]: Configure deferred tool loading to work within Cursor's 40-tool limit
-* xref:ai-gateway/cel-routing-cookbook.adoc[]: Use CEL expressions to route Cursor requests based on context
+* xref:ai-gateway:aggregation.adoc[]: Configure deferred tool loading to work within Cursor's 40-tool limit
+* xref:ai-gateway:routing-cel.adoc[]: Use CEL expressions to route Cursor requests based on context
 
 == Related pages
 
-* xref:ai-gateway/gateway-quickstart.adoc[]: Create and configure your AI Gateway
+* xref:ai-gateway:gateway-quickstart.adoc[]: Create and configure your AI Gateway
 * xref:ai-gateway/gateway-architecture.adoc[]: Learn about AI Gateway architecture and benefits
 * xref:ai-gateway/integrations/claude-code-user.adoc[]: Configure Claude Code with AI Gateway
 * xref:ai-gateway/integrations/continue-user.adoc[]: Configure Continue.dev with AI Gateway

@@ -256,7 +256,7 @@ This demonstrates error recovery without hallucination. The "Never make up track
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:troubleshooting.adoc[].
+For comprehensive troubleshooting guidance, see xref:troubleshoot.adoc[].
 
 === Test with mock data
 
@@ -269,7 +269,7 @@ Use these documented test IDs when testing the agent. If you replace the mock to
 
 == Next steps
 
-* xref:mcp:remote/tool-patterns.adoc#call-external-apis[Call external APIs]
-* xref:prompt-best-practices.adoc[]
+* xref:mcp:remote/patterns.adoc#call-external-apis[Call external APIs]
+* xref:system-prompts.adoc[]
 * xref:architecture-patterns.adoc[]
-* xref:troubleshooting.adoc[]
+* xref:troubleshoot.adoc[]

@@ -128,6 +128,6 @@ The following patterns demonstrate how to use the Transcripts view for understan
 
 == Next steps
 
-* xref:agents:monitor-agents.adoc[]
+* xref:agents:monitor.adoc[]
 * xref:mcp/remote/monitor-mcp-servers.adoc[]
-* xref:agents:troubleshooting.adoc[]
+* xref:agents:troubleshoot.adoc[]

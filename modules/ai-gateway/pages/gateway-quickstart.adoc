@@ -373,7 +373,7 @@ Guard for field existence:
 has(request.body.max_tokens) && request.body.max_tokens > 1000
 ----
 
-For more CEL examples, see xref:cel-routing-cookbook.adoc[].
+For more CEL examples, see xref:routing-cel.adoc[].
 
 == Connect AI tools to your gateway
 
@@ -531,8 +531,8 @@ const openai = new OpenAI({
 
 Explore advanced AI Gateway features:
 
-* xref:cel-routing-cookbook.adoc[]: Advanced CEL routing patterns for traffic distribution and cost optimization
-* xref:mcp-aggregation-guide.adoc[]: Configure MCP server aggregation and deferred tool loading
+* xref:routing-cel.adoc[]: Advanced CEL routing patterns for traffic distribution and cost optimization
+* xref:aggregation.adoc[]: Configure MCP server aggregation and deferred tool loading
 ifdef::integrations-available[]
 * xref:integrations/index.adoc[]: Connect more AI development tools
 endif::[]
@@ -540,4 +540,4 @@ endif::[]
 Learn about the architecture:
 
 * xref:gateway-architecture.adoc[]: Technical architecture, request lifecycle, and deployment models
-* xref:what-is-ai-gateway.adoc[]: Problems AI Gateway solves and common use cases
+* xref:overview.adoc[]: Problems AI Gateway solves and common use cases

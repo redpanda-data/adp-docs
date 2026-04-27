@@ -171,7 +171,7 @@ Try modifying the agent to change its behavior:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:troubleshooting.adoc[].
+For comprehensive troubleshooting guidance, see xref:troubleshoot.adoc[].
 
 Common quickstart issue:
 
@@ -183,6 +183,6 @@ You've created an agent that orchestrates MCP tools through natural language. Ex
 
 * xref:overview.adoc[]
 * xref:create-agent.adoc[]
-* xref:prompt-best-practices.adoc[]
+* xref:system-prompts.adoc[]
 * xref:architecture-patterns.adoc[]
-* xref:mcp:remote/tool-patterns.adoc[]
+* xref:mcp:remote/patterns.adoc[]

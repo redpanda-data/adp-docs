@@ -2,7 +2,7 @@
 :description: Enterprise-grade infrastructure for building, deploying, and governing AI agents at scale with compliance-grade audit trails.
 :page-aliases: redpanda-cloud:ai-agents:adp-overview.adoc
 :page-topic-type: overview
-:page-categories: AI, Agentic AI
+:page-categories: Agentic Data Plane
 :personas: evaluator, ai_agent_developer, platform_admin
 :learning-objective-1: Identify the key components of Redpanda ADP and their purposes
 :learning-objective-2: Describe how each component addresses enterprise governance and reliability requirements

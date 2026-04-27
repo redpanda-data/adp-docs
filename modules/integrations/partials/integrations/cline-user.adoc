@@ -8,7 +8,7 @@
 
 include::ROOT:partial$adp-la.adoc[]
 
-After xref:ai-gateway/gateway-quickstart.adoc[configuring your AI Gateway], set up Cline (formerly Claude Dev) to route LLM requests and access MCP tools through the gateway's unified endpoints.
+After xref:ai-gateway:gateway-quickstart.adoc[configuring your AI Gateway], set up Cline (formerly Claude Dev) to route LLM requests and access MCP tools through the gateway's unified endpoints.
 
 After reading this page, you will be able to:
 
@@ -22,8 +22,8 @@ Before configuring Cline, ensure you have:
 
 * Cline VS Code extension installed (search for "Cline" in VS Code Extensions)
 * An active Redpanda AI Gateway with:
-** At least one LLM provider enabled (see xref:ai-gateway/gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
-** A gateway created and configured (see xref:ai-gateway/gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
+** At least one LLM provider enabled (see xref:ai-gateway:gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
+** A gateway created and configured (see xref:ai-gateway:gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
 * Your AI Gateway credentials:
 ** Gateway endpoint URL, which includes the gateway ID (for example, `\https://ai.prd.cloud.redpanda.com/gateway/v1/chat/completions`)
 ** API key with access to the gateway
@@ -580,7 +580,7 @@ You may be using a premium model for simple tasks. Solutions:
 +
 If not using deferred tool loading, all tools load with every request. Solution:
 +
-* Enable deferred tool loading in your AI Gateway configuration (see xref:ai-gateway/mcp-aggregation-guide.adoc[])
+* Enable deferred tool loading in your AI Gateway configuration (see xref:ai-gateway:aggregation.adoc[])
 
 === Cline hangs or times out
 
@@ -609,7 +609,7 @@ You may be hitting rate limits. Check the dashboard for rate limit metrics and i
 
 . **Provider outage**
 +
-Check the AI Gateway dashboard for provider status. If the primary provider is down, configure failover (see xref:ai-gateway/gateway-quickstart.adoc#configure-provider-pool-with-fallback[Configure failover]).
+Check the AI Gateway dashboard for provider status. If the primary provider is down, configure failover (see xref:ai-gateway:gateway-quickstart.adoc#configure-provider-pool-with-fallback[Configure failover]).
 
 === Settings changes not taking effect
 
@@ -705,7 +705,7 @@ After (low token cost):
 * Cline queries the tool for specific information as needed
 * Only relevant sections included in context
 
-See xref:ai-gateway/mcp-aggregation-guide.adoc[] for MCP tool configuration.
+See xref:ai-gateway:aggregation.adoc[] for MCP tool configuration.
 
 === Enable deferred tool loading
 
@@ -725,11 +725,11 @@ The gateway automatically blocks requests that would exceed the limit.
 
 == Next steps
 
-* xref:ai-gateway/mcp-aggregation-guide.adoc[]: Configure deferred tool loading to reduce token costs
-* xref:ai-gateway/cel-routing-cookbook.adoc[]: Use CEL expressions to route Cline requests based on task complexity
+* xref:ai-gateway:aggregation.adoc[]: Configure deferred tool loading to reduce token costs
+* xref:ai-gateway:routing-cel.adoc[]: Use CEL expressions to route Cline requests based on task complexity
 
 == Related pages
 
-* xref:ai-gateway/gateway-quickstart.adoc[]: Create and configure your AI Gateway
+* xref:ai-gateway:gateway-quickstart.adoc[]: Create and configure your AI Gateway
 * xref:ai-gateway/gateway-architecture.adoc[]: Learn about AI Gateway architecture and benefits
 * xref:ai-gateway/integrations/claude-code-user.adoc[]: Configure Claude Code with AI Gateway

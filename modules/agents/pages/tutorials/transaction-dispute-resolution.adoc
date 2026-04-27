@@ -94,7 +94,7 @@ Wait for the server status to show *Running*.
 
 [NOTE]
 ====
-This tutorial uses XSmall resource tier for all MCP servers because the mock tools run lightweight Bloblang transformations. Production deployments with external API calls require larger tiers based on throughput needs. See xref:mcp:remote/scale-resources.adoc[].
+This tutorial uses XSmall resource tier for all MCP servers because the mock tools run lightweight Bloblang transformations. Production deployments with external API calls require larger tiers based on throughput needs. See xref:mcp:remote/scale.adoc[].
 ====
 
 === Fraud tools
@@ -643,7 +643,7 @@ In the transcript details, you'll see:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:troubleshooting.adoc[].
+For comprehensive troubleshooting guidance, see xref:troubleshoot.adoc[].
 
 === Test with mock data
 
@@ -661,5 +661,5 @@ For production deployments, replace the mock tools with API calls to your accoun
 * xref:architecture-patterns.adoc[]
 * xref:integration-overview.adoc[]
 * xref:pipeline-integration-patterns.adoc[]
-* xref:monitor-agents.adoc[]
+* xref:monitor.adoc[]
 * xref:mcp:remote/best-practices.adoc[]

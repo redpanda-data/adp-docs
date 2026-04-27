@@ -426,4 +426,4 @@ Now that you're using an AI Hub gateway:
 
 * xref:ai-gateway/builders/connect-your-agent.adoc[Connect Your Agent] - Integrate AI agents with advanced patterns
 * xref:ai-gateway/builders/discover-gateways.adoc[Discover Gateways] - Find other available gateways
-* xref:ai-gateway/mcp-aggregation-guide.adoc[MCP Aggregation] - Use tool aggregation with AI agents
+* xref:ai-gateway:aggregation.adoc[MCP Aggregation] - Use tool aggregation with AI agents

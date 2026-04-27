@@ -8,7 +8,7 @@
 
 include::ROOT:partial$adp-la.adoc[]
 
-This page provides technical details about AI Gateway's architecture, request processing, and capabilities. For an overview of AI Gateway, see xref:what-is-ai-gateway.adoc[]
+This page provides technical details about AI Gateway's architecture, request processing, and capabilities. For an overview of AI Gateway, see xref:overview.adoc[]
 
 == Architecture overview
 
@@ -218,4 +218,4 @@ endif::[]
 == Next steps
 
 * xref:gateway-quickstart.adoc[]: Route your first request through AI Gateway
-* xref:mcp-aggregation-guide.adoc[]: Configure MCP server aggregation for AI agents
+* xref:aggregation.adoc[]: Configure MCP server aggregation for AI agents

@@ -8,7 +8,7 @@
 
 include::ROOT:partial$adp-la.adoc[]
 
-After xref:ai-gateway/gateway-quickstart.adoc[configuring your AI Gateway], set up GitHub Copilot to route LLM requests through the gateway for centralized observability, cost management, and provider flexibility.
+After xref:ai-gateway:gateway-quickstart.adoc[configuring your AI Gateway], set up GitHub Copilot to route LLM requests through the gateway for centralized observability, cost management, and provider flexibility.
 
 After reading this page, you will be able to:
 
@@ -22,8 +22,8 @@ Before configuring GitHub Copilot, ensure you have:
 
 * GitHub Copilot subscription (Individual, Business, or Enterprise)
 * An active Redpanda AI Gateway with:
-** At least one LLM provider enabled (see xref:ai-gateway/gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
-** A gateway created and configured (see xref:ai-gateway/gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
+** At least one LLM provider enabled (see xref:ai-gateway:gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
+** A gateway created and configured (see xref:ai-gateway:gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
 * Your AI Gateway credentials:
 ** Gateway endpoint URL (for example, `https://gw.ai.panda.com`)
 ** Gateway ID (for example, `gateway-abc123`)
@@ -904,12 +904,12 @@ Generate project-specific cost reports from the gateway dashboard.
 
 == Next steps
 
-* xref:ai-gateway/cel-routing-cookbook.adoc[]: Use CEL expressions to route Copilot requests based on context
-* xref:ai-gateway/mcp-aggregation-guide.adoc[]: Learn about MCP tool integration (if using Copilot Workspace)
+* xref:ai-gateway:routing-cel.adoc[]: Use CEL expressions to route Copilot requests based on context
+* xref:ai-gateway:aggregation.adoc[]: Learn about MCP tool integration (if using Copilot Workspace)
 
 == Related pages
 
-* xref:ai-gateway/gateway-quickstart.adoc[]: Create and configure your AI Gateway
+* xref:ai-gateway:gateway-quickstart.adoc[]: Create and configure your AI Gateway
 * xref:ai-gateway/gateway-architecture.adoc[]: Learn about AI Gateway architecture and benefits
 * xref:ai-gateway/integrations/claude-code-user.adoc[]: Configure Claude Code with AI Gateway
 * xref:ai-gateway/integrations/continue-user.adoc[]: Configure Continue.dev with AI Gateway

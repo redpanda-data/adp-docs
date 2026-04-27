@@ -852,7 +852,7 @@ Possible causes:
 Solution:
 
 1. Remove filters, widen time range
-2. Send test request (see xref:ai-gateway/gateway-quickstart.adoc[])
+2. Send test request (see xref:ai-gateway:gateway-quickstart.adoc[])
 3. Check permissions with admin
 
 == Next steps
