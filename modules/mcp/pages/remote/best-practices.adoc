@@ -38,5 +38,5 @@ include::redpanda-connect:ai-agents:example$best-practices/mcp-metadata/search-c
 == Next steps
 
 * xref:remote/create-tool.adoc#secrets[Use secrets for credentials]
-* xref:patterns.adoc[]
+* xref:mcp:remote/patterns.adoc[]
 * xref:remote/troubleshooting.adoc[]

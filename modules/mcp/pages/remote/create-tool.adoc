@@ -118,7 +118,7 @@ Outputs can include a `processors:` section to transform data before publishing:
 include::ROOT:example$mcp-tools/outputs/publish_with_timestamp.yaml[tag=complete,indent=0]
 ----
 
-See xref:patterns.adoc#outputs-with-processors[outputs with processors] for more examples.
+See xref:mcp:remote/patterns.adoc#outputs-with-processors[outputs with processors] for more examples.
 
 Do not wrap components in `input:`, `output:`, or `cache:` blocks. This syntax is for pipelines, not MCP tools.
 
@@ -255,6 +255,6 @@ include::ROOT:example$mcp-tools/processors/get_weather_complete.yaml[tag=complet
 
 * xref:agents:quickstart.adoc[]
 * xref:remote/best-practices.adoc[]
-* xref:patterns.adoc[]
+* xref:mcp:remote/patterns.adoc[]
 * xref:remote/troubleshooting.adoc[]
 * xref:redpanda-cloud:develop:connect/components/about.adoc[]

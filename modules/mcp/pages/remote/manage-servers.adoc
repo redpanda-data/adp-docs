@@ -163,6 +163,6 @@ Deletion is immediate and permanent. Make sure you have backed up any important 
 
 == Next steps
 
-* xref:scale.adoc[]
+* xref:mcp:remote/scale.adoc[]
 * xref:remote/monitor-mcp-servers.adoc[]
 * xref:remote/best-practices.adoc[]

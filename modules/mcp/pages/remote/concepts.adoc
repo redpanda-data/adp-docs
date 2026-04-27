@@ -44,5 +44,5 @@ include::ROOT:partial$service-account-authorization.adoc[]
 
 * xref:remote/create-tool.adoc[]
 * xref:remote/best-practices.adoc[]
-* xref:patterns.adoc[]
+* xref:mcp:remote/patterns.adoc[]
 * xref:remote/troubleshooting.adoc[]
