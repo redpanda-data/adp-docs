@@ -1,0 +1,99 @@
+= Read Violations
+:description: Investigate why a guardrail fired, distinguish a violation from an evaluator failure, and tune the configuration.
+:page-topic-type: how-to
+:personas: app_developer, platform_admin
+// TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (e.g., security_admin), apply it here. Open Q D4 in the companion plan.
+:learning-objective-1: Locate a violation entry in a transcript and identify which guardrail fired
+:learning-objective-2: Distinguish a guardrail violation from an evaluator failure and apply the right response
+:learning-objective-3: Recognize common false-positive patterns per evaluator type and tune the configuration
+
+include::ROOT:partial$adp-la.adoc[]
+
+// TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the violation field shape and async-vs-sync timing fill in once eng confirms the transcript proto integration and the shipping evaluation behavior. Open Qs B1, B2, B5, C1 in the companion plan.
+
+A guardrail *violation* fires when an evaluator decides to block (or redact) a request. This page covers what a violation looks like in the transcript, how to distinguish it from an evaluator failure, common false-positive patterns per evaluator type, and what happens when an evaluator can't run.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What a violation is
+
+A violation is the gateway's record that a guardrail's evaluator returned a `block` decision on a specific request, at a specific phase. Every violation carries the guardrail name, the phase (`INPUT` or `OUTPUT`), a redacted summary of what content matched, and the action the gateway took (block, redact, or pass-through-with-warning).
+
+A violation is distinct from an *evaluator failure*: a failure is when the evaluator itself errored out (custom webhook timed out, classifier model unavailable, regex parser crashed). Failures and violations surface differently and are handled differently. See xref:_evaluator_down_behavior[Evaluator-down behavior] below.
+
+== Where violations show up
+
+Violations surface in two places:
+
+* *Transcripts* — each request's transcript carries a violation entry per fired guardrail, alongside the LLM call entry, tool calls, and cost data. See xref:observability:transcripts.adoc[Read a transcript] for the full transcript walkthrough.
+* *Metrics* — aggregate violation counts per guardrail per provider per time window. See xref:observability:metrics.adoc[Metrics].
+
+// TODO: confirm the violation field shape in the transcript proto. The Transcripts plan (workflow #7) didn't call out a violation field specifically; coordinate with that workflow's author so the xref above resolves to a real proto field. Open Q C1 in the companion plan.
+
+== Read a violation entry
+
+Open the transcript for a request that fired a guardrail and walk through the violation entry:
+
+* *Guardrail name* — the human-readable identifier you assigned at create time.
+* *Phase* — `INPUT` (matched the user's prompt) or `OUTPUT` (matched the model's response).
+* *Matched content* — a redacted summary, not the full payload. The full payload remains in the request body itself; the violation entry is a pointer.
+* *Action taken* — `block` (request stopped, error returned to caller), `redact` (matched fields stripped, request continued), or `pass-through-with-warning` (request continued, violation logged for review).
+
+// TODO: confirm action-taken value set at GA. Open Q B3 in the companion plan.
+
+== Common false-positive patterns
+
+Use these patterns as a starting checklist when a guardrail fires unexpectedly.
+
+=== PII
+
+* *Regex too broad* — the entity allowlist matched on a benign substring. Tune the entity types to the specific PII categories you care about.
+* *Locale mismatch* — the config is tuned for US patterns but traffic includes EU PII (or vice versa). Add the relevant locale's pattern set or scope the guardrail to a per-region provider.
+* *Structured-payload matches* — code blocks, JSON payloads, or sample data contain strings that resemble PII. Adjust the allowlist or scope the guardrail to user-text fields only.
+
+=== Toxicity
+
+* *Threshold too aggressive* — drop the threshold and re-evaluate from the violation history. Categories matter too — disable categories that don't apply to your use case.
+* *Wrong phase* — `INPUT` toxicity blocks the user from asking certain questions; usually `OUTPUT` is what you want. Switch the phase to `OUTPUT` only.
+
+=== Custom webhook
+
+* *Webhook returning `block` for legitimate content* — the bug is in your webhook. Add logging to your webhook to see which inputs are being flagged.
+* *Webhook timing out* — see xref:_evaluator_down_behavior[Evaluator-down behavior] below; the gateway fails closed (or open, depending on configuration) when a webhook can't be reached.
+
+== Guardrail expected to fire but didn't
+
+If you expect a guardrail to fire and it doesn't:
+
+* Confirm the guardrail is *enabled*. Disabled guardrails skip evaluation entirely.
+* Confirm the *attached provider* is the one the request actually used. A guardrail attached to `provider-a` doesn't fire on requests routed to `provider-b`.
+* Confirm the *phase alignment*. A guardrail set to `INPUT` only doesn't fire on the response side. A guardrail set to `OUTPUT` only doesn't fire on the request side.
+* Confirm the request *actually reached the gateway* — direct-to-provider requests that bypass the gateway are invisible to guardrails.
+
+[#_evaluator_down_behavior]
+== Evaluator-down behavior
+
+When an evaluator can't run (custom webhook unreachable, classifier model down, internal evaluator panic), the gateway has two options:
+
+* *Fail closed* — block the request. Safe default; preserves the policy at the cost of availability.
+* *Fail open* — pass the request through. Available default; preserves throughput at the cost of policy coverage.
+
+// TODO: confirm the GA default and whether it's configurable per guardrail. Open Qs B2, B5 in the companion plan.
+
+The default at GA is fail-closed. Per-guardrail override is available for guardrails where availability is more important than policy coverage (for example, a brand-safety webhook that's not critical to organizational compliance).
+
+== Async versus sync evaluation
+
+Per the AI Gateway design, evaluators run async where possible — specifically, `OUTPUT` evaluators alongside non-streaming responses can complete in parallel with the response delivery. `INPUT` evaluators always run synchronously: the request is blocked until the evaluator returns, because pass/block has to be decided before the request can dispatch upstream.
+
+// TODO: confirm shipping behavior at GA — the design intent is async OUTPUT where possible, but streaming responses change the timing. Open Q B1 in the companion plan.
+
+== Next steps
+
+* xref:governance:guardrails/types-reference.adoc[Evaluator types reference] — config schemas and per-type tuning surface.
+* xref:governance:guardrails/cost-tracking.adoc[Cost tracking] — what each evaluator costs and where the cost surfaces.
+* xref:observability:transcripts.adoc[Read a transcript] — the full transcript walkthrough for finding a specific violation.

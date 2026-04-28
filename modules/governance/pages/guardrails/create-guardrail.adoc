@@ -1,0 +1,111 @@
+= Create a Guardrail
+:description: Configure a guardrail, pick an evaluator type and phase, attach it to one or more LLM providers, and verify that it fires.
+:page-topic-type: how-to
+:personas: platform_admin
+// TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (e.g., security_admin), apply it here. Open Q D4 in the companion plan.
+:learning-objective-1: Create and configure a guardrail of a chosen evaluator type
+:learning-objective-2: Attach the guardrail to one or more LLM providers and enable it
+:learning-objective-3: Verify the guardrail fires and trace the violation through the transcript
+
+include::ROOT:partial$adp-la.adoc[]
+
+// TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the live walkthrough fills in once eng confirms the post-pivot Guardrail resource shape and `aigwctl` (or the ADP UI) is reachable from a sandbox cluster.
+
+This page walks through configuring your first guardrail end-to-end: pick an evaluator type, choose a phase, fill in the per-type config, attach it to LLM providers, and confirm it fires.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* An ADP environment with at least one LLM provider configured. See xref:ai-gateway:configure-provider.adoc[Configure your LLM provider].
+* For a *Custom webhook* evaluator, a publicly reachable HTTPS endpoint that implements the gateway's webhook contract. See xref:governance:guardrails/types-reference.adoc[Evaluator types reference].
+* For evaluators that need their own credentials (for example, a hosted PII service), the credential stored in the ADP secret store using `UPPER_SNAKE_CASE`.
+
+// TODO: standalone-ADP wording. Replace with the concrete sign-in URL, IAM role, and OIDC audience once the standalone product surface ships. Open Q D1 in the companion plan.
+
+== Open the Guardrails surface
+
+// TODO: finalize this section once the ADP UI ships a Guardrails surface. As of 2026-04-28, `apps/adp-ui/src/routes/` has no `guardrails/` route. The walkthrough may need to lead with `aigwctl` instead of the UI and add the UI flow in a later refresh. Open Qs C4 and C5 in the companion plan.
+
+In the ADP UI, open *Trust & Governance* → *Guardrails* → *Create guardrail*.
+
+== Pick an evaluator type
+
+Choose one of the supported evaluator types:
+
+* *PII* — detects personally identifiable information using regex and entity-recognition rules. No per-call LLM cost.
+* *Toxicity* — runs content through a toxicity classifier. Per-call LLM cost.
+* *Custom webhook* — delegates the decision to your HTTPS endpoint. Gateway charges nothing per call.
+
+For each type's full config schema and behavior, see xref:governance:guardrails/types-reference.adoc[Evaluator types reference].
+
+// TODO: confirm the evaluator type set at GA. Open Q A5 in the companion plan.
+
+== Pick a phase
+
+Pick the phase or phases at which the evaluator runs:
+
+* `INPUT` — runs against the user's prompt before the gateway forwards it upstream.
+* `OUTPUT` — runs against the model's response before the gateway returns it to the caller.
+* `BOTH` — runs at both phases.
+
+Decision rule:
+
+* PII guardrails typically run at `BOTH` (defend data exfiltration in both directions).
+* Toxicity guardrails typically run at `OUTPUT` only (filter what the model generates; INPUT-side toxicity filtering rarely improves outcomes).
+* Custom webhook depends on what your webhook does — start with `INPUT` for prompt-injection heuristics, `OUTPUT` for brand-safety lists, `BOTH` for either-direction checks.
+
+== Configure the evaluator
+
+Fill in the per-type config block. The form fields differ per evaluator type; see xref:governance:guardrails/types-reference.adoc[Evaluator types reference] for the full schema of each type.
+
+// TODO: walk through the PII form as the exemplar (most common starting case) once the post-pivot field set is confirmed. Lift exact field names and labels from the proto. Open Qs A1, A2 in the companion plan.
+
+== Attach to LLM providers
+
+Select one or more LLM providers to attach the guardrail to. Multi-attach is supported — one guardrail can apply to many providers.
+
+// TODO: confirm whether guardrails also attach at other scopes (agents, MCP servers, organizations). The pre-pivot proto attached via `provider_ids[]` and `route_ids[]`; routes were removed in cloudv2 commit `7eff2ecbbf`. Open Qs A3, A4 in the companion plan.
+
+== Enable the guardrail
+
+Toggle the guardrail to *Enabled*. Disabled guardrails skip evaluation entirely — useful when staging a new policy before turning it on, or when troubleshooting whether a guardrail is responsible for unexpected blocks.
+
+== Verify the guardrail fires
+
+Send a request through one of the attached providers that should trigger the guardrail. For example, with a PII guardrail attached on `INPUT`:
+
+// TODO: replace with a working `curl` one-liner against the proxy URL once the live walkthrough resolves authentication. Standalone-ADP wording until then.
+
+[source,bash]
+----
+curl -X POST https://your-adp-environment/v1/chat/completions \
+  -H "Authorization: Bearer $ADP_TOKEN" \
+  -d '{"messages":[{"role":"user","content":"My SSN is 123-45-6789"}]}'
+----
+
+The request should return an error. Open the request's transcript and confirm a violation entry appears for the guardrail. See xref:observability:transcripts.adoc[Read a transcript] for the transcript walkthrough and xref:governance:guardrails/violations.adoc[Read violations] for what to do when a violation surprises you.
+
+== Edit, disable, or delete
+
+* *Edit* — change the per-type config or the attached providers. Changes apply on the next request.
+* *Disable* — short-circuit the middleware without losing the config. Useful when staging or troubleshooting.
+* *Delete* — permanently remove the guardrail. If the guardrail is currently firing on production traffic, the UI requires confirmation.
+
+// TODO: confirm exact UI labels and the delete-confirmation copy once the UI ships. Open Q C4 in the companion plan.
+
+== Troubleshooting
+
+* *Evaluator returns false positives* — see xref:governance:guardrails/violations.adoc[Read violations] for tuning patterns per evaluator type.
+* *Evaluator times out or is unavailable* — see xref:governance:guardrails/violations.adoc[Read violations] for the evaluator-down section.
+* *Attached provider doesn't fire the guardrail* — confirm attachment (right provider, right phase), enabled state, and that requests are actually reaching the gateway (not bypassing via a direct provider URL).
+
+== Next steps
+
+* xref:governance:guardrails/types-reference.adoc[Evaluator types reference] — config schemas and gotchas per evaluator type.
+* xref:governance:guardrails/violations.adoc[Read violations] — investigate fired guardrails and tune false-positive rates.
+* xref:governance:guardrails/cost-tracking.adoc[Cost tracking] — see what each evaluator costs and where it shows up.

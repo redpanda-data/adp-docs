@@ -1,4 +1,0 @@
-= Configure Guardrails
-:description: Set up safety guardrails for AI agent operations.
-
-// TODO: Add content
