@@ -20,7 +20,7 @@ After reading this page, you will be able to:
 
 * A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
 * xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled.
-* At least one xref:mcp:remote/overview.adoc[Remote MCP server] deployed with tools.
+* At least one xref:mcp:index.adoc[Remote MCP server] deployed with tools.
 * System prompt prepared (see xref:system-prompts.adoc[System Prompt Best Practices]).
 
 == Access the agents UI
@@ -276,6 +276,6 @@ Here are example configurations for different agent types:
 
 * xref:integration-overview.adoc[]
 * xref:system-prompts.adoc[]
-* xref:mcp:remote/create-tool.adoc[]
+* xref:mcp:create-server.adoc[]
 * xref:architecture-patterns.adoc[]
 * xref:troubleshoot.adoc[]

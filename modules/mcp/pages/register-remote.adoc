@@ -1,0 +1,147 @@
+= Register a Self-Managed MCP Server
+:description: Front your own MCP server with a managed Redpanda URL — pick a transport, configure authentication, and let agents discover the server's tools through Redpanda.
+:page-topic-type: how-to
+:personas: platform_admin
+:learning-objective-1: Register a self-managed MCP server in the ADP UI
+:learning-objective-2: Pick the right transport (SSE vs. Streamable HTTP) and authentication mode
+:learning-objective-3: Confirm tool discovery completed and the server is reachable through its proxy URL
+
+include::ROOT:partial$adp-la.adoc[]
+
+This guide covers the *self-managed* path through xref:create-server.adoc[] in depth. Use it when you already run an MCP server somewhere and want Redpanda to proxy it for authentication, observability, aggregation with other MCP servers, and agent access.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== When to use this
+
+Choose self-managed registration when:
+
+* The MCP server is already deployed in your environment and you don't want to migrate it to a managed type.
+* You need custom tool logic that no managed type provides.
+* You want a unified MCP URL (and Inspector / observability / agent access) across servers without standing up your own gateway.
+
+If you don't already run a server, prefer a managed type — see xref:managed-catalog.adoc[] for the catalog.
+
+== Prerequisites
+
+* An MCP server reachable from the Agentic Data Plane.
++
+// TODO: confirm network reachability requirements (egress / VPC peering / public endpoint) once the standalone ADP product surface ships.
+* The endpoint URL. `http://` is allowed for everything except user-delegated OAuth, which requires `https://` (proto rule `remote_mcp.user_oauth_requires_https`).
+* Knowledge of which transport the server speaks — SSE or Streamable HTTP. If you don't know, see <<test-transport>>.
+* If using static-key or service-account-OAuth: secrets pre-created in the ADP secret store, `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`).
+* If using user-delegated OAuth: an OAuth Provider already configured. See xref:user-delegated-oauth.adoc[].
+
+== Create the server
+
+. Open *MCP Servers* and click *Create Server*.
+. In the marketplace picker, choose *Remote (Proxied)*.
++
+// TODO: screenshot of the marketplace picker with Remote (Proxied) highlighted.
+. Fill in the identity fields (`name`, `description`, `enabled`) — same constraints as in xref:create-server.adoc[].
+. Provide the *URL* and *Transport*.
+. Configure authentication (see <<authentication>>).
+. Click *Create*.
+
+// TODO: screenshot of the self-managed create form with URL and transport visible.
+
+[[test-transport]]
+== Transport choice
+
+Two transports are available on the proto enum `MCPTransport`:
+
+* *SSE* — server-sent events. The traditional MCP transport.
+* *Streamable HTTP* — newer bidirectional protocol.
+
+Pick whichever your server actually speaks. To probe a server quickly:
+
+[source,bash]
+----
+# SSE handshake — expect a stream of `event:` lines on success.
+curl -N -H "Accept: text/event-stream" https://your-server.example.com/mcp/sse
+
+# Streamable HTTP — expect a JSON-RPC response on success.
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}' \
+  https://your-server.example.com/mcp
+----
+
+// TODO: lift exact handshake examples from the MCP spec and verify against `adp-production` once we have a known-good self-managed test endpoint.
+
+[[authentication]]
+== Authentication
+
+The five auth modes from xref:create-server.adoc#configure-authentication[create-server.adoc] all apply. Three patterns are particularly common for self-managed servers:
+
+[cols="1,2"]
+|===
+|Pattern |Use when
+
+|*Static key with a custom header*
+|First-party servers that authenticate with a non-`Authorization` header. Provide a `header_name` (for example, `X-Api-Key`) and a `key_ref` pointing at a `UPPER_SNAKE_CASE` secret.
+
+|*Service-account OAuth*
+|The upstream system supports OAuth client credentials and you want one shared identity for all callers. Provide `client_id`, `client_secret_ref`, `token_url`, and any required `scopes`.
+
+|*Token passthrough*
+|The upstream server already validates client tokens — Redpanda just forwards the caller's `Authorization` header.
+|===
+
+For user-delegated OAuth, the URL must be `https://` and you also need an OAuth Provider. See xref:user-delegated-oauth.adoc[].
+
+// TODO: screenshots of each auth-mode form panel after walking `adp-production`.
+
+== Tool discovery
+
+After create, Redpanda runs a live `tools/list` (the `ListMCPServerTools` RPC) against the server. The result is cached on the `MCPServer.tools` output-only field and shown on the detail page's *Overview* tab. The *Inspector* tab (see xref:test-tools.adoc[]) exercises individual tools.
+
+If the tools list is empty or stale, hit the *Refresh tools* action on the Overview tab to re-query the server.
+
+// TODO: confirm exact UI affordance for triggering a re-list.
+
+== Connection errors and retry
+
+[cols="1,2"]
+|===
+|Error |What it means
+
+|`OAuthConnectionRequired`
+|The user-delegated auth path needs a stored token vault entry for the calling user. Redpanda surfaces an `authorize_url` so the user can complete the consent flow. See xref:user-delegated-oauth.adoc[].
+
+|`OAuthTokenExpired`
+|The user's stored token has expired and refresh failed. Surface the new authorize URL and have the user re-consent.
+
+|Plain connection error / 502 / 504
+|Redpanda couldn't reach your server. Look at the *Connection* tab on the detail page for the upstream error and check the connection-status banner.
+|===
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|"Transport mismatch" or empty stream
+|Your server speaks the other transport. Re-probe with curl per <<test-transport>> and update the *Transport* field on the server's edit page.
+
+|TLS errors when registering an `https://` URL
+|Confirm the server's certificate chains to a public CA (or the CA Redpanda's egress trusts). Self-signed certs aren't supported.
++
+// TODO: confirm TLS / private CA story for the standalone ADP product surface.
+
+|`401 Unauthorized` from the upstream
+|Authentication is misconfigured. For static-key or service-account-OAuth, verify the secret content and `header_name`. For token passthrough, confirm the caller is sending an `Authorization` header.
+
+|Tool schema parse errors
+|The server returned a `tools/list` response with an invalid JSON schema for one or more tool inputs. Fix the upstream tool's schema and refresh.
+|===
+
+== Out of scope
+
+* *User-delegated OAuth consent flow* — see xref:user-delegated-oauth.adoc[].
+* *Multi-server aggregation* (one MCP URL fronting many servers) — handled by AI Gateway. See xref:ai-gateway:aggregation.adoc[].
+* *Server hosting and deployment guidance* — Redpanda doesn't operate self-managed servers; deployment, scaling, and patching are your responsibility.

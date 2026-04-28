@@ -23,7 +23,7 @@ After completing this quickstart, you will be able to:
 
 * xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, or Google AI)
 
-* Completed the xref:mcp:remote/quickstart.adoc[Remote MCP Quickstart] to create an MCP server with the following tools deployed:
+* Completed the xref:mcp:create-server.adoc[Remote MCP Quickstart] to create an MCP server with the following tools deployed:
 +
 ** `generate_input`: Generates fake user event data
 ** `redpanda_output`: Publishes data to Redpanda topics
@@ -185,4 +185,4 @@ You've created an agent that orchestrates MCP tools through natural language. Ex
 * xref:create-agent.adoc[]
 * xref:system-prompts.adoc[]
 * xref:architecture-patterns.adoc[]
-* xref:mcp:remote/patterns.adoc[]
+* xref:mcp:index.adoc[]

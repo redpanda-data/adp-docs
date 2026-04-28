@@ -423,4 +423,4 @@ Decision criteria enable reliable tool selection based on request context.
 
 * xref:quickstart.adoc[]
 * xref:overview.adoc[]
-* xref:mcp:remote/best-practices.adoc[]
+* xref:mcp:index.adoc[]

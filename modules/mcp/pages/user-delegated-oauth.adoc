@@ -1,0 +1,104 @@
+= Configure User-Delegated OAuth for an MCP Server
+:description: Have each end-user authenticate against the MCP server's upstream system with their own credentials — Redpanda stores their token in the vault and injects it at call time.
+:page-topic-type: how-to
+:personas: platform_admin, app_developer
+:learning-objective-1: Configure an MCP server to use user-delegated OAuth with a registered OAuth Provider
+:learning-objective-2: Walk an end-user through the consent flow and verify the connection
+:learning-objective-3: Troubleshoot scope upgrades, token expiry, and refresh failures
+
+include::ROOT:partial$adp-la.adoc[]
+
+User-delegated OAuth means each end-user authenticates against the MCP server's upstream system (Slack, Jira, Google, …) with their own credentials. Redpanda stores their token in the token vault and injects it at call time. Contrast with service-account OAuth, where one shared identity is used for every caller.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* An OAuth Provider resource configured in the ADP UI under *OAuth Providers*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials.
++
+// TODO: link the OAuth Provider how-to once it exists.
+* The required scopes for the upstream API you plan to call.
+* For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
+* For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:managed-catalog.adoc[] before configuring.
+
+== Configure the server
+
+. Create or edit your MCP server (see xref:create-server.adoc[]).
+. In the auth section, choose *User-delegated OAuth*.
+. Pick the configured *OAuth Provider* (`UserOAuthAuth.provider_name`).
+. List the *required scopes* (`UserOAuthAuth.required_scopes`). Redpanda enforces these at consent time.
+. (Optional) Override token injection. By default Redpanda sends `Authorization: Bearer <token>`. To use a different header, set `TokenInjection.header_name`. To omit the prefix entirely (for example, an upstream that expects a bare API key as the token), set `TokenInjection.header_prefix` to the empty string.
++
+// TODO: confirm exact UI labels for `TokenInjection.header_name` and `header_prefix`.
+. Save.
+
+NOTE: Choosing user-delegated OAuth instead of service-account OAuth *is* the credential-mode decision — there's no separate field. User-delegated gives each caller a per-user upstream identity; service-account gives every caller one shared identity. Switching between them later requires re-consent for every active user.
+
+== The user connection flow
+
+The first time a user calls a tool that needs this server's auth, Redpanda doesn't have a stored token for them. The behavior is:
+
+. The MCP RPC returns `FAILED_PRECONDITION` with an `OAuthConnectionRequired` error detail. The detail carries an `authorize_url`.
+. The ADP UI surfaces a consent prompt to the user, pointing at the `authorize_url`.
+. The user completes the device-authorization flow with the upstream provider.
+. The upstream provider redirects back to Redpanda with a token. Redpanda stores it in the token vault under that user's identity.
+. The original tool call retries automatically. Subsequent calls reuse the stored token.
+
+After consent, the user can see and revoke their connection under *My Connections* in the ADP UI.
+
+// TODO: screenshot of the consent prompt and the resulting *My Connections* entry.
+
+== Scope upgrades
+
+If a user's stored connection has fewer scopes than the server's `required_scopes`, the gateway returns a `scope_upgrade_required` error and surfaces a new `authorize_url` requesting the additional scopes. The user re-consents; the connection is updated in place.
+
+// TODO: confirm the exact error code or status used for scope upgrade and capture a screenshot.
+
+== Refresh and expiry
+
+Redpanda transparently refreshes tokens before they expire, using the refresh token returned at consent time.
+
+When refresh fails (revoked token, idle too long, upstream error), the next tool call returns `OAuthTokenExpired` with a `reason`. The user must re-consent through the same flow as initial connection.
+
+== Service-account contrast
+
+If you want one shared upstream identity for every caller (instead of per-user identities), choose *Service-account OAuth* on the server instead of *User-delegated OAuth*. With service-account OAuth, every caller of every tool sees the same upstream identity; the upstream system has no idea which ADP user invoked the tool. With user-delegated OAuth, the upstream system sees each end-user as themselves and applies their own permissions.
+
+For the field-by-field service-account-OAuth setup, see xref:create-server.adoc#configure-authentication[create-server.adoc].
+
+== Worked examples
+
+* xref:managed/slack.adoc[] — consumer-facing user-delegated OAuth example. Shows the consent flow against a real Slack workspace.
+* xref:managed/jira.adoc[] — enterprise user-delegated OAuth example. Atlassian's OAuth flow differs from Slack's; this page calls out scope-management gotchas.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|"OAuth provider not found"
+|The provider name on the server doesn't match an OAuth Provider in the ADP UI. Check spelling and that the provider exists.
+
+|"HTTPS required" on save (self-managed only)
+|User-delegated OAuth requires `https://` URLs on the MCP server (proto rule `remote_mcp.user_oauth_requires_https`). Switch the server's URL to HTTPS.
+
+|`OAuthConnectionRequired` returned even after the user consented
+|The user's vault entry might have been revoked or the token expired with no refresh. Have the user re-consent through *My Connections*.
+
+|`scope_upgrade_required` returned
+|The required scopes on the server changed (or the user originally consented with fewer scopes). The user re-consents with the higher scope.
+
+|*My Connections* shows stale entries
+|Connections persist until manually revoked. Have the user remove and re-add the connection if upstream credentials changed.
+|===
+
+== Out of scope
+
+* *Configuring an OAuth Provider* — separate workflow under the *OAuth Providers* section.
+* *Service-account OAuth setup* — see xref:create-server.adoc#configure-authentication[create-server.adoc].
+* *Token vault internals* — Redpanda manages the vault; users see their own connections under *My Connections*, but the underlying storage isn't user-configurable.

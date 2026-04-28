@@ -103,7 +103,7 @@ Use get_shipping_info when:
 
 **Prevention:**
 
-* Follow tool design patterns in xref:mcp:remote/patterns.adoc[]
+* Follow tool design patterns in xref:mcp:index.adoc[]
 * Limit each agent to 10-15 tools maximum
 * Test boundary cases where multiple tools might apply
 
@@ -484,5 +484,5 @@ For comprehensive guidance on monitoring agent activity, analyzing conversation 
 
 * xref:system-prompts.adoc[]
 * xref:concepts.adoc[]
-* xref:mcp:remote/patterns.adoc[]
+* xref:mcp:index.adoc[]
 * xref:architecture-patterns.adoc[]

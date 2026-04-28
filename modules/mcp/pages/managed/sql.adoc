@@ -1,0 +1,112 @@
+= SQL Managed MCP Server
+:description: Query SQL databases — Postgres, MySQL, ClickHouse, MSSQL, SQLite — through a managed MCP server hosted by Redpanda.
+:page-topic-type: how-to
+:personas: platform_admin, app_developer
+:learning-objective-1: Configure the SQL managed MCP server for your database
+:learning-objective-2: Run a canonical SELECT query through the Inspector
+:learning-objective-3: Pick the right authentication and connection-string pattern for your database
+
+include::ROOT:partial$adp-la.adoc[]
+
+The SQL managed MCP server gives agents read access to a SQL database through MCP. Redpanda runs the server in-process; you provide a connection string and credentials.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+Redpanda's SQL managed type proxies queries to one of these database engines:
+
+* PostgreSQL
+* MySQL / MariaDB
+* ClickHouse
+* Microsoft SQL Server
+* SQLite
+
+It exposes a small set of tools for querying schemas and running parameterized queries.
+
+// TODO: lift the exact tool list and per-tool descriptions from `proto/mcps/redpanda/mcps/sql/v1/` once verified against `adp-production`.
+
+== Prerequisites
+
+* A SQL database reachable from the Agentic Data Plane.
++
+// TODO: confirm network reachability requirements (egress / VPC peering / public endpoint) for the standalone ADP product surface.
+* A connection string or the connection components (host, port, database, user).
+* A secret in the ADP secret store containing the database password (`UPPER_SNAKE_CASE`, for example `SQL_PASSWORD`).
+
+== Configure
+
+. Open *MCP Servers > Create Server*.
+. Pick *SQL* from the marketplace picker.
+. Fill in the identity fields (`name`, `description`).
+. In the SQL configuration form, provide:
++
+// TODO: enumerate exact fields from `proto/mcps/redpanda/mcps/sql/v1/sql_config.proto` — driver, DSN/connection-string format, query timeout, read-vs-write-tool split, max rows.
++
+* *Driver* — Postgres, MySQL, ClickHouse, MSSQL, or SQLite.
+* *Connection string* — driver-specific.
+* *Password reference* — `UPPER_SNAKE_CASE` secret reference.
+* *Query timeout* (optional).
+. Click *Create*.
+
+// TODO: screenshot of the SQL form filled in for a Postgres example on `adp-production`.
+
+== Test
+
+After create, exercise the server through the Inspector tab. See xref:../test-tools.adoc[].
+
+A canonical first call:
+
+. Open the *Inspector* tab.
+. In *Tools*, select the schema-listing tool (likely `list_tables` or similar).
++
+// TODO: confirm exact tool name from the proto's service definition.
+. Run with no arguments. Confirm a list of tables comes back.
+. Select the query tool. Run `SELECT 1` (or your driver's equivalent). Confirm a single-row response.
+
+== Authentication
+
+The SQL managed type supports:
+
+* *None* — only useful for local SQLite without auth.
+* *Static key* — most common; the password lives in a secret reference.
+
+User-delegated OAuth and service-account OAuth are *not* supported for SQL — there's no per-user identity model that maps to a database password.
+
+// TODO: confirm exact auth modes the SQL type registers in its `register_mcp.go` once an auth-mode list is exposed on `ManagedMCPType`.
+
+== Use with agents
+
+Once the SQL server is created, point an agent at the *API URL* on the server's detail page. The agent sees the SQL tools alongside any other MCP servers it has access to.
+
+// TODO: link the Agents docs section that walks through wiring an MCP server into an agent definition.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`connection refused` from create
+|Database isn't reachable from ADP. Confirm host, port, and any egress / firewall rules.
+
+|`authentication failed for user`
+|Password reference points at the wrong secret, or the secret content is wrong. Re-create the secret with `UPPER_SNAKE_CASE` and verify it.
+
+|Query timeout
+|Long-running queries exceed the configured timeout. Either tighten the query or raise the timeout on the server config.
+
+|Tools list returns empty
+|The driver couldn't introspect the schema. Verify the user has read access to `information_schema` (Postgres/MySQL) or the equivalent.
+|===
+
+// TODO: gather more failure modes once we walk SQL on `adp-production`.
+
+== Out of scope
+
+* *Schema migrations* — this server is read/query-focused; running DDL is not the intended use.
+* *Per-user database identities* — see <<authentication>>.

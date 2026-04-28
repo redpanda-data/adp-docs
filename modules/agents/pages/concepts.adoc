@@ -132,7 +132,7 @@ Tool design affects agent behavior. Coarse-grained tools that do many things res
 
 Choose granularity based on how often you'll reuse tool logic across workflows, whether intermediate results help with debugging, and how much control you want over tool invocation order.
 
-For tool design guidance, see xref:mcp:remote/best-practices.adoc[].
+For tool design guidance, see xref:mcp:index.adoc[].
 
 == Context and state management
 
@@ -159,4 +159,4 @@ include::ROOT:partial$service-account-authorization.adoc[]
 * xref:architecture-patterns.adoc[]
 * xref:quickstart.adoc[]
 * xref:system-prompts.adoc[]
-* xref:mcp:remote/best-practices.adoc[]
+* xref:mcp:index.adoc[]
