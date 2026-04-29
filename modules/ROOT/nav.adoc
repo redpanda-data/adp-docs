@@ -45,7 +45,9 @@
 *** For Builders
 **** xref:ai-gateway:builders/discover-gateways.adoc[Discover gateways]
 * xref:governance:index.adoc[Trust & Governance]
-** xref:governance:dashboard.adoc[Governance dashboard]
+** xref:governance:dashboard/index.adoc[Governance dashboard]
+*** xref:governance:dashboard/agent-network.adoc[Agent network]
+*** xref:governance:dashboard/violations.adoc[Authorization denials and violations]
 ** Guardrails
 *** xref:governance:guardrails/index.adoc[Overview]
 *** xref:governance:guardrails/create-guardrail.adoc[Create a guardrail]
