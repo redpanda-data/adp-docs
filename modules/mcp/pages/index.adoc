@@ -74,7 +74,3 @@ The Agentic Data Plane UI has four top-level areas:
 . *Wire up user-delegated OAuth* if your users should authenticate against the upstream system with their own credentials. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
 . *Register an existing server* you already run yourself. See xref:register-remote.adoc[Register a self-managed server].
 . *Browse the managed catalog* for the full list of types, their categories, and per-type configuration links. See xref:managed-catalog.adoc[Managed catalog].
-
-== Redpanda Cloud Management MCP Server
-
-Redpanda also publishes a separate, locally-installed MCP server for managing Redpanda Cloud resources — glossterm:cluster[,clusters], glossterm:topic[,topics], glossterm:acl[,ACLs] — from your AI development environment. It is not an Agentic Data Plane resource and does not appear in the MCP Servers list. To install it, see xref:local/index.adoc[Redpanda Cloud Management MCP Server].

@@ -32,10 +32,6 @@
 *** xref:mcp:managed/slack.adoc[Slack]
 *** xref:mcp:managed/jira.adoc[Jira]
 *** xref:mcp:managed/openapi.adoc[OpenAPI]
-* Redpanda Cloud Management MCP Server
-** xref:mcp:local/index.adoc[Overview]
-** xref:mcp:local/quickstart.adoc[Quickstart]
-** xref:mcp:local/configuration.adoc[Configuration]
 * xref:ai-gateway:index.adoc[AI Gateway]
 ** xref:ai-gateway:overview.adoc[Overview]
 ** xref:ai-gateway:gateway-quickstart.adoc[Quickstart]
