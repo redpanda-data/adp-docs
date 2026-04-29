@@ -1,195 +1,123 @@
-= What is an AI Gateway?
-:page-aliases: redpanda-cloud:ai-agents:ai-gateway/what-is-ai-gateway.adoc
-:description: Understand how AI Gateway keeps AI-powered apps highly available across providers and prevents runaway AI spend with centralized cost governance.
-:page-topic-type: concept
-:personas: evaluator, app_developer, platform_admin
-:learning-objective-1: Explain how AI Gateway keeps AI-powered apps highly available through governed provider failover
-:learning-objective-2: Describe how AI Gateway prevents runaway AI spend with centralized budget controls and tenancy-based governance
-:learning-objective-3: Identify when AI Gateway fits your use case based on availability requirements, cost governance needs, and multi-provider or MCP tool usage
+= AI Gateway Overview
+:description: AI Gateway is Redpanda's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
+:page-topic-type: overview
+:personas: platform_admin, app_developer, evaluator
+:page-aliases: redpanda-cloud:ai-agents:ai-gateway/what-is-ai-gateway.adoc, redpanda-cloud:ai-agents:ai-gateway/gateway-architecture.adoc, redpanda-cloud:ai-agents:ai-gateway/cel-routing-cookbook.adoc, redpanda-cloud:ai-agents:ai-gateway/mcp-aggregation-guide.adoc, redpanda-cloud:ai-agents:ai-gateway/builders/discover-gateways.adoc
+:learning-objective-1: Describe what AI Gateway is and how a managed proxy differs from direct upstream calls
+:learning-objective-2: Explain how LLM providers, secrets, and OIDC authentication fit together in AI Gateway
+:learning-objective-3: Identify use cases where AI Gateway fits, and use cases where it does not
 
 include::ROOT:partial$adp-la.adoc[]
 
-Redpanda AI Gateway keeps your AI-powered applications highly available and your AI spend under control. It sits between your applications and the LLM providers and AI tools they depend on. If a provider goes down, the gateway provides automatic failover to keep your apps running. It also offers centralized budget controls to prevent runaway costs. For platform teams, it adds governance at the model-fallback level, tenancy modeling for teams, individuals, apps, and service accounts, and a single proxy layer for both LLM models and glossterm:MCP server[,MCP servers].
+AI Gateway is Redpanda's managed proxy for LLM APIs. Instead of giving every application a provider API key and letting it call the upstream directly, you create an *LLM provider* in Redpanda Cloud and point your applications at a Redpanda-hosted proxy URL. Redpanda handles the upstream credentials, forwards the request, and records usage. Your code continues to use the provider's native SDK.
 
-== The problem
+After reading this page, you will be able to:
 
-Modern AI applications face two business-critical challenges: staying up and staying on budget.
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
 
-First, applications typically hardcode provider-specific SDKs. An application using OpenAI's SDK cannot easily switch to Anthropic or Google without code changes and redeployment. When a provider hits rate limits, suffers an outage, or degrades in performance, your application goes down with it. Your end users don't care which provider you use; they care that the app works.
+== The problem AI Gateway solves
 
-Second, costs can spiral without centralized controls. Without a single view of token consumption across teams and applications, it's difficult to attribute costs to specific customers, features, or environments. Testing and debugging can generate unexpected bills, and there's no way to enforce budgets or rate limits per team, application, or service account. The result: runaway spend that finance discovers only after the fact.
+Teams adopting LLMs can quickly hit operational problems:
 
-These two challenges are compounded by fragmented observability across provider dashboards, which makes it harder to detect availability issues or cost anomalies in time to act. And as organizations adopt glossterm:AI agent[,AI agents] that call glossterm:MCP tool[,MCP tools], the lack of centralized tool governance adds another dimension of uncontrolled cost and risk.
+* *Credential sprawl:* Every team that touches an LLM gets its own API key. Rotation is manual, offboarding is manual, and it's hard to know who's using what.
+* *SDK lock-in and switching cost:* Each provider has its own SDK, auth scheme, and model catalog. Swapping OpenAI for Anthropic means a code change, not a configuration change.
+* *No shared view of usage:* Provider dashboards tell you what a single API key spent. They don't tell you what your organization spent, broken down by team or application.
 
-== What AI Gateway solves
+== What AI Gateway gives you
 
-Redpanda AI Gateway delivers two core business outcomes, high availability and cost governance, backed by platform-level controls that set it apart from simple proxy layers.
+AI Gateway consolidates provider access behind the following capabilities.
 
-=== High availability through governed failover
+=== Traffic stays in your VPC
 
-Your end users don't care whether you use OpenAI, Anthropic, or Google: they care that your app stays up. AI Gateway lets you configure provider pools with automatic failover, so when your primary provider hits rate limits, times out, or returns errors, the gateway routes requests to a fallback provider with no code changes and no downtime for your users.
+LLM requests are proxied through your dataplane's AI Gateway. API keys are stored in your dataplane's secret store and never leave your infrastructure. Upstream calls leave your VPC only when the LLM provider is third-party (OpenAI, Anthropic, Google AI); self-hosted OpenAI-compatible endpoints stay entirely inside your network.
 
-Unlike simple retry logic, AI Gateway provides governance at the failover level: you define which providers fail over to which, under what conditions, and with what priority. This controlled failover can significantly improve uptime even during extended provider outages.
+=== Centralized secrets
 
-=== Cost governance and budget controls
+The upstream API key (or AWS credentials for Bedrock) lives in the Redpanda secret store and is attached to the provider at configuration time. Your application never sees it; rotation happens in one place.
 
-AI Gateway gives you centralized fiscal control over AI spend. Set monthly budget caps for each gateway, enforce them automatically, and set rate limits per team, environment, or application. No more runaway costs discovered after the fact.
+=== A managed proxy URL per provider
 
-You can route requests to different models based on user attributes. For example, to direct premium users to a more capable model while routing free tier users to a cost-effective option, use a CEL expression. For example:
+Every provider you create has its own URL of the form `<gateway-base>/llm/v1/providers/<provider-name>/<upstream-path>`. Your application points its SDK at this URL instead of the upstream, continues to use the provider's native API, and authenticates to Redpanda with a short-lived OIDC access token. The gateway base is a cluster-specific subdomain (for example, `aigw.<cluster-id>.clusters.rdpa.co`); copy the exact value from the *Proxy URL* field on any provider's detail page.
 
-[source,cel]
-----
-// Route premium users to best model, free users to cost-effective model
-request.headers["x-user-tier"] == "premium"
-  ? "anthropic/claude-opus-4.6"
-  : "anthropic/claude-sonnet-4.5"
-----
+=== Native SDK compatibility
 
-You can also set different rate limits and spend limits for each environment to prevent staging or development traffic from consuming production budgets.
+Use the provider's own SDK: OpenAI, Anthropic, Google AI, AWS Bedrock, or any OpenAI-compatible client (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). AI Gateway does not require a single unified SDK; it forwards native requests to the native upstream.
 
-=== Tenancy and access governance
+=== Managed authentication
 
-AI Gateway provides multi-tenant isolation by design. Create separate gateways for teams, individual developers, applications, or service accounts, each with their own budgets, rate limits, routing policies, and observability scope. This tenancy model lets platform teams govern who uses what, how much they spend, and which models and tools they can access, without building custom authorization layers.
+Applications authenticate to Redpanda with OIDC service accounts instead of long-lived provider API keys. Service accounts live in Redpanda Cloud IAM, follow the same role and audit model as every other resource, and mint short-lived tokens that are easy to revoke. The recommended local flow uses the `rpai` CLI for token refresh; CI and programmatic clients use the OIDC client-credentials grant directly. See xref:connect-agent.adoc[Connect your agent].
 
-=== Unified LLM access (single endpoint for all providers)
+=== Per-provider observability
 
-AI Gateway provides a single OpenAI-compatible endpoint that routes requests to multiple LLM providers. Instead of integrating with each provider's SDK separately, you configure your application once and switch providers by changing only the model parameter.
+The provider's detail page in the Cloud UI records request and token counts. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
 
-Without AI Gateway, you need different SDKs and patterns for each provider:
+== What's in the UI
 
-[source,python]
-----
-# OpenAI
-from openai import OpenAI
-client = OpenAI(api_key="sk-...")
-response = client.chat.completions.create(
-    model="gpt-5.2",
-    messages=[{"role": "user", "content": "Hello"}]
-)
+// TODO: this guide describes the cluster-embedded view available today on cloud.redpanda.com. The standalone-ADP UI launches as a separate product surface; sign-in URL, IAM model, and sidebar layout will change. Update this section once standalone ADP ships.
 
-# Anthropic (different SDK, different patterns)
-from anthropic import Anthropic
-client = Anthropic(api_key="sk-ant-...")
-response = client.messages.create(
-    model="claude-sonnet-4.5",
-    max_tokens=1024,
-    messages=[{"role": "user", "content": "Hello"}]
-)
-----
+In Redpanda Cloud, open your cluster and expand the *ADP* section in the sidebar. You'll see four sub-items:
 
-With AI Gateway, you use the OpenAI SDK for all providers:
+* *LLM Providers*: Create, edit, enable, and delete providers. This is the home of AI Gateway configuration.
+* *MCP Servers*: Register glossterm:MCP[] tool servers for agents. Separate from the AI Gateway proxy URL.
+* *OAuth Providers*: Register OAuth providers for user-delegated flows (for example, GitHub or Google).
+* *My Connections*: Per-user OAuth token management.
 
-[source,python]
-----
-from openai import OpenAI
+LLM Providers is where you'll spend most of your time. The other three are covered by their own docs.
 
-# Single configuration, multiple providers
-client = OpenAI(
-    base_url="<your-gateway-endpoint>",
-    api_key="your-redpanda-token",
-)
+== Supported providers
 
-# Route to OpenAI
-response = client.chat.completions.create(
-    model="openai/gpt-5.2",
-    messages=[{"role": "user", "content": "Hello"}]
-)
+AI Gateway supports five provider types. The UI labels and short descriptions match the picker on the *Create LLM provider* page.
 
-# Route to Anthropic (same code, different model string)
-response = client.chat.completions.create(
-    model="anthropic/claude-sonnet-4.5",
-    messages=[{"role": "user", "content": "Hello"}]
-)
+[cols="1,3"]
+|===
+|Type |Typical upstream
 
-# Route to Google Gemini (same code, different model string)
-response = client.chat.completions.create(
-    model="google/gemini-2.0-flash",
-    messages=[{"role": "user", "content": "Hello"}]
-)
-----
+|*OpenAI*
+|Proxy GPT, o-series, and embeddings through the OpenAI API. Best when you already hold an OpenAI API key or want the broadest GPT model catalog.
 
-To switch providers, you change only the `model` parameter from `openai/gpt-5.2` to `anthropic/claude-sonnet-4.5`. No code changes or redeployment needed.
+|*Anthropic*
+|Call Claude Opus, Sonnet, and Haiku directly. Optionally forwards the client's `Authorization` header for enterprise and Max-plan subscription passthrough.
 
-=== Proxy for LLM models and MCP servers
+|*Google AI*
+|Reach Gemini Pro, Flash, and multimodal models via Google AI Studio. Ideal for long-context workloads and image/video inputs.
 
-AI Gateway acts as a single proxy layer for both LLM model requests and MCP servers. For LLM traffic, it provides a unified endpoint. For AI agents that use MCP tools, it aggregates multiple MCP servers and provides deferred tool loading, which dramatically reduces token costs.
+|*AWS Bedrock*
+|Invoke foundation models (Claude, Llama, Titan, Nova) hosted inside your AWS account. Use when data residency, IAM, or VPC egress matter more than raw feature parity. Signed with SigV4 server-side by AI Gateway.
 
-Without AI Gateway, agents typically load all available MCP tools from multiple MCP servers at startup. This approach sends 50+ tool definitions with every request, creating high token costs (thousands of tokens per request), slow agent startup times, and no centralized governance over which tools agents can access.
+|*OpenAI-compatible*
+|Point at any OpenAI-compatible endpoint (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways that ship `/v1/chat/completions`.
+|===
 
-With AI Gateway, you configure approved MCP servers once, and the gateway loads only search and orchestrator tools initially. Agents query for specific tools only when needed, which often reduces token usage by 80-90% depending on your configuration and the number of tools aggregated. You also gain centralized approval and governance over which MCP servers your agents can access.
-
-For complex workflows, AI Gateway provides a JavaScript-based orchestrator tool that reduces multi-step workflows from multiple round trips to a single call. For example, you can create a workflow that searches a vector database and, if the results are insufficient, falls back to web search—all in one orchestration step.
-
-=== Unified observability and cost tracking
-
-AI Gateway provides a single dashboard that tracks all LLM traffic across providers, eliminating the need to switch between multiple provider dashboards.
-
-The dashboard tracks request volume for each gateway, model, and provider, along with token usage for both prompt and completion tokens. You can view estimated spend per model with cross-provider comparisons, latency metrics (p50, p95, p99), and errors broken down by type, provider, and model.
-
-This unified view helps you answer critical questions such as which model is the most cost-effective for your use case, why a specific user request failed, how much your staging environment costs each week, and what the latency difference is between providers for your workload.
-
-ifdef::ai-hub-available[]
-== Gateway modes
-
-AI Gateway supports two modes to accommodate different organizational needs:
-
-*AI Hub Mode* provides zero-configuration access with pre-configured backend pools and intelligent routing. Platform admins simply add provider credentials (OpenAI, Anthropic, Google Gemini), and all teams immediately benefit from 17 routing rules and 6 backend pools. Users can toggle preferences like vision routing or long-context routing, but the underlying architecture is managed by Redpanda. This mode eliminates the complexity of LLM gateway configuration. IT adds API keys once, and all teams benefit immediately.
-
-*Custom Mode* provides full control over routing rules, backend pools, rate limits, and policies. Admins configure every aspect of the gateway to meet specific requirements. This mode is ideal when you need custom routing logic based business rules, specific failover behavior, or integration with custom infrastructure like Azure OpenAI or AWS Bedrock.
-
-To understand which mode fits your use case, see xref:gateway-modes.adoc[].
-endif::[]
-
-== Common gateway patterns
-
-Some common patterns for configuring gateways include:
-
-* *Team isolation*: When multiple teams share infrastructure but need separate budgets and policies, create one gateway for each team. For example, you might configure Team A's gateway with a $5K/month budget for both staging and production environments, while Team B's gateway has a $10K/month budget with different rate limits. Each team sees only their own traffic in the observability dashboards, providing clear cost attribution and isolation.
-* *Environment separation*: To prevent staging traffic from affecting production metrics, create separate gateways for each environment. Configure the staging gateway with lower rate limits, restricted model access, and aggressive cost controls to prevent runaway expenses. The production gateway can have higher rate limits, access to all models, and alerting configured to detect anomalies.
-* *Primary and fallback for reliability*: To ensure uptime during provider outages, configure provider pools with automatic failover. For example, you can set OpenAI as your primary provider (preferred for quality) and configure Anthropic as the fallback that activates when the gateway detects rate limits or timeouts from OpenAI. Monitor the fallback rate to detect primary provider issues early, before they impact your users.
-* *A/B testing models*: To compare model quality and cost without dual integration, route a percentage of traffic to different models. For example, you can send 80% of traffic to `claude-sonnet-4.5` and 20% to `claude-opus-4.6`, then compare quality metrics and costs in the observability dashboard before adjusting the split.
-* *Customer-based routing*: For SaaS products with tiered pricing (for example, free, pro, enterprise), use CEL routing based on request headers to match users with appropriate models:
-
-=== Customer-based routing
-
-For SaaS products with tiered pricing (for example, free, pro, enterprise), use CEL routing based on request headers to match users with appropriate models:
-
-[source,cel]
-----
-request.headers["x-customer-tier"] == "enterprise" ? "anthropic/claude-opus-4.6" :
-request.headers["x-customer-tier"] == "pro" ? "anthropic/claude-sonnet-4.5" :
-"anthropic/claude-haiku"
-----
+See xref:configure-provider.adoc[Configure an LLM provider] for the full form reference for each type.
 
 == When to use AI Gateway
 
-AI Gateway is ideal for organizations that:
+AI Gateway is a good fit when you want to:
 
-* Use or plan to use multiple LLM providers
-* Need centralized cost tracking and budgeting
-* Want to experiment with different models without code changes
-* Require high availability during provider outages
-* Have multiple teams or customers using AI services
-* Build AI agents that need MCP tool aggregation
-* Need unified observability across all AI traffic
+* Pull provider API keys out of application code and manage them centrally.
+* Keep LLM traffic inside your dataplane's VPC and your secrets out of application code.
+* Authenticate applications to LLMs using the same OIDC identity you use for other Redpanda Cloud resources.
+* Run a self-hosted OpenAI-compatible endpoint (vLLM, Ollama, LM Studio) alongside 1P providers behind a single management plane.
+* Separate operator and developer roles. Operators configure providers and credentials; developers point at proxy URLs.
 
-AI Gateway may not be necessary if:
+It is not the right fit when you:
 
-* You only use a single provider with simple requirements
-* You have minimal AI traffic (< 1000 requests/day)
-* You don't need cost tracking or policy enforcement
-* Your application doesn't require provider switching
+* Only ever call a single provider with a single API key and are happy managing that key inline.
+* Need routing, failover, or cross-provider load balancing across providers. AI Gateway does not provide these capabilities.
+
+[[out-of-scope]]
+== Out of scope
+
+AI Gateway does not provide these capabilities. For current status, consult the Redpanda Cloud release notes.
+
+* *Multi-provider routing, failover, and retries.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
+* *Spend limits.* Per-user, per-org, and global cost caps are not available. The provider detail page shows a *Cost & usage* placeholder labeled "Coming soon"; see xref:governance:budgets.adoc[Token budgets and limits] for the read-only spending visibility shipping at GA.
+* *Rate limits.* Requests-per-second, per-minute, or per-day caps are not available.
+* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *ADP* → *MCP Servers*.
 
 == Next steps
 
-* xref:gateway-quickstart.adoc[Gateway Quickstart] - Get started quickly with a basic gateway setup
-
-*For Administrators:*
-
-* xref:admin/setup-guide.adoc[Setup Guide] - Enable providers, models, and create gateways
-* xref:gateway-architecture.adoc[Architecture Deep Dive] - Technical architecture details
-
-*For Builders:*
-
-* xref:builders/discover-gateways.adoc[Discover Available Gateways] - Find which gateways you can access
-* xref:connect-agent.adoc[Connect Your Agent] - Integrate your application
+. xref:configure-provider.adoc[Configure an LLM provider]. Create your first provider and copy its proxy URL.
+. xref:connect-agent.adoc[Connect your agent]. Point your application's SDK at the proxy URL.
