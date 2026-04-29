@@ -6,8 +6,6 @@
 :learning-objective-2: Apply tool orchestration patterns to handle multi-step workflows
 :learning-objective-3: Evaluate how system prompt design affects agent tool selection
 
-include::ROOT:partial$adp-la.adoc[]
-
 This tutorial shows you how to build a customer support agent to learn how agents orchestrate multiple tools, make context-aware decisions, and handle incomplete data.
 
 After completing this tutorial, you will be able to:

@@ -3,8 +3,6 @@
 :page-topic-type: reference
 :personas: app_developer, platform_admin
 
-include::ROOT:partial$adp-la.adoc[]
-
 Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in the ADP UI and pick the type from the marketplace picker. See xref:create-server.adoc[Create an MCP Server] for the full create flow.
 
 This catalog lists every managed type currently registered, grouped by `ManagedMCPCategory`. Display names and descriptions are lifted verbatim from the type registrations in `cloudv2`.

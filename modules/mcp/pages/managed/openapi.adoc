@@ -6,8 +6,6 @@
 :learning-objective-2: Pick the right authentication mode for the upstream API
 :learning-objective-3: Verify generated tools through the Inspector
 
-include::ROOT:partial$adp-la.adoc[]
-
 The *OpenAPI* managed MCP server is the "bring your own API" escape hatch. Hand it an OpenAPI 3 (or Swagger 2) spec, and it generates one MCP tool per operation in the spec. No custom code, no per-API managed type — useful when the API you want to expose is not in the catalog.
 
 After completing this guide, you will be able to:

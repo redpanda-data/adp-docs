@@ -7,8 +7,6 @@
 :learning-objective-2: Select the models you want to expose through the provider
 :learning-objective-3: Verify the provider is reachable using the built-in Test Connection control
 
-include::ROOT:partial$adp-la.adoc[]
-
 An LLM provider is the primary resource in AI Gateway. When you create one, Redpanda gives you a managed proxy URL that your applications can point at: Redpanda handles the upstream API keys, forwards requests to the provider, and records usage for you. This guide walks you through creating a provider for each supported upstream.
 
 After completing this guide, you will be able to:

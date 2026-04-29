@@ -1,0 +1,3 @@
+= Integrations
+:description: Connect ADP-managed LLM providers and MCP servers to AI development environments such as Claude Code, Cursor, Continue, Cline, and GitHub Copilot.
+:page-layout: index

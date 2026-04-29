@@ -6,8 +6,6 @@
 :learning-objective-2: Produce a test message through the Inspector and consume it back
 :learning-objective-3: Pick the right authentication mode for your broker (PLAIN / SCRAM / mTLS / OAuth)
 
-include::ROOT:partial$adp-la.adoc[]
-
 The *Kafka* managed MCP server gives agents read and write access to topics on either an Apache Kafka cluster or a Redpanda cluster — the same protocol, the same tools. Despite the name, it works against any Kafka-compatible broker.
 
 After completing this guide, you will be able to:

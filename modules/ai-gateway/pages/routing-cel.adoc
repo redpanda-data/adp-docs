@@ -7,8 +7,6 @@
 :learning-objective-2: Test CEL routing logic using the UI editor or test requests
 :learning-objective-3: Troubleshoot common CEL errors using safe patterns
 
-include::ROOT:partial$adp-la.adoc[]
-
 Redpanda AI Gateway uses CEL (Common Expression Language) for dynamic request routing. CEL expressions evaluate request properties (headers, body, context) and determine which model or provider should handle each request.
 
 CEL enables:

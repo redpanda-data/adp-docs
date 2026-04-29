@@ -7,8 +7,6 @@
 :learning-objective-2: Locate where to view spend in the dashboard, in transcripts, and through breakdown queries
 :learning-objective-3: Recognize which cap-management capabilities ship at GA versus arrive in a later release
 
-include::ROOT:partial$adp-la.adoc[]
-
 The Agentic Data Plane records every LLM call as a spending event the moment your first agent or MCP server runs through the gateway. The current release lets you read that data — through the governance dashboard, through individual transcripts, and through breakdown queries by provider, model, user, organization, or provider type. Configurable caps, halt-vs-notify enforcement, alerts, and per-tenant cap-setting arrive in a later release.
 
 After reading this page, you will be able to:

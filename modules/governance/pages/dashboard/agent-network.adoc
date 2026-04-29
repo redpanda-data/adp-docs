@@ -4,8 +4,6 @@
 :personas: platform_admin
 // TODO: confirm persona vocabulary. PRD names HoT (Head of Trust) and CISO as primary readers for the topology graph; using canonical `platform_admin` until docs-team-standards confirms whether to add `security_admin` or equivalent.
 
-include::ROOT:partial$adp-la.adoc[]
-
 [NOTE]
 ====
 *Coming at GA (2026-06-15).* The Agent Network sub-page ships in V1 of the governance dashboard. The V0 release (2026-05-15) covers the xref:dashboard/index.adoc[overview] only.
