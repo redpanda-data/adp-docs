@@ -1,5 +1,5 @@
 = MCP Servers Overview
-:description: Connect AI agents to your databases, queues, CRMs, and other business systems through MCP servers — fully managed types Redpanda hosts for you, or your own self-managed servers proxied through the Agentic Data Plane.
+:description: Connect AI agents to your databases, queues, CRMs, and other business systems through MCP servers, including fully managed types Redpanda hosts for you and self-managed servers proxied through the Agentic Data Plane.
 :page-topic-type: overview
 :personas: evaluator, app_developer, platform_admin
 
@@ -72,4 +72,4 @@ The Agentic Data Plane UI has four top-level areas:
 . *Test what you built.* xref:test-tools.adoc[Test a server's tools] uses the Inspector tab to call tools, resources, and prompts live.
 . *Wire up user-delegated OAuth* if your users should authenticate against the upstream system with their own credentials. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
 . *Register an existing server* you already run yourself. See xref:register-remote.adoc[Register a self-managed server].
-. *Browse the managed catalog* for the full list of types, their categories, and per-type configuration links. See xref:managed-catalog.adoc[Managed catalog].
+. *Browse the managed catalog* for the full list of types, their categories, and per-type configuration links. See xref:managed/managed-catalog.adoc[Managed catalog].

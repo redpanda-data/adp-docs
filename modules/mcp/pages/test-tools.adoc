@@ -1,5 +1,5 @@
 = Test an MCP Server's Tools with the Inspector
-:description: Use the Inspector tab to call tools, inspect resources and prompts, and verify your MCP server works — without standing up an agent.
+:description: Use the Inspector tab to call tools, inspect resources and prompts, and verify your MCP server works without standing up an agent.
 :page-topic-type: how-to
 :personas: app_developer
 :learning-objective-1: Run an MCP tool from the Inspector and read its response

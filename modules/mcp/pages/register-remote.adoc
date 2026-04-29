@@ -1,5 +1,5 @@
 = Register a Self-Managed MCP Server
-:description: Front your own MCP server with a managed Redpanda URL — pick a transport, configure authentication, and let agents discover the server's tools through Redpanda.
+:description: Front your own MCP server with a managed Redpanda URL. Pick a transport, configure authentication, and let agents discover the server's tools through Redpanda.
 :page-topic-type: how-to
 :personas: platform_admin
 :learning-objective-1: Register a self-managed MCP server in the ADP UI
@@ -22,7 +22,7 @@ Choose self-managed registration when:
 * You need custom tool logic that no managed type provides.
 * You want a unified MCP URL (and Inspector / observability / agent access) across servers without standing up your own gateway.
 
-If you don't already run a server, prefer a managed type — see xref:managed-catalog.adoc[Managed catalog] for the catalog.
+If you don't already run a server, prefer a managed type — see xref:managed/managed-catalog.adoc[Managed catalog] for the catalog.
 
 == Prerequisites
 

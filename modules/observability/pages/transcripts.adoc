@@ -194,4 +194,4 @@ For long-running conversations, accept some reconstruction; for short conversati
 
 * xref:agents:monitor.adoc[]
 * xref:mcp:test-tools.adoc[]
-* xref:agents:troubleshoot.adoc[]
+* xref:agents:troubleshoot/troubleshoot-ai-agents.adoc[]

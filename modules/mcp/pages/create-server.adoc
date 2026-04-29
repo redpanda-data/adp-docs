@@ -1,5 +1,5 @@
 = Create an MCP Server
-:description: Create an MCP server in the Agentic Data Plane — pick a managed type from the marketplace or register a self-managed server you host yourself, then configure authentication, code mode, and access.
+:description: Create an MCP server in the Agentic Data Plane by picking a managed type from the marketplace or registering a self-managed server you host yourself, then configure authentication, code mode, and access.
 :page-topic-type: how-to
 :personas: platform_admin, app_developer
 :learning-objective-1: Create a managed or self-managed MCP server in the ADP UI
@@ -40,7 +40,7 @@ The marketplace picker lists every managed type as a card and includes a *Remote
 
 // TODO: screenshot of the marketplace picker, with both a managed card and the Remote (Proxied) option visible.
 
-For a tour of every managed type and which one fits your use case, see xref:managed-catalog.adoc[Managed catalog]. To go deep on the self-managed path (transport choices, TLS, multi-server aggregation), see xref:register-remote.adoc[Register a self-managed server].
+For a tour of every managed type and which one fits your use case, see xref:managed/managed-catalog.adoc[Managed catalog]. To go deep on the self-managed path (transport choices, TLS, multi-server aggregation), see xref:register-remote.adoc[Register a self-managed server].
 
 == Name and basic fields
 
@@ -71,7 +71,7 @@ Each managed type ships its own configuration schema. The form on this page is r
 
 // TODO: screenshot of the SQL configuration form as the exemplar (it covers the most common field shapes).
 
-For per-type fields, see xref:managed-catalog.adoc[Managed catalog] for one-line entries on every type, and the deep-dive pages for SQL, Kafka, Slack, Jira, and OpenAPI:
+For per-type fields, see xref:managed/managed-catalog.adoc[Managed catalog] for one-line entries on every type, and the deep-dive pages for SQL, Kafka, Slack, Jira, and OpenAPI:
 
 * xref:managed/sql.adoc[SQL]
 * xref:managed/kafka.adoc[Kafka]
@@ -179,4 +179,4 @@ The following capabilities are not configured on this page; see the linked conte
 * *User-delegated OAuth consent flow* — see xref:user-delegated-oauth.adoc[User-delegated OAuth].
 * *Inspector usage* — see xref:test-tools.adoc[Test a server's tools].
 * *Multi-server aggregation* — handled by AI Gateway. See xref:ai-gateway:aggregation.adoc[MCP aggregation].
-* *Per-type configuration depth* — see xref:managed-catalog.adoc[Managed catalog] and the deep-dive pages.
+* *Per-type configuration depth* — see xref:managed/managed-catalog.adoc[Managed catalog] and the deep-dive pages.

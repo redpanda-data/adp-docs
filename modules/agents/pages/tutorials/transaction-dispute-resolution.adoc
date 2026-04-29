@@ -641,7 +641,7 @@ In the transcript details, you'll see:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:troubleshoot.adoc[].
+For comprehensive troubleshooting guidance, see xref:troubleshoot/troubleshoot-ai-agents.adoc[].
 
 === Test with mock data
 

@@ -1,5 +1,5 @@
 = Configure User-Delegated OAuth for an MCP Server
-:description: Have each end-user authenticate against the MCP server's upstream system with their own credentials — Redpanda stores their token in the vault and injects it at call time.
+:description: Have each end-user authenticate against the MCP server's upstream system with their own credentials. Redpanda stores their token in the vault and injects it at call time.
 :page-topic-type: how-to
 :personas: platform_admin, app_developer
 :learning-objective-1: Configure an MCP server to use user-delegated OAuth with a registered OAuth Provider
@@ -21,7 +21,7 @@ After completing this guide, you will be able to:
 // TODO: link the OAuth Provider how-to once it exists.
 * The required scopes for the upstream API you plan to call.
 * For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
-* For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:managed-catalog.adoc[Managed catalog] before configuring.
+* For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:managed/managed-catalog.adoc[Managed catalog] before configuring.
 
 == Configure the server
 

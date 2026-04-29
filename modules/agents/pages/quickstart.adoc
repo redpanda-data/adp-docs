@@ -169,7 +169,7 @@ Try modifying the agent to change its behavior:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:troubleshoot.adoc[].
+For comprehensive troubleshooting guidance, see xref:troubleshoot/troubleshoot-ai-agents.adoc[].
 
 Common quickstart issue:
 

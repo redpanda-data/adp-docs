@@ -276,4 +276,4 @@ Here are example configurations for different agent types:
 * xref:system-prompts.adoc[]
 * xref:mcp:create-server.adoc[]
 * xref:architecture-patterns.adoc[]
-* xref:troubleshoot.adoc[]
+* xref:troubleshoot/troubleshoot-ai-agents.adoc[]
