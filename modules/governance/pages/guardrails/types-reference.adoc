@@ -4,8 +4,6 @@
 :personas: platform_admin
 // TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (e.g., security_admin), apply it here. Open Q D4 in the companion plan.
 
-include::ROOT:partial$adp-la.adoc[]
-
 // TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the per-type config schemas are filled in once eng confirms the post-pivot Guardrail resource shape and the evaluator type set at GA. Open Qs A1, A2, A5, B3, B4 in the companion plan.
 
 Use this reference to:

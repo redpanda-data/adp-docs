@@ -4,8 +4,6 @@
 :personas: platform_admin
 // TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (e.g., security_admin), apply it here. Open Q D4 in the companion plan.
 
-include::ROOT:partial$adp-la.adoc[]
-
 // TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a should-ship deliverable; the cost-pool integration with Budgets fills in once eng confirms whether evaluator cost flows into the user-facing budget pool, a separate guardrail-evaluator pool, or both. Open Qs C2, C3 in the companion plan.
 
 Use this reference to:

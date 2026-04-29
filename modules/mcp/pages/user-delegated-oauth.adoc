@@ -6,8 +6,6 @@
 :learning-objective-2: Walk an end-user through the consent flow and verify the connection
 :learning-objective-3: Troubleshoot scope upgrades, token expiry, and refresh failures
 
-include::ROOT:partial$adp-la.adoc[]
-
 User-delegated OAuth means each end-user authenticates against the MCP server's upstream system (Slack, Jira, Google, …) with their own credentials. Redpanda stores their token in the token vault and injects it at call time. Contrast with service-account OAuth, where one shared identity is used for every caller.
 
 After completing this guide, you will be able to:

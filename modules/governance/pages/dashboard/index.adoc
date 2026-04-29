@@ -7,8 +7,6 @@
 :learning-objective-2: Choose where to focus first based on your role
 :learning-objective-3: Investigate a metric, agent, or event by opening its underlying transcript
 
-include::ROOT:partial$adp-la.adoc[]
-
 The governance overview shows your AI deployment's spending, fleet, and activity on a single page. Every number, agent, and event links to the transcript that produced it, so you can investigate without leaving the dashboard.
 
 After reading this page, you will be able to:

@@ -8,8 +8,6 @@
 :learning-objective-2: Explain how LLM providers, secrets, and OIDC authentication fit together in AI Gateway
 :learning-objective-3: Identify use cases where AI Gateway fits, and use cases where it does not
 
-include::ROOT:partial$adp-la.adoc[]
-
 AI Gateway is Redpanda's managed proxy for LLM APIs. Instead of giving every application a provider API key and letting it call the upstream directly, you create an *LLM provider* in Redpanda Cloud and point your applications at a Redpanda-hosted proxy URL. Redpanda handles the upstream credentials, forwards the request, and records usage. Your code continues to use the provider's native SDK.
 
 After reading this page, you will be able to:

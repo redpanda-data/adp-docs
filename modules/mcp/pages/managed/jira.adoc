@@ -6,8 +6,6 @@
 :learning-objective-2: Pick the right scopes for read-only vs. read-write workflows
 :learning-objective-3: Walk a user through the consent flow and verify the connection
 
-include::ROOT:partial$adp-la.adoc[]
-
 The *Jira* managed MCP server gives agents access to Jira issues, projects, and workflows on behalf of the calling user. It's the enterprise counterpart to xref:managed/slack.adoc[the Slack deep-dive] — both use user-delegated OAuth, but Atlassian's flow has its own scope model and quirks worth calling out.
 
 After completing this guide, you will be able to:

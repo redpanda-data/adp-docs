@@ -6,8 +6,6 @@
 :learning-objective-2: Pick the right transport (SSE vs. Streamable HTTP) and authentication mode
 :learning-objective-3: Confirm tool discovery completed and the server is reachable through its proxy URL
 
-include::ROOT:partial$adp-la.adoc[]
-
 Register your existing MCP server with Redpanda to add authentication, observability, and agent aggregation without changing your server's code. This guide covers the self-managed path from xref:create-server.adoc[Create an MCP Server] in depth — choose this when you already run a server and want Redpanda to proxy it.
 
 After completing this guide, you will be able to:

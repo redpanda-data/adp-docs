@@ -6,8 +6,6 @@
 :learning-objective-2: Configure each authentication mode and pick the right one for your use case
 :learning-objective-3: Save the server, verify the API URL, and confirm tools were discovered
 
-include::ROOT:partial$adp-la.adoc[]
-
 Create MCP servers to give agents structured access to your databases, queues, CRMs, and other business systems. Each server exposes glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] that an agent can discover and invoke. Choose managed types that Redpanda hosts for you, or register self-managed servers you host yourself.
 
 After completing this guide, you will be able to:

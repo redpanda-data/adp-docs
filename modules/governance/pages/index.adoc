@@ -1,0 +1,3 @@
+= Trust & Governance
+:description: Govern agent behavior with guardrails, token budgets, the kill switch, and the governance dashboard.
+:page-layout: index

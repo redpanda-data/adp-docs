@@ -6,8 +6,6 @@
 :learning-objective-2: Run a canonical SELECT query through the Inspector
 :learning-objective-3: Pick the right authentication and connection-string pattern for your database
 
-include::ROOT:partial$adp-la.adoc[]
-
 The SQL managed MCP server gives agents read access to a SQL database through MCP. Redpanda runs the server in-process; you provide a connection string and credentials.
 
 After completing this guide, you will be able to:

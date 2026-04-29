@@ -7,8 +7,6 @@
 :learning-objective-2: Attach the guardrail to one or more LLM providers and enable it
 :learning-objective-3: Verify the guardrail fires and trace the violation through the transcript
 
-include::ROOT:partial$adp-la.adoc[]
-
 // TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the live walkthrough fills in once eng confirms the post-pivot Guardrail resource shape and `aigwctl` (or the ADP UI) is reachable from a sandbox cluster.
 
 This page walks through configuring your first guardrail end-to-end: pick an evaluator type, choose a phase, fill in the per-type config, attach it to LLM providers, and confirm it fires.

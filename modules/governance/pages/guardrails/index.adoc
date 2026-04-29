@@ -7,8 +7,6 @@
 :learning-objective-2: Distinguish between the three evaluator types — PII, Toxicity, and Custom webhook — and the situations each fits
 :learning-objective-3: Recognize where a guardrail violation surfaces and which page to read next
 
-include::ROOT:partial$adp-la.adoc[]
-
 A *guardrail* is a configurable safety or policy filter that runs on the request or response side of every LLM call routed through AI Gateway. Use a guardrail to prevent personally identifiable information (PII) from leaving your organization, filter toxic or off-policy responses before they reach end users, or delegate the decision to a custom webhook that enforces policy your way.
 
 After reading this page, you will be able to:
