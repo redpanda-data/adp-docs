@@ -1,13 +1,13 @@
 = AI Gateway Overview
-:description: AI Gateway is Redpanda's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google Gemini, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
+:description: AI Gateway is Redpanda's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
 :page-topic-type: overview
 :personas: platform_admin, app_developer, evaluator
-:page-aliases: ai-gateway/what-is-ai-gateway.adoc, ai-gateway/gateway-architecture.adoc, ai-gateway/cel-routing-cookbook.adoc, ai-gateway/mcp-aggregation-guide.adoc, ai-gateway/builders/discover-gateways.adoc
+:page-aliases: redpanda-cloud:ai-agents:ai-gateway/what-is-ai-gateway.adoc, redpanda-cloud:ai-agents:ai-gateway/gateway-architecture.adoc, redpanda-cloud:ai-agents:ai-gateway/cel-routing-cookbook.adoc, redpanda-cloud:ai-agents:ai-gateway/mcp-aggregation-guide.adoc, redpanda-cloud:ai-agents:ai-gateway/builders/discover-gateways.adoc
 :learning-objective-1: Describe what AI Gateway is and how a managed proxy differs from direct upstream calls
 :learning-objective-2: Explain how LLM providers, secrets, and OIDC authentication fit together in AI Gateway
 :learning-objective-3: Identify use cases where AI Gateway fits, and use cases where it does not
 
-include::ai-agents:partial$adp-la.adoc[]
+include::ROOT:partial$adp-la.adoc[]
 
 AI Gateway is Redpanda's managed proxy for LLM APIs. Instead of giving every application a provider API key and letting it call the upstream directly, you create an *LLM provider* in Redpanda Cloud and point your applications at a Redpanda-hosted proxy URL. Redpanda handles the upstream credentials, forwards the request, and records usage. Your code continues to use the provider's native SDK.
 
@@ -29,70 +29,75 @@ Teams adopting LLMs can quickly hit operational problems:
 
 AI Gateway consolidates provider access behind the following capabilities.
 
+=== Traffic stays in your VPC
+
+LLM requests are proxied through your dataplane's AI Gateway. API keys are stored in your dataplane's secret store and never leave your infrastructure. Upstream calls leave your VPC only when the LLM provider is third-party (OpenAI, Anthropic, Google AI); self-hosted OpenAI-compatible endpoints stay entirely inside your network.
+
 === Centralized secrets
 
 The upstream API key (or AWS credentials for Bedrock) lives in the Redpanda secret store and is attached to the provider at configuration time. Your application never sees it; rotation happens in one place.
 
 === A managed proxy URL per provider
 
-Every provider you create has its own URL of the form `<gateway-base>/llm/v1/providers/<provider-name>/<upstream-path>`. Your application points its SDK at this URL instead of the upstream, continues to use the provider's native API, and authenticates to Redpanda with a short-lived OIDC access token.
+Every provider you create has its own URL of the form `<gateway-base>/llm/v1/providers/<provider-name>/<upstream-path>`. Your application points its SDK at this URL instead of the upstream, continues to use the provider's native API, and authenticates to Redpanda with a short-lived OIDC access token. The gateway base is a cluster-specific subdomain (for example, `aigw.<cluster-id>.clusters.rdpa.co`); copy the exact value from the *Proxy URL* field on any provider's detail page.
 
 === Native SDK compatibility
 
-Use the provider's own SDK: OpenAI, Anthropic, Google Gemini, AWS Bedrock, or any OpenAI-compatible client (vLLM, Ollama, LM Studio, LocalAI). AI Gateway does not require a single unified SDK; it forwards native requests to the native upstream.
+Use the provider's own SDK: OpenAI, Anthropic, Google AI, AWS Bedrock, or any OpenAI-compatible client (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). AI Gateway does not require a single unified SDK; it forwards native requests to the native upstream.
 
 === Managed authentication
 
-Applications authenticate to Redpanda with OIDC service accounts instead of long-lived provider API keys. Service accounts live in Redpanda Cloud IAM, follow the same role and audit model as every other resource, and mint short-lived tokens that are easy to revoke.
+Applications authenticate to Redpanda with OIDC service accounts instead of long-lived provider API keys. Service accounts live in Redpanda Cloud IAM, follow the same role and audit model as every other resource, and mint short-lived tokens that are easy to revoke. The recommended local flow uses the `rpai` CLI for token refresh; CI and programmatic clients use the OIDC client-credentials grant directly. See xref:connect-agent.adoc[Connect your agent].
 
 === Per-provider observability
 
-The provider's *Overview* tab in the Cloud UI records request and token counts so you can see what each provider is being used for.
+The provider's detail page in the Cloud UI records request and token counts. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
 
 == What's in the UI
 
-// TODO: confirm the standalone ADP UI entry point (URL and sign-in flow) once it's published.
+// TODO: this guide describes the cluster-embedded view available today on cloud.redpanda.com. The standalone-ADP UI launches as a separate product surface; sign-in URL, IAM model, and sidebar layout will change. Update this section once standalone ADP ships.
 
-The ADP UI has four top-level areas:
+In Redpanda Cloud, open your cluster and expand the *ADP* section in the sidebar. You'll see four sub-items:
 
 * *LLM Providers*: Create, edit, enable, and delete providers. This is the home of AI Gateway configuration.
 * *MCP Servers*: Register glossterm:MCP[] tool servers for agents. Separate from the AI Gateway proxy URL.
 * *OAuth Providers*: Register OAuth providers for user-delegated flows (for example, GitHub or Google).
 * *My Connections*: Per-user OAuth token management.
 
-The LLM Providers list is where you spend most of your time. The other three sit alongside and are covered by their own docs.
+LLM Providers is where you'll spend most of your time. The other three are covered by their own docs.
 
 == Supported providers
 
-AI Gateway supports the following provider types:
+AI Gateway supports five provider types. The UI labels and short descriptions match the picker on the *Create LLM provider* page.
 
 [cols="1,3"]
 |===
 |Type |Typical upstream
 
-|OpenAI
-|OpenAI's API, including Azure OpenAI and other OpenAI-hosted endpoints through a custom base URL.
+|*OpenAI*
+|Proxy GPT, o-series, and embeddings through the OpenAI API. Best when you already hold an OpenAI API key or want the broadest GPT model catalog.
 
-|Anthropic
-|Anthropic's API. Optionally forwards the client's `Authorization` header for enterprise and Max-plan subscription passthrough.
+|*Anthropic*
+|Call Claude Opus, Sonnet, and Haiku directly. Optionally forwards the client's `Authorization` header for enterprise and Max-plan subscription passthrough.
 
-|Google (Gemini)
-|Google Generative Language API.
+|*Google AI*
+|Reach Gemini Pro, Flash, and multimodal models via Google AI Studio. Ideal for long-context workloads and image/video inputs.
 
-|AWS Bedrock
-|Foundation models hosted in AWS Bedrock, signed with SigV4 server-side.
+|*AWS Bedrock*
+|Invoke foundation models (Claude, Llama, Titan, Nova) hosted inside your AWS account. Use when data residency, IAM, or VPC egress matter more than raw feature parity. Signed with SigV4 server-side by AI Gateway.
 
-|OpenAI-compatible
-|Any self-hosted endpoint that implements the OpenAI API surface (vLLM, Ollama, LM Studio, LocalAI, or similar).
+|*OpenAI-compatible*
+|Point at any OpenAI-compatible endpoint (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways that ship `/v1/chat/completions`.
 |===
 
-See xref:ai-agents:ai-gateway/configure-provider.adoc[] for the full form reference for each type.
+See xref:configure-provider.adoc[Configure an LLM provider] for the full form reference for each type.
 
 == When to use AI Gateway
 
 AI Gateway is a good fit when you want to:
 
 * Pull provider API keys out of application code and manage them centrally.
+* Keep LLM traffic inside your dataplane's VPC and your secrets out of application code.
 * Authenticate applications to LLMs using the same OIDC identity you use for other Redpanda Cloud resources.
 * Run a self-hosted OpenAI-compatible endpoint (vLLM, Ollama, LM Studio) alongside 1P providers behind a single management plane.
 * Separate operator and developer roles. Operators configure providers and credentials; developers point at proxy URLs.
@@ -108,11 +113,11 @@ It is not the right fit when you:
 AI Gateway does not provide these capabilities. For current status, consult the Redpanda Cloud release notes.
 
 * *Multi-provider routing, failover, and retries.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
-* *Spend limits.* Per-user, per-org, and global cost caps are not available.
+* *Spend limits.* Per-user, per-org, and global cost caps are not available. The provider detail page shows a *Cost & usage* placeholder labeled "Coming soon"; see xref:governance:budgets.adoc[Token budgets and limits] for the read-only spending visibility shipping at GA.
 * *Rate limits.* Requests-per-second, per-minute, or per-day caps are not available.
 * *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *ADP* → *MCP Servers*.
 
 == Next steps
 
-. xref:ai-agents:ai-gateway/configure-provider.adoc[Configure an LLM provider]. Create your first provider and copy its proxy URL.
-. xref:ai-agents:ai-gateway/connect-agent.adoc[Connect your agent]. Point your application's SDK at the proxy URL.
+. xref:configure-provider.adoc[Configure an LLM provider]. Create your first provider and copy its proxy URL.
+. xref:connect-agent.adoc[Connect your agent]. Point your application's SDK at the proxy URL.
