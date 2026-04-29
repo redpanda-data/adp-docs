@@ -1,0 +1,196 @@
+= Managed MCP Server Catalog
+:description: Reference of every managed MCP server type Redpanda hosts in-process — grouped by category, with display name, description, and a link to a deep-dive where one exists.
+:page-topic-type: reference
+:personas: app_developer, platform_admin
+
+include::ROOT:partial$adp-la.adoc[]
+
+Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in the ADP UI and pick the type from the marketplace picker. See xref:create-server.adoc[Create an MCP Server] for the full create flow.
+
+This catalog lists every managed type currently registered, grouped by `ManagedMCPCategory`. Display names and descriptions are lifted verbatim from the type registrations in `cloudv2`.
+
+// TODO: confirm the registered list at GA — counts and category assignments are subject to last-minute adds/renames. Re-verify against `apps/aigw/internal/mcp/managed/mcps/*/register_mcp.go`.
+
+== Choosing managed vs. self-managed
+
+[cols="1,2"]
+|===
+|Question |Choose managed when…
+
+|Who hosts and operates the server?
+|You want Redpanda to host it.
+
+|Where do upstream credentials live?
+|You're happy storing them in the ADP secret store.
+
+|Do you need custom tool logic?
+|The fixed tool set of the managed type covers your use case.
+
+|Do you need per-user identities at the upstream?
+|The managed type supports user-delegated OAuth (Slack, Jira, Google types do; SQL/Kafka don't).
+|===
+
+If any of these answers are "no," prefer xref:register-remote.adoc[a self-managed server] instead.
+
+== AI
+
+[cols="1,2,1"]
+|===
+|Display name |Description |Deep dive
+
+|*AWS Bedrock*
+|Invoke foundation models (Claude, Llama, Titan) on AWS Bedrock.
+|—
+
+|*Cohere*
+|Generate embeddings and chat completions via the Cohere API.
+|—
+
+|*OpenAI*
+|Chat completions, embeddings, and tools via the OpenAI API.
+|—
+|===
+
+== AWS
+
+[cols="1,2,1"]
+|===
+|Display name |Description |Deep dive
+
+|*AWS SNS*
+|Publish and manage topics on AWS Simple Notification Service.
+|—
+
+|*AWS SQS*
+|Send, receive, and manage messages on AWS Simple Queue Service.
+|—
+|===
+
+== Communication
+
+[cols="1,2,1"]
+|===
+|Display name |Description |Deep dive
+
+|*Discord*
+|Post messages, read channels, and manage servers on Discord.
+|—
+
+|*GitHub (Read)*
+|Read-only access to GitHub repositories, pull requests, commits, and code.
+|—
+
+|*Jira*
+|Manage Jira issues, projects, and workflows.
+|xref:managed/jira.adoc[See the deep-dive →]
+
+|*Slack*
+|Post messages and read channels on Slack.
+|xref:managed/slack.adoc[See the deep-dive →]
+|===
+
+== Database
+
+[cols="1,2,1"]
+|===
+|Display name |Description |Deep dive
+
+|*Elasticsearch*
+|Query and index documents in an Elasticsearch cluster.
+|—
+
+|*MongoDB*
+|Query collections and documents in MongoDB.
+|—
+
+|*Qdrant*
+|Vector search over a Qdrant collection.
+|—
+
+|*Redis*
+|Read, write, and query keys in Redis.
+|—
+
+|*SQL*
+|Query SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite) via MCP.
+|xref:managed/sql.adoc[See the deep-dive →]
+|===
+
+== Google
+
+[cols="1,2,1"]
+|===
+|Display name |Description |Deep dive
+
+|*GCP Pub/Sub*
+|Publish and subscribe to topics on Google Cloud Pub/Sub.
+|—
+
+|*Google Calendar*
+|Read and manage Google Calendar events and schedules.
+|—
+
+|*Google Drive*
+|Read and search files in Google Drive.
+|—
+|===
+
+== Streaming
+
+[cols="1,2,1"]
+|===
+|Display name |Description |Deep dive
+
+|*Kafka*
+|Produce, consume, and inspect topics on Kafka or Redpanda brokers.
+|xref:managed/kafka.adoc[See the deep-dive →]
+
+|*NATS*
+|Publish and subscribe on NATS and NATS JetStream.
+|—
+|===
+
+== Utility
+
+[cols="1,2,1"]
+|===
+|Display name |Description |Deep dive
+
+|*BambooHR*
+|Access employee directory, time-off, and performance data from BambooHR.
+|—
+
+|*BILL (bill.com)*
+|Manage accounts-payable bills, vendors, AR invoices, payments, and customers in BILL.
+|—
+
+|*DocuSign*
+|Send, track, and manage DocuSign signing envelopes.
+|—
+
+|*Greenhouse*
+|Manage jobs, candidates, and applications in Greenhouse ATS.
+|—
+
+|*Okta*
+|Manage Okta users and groups.
+|—
+
+|*OpenAPI*
+|Expose any OpenAPI/Swagger HTTP API as MCP tools.
+|xref:managed/openapi.adoc[See the deep-dive →]
+
+|*Salesforce*
+|Query, create, update, and delete Salesforce CRM records using SOQL and the REST API.
+|—
+
+|*Text Chunker*
+|Split and chunk text for RAG and LLM ingestion pipelines.
+|—
+|===
+
+== Where to go next
+
+* xref:create-server.adoc[Create an MCP server] using the marketplace picker.
+* xref:test-tools.adoc[Test tools with the Inspector] before pointing an agent at the server.
+* xref:user-delegated-oauth.adoc[Configure user-delegated OAuth] for types that need per-user upstream identities.

@@ -1,6 +1,6 @@
 = Redpanda Agentic Data Plane Overview
 :description: Enterprise-grade infrastructure for building, deploying, and governing AI agents at scale with compliance-grade audit trails.
-:page-aliases: redpanda-cloud:ai-agents:adp-overview.adoc
+// TODO: Add 'redpanda-cloud:ai-agents:adp-overview.adoc' to page-aliases after ai-agents is removed from cloud-docs
 :page-topic-type: overview
 :page-categories: Agentic Data Plane
 :personas: evaluator, ai_agent_developer, platform_admin
@@ -40,7 +40,7 @@ Under the hood, MCP servers wrap the same proven connectors that power some of t
 
 With over 300 connectors and real-time debugging capabilities, you reduce integration time while getting enterprise-grade security. You can reuse your existing infrastructure and data sources rather than building new integrations from scratch.
 
-For more information, see xref:mcp:overview.adoc[MCP Servers Overview].
+For more information, see xref:mcp:index.adoc[MCP Servers Overview].
 
 == Transcripts
 
@@ -85,6 +85,6 @@ Some ways organizations can leverage Redpanda ADP include:
 == Next steps
 
 * xref:agents:overview.adoc[AI Agents Overview]
-* xref:mcp:overview.adoc[MCP Server Overview]
+* xref:mcp:index.adoc[MCP Server Overview]
 * xref:observability:concepts.adoc[Transcripts Overview]
 * xref:ai-gateway:overview.adoc[AI Gateway Overview]

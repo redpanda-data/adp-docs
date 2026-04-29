@@ -1,4 +1,0 @@
-= Register a Self-Hosted Server
-:description: Connect your self-hosted MCP server to Redpanda ADP.
-
-// TODO: Add content

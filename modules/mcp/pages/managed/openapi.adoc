@@ -1,0 +1,116 @@
+= OpenAPI Managed MCP Server
+:description: Expose any OpenAPI- or Swagger-described HTTP API as MCP tools — point Redpanda at a spec URL and get a fully-typed tool surface for agents, with no custom code.
+:page-topic-type: how-to
+:personas: app_developer
+:learning-objective-1: Configure the OpenAPI managed MCP server against an OpenAPI 3 spec
+:learning-objective-2: Pick the right authentication mode for the upstream API
+:learning-objective-3: Verify generated tools through the Inspector
+
+include::ROOT:partial$adp-la.adoc[]
+
+The *OpenAPI* managed MCP server is the "bring your own API" escape hatch. Hand it an OpenAPI 3 (or Swagger 2) spec, and it generates one MCP tool per operation in the spec. No custom code, no per-API managed type — useful when the API you want to expose is not in the catalog.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+The OpenAPI managed type:
+
+* Loads an OpenAPI 3 (or Swagger 2) spec from a URL or pasted JSON/YAML.
+* Generates one MCP tool per operation, with input schemas derived from the spec's parameter and request-body schemas.
+* Forwards calls to the upstream API, applying the configured authentication.
+
+// TODO: confirm exact spec versions supported (OpenAPI 3.0 vs. 3.1 vs. Swagger 2) and any spec features that are unsupported (oneOf, discriminators, callbacks).
+
+== Prerequisites
+
+* An HTTP API with an OpenAPI 3 (or Swagger 2) spec.
+* The spec URL or the spec content itself.
+* Credentials for the API, if it requires them.
+
+== Configure
+
+. Open *MCP Servers > Create Server*.
+. Pick *OpenAPI* from the marketplace picker.
+. Fill in identity fields (`name`, `description`).
+. In the OpenAPI configuration form:
++
+// TODO: enumerate exact fields from `apps/aigw/internal/mcp/managed/mcps/openapi/register.go` (spec source, base URL override, tool-name strategy, operation include/exclude lists).
++
+* *Spec source* — URL or inline text.
+* *Base URL override* (optional) — useful when the spec's `servers` block doesn't match your environment.
+* *Operations to expose* (optional) — filter by `operationId`, path, or method if you want only a subset.
+. Configure auth (see <<authentication>>).
+. Click *Create*.
+
+== Authentication
+
+OpenAPI is the most flexible managed type for auth — the upstream API can need anything. All the standard auth modes apply:
+
+[cols="1,2"]
+|===
+|Mode |Use when
+
+|*None*
+|Public APIs (rare in practice).
+
+|*Static key*
+|API expects a token in a header. Set `header_name` to the API's expected header (`Authorization`, `X-Api-Key`, etc.).
+
+|*Token passthrough*
+|The API already validates the caller's `Authorization` header.
+
+|*Service-account OAuth*
+|API supports OAuth client credentials and you want one shared identity.
+
+|*User-delegated OAuth*
+|API supports OAuth on behalf of users and you want per-user identities. Requires an OAuth Provider configured for that API. See xref:../user-delegated-oauth.adoc[].
+|===
+
+== Test
+
+. Open the *Inspector* tab.
+. The Tools panel lists every operation from your spec, named per the `operationId` (or per the path if `operationId` is missing).
+. Pick one and run it. The Inspector renders a form from the operation's parameter and request-body schemas.
+
+// TODO: capture screenshots of a non-trivial OpenAPI spec rendered in the Inspector once we walk a real example on `adp-production`.
+
+See xref:../test-tools.adoc[] for general Inspector usage.
+
+== Use with agents
+
+Once tools generate cleanly, point an agent at the *API URL* on the server's detail page. The agent sees one tool per OpenAPI operation, named accordingly.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|"Failed to load spec"
+|Confirm the spec URL is reachable from ADP and serves valid JSON or YAML. CORS doesn't matter (Redpanda fetches server-side).
+
+|Tools list doesn't include an expected operation
+|The operation may be missing an `operationId`, or the operation include/exclude filters might be excluding it.
+
+|Tool input schema looks wrong
+|Spec features (oneOf, discriminator, etc.) might not translate cleanly. See the TODO above on supported versions/features.
+
+|Calls return 401
+|Auth mode or credentials are wrong. Confirm secret content and the API's expected auth header.
+
+|Calls return 404 with the right operation
+|`servers` block in the spec doesn't match your real API endpoint. Use the *Base URL override*.
+|===
+
+// TODO: capture more spec-specific failure modes during the live walkthrough.
+
+== Out of scope
+
+* *Custom tool logic* — the OpenAPI type is purely a spec-to-tools generator. For business logic on top of the API, use a self-managed MCP server (xref:../register-remote.adoc[]).
+* *GraphQL APIs* — OpenAPI doesn't describe GraphQL; for GraphQL APIs, use a self-managed server.
+* *gRPC services* — same.

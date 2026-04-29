@@ -1,4 +1,0 @@
-= User-Delegated OAuth
-:description: Configure OAuth for user-delegated authentication in MCP servers.
-
-// TODO: Add content

@@ -20,11 +20,8 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* A running xref:ai-agents:agents/create-agent.adoc[agent] or xref:ai-agents:mcp/remote/quickstart.adoc[MCP server] with at least one execution
-* Access to the ADP UI
-// TODO: Replace with the exact standalone-ADP sign-in URL and IAM/role requirement once the standalone product surface ships. Today: flag `enableTranscriptsInConsole` must be on for the user's cluster.
-* Read access to the `redpanda.otel_traces` glossterm:topic[]
-// TODO: Confirm whether this ACL is user-managed or auto-granted on the standalone ADP UI.
+* xref:agents:create-agent.adoc[Running agent] or xref:mcp:create-server.adoc[MCP server] with at least one execution
+* Access to the Transcripts view (requires appropriate permissions to read the `redpanda.otel_traces` glossterm:topic[])
 
 == Open the Transcripts view
 
@@ -197,6 +194,6 @@ For long-running conversations, accept some reconstruction; for short conversati
 
 == Next steps
 
-* xref:ai-agents:agents/monitor-agents.adoc[]
-* xref:ai-agents:mcp/remote/monitor-mcp-servers.adoc[]
-* xref:ai-agents:agents/troubleshooting.adoc[]
+* xref:agents:monitor.adoc[]
+* xref:mcp:test-tools.adoc[]
+* xref:agents:troubleshoot.adoc[]

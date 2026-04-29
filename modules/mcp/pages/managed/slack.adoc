@@ -1,0 +1,103 @@
+= Slack Managed MCP Server
+:description: Let agents post messages and read channels in your Slack workspace using each end-user's own Slack identity through user-delegated OAuth.
+:page-topic-type: how-to
+:personas: app_developer
+:learning-objective-1: Configure the Slack managed MCP server with user-delegated OAuth
+:learning-objective-2: Walk through the consent flow and verify the connection in My Connections
+:learning-objective-3: Send a test message through the Inspector
+
+include::ROOT:partial$adp-la.adoc[]
+
+The *Slack* managed MCP server is the canonical user-delegated OAuth example for ADP. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time — so messages posted by the agent appear as the user, not as a shared bot.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+The Slack managed type exposes tools for:
+
+* Listing channels and reading channel history.
+* Posting messages and replying in threads.
+* Looking up users.
+
+// TODO: lift exact tool list and tool-by-tool scope requirements from the Slack server's tool registration.
+
+== Prerequisites
+
+* A Slack workspace where you can install or authorize an OAuth app.
+* A Slack OAuth app registered (your own or a Redpanda-published reference app).
++
+// TODO: confirm whether Redpanda ships a reference Slack OAuth app or whether each customer brings their own. Document the path.
+* An OAuth Provider configured in the ADP UI under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials.
++
+// TODO: link the OAuth Provider how-to once it exists.
+* Familiarity with xref:../user-delegated-oauth.adoc[].
+
+== Configure
+
+. Open *MCP Servers > Create Server*.
+. Pick *Slack* from the marketplace picker.
+. Fill in the identity fields (`name`, `description`).
+. In the Slack configuration form:
++
+// TODO: enumerate exact fields. Slack's MCP type likely doesn't need workspace-specific configuration — the OAuth flow tells Slack which workspace.
++
+* *Auth* — choose *User-delegated OAuth*.
+* *OAuth Provider* — pick the Slack provider you configured.
+* *Required scopes* — typical: `channels:read`, `chat:write`, `users:read`. Adjust to your need.
+. Click *Create*.
+
+== Test the consent flow
+
+. Open the *Inspector* tab.
+. Run a tool that requires the user's identity, for example `chat_postMessage`.
+. The first call returns `OAuthConnectionRequired` with a Slack `authorize_url`. The Inspector surfaces it as a consent prompt.
+. Click *Authorize*. You're redirected to Slack; pick the workspace and approve the requested scopes.
+. Slack redirects back to ADP. Your connection now appears under *My Connections*.
+. Re-run the original tool call. The message posts to Slack as your user.
+
+// TODO: screenshots of the consent prompt, Slack's approval screen, and the My Connections entry post-consent.
+
+== Authentication scopes
+
+Slack distinguishes user tokens from bot tokens, and many tools need user-token scopes. Common gotchas:
+
+* `chat:write` is a *user* scope; `chat:write.public` is a separate scope for posting in channels the user isn't a member of.
+* `channels:read` returns only channels the user can see.
+* Tokens are workspace-scoped — the same user authorizing twice across two workspaces produces two separate connections.
+
+// TODO: confirm exact required scopes per tool from the Slack server's tool registration.
+
+== Use with agents
+
+Once the server is created and at least one user has consented, you can point an agent at the *API URL* on the server's detail page. Each user calling the agent will trigger their own consent flow if they haven't connected yet.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`OAuthConnectionRequired` even after consent
+|The token might be revoked or expired with no refresh. Check *My Connections*; remove and re-add if needed.
+
+|`scope_upgrade_required`
+|The server's required scopes were widened after the user consented. The user re-consents to grant the new scope.
+
+|"channel not found" on a channel the user can see in Slack
+|Some private channels need an explicit `groups:read` scope. Add it to the server's required scopes and have users re-consent.
+
+|`invalid_auth` from Slack
+|The OAuth Provider's client credentials are wrong, or the OAuth app has been suspended in Slack. Check the provider config.
+|===
+
+// TODO: capture more Slack-specific errors during the live walkthrough.
+
+== Out of scope
+
+* *Configuring the Slack OAuth app* — Slack-side configuration (creating the app, picking redirect URIs, choosing scopes) happens in api.slack.com, not in ADP.
+* *Posting as a Slack bot* — this page covers user-delegated auth. For bot-token posting, use static-key auth with a bot user OAuth token.

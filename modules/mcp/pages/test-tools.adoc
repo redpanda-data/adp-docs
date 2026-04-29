@@ -1,0 +1,110 @@
+= Test an MCP Server's Tools with the Inspector
+:description: Use the Inspector tab to call tools, inspect resources and prompts, and verify your MCP server works — without standing up an agent.
+:page-topic-type: how-to
+:personas: app_developer
+:learning-objective-1: Run an MCP tool from the Inspector and read its response
+:learning-objective-2: Inspect resources, prompts, and call history
+:learning-objective-3: Diagnose common errors (auth missing, scope upgrade required, transport mismatch) before pointing an agent at the server
+
+include::ROOT:partial$adp-la.adoc[]
+
+Test your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] using the Inspector — a built-in MCP client in the ADP UI. It runs on the same JSON-RPC connection that agents use, so if a tool works in the Inspector, it will work for an agent. Use this after creating your server (xref:create-server.adoc[Create an MCP Server]) or whenever you change a tool's schema.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== When to use the Inspector
+
+* After creating or registering a server, to confirm tool discovery completed and tools run correctly.
+* While iterating on a self-managed server, to test schema changes against a live connection.
+* When debugging an agent failure, to isolate whether the issue is in the agent or in the MCP server itself.
+
+== Open the Inspector
+
+. Open *MCP Servers* and click into your server.
+. Switch to the *Inspector* tab.
++
+// TODO: screenshot of the Inspector tab with all four panels visible.
+
+The Inspector has four panels: *Tools*, *Resources*, *Prompts*, and *Session*.
+
+== Tools panel
+
+The Tools panel lists every tool the server returned from `tools/list`.
+
+. Select a tool from the list. The right-hand pane renders a form from the tool's input JSON schema.
+. Fill in the form fields.
+. Click *Run*. The response appears below the form.
+
+// TODO: screenshot of a successful Tools-panel call (use a SQL `query` against a sample table on `adp-production`).
+
+If the tool returns an error, the response pane shows the structured error detail. See <<errors>> for what each common error means.
+
+=== Code-mode tools
+
+If the server has *Code mode* enabled, the Tools panel also lists `{name}_search` and `{name}_execute` alongside the server's regular tools. These are the helpers an agent uses to discover and orchestrate tools through generated Python or JavaScript. Test them like any other tool.
+
+// TODO: screenshot of the code-mode helper tools in the Tools panel and a sample `_execute` call.
+
+== Resources panel
+
+The Resources panel lists any resources the server exposes through `resources/list`. Many MCP servers don't expose resources at all — if the panel is empty, that's fine.
+
+If your server does expose resources:
+
+. Click a resource to load its content into the right-hand pane.
+. The Inspector renders text, JSON, and binary types differently; binary types show a download link.
+
+== Prompts panel
+
+The Prompts panel lists any prompt templates the server exposes through `prompts/list`. Prompt templates are parameterized prompts an agent can invoke by name. As with resources, many servers don't expose prompts.
+
+If your server does expose prompts:
+
+. Click a prompt to render its template.
+. Fill in any required parameters in the rendered form.
+. Click *Run* to see the rendered prompt content.
+
+== Session panel
+
+The Session panel keeps a running history of every call you've made through the Inspector — request, response, latency. Use it to:
+
+* Replay a previous call by clicking it in the history list.
+* Diff two responses side-by-side (useful when iterating on a tool's logic).
+* Copy a request as JSON-RPC for use outside the Inspector.
+
+// TODO: confirm exact session-history affordances and capture a screenshot.
+
+[[errors]]
+== Common errors
+
+[cols="1,2"]
+|===
+|Error |Meaning and fix
+
+|`OAuthConnectionRequired`
+|User-delegated auth has no stored token for the calling user. Redpanda includes an `authorize_url` in the error detail; complete the consent flow per xref:user-delegated-oauth.adoc[User-delegated OAuth].
+
+|`OAuthTokenExpired`
+|Stored token is expired and refresh failed. Re-consent through *My Connections*.
+
+|`scope_upgrade_required`
+|The user's connection lacks one of the server's `required_scopes`. Re-consent with the higher scope.
+
+|Transport / connection error
+|The Inspector can't reach the upstream. For self-managed servers, check the *Connection* tab on the detail page; verify the URL and transport choice.
+
+|Tool input validation error
+|The form's input doesn't match the tool's schema. The error message includes the offending field. Update and re-run.
+|===
+
+// TODO: screenshots of each error case once captured against `adp-production`.
+
+== Out of scope
+
+* *Pointing an agent at the server* — see the Agents docs.
+* *Aggregating multiple servers* — see xref:ai-gateway:aggregation.adoc[MCP aggregation].
+* *Debugging the upstream system itself* (your SQL database, your Slack app) — outside the scope of MCP tooling.

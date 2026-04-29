@@ -1,0 +1,118 @@
+= Kafka Managed MCP Server
+:description: Produce, consume, and inspect topics on Kafka or Redpanda brokers through a managed MCP server hosted in the Agentic Data Plane.
+:page-topic-type: how-to
+:personas: platform_admin, app_developer
+:learning-objective-1: Configure the Kafka managed MCP server against a Kafka or Redpanda cluster
+:learning-objective-2: Produce a test message through the Inspector and consume it back
+:learning-objective-3: Pick the right authentication mode for your broker (PLAIN / SCRAM / mTLS / OAuth)
+
+include::ROOT:partial$adp-la.adoc[]
+
+The *Kafka* managed MCP server gives agents read and write access to topics on either an Apache Kafka cluster or a Redpanda cluster — the same protocol, the same tools. Despite the name, it works against any Kafka-compatible broker.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+The Kafka managed type proxies a managed Kafka client. It exposes tools for:
+
+* Listing topics, partitions, and consumer groups.
+* Producing messages to a topic.
+* Consuming a window of messages from a topic.
+* Inspecting topic and consumer-group metadata.
+
+// TODO: lift the exact tool list and descriptions from `proto/mcps/redpanda/mcps/kafka/v1/` once verified against `adp-production`.
+
+== Prerequisites
+
+* A Kafka or Redpanda cluster reachable from the Agentic Data Plane.
++
+// TODO: confirm reachability requirements (public bootstrap, peering, etc.) once the standalone ADP product surface ships.
+* The cluster's bootstrap servers and SASL/TLS settings.
+* For SCRAM or PLAIN: secrets in the ADP secret store for the username and password (`UPPER_SNAKE_CASE`, for example `KAFKA_SASL_USER` and `KAFKA_SASL_PASSWORD`).
+
+== Configure
+
+. Open *MCP Servers > Create Server*.
+. Pick *Kafka* from the marketplace picker.
+. Fill in the identity fields (`name`, `description`).
+. In the Kafka configuration form, provide:
++
+// TODO: enumerate exact fields from `proto/mcps/redpanda/mcps/kafka/v1/kafka_config.proto`.
++
+* *Seed brokers* — comma-separated bootstrap addresses.
+* *TLS* settings — usually on for production, off for local dev.
+* *SASL mechanism* — `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512`, or `OAUTHBEARER`.
+* *Username / password references* — `UPPER_SNAKE_CASE` secret references.
+. Click *Create*.
+
+// TODO: screenshot of the Kafka form filled in for a Redpanda Cloud cluster on `adp-production`.
+
+== Test
+
+. Open the *Inspector* tab on the server's detail page.
+. In *Tools*, run the topic-listing tool to confirm the broker is reachable and credentials work.
+. Produce a test message to a sandbox topic.
+. Consume from the same topic and confirm you get the message back.
+
+// TODO: confirm exact tool names for produce/consume/list-topics and capture screenshots.
+
+See xref:../test-tools.adoc[] for general Inspector usage.
+
+== Authentication
+
+The Kafka managed type's authentication is part of its config, not the generic MCP auth oneof — it speaks Kafka protocol auth (SASL/SSL), not MCP auth.
+
+[cols="1,2"]
+|===
+|Mechanism |Use when
+
+|`PLAIN`
+|Username and password over TLS. Common for managed Kafka services.
+
+|`SCRAM-SHA-256` / `SCRAM-SHA-512`
+|Salted challenge-response. Default for Redpanda Cloud.
+
+|`OAUTHBEARER`
+|Token-based; useful when fronting Kafka with an OAuth proxy.
+
+|mTLS
+|Client certificate. Higher operational overhead, but no shared password.
+|===
+
+// TODO: confirm whether mTLS and `OAUTHBEARER` are supported in the current registration; lift exact field names from the config proto.
+
+== Use with agents
+
+Once the Kafka server is created, point an agent at the *API URL* on the server's detail page. The agent can then list topics and produce/consume messages through the exposed tools.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`connection refused` or `dial timeout`
+|Brokers aren't reachable from ADP egress. Confirm bootstrap addresses and any private-network requirements.
+
+|`SASL authentication failed`
+|Check username/password reference content and the SASL mechanism.
+
+|TLS handshake error
+|Certificate chain isn't trusted, or you've enabled TLS against a plaintext broker. Confirm broker config.
+
+|Consume returns nothing
+|Check topic existence, consumer-group offset behavior, and that messages exist in the time window the tool consumes.
+|===
+
+// TODO: gather more Kafka failure modes from `adp-production` walkthroughs.
+
+== Out of scope
+
+* *Kafka administration* (creating topics, managing ACLs) — this server is read/produce/consume-focused. For administration, use rpk or your broker's admin API.
+* *Schema registry* — not exposed by this MCP server.
+* *Streaming joins / processing* — for stream processing, use Redpanda Connect.

@@ -1,0 +1,204 @@
+{
+  "tests": [
+    {
+      "testId": "create-managed-mcp-server",
+      "description": "Create a managed MCP server following the documented procedure",
+      "steps": [
+        {
+          "description": "Navigate to ADP UI",
+          "goTo": "https://adp.redpanda.com"
+        },
+        {
+          "description": "Verify user is on the ADP UI home page",
+          "find": "MCP Servers"
+        },
+        {
+          "description": "Navigate to MCP Servers section",
+          "click": "MCP Servers"
+        },
+        {
+          "description": "Verify MCP Servers page loaded",
+          "find": "Create Server"
+        },
+        {
+          "description": "Click Create Server button to open marketplace picker",
+          "click": "Create Server"
+        },
+        {
+          "description": "Verify marketplace picker opened",
+          "find": "Remote (Proxied)"
+        },
+        {
+          "description": "Select a managed type card (SQL example)",
+          "click": "SQL"
+        },
+        {
+          "description": "Verify server configuration form loaded",
+          "find": "Name"
+        },
+        {
+          "description": "Enter server name (lowercase, hyphens, starts with letter)",
+          "type": {
+            "keys": "test-sql-server",
+            "selector": "input[name='name']"
+          }
+        },
+        {
+          "description": "Enter server description",
+          "type": {
+            "keys": "Test SQL server for documentation testing",
+            "selector": "input[name='description']"
+          }
+        },
+        {
+          "description": "Verify Enabled toggle is present",
+          "find": "Enabled"
+        },
+        {
+          "description": "Configure authentication - select None mode",
+          "click": "None"
+        },
+        {
+          "description": "Click Create button to save the server",
+          "click": "Create"
+        },
+        {
+          "description": "Verify server was created and appears in list",
+          "find": "test-sql-server"
+        },
+        {
+          "description": "Verify Type badge shows server type",
+          "find": "Managed"
+        }
+      ]
+    },
+    {
+      "testId": "verify-mcp-server-details",
+      "description": "Verify server details and tool discovery after creation",
+      "steps": [
+        {
+          "description": "Open the newly created server detail page",
+          "click": "test-sql-server"
+        },
+        {
+          "description": "Verify Overview tab is shown",
+          "find": "Overview"
+        },
+        {
+          "description": "Verify API URL is displayed",
+          "find": "API URL"
+        },
+        {
+          "description": "Switch to Inspector tab",
+          "click": "Inspector"
+        },
+        {
+          "description": "Verify Inspector tab loaded",
+          "find": "Tools"
+        },
+        {
+          "description": "Verify tools list is populated (not empty)",
+          "find": "query"
+        }
+      ]
+    },
+    {
+      "testId": "create-self-managed-mcp-server",
+      "description": "Create a self-managed (Remote/Proxied) MCP server",
+      "steps": [
+        {
+          "description": "Navigate to MCP Servers section",
+          "goTo": "https://adp.redpanda.com/mcp-servers"
+        },
+        {
+          "description": "Click Create Server button",
+          "click": "Create Server"
+        },
+        {
+          "description": "Select Remote (Proxied) option for self-managed server",
+          "click": "Remote (Proxied)"
+        },
+        {
+          "description": "Verify self-managed configuration form loaded",
+          "find": "URL"
+        },
+        {
+          "description": "Enter server name",
+          "type": {
+            "keys": "test-remote-server",
+            "selector": "input[name='name']"
+          }
+        },
+        {
+          "description": "Enter server URL (must start with http:// or https://)",
+          "type": {
+            "keys": "https://mcp-server.example.com",
+            "selector": "input[name='url']"
+          }
+        },
+        {
+          "description": "Verify Transport field is present",
+          "find": "Transport"
+        },
+        {
+          "description": "Select SSE transport",
+          "click": "SSE"
+        },
+        {
+          "description": "Configure authentication - select None mode",
+          "click": "None"
+        },
+        {
+          "description": "Click Create button",
+          "click": "Create"
+        },
+        {
+          "description": "Verify self-managed server was created",
+          "find": "test-remote-server"
+        },
+        {
+          "description": "Verify Type badge shows Self-managed",
+          "find": "Self-managed"
+        }
+      ]
+    },
+    {
+      "testId": "verify-authentication-modes",
+      "description": "Verify all five authentication modes are available",
+      "steps": [
+        {
+          "description": "Navigate to create server flow",
+          "goTo": "https://adp.redpanda.com/mcp-servers"
+        },
+        {
+          "description": "Click Create Server",
+          "click": "Create Server"
+        },
+        {
+          "description": "Select a managed type",
+          "click": "SQL"
+        },
+        {
+          "description": "Verify None auth mode is available",
+          "find": "None"
+        },
+        {
+          "description": "Verify Static key auth mode is available",
+          "find": "Static key"
+        },
+        {
+          "description": "Verify Token passthrough auth mode is available",
+          "find": "Token passthrough"
+        },
+        {
+          "description": "Verify Service-account OAuth auth mode is available",
+          "find": "Service-account OAuth"
+        },
+        {
+          "description": "Verify User-delegated OAuth auth mode is available",
+          "find": "User-delegated OAuth"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+= Create an MCP Server
+:description: Create an MCP server in the Agentic Data Plane — pick a managed type from the marketplace or register a self-managed server you host yourself, then configure authentication, code mode, and access.
+:page-topic-type: how-to
+:personas: platform_admin, app_developer
+:learning-objective-1: Create a managed or self-managed MCP server in the ADP UI
+:learning-objective-2: Configure each authentication mode and pick the right one for your use case
+:learning-objective-3: Save the server, verify the API URL, and confirm tools were discovered
+
+include::ROOT:partial$adp-la.adoc[]
+
+Create MCP servers to give agents structured access to your databases, queues, CRMs, and other business systems. Each server exposes glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] that an agent can discover and invoke. Choose managed types that Redpanda hosts for you, or register self-managed servers you host yourself.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* Access to the Agentic Data Plane.
++
+// TODO: confirm sign-in URL and IAM/role requirements once the standalone ADP UI ships.
+* For any auth mode that uses upstream credentials: the credentials in hand and a secret already created in the ADP secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
++
+// TODO: xref the ADP secrets-management page once confirmed.
+* For user-delegated OAuth: an OAuth Provider resource already configured. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
+
+== Open the MCP Servers page
+
+. Sign in to the ADP UI and open *MCP Servers*.
++
+// TODO: screenshot of the MCP Servers list page on `adp-production`.
+. Click *Create Server*. The marketplace picker opens.
+
+== Pick a backend
+
+The marketplace picker lists every managed type as a card and includes a *Remote (Proxied)* option for self-managed servers.
+
+* *Managed* — pick a card. Redpanda hosts the server in-process. The configuration form is rendered from the type's protobuf schema; field labels and help text come straight from the proto.
+* *Self-managed* — pick *Remote (Proxied)*. You provide a URL and a transport, and Redpanda proxies requests to your server.
+
+// TODO: screenshot of the marketplace picker, with both a managed card and the Remote (Proxied) option visible.
+
+For a tour of every managed type and which one fits your use case, see xref:managed-catalog.adoc[Managed catalog]. To go deep on the self-managed path (transport choices, TLS, multi-server aggregation), see xref:register-remote.adoc[Register a self-managed server].
+
+== Name and basic fields
+
+Every server has the same identity fields.
+
+[cols="1,1,3"]
+|===
+|Field |Required |Notes
+
+|Name
+|Yes
+|Lowercase letters, numbers, and hyphens only (proto regex `^[a-z][a-z0-9-]*$`); 1–63 characters; must start with a letter. *Immutable after create.* Used as the URL path segment.
+
+|Description
+|No
+|Up to 256 characters. Shown in list and detail views.
+
+|Enabled
+|Yes (toggle)
+|Disabled servers reject every tool call.
+|===
+
+// TODO: confirm whether the proto's `name` immutability is enforced server-side at edit time, and if not, what the UI does.
+
+== Configure the managed flow (managed types only)
+
+Each managed type ships its own configuration schema. The form on this page is rendered from the type's `_config.proto`, so field labels and help text come from the proto definition itself. There is no hand-written form code per type.
+
+// TODO: screenshot of the SQL configuration form as the exemplar (it covers the most common field shapes).
+
+For per-type fields, see xref:managed-catalog.adoc[Managed catalog] for one-line entries on every type, and the deep-dive pages for SQL, Kafka, Slack, Jira, and OpenAPI:
+
+* xref:managed/sql.adoc[SQL]
+* xref:managed/kafka.adoc[Kafka]
+* xref:managed/slack.adoc[Slack]
+* xref:managed/jira.adoc[Jira]
+* xref:managed/openapi.adoc[OpenAPI]
+
+== Configure the self-managed flow (Remote/Proxied only)
+
+Two fields on top of the identity fields:
+
+[cols="1,1,3"]
+|===
+|Field |Required |Notes
+
+|URL
+|Yes
+|Endpoint URL of your server. Must start with `http://` or `https://`. *HTTPS is required if you choose user-delegated OAuth* (proto rule `remote_mcp.user_oauth_requires_https`).
+
+|Transport
+|Yes
+|`SSE` (server-sent events) or `Streamable HTTP` (newer bidirectional protocol). Pick whichever your server speaks. See xref:register-remote.adoc[Register a self-managed server] for how to test which transport your server uses.
+|===
+
+== Configure authentication
+
+Both managed and self-managed servers offer the same five authentication modes (managed types only show the modes that make sense for that type — for example, SQL never offers user-delegated OAuth):
+
+[cols="1,3"]
+|===
+|Mode |Use when
+
+|*None*
+|The upstream server doesn't need authentication, or the managed type wraps an in-process resource that needs no creds.
+
+|*Static key*
+|Single shared API key. Provide a `key_ref` (secret reference, `UPPER_SNAKE_CASE`) and an optional `header_name` (defaults to `Authorization`).
+
+|*Token passthrough*
+|Forward the caller's `Authorization` header to the upstream server as-is. Useful when the upstream already validates upstream tokens.
+
+|*Service-account OAuth*
+|2-legged OAuth client credentials. One shared upstream identity for every caller. Provide `client_id`, `client_secret_ref`, `token_url`, and any required `scopes`.
+
+|*User-delegated OAuth*
+|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. Pick the configured *OAuth Provider* and the required scopes. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; the resulting connection is stored in the token vault and shows up under *My Connections*. See xref:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
+|===
+
+NOTE: Choosing between *Service-account OAuth* and *User-delegated OAuth* is the credential-mode decision. Service-account auth gives every caller the same identity at the upstream; user-delegated auth gives each caller their own.
+
+// TODO: confirm that the UI surfaces the token-injection options (`header_name`, `header_prefix` from `TokenInjection`) on the user-delegated flow and capture a screenshot.
+
+== Code mode (optional)
+
+Toggle *Code mode* to add `{name}_search` and `{name}_execute` tools alongside the server's own tools. Agents can use `_search` to discover available tools and `_execute` to run sandboxed Python or JavaScript that orchestrates them. This is useful when you'd rather have the agent generate a small program than call tools one at a time.
+
+When code mode is enabled, the server's detail page surfaces a second URL — the *code-mode MCP URL* — that clients can connect to instead of the standard one.
+
+// TODO: screenshot of the code-mode toggle and the resulting two URLs on the detail page.
+
+NOTE: Defer advanced code-mode patterns (sandboxing limits, runtime selection, dependency management) to follow-up content; this page covers only enabling it.
+
+== Save and verify
+
+. Click *Create*. The server appears in the list with a *Type* badge — *Managed* or *Self-managed*.
+. Open the detail page. The *Overview* tab shows the *API URL* — this is the MCP URL agents connect to. Copy it for use later.
+. Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:test-tools.adoc[Test a server's tools] for how to call them.
+
+A populated tools list confirms that the connection works and credentials resolve correctly. If the list is empty or the tab shows an error, see <<troubleshooting>>.
+
+== Edit, disable, and delete a server
+
+* *Edit:* most fields can change. The *name* and *type* are *immutable* after create.
+* *Disable:* toggle *Enabled* off. The server stays in the list, but every tool call returns an error until you re-enable it.
+* *Delete:* permanently removes the server. In-flight user OAuth connections for this server are also discarded; users will need to re-consent if you re-create a server with the same name.
++
+// TODO: confirm exact delete semantics with eng — does deletion drop tokens from the vault, or just unbind the server?
+
+[[troubleshooting]]
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`Secret <NAME> not found`
+|The secret reference is case-sensitive and must be `UPPER_SNAKE_CASE` matching the proto regex `^[A-Z][A-Z0-9_]*$`. Confirm the secret exists in the ADP secret store and is spelled identically.
+
+|"HTTPS required" error on save (self-managed)
+|You picked user-delegated OAuth on a server with an `http://` URL. Switch to `https://` (proto rule `remote_mcp.user_oauth_requires_https`).
+
+|Inspector / tools list empty after create
+|The connection or auth might be failing. Check the *Connection* tab for upstream errors. For self-managed, confirm the transport (SSE vs. Streamable HTTP) matches what your server actually speaks.
+
+|Tool calls return errors after disable/enable
+|Disabled servers reject all tool calls. Confirm the *Enabled* toggle is on.
+|===
+
+// TODO: add screenshots of common error toasts after walking the live cluster.
+
+== Out of scope
+
+The following capabilities are not configured on this page; see the linked content instead.
+
+* *User-delegated OAuth consent flow* — see xref:user-delegated-oauth.adoc[User-delegated OAuth].
+* *Inspector usage* — see xref:test-tools.adoc[Test a server's tools].
+* *Multi-server aggregation* — handled by AI Gateway. See xref:ai-gateway:aggregation.adoc[MCP aggregation].
+* *Per-type configuration depth* — see xref:managed-catalog.adoc[Managed catalog] and the deep-dive pages.

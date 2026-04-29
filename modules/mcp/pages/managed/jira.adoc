@@ -1,0 +1,118 @@
+= Jira Managed MCP Server
+:description: Let agents read and manage Jira issues, projects, and workflows using each end-user's own Atlassian identity through user-delegated OAuth.
+:page-topic-type: how-to
+:personas: app_developer
+:learning-objective-1: Configure the Jira managed MCP server with Atlassian's OAuth flow
+:learning-objective-2: Pick the right scopes for read-only vs. read-write workflows
+:learning-objective-3: Walk a user through the consent flow and verify the connection
+
+include::ROOT:partial$adp-la.adoc[]
+
+The *Jira* managed MCP server gives agents access to Jira issues, projects, and workflows on behalf of the calling user. It's the enterprise counterpart to xref:managed/slack.adoc[the Slack deep-dive] — both use user-delegated OAuth, but Atlassian's flow has its own scope model and quirks worth calling out.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+The Jira managed type exposes tools for:
+
+* Searching issues with JQL.
+* Reading individual issues, projects, and users.
+* Creating, updating, and transitioning issues.
+* Adding comments and worklog entries.
+
+// TODO: lift exact tool list and per-tool scope requirements from the Jira server's tool registration.
+
+== Prerequisites
+
+* A Jira (Atlassian Cloud) site where you can install or authorize an OAuth app.
+* An Atlassian OAuth 2.0 (3LO) app registered against `https://api.atlassian.com`.
++
+// TODO: confirm whether Redpanda publishes a reference Atlassian app or whether each customer brings their own.
+* An OAuth Provider in the ADP UI configured for Atlassian's authorize/token URLs and carrying the app's client credentials.
+* Familiarity with xref:../user-delegated-oauth.adoc[].
+
+== Atlassian's scope model
+
+Atlassian uses a granular, prefixed scope namespace. Common scopes:
+
+[cols="1,2"]
+|===
+|Scope |Allows
+
+|`read:jira-user`
+|Read user profile.
+
+|`read:jira-work`
+|Read issues, projects, sprints, etc. (read-only operation).
+
+|`write:jira-work`
+|Create, update, transition issues, add comments.
+
+|`offline_access`
+|Issue a refresh token so Redpanda can refresh expired access tokens. *Required* for any long-lived MCP server — without it, tokens expire after one hour and users re-consent every time.
+|===
+
+// TODO: confirm minimum required scopes per tool from the Jira server's tool registration.
+
+NOTE: Always include `offline_access` in `required_scopes`. Without it, `OAuthTokenExpired` will hit users every hour.
+
+== Configure
+
+. Open *MCP Servers > Create Server*.
+. Pick *Jira* from the marketplace picker.
+. Fill in identity fields (`name`, `description`).
+. In the Jira configuration form:
++
+* *Auth* — choose *User-delegated OAuth*.
+* *OAuth Provider* — pick the Atlassian provider you configured.
+* *Required scopes* — at minimum `read:jira-user`, `read:jira-work`, `offline_access`. Add `write:jira-work` if your agents will create or update issues.
+. Click *Create*.
+
+// TODO: capture screenshots of the Jira form on `adp-production`.
+
+== Test the consent flow
+
+. Open the *Inspector* tab.
+. Run an issue-search tool with a small JQL filter.
+. The first call returns `OAuthConnectionRequired` with an Atlassian `authorize_url`. The Inspector surfaces it as a consent prompt.
+. Click *Authorize*. Atlassian asks you to pick a site (Cloud instance) and approve scopes.
+. Atlassian redirects back. Your connection appears under *My Connections* with a site label.
+. Re-run the search; results come back.
+
+== Use with agents
+
+Point an agent at the *API URL* on the server's detail page. Each user calling the agent will trigger their own consent flow on first call.
+
+For agents that need both read and write capabilities, define the server's `required_scopes` to include all the scopes any tool might need — Atlassian doesn't allow per-tool scope upgrades, so the user consents once with the full set.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`OAuthTokenExpired` after about an hour
+|`offline_access` wasn't in `required_scopes` at consent time. Update the server config and have users re-consent.
+
+|"Resource not found" for a project the user has access to
+|Atlassian's OAuth grants are *site-scoped*. The user authorized for one Cloud instance; the project lives on another. They need to re-consent with the second site.
+
+|`scope_upgrade_required` after adding write capability
+|You added `write:jira-work` to `required_scopes` after users had already consented to read-only. Users re-consent with the higher scope.
+
+|`invalid_grant` during refresh
+|Refresh tokens expire if unused for ~90 days. The user re-consents.
+|===
+
+// TODO: capture more Atlassian-specific errors during the live walkthrough.
+
+== Out of scope
+
+* *Atlassian app management* — the OAuth app and its callback URLs are managed in `developer.atlassian.com`, not in ADP.
+* *Jira Server / Data Center* (self-hosted) — this MCP type targets Atlassian Cloud. Self-hosted Jira may need a self-managed MCP server instead. See xref:../register-remote.adoc[].
+* *Confluence access* — separate scope namespace; not exposed by this MCP server.

@@ -11,7 +11,7 @@
 
 In this quickstart, you'll get your Claude AI agent talking to Redpanda Cloud using the xref:local/overview.adoc[Redpanda Cloud Management MCP Server].
 
-If you're trying to deploy your own MCP server as a managed service inside your cluster, see xref:remote/quickstart.adoc[].
+If you're trying to deploy your own MCP server through the Agentic Data Plane, see xref:mcp:create-server.adoc[].
 
 After completing this quickstart, you will be able to:
 
