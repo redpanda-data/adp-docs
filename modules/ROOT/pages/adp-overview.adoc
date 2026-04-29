@@ -1,6 +1,6 @@
 = Redpanda Agentic Data Plane Overview
 :description: Enterprise-grade infrastructure for building, deploying, and governing AI agents at scale with compliance-grade audit trails.
-:page-aliases: redpanda-cloud:ai-agents:adp-overview.adoc
+// TODO: Add 'redpanda-cloud:ai-agents:adp-overview.adoc' to page-aliases after ai-agents is removed from cloud-docs
 :page-topic-type: overview
 :page-categories: Agentic Data Plane
 :personas: evaluator, ai_agent_developer, platform_admin

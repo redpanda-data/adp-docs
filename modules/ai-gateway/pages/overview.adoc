@@ -2,7 +2,8 @@
 :description: AI Gateway is Redpanda's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
 :page-topic-type: overview
 :personas: platform_admin, app_developer, evaluator
-:page-aliases: redpanda-cloud:ai-agents:ai-gateway/what-is-ai-gateway.adoc, redpanda-cloud:ai-agents:ai-gateway/gateway-architecture.adoc, redpanda-cloud:ai-agents:ai-gateway/cel-routing-cookbook.adoc, redpanda-cloud:ai-agents:ai-gateway/mcp-aggregation-guide.adoc, redpanda-cloud:ai-agents:ai-gateway/builders/discover-gateways.adoc
+// TODO: Add 'redpanda-cloud:ai-agents:ai-gateway/what-is-ai-gateway.adoc' to page-aliases after ai-agents is removed from cloud-docs
+:page-aliases: redpanda-cloud:ai-agents:ai-gateway/gateway-architecture.adoc, redpanda-cloud:ai-agents:ai-gateway/cel-routing-cookbook.adoc, redpanda-cloud:ai-agents:ai-gateway/mcp-aggregation-guide.adoc, redpanda-cloud:ai-agents:ai-gateway/builders/discover-gateways.adoc
 :learning-objective-1: Describe what AI Gateway is and how a managed proxy differs from direct upstream calls
 :learning-objective-2: Explain how LLM providers, secrets, and OIDC authentication fit together in AI Gateway
 :learning-objective-3: Identify use cases where AI Gateway fits, and use cases where it does not
