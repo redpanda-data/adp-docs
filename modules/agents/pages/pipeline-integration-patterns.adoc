@@ -137,7 +137,7 @@ This pipeline:
 
 == Next steps
 
-* xref:mcp:index.adoc[]
+* xref:mcp:overview.adoc[]
 * xref:integration-overview.adoc[]
 * xref:a2a-concepts.adoc[]
 * xref:redpanda-cloud:develop:connect/components/processors/about.adoc[]

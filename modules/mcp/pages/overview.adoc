@@ -1,0 +1,75 @@
+= MCP Servers Overview
+:description: Connect AI agents to your databases, queues, CRMs, and other business systems through MCP servers — fully managed types Redpanda hosts for you, or your own self-managed servers proxied through the Agentic Data Plane.
+:page-topic-type: overview
+:personas: evaluator, app_developer, platform_admin
+
+The Model Context Protocol (MCP) is how AI agents talk to tools. In the Agentic Data Plane, you create *MCP Servers* that agents can connect to. Each MCP server exposes a set of glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] that an agent can discover at runtime through `tools/list` and invoke through structured JSON-RPC calls. Redpanda handles upstream credentials, authentication flows, observability, and aggregation, so you can focus on what your agents do, not on the plumbing.
+
+Redpanda offers two kinds of MCP server backends:
+
+[cols="1,3"]
+|===
+|Backend |When to use
+
+|*Managed*
+|Redpanda hosts the server in-process. You pick a type from the marketplace (SQL, Kafka, Slack, Jira, OpenAPI, and many more) and configure it with your credentials. No infrastructure to run.
+
+|*Self-managed*
+|You already run an MCP server somewhere and want Redpanda to proxy it for authentication, observability, aggregation, and agent access. Redpanda fronts your server with a managed URL and resolves auth at the gateway.
+|===
+
+// TODO: confirm exact count of managed types at GA — currently 27 in the registry.
+
+== When to use each
+
+[cols="1,2,2"]
+|===
+|Concern |Managed |Self-managed
+
+|Infrastructure ownership
+|Redpanda hosts and operates
+|You host and operate
+
+|Upstream credentials
+|Redpanda secret store; per-type schema
+|Redpanda secret store or token vault; you control the upstream auth
+
+|Custom tool logic
+|Limited to what the type exposes
+|Anything the MCP protocol supports
+
+|Startup latency
+|In-process; effectively zero
+|Network round-trip to your endpoint
+
+|Upgrade cadence
+|Redpanda manages
+|You manage
+|===
+
+== What's in the ADP UI
+
+The Agentic Data Plane UI has four top-level areas:
+
+* *LLM Providers* — OpenAI, Anthropic, Bedrock, Gemini, OpenAI-compatible endpoints. See xref:ai-gateway:configure-provider.adoc[Configure your LLM provider].
+* *MCP Servers* — you are here. Both managed and self-managed servers live in this list.
+* *OAuth Providers* — reusable OAuth provider definitions used by user-delegated MCP auth (and elsewhere). See xref:user-delegated-oauth.adoc[User-delegated OAuth].
+* *My Connections* — per-user OAuth connections for user-delegated MCP servers. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
+
+// TODO: screenshot of the four-area sidebar on adp-production once standalone-ADP wording is final.
+
+== Key capabilities
+
+* *Tool discovery.* After you create or register a server, Redpanda performs a live `tools/list` against it and populates the server's detail page so you can see what tools agents will see.
+* *Service-account and user-delegated auth.* Pick a single shared upstream identity for all callers, or have each end-user authenticate against the upstream system with their own credentials.
+* *Code mode.* Optionally expose `{name}_search` and `{name}_execute` helpers so an agent can discover and orchestrate tools through generated Python or JavaScript instead of calling them one at a time.
+* *Inspector.* Test each tool, resource, and prompt directly from the ADP UI before pointing an agent at the server. See xref:test-tools.adoc[Test a server's tools].
+* *Aggregation.* Connect your agent to a single MCP URL and have Redpanda fan out across multiple registered MCP servers. See xref:ai-gateway:aggregation.adoc[MCP aggregation].
+
+== Where to go next
+
+. *Create your first MCP server.* xref:create-server.adoc[Create an MCP Server] walks through the marketplace picker, the managed and self-managed flows, every authentication mode, and code mode.
+. *Test what you built.* xref:test-tools.adoc[Test a server's tools] uses the Inspector tab to call tools, resources, and prompts live.
+. *Wire up user-delegated OAuth* if your users should authenticate against the upstream system with their own credentials. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
+. *Register an existing server* you already run yourself. See xref:register-remote.adoc[Register a self-managed server].
+. *Browse the managed catalog* for the full list of types, their categories, and per-type configuration links. See xref:managed-catalog.adoc[Managed catalog].

@@ -267,7 +267,7 @@ Use these documented test IDs when testing the agent. If you replace the mock to
 
 == Next steps
 
-* xref:mcp:index.adoc[Call external APIs]
+* xref:mcp:overview.adoc[Call external APIs]
 * xref:system-prompts.adoc[]
 * xref:architecture-patterns.adoc[]
 * xref:troubleshoot.adoc[]

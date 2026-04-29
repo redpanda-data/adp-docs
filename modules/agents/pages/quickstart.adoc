@@ -183,4 +183,4 @@ You've created an agent that orchestrates MCP tools through natural language. Ex
 * xref:create-agent.adoc[]
 * xref:system-prompts.adoc[]
 * xref:architecture-patterns.adoc[]
-* xref:mcp:index.adoc[]
+* xref:mcp:overview.adoc[]

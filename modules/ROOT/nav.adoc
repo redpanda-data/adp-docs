@@ -18,10 +18,11 @@
 ** xref:agents:pipeline-integration-patterns.adoc[Pipeline integration patterns]
 ** xref:agents:monitor.adoc[Monitor agents]
 ** xref:agents:troubleshoot.adoc[Troubleshoot]
-*** Tutorials
+*** xref:agents:tutorials/index.adoc[Tutorials]
 **** xref:agents:tutorials/customer-support-agent.adoc[Customer support agent]
 **** xref:agents:tutorials/transaction-dispute-resolution.adoc[Transaction dispute resolution]
 * xref:mcp:index.adoc[MCP Servers]
+** xref:mcp:overview.adoc[Overview]
 ** xref:mcp:create-server.adoc[Create a server]
 ** xref:mcp:register-remote.adoc[Register a self-managed server]
 ** xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]
@@ -40,16 +41,16 @@
 ** xref:ai-gateway:routing-cel.adoc[CEL routing]
 ** xref:ai-gateway:aggregation.adoc[MCP aggregation]
 ** xref:ai-gateway:connect-agent.adoc[Connect your agent]
-*** For Admins
+*** xref:ai-gateway:admin/index.adoc[For Admins]
 **** xref:ai-gateway:admin/setup-guide.adoc[Setup guide]
-*** For Builders
+*** xref:ai-gateway:builders/index.adoc[For Builders]
 **** xref:ai-gateway:builders/discover-gateways.adoc[Discover gateways]
 * xref:governance:index.adoc[Trust & Governance]
 ** xref:governance:dashboard/index.adoc[Governance dashboard]
 *** xref:governance:dashboard/agent-network.adoc[Agent network]
 *** xref:governance:dashboard/violations.adoc[Authorization denials and violations]
-** Guardrails
-*** xref:governance:guardrails/index.adoc[Overview]
+** xref:governance:guardrails/index.adoc[Guardrails]
+*** xref:governance:guardrails/overview.adoc[Overview]
 *** xref:governance:guardrails/create-guardrail.adoc[Create a guardrail]
 *** xref:governance:guardrails/types-reference.adoc[Evaluator types]
 *** xref:governance:guardrails/violations.adoc[Read violations]

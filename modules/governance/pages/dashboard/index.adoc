@@ -134,7 +134,7 @@ Every MCP server registered in your deployment. The table lists:
 * *Type* — managed or self-managed.
 * *Status* — connection state.
 
-For deeper MCP server reading, see xref:mcp:index.adoc[MCP Servers].
+For deeper MCP server reading, see xref:mcp:overview.adoc[MCP Servers].
 
 == Reading the dashboard for your role
 

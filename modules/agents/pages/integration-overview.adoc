@@ -25,7 +25,7 @@ Redpanda Cloud supports three primary integration scenarios based on who initiat
 | Agent needs capabilities
 | Your agent invokes MCP tools to fetch data, call APIs, or access external systems on-demand
 | Agent-initiated, synchronous, interactive workflows
-| xref:mcp:index.adoc[]
+| xref:mcp:overview.adoc[]
 
 | Pipeline processes events
 | Your Redpanda Connect pipeline invokes agents for each event in a stream using the `a2a_message` processor
@@ -53,7 +53,7 @@ This pattern works well for interactive workflows: customer support lookups, app
 
 Avoid MCP tools for high-volume stream processing or automated workflows without user interaction. Use pipeline-initiated integration instead.
 
-For implementation details, see xref:mcp:index.adoc[].
+For implementation details, see xref:mcp:overview.adoc[].
 
 [[pipeline-processes-events]]
 === Pipeline processes events (`a2a_message`)
@@ -124,5 +124,5 @@ Access tokens grant full access to the agent. Anyone with a valid token can send
 == Next steps
 
 * xref:a2a-concepts.adoc[]
-* xref:mcp:index.adoc[]
+* xref:mcp:overview.adoc[]
 * xref:pipeline-integration-patterns.adoc[]
