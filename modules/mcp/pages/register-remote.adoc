@@ -8,7 +8,7 @@
 
 include::ROOT:partial$adp-la.adoc[]
 
-This guide covers the *self-managed* path through xref:create-server.adoc[] in depth. Use it when you already run an MCP server somewhere and want Redpanda to proxy it for authentication, observability, aggregation with other MCP servers, and agent access.
+Register your existing MCP server with Redpanda to add authentication, observability, and agent aggregation without changing your server's code. This guide covers the self-managed path from xref:create-server.adoc[Create an MCP Server] in depth — choose this when you already run a server and want Redpanda to proxy it.
 
 After completing this guide, you will be able to:
 
@@ -24,7 +24,7 @@ Choose self-managed registration when:
 * You need custom tool logic that no managed type provides.
 * You want a unified MCP URL (and Inspector / observability / agent access) across servers without standing up your own gateway.
 
-If you don't already run a server, prefer a managed type — see xref:managed-catalog.adoc[] for the catalog.
+If you don't already run a server, prefer a managed type — see xref:managed-catalog.adoc[Managed catalog] for the catalog.
 
 == Prerequisites
 
@@ -34,7 +34,7 @@ If you don't already run a server, prefer a managed type — see xref:managed-ca
 * The endpoint URL. `http://` is allowed for everything except user-delegated OAuth, which requires `https://` (proto rule `remote_mcp.user_oauth_requires_https`).
 * Knowledge of which transport the server speaks — SSE or Streamable HTTP. If you don't know, see <<test-transport>>.
 * If using static-key or service-account-OAuth: secrets pre-created in the ADP secret store, `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`).
-* If using user-delegated OAuth: an OAuth Provider already configured. See xref:user-delegated-oauth.adoc[].
+* If using user-delegated OAuth: an OAuth Provider already configured. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Create the server
 
@@ -42,7 +42,7 @@ If you don't already run a server, prefer a managed type — see xref:managed-ca
 . In the marketplace picker, choose *Remote (Proxied)*.
 +
 // TODO: screenshot of the marketplace picker with Remote (Proxied) highlighted.
-. Fill in the identity fields (`name`, `description`, `enabled`) — same constraints as in xref:create-server.adoc[].
+. Fill in the identity fields (`name`, `description`, `enabled`) — same constraints as in xref:create-server.adoc[Create an MCP Server].
 . Provide the *URL* and *Transport*.
 . Configure authentication (see <<authentication>>).
 . Click *Create*.
@@ -91,13 +91,13 @@ The five auth modes from xref:create-server.adoc#configure-authentication[create
 |The upstream server already validates client tokens — Redpanda just forwards the caller's `Authorization` header.
 |===
 
-For user-delegated OAuth, the URL must be `https://` and you also need an OAuth Provider. See xref:user-delegated-oauth.adoc[].
+For user-delegated OAuth, the URL must be `https://` and you also need an OAuth Provider. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
 
 // TODO: screenshots of each auth-mode form panel after walking `adp-production`.
 
 == Tool discovery
 
-After create, Redpanda runs a live `tools/list` (the `ListMCPServerTools` RPC) against the server. The result is cached on the `MCPServer.tools` output-only field and shown on the detail page's *Overview* tab. The *Inspector* tab (see xref:test-tools.adoc[]) exercises individual tools.
+After create, Redpanda runs a live `tools/list` (the `ListMCPServerTools` RPC) against the server. The result is cached on the `MCPServer.tools` output-only field and shown on the detail page's *Overview* tab. The *Inspector* tab (see xref:test-tools.adoc[Test a server's tools]) exercises individual glossterm:tool[,tools].
 
 If the tools list is empty or stale, hit the *Refresh tools* action on the Overview tab to re-query the server.
 
@@ -110,7 +110,7 @@ If the tools list is empty or stale, hit the *Refresh tools* action on the Overv
 |Error |What it means
 
 |`OAuthConnectionRequired`
-|The user-delegated auth path needs a stored token vault entry for the calling user. Redpanda surfaces an `authorize_url` so the user can complete the consent flow. See xref:user-delegated-oauth.adoc[].
+|The user-delegated auth path needs a stored token vault entry for the calling user. Redpanda surfaces an `authorize_url` so the user can complete the consent flow. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
 
 |`OAuthTokenExpired`
 |The user's stored token has expired and refresh failed. Surface the new authorize URL and have the user re-consent.
@@ -142,6 +142,6 @@ If the tools list is empty or stale, hit the *Refresh tools* action on the Overv
 
 == Out of scope
 
-* *User-delegated OAuth consent flow* — see xref:user-delegated-oauth.adoc[].
-* *Multi-server aggregation* (one MCP URL fronting many servers) — handled by AI Gateway. See xref:ai-gateway:aggregation.adoc[].
+* *User-delegated OAuth consent flow* — see xref:user-delegated-oauth.adoc[User-delegated OAuth].
+* *Multi-server aggregation* (one MCP URL fronting many servers) — handled by AI Gateway. See xref:ai-gateway:aggregation.adoc[MCP aggregation].
 * *Server hosting and deployment guidance* — Redpanda doesn't operate self-managed servers; deployment, scaling, and patching are your responsibility.

@@ -8,7 +8,7 @@
 
 include::ROOT:partial$adp-la.adoc[]
 
-The Inspector is a built-in MCP client embedded in the ADP UI. It runs on top of the same JSON-RPC connection that agents use, so a tool that works in the Inspector will work for an agent. Use the Inspector to verify your server end-to-end after creating it (xref:create-server.adoc[]) or whenever you change a tool's schema.
+Test your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] using the Inspector — a built-in MCP client in the ADP UI. It runs on the same JSON-RPC connection that agents use, so if a tool works in the Inspector, it will work for an agent. Use this after creating your server (xref:create-server.adoc[Create an MCP Server]) or whenever you change a tool's schema.
 
 After completing this guide, you will be able to:
 
@@ -86,7 +86,7 @@ The Session panel keeps a running history of every call you've made through the 
 |Error |Meaning and fix
 
 |`OAuthConnectionRequired`
-|User-delegated auth has no stored token for the calling user. Redpanda includes an `authorize_url` in the error detail; complete the consent flow per xref:user-delegated-oauth.adoc[].
+|User-delegated auth has no stored token for the calling user. Redpanda includes an `authorize_url` in the error detail; complete the consent flow per xref:user-delegated-oauth.adoc[User-delegated OAuth].
 
 |`OAuthTokenExpired`
 |Stored token is expired and refresh failed. Re-consent through *My Connections*.
@@ -106,5 +106,5 @@ The Session panel keeps a running history of every call you've made through the 
 == Out of scope
 
 * *Pointing an agent at the server* — see the Agents docs.
-* *Aggregating multiple servers* — see xref:ai-gateway:aggregation.adoc[].
+* *Aggregating multiple servers* — see xref:ai-gateway:aggregation.adoc[MCP aggregation].
 * *Debugging the upstream system itself* (your SQL database, your Slack app) — outside the scope of MCP tooling.

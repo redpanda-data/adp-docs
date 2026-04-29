@@ -1,0 +1,224 @@
+{
+  "tests": [
+    {
+      "testId": "use-inspector-test-tool",
+      "description": "Test an MCP server's tools using the Inspector following the documented procedure",
+      "steps": [
+        {
+          "description": "Navigate to MCP Servers section",
+          "goTo": "https://adp.redpanda.com/mcp-servers"
+        },
+        {
+          "description": "Verify MCP Servers page loaded",
+          "find": "MCP Servers"
+        },
+        {
+          "description": "Click into an existing server (assumes test-sql-server from previous test)",
+          "click": "test-sql-server"
+        },
+        {
+          "description": "Verify server detail page loaded",
+          "find": "Overview"
+        },
+        {
+          "description": "Switch to Inspector tab",
+          "click": "Inspector"
+        },
+        {
+          "description": "Verify Inspector tab loaded with four panels",
+          "find": "Tools"
+        },
+        {
+          "description": "Verify Resources panel exists",
+          "find": "Resources"
+        },
+        {
+          "description": "Verify Prompts panel exists",
+          "find": "Prompts"
+        },
+        {
+          "description": "Verify Session panel exists",
+          "find": "Session"
+        }
+      ]
+    },
+    {
+      "testId": "inspector-tools-panel-run-tool",
+      "description": "Select a tool, fill in parameters, and run it from the Tools panel",
+      "steps": [
+        {
+          "description": "Navigate to Inspector tab (assumes already on server detail page)",
+          "click": "Inspector"
+        },
+        {
+          "description": "Verify Tools panel is visible",
+          "find": "Tools"
+        },
+        {
+          "description": "Select a tool from the list (example: query tool)",
+          "click": "query"
+        },
+        {
+          "description": "Verify tool form rendered on right-hand pane",
+          "find": "Run"
+        },
+        {
+          "description": "Fill in a tool parameter (example SQL query field)",
+          "type": {
+            "keys": "SELECT 1",
+            "selector": "textarea[name='query']"
+          }
+        },
+        {
+          "description": "Click Run button to execute the tool",
+          "click": "Run"
+        },
+        {
+          "description": "Verify response appears below the form",
+          "wait": 2000
+        }
+      ]
+    },
+    {
+      "testId": "inspector-verify-code-mode-tools",
+      "description": "Verify code-mode helper tools appear when code mode is enabled",
+      "steps": [
+        {
+          "description": "Navigate to a server with code mode enabled",
+          "goTo": "https://adp.redpanda.com/mcp-servers/test-sql-server"
+        },
+        {
+          "description": "Open Inspector tab",
+          "click": "Inspector"
+        },
+        {
+          "description": "Verify _search helper tool exists",
+          "find": "_search"
+        },
+        {
+          "description": "Verify _execute helper tool exists",
+          "find": "_execute"
+        }
+      ]
+    },
+    {
+      "testId": "inspector-resources-panel",
+      "description": "Navigate and inspect resources in the Resources panel",
+      "steps": [
+        {
+          "description": "Navigate to Inspector tab",
+          "click": "Inspector"
+        },
+        {
+          "description": "Switch to Resources panel",
+          "click": "Resources"
+        },
+        {
+          "description": "Verify Resources panel loaded",
+          "find": {
+            "selector": "[data-panel='resources']",
+            "timeout": 3000
+          }
+        },
+        {
+          "description": "Click a resource to load its content (if available)",
+          "wait": 1000
+        }
+      ]
+    },
+    {
+      "testId": "inspector-prompts-panel",
+      "description": "Navigate and test prompt templates in the Prompts panel",
+      "steps": [
+        {
+          "description": "Navigate to Inspector tab",
+          "click": "Inspector"
+        },
+        {
+          "description": "Switch to Prompts panel",
+          "click": "Prompts"
+        },
+        {
+          "description": "Verify Prompts panel loaded",
+          "find": {
+            "selector": "[data-panel='prompts']",
+            "timeout": 3000
+          }
+        },
+        {
+          "description": "Click a prompt template (if available)",
+          "wait": 1000
+        },
+        {
+          "description": "Verify prompt form renders",
+          "find": "Run"
+        }
+      ]
+    },
+    {
+      "testId": "inspector-session-history",
+      "description": "Verify session history panel tracks calls",
+      "steps": [
+        {
+          "description": "Navigate to Inspector tab",
+          "click": "Inspector"
+        },
+        {
+          "description": "Run a tool to generate session history",
+          "click": "query"
+        },
+        {
+          "description": "Click Run button",
+          "click": "Run"
+        },
+        {
+          "description": "Switch to Session panel",
+          "click": "Session"
+        },
+        {
+          "description": "Verify session history shows the recent call",
+          "find": {
+            "selector": "[data-panel='session']",
+            "timeout": 3000
+          }
+        },
+        {
+          "description": "Verify request and response are logged",
+          "find": "request"
+        }
+      ]
+    },
+    {
+      "testId": "inspector-oauth-connection-required-error",
+      "description": "Verify OAuthConnectionRequired error displays authorize_url",
+      "steps": [
+        {
+          "description": "Navigate to a server with user-delegated OAuth (no stored token)",
+          "goTo": "https://adp.redpanda.com/mcp-servers/oauth-test-server"
+        },
+        {
+          "description": "Open Inspector and run a tool",
+          "click": "Inspector"
+        },
+        {
+          "description": "Select a tool",
+          "click": {
+            "selector": "[data-tool]:first-child"
+          }
+        },
+        {
+          "description": "Click Run",
+          "click": "Run"
+        },
+        {
+          "description": "Verify OAuthConnectionRequired error appears",
+          "find": "OAuthConnectionRequired"
+        },
+        {
+          "description": "Verify authorize_url is shown in error detail",
+          "find": "authorize_url"
+        }
+      ]
+    }
+  ]
+}

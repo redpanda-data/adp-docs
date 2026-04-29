@@ -8,7 +8,7 @@
 
 include::ROOT:partial$adp-la.adoc[]
 
-An MCP server is the resource that agents connect to in the Agentic Data Plane. It exposes tools, resources, and prompts that an agent can discover and invoke. This page walks through creating one — managed (hosted by Redpanda) or self-managed (proxied to a server you run) — including authentication and code mode.
+Create MCP servers to give agents structured access to your databases, queues, CRMs, and other business systems. Each server exposes glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] that an agent can discover and invoke. Choose managed types that Redpanda hosts for you, or register self-managed servers you host yourself.
 
 After completing this guide, you will be able to:
 
@@ -24,7 +24,7 @@ After completing this guide, you will be able to:
 * For any auth mode that uses upstream credentials: the credentials in hand and a secret already created in the ADP secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
 +
 // TODO: xref the ADP secrets-management page once confirmed.
-* For user-delegated OAuth: an OAuth Provider resource already configured. See xref:user-delegated-oauth.adoc[].
+* For user-delegated OAuth: an OAuth Provider resource already configured. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Open the MCP Servers page
 
@@ -42,7 +42,7 @@ The marketplace picker lists every managed type as a card and includes a *Remote
 
 // TODO: screenshot of the marketplace picker, with both a managed card and the Remote (Proxied) option visible.
 
-For a tour of every managed type and which one fits your use case, see xref:managed-catalog.adoc[]. To go deep on the self-managed path (transport choices, TLS, multi-server aggregation), see xref:register-remote.adoc[].
+For a tour of every managed type and which one fits your use case, see xref:managed-catalog.adoc[Managed catalog]. To go deep on the self-managed path (transport choices, TLS, multi-server aggregation), see xref:register-remote.adoc[Register a self-managed server].
 
 == Name and basic fields
 
@@ -73,13 +73,13 @@ Each managed type ships its own configuration schema. The form on this page is r
 
 // TODO: screenshot of the SQL configuration form as the exemplar (it covers the most common field shapes).
 
-For per-type fields, see xref:managed-catalog.adoc[] for one-line entries on every type, and the deep-dive pages for SQL, Kafka, Slack, Jira, and OpenAPI:
+For per-type fields, see xref:managed-catalog.adoc[Managed catalog] for one-line entries on every type, and the deep-dive pages for SQL, Kafka, Slack, Jira, and OpenAPI:
 
-* xref:managed/sql.adoc[]
-* xref:managed/kafka.adoc[]
-* xref:managed/slack.adoc[]
-* xref:managed/jira.adoc[]
-* xref:managed/openapi.adoc[]
+* xref:managed/sql.adoc[SQL]
+* xref:managed/kafka.adoc[Kafka]
+* xref:managed/slack.adoc[Slack]
+* xref:managed/jira.adoc[Jira]
+* xref:managed/openapi.adoc[OpenAPI]
 
 == Configure the self-managed flow (Remote/Proxied only)
 
@@ -95,7 +95,7 @@ Two fields on top of the identity fields:
 
 |Transport
 |Yes
-|`SSE` (server-sent events) or `Streamable HTTP` (newer bidirectional protocol). Pick whichever your server speaks. See xref:register-remote.adoc[] for how to test which transport your server uses.
+|`SSE` (server-sent events) or `Streamable HTTP` (newer bidirectional protocol). Pick whichever your server speaks. See xref:register-remote.adoc[Register a self-managed server] for how to test which transport your server uses.
 |===
 
 == Configure authentication
@@ -119,7 +119,7 @@ Both managed and self-managed servers offer the same five authentication modes (
 |2-legged OAuth client credentials. One shared upstream identity for every caller. Provide `client_id`, `client_secret_ref`, `token_url`, and any required `scopes`.
 
 |*User-delegated OAuth*
-|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. Pick the configured *OAuth Provider* and the required scopes. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; the resulting connection is stored in the token vault and shows up under *My Connections*. See xref:user-delegated-oauth.adoc[] for the full flow.
+|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. Pick the configured *OAuth Provider* and the required scopes. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; the resulting connection is stored in the token vault and shows up under *My Connections*. See xref:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
 |===
 
 NOTE: Choosing between *Service-account OAuth* and *User-delegated OAuth* is the credential-mode decision. Service-account auth gives every caller the same identity at the upstream; user-delegated auth gives each caller their own.
@@ -140,7 +140,7 @@ NOTE: Defer advanced code-mode patterns (sandboxing limits, runtime selection, d
 
 . Click *Create*. The server appears in the list with a *Type* badge — *Managed* or *Self-managed*.
 . Open the detail page. The *Overview* tab shows the *API URL* — this is the MCP URL agents connect to. Copy it for use later.
-. Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:test-tools.adoc[] for how to call them.
+. Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:test-tools.adoc[Test a server's tools] for how to call them.
 
 A populated tools list confirms that the connection works and credentials resolve correctly. If the list is empty or the tab shows an error, see <<troubleshooting>>.
 
@@ -178,7 +178,7 @@ A populated tools list confirms that the connection works and credentials resolv
 
 The following capabilities are not configured on this page; see the linked content instead.
 
-* *User-delegated OAuth consent flow* — see xref:user-delegated-oauth.adoc[].
-* *Inspector usage* — see xref:test-tools.adoc[].
-* *Multi-server aggregation* — handled by AI Gateway. See xref:ai-gateway:aggregation.adoc[].
-* *Per-type configuration depth* — see xref:managed-catalog.adoc[] and the deep-dive pages.
+* *User-delegated OAuth consent flow* — see xref:user-delegated-oauth.adoc[User-delegated OAuth].
+* *Inspector usage* — see xref:test-tools.adoc[Test a server's tools].
+* *Multi-server aggregation* — handled by AI Gateway. See xref:ai-gateway:aggregation.adoc[MCP aggregation].
+* *Per-type configuration depth* — see xref:managed-catalog.adoc[Managed catalog] and the deep-dive pages.

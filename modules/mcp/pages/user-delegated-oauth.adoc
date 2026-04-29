@@ -23,11 +23,11 @@ After completing this guide, you will be able to:
 // TODO: link the OAuth Provider how-to once it exists.
 * The required scopes for the upstream API you plan to call.
 * For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
-* For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:managed-catalog.adoc[] before configuring.
+* For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:managed-catalog.adoc[Managed catalog] before configuring.
 
 == Configure the server
 
-. Create or edit your MCP server (see xref:create-server.adoc[]).
+. Create or edit your MCP server (see xref:create-server.adoc[Create an MCP Server]).
 . In the auth section, choose *User-delegated OAuth*.
 . Pick the configured *OAuth Provider* (`UserOAuthAuth.provider_name`).
 . List the *required scopes* (`UserOAuthAuth.required_scopes`). Redpanda enforces these at consent time.
@@ -64,7 +64,7 @@ Redpanda transparently refreshes tokens before they expire, using the refresh to
 
 When refresh fails (revoked token, idle too long, upstream error), the next tool call returns `OAuthTokenExpired` with a `reason`. The user must re-consent through the same flow as initial connection.
 
-== Service-account contrast
+== Service-account OAuth contrast
 
 If you want one shared upstream identity for every caller (instead of per-user identities), choose *Service-account OAuth* on the server instead of *User-delegated OAuth*. With service-account OAuth, every caller of every tool sees the same upstream identity; the upstream system has no idea which ADP user invoked the tool. With user-delegated OAuth, the upstream system sees each end-user as themselves and applies their own permissions.
 
@@ -72,8 +72,8 @@ For the field-by-field service-account-OAuth setup, see xref:create-server.adoc#
 
 == Worked examples
 
-* xref:managed/slack.adoc[] — consumer-facing user-delegated OAuth example. Shows the consent flow against a real Slack workspace.
-* xref:managed/jira.adoc[] — enterprise user-delegated OAuth example. Atlassian's OAuth flow differs from Slack's; this page calls out scope-management gotchas.
+* xref:managed/slack.adoc[Slack] — consumer-facing user-delegated OAuth example. Shows the consent flow against a real Slack workspace.
+* xref:managed/jira.adoc[Jira] — enterprise user-delegated OAuth example. Atlassian's OAuth flow differs from Slack's; this page calls out scope-management gotchas.
 
 == Troubleshooting
 
