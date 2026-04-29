@@ -68,7 +68,7 @@ Agent transcripts contain these span types:
 | Identify which model was called, measure LLM response time, and debug LLM API errors.
 
 | `rpcn-mcp`
-| MCP tool invocation representing calls to Remote MCP servers. Shows tool execution time, including network latency and tool processing. Child spans with `instrumentationScope.name` set to `redpanda-connect` represent internal Redpanda Connect processing.
+| MCP tool invocation representing calls to Remote MCP servers. Shows tool execution time, including network latency and tool processing.
 | Measure tool execution time and identify slow MCP tool calls.
 |===
 
@@ -102,7 +102,7 @@ MCP server transcripts contain these span types:
 | Measure total MCP server response time and identify slow tool invocations.
 
 | `service`
-| Internal service processing span that appears at multiple levels in the hierarchy. Represents Redpanda Connect service operations including routing, processing, and component execution.
+| Internal service processing span that appears at multiple levels in the hierarchy. Represents internal MCP server operations including routing, processing, and component execution.
 | Track internal processing overhead and identify where time is spent in the service layer.
 
 | Tool name (for example, `get_order_status`, `get_customer_history`)
@@ -114,7 +114,7 @@ MCP server transcripts contain these span types:
 | Measure total processor pipeline execution time.
 
 | Processor name (for example, `mapping`, `http`, `branch`)
-| Individual processor execution span representing a single Redpanda Connect processor. The span name matches the processor type.
+| Individual processor execution span representing a single internal processor in the MCP server pipeline. The span name matches the processor type.
 | Identify slow processors and debug processing logic.
 |===
 
@@ -136,7 +136,7 @@ This shows:
 3. Processor pipeline: 43 microseconds
 4. Mapping processor: 18 microseconds (data transformation)
 
-The majority of time (4+ seconds) is spent in tool execution, while internal processing (mapping) takes only microseconds. This indicates the tool itself (likely making external API calls or database queries) is the bottleneck, not Redpanda Connect's internal processing.
+The majority of time (4+ seconds) is spent in tool execution, while internal processing (mapping) takes only microseconds. This indicates the tool itself (likely making external API calls or database queries) is the bottleneck, not the MCP server's internal processing.
 
 == Transcript layers and scope
 
@@ -165,10 +165,6 @@ A complete agent transcript includes these layers:
 | MCP Server
 | `rpcn-mcp`
 | MCP server tool execution. Shows tool name, input parameters, result size, and execution time. Appears as a separate `service.name` in resource attributes.
-
-| Redpanda Connect
-| `redpanda-connect`
-| Internal Redpanda Connect component execution within MCP tools. Shows pipeline and individual component spans.
 |===
 
 === How layers connect
@@ -182,7 +178,7 @@ ai-agent-http-server (HTTP Server layer)
     ├── execute_tool get_order_status (AI SDK layer)
     │   └── HTTP POST (HTTP Client layer)
     │       └── get_order_status (MCP Server layer, different service)
-    │           └── processors (Redpanda Connect layer)
+    │           └── processors (MCP Server layer)
     └── chat gpt-5-nano (AI SDK layer, LLM call 2)
 ----
 
@@ -232,9 +228,6 @@ MCP Server layer:
 
 - Tool-specific attributes like `order_id`, `customer_id`
 - `result_prefix`, `result_length`: Tool result metadata
-
-Redpanda Connect layer:
-
 - Component-specific attributes from your tool configuration
 
 The `scope.name` field identifies which instrumentation layer created each span.
@@ -263,7 +256,7 @@ Each span captures a unit of work. Here's what a typical MCP tool invocation loo
 * `traceId` links all spans in the same request across services
 * `spanId` uniquely identifies this span
 * `name` identifies the operation or tool
-* `instrumentationScope.name` identifies which layer created the span (`rpcn-mcp` for MCP tools, `redpanda-connect` for internal processing)
+* `instrumentationScope.name` identifies which layer created the span (for example, `rpcn-mcp` for MCP tools)
 * `attributes` contain operation-specific metadata
 * `status.code` indicates success (0) or error (2)
 
