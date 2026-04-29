@@ -1,0 +1,25 @@
+= Agent Network
+:description: Investigate your AI deployment with an interactive topology graph showing every agent and the resources it touches.
+:page-topic-type: how-to
+:personas: platform_admin
+// TODO: confirm persona vocabulary. PRD names HoT (Head of Trust) and CISO as primary readers for the topology graph; using canonical `platform_admin` until docs-team-standards confirms whether to add `security_admin` or equivalent.
+
+include::ROOT:partial$adp-la.adoc[]
+
+[NOTE]
+====
+*Coming at GA (2026-06-15).* The Agent Network sub-page ships in V1 of the governance dashboard. The V0 release (2026-05-15) covers the xref:dashboard/index.adoc[overview] only.
+====
+
+The *Agent Network* sub-page provides an interactive topology graph that traces every agent in your deployment through the LLM providers and MCP servers it depends on. Use it when an anomaly in the xref:dashboard/index.adoc[fleet view] needs to be traced through dependencies, or when you need to audit which agents access a sensitive resource.
+
+// TODO: shipping at GA. Fill against the V1 prototype once the Agent Network design lands per the Governance V0 PRD §"Future Versions". Sections to draft: When to use it, Node types, Edge types, Reading the graph (hover/click/right-click interactions), Runtime overlays (status + volume), Table-view alternative, Click-through to agent config, Common investigation flows, Limits.
+
+== Coming at GA
+
+This page is staged ahead of GA. The full how-to is being drafted against the V1 design and the live Agent Network surface; it ships before 2026-06-15.
+
+In the meantime, see:
+
+* xref:dashboard/index.adoc[Read the governance overview] — the V0 surface, available now.
+* xref:dashboard/violations.adoc[Authorization denials and violations] — also shipping at GA.

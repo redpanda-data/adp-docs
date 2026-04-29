@@ -54,7 +54,10 @@
 *** For Builders
 **** xref:ai-gateway:builders/discover-gateways.adoc[Discover gateways]
 * Trust & Governance
-** xref:governance:dashboard.adoc[Governance dashboard]
+** Governance dashboard
+*** xref:governance:dashboard/index.adoc[Read the overview]
+*** xref:governance:dashboard/agent-network.adoc[Agent Network]
+*** xref:governance:dashboard/violations.adoc[Authorization denials and violations]
 ** xref:governance:guardrails.adoc[Configure guardrails]
 ** xref:governance:budgets.adoc[Token budgets and limits]
 ** xref:governance:kill-switch.adoc[Kill switch]
