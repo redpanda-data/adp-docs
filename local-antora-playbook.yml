@@ -12,8 +12,8 @@ output:
   clean: true
 content:
   sources:
-  - url: https://github.com/redpanda-data/adp-docs
-    branches: main
+  - url: .
+    branches: HEAD
   - url: https://github.com/redpanda-data/docs
     branches: [main, v/*, api, shared, site-search,'!v-end-of-life/*']
   - url: https://github.com/redpanda-data/cloud-docs
