@@ -319,7 +319,7 @@ After configuring Cursor IDE, verify it connects correctly to your AI Gateway.
 
 Then verify in the AI Gateway dashboard:
 
-. Open the Redpanda Cloud Console
+. Sign in to ADP
 . Navigate to your gateway's observability dashboard
 . Filter by gateway ID
 . Verify:
@@ -513,7 +513,7 @@ curl -H "Authorization: Bearer YOUR_API_KEY" \
      <your-gateway-endpoint>/models
 ----
 +
-You should receive a list of available models. If you get `401 Unauthorized`, regenerate your API key in the Redpanda Cloud Console.
+You should receive a list of available models. If you get `401 Unauthorized`, regenerate your API key in ADP.
 
 . **Gateway endpoint URL mismatch**
 +
@@ -665,7 +665,7 @@ Check if `.vscode/settings.json` in your project root overrides global settings 
 
 . **Gateway geographic distance**
 +
-If your gateway is in a different region than you or the upstream provider, this adds network latency. Check gateway region in the Redpanda Cloud Console.
+If your gateway is in a different region than you or the upstream provider, this adds network latency. Check gateway region in ADP.
 
 . **Provider pool failover**
 +

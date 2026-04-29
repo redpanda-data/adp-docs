@@ -949,4 +949,4 @@ Each request evaluates CEL expression once. Total latency impact:
 
 == Next steps
 
-* *Apply CEL routing*: See the gateway configuration options available in the Redpanda Cloud console.
+* *Apply CEL routing*: See the gateway configuration options available in ADP.

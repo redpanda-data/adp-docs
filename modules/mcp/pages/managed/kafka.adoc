@@ -73,7 +73,7 @@ The Kafka managed type's authentication is part of its config, not the generic M
 |Username and password over TLS. Common for managed Kafka services.
 
 |`SCRAM-SHA-256` / `SCRAM-SHA-512`
-|Salted challenge-response. Default for Redpanda Cloud.
+|Salted challenge-response. Default for Redpanda.
 
 |`OAUTHBEARER`
 |Token-based; useful when fronting Kafka with an OAuth proxy.

@@ -58,7 +58,7 @@ Continue.dev works with multiple providers. Enable the providers your users will
 
 To enable Anthropic with native format support:
 
-. Navigate to *AI Gateway* > *Providers* in the Redpanda Cloud console
+. Navigate to *AI Gateway* > *Providers* in ADP
 . Select *Anthropic* from the provider list
 . Click *Add configuration*
 . Enter your Anthropic API key
@@ -378,7 +378,7 @@ Continue.dev clients authenticate using bearer tokens.
 
 === Generate API tokens
 
-. Navigate to *Security* > *API Tokens* in the Redpanda Cloud console
+. Navigate to *Security* > *API Tokens* in ADP
 . Click *Create Token*
 . Enter token details:
 +

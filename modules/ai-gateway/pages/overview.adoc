@@ -1,5 +1,5 @@
 = AI Gateway Overview
-:description: AI Gateway is Redpanda's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
+:description: AI Gateway is ADP's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
 :page-topic-type: overview
 :personas: platform_admin, app_developer, evaluator
 // TODO: Add 'redpanda-cloud:ai-agents:ai-gateway/what-is-ai-gateway.adoc' to page-aliases after ai-agents is removed from cloud-docs
@@ -8,7 +8,7 @@
 :learning-objective-2: Explain how LLM providers, secrets, and OIDC authentication fit together in AI Gateway
 :learning-objective-3: Identify use cases where AI Gateway fits, and use cases where it does not
 
-AI Gateway is Redpanda's managed proxy for LLM APIs. Instead of giving every application a provider API key and letting it call the upstream directly, you create an *LLM provider* in Redpanda Cloud and point your applications at a Redpanda-hosted proxy URL. Redpanda handles the upstream credentials, forwards the request, and records usage. Your code continues to use the provider's native SDK.
+AI Gateway is ADP's managed proxy for LLM APIs. Instead of giving every application a provider API key and letting it call the upstream directly, you create an *LLM provider* in ADP and point your applications at a Redpanda-hosted proxy URL. Redpanda handles the upstream credentials, forwards the request, and records usage. Your code continues to use the provider's native SDK.
 
 After reading this page, you will be able to:
 
@@ -46,17 +46,15 @@ Use the provider's own SDK: OpenAI, Anthropic, Google AI, AWS Bedrock, or any Op
 
 === Managed authentication
 
-Applications authenticate to Redpanda with OIDC service accounts instead of long-lived provider API keys. Service accounts live in Redpanda Cloud IAM, follow the same role and audit model as every other resource, and mint short-lived tokens that are easy to revoke. The recommended local flow uses the `rpai` CLI for token refresh; CI and programmatic clients use the OIDC client-credentials grant directly. See xref:connect-agent.adoc[Connect your agent].
+Applications authenticate to ADP with OIDC service accounts instead of long-lived provider API keys. Service accounts use the same role and audit model as every other ADP resource, and mint short-lived tokens that are easy to revoke. The recommended local flow uses the `rpai` CLI for token refresh; CI and programmatic clients use the OIDC client-credentials grant directly. See xref:connect-agent.adoc[Connect your agent].
 
 === Per-provider observability
 
-The provider's detail page in the Cloud UI records request and token counts. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
+The provider's detail page in the ADP UI records request and token counts. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
 
 == What's in the UI
 
-// TODO: this guide describes the cluster-embedded view available today on cloud.redpanda.com. The standalone-ADP UI launches as a separate product surface; sign-in URL, IAM model, and sidebar layout will change. Update this section once standalone ADP ships.
-
-In Redpanda Cloud, open your cluster and expand the *ADP* section in the sidebar. You'll see four sub-items:
+In the ADP UI you'll find four areas:
 
 * *LLM Providers*: Create, edit, enable, and delete providers. This is the home of AI Gateway configuration.
 * *MCP Servers*: Register glossterm:MCP[] tool servers for agents. Separate from the AI Gateway proxy URL.
@@ -97,7 +95,7 @@ AI Gateway is a good fit when you want to:
 
 * Pull provider API keys out of application code and manage them centrally.
 * Keep LLM traffic inside your dataplane's VPC and your secrets out of application code.
-* Authenticate applications to LLMs using the same OIDC identity you use for other Redpanda Cloud resources.
+* Authenticate applications to LLMs using the same OIDC identity you use for other ADP resources.
 * Run a self-hosted OpenAI-compatible endpoint (vLLM, Ollama, LM Studio) alongside 1P providers behind a single management plane.
 * Separate operator and developer roles. Operators configure providers and credentials; developers point at proxy URLs.
 
@@ -109,12 +107,12 @@ It is not the right fit when you:
 [[out-of-scope]]
 == Out of scope
 
-AI Gateway does not provide these capabilities. For current status, consult the Redpanda Cloud release notes.
+AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
 
 * *Multi-provider routing, failover, and retries.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
 * *Spend limits.* Per-user, per-org, and global cost caps are not available. The provider detail page shows a *Cost & usage* placeholder labeled "Coming soon"; see xref:governance:budgets.adoc[Token budgets and limits] for the read-only spending visibility shipping at GA.
 * *Rate limits.* Requests-per-second, per-minute, or per-day caps are not available.
-* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *ADP* → *MCP Servers*.
+* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the ADP UI.
 
 == Next steps
 

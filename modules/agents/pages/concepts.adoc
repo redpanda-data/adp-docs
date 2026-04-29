@@ -110,7 +110,7 @@ MCP tools extend agent capabilities beyond text generation. Understanding when a
 
 === Synchronous tool execution
 
-In Redpanda Cloud, tool calls block the agent. When the agent decides to invoke a tool, it pauses and waits while the tool executes (querying a database, calling an API, or processing data). When the tool returns its result, the agent resumes reasoning.
+In ADP, tool calls block the agent. When the agent decides to invoke a tool, it pauses and waits while the tool executes (querying a database, calling an API, or processing data). When the tool returns its result, the agent resumes reasoning.
 
 This synchronous model means latency adds up across multiple tool calls, the agent sees tool results sequentially rather than in parallel, and long-running tools can delay or fail agent requests due to timeouts.
 

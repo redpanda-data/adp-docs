@@ -58,7 +58,7 @@ Cursor IDE works with multiple providers through OpenAI-compatible transforms. E
 
 Cursor sends OpenAI-formatted requests but can route to Anthropic models. Configure the gateway to transform these requests:
 
-. Navigate to *AI Gateway* > *Providers* in the Redpanda Cloud console
+. Navigate to *AI Gateway* > *Providers* in ADP
 . Select *Anthropic* from the provider list
 . Click *Add configuration*
 . Enter your Anthropic API key
@@ -342,7 +342,7 @@ Cursor clients authenticate using bearer tokens in the `Authorization` header.
 
 === Generate API tokens
 
-. Navigate to *Security* > *API Tokens* in the Redpanda Cloud console
+. Navigate to *Security* > *API Tokens* in ADP
 . Click *Create Token*
 . Enter token details:
 +

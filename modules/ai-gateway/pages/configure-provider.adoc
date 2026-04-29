@@ -17,9 +17,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* Access to a Redpanda Cloud cluster with ADP enabled.
-+
-// TODO: this guide describes the cluster-embedded view available today on cloud.redpanda.com. The standalone-ADP UI launches as a separate product surface; sign-in URL, IAM model, and role-permission requirements will change. Update once standalone ADP ships.
+* Access to ADP.
 * An API key (or AWS credentials for Bedrock) for the upstream provider you want to configure.
 * One or more secrets already created in your dataplane's secret store for the provider's credentials. Secret references must use `UPPER_SNAKE_CASE`. For example: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `AWS_ACCESS_KEY_ID`.
 +
@@ -27,8 +25,8 @@ After completing this guide, you will be able to:
 
 == Open the Create LLM provider page
 
-. Sign in to https://cloud.redpanda.com[cloud.redpanda.com] and open the cluster you want to configure.
-. In the sidebar, expand *ADP* and select *LLM Providers*.
+. Sign in to ADP.
+. Open *LLM Providers* in the sidebar.
 . Click *Create provider*. The *Create LLM provider* page opens.
 
 == Fill in the Provider card
@@ -232,12 +230,12 @@ The provider detail page shows whether Auth passthrough is enabled in the *Conne
 
 == Out of scope
 
-AI Gateway does not provide these capabilities. For current status, consult the Redpanda Cloud release notes.
+AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
 
 * *Multi-provider routing, failover, and retries across providers.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
 * *Spend limits.* Per-user, per-org, and global cost caps are not available. The provider detail page shows a *Cost & usage* placeholder labeled "Coming soon"; see xref:governance:budgets.adoc[Token budgets and limits].
 * *Rate limits.* Requests-per-second, per-minute, or per-day limits are not available.
-* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *ADP* → *MCP Servers*.
+* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the ADP UI.
 
 == Next steps
 

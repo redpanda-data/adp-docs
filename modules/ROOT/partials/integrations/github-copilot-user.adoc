@@ -449,7 +449,7 @@ Chat requests appear in the gateway dashboard with:
 
 === Verify in dashboard
 
-. Open the Redpanda Cloud Console
+. Sign in to ADP
 . Navigate to your gateway's observability dashboard
 . Filter by gateway ID
 . Verify:
@@ -599,7 +599,7 @@ curl -H "Authorization: Bearer YOUR_API_KEY" \
      https://gw.ai.panda.com/v1/models
 ----
 +
-You should receive a list of available models. If you get `401 Unauthorized`, regenerate your API key in the Redpanda Cloud Console.
+You should receive a list of available models. If you get `401 Unauthorized`, regenerate your API key in ADP.
 
 . **Extension/plugin disabled**
 +
@@ -654,7 +654,7 @@ echo $REDPANDA_API_KEY  # Should print your API key
 
 . **Gateway geographic distance**
 +
-If your gateway is in a different region than you or the upstream provider, this adds network latency. Check gateway region in the Redpanda Cloud Console.
+If your gateway is in a different region than you or the upstream provider, this adds network latency. Check gateway region in ADP.
 
 . **Slow model for completion**
 +
@@ -764,7 +764,7 @@ gpt-5.2
 +
 Verify the model is enabled in your AI Gateway configuration:
 +
-.. Open Redpanda Cloud Console
+.. Sign in to ADP
 .. Navigate to your gateway
 .. Check enabled providers and models
 

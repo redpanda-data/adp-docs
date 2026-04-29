@@ -6,7 +6,7 @@
 :learning-objective-2: Apply appropriate authentication for internal versus external integration
 :learning-objective-3: Select the right communication protocol for your integration scenario
 
-Redpanda Cloud supports multiple integration patterns for agents, pipelines, and external applications. Choose the pattern that matches your integration scenario.
+ADP supports multiple integration patterns for agents, pipelines, and external applications. Choose the pattern that matches your integration scenario.
 
 After reading this page, you will be able to:
 
@@ -16,7 +16,7 @@ After reading this page, you will be able to:
 
 == Integration scenarios
 
-Redpanda Cloud supports three primary integration scenarios based on who initiates the call and where the caller is located:
+ADP supports three primary integration scenarios based on who initiates the call and where the caller is located:
 
 [cols="1,2,2,1"]
 |===
@@ -33,7 +33,7 @@ Redpanda Cloud supports three primary integration scenarios based on who initiat
 | xref:pipeline-integration-patterns.adoc[]
 
 | External system calls agent
-| Your application or agent (hosted outside Redpanda Cloud) calls Redpanda Cloud agents using the A2A protocol
+| Your application or agent (hosted outside ADP) calls ADP agents using the A2A protocol
 | Backend services, CLI tools, custom UIs, multi-platform agent workflows
 | xref:a2a-concepts.adoc[]
 |===
@@ -68,7 +68,7 @@ For implementation details, see xref:pipeline-integration-patterns.adoc[].
 
 === External system calls agent
 
-Use external integration when your applications, services, or agents hosted outside Redpanda Cloud need to call Redpanda Cloud agents.
+Use external integration when your applications, services, or agents hosted outside ADP need to call ADP agents.
 
 External systems send requests using the A2A protocol and receive responses synchronously. This works for backend services, CLI tools, custom UIs, and agents hosted on other platforms.
 
@@ -111,7 +111,7 @@ The following table compares the two primary internal integration patterns:
 
 == Security considerations for external integration
 
-When integrating external applications with Redpanda Cloud agents, protect credentials and tokens.
+When integrating external applications with ADP agents, protect credentials and tokens.
 
 === Protect service account credentials
 

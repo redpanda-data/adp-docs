@@ -6,7 +6,7 @@
 :learning-objective-2: Connect MCP servers and select tools for your agent
 :learning-objective-3: Set agent execution parameters including max iterations
 
-Create a new AI agent declaratively through the Redpanda Cloud Console. No Python or JavaScript code required. This guide walks you through configuring the agent's model, writing the system prompt, connecting tools from built-in connectors, and setting execution parameters.
+Create a new AI agent declaratively through the ADP UI. No Python or JavaScript code required. This guide walks you through configuring the agent's model, writing the system prompt, connecting tools from built-in connectors, and setting execution parameters.
 
 After reading this page, you will be able to:
 
@@ -16,15 +16,14 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
+* An ADP BYOC environment.
 * xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled.
 * At least one xref:mcp:overview.adoc[Remote MCP server] deployed with tools.
 * System prompt prepared (see xref:system-prompts.adoc[System Prompt Best Practices]).
 
 == Access the agents UI
 
-. Log in to the link:https://cloud.redpanda.com[Redpanda Cloud Console^].
-. Navigate to your cluster.
+. Sign in to ADP.
 . Click *Agentic AI* > *AI Agents* in the left navigation.
 
 == Configure basic settings
@@ -126,7 +125,7 @@ For complete prompt guidelines, see xref:system-prompts.adoc[System Prompt Best 
 == Add MCP servers and select tools
 
 . In the *Tools* section, click *Add MCP Server*.
-. Select an MCP server from your cluster.
+. Select an MCP server from those registered in ADP.
 . The UI displays all tools exposed by that server.
 . Select which tools this agent can use:
 +
@@ -210,7 +209,7 @@ The updated metadata appears immediately at `\https://your-agent-url/.well-known
 
 . Configure the service account name (optional):
 +
-A service account is automatically created to authenticate your agent with cluster resources. The default name follows the pattern `cluster-<cluster-id>-agent-<agent-name>-sa`. You can customize this name (3-128 characters, cannot contain `<` or `>` characters).
+A service account is automatically created to authenticate your agent with ADP resources. You can customize the default name (3-128 characters, cannot contain `<` or `>` characters).
 +
 For details about default permissions and how to manage service accounts, see xref:concepts.adoc#service-account-authorization[Service account authorization].
 
@@ -218,15 +217,11 @@ For details about default permissions and how to manage service accounts, see xr
 
 . Wait for agent creation to complete.
 
-When your agent is running, Redpanda Cloud provides an HTTP endpoint URL with the pattern:
-
-----
-https://<agent-id>.ai-agents.<cluster-id>.<cluster-domain>
-----
+When your agent is running, ADP provides an HTTP endpoint URL. The exact form is shown on the agent's overview page; copy the value from the *Endpoint* field there.
 
 You can use this URL to call your agent programmatically or integrate it with external systems.
 
-The *Inspector* tab in the Cloud Console automatically uses this URL to connect to your agent for testing.
+The *Inspector* tab in ADP automatically uses this URL to connect to your agent for testing.
 
 For programmatic access or external agent integration, see xref:integration-overview.adoc[].
 

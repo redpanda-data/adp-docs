@@ -18,17 +18,17 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* Access to the Redpanda Cloud Console with administrator privileges
+* Access to ADP with administrator privileges
 * API keys for at least one LLM provider:
 ** OpenAI: API key from https://platform.openai.com/api-keys
 ** Anthropic: API key from https://console.anthropic.com/settings/keys
-* A Redpanda Cloud workspace
+* An ADP workspace
 
 == Create an AI Hub gateway
 
 Creating an AI Hub gateway is significantly simpler than creating a Custom mode gateway because all routing rules and backend pools are pre-configured.
 
-. In the Redpanda Cloud Console, navigate to *Agentic* → *AI Gateway* → *Gateways*.
+. In ADP, navigate to *Agentic* → *AI Gateway* → *Gateways*.
 . Click *Create Gateway*.
 . Select *AI Hub* as the gateway mode.
 . Configure basic settings:
