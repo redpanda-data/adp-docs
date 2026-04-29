@@ -4,11 +4,9 @@
 :personas: platform_admin, app_developer
 // TODO: confirm persona vocabulary. PRD names CISO and HoT (Head of Trust) as primary readers for the violations feed; using canonical `platform_admin, app_developer` until docs-team-standards confirms whether to add `security_admin` or equivalent.
 
-include::ROOT:partial$adp-la.adoc[]
-
 [NOTE]
 ====
-*Coming at GA (2026-06-15).* The aggregated violations feed ships in V1 of the governance dashboard. The V0 release (2026-05-15) covers the xref:dashboard/index.adoc[overview] only.
+*Coming at GA (2026-06-15).* The aggregated violations feed ships in V1 of the governance dashboard. The V0 release (2026-05-15) covers the xref:dashboard/overview.adoc[overview] only.
 ====
 
 The violations feed aggregates every policy event in your deployment: authorization denials, guardrail violations, and other policy enforcement actions. Use it to investigate "what was blocked, when, and why," and to follow each event back to the underlying transcript.
@@ -21,6 +19,6 @@ This page is staged ahead of GA. The full how-to is being drafted against the V1
 
 In the meantime, see:
 
-* xref:dashboard/index.adoc[Read the governance overview] — the V0 surface, available now.
+* xref:dashboard/overview.adoc[Read the governance overview] — the V0 surface, available now.
 * xref:dashboard/agent-network.adoc[Agent Network] — also shipping at GA.
 * xref:observability:transcripts.adoc[Read a transcript] — for per-execution investigation today.

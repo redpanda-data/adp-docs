@@ -6,8 +6,6 @@
 :learning-objective-2: Connect your application to an AI Hub gateway using the OpenAI SDK
 :learning-objective-3: Describe how intelligent routing directs requests to providers
 
-include::ROOT:partial$adp-la.adoc[]
-
 AI Hub mode gateways provide instant access to OpenAI, Anthropic, and Google Gemini with pre-configured intelligent routing. As a builder, you benefit from zero-configuration access while your administrator manages provider credentials and routing policies.
 
 This page shows you how to discover AI Hub gateways, connect your applications, and verify your integration.

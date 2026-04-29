@@ -6,8 +6,6 @@
 :learning-objective-2: Apply tool orchestration patterns to handle multi-step workflows
 :learning-objective-3: Evaluate how system prompt design affects agent tool selection
 
-include::ROOT:partial$adp-la.adoc[]
-
 This tutorial shows you how to build a customer support agent to learn how agents orchestrate multiple tools, make context-aware decisions, and handle incomplete data.
 
 After completing this tutorial, you will be able to:
@@ -256,7 +254,7 @@ This demonstrates error recovery without hallucination. The "Never make up track
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:troubleshoot.adoc[].
+For comprehensive troubleshooting guidance, see xref:troubleshoot/troubleshoot-ai-agents.adoc[].
 
 === Test with mock data
 
@@ -269,7 +267,7 @@ Use these documented test IDs when testing the agent. If you replace the mock to
 
 == Next steps
 
-* xref:mcp:index.adoc[Call external APIs]
+* xref:mcp:overview.adoc[Call external APIs]
 * xref:system-prompts.adoc[]
 * xref:architecture-patterns.adoc[]
-* xref:troubleshoot.adoc[]
+* xref:troubleshoot/troubleshoot-ai-agents.adoc[]

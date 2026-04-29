@@ -7,8 +7,6 @@
 :learning-objective-2: Locate where to view spend in the dashboard, in transcripts, and through breakdown queries
 :learning-objective-3: Recognize which cap-management capabilities ship at GA versus arrive in a later release
 
-include::ROOT:partial$adp-la.adoc[]
-
 The Agentic Data Plane records every LLM call as a spending event the moment your first agent or MCP server runs through the gateway. The current release lets you read that data — through the governance dashboard, through individual transcripts, and through breakdown queries by provider, model, user, organization, or provider type. Configurable caps, halt-vs-notify enforcement, alerts, and per-tenant cap-setting arrive in a later release.
 
 After reading this page, you will be able to:
@@ -44,7 +42,7 @@ You don't view spend on this page. The dashboard, transcripts, and breakdown que
 |Surface |Use it for
 
 |*Governance dashboard*
-|Summary cards (total spend, agent count, request count, trend), provider breakdown chart, events timeline, agents and MCP servers tables. The single-pane-of-glass view across your whole deployment. See xref:governance:dashboard/index.adoc[Read the governance overview].
+|Summary cards (total spend, agent count, request count, trend), provider breakdown chart, events timeline, agents and MCP servers tables. The single-pane-of-glass view across your whole deployment. See xref:governance:dashboard/overview.adoc[Read the governance overview].
 
 |*Transcripts*
 |Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:observability:transcripts.adoc[Read a transcript].
@@ -95,6 +93,6 @@ Until those features ship, treat the dashboard and breakdown queries as your vis
 
 == Next steps
 
-* Open the dashboard to see your current spend: xref:governance:dashboard/index.adoc[Read the governance overview].
+* Open the dashboard to see your current spend: xref:governance:dashboard/overview.adoc[Read the governance overview].
 * Investigate a specific agent's cost: xref:observability:transcripts.adoc[Read a transcript].
 * Configure platform-level safety filtering: xref:governance:guardrails.adoc[Configure guardrails].

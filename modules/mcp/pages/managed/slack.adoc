@@ -6,8 +6,6 @@
 :learning-objective-2: Walk through the consent flow and verify the connection in My Connections
 :learning-objective-3: Send a test message through the Inspector
 
-include::ROOT:partial$adp-la.adoc[]
-
 The *Slack* managed MCP server is the canonical user-delegated OAuth example for ADP. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time — so messages posted by the agent appear as the user, not as a shared bot.
 
 After completing this guide, you will be able to:

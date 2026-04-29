@@ -7,8 +7,6 @@
 :learning-objective-2: Explain how Redpanda Cloud streaming infrastructure benefits agent architectures
 :learning-objective-3: Identify use cases where Redpanda Cloud agents provide value
 
-include::ROOT:partial$adp-la.adoc[]
-
 AI agents in Redpanda Cloud take a declarative approach: instead of writing Python or JavaScript agent code, you declare the behavior you want by selecting an LLM, writing a system prompt, and connecting tools drawn from 300+ built-in Redpanda Connect connectors. The framework handles execution, tool orchestration, and scaling, backed by real-time streaming infrastructure and built-in filtering and data enrichment.
 
 After reading this page, you will be able to:
@@ -27,7 +25,7 @@ When you create an agent, you configure the components through the Redpanda Clou
 
 * *System prompt*: Defines the agent's role, responsibilities, and constraints
 * *LLM*: Interprets user intent and decides which tools to invoke
-* *Tools*: External capabilities exposed through the xref:mcp:index.adoc[Model Context Protocol (MCP)]
+* *Tools*: External capabilities exposed through the xref:mcp:overview.adoc[Model Context Protocol (MCP)]
 * *Context*: Conversation history, tool results, and real-time events from Redpanda topics
 
 Agents can invoke Redpanda Connect components as tools on-demand. Redpanda Connect pipelines can also invoke agents for event-driven processing. This bidirectional integration supports both interactive workflows and automated streaming.
@@ -38,7 +36,7 @@ For a deeper understanding of how agents execute, manage context, and maintain s
 
 == Key benefits
 
-A declarative approach means you configure agent behavior instead of coding it, with access to 300+ built-in Redpanda Connect connectors for data sources, APIs, and services. Real-time streaming data ensures agents access live events instead of batch snapshots. xref:mcp:index.adoc[Remote MCP] support enables standardized tool access. Managed infrastructure handles deployment, scaling, and security for you. Low-latency execution means tools run close to your data. Integrated secrets management securely stores API keys and credentials.
+A declarative approach means you configure agent behavior instead of coding it, with access to 300+ built-in Redpanda Connect connectors for data sources, APIs, and services. Real-time streaming data ensures agents access live events instead of batch snapshots. xref:mcp:overview.adoc[Remote MCP] support enables standardized tool access. Managed infrastructure handles deployment, scaling, and security for you. Low-latency execution means tools run close to your data. Integrated secrets management securely stores API keys and credentials.
 
 == Use cases
 

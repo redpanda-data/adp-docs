@@ -6,8 +6,6 @@
 :learning-objective-2: Set up autonomous mode with custom instructions and browser integration
 :learning-objective-3: Verify Cline routes requests through the gateway and optimize for cost
 
-include::ROOT:partial$adp-la.adoc[]
-
 After xref:ai-gateway:gateway-quickstart.adoc[configuring your AI Gateway], set up Cline (formerly Claude Dev) to route LLM requests and access MCP tools through the gateway's unified endpoints.
 
 After reading this page, you will be able to:

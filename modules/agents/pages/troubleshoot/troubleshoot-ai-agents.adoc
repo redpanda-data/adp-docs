@@ -7,8 +7,6 @@
 :learning-objective-2: Resolve runtime behavior issues including tool selection and iteration limits
 :learning-objective-3: Fix tool execution problems and authentication failures
 
-include::ROOT:partial$adp-la.adoc[]
-
 Use this page to diagnose and fix common issues with AI agents, including deployment failures, runtime behavior problems, tool execution errors, and integration issues.
 
 == Deployment issues
@@ -103,7 +101,7 @@ Use get_shipping_info when:
 
 **Prevention:**
 
-* Follow tool design patterns in xref:mcp:index.adoc[]
+* Follow tool design patterns in xref:mcp:overview.adoc[]
 * Limit each agent to 10-15 tools maximum
 * Test boundary cases where multiple tools might apply
 
@@ -484,5 +482,5 @@ For comprehensive guidance on monitoring agent activity, analyzing conversation 
 
 * xref:system-prompts.adoc[]
 * xref:concepts.adoc[]
-* xref:mcp:index.adoc[]
+* xref:mcp:overview.adoc[]
 * xref:architecture-patterns.adoc[]

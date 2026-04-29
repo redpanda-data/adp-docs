@@ -6,8 +6,6 @@
 :learning-objective-2: Read a transcript as a turn-by-turn conversation, including tool calls and token usage
 :learning-objective-3: Investigate errors, slow turns, and cost anomalies from the transcript detail view
 
-include::ai-agents:partial$adp-la.adoc[]
-
 Use the Transcripts view to read a complete record of an agent or MCP server execution, turn by turn. Each transcript captures the conversation between the user, the agent, any LLM calls, and any tools it invoked, along with token usage, USD cost, latency, and any errors.
 
 For conceptual background on the underlying OpenTelemetry data model, see xref:ai-agents:observability/concepts.adoc[].
@@ -196,4 +194,4 @@ For long-running conversations, accept some reconstruction; for short conversati
 
 * xref:agents:monitor.adoc[]
 * xref:mcp:test-tools.adoc[]
-* xref:agents:troubleshoot.adoc[]
+* xref:agents:troubleshoot/troubleshoot-ai-agents.adoc[]

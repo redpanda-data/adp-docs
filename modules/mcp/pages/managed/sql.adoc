@@ -1,12 +1,10 @@
 = SQL Managed MCP Server
-:description: Query SQL databases — Postgres, MySQL, ClickHouse, MSSQL, SQLite — through a managed MCP server hosted by Redpanda.
+:description: Query SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite) through a managed MCP server hosted by Redpanda.
 :page-topic-type: how-to
 :personas: platform_admin, app_developer
 :learning-objective-1: Configure the SQL managed MCP server for your database
 :learning-objective-2: Run a canonical SELECT query through the Inspector
 :learning-objective-3: Pick the right authentication and connection-string pattern for your database
-
-include::ROOT:partial$adp-la.adoc[]
 
 The SQL managed MCP server gives agents read access to a SQL database through MCP. Redpanda runs the server in-process; you provide a connection string and credentials.
 

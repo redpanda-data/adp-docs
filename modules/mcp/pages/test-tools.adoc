@@ -1,12 +1,10 @@
 = Test an MCP Server's Tools with the Inspector
-:description: Use the Inspector tab to call tools, inspect resources and prompts, and verify your MCP server works — without standing up an agent.
+:description: Use the Inspector tab to call tools, inspect resources and prompts, and verify your MCP server works without standing up an agent.
 :page-topic-type: how-to
 :personas: app_developer
 :learning-objective-1: Run an MCP tool from the Inspector and read its response
 :learning-objective-2: Inspect resources, prompts, and call history
 :learning-objective-3: Diagnose common errors (auth missing, scope upgrade required, transport mismatch) before pointing an agent at the server
-
-include::ROOT:partial$adp-la.adoc[]
 
 Test your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] using the Inspector — a built-in MCP client in the ADP UI. It runs on the same JSON-RPC connection that agents use, so if a tool works in the Inspector, it will work for an agent. Use this after creating your server (xref:create-server.adoc[Create an MCP Server]) or whenever you change a tool's schema.
 

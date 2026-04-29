@@ -6,8 +6,6 @@
 :learning-objective-2: Configure user preference toggles to customize routing behavior
 :learning-objective-3: Manage provider credentials for OpenAI, Anthropic, and Google Gemini
 
-include::ROOT:partial$adp-la.adoc[]
-
 AI Hub mode provides instant, pre-configured access to OpenAI, Anthropic, and Google Gemini with zero setup complexity. Platform admins add provider credentials, and all teams immediately benefit from intelligent routing.
 
 This guide walks administrators through creating and configuring AI Hub gateways, from initial setup to managing preferences and credentials.

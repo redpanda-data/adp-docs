@@ -7,8 +7,6 @@
 :learning-objective-2: Choose appropriate LLM models based on task requirements
 :learning-objective-3: Apply agent boundary design principles for maintainability
 
-include::ROOT:partial$adp-la.adoc[]
-
 This topic helps you design agent systems that are maintainable, discoverable, and reliable by choosing the right architecture pattern and applying clear boundary principles.
 
 After reading this page, you will be able to:
@@ -167,7 +165,7 @@ This pattern fails because:
 * Tool descriptions compete for limited prompt space
 * The agent invokes wrong tools with similar names, wasting iteration budget on selection mistakes
 
-Limit tools per agent to 10-15 for optimal performance. Agents with more than 20-25 tools often show degraded tool selection accuracy. Use subagents to partition tools by domain. For tool design patterns, see xref:mcp:index.adoc[].
+Limit tools per agent to 10-15 for optimal performance. Agents with more than 20-25 tools often show degraded tool selection accuracy. Use subagents to partition tools by domain. For tool design patterns, see xref:mcp:overview.adoc[].
 
 === Premature A2A splitting
 
@@ -259,6 +257,6 @@ Provide clear error messages to users. Log errors for debugging.
 
 * xref:integration-overview.adoc[]
 * xref:a2a-concepts.adoc[]
-* xref:mcp:index.adoc[]
+* xref:mcp:overview.adoc[]
 * xref:overview.adoc[]
-* xref:mcp:index.adoc[]
+* xref:mcp:overview.adoc[]

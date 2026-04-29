@@ -7,8 +7,6 @@
 :learning-objective-2: Configure the agent with a system prompt and model selection
 :learning-objective-3: Test the agent by generating and publishing events through natural language
 
-include::ROOT:partial$adp-la.adoc[]
-
 This quickstart helps you build your first AI agent in Redpanda Cloud. You'll create an agent that understands natural language requests and uses MCP tools to generate and publish event data to Redpanda topics.
 
 After completing this quickstart, you will be able to:
@@ -171,7 +169,7 @@ Try modifying the agent to change its behavior:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:troubleshoot.adoc[].
+For comprehensive troubleshooting guidance, see xref:troubleshoot/troubleshoot-ai-agents.adoc[].
 
 Common quickstart issue:
 
@@ -185,4 +183,4 @@ You've created an agent that orchestrates MCP tools through natural language. Ex
 * xref:create-agent.adoc[]
 * xref:system-prompts.adoc[]
 * xref:architecture-patterns.adoc[]
-* xref:mcp:index.adoc[]
+* xref:mcp:overview.adoc[]

@@ -1,12 +1,10 @@
 = OpenAPI Managed MCP Server
-:description: Expose any OpenAPI- or Swagger-described HTTP API as MCP tools — point Redpanda at a spec URL and get a fully-typed tool surface for agents, with no custom code.
+:description: Expose any OpenAPI- or Swagger-described HTTP API as MCP tools. Point Redpanda at a spec URL and get a fully-typed tool surface for agents, with no custom code.
 :page-topic-type: how-to
 :personas: app_developer
 :learning-objective-1: Configure the OpenAPI managed MCP server against an OpenAPI 3 spec
 :learning-objective-2: Pick the right authentication mode for the upstream API
 :learning-objective-3: Verify generated tools through the Inspector
-
-include::ROOT:partial$adp-la.adoc[]
 
 The *OpenAPI* managed MCP server is the "bring your own API" escape hatch. Hand it an OpenAPI 3 (or Swagger 2) spec, and it generates one MCP tool per operation in the spec. No custom code, no per-API managed type — useful when the API you want to expose is not in the catalog.
 

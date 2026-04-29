@@ -7,8 +7,6 @@
 :learning-objective-2: Authenticate to AI Gateway using rpai for local development or OIDC client credentials for CI and programmatic clients
 :learning-objective-3: Send requests through the proxy URL with the SDK of your choice
 
-include::ROOT:partial$adp-la.adoc[]
-
 This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You'll construct the proxy URL for a provider you have already created, authenticate (with `rpai` for local development or with OIDC client credentials for CI), and send your first request with the SDK of your choice.
 
 After completing this guide, you will be able to:

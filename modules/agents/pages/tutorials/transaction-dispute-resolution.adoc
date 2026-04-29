@@ -8,8 +8,6 @@
 
 This tutorial shows you how to build a transaction dispute resolution system using multi-agent architecture, secure data handling, and execution monitoring.
 
-include::ROOT:partial$adp-la.adoc[]
-
 After completing this tutorial, you will be able to:
 
 * [ ] {learning-objective-1}
@@ -94,7 +92,7 @@ Wait for the server status to show *Running*.
 
 [NOTE]
 ====
-This tutorial uses XSmall resource tier for all MCP servers because the mock tools run lightweight Bloblang transformations. Production deployments with external API calls require larger tiers based on throughput needs. See xref:mcp:index.adoc[].
+This tutorial uses XSmall resource tier for all MCP servers because the mock tools run lightweight Bloblang transformations. Production deployments with external API calls require larger tiers based on throughput needs. See xref:mcp:overview.adoc[].
 ====
 
 === Fraud tools
@@ -643,7 +641,7 @@ In the transcript details, you'll see:
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:troubleshoot.adoc[].
+For comprehensive troubleshooting guidance, see xref:troubleshoot/troubleshoot-ai-agents.adoc[].
 
 === Test with mock data
 
@@ -662,4 +660,4 @@ For production deployments, replace the mock tools with API calls to your accoun
 * xref:integration-overview.adoc[]
 * xref:pipeline-integration-patterns.adoc[]
 * xref:monitor.adoc[]
-* xref:mcp:index.adoc[]
+* xref:mcp:overview.adoc[]

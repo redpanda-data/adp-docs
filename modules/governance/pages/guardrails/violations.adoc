@@ -7,8 +7,6 @@
 :learning-objective-2: Distinguish a guardrail violation from an evaluator failure and apply the right response
 :learning-objective-3: Recognize common false-positive patterns per evaluator type and tune the configuration
 
-include::ROOT:partial$adp-la.adoc[]
-
 // TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the violation field shape and async-vs-sync timing fill in once eng confirms the transcript proto integration and the shipping evaluation behavior. Open Qs B1, B2, B5, C1 in the companion plan.
 
 A guardrail *violation* fires when an evaluator decides to block (or redact) a request. This page covers what a violation looks like in the transcript, how to distinguish it from an evaluator failure, common false-positive patterns per evaluator type, and what happens when an evaluator can't run.
