@@ -1,0 +1,80 @@
+= Evaluator Types Reference
+:description: Definitive reference for every evaluator type's config schema, supported phases, behavior on match, and gotchas.
+:page-topic-type: reference
+:personas: platform_admin
+// TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (e.g., security_admin), apply it here. Open Q D4 in the companion plan.
+
+include::ROOT:partial$adp-la.adoc[]
+
+// TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the per-type config schemas are filled in once eng confirms the post-pivot Guardrail resource shape and the evaluator type set at GA. Open Qs A1, A2, A5, B3, B4 in the companion plan.
+
+Use this reference to:
+
+* [ ] Look up the config schema for a given evaluator type
+* [ ] Decide which phases each evaluator type supports
+* [ ] Recognize the behavior-on-match options each evaluator type exposes
+
+Each evaluator type has its own config schema, supported phase set, behavior-on-match options, and cost shape. Sections below cover all three types currently planned for GA.
+
+== PII evaluator
+
+*What it does* — detects personally identifiable information (names, emails, phone numbers, SSNs, addresses, and other entity types) in text using regex and entity-recognition rules.
+
+*Phases supported* — `INPUT`, `OUTPUT`, `BOTH`.
+
+// TODO: lift the full config schema from `apps/aigw/internal/guardrails/pii.go` once the post-pivot proto is final. Document each field's name, type, default, and example. Likely fields: entity types to detect (allowlist or denylist), locale (US-only patterns versus EU patterns), confidence threshold.
+
+*Behavior on match* — block (default). Redact-and-pass behavior may be configurable; confirm whether the GA build exposes redact-mode and how it interacts with the per-type config.
+
+// TODO: confirm block-vs-redact options at GA. Open Q B3 in the companion plan.
+
+*Cost* — none beyond compute. Regex is negligible; entity-recognition can be non-trivial if a NER model ships at GA.
+
+*Gotchas:*
+
+* Regex-based detection produces false positives on uncommon PII formats (international phone numbers, non-US SSN equivalents).
+* Locale-specific patterns matter — a US-tuned config will miss EU PII patterns and vice versa.
+* PII matches in code blocks or quoted JSON payloads can produce surprising blocks; tune the entity allowlist if your traffic includes structured payloads.
+
+== Toxicity evaluator
+
+*What it does* — runs the input or output through a toxicity classifier and flags content above a configurable threshold.
+
+*Phases supported* — typically `OUTPUT`; `INPUT` and `BOTH` also valid but rarely useful.
+
+// TODO: confirm the config schema with eng. The phase5-aigw-guardrails branch in cloudv2 ships a "keyword" evaluator that may rename to Toxicity at GA, stay as a fourth type, or be dropped entirely. Open Q A5 in the companion plan. Likely fields: classifier model identifier, threshold (0.0–1.0), category set to flag (hate, harassment, self-harm, sexual, violence, etc.).
+
+*Behavior on match* — block.
+
+*Cost* — per-call LLM cost. Counts against the *evaluator's configured upstream provider* (typically a small classifier model, separate from the user-facing LLM). Token cost surfaces alongside the user-facing LLM call in the same transcript. See xref:governance:guardrails/cost-tracking.adoc[Cost tracking].
+
+*Gotchas:*
+
+* Threshold tuning matters — too aggressive blocks legitimate traffic; too permissive lets toxic content through. Start at the classifier's recommended default and tune from violation review.
+* Latency adds to overall response time. If async-OUTPUT evaluation isn't supported for your model's stream type, the user-visible latency includes the classifier call.
+* The classifier model itself can fail or be down. See xref:governance:guardrails/violations.adoc[Read violations] for the evaluator-down section.
+
+== Custom webhook evaluator
+
+*What it does* — delegates the evaluation to a user-provided HTTPS endpoint. The gateway POSTs the content to your endpoint and acts on the response.
+
+*Phases supported* — `INPUT`, `OUTPUT`, `BOTH`.
+
+*Webhook contract:*
+
+// TODO: lift the exact request and response shape from `apps/aigw/internal/guardrails/registry.go` and the custom-webhook handler once the webhook contract lands. Open Q B4 in the companion plan.
+
+* *Request shape* — the gateway POSTs a JSON document containing the phase (`INPUT` or `OUTPUT`), the content payload (prompt or response text), request metadata (request ID for correlation, model identifier, attached provider), and any extra fields the contract specifies.
+* *Response shape* — your endpoint returns a JSON document containing the decision (`pass` or `block`), an optional reason string surfaced in the violation entry, and (if redact-mode is supported) an optional redacted-content payload.
+* *Authentication* — the gateway authenticates to your webhook using a shared secret stored in the ADP secret store. mTLS or signed-JWT alternatives may be available.
+* *Retry / timeout* — the gateway honors a default per-call timeout. On webhook unavailable, the evaluator-down behavior applies (see xref:governance:guardrails/violations.adoc[Read violations]).
+
+// TODO: confirm webhook authentication options at GA. Open Q B4c in the companion plan.
+
+*Cost* — gateway charges nothing per call. Your webhook's compute cost is your own.
+
+*Gotchas:*
+
+* Slow webhooks add to user-visible latency, especially on `INPUT` (the request is blocked until the webhook responds).
+* Webhook errors should fail closed (block) by default for safety, but make this configurable per guardrail if your use case favors availability.
+* Logging and observability of the webhook itself is your responsibility — the gateway only records the decision the webhook returned.
