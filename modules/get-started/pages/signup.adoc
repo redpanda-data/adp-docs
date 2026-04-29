@@ -1,5 +1,5 @@
 = Sign Up for ADP Cloud
-:description: Create your Redpanda Cloud account and get started with Agentic Data Plane.
+:description: Create your ADP Cloud account and get started with the Agentic Data Plane.
 :page-cloud-only: true
 
 // TODO: Add content

@@ -93,8 +93,6 @@ When `rpai` isn't available (CI runners, server-side processes, headless agents)
 |`client_credentials`
 |===
 
-// TODO: confirm the audience for ADP once the standalone UI launches. The values above match today's cluster-embedded view.
-
 [tabs]
 ======
 cURL::
@@ -356,7 +354,7 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 * *Implement retry with exponential backoff* for 5xx and timeout conditions.
 * *Respect `Retry-After`* on 429 responses.
 * *Rotate service account credentials* on a schedule your organization accepts.
-* *Observe usage* through the Cloud UI on each provider's detail page. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
+* *Observe usage* through the ADP UI on each provider's detail page. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
 
 == Troubleshooting
 

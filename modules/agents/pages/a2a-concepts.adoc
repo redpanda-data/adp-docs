@@ -6,7 +6,7 @@
 :learning-objective-2: Explain how agent cards enable discovery
 :learning-objective-3: Identify how authentication secures agent communication
 
-The Agent-to-Agent (A2A) protocol is an open standard for agent communication and discovery. Redpanda Cloud uses A2A for both external integration and internal pipeline-to-agent communication.
+The Agent-to-Agent (A2A) protocol is an open standard for agent communication and discovery. ADP uses A2A for both external integration and internal pipeline-to-agent communication.
 
 After reading this page, you will be able to:
 
@@ -38,7 +38,7 @@ The agent card is a JSON document that describes what the agent can do and how t
 [#agent-card-location]
 === Agent card location
 
-Redpanda Cloud agents expose their agent cards at the `/.well-known/agent-card.json` subpath of the agent URL. You can find the agent URL on the agent overview page in the Redpanda Cloud Console under *Agentic AI* > *AI Agents*.
+ADP agents expose their agent cards at the `/.well-known/agent-card.json` subpath of the agent URL. You can find the agent URL on the agent overview page in the ADP UI under *Agentic AI* > *AI Agents*.
 
 For example, if your agent URL is `\https://my-agent.ai-agents.abc123.cloud.redpanda.com`, your agent card URL is `\https://my-agent.ai-agents.abc123.cloud.redpanda.com/.well-known/agent-card.json`.
 
@@ -46,13 +46,13 @@ The `.well-known` path follows internet standards for service discovery, making 
 
 To configure the agent card, see xref:create-agent.adoc#configure-a2a-discovery-metadata-optional[Configure A2A discovery metadata].
 
-== Where A2A is used in Redpanda Cloud
+== Where A2A is used in ADP
 
-Redpanda Cloud uses the A2A protocol in two contexts:
+ADP uses the A2A protocol in two contexts:
 
 === External integration
 
-External applications and agents hosted outside Redpanda Cloud use A2A to call Redpanda Cloud agents. This includes backend services, CLI tools, custom UIs, and agents hosted on other platforms.
+External applications and agents hosted outside ADP use A2A to call ADP agents. This includes backend services, CLI tools, custom UIs, and agents hosted on other platforms.
 
 For integration pattern guidance, see xref:integration-overview.adoc[].
 
@@ -85,7 +85,7 @@ This discovery model allows:
 
 A2A-compliant agents require authentication to prevent unauthorized access.
 
-Redpanda Cloud agents use OAuth2 client credentials flow. When you create an agent, the system provisions a service account with a client ID and secret.
+ADP agents use OAuth2 client credentials flow. When you create an agent, the system provisions a service account with a client ID and secret.
 
 External callers use these credentials to obtain access tokens:
 
@@ -108,7 +108,7 @@ For step-by-step authentication instructions, see xref:redpanda-cloud:security:c
 
 === Internal integration
 
-The `a2a_message` processor handles authentication automatically. Pipelines don't need to manage credentials explicitly because they run within the Redpanda Cloud cluster with appropriate permissions.
+The `a2a_message` processor handles authentication automatically. Pipelines don't need to manage credentials explicitly because they run within ADP with appropriate permissions.
 
 == Protocol versions
 

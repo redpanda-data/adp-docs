@@ -79,7 +79,7 @@ Single agents are simpler to build and maintain. You have one system prompt, one
 
 However, all capabilities must coexist in one agent. Adding features increases complexity rapidly, making single agents difficult to scale to multi-domain problems.
 
-TIP: You can migrate from a single agent to a root agent with subagents without starting over. Add subagents to an existing agent using the Redpanda Cloud Console, then gradually move tools and responsibilities to the new subagents.
+TIP: You can migrate from a single agent to a root agent with subagents without starting over. Add subagents to an existing agent using the ADP UI, then gradually move tools and responsibilities to the new subagents.
 
 == Root agent with subagents pattern
 
@@ -87,7 +87,7 @@ A multi-agent architecture uses a root agent that delegates to specialized inter
 
 This pattern works for complex domains spanning multiple areas, multiple data sources with different access patterns, and tasks requiring specialized expertise within one deployment.
 
-NOTE: Subagents in Redpanda Cloud are internal specialists within a single agent. They share the parent agent's model, budget, and policies, but each can have different names, descriptions, system prompts, and MCP tools.
+NOTE: Subagents in ADP are internal specialists within a single agent. They share the parent agent's model, budget, and policies, but each can have different names, descriptions, system prompts, and MCP tools.
 
 === How it works
 
@@ -109,11 +109,11 @@ Internal subagents provide domain isolation, allowing you to update the order su
 
 External A2A integration connects agents across organizational boundaries, platforms, or independent systems.
 
-NOTE: Cross-agent calling between separate Redpanda Cloud agents is not supported. This pattern only applies to connecting Redpanda Cloud agents with external agents you host elsewhere.
+NOTE: Cross-agent calling between separate ADP agents is not supported. This pattern only applies to connecting ADP agents with external agents you host elsewhere.
 
 === When to use external A2A
 
-Use external glossterm:Agent2Agent (A2A) protocol[] for multi-organization workflows that coordinate agents across company boundaries, for platform integration connecting Redpanda Cloud agents with agents hosted elsewhere, and when agents require different deployment environments such as GPU clusters, air-gapped networks, or regional constraints.
+Use external glossterm:Agent2Agent (A2A) protocol[] for multi-organization workflows that coordinate agents across company boundaries, for platform integration connecting ADP agents with agents hosted elsewhere, and when agents require different deployment environments such as GPU clusters, air-gapped networks, or regional constraints.
 
 === How it works
 
@@ -123,7 +123,7 @@ Agents communicate using the xref:a2a-concepts.adoc[A2A protocol], a standard HT
 
 A customer service workflow might span multiple platforms:
 
-* Redpanda Cloud agent accesses real-time order and inventory data
+* ADP agent accesses real-time order and inventory data
 * CRM agent hosted elsewhere manages customer profiles and support tickets
 * Payment agent from a third party handles transactions in a secure environment
 
@@ -157,7 +157,7 @@ Split into domain-specific subagents instead. Each subagent gets a focused promp
 
 === The tool explosion
 
-A tool explosion occurs when a single agent has too many tools from every MCP server in the cluster.
+A tool explosion occurs when a single agent has too many tools from every MCP server in the environment.
 
 This pattern fails because:
 
@@ -199,7 +199,7 @@ For best results:
 
 == Model selection guide
 
-Choose models based on task complexity, latency requirements, and cost constraints. The Redpanda Cloud Console displays available models with descriptions when creating agents.
+Choose models based on task complexity, latency requirements, and cost constraints. The ADP UI displays available models with descriptions when creating agents.
 
 === Match models to task complexity
 

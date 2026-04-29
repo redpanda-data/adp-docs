@@ -1,8 +1,8 @@
 [tabs]
 ====
-Redpanda Cloud Console::
+ADP UI::
 +
-In the Redpanda Cloud Console:
+In ADP:
 +
 . Navigate to *Agentic* → *AI Gateway* → *Gateways*.
 . Select a gateway from your list.

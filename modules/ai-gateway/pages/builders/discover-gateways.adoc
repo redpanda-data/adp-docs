@@ -16,16 +16,16 @@ After reading this page, you will be able to:
 
 == Before you begin
 
-* You have a Redpanda Cloud account with access to at least one AI Gateway
-* You have access to the Redpanda Cloud Console or API credentials
+* You have an ADP account with access to at least one AI Gateway
+* You have access to ADP or API credentials
 
 == List your accessible gateways
 
 [tabs]
 ====
-Using the Console::
+Using the UI::
 +
-. Navigate to *Agentic* > *AI Gateway* > *Gateways* in the Redpanda Cloud Console.
+. In ADP, navigate to *Agentic* > *AI Gateway* > *Gateways*.
 . Review the list of gateways you can access. For each gateway, you'll see the gateway name, ID, endpoint URL, status, available models, and provider performance.
 +
 Click the Configuration, API, MCP Tools, and Changelog tabs for additional information.

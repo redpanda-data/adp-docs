@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 == Before you begin
 
 * You have access to at least one AI Hub gateway (provided by your administrator)
-* You have a Redpanda Cloud API key
+* You have an ADP API key
 * You have Python 3.8+ or Node.js 18+ installed (for code examples)
 
 == Identify an AI Hub gateway

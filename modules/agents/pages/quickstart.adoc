@@ -1,13 +1,13 @@
 = AI Agent Quickstart
 :page-aliases: redpanda-cloud:ai-agents:agents/quickstart.adoc
-:description: Create your first AI agent in Redpanda Cloud that generates and publishes event data through natural language commands.
+:description: Create your first AI agent in ADP that generates and publishes event data through natural language commands.
 :page-topic-type: tutorial
 :personas: agent_developer, evaluator
-:learning-objective-1: Create an AI agent in Redpanda Cloud that uses MCP tools
+:learning-objective-1: Create an AI agent in ADP that uses MCP tools
 :learning-objective-2: Configure the agent with a system prompt and model selection
 :learning-objective-3: Test the agent by generating and publishing events through natural language
 
-This quickstart helps you build your first AI agent in Redpanda Cloud. You'll create an agent that understands natural language requests and uses MCP tools to generate and publish event data to Redpanda topics.
+This quickstart helps you build your first AI agent in ADP. You'll create an agent that understands natural language requests and uses MCP tools to generate and publish event data to Redpanda topics.
 
 After completing this quickstart, you will be able to:
 
@@ -17,7 +17,7 @@ After completing this quickstart, you will be able to:
 
 == Prerequisites
 
-* A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC cluster] (agents are not available on Dedicated or Serverless clusters)
+* An ADP BYOC environment (agents are not available on ADP Cloud yet)
 
 * xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, or Google AI)
 
@@ -38,9 +38,9 @@ The agent orchestrates the `generate_input` and `redpanda_output` tools you crea
 
 == Create the agent
 
-. Log in to the link:https://cloud.redpanda.com/[Redpanda Cloud Console^].
+. Sign in to ADP.
 
-. Navigate to your cluster and click *Agentic AI* > *AI Agents* in the left navigation.
+. Click *Agentic AI* > *AI Agents* in the left navigation.
 
 . Click *Create Agent*.
 
@@ -60,7 +60,7 @@ The agent orchestrates the `generate_input` and `redpanda_output` tools you crea
 +
 [,text]
 ----
-You are an Event Data Manager agent for Redpanda Cloud.
+You are an Event Data Manager agent for Redpanda.
 
 Your responsibilities:
 - Generate realistic fake user event data
@@ -98,7 +98,7 @@ Response format:
 
 . Review your configuration and click *Create Agent*.
 +
-TIP: A service account is automatically created to authenticate your agent with cluster resources. For details about default permissions and how to manage service accounts, see xref:concepts.adoc#service-account-authorization[Service account authorization].
+TIP: A service account is automatically created to authenticate your agent with ADP resources. For details about default permissions and how to manage service accounts, see xref:concepts.adoc#service-account-authorization[Service account authorization].
 
 . Wait for the agent status to change from *Starting* to *Running*.
 

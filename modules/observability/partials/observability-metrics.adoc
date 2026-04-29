@@ -11,7 +11,7 @@ AI Gateway provides aggregate metrics and analytics dashboards to help you under
 == Before you begin
 
 * You have an active AI Gateway with at least one request processed.
-* You have access to the Redpanda Cloud Console.
+* You have access to ADP.
 * You have the appropriate permissions to view gateway metrics.
 
 Use metrics for:

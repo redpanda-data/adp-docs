@@ -16,7 +16,7 @@ This guide helps you migrate existing applications from direct LLM provider inte
 
 Before migrating, ensure you have:
 
-* AI Gateway configured in your Redpanda Cloud account
+* AI Gateway configured in your ADP account
 * Enabled providers and models in AI Gateway
 * Created gateway with appropriate policies
 * Your gateway endpoint URL (with the gateway ID embedded in the path)

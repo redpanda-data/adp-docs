@@ -45,7 +45,7 @@ Before creating agents, create the tools they'll use. You'll organize tools by d
 
 Account tools retrieve customer and transaction data with PII protection.
 
-. Navigate to your cluster in the link:https://cloud.redpanda.com[Redpanda Cloud Console^].
+. Sign in to ADP.
 . Go to *Agentic AI* > *Remote MCP*.
 . Click *Create MCP Server*.
 . Configure the server:
@@ -425,7 +425,7 @@ https://abc123.ai-agents.def456.cloud.redpanda.com/.well-known/agent-card.json
 
 Create the topics the pipeline will use for input and output.
 
-. Go to *Topics* in the Redpanda Cloud Console.
+. In ADP, go to *Topics*.
 . Click *Create Topic*.
 . Create the input topic:
 +
@@ -444,7 +444,7 @@ Create the topics the pipeline will use for input and output.
 
 The pipeline needs SASL credentials to read from and write to Redpanda topics.
 
-. Go to *Security* > *Users* in the Redpanda Cloud Console.
+. In ADP, go to *Security* > *Users*.
 . Click *Create User*.
 . Configure the user:
 +
@@ -480,7 +480,7 @@ The pipeline needs SASL credentials to read from and write to Redpanda topics.
 
 The pipeline needs SASL credentials stored as secrets to authenticate with Redpanda topics.
 
-. Go to *Connect* > *Secrets* in the Redpanda Cloud Console (if not already there).
+. In ADP, go to *Connect* > *Secrets* (if not already there).
 . Click *Create Secret*.
 . Create two secrets with these values:
 +
@@ -489,7 +489,7 @@ The pipeline needs SASL credentials stored as secrets to authenticate with Redpa
 
 === Create the pipeline
 
-. Go to *Connect* in the Redpanda Cloud Console.
+. In ADP, go to *Connect*.
 . Click *Create a pipeline*.
 . In the numbered steps, click *4 Add permissions*.
 . Select *Service Account*.
@@ -515,7 +515,7 @@ This pipeline:
 
 === Test the pipeline
 
-. Authenticate with your Redpanda Cloud cluster:
+. Authenticate with ADP:
 +
 [,bash]
 ----

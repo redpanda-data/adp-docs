@@ -757,7 +757,7 @@ Possible causes:
 
 Solution:
 
-1. Verify MCP server is active in the Redpanda Cloud console
+1. Verify MCP server is active in ADP
 2. Verify tool is in enabled_tools list
 3. If deferred loading: Agent must call `search_tools` first
 
@@ -823,7 +823,7 @@ Gateway → MCP server:
 
 Agent → Gateway:
 
-* Standard gateway authentication (Redpanda Cloud token)
+* Standard gateway authentication (ADP token)
 * Gateway endpoint URL identifies the gateway (and its approved MCP servers)
 
 === Audit trail
