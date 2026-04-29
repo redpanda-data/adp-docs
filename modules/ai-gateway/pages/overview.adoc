@@ -1,5 +1,5 @@
 = AI Gateway Overview
-:description: AI Gateway is Redpanda's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
+:description: AI Gateway is ADP's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
 :page-topic-type: overview
 :personas: platform_admin, app_developer, evaluator
 // TODO: Add 'redpanda-cloud:ai-agents:ai-gateway/what-is-ai-gateway.adoc' to page-aliases after ai-agents is removed from cloud-docs
