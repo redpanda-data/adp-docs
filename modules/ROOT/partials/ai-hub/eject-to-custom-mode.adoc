@@ -391,8 +391,6 @@ To get back to AI Hub mode:
 
 == Next steps
 
-Now that you've ejected to Custom mode:
-
-* xref:ai-gateway/admin/setup-guide.adoc[Complete Custom mode configuration] - Configure routing rules and backend pools
-* xref:ai-gateway:routing-cel.adoc[Learn CEL routing patterns] - Write powerful routing expressions
-* xref:ai-gateway/gateway-architecture.adoc[Understand architecture] - Deep dive into Custom mode architecture
+* xref:ai-gateway/admin/setup-guide.adoc[Complete Custom mode configuration]
+* xref:ai-gateway:routing-cel.adoc[Learn CEL routing patterns]
+* xref:ai-gateway/gateway-architecture.adoc[Understand architecture]

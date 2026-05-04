@@ -427,8 +427,6 @@ For ejection instructions, see xref:ai-gateway/admin/eject-to-custom-mode.adoc[]
 
 == Next steps
 
-Now that you've configured your AI Hub gateway:
-
-* xref:ai-gateway/builders/use-ai-hub-gateway.adoc[Share this guide with builders] - Help your teams connect to the gateway
-* xref:ai-gateway/admin/eject-to-custom-mode.adoc[Learn about ejecting to Custom mode] - Understand the transition path if you need more control
-* xref:ai-gateway/gateway-architecture.adoc[Deep dive into architecture] - Understand how AI Hub routing works
+* xref:ai-gateway/builders/use-ai-hub-gateway.adoc[Share this guide with builders]
+* xref:ai-gateway/admin/eject-to-custom-mode.adoc[Learn about ejecting to Custom mode]
+* xref:ai-gateway/gateway-architecture.adoc[Deep dive into architecture]

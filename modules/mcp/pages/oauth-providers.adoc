@@ -1,0 +1,265 @@
+= Configure an OAuth Provider
+:description: Register an OAuth provider in ADP so MCP servers can authenticate users (or service accounts) against an upstream system like Slack, Jira, GitHub, or Salesforce.
+:page-topic-type: how-to
+:personas: platform_admin
+:learning-objective-1: Register an OAuth provider for an upstream system you want MCP servers to authenticate against
+:learning-objective-2: Grant the right permissions so principals can attach the provider to MCP servers
+:learning-objective-3: Edit, rotate credentials on, or delete an OAuth provider
+
+An OAuth provider defines an upstream system (Slack, Jira, GitHub, Salesforce, Workday, and so on) that AI Gateway can authenticate against on behalf of users (user-delegated OAuth) or service accounts. After you register a provider, any MCP server that talks to that upstream can attach to it instead of carrying its own credentials.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+[IMPORTANT]
+====
+OAuth providers and OAuth clients are different resources. An *OAuth provider* (this page) is a definition of an upstream system the gateway authenticates against. An *OAuth client* is a per-application credential issued *by* the AI Gateway's own identity provider, used by external clients to call ADP. They live under separate sidebar entries (*OAuth Providers* and *OAuth Clients*) and have separate proto, permissions, and lifecycles.
+====
+
+== Prerequisites
+
+Before you register the provider, make sure you have:
+
+* An OAuth 2.0 application registered with the upstream provider, with the gateway's redirect URI configured. The redirect URI is the AI Gateway's OAuth callback (typically `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`).
+* The OAuth app's *client ID* and *client secret*.
+* A secret already created in the ADP secret store for the client secret. Secret references must be `UPPER_SNAKE_CASE`, for example `SLACK_CLIENT_SECRET`.
++
+// TODO: xref the ADP secrets-management page once confirmed.
+* The list of *scopes* the upstream API needs. Include every scope any MCP server attached to this provider may need; users re-consent when scopes are added later.
+
+== Required permissions
+
+OAuth providers are governed by their own permission set. Granting create/update/delete to an admin role is independent from granting attach to MCP-editor roles.
+
+[cols="1,2"]
+|===
+|Permission |Allows
+
+|`dataplane_aigateway_oauthprovider_create`
+|Create new OAuth providers.
+
+|`dataplane_aigateway_oauthprovider_get`
+|Read existing OAuth providers.
+
+|`dataplane_aigateway_oauthprovider_update`
+|Edit an existing OAuth provider's endpoints, scopes, or credentials.
+
+|`dataplane_aigateway_oauthprovider_delete`
+|Delete an OAuth provider.
+
+|`dataplane_aigateway_oauthprovider_attach`
+|*Required to attach this provider to an MCP server.* Enforced as a sub-resource check in `CreateMCPServer` and `UpdateMCPServer` whenever `authConfig.userOauth.provider_name` is set or swapped. Without this permission, a principal with `mcpserver_update` could otherwise bind any provider's token vault to an MCP they control and indirectly consume its tokens.
+|===
+
+NOTE: The `_attach` permission is independent from `_get`, `_create`, `_update`, and `_delete`. Grant it only to roles that should be able to bind a given provider's token vault to an MCP server.
+
+== Manage external identity providers for user-delegated MCP authentication
+
+The *OAuth Providers* page is your starting point. 
+
+[cols="1,3"]
+|===
+|Column |What it shows
+
+|*Name*
+|The provider's machine identifier (used in MCP server configuration to attach this provider).
+
+|*Grant types*
+|A badge per grant type. Typically *Browser consent* for user-delegated OAuth.
+
+|*Status*
+|*Enabled* or *Disabled*.
+
+|*Scopes*
+|A chip list of the supported scopes, for example `read:user`, `repo`, `read:org` for a GitHub provider.
+|===
+
+A *Filter* button narrows the list. The *Create provider* button opens the create form.
+
+== Register an OAuth provider in the UI
+
+Walk through the create form to register the upstream:
+
+. Sign in to ADP.
+. Open *OAuth Providers* in the sidebar.
+. Click *Create provider*.
+. Pick the upstream's *Category*. The picker offers presets for popular providers. When you pick one, the form pre-fills the standard authorization and token endpoints.
++
+[cols="1,2"]
+|===
+|Category |Examples
+
+|*Identity*
+|Okta, Microsoft Entra (Azure AD), Google
+
+|*Source control*
+|GitHub, GitLab, Bitbucket
+
+|*Productivity*
+|Notion, Linear, Asana, Atlassian
+
+|*Storage*
+|Dropbox, Box
+
+|*Communication*
+|Slack, Zoom, Webex, Discord, Zendesk
+
+|*CRM*
+|Salesforce, HubSpot
+
+|*Data warehouse*
+|Snowflake, Databricks
+
+|*Monitoring*
+|Datadog, Splunk, Sentry, PagerDuty
+
+|*Security*
+|Cloudflare, Tailscale, 1Password
+
+|*Business*
+|Workday, DocuSign, ServiceNow
+|===
++
+// TODO: capture screenshots of the well-known catalog picker.
++
+. Fill in the identity fields:
++
+[cols="1,1,3"]
+|===
+|Field |Required |Notes
+
+|*Name*
+|Yes
+|Lowercase letters, numbers, and hyphens only. Used to reference the provider in MCP server configuration. Immutable after create.
+
+|*Display name*
+|No
+|Human-readable label shown in the UI.
+
+|*Authorization endpoint*
+|Yes
+|The upstream's OAuth authorize URL, for example `\https://slack.com/oauth/v2/authorize`.
+
+|*Token endpoint*
+|Yes
+|The upstream's OAuth token URL, for example `\https://slack.com/api/oauth.v2.access`.
+
+|*Revocation endpoint*
+|No
+|RFC 7009 token-revocation URL. When set, the gateway calls it on disconnect (best-effort). Not all providers support this.
+|===
++
+. Pick a *Grant type*:
++
+* *Browser Consent*: The user approves access in their browser (OAuth 2.0 Authorization Code flow). The default for user-delegated OAuth.
+* *JWT Bearer*: RFC 8693 token exchange. Phase 4 feature; the gateway swaps the user's identity-provider JWT for a provider-scoped token without browser interaction.
++
+. Pick a *Token-endpoint authentication method*:
++
+* *HTTP Basic*: `client_id:client_secret` sent as the Basic auth header. Most common.
+* *POST body*: Credentials sent as form fields in the token-request body.
+* *None*: For public clients that rely on PKCE only.
++
+. Provide the *Client ID* and a secret reference for the *Client secret* (for example, `SLACK_CLIENT_SECRET`).
+. Define the *Supported scopes*. Include every scope any MCP server may need.
+. Click *Create*.
+
+The provider appears in the *OAuth providers* list.
+
+== Register from the CLI
+
+Use the `rpk ai` plugin to script provider registration:
+
+[source,bash]
+----
+rpk ai oauth-provider create --name ramp \
+  --type oauth2 \
+  --client-id "$RAMP_CLIENT_ID" \
+  --client-secret-ref RAMP_CLIENT_SECRET \
+  --auth-url "https://app.ramp.com/v1/authorize" \
+  --token-url "https://api.ramp.com/developer/v1/token" \
+  --scopes "transactions:read,cards:read,users:read"
+----
+
+[cols="1,3"]
+|===
+|Flag |Notes
+
+|`--name`
+|Resource name. Lowercase letters, numbers, hyphens. Immutable.
+
+|`--type`
+|`oauth2` for the standard authorization-code flow.
+
+|`--client-id`
+|Client ID from the upstream OAuth app.
+
+|`--client-secret-ref`
+|Secret-store reference (`UPPER_SNAKE_CASE`).
+
+|`--auth-url`
+|Authorization endpoint.
+
+|`--token-url`
+|Token endpoint.
+
+|`--scopes`
+|Comma-separated scope list.
+|===
+
+== Attach to an MCP server
+
+To attach an OAuth provider to an MCP server, the principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider plus the usual `mcpserver_create` / `mcpserver_update` permission. See xref:create-server.adoc[Create an MCP Server] for the full attach flow and xref:user-delegated-oauth.adoc[User-delegated OAuth] for the consent flow that runs on first call.
+
+== Edit and rotate credentials
+
+You can change the provider's configuration or rotate its client secret without re-creating the resource:
+
+* *Edit*: Open the provider's detail page and click *Edit*. Endpoints, scopes, display name, and the client-secret reference can change. The `Name` is immutable.
+* *Rotate credentials*: Update the secret content in the secret store under the same name (for example, `SLACK_CLIENT_SECRET`). The provider's reference is unchanged. Existing tokens in the vault stay valid; the new client secret is used the next time AI Gateway exchanges credentials.
+* *Disable temporarily*: Deleting the provider invalidates every MCP server's connections that reference it, so disable the dependent MCP servers first if you want to pause traffic without losing user consent.
+
+== Delete a provider
+
+Deleting an OAuth provider:
+
+* Removes the provider record.
+* Causes every MCP server that referenced it to fail authentication on the next call (the `provider_name` reference no longer resolves).
+* Leaves user-stored tokens in the vault until garbage-collected, but they're unusable without the provider definition.
+
+Plan the deletion: disable or reconfigure dependent MCP servers first, communicate the cutover to users so they can re-consent against a replacement provider, then delete.
+
+== Troubleshooting
+
+Common symptoms and fixes:
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`PermissionDenied` when creating an MCP server with this provider attached
+|The principal lacks `dataplane_aigateway_oauthprovider_attach` on this provider. Have an admin grant the permission, or delegate the attach to a role that already has it.
+
+|Consent flow fails with `redirect_uri_mismatch`
+|The OAuth app's registered redirect URI doesn't match the gateway's callback. Update the upstream OAuth app to include `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`.
+
+|`invalid_client` during token exchange
+|Client ID or client secret is wrong, or the *Token-endpoint authentication method* doesn't match what the upstream expects. Check the upstream OAuth app's settings.
+
+|`invalid_scope` during consent
+|A scope in *Supported scopes* isn't valid for the upstream. Check the upstream's scope reference and remove or rename the offending scope.
+|===
+
+== Related topics
+
+* xref:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:create-server.adoc[Create an MCP Server]
+* xref:managed/slack.adoc[Slack managed MCP]
+* xref:managed/jira.adoc[Jira managed MCP]
+* xref:managed/zendesk.adoc[Zendesk managed MCP]
+* xref:managed/workday.adoc[Workday managed MCP]
+* xref:managed/ironclad.adoc[Ironclad managed MCP]
+* xref:managed/ramp.adoc[Ramp managed MCP]

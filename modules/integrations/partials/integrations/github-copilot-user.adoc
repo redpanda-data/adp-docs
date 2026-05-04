@@ -902,8 +902,8 @@ Generate project-specific cost reports from the gateway dashboard.
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]: Use CEL expressions to route Copilot requests based on context
-* xref:ai-gateway:aggregation.adoc[]: Learn about MCP tool integration (if using Copilot Workspace)
+* xref:ai-gateway:routing-cel.adoc[]
+* xref:ai-gateway:aggregation.adoc[]
 
 == Related pages
 

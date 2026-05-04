@@ -946,7 +946,3 @@ Each request evaluates CEL expression once. Total latency impact:
 | Field exists
 | `has(request.body.max_tokens)`
 |===
-
-== Next steps
-
-* *Apply CEL routing*: See the gateway configuration options available in ADP.

@@ -1,13 +1,17 @@
 = Read the Governance Overview
-:description: See your AI deployment's spending, fleet, and activity in one place; drill into the transcript behind any number to investigate further.
+:description: See your AI deployment's spending, request volume, token usage, and agent fleet on a single page; filter by provider and model, compare to a previous period, and drill into Spending, Requests, or Tokens views.
 :page-topic-type: how-to
 :personas: evaluator, platform_admin, app_developer
-// TODO: confirm persona vocabulary. The Governance V0 PRD names HoT (Head of Trust), CIO/CFO, CISO, and FDE; this page uses canonical docs-team-standards personas (`evaluator`, `platform_admin`, `app_developer`) and surfaces the PRD names only in the "Reading the dashboard for your role" section headings. Confirm with docs-team-standards owner whether to add `executive` and `security_admin` (or equivalents) so the persona metadata matches the PRD audience exactly.
-:learning-objective-1: Identify the widgets on the governance overview and what each one shows
-:learning-objective-2: Choose where to focus first based on your role
-:learning-objective-3: Investigate a metric, agent, or event by opening its underlying transcript
+:learning-objective-1: Identify the four KPI cards, the Spending chart, and the Agents list, and describe what each one surfaces
+:learning-objective-2: Filter the Spending chart by provider, model, and cost type, and compare to a previous period
+:learning-objective-3: Drill into the Spending, Requests, or Tokens views to investigate further
 
-The governance overview shows your AI deployment's spending, fleet, and activity on a single page. Every number, agent, and event links to the transcript that produced it, so you can investigate without leaving the dashboard.
+[IMPORTANT]
+====
+The Governance dashboard described here is an early prototype. The design is in active flux, and details (including filter affordances, drill-down URL contracts, and chart visuals) may change before general availability. Verify against the live UI before relying on specifics.
+====
+
+The Governance overview shows your AI deployment's spend, requests, tokens, and agent fleet on a single page. Filter by provider and model, compare current activity against a previous period, and drill into dedicated Spending, Requests, or Tokens views to investigate further.
 
 After reading this page, you will be able to:
 
@@ -18,198 +22,196 @@ After reading this page, you will be able to:
 == Prerequisites
 
 * Access to the Agentic Data Plane.
-+
-// TODO: confirm sign-in URL and IAM/role requirement once the standalone ADP UI ships.
-* At least one agent or MCP server with recent activity, or an empty deployment if you want to see the empty-state guidance below.
-* Read access to the Spending, Agent registry, and MCP server APIs (`dataplane_adp_spending_get`, `dataplane_adp_agent_get`, `dataplane_adp_mcpserver_get`).
-+
-// TODO: confirm role-to-permission mapping once the standalone ADP UI ships.
+* At least one LLM provider with recent activity, or an empty deployment if you want to see the empty-state behavior.
+* The `dataplane_adp_spending_get` permission. The dashboard composes data from `aigw.SpendingService` and the agent registry; without this permission the spend cards and chart are empty.
 
-== Open the governance overview
+== Open the dashboard
 
-Sign in to the ADP UI and select *Governance* from the sidebar. The overview is the default view.
+Sign in to ADP and select *Governance* from the sidebar. The overview is the default view.
 
-// TODO: annotated screenshot of the V0 governance overview, with callouts for the five widgets (summary cards, token spend by provider, events timeline, agents table, MCP servers table). V0 prototype lands on `adp-production` 2026-05-08 per the PRD milestone.
+// TODO: annotated screenshot of the Governance overview with callouts for the four cards, the Spending chart, and the Agents list.
 
-The overview shows five widgets, top to bottom:
+The page is laid out top to bottom in three sections:
 
-. *Summary cards* — total spend, agent count, request count, trend versus the previous period.
-. *Token spend by LLM provider* — provider-by-provider cost and request breakdown.
-. *Events over time* — time series of activity, filterable by event type.
-. *Agents* — every agent in your deployment, with status, error count, and tool invocation count.
-. *MCP servers* — every MCP server, with type and connection status.
+. Four summary cards.
+. The *Spending* chart with provider, model, and cost-type filters.
+. The *Agents* list.
 
-== Reading each widget
+A *date-range picker* in the top-right scopes everything on the page.
 
-=== Summary cards
+== Set the date range
 
-The summary cards answer "how much are we using right now?" at a glance.
+The date-range picker offers seven preset windows plus a custom calendar:
+
+* *Last 7 days* (default)
+* *Last 14 days*
+* *Last 30 days*
+* *Last 90 days*
+* *Month to date*
+* *Quarter to date*
+* *Year to date*
+
+For a custom range, pick start and end dates from the two-month calendar.
+
+A *Compare to previous period* toggle lives in the same popover. When on, every chart on the page renders the previous comparable window as a dashed-line overlay so you can spot week-over-week or month-over-month trends. Click *Apply* to commit the selection.
+
+// TODO: screenshot of the date-range picker open with presets visible.
+
+== Read the four summary cards
+
+The cards across the top answer the _how much are you using right now_ question at a glance.
 
 [cols="1,3"]
 |===
 |Card |What it shows
 
-|*Total spend*
-|Sum of all LLM provider costs in the current period. Reported in microcents (1 cent = 100 microcents, $1 = 10,000 microcents). Divide by 10,000 to get dollars.
+|*TOTAL SPEND*
+|Sum of all LLM provider costs in the active window. Displayed in dollars. Sparkline shows daily spend across the window. The _vs previous period_ delta compares to the prior window of equal length.
 
-|*Agent count*
-|Number of agents (managed plus BYOA) registered in your deployment.
+|*REQUESTS*
+|Total LLM requests routed through AI Gateway in the active window. *View all →* opens the Requests drill-down (see <<drill-down>>).
 
-|*Request count*
-|Total LLM requests routed through AI Gateway in the current period.
+|*TOKENS*
+|Total tokens consumed in the active window: input plus output plus cached, summed across all providers and models. *View all →* opens the Tokens drill-down.
 
-|*Trend*
-|Each card carries a "vs last period" delta. The delta uses the same window length as the current period: a 30-day current view compares against the prior 30 days. Calculation: `(current - previous) / previous`.
+|*AGENTS*
+|Number of agents registered in your deployment. The sub-line breaks the total into running and other states (`9 running · 1 other`). The visual on this card is a bar chart, not a sparkline.
 |===
 
-The current period defaults to the last 30 days. Change the time-range selector at the top of the page to inspect a shorter or longer window.
+The first three cards (Spend, Requests, Tokens) carry sparklines and a _vs previous period_ delta when *Compare to previous period* is on. The Agents card carries a state breakdown instead.
 
-// TODO: confirm time-range selector defaults and allowable windows once the V0 prototype lands.
+== Read the Spending chart
 
-=== Token spend by LLM provider
+The *Spending* card shows spend over time, broken out by provider or model. The chart subtitle explains what its lines represent for the active filter combination:
 
-Each row shows a single LLM provider (`openai`, `anthropic`, `bedrock`, …) with cost, request count, and token totals for the current period. Click a provider row to filter the events timeline and agents table to that provider.
+[quote]
+Filter by provider, then drill into models. Cost type narrows what each line sums; hover for the per-day breakdown.
 
-The breakdown is also available by model, by user, and by provider type. Use the dimension toggle above the chart to switch.
+=== Filter the chart
 
-// TODO: confirm dimension-toggle UX once the V0 prototype lands.
+The *Filter* button opens a hierarchical popover with three sibling categories: *Provider*, *Model*, *Cost type*. Each category opens a search-filterable, multi-select list. Active filters display as chips above the chart; click a chip's *×* to remove it, or click *Clear* to reset all filters.
 
-=== Events over time
-
-A time-series chart of activity across your deployment.
-
-* For ranges shorter than 7 days, the chart uses *hourly* buckets.
-* For ranges of 7 days or more, the chart uses *daily* buckets.
-
-Use the event-type filter to focus on a specific kind of activity (request, error, violation, agent state change). Each bar links to a filtered transcript view for the time bucket.
-
-// TODO: confirm event-type filter values once the V0 prototype lands.
-
-=== Agents
-
-Every agent in your deployment, managed or BYOA. The table lists:
-
-* *Name* — the agent's resource name.
-* *Type* — managed or BYOA.
-* *Status* — current runtime state. The state badge maps to the agent's runtime state:
-+
-[cols="1,2"]
+[cols="1,3"]
 |===
-|State |Display
+|Filter |What it does
 
-|`AGENT_STATE_RUNNING`
-|*Running*
+|*Provider*
+|Multi-select of every LLM provider configured in your dataplane. When 2+ providers are picked, the chart renders a colored line per provider. Chip operator: `is any of`.
 
-|`AGENT_STATE_STOPPED`
-|*Stopped*
+|*Model*
+|Multi-select of every model exposed by your providers. When models are picked, the chart drills into per-model lines instead of per-provider. Chip operator: `is any of`.
 
-|`AGENT_STATE_STARTING` / `AGENT_STATE_CREATING`
-|*Starting* (transient; refresh for the latest state)
-
-|`AGENT_STATE_STOPPING` / `AGENT_STATE_DELETING`
-|*Stopping* (transient; refresh for the latest state)
-
-|`AGENT_STATE_DEGRADED`
-|*Degraded* (the row shows `state_reason`)
-
-|`AGENT_STATE_FAILED`
-|*Failed* (the row shows `state_reason`)
+|*Cost type*
+|Multi-select of *Input*, *Output*, *Cached*. Narrows what each line in the chart sums; the totals strip below the chart still reports all four buckets. Chip operator: `is` for one selection, `is any of` for two or more.
 |===
 
-* *Error count* — number of errored executions in the current period.
-+
-// TODO: confirm error-count source (transcripts vs separate metric) once the V0 prototype lands.
-* *Tool invocations* — number of tool calls the agent has made in the current period.
-+
-// TODO: confirm tool-invocation source (transcripts vs separate metric).
-* *Last active* — most recent execution timestamp.
+NOTE: *Cost type* narrows the chart's lines, not the totals strip. If you select `Cost type | is | Cached`, each line in the chart sums only cached spend; the *INPUT*, *OUTPUT*, and *TOTAL* values in the strip below still reflect the full active Provider/Model selection.
 
-Click any agent row to drill into its transcript history.
+=== Compare to a previous period
 
-=== MCP servers
+When *Compare to previous period* is on (in the date-range picker), each line gets a dashed-line counterpart drawn from the same data for the previous comparable window. Hover anywhere on the chart to see a per-day, per-line breakdown with each value's *Previous* sub-row.
 
-Every MCP server registered in your deployment. The table lists:
+// TODO: screenshot of the spend chart with previous-period overlay and a hover tooltip visible.
 
-* *Name* — the server's resource name.
-* *Type* — managed or self-managed.
-* *Status* — connection state.
+=== Read the cost buckets
 
-For deeper MCP server reading, see xref:mcp:overview.adoc[MCP Servers].
+Below the chart, four totals report the active Provider/Model selection:
 
-== Reading the dashboard for your role
+[cols="1,3"]
+|===
+|Bucket |Meaning
 
-The dashboard is designed for non-technical leadership. Different roles read it differently.
+|*TOTAL*
+|Sum of input, output, and cached spend.
 
-=== If you're a CIO or CFO
+|*INPUT*
+|Cost attributable to prompt tokens, including tool-use inputs.
 
-Start with the *summary cards*. The total spend and trend tell you at a glance whether AI cost is moving in the expected direction.
+|*OUTPUT*
+|Cost attributable to completion tokens, including any reasoning tokens for models that emit them (Anthropic 4.x, OpenAI o-series).
 
-Next, scan *Token spend by LLM provider* to see which provider is the largest line item. If one provider dominates your spend, click into it to see which agents drive that cost.
+|*CACHED*
+|Cost attributable to cache-read tokens (5-minute or 1-hour prompt caches). Billed at a steep discount versus fresh INPUT.
+|===
 
-You should be able to answer "how much are we spending?" within 30 seconds of opening the page.
+The dashboard surfaces these as the cost-tracking pipeline records them. Specific multipliers (fast-mode premium, cross-region inference premium, tiered Gemini pricing) are baked into the per-bucket totals automatically; no manual conversion is required.
 
-=== If you're a CISO
+== Read the Agents list
 
-Start with the *Agents* and *MCP servers* tables. They give you full visibility into what's running in the deployment, including BYOA agents that operate outside your direct control.
+The Agents card lists every agent in your deployment, managed and BYOA. Columns:
 
-Scan for unfamiliar agents, agents in `Failed` or `Degraded` states, or MCP servers in disconnected states. Click any anomaly to drill into the transcript.
+[cols="1,3"]
+|===
+|Column |What it shows
 
-=== If you're a Head of Trust
+|*Name*
+|Agent resource name.
 
-Start with the *Agents* table sorted by error count or tool-invocation count. Outlier rows are usually where investigation begins.
+|*Type*
+|*Redpanda Managed* or *BYOA*.
 
-Use the *Events over time* chart to spot bursts of activity that don't match your expectations. Drill into a bar to see exactly what happened in that time bucket.
+|*LLM provider*
+|The provider the agent calls, with its provider-type icon.
 
-=== If you're demoing to a prospect
+|*Model*
+|The model identifier the agent uses.
+|===
 
-Walk top to bottom: summary cards, then provider breakdown, then events timeline, then agent fleet, then MCP servers. The page is designed to tell the full story of an AI deployment in under two minutes, with no setup or pre-staged data.
+A *Filter* button above the table narrows the list by name, type, provider, or model.
 
-== Investigate any number, agent, or activity
+NOTE: Per-agent state, error count, tool-invocation count, and last-active timestamp are not in the V0 dashboard; they ship at GA. Today, click into the agent's resource page for those details.
 
-Every value on this page is a link.
+[[drill-down]]
+== Drill into a specific view
 
-* Click a *summary card* to filter the page to its underlying period.
-* Click a *provider row* to scope every other widget to that provider.
-* Click an *agent row* to open the agent's transcript history.
-* Click an *event bucket* to open transcripts for that time range.
-* Click an *MCP server row* to see invocations against that server.
+The *View all →* link on each KPI card opens a dedicated drill-down page. Filters, model selection, and date range carry over as URL search parameters, so deep-links and back-navigation preserve the current state.
 
-For the data model behind transcripts, see xref:observability:transcripts.adoc[Read a transcript].
+[cols="1,3"]
+|===
+|View |What it shows
+
+|*Spending*
+|The same chart as the dashboard's Spending card, in a full-page layout. Bottom strip: TOTAL / INPUT / OUTPUT / CACHED.
+
+|*Requests*
+|Per-provider and per-model request count over time. Cost-type filter does not apply. Bottom strip: TOTAL REQUESTS.
+
+|*Tokens*
+|Input + output + cached token volume by provider and model. Each line sums all three token buckets per provider or model. Bottom strip: TOTAL TOKENS.
+|===
+
+A `<` back arrow returns to the dashboard with filter state preserved.
+
+You can also reach the Spending, Requests, and Tokens drill-downs from a specific provider's detail page. Open *LLM Providers > \{provider}* and click *View all →* on the provider-scoped KPI strip. The drill-down opens with that provider already filtered in.
 
 == Empty states
-
-The dashboard handles three common empty states:
 
 [cols="1,3"]
 |===
 |State |What you see
 
-|*No telemetry yet*
-|For a BYOA agent that has not yet streamed any transcripts. The agent row shows a *Connect telemetry* call to action that links to xref:observability:byoa-telemetry.adoc[BYOA telemetry].
+|*No providers yet*
+|The KPI cards show zeroes and a hint that data populates after the first LLM request. The Spending chart is hidden. The Agents list is empty with a link to xref:agents:create-agent.adoc[Create a declarative agent].
 
-|*No spend recorded*
-|For fresh deployments before the first agent run. The summary cards show zeroes and a hint that data will populate after the first request.
+|*Providers but no traffic*
+|The KPI cards show zeroes; the chart is empty with axis labels. Useful for confirming a fresh provider is wired up before traffic flows.
 
-|*No agents*
-|For deployments before the first agent is created. The page links to xref:agents:create-agent.adoc[Create a declarative agent].
+|*Provider missing in filter*
+|If a provider was deleted, its name disappears from the filter; historical lines for the deleted provider continue to render until they fall outside the active window.
 |===
-
-// TODO: confirm exact CTA text and behavior once the V0 prototype lands.
 
 == What's coming at GA
 
-The current beta release ships the V0 overview described above. Later in the GA window, the dashboard adds:
+The current beta release ships the V0 overview described above. At GA:
 
-* *Cost over time* and *cost drill-down by agent within a provider* on the same page.
-* *Token-to-dollar conversion* on every cost figure.
-* *Agent Network* — an interactive topology graph that traces every agent through its LLM providers and MCP servers. See xref:dashboard/agent-network.adoc[Agent Network] (shipping at GA).
-* *Authorization denials and violations* — an aggregated feed of policy events. See xref:dashboard/violations.adoc[Authorization denials and violations] (shipping at GA).
-* *Kill switch* — pause an agent without removing it.
+* *Per-agent enrichment*: The Agents list adds error counts, tool-invocation counts, last-active timestamps, and a per-agent spend column.
+* *Agent Network*: An interactive topology graph that traces every agent through its LLM providers and MCP servers. See xref:governance:dashboard/agent-network.adoc[Agent Network].
+* *Authorization denials and violations*: An aggregated feed of policy events. See xref:governance:dashboard/violations.adoc[Authorization denials and violations].
+* *Kill switch*: Pause an agent without removing it.
 
-// TODO: refresh this list against the V1 design when those design docs land. Per the Governance V0 PRD, V1 also adds a top-spenders table and agent-owner metadata; confirm the final V1 surface before GA.
+== Investigate further
 
-== Next steps
-
-* Investigate an anomaly: xref:observability:transcripts.adoc[Read a transcript].
-* Wire up missing telemetry: xref:observability:byoa-telemetry.adoc[BYOA telemetry].
-* Add agents to your deployment: xref:agents:create-agent.adoc[Create a declarative agent].
+* xref:observability:transcripts.adoc[Read a transcript]: Full conversation history for an agent run.
+* xref:governance:budgets.adoc[Token budgets and limits]: Set spend caps when a provider's cost trends above expectations.
+* xref:observability:byoa-telemetry.adoc[BYOA telemetry]: Wire up missing telemetry for BYOA agents that haven't streamed transcripts yet.
+* xref:agents:create-agent.adoc[Create a declarative agent]: Add agents to your deployment.

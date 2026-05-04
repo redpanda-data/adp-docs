@@ -46,7 +46,7 @@ Use the provider's own SDK: OpenAI, Anthropic, Google AI, AWS Bedrock, or any Op
 
 === Managed authentication
 
-Applications authenticate to ADP with OIDC service accounts instead of long-lived provider API keys. Service accounts use the same role and audit model as every other ADP resource, and mint short-lived tokens that are easy to revoke. The recommended local flow uses the `rpai` CLI for token refresh; CI and programmatic clients use the OIDC client-credentials grant directly. See xref:connect-agent.adoc[Connect your agent].
+Applications authenticate to ADP with OIDC service accounts instead of long-lived provider API keys. Service accounts use the same role and audit model as every other ADP resource, and mint short-lived tokens that are easy to revoke. The recommended local flow uses the `rpk ai` plugin for token refresh; CI and programmatic clients use the OIDC client-credentials grant directly. See xref:connect-agent.adoc[Connect your agent].
 
 === Per-provider observability
 
@@ -116,5 +116,5 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 
 == Next steps
 
-. xref:configure-provider.adoc[Configure an LLM provider]. Create your first provider and copy its proxy URL.
-. xref:connect-agent.adoc[Connect your agent]. Point your application's SDK at the proxy URL.
+. xref:configure-provider.adoc[Configure an LLM provider]
+. xref:connect-agent.adoc[Connect your agent]

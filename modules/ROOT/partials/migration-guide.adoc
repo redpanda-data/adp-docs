@@ -873,5 +873,5 @@ A/B testing
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]: Configure advanced routing policies.
-* xref:ai-gateway:aggregation.adoc[]: Explore MCP aggregation.
+* xref:ai-gateway:routing-cel.adoc[]
+* xref:ai-gateway:aggregation.adoc[]

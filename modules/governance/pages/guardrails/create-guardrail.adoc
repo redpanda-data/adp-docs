@@ -29,15 +29,15 @@ After reading this page, you will be able to:
 
 // TODO: finalize this section once the ADP UI ships a Guardrails surface. As of 2026-04-28, `apps/adp-ui/src/routes/` has no `guardrails/` route. The walkthrough may need to lead with `aigwctl` instead of the UI and add the UI flow in a later refresh. Open Qs C4 and C5 in the companion plan.
 
-In the ADP UI, open *Trust & Governance* → *Guardrails* → *Create guardrail*.
+In the ADP UI, open *Governance* → *Guardrails* → *Create guardrail*.
 
 == Pick an evaluator type
 
 Choose one of the supported evaluator types:
 
-* *PII* — detects personally identifiable information using regex and entity-recognition rules. No per-call LLM cost.
-* *Toxicity* — runs content through a toxicity classifier. Per-call LLM cost.
-* *Custom webhook* — delegates the decision to your HTTPS endpoint. Gateway charges nothing per call.
+* *PII*: detects personally identifiable information using regex and entity-recognition rules. No per-call LLM cost.
+* *Toxicity*: runs content through a toxicity classifier. Per-call LLM cost.
+* *Custom webhook*: delegates the decision to your HTTPS endpoint. Gateway charges nothing per call.
 
 For each type's full config schema and behavior, see xref:governance:guardrails/types-reference.adoc[Evaluator types reference].
 
@@ -47,15 +47,15 @@ For each type's full config schema and behavior, see xref:governance:guardrails/
 
 Pick the phase or phases at which the evaluator runs:
 
-* `INPUT` — runs against the user's prompt before the gateway forwards it upstream.
-* `OUTPUT` — runs against the model's response before the gateway returns it to the caller.
-* `BOTH` — runs at both phases.
+* `INPUT`: runs against the user's prompt before the gateway forwards it upstream.
+* `OUTPUT`: runs against the model's response before the gateway returns it to the caller.
+* `BOTH`: runs at both phases.
 
 Decision rule:
 
 * PII guardrails typically run at `BOTH` (defend data exfiltration in both directions).
 * Toxicity guardrails typically run at `OUTPUT` only (filter what the model generates; INPUT-side toxicity filtering rarely improves outcomes).
-* Custom webhook depends on what your webhook does — start with `INPUT` for prompt-injection heuristics, `OUTPUT` for brand-safety lists, `BOTH` for either-direction checks.
+* Custom webhook depends on what your webhook does: start with `INPUT` for prompt-injection heuristics, `OUTPUT` for brand-safety lists, `BOTH` for either-direction checks.
 
 == Configure the evaluator
 
@@ -65,13 +65,13 @@ Fill in the per-type config block. The form fields differ per evaluator type; se
 
 == Attach to LLM providers
 
-Select one or more LLM providers to attach the guardrail to. Multi-attach is supported — one guardrail can apply to many providers.
+Select one or more LLM providers to attach the guardrail to. Multi-attach is supported: one guardrail can apply to many providers.
 
 // TODO: confirm whether guardrails also attach at other scopes (agents, MCP servers, organizations). The pre-pivot proto attached via `provider_ids[]` and `route_ids[]`; routes were removed in cloudv2 commit `7eff2ecbbf`. Open Qs A3, A4 in the companion plan.
 
 == Enable the guardrail
 
-Toggle the guardrail to *Enabled*. Disabled guardrails skip evaluation entirely — useful when staging a new policy before turning it on, or when troubleshooting whether a guardrail is responsible for unexpected blocks.
+Toggle the guardrail to *Enabled*. Disabled guardrails skip evaluation entirely: useful when staging a new policy before turning it on, or when troubleshooting whether a guardrail is responsible for unexpected blocks.
 
 == Verify the guardrail fires
 
@@ -90,20 +90,20 @@ The request should return an error. Open the request's transcript and confirm a 
 
 == Edit, disable, or delete
 
-* *Edit* — change the per-type config or the attached providers. Changes apply on the next request.
-* *Disable* — short-circuit the middleware without losing the config. Useful when staging or troubleshooting.
-* *Delete* — permanently remove the guardrail. If the guardrail is currently firing on production traffic, the UI requires confirmation.
+* *Edit*: change the per-type config or the attached providers. Changes apply on the next request.
+* *Disable*: short-circuit the middleware without losing the config. Useful when staging or troubleshooting.
+* *Delete*: permanently remove the guardrail. If the guardrail is currently firing on production traffic, the UI requires confirmation.
 
 // TODO: confirm exact UI labels and the delete-confirmation copy once the UI ships. Open Q C4 in the companion plan.
 
 == Troubleshooting
 
-* *Evaluator returns false positives* — see xref:governance:guardrails/violations.adoc[Read violations] for tuning patterns per evaluator type.
-* *Evaluator times out or is unavailable* — see xref:governance:guardrails/violations.adoc[Read violations] for the evaluator-down section.
-* *Attached provider doesn't fire the guardrail* — confirm attachment (right provider, right phase), enabled state, and that requests are actually reaching the gateway (not bypassing via a direct provider URL).
+* *Evaluator returns false positives*: see xref:governance:guardrails/violations.adoc[Read violations] for tuning patterns per evaluator type.
+* *Evaluator times out or is unavailable*: see xref:governance:guardrails/violations.adoc[Read violations] for the evaluator-down section.
+* *Attached provider doesn't fire the guardrail*: confirm attachment (right provider, right phase), enabled state, and that requests are actually reaching the gateway (not bypassing via a direct provider URL).
 
 == Next steps
 
-* xref:governance:guardrails/types-reference.adoc[Evaluator types reference] — config schemas and gotchas per evaluator type.
-* xref:governance:guardrails/violations.adoc[Read violations] — investigate fired guardrails and tune false-positive rates.
-* xref:governance:guardrails/cost-tracking.adoc[Cost tracking] — see what each evaluator costs and where it shows up.
+* xref:governance:guardrails/types-reference.adoc[Evaluator types reference]
+* xref:governance:guardrails/violations.adoc[Read violations]
+* xref:governance:guardrails/cost-tracking.adoc[Cost tracking]

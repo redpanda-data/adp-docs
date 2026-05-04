@@ -6,7 +6,7 @@
 :learning-objective-2: Walk through the consent flow and verify the connection in My Connections
 :learning-objective-3: Send a test message through the Inspector
 
-The *Slack* managed MCP server is the canonical user-delegated OAuth example for ADP. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time — so messages posted by the agent appear as the user, not as a shared bot.
+The *Slack* managed MCP server is the canonical user-delegated OAuth example for ADP. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time: so messages posted by the agent appear as the user, not as a shared bot.
 
 After completing this guide, you will be able to:
 
@@ -26,30 +26,34 @@ The Slack managed type exposes tools for:
 
 == Prerequisites
 
+Before you create the server, make sure you have:
+
 * A Slack workspace where you can install or authorize an OAuth app.
 * A Slack OAuth app registered (your own or a Redpanda-published reference app).
 +
 // TODO: confirm whether Redpanda ships a reference Slack OAuth app or whether each customer brings their own. Document the path.
-* An OAuth Provider configured in the ADP UI under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials.
-+
-// TODO: link the OAuth Provider how-to once it exists.
+* An OAuth Provider configured in the ADP UI under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:../oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:../user-delegated-oauth.adoc[].
 
 == Configure
+
+Create a new Slack MCP server in the ADP UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Slack* from the marketplace picker.
 . Fill in the identity fields (`name`, `description`).
 . In the Slack configuration form:
 +
-// TODO: enumerate exact fields. Slack's MCP type likely doesn't need workspace-specific configuration — the OAuth flow tells Slack which workspace.
+// TODO: enumerate exact fields. Slack's MCP type likely doesn't need workspace-specific configuration: the OAuth flow tells Slack which workspace.
 +
-* *Auth* — choose *User-delegated OAuth*.
-* *OAuth Provider* — pick the Slack provider you configured.
-* *Required scopes* — typical: `channels:read`, `chat:write`, `users:read`. Adjust to your need.
+* *Auth*: choose *User-delegated OAuth*.
+* *OAuth Provider*: pick the Slack provider you configured.
+* *Required scopes*: typical: `channels:read`, `chat:write`, `users:read`. Adjust to your need.
 . Click *Create*.
 
 == Test the consent flow
+
+After creating the server, run a tool that requires Slack auth to verify the consent flow end-to-end:
 
 . Open the *Inspector* tab.
 . Run a tool that requires the user's identity, for example `chat_postMessage`.
@@ -66,7 +70,7 @@ Slack distinguishes user tokens from bot tokens, and many tools need user-token 
 
 * `chat:write` is a *user* scope; `chat:write.public` is a separate scope for posting in channels the user isn't a member of.
 * `channels:read` returns only channels the user can see.
-* Tokens are workspace-scoped — the same user authorizing twice across two workspaces produces two separate connections.
+* Tokens are workspace-scoped: the same user authorizing twice across two workspaces produces two separate connections.
 
 // TODO: confirm exact required scopes per tool from the Slack server's tool registration.
 
@@ -75,6 +79,8 @@ Slack distinguishes user tokens from bot tokens, and many tools need user-token 
 Once the server is created and at least one user has consented, you can point an agent at the *API URL* on the server's detail page. Each user calling the agent will trigger their own consent flow if they haven't connected yet.
 
 == Troubleshooting
+
+Common symptoms and fixes:
 
 [cols="1,2"]
 |===
@@ -97,5 +103,7 @@ Once the server is created and at least one user has consented, you can point an
 
 == Out of scope
 
-* *Configuring the Slack OAuth app* — Slack-side configuration (creating the app, picking redirect URIs, choosing scopes) happens in api.slack.com, not in ADP.
-* *Posting as a Slack bot* — this page covers user-delegated auth. For bot-token posting, use static-key auth with a bot user OAuth token.
+This page does not cover:
+
+* *Configuring the Slack OAuth app*: Slack-side configuration (creating the app, picking redirect URIs, choosing scopes) happens in api.slack.com, not in ADP.
+* *Posting as a Slack bot*: This page covers user-delegated auth. For bot-token posting, use static-key auth with a bot user OAuth token.

@@ -855,4 +855,4 @@ Solution:
 
 == Next steps
 
-* xref:ai-gateway/observability-logs.adoc[]: View individual requests and debug issues.
+* xref:ai-gateway/observability-logs.adoc[]

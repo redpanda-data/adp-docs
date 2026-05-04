@@ -1,0 +1,228 @@
+= Connect Remote MCP Clients to AI Gateway
+:description: Connect external MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps) to MCP servers hosted in AI Gateway. Covers the three-piece architecture (MCP server, OAuth Provider, OAuth Client) and the two-step OAuth flow that runs end-to-end.
+:page-topic-type: how-to
+:personas: app_developer, platform_admin
+:learning-objective-1: Register an OAuth Client in AI Gateway so an external chat app can authenticate users
+:learning-objective-2: Wire a custom connector in Claude Desktop (or another chat client) to your MCP server
+:learning-objective-3: Walk a user through the two-step OAuth flow that runs end-to-end
+
+External MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps, Cursor) connect to MCP servers hosted in AI Gateway by registering as OAuth clients. End-users get the MCP tools inside their preferred chat app, with Redpanda mediating both client-app authentication and upstream-system authentication.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== When to use this
+
+Use a remote MCP client connection when:
+
+* You want users to invoke MCP tools from inside Claude Desktop, ChatGPT desktop, Gemini Apps, or Cursor without writing custom integration code.
+* You already have, or are about to create, an MCP server (managed or self-managed) in AI Gateway.
+* End-users have accounts with the chat client and the upstream system you're integrating with.
+
+Use a different approach when:
+
+* You need programmatic, server-side tool invocation. See xref:ai-gateway:connect-agent.adoc[Connect your agent] for SDK-based access.
+* You need an in-house chat UI. Build against the AI Gateway's MCP endpoints directly with the SDK of your choice.
+
+== Architecture: Three resources work together
+
+Wiring a remote chat client to an MCP server uses three resources in AI Gateway:
+
+[cols="1,3"]
+|===
+|Resource |Role
+
+|*MCP server*
+|The tool surface itself. Managed (Redpanda hosts it) or self-managed (you host it). See xref:mcp:create-server.adoc[Create an MCP Server].
+
+|*OAuth Provider*
+|Defines how AI Gateway authenticates against the upstream system on behalf of users (for example, GitHub) when the MCP server uses user-delegated OAuth. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]. Optional: only needed if the MCP server requires per-user upstream identity.
+
+|*OAuth Client*
+|Defines how an external chat app (Claude Desktop, ChatGPT, Gemini, Cursor) authenticates *against AI Gateway* on behalf of users. The chat client gets a `client_id` + `client_secret` it uses to negotiate access tokens. *This is what makes the chat-client integration possible.*
+|===
+
+Putting it together with a GitHub example:
+
+* The *MCP server* is a managed GitHub MCP, configured to use user-delegated OAuth.
+* The *OAuth Provider* points at GitHub's OAuth endpoints; AI Gateway uses it to act as each user against GitHub.
+* The *OAuth Client* is registered for Claude Desktop; Claude Desktop uses it to act as each user against AI Gateway.
+
+When a user invokes a tool, AI Gateway runs both auth handshakes: Claude to AI Gateway through the OAuth Client, then AI Gateway to GitHub through the OAuth Provider.
+
+== Prerequisites
+
+Before you wire up the chat-client connector, make sure you have:
+
+* An MCP server already created in AI Gateway. See xref:mcp:create-server.adoc[Create an MCP Server].
+* The MCP server's *API URL*. Copy it from the server's *Overview* tab.
+* For user-delegated MCP servers: an OAuth Provider configured for the upstream system. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider].
+* End-users have accounts with the chat client (Claude, ChatGPT, Gemini, Cursor) and the upstream system the MCP server connects to.
+
+== Register an OAuth Client in AI Gateway
+
+Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
+
+. Sign in to ADP and open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway.
+. Click *Register Client*.
+. Fill in the form:
++
+[cols="1,3"]
+|===
+|Field |Notes
+
+|*Name*
+|Human-readable identifier. Pick something descriptive: `Claude Desktop (GitHub MCP)` or `Cursor (production)`.
+
+|*Grant types*
+|*Authorization Code* and *Refresh Token*. This is the standard combination for browser-based chat clients with long-lived tokens. Most external chat clients require both.
+
+|*Redirect URIs*
+|The URIs the gateway redirects to after a user approves. Each chat client publishes its own callback URLs; copy them from the chat client's connector documentation. Multiple URIs are allowed. Claude Desktop, for example, uses two: `\https://claude.ai/api/mcp/auth_callback` and `\https://claude.ai/api/organizations/custom-connectors/oauth/callback`.
+|===
++
+. Click *Register*.
+
+After registration, the detail page shows the *Client ID* and *Client Secret*. Copy both. The Client Secret is shown only once; rotate it through the secret store if you need to recover it later.
+
+// TODO: capture screenshots of the Register Client form and the post-create detail page.
+
+NOTE: OAuth Clients and OAuth Providers are different resources with different sidebar entries. *Provider* defines how AI Gateway authenticates against an upstream system; *Client* defines how an external app authenticates against AI Gateway. They are configured independently and the same upstream (GitHub, Slack, Atlassian) often has both: one per direction.
+
+== Wire up Claude
+
+Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and the Claude organization-settings UI. The setup flow is the same in each:
+
+. Open *Settings > Connectors* (or *Customize > Connectors* in newer builds; Anthropic surfaces a _Connectors have moved to Customize_ notice during the migration).
+. Click *Add custom connector*. The *Add custom connector BETA* modal opens.
+. Fill in the connector details:
++
+[cols="1,3"]
+|===
+|Field |Value
+
+|*Name*
+|Anything that helps the user identify the connector (for example, `Redpanda GitHub`). Surfaces in Claude's tool list.
+
+|*Remote MCP server URL*
+|The MCP server's *API URL* from AI Gateway. Format: `\https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>`.
+
+|*OAuth client ID* (optional, under *Advanced settings*)
+|The Client ID from the AI Gateway OAuth Client. Required for any MCP server that requires authentication. Leave blank only for public, no-auth MCP servers.
+
+|*OAuth client secret* (under *Advanced settings*)
+|The Client Secret from the AI Gateway OAuth Client. Required whenever Client ID is set.
+|===
++
+. Click *Add*. The connector appears in the Connectors list with a `CUSTOM` badge.
+. Click *Connect* on the new connector row. Claude opens a browser tab pointed at AI Gateway's authorization endpoint. Sign in with your AI Gateway identity (Auth0 today, Zitadel in a future release). Once approved, the connector becomes invokable in any conversation.
+
+// TODO: capture screenshots of the Add custom connector modal and the post-connect Connectors list against `adp-production`.
+
+NOTE: Anthropic's modal warns that connectors are user-trust-based; Anthropic doesn't control which tools developers expose. If you're publishing a connector for end-users, document the upstream system and scopes clearly so users know what they're authorizing.
+
+== Wire up other chat clients
+
+The flow mirrors Claude Desktop. The exact menu paths and field labels differ by client:
+
+* *ChatGPT desktop*: Recent builds support remote MCP custom connectors. Confirm the latest menu path; OpenAI iterates on this surface.
+* *Gemini apps*: Recent builds support remote MCP custom connectors.
+* *Cursor*: Supports remote MCP servers in recent builds.
+
+The required inputs are the same as Claude Desktop: connector name, MCP URL, Client ID, Client Secret. The chat client's redirect URIs must be registered on the AI Gateway OAuth Client.
+
+// TODO: confirm and document the ChatGPT, Gemini, and Cursor menu paths once each integration ships.
+
+== The two-step OAuth flow
+
+When a user calls a tool that needs upstream access, two OAuth handshakes run end-to-end. Most users only see the second one (and only on the very first tool call).
+
+=== Chat client connects to AI Gateway
+
+This handshake runs *once per user* when the connector is first added.
+
+. The user clicks *Connect* in the chat client.
+. The chat client opens a browser tab at the AI Gateway authorization endpoint, parameterized with the OAuth Client's `client_id` and one of the registered redirect URIs.
+. AI Gateway authenticates the user against the configured IdP (Auth0 today, Zitadel later) and presents an *Authorize access* consent screen. The screen shows:
++
+* The OAuth Client's name (for example, _Claude (GitHub Read demo) wants to access your data_).
+* The *Resource* being authorized: The MCP server name and URL.
+* The *Requested permissions*: The gateway's internal scopes for this handshake (`mcp` and `offline_access`). These are *not* the upstream system's scopes; the upstream's scopes appear during the next handshake.
+* A footer reminding the user that they can revoke access from their *Connections* page in the ADP UI.
++
+. The user clicks *Allow*. AI Gateway redirects the chat client back to the redirect URI with an authorization code.
+. The chat client exchanges the code for an access token and a refresh token. Tokens are stored locally in the chat client's credential store.
+. Subsequent calls to AI Gateway send the access token in `Authorization: Bearer ...`. The chat client refreshes the token automatically when it expires.
+
+=== AI Gateway connects to the upstream system
+
+(Only for user-delegated MCP servers.)
+
+This handshake runs *once per user, per upstream*. For an MCP server using user-delegated OAuth (GitHub, Slack, Atlassian, Workday, etc.):
+
+. The user invokes a tool that requires upstream auth.
+. AI Gateway has no stored upstream token for this user yet. The MCP protocol returns a `FAILED_PRECONDITION` response with an `OAuthConnectionRequired` error detail. The detail carries an `authorize_url` pointing at AI Gateway's OAuth bridge for the configured upstream provider, for example: `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/authorize?provider_name=github&scopes=read:user,repo`.
+. The chat client renders the link in its response to the user. Inside Claude this appears as a hyperlinked URL with prose telling the user to authorize the upstream connection (for example, _Authorize the GitHub connection first_) before retrying.
+. The user clicks the link. AI Gateway redirects them to the *upstream system's own OAuth consent page* (for example, GitHub's standard authorization UI) listing the requested repositories and scopes.
+. The user clicks *Authorize* on the upstream's consent page. The upstream redirects back to AI Gateway with an authorization code. AI Gateway exchanges the code for a token and stores it in its token vault under the user's identity.
+. The user tells the chat client they've connected. The chat client retries the original tool call, which now succeeds. Subsequent calls reuse the stored upstream token automatically.
+
+After both steps complete, the user can invoke any tool on the MCP server transparently. They re-consent only if scopes change or the refresh tokens expire.
+
+NOTE: Claude (and other chat clients) layer their own *per-tool consent prompts* on top of the OAuth flow described here. The first time a connector tries to invoke a specific tool, Claude shows a prompt of the form _Claude wants to use \{tool_name} from \{connector_name}_ with *Always allow* / *Deny* buttons. This is the chat client's own user-trust UX, not an additional AI Gateway auth step. Once a user picks *Always allow* for a tool, Claude won't prompt again for that tool from that connector.
+
+NOTE: If the MCP server uses a service-account auth mode instead of user-delegated OAuth, only Step 1 runs. AI Gateway calls the upstream with one shared identity and the user never sees the upstream consent flow.
+
+== Manage and rotate
+
+Maintain registered OAuth Clients without re-creating them:
+
+* *List registered clients*: Open *OAuth clients*. Each row shows the Name, Grant Types, and Redirect URIs.
+* *Edit a client*: Change the redirect URIs or grant types. The Client ID is immutable.
+* *Rotate the secret*: Generate a new Client Secret on the detail page. Update the value in every chat client that uses this OAuth Client; old tokens continue to work until they expire.
+* *Delete a client*: Invalidates every active token issued under it. Every chat-client connector that depends on this OAuth Client breaks until reconfigured against a replacement.
+
+== Troubleshooting
+
+Common symptoms and fixes:
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|_Couldn't connect to MCP server_ or connector setup fails immediately
+|The MCP URL is wrong, or the Client ID + Client Secret don't match an OAuth Client. Confirm the API URL on the MCP server's *Overview* tab and the credentials on the OAuth Client's detail page.
+
+|`redirect_uri_mismatch` during the connect flow
+|The chat client's callback URL isn't registered on the OAuth Client. Add the URL the chat client publishes (Claude Desktop has two; check Claude's docs for the current set).
+
+|Connector authorized but no tools appear
+|The MCP server has zero tools, or `tools/list` failed at connection time. Open the server in the Inspector to confirm tools are discovered. See xref:mcp:test-tools.adoc[Test a server's tools].
+
+|Tool call returns an _authorize_ link to the user
+|First call from a user with no stored upstream token. The user follows the link, completes upstream consent, and the call retries automatically (Step 2 of the flow above).
+
+|`scope_upgrade_required` from a tool call
+|The MCP server's `required_scopes` was extended after the user consented at the upstream. The user re-consents at the upstream with the higher scope.
+
+|`401 Unauthorized` from every call after working previously
+|The chat client's access token expired and the refresh token also expired (or the OAuth Client secret was rotated). Disconnect the connector and re-add it to mint fresh tokens.
+|===
+
+== Out of scope
+
+This page does not cover:
+
+* *Custom desktop or mobile UIs*: Build against the AI Gateway MCP endpoints directly using your platform's HTTP client; you don't need an OAuth Client unless you want the same external-app flow.
+* *Agent-to-agent calls (A2A)*: See the Agents docs; remote MCP clients are end-user-facing.
+* *MCP server authoring*: See xref:mcp:create-server.adoc[Create an MCP Server] for the server side.
+
+== Related topics
+
+* xref:mcp:create-server.adoc[Create an MCP Server]
+* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:ai-gateway:connect-agent.adoc[Connect your agent]

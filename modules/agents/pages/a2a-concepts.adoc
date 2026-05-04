@@ -118,4 +118,3 @@ The A2A protocol uses semantic versioning (major.minor.patch). Agents declare th
 
 * xref:integration-overview.adoc[]
 * xref:create-agent.adoc[]
-* link:https://a2a.ag/spec[A2A Protocol Specification^]

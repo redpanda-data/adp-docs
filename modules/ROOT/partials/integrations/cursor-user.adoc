@@ -805,8 +805,8 @@ This sends only search + orchestrator tools initially, reducing token usage sign
 
 == Next steps
 
-* xref:ai-gateway:aggregation.adoc[]: Configure deferred tool loading to work within Cursor's 40-tool limit
-* xref:ai-gateway:routing-cel.adoc[]: Use CEL expressions to route Cursor requests based on context
+* xref:ai-gateway:aggregation.adoc[]
+* xref:ai-gateway:routing-cel.adoc[]
 
 == Related pages
 

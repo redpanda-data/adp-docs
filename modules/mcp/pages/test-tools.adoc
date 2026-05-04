@@ -6,7 +6,7 @@
 :learning-objective-2: Inspect resources, prompts, and call history
 :learning-objective-3: Diagnose common errors (auth missing, scope upgrade required, transport mismatch) before pointing an agent at the server
 
-Test your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] using the Inspector — a built-in MCP client in the ADP UI. It runs on the same JSON-RPC connection that agents use, so if a tool works in the Inspector, it will work for an agent. Use this after creating your server (xref:create-server.adoc[Create an MCP Server]) or whenever you change a tool's schema.
+Test your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] using the Inspector: a built-in MCP client in the ADP UI. It runs on the same JSON-RPC connection that agents use, so if a tool works in the Inspector, it will work for an agent. Use this after creating your server (xref:create-server.adoc[Create an MCP Server]) or whenever you change a tool's schema.
 
 After completing this guide, you will be able to:
 
@@ -49,7 +49,7 @@ If the server has *Code mode* enabled, the Tools panel also lists `{name}_search
 
 == Resources panel
 
-The Resources panel lists any resources the server exposes through `resources/list`. Many MCP servers don't expose resources at all — if the panel is empty, that's fine.
+The Resources panel lists any resources the server exposes through `resources/list`. Many MCP servers don't expose resources at all: if the panel is empty, that's fine.
 
 If your server does expose resources:
 
@@ -68,7 +68,7 @@ If your server does expose prompts:
 
 == Session panel
 
-The Session panel keeps a running history of every call you've made through the Inspector — request, response, latency. Use it to:
+The Session panel keeps a running history of every call you've made through the Inspector: request, response, latency. Use it to:
 
 * Replay a previous call by clicking it in the history list.
 * Diff two responses side-by-side (useful when iterating on a tool's logic).
@@ -101,8 +101,27 @@ The Session panel keeps a running history of every call you've made through the 
 
 // TODO: screenshots of each error case once captured against `adp-production`.
 
+== Test from the CLI
+
+The `rpk ai` plugin offers a non-UI path for the same tool calls. Use it when scripting smoke tests or running checks from CI.
+
+[source,bash]
+----
+# List every tool exposed by a server
+rpk ai mcp tools list <server-name>
+
+# Call a tool with a JSON arg blob
+rpk ai mcp tools call <server-name> <tool-name> --input '{"arg1":"value"}'
+
+# Get server detail; includes the tool list by default. Add --no-tools
+# to skip discovery (faster when you only want metadata).
+rpk ai mcp get <server-name>
+----
+
+The CLI uses your active `rpk ai` profile for the gateway URL and authentication. See xref:ai-gateway:connect-agent.adoc[Connect your agent] for installation and profile setup.
+
 == Out of scope
 
-* *Pointing an agent at the server* — see the Agents docs.
-* *Aggregating multiple servers* — see xref:ai-gateway:aggregation.adoc[MCP aggregation].
-* *Debugging the upstream system itself* (your SQL database, your Slack app) — outside the scope of MCP tooling.
+* *Pointing an agent at the server*: see the Agents docs.
+* *Aggregating multiple servers*: see xref:ai-gateway:aggregation.adoc[MCP aggregation].
+* *Debugging the upstream system itself* (your SQL database, your Slack app): outside the scope of MCP tooling.

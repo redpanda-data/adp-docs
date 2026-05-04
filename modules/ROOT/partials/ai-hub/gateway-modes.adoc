@@ -257,16 +257,9 @@ For detailed instructions on ejecting to Custom mode, see xref:ai-gateway/admin/
 
 == Next steps
 
-Now that you understand gateway modes:
-
-*For Administrators:*
-
-* xref:ai-gateway/admin/configure-ai-hub.adoc[Configure AI Hub Gateway] - Set up AI Hub mode
-* xref:ai-gateway/admin/setup-guide.adoc[Setup Guide] - Configure Custom mode
-* xref:ai-gateway/admin/eject-to-custom-mode.adoc[Eject to Custom Mode] - Transition from AI Hub to Custom
-
-*For Builders:*
-
-* xref:ai-gateway/builders/use-ai-hub-gateway.adoc[Use AI Hub Gateway] - Connect to AI Hub gateways
-* xref:ai-gateway/builders/discover-gateways.adoc[Discover Gateways] - Find available gateways
-* xref:ai-gateway/builders/connect-your-agent.adoc[Connect Your Agent] - Integrate your application
+* xref:ai-gateway/admin/configure-ai-hub.adoc[Configure AI Hub Gateway]
+* xref:ai-gateway/admin/setup-guide.adoc[Setup Guide]
+* xref:ai-gateway/admin/eject-to-custom-mode.adoc[Eject to Custom Mode]
+* xref:ai-gateway/builders/use-ai-hub-gateway.adoc[Use AI Hub Gateway]
+* xref:ai-gateway/builders/discover-gateways.adoc[Discover Gateways]
+* xref:ai-gateway/builders/connect-your-agent.adoc[Connect Your Agent]

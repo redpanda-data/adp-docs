@@ -723,8 +723,8 @@ The gateway automatically blocks requests that would exceed the limit.
 
 == Next steps
 
-* xref:ai-gateway:aggregation.adoc[]: Configure deferred tool loading to reduce token costs
-* xref:ai-gateway:routing-cel.adoc[]: Use CEL expressions to route Cline requests based on task complexity
+* xref:ai-gateway:aggregation.adoc[]
+* xref:ai-gateway:routing-cel.adoc[]
 
 == Related pages
 
