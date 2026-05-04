@@ -105,15 +105,15 @@ Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and
 |Field |Value
 
 |*Name*
-|Anything that helps the user identify the connector (for example, `Redpanda GitHub` or `RP Github`). Surfaces in Claude's tool list.
+|Anything that helps the user identify the connector (for example, `Redpanda GitHub`). Surfaces in Claude's tool list.
 
 |*Remote MCP server URL*
 |The MCP server's *API URL* from AI Gateway. Format: `\https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>`.
 
-|*OAuth Client ID* (optional, under *Advanced settings*)
+|*OAuth client ID* (optional, under *Advanced settings*)
 |The Client ID from the AI Gateway OAuth Client. Required for any MCP server that requires authentication. Leave blank only for public, no-auth MCP servers.
 
-|*OAuth Client Secret* (under *Advanced settings*)
+|*OAuth client secret* (under *Advanced settings*)
 |The Client Secret from the AI Gateway OAuth Client. Required whenever Client ID is set.
 |===
 +
@@ -129,7 +129,7 @@ NOTE: Anthropic's modal warns that connectors are user-trust-based; Anthropic do
 The flow mirrors Claude Desktop. The exact menu paths and field labels differ by client:
 
 * *ChatGPT desktop*: Recent builds support remote MCP custom connectors. Confirm the latest menu path; OpenAI iterates on this surface.
-* *Gemini Apps*: Recent builds support remote MCP custom connectors.
+* *Gemini apps*: Recent builds support remote MCP custom connectors.
 * *Cursor*: Supports remote MCP servers in recent builds.
 
 The required inputs are the same as Claude Desktop: connector name, MCP URL, Client ID, Client Secret. The chat client's redirect URIs must be registered on the AI Gateway OAuth Client.
@@ -180,7 +180,7 @@ NOTE: If the MCP server uses a service-account auth mode instead of user-delegat
 
 Maintain registered OAuth Clients without re-creating them:
 
-* *List registered clients*: Open *OAuth Clients*. Each row shows the Name, Grant Types, and Redirect URIs.
+* *List registered clients*: Open *OAuth clients*. Each row shows the Name, Grant Types, and Redirect URIs.
 * *Edit a client*: Change the redirect URIs or grant types. The Client ID is immutable.
 * *Rotate the secret*: Generate a new Client Secret on the detail page. Update the value in every chat client that uses this OAuth Client; old tokens continue to work until they expire.
 * *Delete a client*: Invalidates every active token issued under it. Every chat-client connector that depends on this OAuth Client breaks until reconfigured against a replacement.
