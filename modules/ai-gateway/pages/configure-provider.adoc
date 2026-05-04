@@ -312,9 +312,9 @@ A list/grid view toggle in the top-right switches between table and card layouts
 
 == Edit, disable, or delete a provider
 
-* *Edit*: click *Edit* on the detail page. You can change any field *except* `Name` and `Type`, which are immutable. Model lists, credential references, and the enabled state can all change.
-* *Disable*: click *Disable* on the detail page. The provider remains in the list, but requests to its proxy URL are rejected until you enable it again. Use this when you want to pause traffic without losing configuration.
-* *Delete*: scroll to the *Delete this provider* section at the bottom of the detail page and click *Delete*. The action is permanent; in-flight requests fail and downstream clients receive errors until reconfigured.
+* *Edit*: Click *Edit* on the detail page. You can change any field *except* `Name` and `Type`, which are immutable. Model lists, credential references, and the enabled state can all change.
+* *Disable*: Click *Disable* on the detail page. The provider remains in the list, but requests to its proxy URL are rejected until you enable it again. Use this when you want to pause traffic without losing configuration.
+* *Delete*: Scroll to the *Delete this provider* section at the bottom of the detail page and click *Delete*. The action is permanent; in-flight requests fail and downstream clients receive errors until reconfigured.
 
 [[troubleshooting]]
 == Troubleshooting

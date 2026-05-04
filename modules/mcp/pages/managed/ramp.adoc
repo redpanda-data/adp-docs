@@ -198,9 +198,9 @@ curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/my-ramp \
 
 == Out of scope
 
-* *Bulk data export*: use Ramp's native data export.
-* *Accounting system integration*: use Ramp's accounting sync.
-* *Receipt management and approvals*: handled in the Ramp web UI.
+* *Bulk data export*: Use Ramp's native data export.
+* *Accounting system integration*: Use Ramp's accounting sync.
+* *Receipt management and approvals*: Handled in the Ramp web UI.
 
 == Related topics
 

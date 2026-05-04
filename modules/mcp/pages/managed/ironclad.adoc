@@ -142,8 +142,8 @@ curl -X POST https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/my-ironclad \
 
 == Out of scope
 
-* *Template authoring*: define templates in the Ironclad web UI, then reference them by `schema_id`.
-* *eSignature flows*: handled inside Ironclad; this MCP launches and reads workflow state.
+* *Template authoring*: Define templates in the Ironclad web UI, then reference them by `schema_id`.
+* *eSignature flows*: Handled inside Ironclad; this MCP launches and reads workflow state.
 
 == Related topics
 

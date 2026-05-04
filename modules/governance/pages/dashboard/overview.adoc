@@ -204,10 +204,10 @@ You can also reach the Spending, Requests, and Tokens drill-downs from a specifi
 
 The current beta release ships the V0 overview described above. At GA:
 
-* *Per-agent enrichment*: the Agents list adds error counts, tool-invocation counts, last-active timestamps, and a per-agent spend column.
-* *Agent Network*: an interactive topology graph that traces every agent through its LLM providers and MCP servers. See xref:governance:dashboard/agent-network.adoc[Agent Network].
-* *Authorization denials and violations*: an aggregated feed of policy events. See xref:governance:dashboard/violations.adoc[Authorization denials and violations].
-* *Kill switch*: pause an agent without removing it.
+* *Per-agent enrichment*: The Agents list adds error counts, tool-invocation counts, last-active timestamps, and a per-agent spend column.
+* *Agent Network*: An interactive topology graph that traces every agent through its LLM providers and MCP servers. See xref:governance:dashboard/agent-network.adoc[Agent Network].
+* *Authorization denials and violations*: An aggregated feed of policy events. See xref:governance:dashboard/violations.adoc[Authorization denials and violations].
+* *Kill switch*: Pause an agent without removing it.
 
 == Investigate further
 

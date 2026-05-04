@@ -44,9 +44,9 @@ Authentication is one ISU per MCP instance, not per end-user. Customers that nee
 . *Create an Integration System User (ISU)* under *Workday > Create Integration System User*. Note the username; it usually ends up as `<isu_name>@<tenant>`.
 . *Register an API Client for Integrations* under *Workday > Register API Client for Integrations*:
 +
-* *Grant types*: include both *Refresh Token* (required) and *Authorization Code*. Workday's UX requires both to be checked even when only the refresh-token grant is used at runtime.
-* *Non-Expiring Refresh Tokens*: tick this option. Required for static-credential MCP usage; if Workday rotates the refresh token on every exchange, the cached value goes stale and authentication breaks.
-* *Scope*: include *Human Resources* (and any other functional areas your business processes touch).
+* *Grant types*: Include both *Refresh Token* (required) and *Authorization Code*. Workday's UX requires both to be checked even when only the refresh-token grant is used at runtime.
+* *Non-Expiring Refresh Tokens*: Tick this option. Required for static-credential MCP usage; if Workday rotates the refresh token on every exchange, the cached value goes stale and authentication breaks.
+* *Scope*: Include *Human Resources* (and any other functional areas your business processes touch).
 . *Issue a refresh token to the ISU* by completing the one-time authorization-code flow Workday walks you through, or by using *View API Clients > Manage Refresh Tokens for Integrations* to mint one directly.
 . Save four values: the `tenant`, the `host` (the Workday data-center hostname, for example `wd2-impl-services1.workday.com`), the ISU `username`, and the ISU `password`. Save the `refresh_token` separately.
 
@@ -180,8 +180,8 @@ If Workday returns a SOAP Fault (validation error, missing permissions, worker n
 == Out of scope
 
 * *Per-user-delegated access*: Workday auth is one shared ISU per MCP. For per-user identities, mount multiple MCP instances (one per ISU/scope).
-* *Custom report execution*: this MCP wraps SOAP business processes, not reports. Use Workday RaaS or the report API for custom reports.
-* *Read-side data exploration*: there is no general _search Workday_ tool. Add specific business-process tools as needed.
+* *Custom report execution*: This MCP wraps SOAP business processes, not reports. Use Workday RaaS or the report API for custom reports.
+* *Read-side data exploration*: There is no general _search Workday_ tool. Add specific business-process tools as needed.
 
 == Related topics
 

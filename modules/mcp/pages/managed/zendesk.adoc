@@ -18,8 +18,8 @@ After completing this guide, you will be able to:
 
 Wraps the Zendesk REST API. Two auth modes are supported:
 
-* *API token (Basic auth)*: a long-lived agent token paired with the agent's email. Best for service-account-style use.
-* *User OAuth*: per-user Zendesk OAuth tokens resolved from the gateway's token vault. Best when you want each agent action attributed to the calling end-user.
+* *API token (Basic auth)*: A long-lived agent token paired with the agent's email. Best for service-account-style use.
+* *User OAuth*: Per-user Zendesk OAuth tokens resolved from the gateway's token vault. Best when you want each agent action attributed to the calling end-user.
 
 Responses are curated for token efficiency: HATEOAS URLs, transport metadata, and rarely-used fields are dropped before reaching the LLM. Related users, groups, and organizations are resolved into nested ref objects through Zendesk side-loading (single round trip), and Help Center article HTML is converted to GitHub-flavored markdown. Typical responses are 3–7× smaller than raw Zendesk JSON.
 
@@ -256,8 +256,8 @@ The handler follows Zendesk's `next_page` URLs only when they point at the same 
 
 == Out of scope
 
-* *Zendesk admin operations*: managing macros, triggers, ticket forms, custom fields, schedules, or SLAs. Use the Zendesk Admin Center or a Terraform provider.
-* *Voice / chat / Talk*: this MCP wraps Support tickets and Help Center; voice and chat are separate Zendesk products with their own APIs.
+* *Zendesk admin operations*: Managing macros, triggers, ticket forms, custom fields, schedules, or SLAs. Use the Zendesk Admin Center or a Terraform provider.
+* *Voice / chat / Talk*: This MCP wraps Support tickets and Help Center; voice and chat are separate Zendesk products with their own APIs.
 
 == Related topics
 
