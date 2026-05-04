@@ -255,8 +255,11 @@ Common symptoms and fixes:
 
 == Related topics
 
-Related pages:
-
-* xref:user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow users walk through when an MCP server attached to this provider is invoked.
-* xref:create-server.adoc[Create an MCP Server]: Including attaching a provider from the UI or CLI.
-* xref:managed/slack.adoc[Slack managed MCP], xref:managed/jira.adoc[Jira managed MCP], xref:managed/zendesk.adoc[Zendesk managed MCP], xref:managed/workday.adoc[Workday managed MCP], xref:managed/ironclad.adoc[Ironclad managed MCP], xref:managed/ramp.adoc[Ramp managed MCP]: Managed MCP types that use OAuth Providers.
+* xref:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:create-server.adoc[Create an MCP Server]
+* xref:managed/slack.adoc[Slack managed MCP]
+* xref:managed/jira.adoc[Jira managed MCP]
+* xref:managed/zendesk.adoc[Zendesk managed MCP]
+* xref:managed/workday.adoc[Workday managed MCP]
+* xref:managed/ironclad.adoc[Ironclad managed MCP]
+* xref:managed/ramp.adoc[Ramp managed MCP]

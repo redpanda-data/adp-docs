@@ -222,9 +222,7 @@ This page does not cover:
 
 == Related topics
 
-Related pages:
-
-* xref:mcp:create-server.adoc[Create an MCP Server]: Set up the server side first.
-* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]: Define how AI Gateway authenticates against upstream systems.
-* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]: The per-user upstream consent flow that runs after the chat client handshake.
-* xref:ai-gateway:connect-agent.adoc[Connect your agent]: Programmatic SDK-based access (alternative to remote chat clients).
+* xref:mcp:create-server.adoc[Create an MCP Server]
+* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:ai-gateway:connect-agent.adoc[Connect your agent]

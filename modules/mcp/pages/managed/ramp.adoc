@@ -216,8 +216,6 @@ This page does not cover:
 
 == Related topics
 
-Related pages:
-
-* xref:../oauth-providers.adoc[Configure an OAuth Provider]: Register the Ramp OAuth app.
-* xref:../user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow.
-* xref:../create-server.adoc[Create an MCP Server].
+* xref:../oauth-providers.adoc[Configure an OAuth Provider]
+* xref:../user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:../create-server.adoc[Create an MCP Server]

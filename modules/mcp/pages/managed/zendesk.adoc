@@ -273,9 +273,7 @@ This page does not cover:
 
 == Related topics
 
-Related pages:
-
-* xref:../oauth-providers.adoc[Configure an OAuth Provider]: Register the Zendesk OAuth client for User-OAuth mode.
-* xref:../user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow users walk through on first call.
-* xref:../create-server.adoc[Create an MCP Server].
-* xref:../test-tools.adoc[Test a server's tools].
+* xref:../oauth-providers.adoc[Configure an OAuth Provider]
+* xref:../user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:../create-server.adoc[Create an MCP Server]
+* xref:../test-tools.adoc[Test a server's tools]
