@@ -32,6 +32,8 @@ Authentication is one ISU per MCP instance, not per end-user. Customers that nee
 
 == Prerequisites
 
+Before you create the server, make sure you have:
+
 * A Workday tenant where you can create an Integration System User and register an API client.
 * Admin access to *Workday > Create Integration System User* and *Workday > Register API Client for Integrations*.
 * Two ADP secret-store entries:
@@ -40,6 +42,8 @@ Authentication is one ISU per MCP instance, not per end-user. Customers that nee
 * `WORKDAY_REFRESH_TOKEN`: The non-expiring refresh token.
 
 == Get Workday credentials
+
+Set up authentication on the Workday side before configuring the MCP:
 
 . *Create an Integration System User (ISU)* under *Workday > Create Integration System User*. Note the username; it usually ends up as `<isu_name>@<tenant>`.
 . *Register an API Client for Integrations* under *Workday > Register API Client for Integrations*:
@@ -51,6 +55,8 @@ Authentication is one ISU per MCP instance, not per end-user. Customers that nee
 . Save four values: the `tenant`, the `host` (the Workday data-center hostname, for example `wd2-impl-services1.workday.com`), the ISU `username`, and the ISU `password`. Save the `refresh_token` separately.
 
 == Configure
+
+Create a new Workday MCP server in the ADP UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Workday* from the marketplace picker.
@@ -102,6 +108,8 @@ rpk ai mcp create workday-hr --managed-config '{
 ----
 
 == Tools
+
+The Workday MCP exposes the following tools:
 
 [cols="1,2"]
 |===
@@ -157,6 +165,8 @@ If Workday returns a SOAP Fault (validation error, missing permissions, worker n
 
 == Troubleshooting
 
+Common symptoms and fixes:
+
 [cols="1,2"]
 |===
 |Symptom |What to check
@@ -179,11 +189,15 @@ If Workday returns a SOAP Fault (validation error, missing permissions, worker n
 
 == Out of scope
 
+This page does not cover:
+
 * *Per-user-delegated access*: Workday auth is one shared ISU per MCP. For per-user identities, mount multiple MCP instances (one per ISU/scope).
 * *Custom report execution*: This MCP wraps SOAP business processes, not reports. Use Workday RaaS or the report API for custom reports.
 * *Read-side data exploration*: There is no general _search Workday_ tool. Add specific business-process tools as needed.
 
 == Related topics
+
+Related pages:
 
 * xref:create-server.adoc[Create an MCP Server]: Generic create flow.
 * xref:test-tools.adoc[Test a server's tools]: Run tools from the Inspector or `rpk ai mcp tools`.

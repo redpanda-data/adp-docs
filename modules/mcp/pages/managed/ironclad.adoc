@@ -22,11 +22,15 @@ It is *not* a replacement for the Ironclad web UI for complex workflow managemen
 
 == Prerequisites
 
+Before you create the server, make sure you have:
+
 * An Ironclad tenant where you can register an OAuth app.
 * An OAuth Provider configured in ADP for Ironclad. See xref:../oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:../user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Get Ironclad credentials
+
+Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
 
 . Log in to your Ironclad account and go to *Settings > API > OAuth Apps*.
 . Create a new OAuth app. Set the redirect URI to your AI Gateway callback URL (typically `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`).
@@ -44,6 +48,8 @@ It is *not* a replacement for the Ironclad web UI for complex workflow managemen
 * The Client ID and a secret-store reference for the Client Secret.
 
 == Configure
+
+Create a new Ironclad MCP server in the ADP UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Ironclad* from the marketplace picker.
@@ -85,6 +91,8 @@ For EU-hosted accounts, use `"IRONCLAD_REGION_EU"`. For sandbox testing, use `"I
 
 == Tools
 
+The Ironclad MCP exposes the following tools:
+
 [cols="1,2"]
 |===
 |Tool |Description
@@ -123,6 +131,8 @@ curl -X POST https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/my-ironclad \
 
 == Troubleshooting
 
+Common symptoms and fixes:
+
 [cols="1,2"]
 |===
 |Symptom |What to check
@@ -142,10 +152,14 @@ curl -X POST https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/my-ironclad \
 
 == Out of scope
 
+This page does not cover:
+
 * *Template authoring*: Define templates in the Ironclad web UI, then reference them by `schema_id`.
 * *eSignature flows*: Handled inside Ironclad; this MCP launches and reads workflow state.
 
 == Related topics
+
+Related pages:
 
 * xref:../oauth-providers.adoc[Configure an OAuth Provider]: Register the Ironclad OAuth app.
 * xref:../user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow.

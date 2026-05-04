@@ -26,6 +26,8 @@ The Slack managed type exposes tools for:
 
 == Prerequisites
 
+Before you create the server, make sure you have:
+
 * A Slack workspace where you can install or authorize an OAuth app.
 * A Slack OAuth app registered (your own or a Redpanda-published reference app).
 +
@@ -34,6 +36,8 @@ The Slack managed type exposes tools for:
 * Familiarity with xref:../user-delegated-oauth.adoc[].
 
 == Configure
+
+Create a new Slack MCP server in the ADP UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Slack* from the marketplace picker.
@@ -48,6 +52,8 @@ The Slack managed type exposes tools for:
 . Click *Create*.
 
 == Test the consent flow
+
+After creating the server, run a tool that requires Slack auth to verify the consent flow end-to-end:
 
 . Open the *Inspector* tab.
 . Run a tool that requires the user's identity, for example `chat_postMessage`.
@@ -74,6 +80,8 @@ Once the server is created and at least one user has consented, you can point an
 
 == Troubleshooting
 
+Common symptoms and fixes:
+
 [cols="1,2"]
 |===
 |Symptom |What to check
@@ -95,5 +103,7 @@ Once the server is created and at least one user has consented, you can point an
 
 == Out of scope
 
+This page does not cover:
+
 * *Configuring the Slack OAuth app*: Slack-side configuration (creating the app, picking redirect URIs, choosing scopes) happens in api.slack.com, not in ADP.
-* *Posting as a Slack bot*: this page covers user-delegated auth. For bot-token posting, use static-key auth with a bot user OAuth token.
+* *Posting as a Slack bot*: This page covers user-delegated auth. For bot-token posting, use static-key auth with a bot user OAuth token.

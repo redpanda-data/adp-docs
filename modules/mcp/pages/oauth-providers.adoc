@@ -21,6 +21,8 @@ OAuth providers and OAuth clients are different resources. An *OAuth provider* (
 
 == Prerequisites
 
+Before you register the provider, make sure you have:
+
 * An OAuth 2.0 application registered with the upstream provider, with the gateway's redirect URI configured. The redirect URI is the AI Gateway's OAuth callback (typically `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`).
 * The OAuth app's *client ID* and *client secret*.
 * A secret already created in the ADP secret store for the client secret. Secret references must be `UPPER_SNAKE_CASE`, for example `SLACK_CLIENT_SECRET`.
@@ -78,6 +80,8 @@ The *OAuth Providers* page is your starting point.
 A *Filter* button narrows the list. The *Create provider* button opens the create form.
 
 == Register an OAuth provider in the UI
+
+Walk through the create form to register the upstream:
 
 . Sign in to ADP.
 . Open *OAuth Providers* in the sidebar.
@@ -212,6 +216,8 @@ To attach an OAuth provider to an MCP server, the principal needs `dataplane_aig
 
 == Edit and rotate credentials
 
+You can change the provider's configuration or rotate its client secret without re-creating the resource:
+
 * *Edit*: Open the provider's detail page and click *Edit*. Endpoints, scopes, display name, and the client-secret reference can change. The `Name` is immutable.
 * *Rotate credentials*: Update the secret content in the secret store under the same name (for example, `SLACK_CLIENT_SECRET`). The provider's reference is unchanged. Existing tokens in the vault stay valid; the new client secret is used the next time AI Gateway exchanges credentials.
 * *Disable temporarily*: Deleting the provider invalidates every MCP server's connections that reference it, so disable the dependent MCP servers first if you want to pause traffic without losing user consent.
@@ -227,6 +233,8 @@ Deleting an OAuth provider:
 Plan the deletion: disable or reconfigure dependent MCP servers first, communicate the cutover to users so they can re-consent against a replacement provider, then delete.
 
 == Troubleshooting
+
+Common symptoms and fixes:
 
 [cols="1,2"]
 |===
@@ -246,6 +254,8 @@ Plan the deletion: disable or reconfigure dependent MCP servers first, communica
 |===
 
 == Related topics
+
+Related pages:
 
 * xref:user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow users walk through when an MCP server attached to this provider is invoked.
 * xref:create-server.adoc[Create an MCP Server]: Including attaching a provider from the UI or CLI.

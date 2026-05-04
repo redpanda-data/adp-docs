@@ -22,11 +22,15 @@ It is suitable for expense analysis, spend-policy enforcement, and corporate car
 
 == Prerequisites
 
+Before you create the server, make sure you have:
+
 * A Ramp account with admin access to the Ramp Developer Portal.
 * An OAuth Provider configured in ADP for Ramp. See xref:../oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:../user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Get Ramp credentials
+
+Set up the OAuth app on Ramp and the matching OAuth Provider in ADP:
 
 . Sign in to the https://app.ramp.com/developer[Ramp Developer Portal].
 . Go to *Developer Settings > Applications* and click *Create Application*.
@@ -50,6 +54,8 @@ It is suitable for expense analysis, spend-policy enforcement, and corporate car
 * The Client ID and a secret-store reference for the Client Secret.
 
 == Configure
+
+Create a new Ramp MCP server in the ADP UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Ramp* from the marketplace picker.
@@ -90,6 +96,8 @@ rpk ai mcp create my-ramp \
 Set `environment` to `"demo"` to target Ramp's sandbox.
 
 == Tools
+
+The Ramp MCP exposes the following tools:
 
 [cols="1,2"]
 |===
@@ -179,6 +187,8 @@ curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/my-ramp \
 
 == Troubleshooting
 
+Common symptoms and fixes:
+
 [cols="1,2"]
 |===
 |Symptom |What to check
@@ -198,11 +208,15 @@ curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/my-ramp \
 
 == Out of scope
 
+This page does not cover:
+
 * *Bulk data export*: Use Ramp's native data export.
 * *Accounting system integration*: Use Ramp's accounting sync.
 * *Receipt management and approvals*: Handled in the Ramp web UI.
 
 == Related topics
+
+Related pages:
 
 * xref:../oauth-providers.adoc[Configure an OAuth Provider]: Register the Ramp OAuth app.
 * xref:../user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow.

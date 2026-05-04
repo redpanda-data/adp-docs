@@ -27,6 +27,8 @@ It is *not* intended for Zendesk admin operations (managing macros, triggers, ti
 
 == Prerequisites
 
+Before you create the server, make sure you have:
+
 * A Zendesk Support instance.
 * For *API token* mode: ability to create an API token under *Apps and integrations > APIs > Zendesk API*.
 * For *User OAuth* mode: a Zendesk OAuth client and an OAuth Provider configured in ADP. See xref:../oauth-providers.adoc[Configure an OAuth Provider].
@@ -45,6 +47,8 @@ It is *not* intended for Zendesk admin operations (managing macros, triggers, ti
 
 === Option 2: User OAuth
 
+For per-user authentication, register an OAuth client on Zendesk and a matching OAuth Provider in ADP:
+
 . Configure a Zendesk OAuth client under *Apps and integrations > APIs > OAuth Clients* (Confidential client, Authorization Code grant).
 . Register a matching OAuth Provider in ADP. See xref:../oauth-providers.adoc[Configure an OAuth Provider]. Use Zendesk's authorize and token endpoints.
 . Each end-user authenticates once through the OAuth flow; tokens are stored in the gateway's token vault.
@@ -52,6 +56,8 @@ It is *not* intended for Zendesk admin operations (managing macros, triggers, ti
 *Required scopes*: `read tickets:write hc:read` covers all 12 tools. Drop `tickets:write` if the MCP only needs to read.
 
 == Configure
+
+Create a new Zendesk MCP server in the ADP UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Zendesk* from the marketplace picker.
@@ -118,6 +124,8 @@ rpk ai mcp create acme-zendesk-oauth \
 ======
 
 == Tools
+
+The Zendesk MCP exposes 12 tools across tickets, users, organizations, and Help Center articles:
 
 [cols="1,2"]
 |===
@@ -234,6 +242,8 @@ The handler follows Zendesk's `next_page` URLs only when they point at the same 
 
 == Troubleshooting
 
+Common symptoms and fixes:
+
 [cols="1,2"]
 |===
 |Symptom |What to check
@@ -256,10 +266,14 @@ The handler follows Zendesk's `next_page` URLs only when they point at the same 
 
 == Out of scope
 
+This page does not cover:
+
 * *Zendesk admin operations*: Managing macros, triggers, ticket forms, custom fields, schedules, or SLAs. Use the Zendesk Admin Center or a Terraform provider.
 * *Voice / chat / Talk*: This MCP wraps Support tickets and Help Center; voice and chat are separate Zendesk products with their own APIs.
 
 == Related topics
+
+Related pages:
 
 * xref:../oauth-providers.adoc[Configure an OAuth Provider]: Register the Zendesk OAuth client for User-OAuth mode.
 * xref:../user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow users walk through on first call.
