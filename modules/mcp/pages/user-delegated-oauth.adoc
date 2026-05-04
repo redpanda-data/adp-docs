@@ -16,9 +16,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* An OAuth Provider resource configured in the ADP UI under *OAuth Providers*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials.
-+
-// TODO: link the OAuth Provider how-to once it exists.
+* An OAuth Provider resource configured in the ADP UI under *OAuth Providers*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:oauth-providers.adoc[Configure an OAuth Provider].
 * The required scopes for the upstream API you plan to call.
 * For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
 * For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:managed/managed-catalog.adoc[Managed catalog] before configuring.
@@ -35,6 +33,8 @@ After completing this guide, you will be able to:
 . Save.
 
 NOTE: Choosing user-delegated OAuth instead of service-account OAuth *is* the credential-mode decision — there's no separate field. User-delegated gives each caller a per-user upstream identity; service-account gives every caller one shared identity. Switching between them later requires re-consent for every active user.
+
+TIP: To configure user-delegated OAuth from the CLI, use `--user-oauth-provider` and `--user-oauth-scopes` on `rpk ai mcp create` or `rpk ai mcp update`. See xref:create-server.adoc[Create an MCP Server].
 
 == The user connection flow
 

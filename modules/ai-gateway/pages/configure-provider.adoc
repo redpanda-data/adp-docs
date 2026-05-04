@@ -23,6 +23,7 @@ After completing this guide, you will be able to:
 +
 // TODO: xref the secrets-management page for ADP once confirmed.
 
+[[open-the-create-llm-provider-page]]
 == Open the Create LLM provider page
 
 . Sign in to ADP.
@@ -63,10 +64,10 @@ The *Provider type* card shows five cards. Pick the one that matches your upstre
 |Call Claude Opus, Sonnet, and Haiku directly. Strong at coding, long-context reasoning, and tool use. Supports forwarding client `Authorization` headers to Anthropic for enterprise and Max-plan subscription passthrough (see <<anthropic-authorization-passthrough>>).
 
 |*Google AI*
-|Reach Gemini Pro, Flash, and multimodal models via Google AI Studio. Ideal for long-context workloads and image/video inputs.
+|Reach Gemini Pro, Flash, and multimodal models through Google AI Studio. Ideal for long-context workloads and image/video inputs.
 
 |*AWS Bedrock*
-|Invoke foundation models (Claude, Llama, Titan, Nova) hosted inside your AWS account. Requires an AWS region and credentials (static, STS-assumed role, or the default credential chain).
+|Invoke foundation models (Claude, Llama, Titan, Nova, Mistral, AI21 Jamba) hosted inside your AWS account. Requires an AWS region and credentials (static, STS-assumed role, or the default credential chain). Supports the native Bedrock APIs (`InvokeModel`, `Converse`) and an OpenAI-compatible Chat Completions endpoint for `gpt-oss` models. See <<bedrock-inference-profiles>> for picking the right model identifier.
 
 |*OpenAI-compatible*
 |Point at any OpenAI-compatible endpoint that ships `/v1/chat/completions` (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways. Requires a *Base URL*; authentication is optional.
@@ -168,21 +169,109 @@ Models you select on this form become the catalog the provider exposes. Leave th
 
 For *OpenAI*, *Anthropic*, *Google AI*, and *AWS Bedrock*, the form shows a picker backed by the provider's catalog. Pick from the list, or type a model identifier the catalog doesn't show. For *OpenAI-compatible*, the form takes a freeform list — type the exact identifiers your upstream serves.
 
+For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs. See <<bedrock-inference-profiles>>.
+
 [NOTE]
 ====
 Models are stored as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). A future Phase 2 release will add per-model metadata such as custom pricing overrides. The legacy flat `models` field still works on writes for backward compatibility.
 ====
 
-After you create the provider, the detail page renders each model as a card with capability badges (for example, *Vision*, *Reasoning*, *Streaming*) lifted from the catalog.
+After you create the provider, the detail page renders each model as a row with capability badges (*Vision*, *Reasoning*, *Streaming*, and others lifted from the catalog), the model's 7-day spend, and a link to the per-model detail page. The model list supports search and filtering.
+
+The detail page also carries a *Last 7 days* KPI strip (*TOTAL SPEND*, *REQUESTS*, *TOKENS*) with sparklines and _vs previous period_ deltas. *View all* on each card opens the relevant Governance drill-down (Spending, Requests, or Tokens) with this provider pre-filtered. See xref:governance:dashboard/overview.adoc[the governance overview] for the drill-down details.
 
 == Save and verify
 
 . Click *Create provider*. The button activates once *Name* and *Type* are both set; the right-hand *Summary* panel checks them off as you fill them in.
 . On the provider's detail page, the *Connection* card shows your *Proxy URL*, *Discovery* URL, *Base URL*, and *API key ref*. Copy the *Proxy URL* — this is where your applications point.
-. Scroll to the *Verify connection* section. Pick a model from the dropdown and click *Test Connection*. The status updates from "Not tested yet" to a pass/fail indicator. Use the *Show commands* disclosure if you want to see the equivalent curl or SDK call.
+. Scroll to the *Verify connection* section. Pick a model from the dropdown and click *Test Connection*. The status updates from _Not tested yet_ to a pass/fail indicator. Use the *Show commands* disclosure if you want to see the equivalent curl or SDK call.
 . To wire up an application, open *Connect your app* further down the page or follow xref:connect-agent.adoc[Connect your agent].
 
 A successful Test Connection result confirms that the provider's credentials, region (Bedrock), and network path are all correct. If the call fails, see <<troubleshooting>>.
+
+[[bedrock-inference-profiles]]
+== AWS Bedrock: inference profiles and IAM
+
+Bedrock has three concepts that affect how you configure a provider: foundation models, cross-region inference profiles, and IAM. Get these right and the *Test connection* check passes; get them wrong and you see `AccessDenied` or `ValidationException` errors.
+
+=== Foundation models versus inference profiles
+
+A *foundation model* is the base model AWS exposes (for example, `anthropic.claude-sonnet-4-6`). It runs in the AWS region you call.
+
+A *cross-region inference profile* wraps a foundation model with a geography prefix that routes requests across multiple regions for higher availability and throughput. The prefix tells AWS which geography the request should run in:
+
+[cols="1,2"]
+|===
+|Prefix |Geography
+
+|`us.`
+|US regions
+
+|`eu.`
+|EU regions
+
+|`apac.`
+|Asia-Pacific regions
+
+|`au.`
+|Australia regions
+
+|`jp.`
+|Japan regions
+
+|`global.`
+|Any region; routes for lowest cost
+|===
+
+Examples: `us.anthropic.claude-sonnet-4-6` (Claude Sonnet 4.6 routed across US regions), `eu.anthropic.claude-haiku-4-5` (Haiku 4.5 routed across EU regions).
+
+[IMPORTANT]
+====
+Anthropic Claude 4.6+ models (Sonnet 4.6, Opus 4.6, Opus 4.7) cannot be invoked with the bare foundation-model ID; they require an inference profile. If you try the bare ID, Bedrock returns:
+
+> "Invocation of model ID … with on-demand throughput isn't supported. Retry your request with the ID or ARN of an inference profile that contains this model."
+
+Older 4.5 and earlier Claude models still accept bare IDs.
+====
+
+Pricing varies by profile. The bare foundation-model ID and the `global.` profile share AWS's headline rate; geo profiles (`us.`, `eu.`, `apac.`, `au.`, `jp.`) carry approximately a 10% cross-region inference premium. Use `global.` when you want the headline rate and don't need a specific geography; use `us.` / `eu.` / `apac.` when data residency matters.
+
+=== IAM policy patterns
+
+Bedrock IAM resources have different ARN structures depending on whether you reference a foundation model, a system-defined inference profile, or an account-scoped application inference profile. The provider's IAM principal needs `bedrock:InvokeModel` and `bedrock:InvokeModelWithResponseStream` on every resource it calls.
+
+[cols="1,3"]
+|===
+|Resource type |ARN shape
+
+|Foundation model
+|`arn:aws:bedrock:\{region}::foundation-model/\{model-id}` (no account ID; AWS-owned)
+
+|System-defined inference profile
+|`arn:aws:bedrock:\{region}:*:inference-profile/\{profile-id}` (wildcard account; system-defined)
+
+|Application inference profile (account-scoped)
+|`arn:aws:bedrock:\{region}:\{account-id}:application-inference-profile/\{profile-id}`
+|===
+
+A minimal policy granting access to all foundation models plus all cross-region profiles:
+
+[source,json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream"],
+    "Resource": [
+      "arn:aws:bedrock:*::foundation-model/*",
+      "arn:aws:bedrock:*:*:inference-profile/*"
+    ]
+  }]
+}
+----
+
+For production, scope to specific models and regions instead of using wildcards.
 
 [[anthropic-authorization-passthrough]]
 == Anthropic: authorization passthrough
@@ -194,6 +283,32 @@ If you want each client to authenticate against Anthropic with its own subscript
 * Use this when you want to aggregate individual client subscriptions rather than share a single API account.
 
 The provider detail page shows whether Auth passthrough is enabled in the *Connection* card.
+
+== Browse providers in the list view
+
+The *LLM Providers* list page is the at-a-glance home for every provider in your dataplane. Open it from the sidebar's *LLM Providers* entry.
+
+[cols="1,3"]
+|===
+|Column |What it shows
+
+|*Provider*
+|User-given name plus the provider-type icon (OpenAI, Anthropic, Google, AWS Bedrock, OpenAI-compatible) and a copyable preview of the proxy base URL.
+
+|*Status*
+|*Enabled* or *Disabled*.
+
+|*Models*
+|First two model identifiers exposed by the provider, plus a `+N` overflow chip when more are configured.
+
+|*Spend (7d)*
+|Spend over the last 7 days with a small sparkline and a "vs previous period" delta. The window is fixed at 7 days on this view; longer-range analysis runs through the xref:governance:dashboard/overview.adoc[governance dashboard].
+
+|*Updated*
+|Relative timestamp of the last edit.
+|===
+
+A list/grid view toggle in the top-right switches between table and card layouts. The *Filter* button narrows the list by provider type, status, or name. The *Create provider* button opens the create flow described in <<open-the-create-llm-provider-page,Open the Create LLM provider page>>.
 
 == Edit, disable, or delete a provider
 
@@ -212,7 +327,10 @@ The provider detail page shows whether Auth passthrough is enabled in the *Conne
 |Confirm the secret exists in your dataplane's secret store and the reference in the provider configuration is spelled identically (`UPPER_SNAKE_CASE`, no typos).
 
 |Bedrock returns `AccessDenied` or region errors
-|Verify the AWS region field matches the region where your Bedrock models are enabled. Bedrock model availability varies by region.
+|Verify the AWS region field matches the region where your Bedrock models are enabled. Bedrock model availability varies by region. Confirm the IAM principal has `bedrock:InvokeModel` on the foundation-model and inference-profile ARNs you use. See <<bedrock-inference-profiles>>.
+
+|Bedrock returns "Invocation of model ID … with on-demand throughput isn't supported"
+|You called a Claude 4.6+ model with a bare foundation-model ID. Switch to an inference profile (for example, `us.anthropic.claude-sonnet-4-6` instead of `anthropic.claude-sonnet-4-6`). See <<bedrock-inference-profiles>>.
 
 |Anthropic returns 401 when passthrough is enabled
 |Confirm the client is sending its own `Authorization` header and the *API key* field on the provider is empty.

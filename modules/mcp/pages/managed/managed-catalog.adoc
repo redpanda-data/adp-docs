@@ -85,6 +85,10 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 |*Slack*
 |Post messages and read channels on Slack.
 |xref:managed/slack.adoc[See the deep-dive →]
+
+|*Zendesk*
+|Search and manage Zendesk Support tickets, users, and Help Center articles.
+|xref:managed/zendesk.adoc[See the deep-dive →]
 |===
 
 == Database
@@ -170,6 +174,10 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 |Manage jobs, candidates, and applications in Greenhouse ATS.
 |—
 
+|*Ironclad*
+|Read and manage contracts in Ironclad CLM.
+|xref:managed/ironclad.adoc[See the deep-dive →]
+
 |*Okta*
 |Manage Okta users and groups.
 |—
@@ -178,6 +186,10 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 |Expose any OpenAPI/Swagger HTTP API as MCP tools.
 |xref:managed/openapi.adoc[See the deep-dive →]
 
+|*Ramp*
+|Manage Ramp corporate cards, transactions, spend limits, and reimbursements.
+|xref:managed/ramp.adoc[See the deep-dive →]
+
 |*Salesforce*
 |Query, create, update, and delete Salesforce CRM records using SOQL and the REST API.
 |—
@@ -185,6 +197,10 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 |*Text Chunker*
 |Split and chunk text for RAG and LLM ingestion pipelines.
 |—
+
+|*Workday*
+|Drive Workday Human Resources business processes via SOAP.
+|xref:managed/workday.adoc[See the deep-dive →]
 |===
 
 == Where to go next

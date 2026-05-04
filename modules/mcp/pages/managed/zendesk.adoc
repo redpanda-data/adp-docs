@@ -1,0 +1,267 @@
+= Zendesk Managed MCP Server
+:description: Search and manage Zendesk Support tickets, users, and Help Center articles. Two auth modes (service-account API token or per-user OAuth) plus token-efficient response shaping for LLM agents.
+:page-topic-type: how-to
+:personas: app_developer, platform_admin
+:learning-objective-1: Configure the Zendesk managed MCP server in API-token or User-OAuth mode
+:learning-objective-2: Pick the right scopes and Zendesk role for your workflows
+:learning-objective-3: Search, read, create, and update tickets from the Inspector or an agent
+
+The *Zendesk* managed MCP server lets agents search, read, create, and update tickets in your Zendesk Support instance, look up users and organizations, and search Help Center articles.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+Wraps the Zendesk REST API. Two auth modes are supported:
+
+* *API token (Basic auth)*: a long-lived agent token paired with the agent's email. Best for service-account-style use.
+* *User OAuth*: per-user Zendesk OAuth tokens resolved from the gateway's token vault. Best when you want each agent action attributed to the calling end-user.
+
+Responses are curated for token efficiency: HATEOAS URLs, transport metadata, and rarely-used fields are dropped before reaching the LLM. Related users, groups, and organizations are resolved into nested ref objects through Zendesk side-loading (single round trip), and Help Center article HTML is converted to GitHub-flavored markdown. Typical responses are 3–7× smaller than raw Zendesk JSON.
+
+It is *not* intended for Zendesk admin operations (managing macros, triggers, ticket forms, custom fields, schedules, or SLAs); use the Zendesk Admin Center or a Terraform provider for those.
+
+== Prerequisites
+
+* A Zendesk Support instance.
+* For *API token* mode: ability to create an API token under *Apps and integrations > APIs > Zendesk API*.
+* For *User OAuth* mode: a Zendesk OAuth client and an OAuth Provider configured in ADP. See xref:../oauth-providers.adoc[Configure an OAuth Provider].
+
+== Get Zendesk credentials
+
+=== Option 1: API token (recommended for service accounts)
+
+. In the Zendesk Admin Center, go to *Apps and integrations > APIs > Zendesk API*.
+. On the *Settings* tab, enable *Token access*.
+. Click *Add API token*, give it a descriptive label (for example, `redpanda-aigw`), and copy the token value. It is shown only once.
+. Note the *agent email* the token will act as (the email of the user who created the token). The HTTP Basic auth string the MCP builds is `base64(<email>/token:<api_token>)`. The `/token` literal is Zendesk's API-token quirk.
+. Store the token in the ADP secret store under a name like `ZENDESK_API_TOKEN`.
+
+*Required role*: Agents and Admins can use the API. Most ticket operations work for the *Agent* role; reading users with `search_users` requires *Light Agent* or higher; Help Center search works for any authenticated user.
+
+=== Option 2: User OAuth
+
+. Configure a Zendesk OAuth client under *Apps and integrations > APIs > OAuth Clients* (Confidential client, Authorization Code grant).
+. Register a matching OAuth Provider in ADP. See xref:../oauth-providers.adoc[Configure an OAuth Provider]. Use Zendesk's authorize and token endpoints.
+. Each end-user authenticates once through the OAuth flow; tokens are stored in the gateway's token vault.
+
+*Required scopes*: `read tickets:write hc:read` covers all 12 tools. Drop `tickets:write` if the MCP only needs to read.
+
+== Configure
+
+. Open *MCP Servers > Create Server*.
+. Pick *Zendesk* from the marketplace picker.
+. Fill in identity fields (`name`, `description`).
+. In the Zendesk configuration form:
++
+[cols="1,3"]
+|===
+|Field |Notes
+
+|*Subdomain*
+|Your Zendesk subdomain (the part before `.zendesk.com`). For `acme.zendesk.com`, set this to `acme`.
+
+|*Auth*
+|*Basic auth* for API-token mode, or *User-delegated OAuth* for per-user mode.
+
+|*Username* (Basic auth only)
+|Agent email used with the API token (for example, `agent@acme.com`).
+
+|*Password ref* (Basic auth only)
+|Secret-store reference holding the API token (for example, `ZENDESK_API_TOKEN`). `UPPER_SNAKE_CASE`.
+
+|*OAuth Provider* (User OAuth only)
+|Pick the Zendesk OAuth Provider you configured.
+
+|*Required scopes* (User OAuth only)
+|`read`, `tickets:write`, `hc:read` covers all 12 tools.
+|===
++
+. Click *Create*.
+
+// TODO: capture screenshots of the Zendesk create form on `adp-production`.
+
+=== Configure from the CLI
+
+[tabs]
+======
+API-token mode::
++
+[source,bash]
+----
+rpk ai mcp create acme-zendesk --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.zendesk.v1.ZendeskMCPConfig",
+  "subdomain": "acme",
+  "basic_auth": {
+    "username": "agent@acme.com",
+    "password_secret_ref": "ZENDESK_API_TOKEN"
+  }
+}'
+----
+
+User-OAuth mode::
++
+[source,bash]
+----
+rpk ai mcp create acme-zendesk-oauth \
+  --managed-config '{
+    "@type": "type.googleapis.com/redpanda.mcps.zendesk.v1.ZendeskMCPConfig",
+    "subdomain": "acme"
+  }' \
+  --user-oauth-provider zendesk-prod \
+  --user-oauth-scopes read,tickets:write,hc:read
+----
+======
+
+== Tools
+
+[cols="1,2"]
+|===
+|Tool |Description
+
+|`search_tickets`
+|Search tickets with Zendesk's search syntax (`status:open priority:high tags:bug`). The handler enforces a `type:ticket` qualifier and post-filters results, so non-ticket records can never leak through.
+
+|`list_tickets`
+|Filter tickets by discrete fields (`status`, `assignee_id`, `group_id`). Faster than `search_tickets` and not subject to the search-API quota. Prefer this for "show me all open tickets assigned to X" workflows.
+
+|`get_ticket`
+|Fetch a single ticket by ID with side-loaded requester, submitter, assignee, group, and organization. Set `include_comments=true` to embed up to 500 comments inline in the same response.
+
+|`list_ticket_comments`
+|List the comment thread on a ticket with explicit pagination. Use this when the thread exceeds 500 comments; otherwise prefer `get_ticket` with `include_comments=true`.
+
+|`create_ticket`
+|Open a new ticket (subject, description, optional priority/type/assignee/group/tags). Subject ≤150 chars, description ≤65536 chars, tags ≤50 chars each.
+
+|`update_ticket`
+|Modify a ticket: status, priority, type, assignee, group, tags. Optionally append a public or internal comment in the same call. Distinct `tags` (replace) / `add_tags` / `remove_tags` fields.
+
+|`search_users`
+|Find a Zendesk user by name, email, or other user-search fields. Returns full User objects.
+
+|`get_user`
+|Fetch a single user by ID. Used to drill into a `UserRef` from a side-load when the agent needs the full User shape.
+
+|`list_organizations`
+|List organizations in the Zendesk account.
+
+|`get_organization`
+|Fetch a single organization by ID. Drills into an `OrganizationRef` from a side-load.
+
+|`search_articles`
+|Search Help Center articles. Body is converted from HTML to GitHub-flavored markdown (tables included).
+
+|`get_article`
+|Fetch a single Help Center article by ID.
+|===
+
+=== Example: triage open tickets
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-zendesk \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+      "name": "search_tickets",
+      "arguments": {
+        "query": "status:open priority:urgent",
+        "max_results": 10
+      }
+    }
+  }'
+----
+
+=== Example: solve a ticket with a closing comment
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-zendesk \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/call",
+    "params": {
+      "name": "update_ticket",
+      "arguments": {
+        "ticket_id": 12345,
+        "status": "solved",
+        "add_tags": ["resolved-by-agent"],
+        "comment": {
+          "body": "Resetting your password should fix this. Reopen if it persists.",
+          "public": true
+        }
+      }
+    }
+  }'
+----
+
+=== Example: read a ticket with its full comment thread
+
+For "summarize this ticket" flows, inline the comments:
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-zendesk \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 4,
+    "method": "tools/call",
+    "params": {
+      "name": "get_ticket",
+      "arguments": {
+        "ticket_id": 12345,
+        "include_comments": true
+      }
+    }
+  }'
+----
+
+The handler follows Zendesk's `next_page` URLs only when they point at the same host as the configured subdomain, so pagination cannot be hijacked by a malicious upstream response.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`401 Unauthorized` (API-token mode)
+|Confirm `ZENDESK_API_TOKEN` content matches the value Zendesk showed at token creation, and the *Username* field is the agent email of the user who created the token.
+
+|`403 Forbidden` on `search_users`
+|The agent role on Zendesk's side is below *Light Agent*. Upgrade the role or use API-token mode with a Light Agent or Admin email.
+
+|`OAuthConnectionRequired` (User-OAuth mode)
+|First call from a user with no stored token. The user completes Zendesk's OAuth consent flow, the token lands in the vault, and subsequent calls reuse it. See xref:../user-delegated-oauth.adoc[User-delegated OAuth].
+
+|`scope_upgrade_required` (User-OAuth mode)
+|Server's `required_scopes` was extended after users had already consented. Users re-consent with the higher scope.
+
+|Search returns non-ticket records
+|Cannot happen: the handler enforces a `type:ticket` qualifier and post-filters results. If you see something unexpected, file an issue.
+|===
+
+== Out of scope
+
+* *Zendesk admin operations*: managing macros, triggers, ticket forms, custom fields, schedules, or SLAs. Use the Zendesk Admin Center or a Terraform provider.
+* *Voice / chat / Talk*: this MCP wraps Support tickets and Help Center; voice and chat are separate Zendesk products with their own APIs.
+
+== Related topics
+
+* xref:../oauth-providers.adoc[Configure an OAuth Provider]: register the Zendesk OAuth client for User-OAuth mode.
+* xref:../user-delegated-oauth.adoc[User-delegated OAuth]: the consent flow users walk through on first call.
+* xref:../create-server.adoc[Create an MCP Server].
+* xref:../test-tools.adoc[Test a server's tools].

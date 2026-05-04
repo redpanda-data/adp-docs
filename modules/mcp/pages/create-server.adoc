@@ -142,6 +142,56 @@ NOTE: Defer advanced code-mode patterns (sandboxing limits, runtime selection, d
 
 A populated tools list confirms that the connection works and credentials resolve correctly. If the list is empty or the tab shows an error, see <<troubleshooting>>.
 
+== Create from the CLI
+
+The `rpk ai` plugin offers a non-UI path for the same create flow. Useful for scripting and CI.
+
+[source,bash]
+----
+# Managed type (Workday example)
+rpk ai mcp create workday-hr \
+  --managed-config '{
+    "@type": "type.googleapis.com/redpanda.mcps.workday.v1.WorkdayMCPConfig",
+    "tenant": "acme",
+    "host": "wd2-impl-services1.workday.com",
+    "oauth_refresh_token": {
+      "username": "isu_user@acme",
+      "password_secret_ref": "${secrets.WORKDAY_PASSWORD}",
+      "refresh_token_secret_ref": "${secrets.WORKDAY_REFRESH_TOKEN}"
+    }
+  }'
+
+# Managed type with user-delegated OAuth (Ramp example)
+rpk ai mcp create my-ramp \
+  --managed-config '{"@type":"type.googleapis.com/redpanda.mcps.ramp.v1.RampMCPConfig","environment":"production"}' \
+  --user-oauth-provider ramp \
+  --user-oauth-scopes transactions:read,cards:read,users:read
+
+# Update a server's user-delegated OAuth scopes
+rpk ai mcp update my-ramp \
+  --user-oauth-provider ramp \
+  --user-oauth-scopes transactions:read,cards:read,cards:write,users:read
+----
+
+[cols="1,3"]
+|===
+|Flag |Notes
+
+|`--managed-config`
+|JSON blob carrying the managed type's `_config.proto` shape, including a `@type` URL.
+
+|`--user-oauth-provider`
+|Name of an OAuth Provider already registered under *OAuth Providers*. See xref:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893).
+
+|`--user-oauth-scopes`
+|Comma-separated scopes the server requires. Provide every scope any tool may need; user re-consent is required if scopes change later.
+
+|`--auth-config`
+|Alternative when a server needs an auth shape that doesn't map to the convenience flags. Takes a JSON blob matching the appropriate auth oneof variant.
+|===
+
+The CLI uses your active `rpk ai` profile for the gateway URL and authentication.
+
 == Edit, disable, and delete a server
 
 * *Edit:* most fields can change. The *name* and *type* are *immutable* after create.

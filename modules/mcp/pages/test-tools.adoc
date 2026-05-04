@@ -101,6 +101,25 @@ The Session panel keeps a running history of every call you've made through the 
 
 // TODO: screenshots of each error case once captured against `adp-production`.
 
+== Test from the CLI
+
+The `rpk ai` plugin offers a non-UI path for the same tool calls. Use it when scripting smoke tests or running checks from CI.
+
+[source,bash]
+----
+# List every tool exposed by a server
+rpk ai mcp tools list <server-name>
+
+# Call a tool with a JSON arg blob
+rpk ai mcp tools call <server-name> <tool-name> --input '{"arg1":"value"}'
+
+# Get server detail; includes the tool list by default. Add --no-tools
+# to skip discovery (faster when you only want metadata).
+rpk ai mcp get <server-name>
+----
+
+The CLI uses your active `rpk ai` profile for the gateway URL and authentication. See xref:ai-gateway:connect-agent.adoc[Connect your agent] for installation and profile setup.
+
 == Out of scope
 
 * *Pointing an agent at the server* — see the Agents docs.

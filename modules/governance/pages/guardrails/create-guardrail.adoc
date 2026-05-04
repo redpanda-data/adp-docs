@@ -29,7 +29,7 @@ After reading this page, you will be able to:
 
 // TODO: finalize this section once the ADP UI ships a Guardrails surface. As of 2026-04-28, `apps/adp-ui/src/routes/` has no `guardrails/` route. The walkthrough may need to lead with `aigwctl` instead of the UI and add the UI flow in a later refresh. Open Qs C4 and C5 in the companion plan.
 
-In the ADP UI, open *Trust & Governance* → *Guardrails* → *Create guardrail*.
+In the ADP UI, open *Governance* → *Guardrails* → *Create guardrail*.
 
 == Pick an evaluator type
 
