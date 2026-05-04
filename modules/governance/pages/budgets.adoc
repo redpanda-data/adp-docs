@@ -93,6 +93,5 @@ Until those features ship, treat the dashboard and breakdown queries as your vis
 
 == Next steps
 
-* Open the dashboard to see your current spend: xref:governance:dashboard/overview.adoc[Read the governance overview].
-* Investigate a specific agent's cost: xref:observability:transcripts.adoc[Read a transcript].
-* Configure platform-level safety filtering: xref:governance:guardrails.adoc[Configure guardrails].
+* xref:governance:dashboard/overview.adoc[Read the governance overview]
+* xref:observability:transcripts.adoc[Read a transcript]

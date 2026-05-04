@@ -395,8 +395,8 @@ chmod 600 ~/.claude.json
 
 == Next steps
 
-* xref:ai-gateway:aggregation.adoc[]: Configure deferred tool loading to reduce token costs
-* xref:ai-gateway:routing-cel.adoc[]: Use CEL expressions to route Claude Code requests based on context
+* xref:ai-gateway:aggregation.adoc[]
+* xref:ai-gateway:routing-cel.adoc[]
 
 == Related pages
 

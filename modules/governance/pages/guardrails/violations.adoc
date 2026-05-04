@@ -92,6 +92,6 @@ Per the AI Gateway design, evaluators run async where possible — specifically,
 
 == Next steps
 
-* xref:governance:guardrails/types-reference.adoc[Evaluator types reference] — config schemas and per-type tuning surface.
-* xref:governance:guardrails/cost-tracking.adoc[Cost tracking] — what each evaluator costs and where the cost surfaces.
-* xref:observability:transcripts.adoc[Read a transcript] — the full transcript walkthrough for finding a specific violation.
+* xref:governance:guardrails/types-reference.adoc[Evaluator types reference]
+* xref:governance:guardrails/cost-tracking.adoc[Cost tracking]
+* xref:observability:transcripts.adoc[Read a transcript]

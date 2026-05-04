@@ -378,17 +378,5 @@ Users can then discover and connect to the gateway using the information provide
 
 == Next steps
 
-*Configure and optimize:*
-
-// * xref:admin/manage-gateways.adoc[Manage Gateways] - List, edit, and delete gateways
-* xref:routing-cel.adoc[CEL Routing Cookbook] - Advanced routing patterns
-// * xref:admin/networking-configuration.adoc[Networking Configuration] - Configure private endpoints and connectivity
-
-//*Monitor and observe:*
-//
-
-ifdef::integrations-available[]
-*Integrate tools:*
-
-* xref:integrations/index.adoc[Integrations] - Admin guides for Claude Code, Cursor, and other tools
-endif::[]
+* xref:routing-cel.adoc[CEL Routing Cookbook]
+* xref:integrations/index.adoc[Integrations]

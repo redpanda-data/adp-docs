@@ -808,5 +808,5 @@ Causes and solutions:
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]: Implement advanced routing rules for model prefix routing
-* xref:mcp/remote/overview.adoc[]: Deploy Remote MCP servers for custom tools
+* xref:ai-gateway:routing-cel.adoc[]
+* xref:mcp/remote/overview.adoc[]

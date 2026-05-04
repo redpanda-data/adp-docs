@@ -735,5 +735,5 @@ This is expected behavior, not a configuration issue:
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]: Implement advanced routing rules
-* xref:mcp/remote/overview.adoc[]: Deploy Remote MCP servers for custom tools
+* xref:ai-gateway:routing-cel.adoc[]
+* xref:mcp/remote/overview.adoc[]

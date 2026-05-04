@@ -388,4 +388,4 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 
 == Next steps
 
-* xref:configure-provider.adoc[Configure an LLM provider]. Add another provider to your dataplane.
+* xref:configure-provider.adoc[Configure an LLM provider]

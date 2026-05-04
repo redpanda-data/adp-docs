@@ -527,15 +527,8 @@ const openai = new OpenAI({
 
 == Next steps
 
-Explore advanced AI Gateway features:
-
-* xref:routing-cel.adoc[]: Advanced CEL routing patterns for traffic distribution and cost optimization
-* xref:aggregation.adoc[]: Configure MCP server aggregation and deferred tool loading
-ifdef::integrations-available[]
-* xref:integrations/index.adoc[]: Connect more AI development tools
-endif::[]
-
-Learn about the architecture:
-
-* xref:gateway-architecture.adoc[]: Technical architecture, request lifecycle, and deployment models
-* xref:overview.adoc[]: Problems AI Gateway solves and common use cases
+* xref:routing-cel.adoc[]
+* xref:aggregation.adoc[]
+* xref:integrations/index.adoc[]
+* xref:gateway-architecture.adoc[]
+* xref:overview.adoc[]

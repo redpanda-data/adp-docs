@@ -116,5 +116,5 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 
 == Next steps
 
-. xref:configure-provider.adoc[Configure an LLM provider]. Create your first provider and copy its proxy URL.
-. xref:connect-agent.adoc[Connect your agent]. Point your application's SDK at the proxy URL.
+. xref:configure-provider.adoc[Configure an LLM provider]
+. xref:connect-agent.adoc[Connect your agent]

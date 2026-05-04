@@ -215,5 +215,5 @@ endif::[]
 
 == Next steps
 
-* xref:gateway-quickstart.adoc[]: Route your first request through AI Gateway
-* xref:aggregation.adoc[]: Configure MCP server aggregation for AI agents
+* xref:gateway-quickstart.adoc[]
+* xref:aggregation.adoc[]

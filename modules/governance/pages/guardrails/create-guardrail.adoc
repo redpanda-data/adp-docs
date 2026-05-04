@@ -104,6 +104,6 @@ The request should return an error. Open the request's transcript and confirm a 
 
 == Next steps
 
-* xref:governance:guardrails/types-reference.adoc[Evaluator types reference]: config schemas and gotchas per evaluator type.
-* xref:governance:guardrails/violations.adoc[Read violations]: investigate fired guardrails and tune false-positive rates.
-* xref:governance:guardrails/cost-tracking.adoc[Cost tracking]: see what each evaluator costs and where it shows up.
+* xref:governance:guardrails/types-reference.adoc[Evaluator types reference]
+* xref:governance:guardrails/violations.adoc[Read violations]
+* xref:governance:guardrails/cost-tracking.adoc[Cost tracking]

@@ -767,4 +767,4 @@ Note: Cost estimates are approximate. Use provider invoices for billing.
 
 == Next steps
 
-* xref:ai-gateway/observability-metrics.adoc[]: Aggregate analytics and cost tracking.
+* xref:ai-gateway/observability-metrics.adoc[]

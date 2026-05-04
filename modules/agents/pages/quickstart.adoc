@@ -177,8 +177,6 @@ Common quickstart issue:
 
 == Next steps
 
-You've created an agent that orchestrates MCP tools through natural language. Explore more:
-
 * xref:overview.adoc[]
 * xref:create-agent.adoc[]
 * xref:system-prompts.adoc[]

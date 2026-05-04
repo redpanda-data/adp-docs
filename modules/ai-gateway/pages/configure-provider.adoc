@@ -357,4 +357,4 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 
 == Next steps
 
-* xref:connect-agent.adoc[Connect your agent]. Point your application's SDK at the proxy URL and make requests.
+* xref:connect-agent.adoc[Connect your agent]
