@@ -27,7 +27,7 @@ Use a different approach when:
 * You need programmatic, server-side tool invocation. See xref:ai-gateway:connect-agent.adoc[Connect your agent] for SDK-based access.
 * You need an in-house chat UI. Build against the AI Gateway's MCP endpoints directly with the SDK of your choice.
 
-== Architecture: three resources work together
+== Architecture: Three resources work together
 
 Wiring a remote chat client to an MCP server uses three resources in AI Gateway:
 

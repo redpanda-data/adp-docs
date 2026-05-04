@@ -132,7 +132,7 @@ Set `environment` to `"demo"` to target Ramp's sandbox.
 |Update an existing spend limit's display name or spending restrictions synchronously.
 |===
 
-=== Example: list recent transactions
+=== Example: List recent transactions
 
 [source,bash]
 ----
@@ -152,7 +152,7 @@ curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/my-ramp \
   }'
 ----
 
-=== Example: create a virtual card for a vendor
+=== Example: Create a virtual card for a vendor
 
 [source,bash]
 ----

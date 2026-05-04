@@ -32,7 +32,7 @@ After completing this guide, you will be able to:
 // TODO: confirm exact UI labels for `TokenInjection.header_name` and `header_prefix`.
 . Save.
 
-NOTE: Choosing user-delegated OAuth instead of service-account OAuth *is* the credential-mode decision — there's no separate field. User-delegated gives each caller a per-user upstream identity; service-account gives every caller one shared identity. Switching between them later requires re-consent for every active user.
+NOTE: Choosing user-delegated OAuth instead of service-account OAuth *is* the credential-mode decision: there's no separate field. User-delegated gives each caller a per-user upstream identity; service-account gives every caller one shared identity. Switching between them later requires re-consent for every active user.
 
 TIP: To configure user-delegated OAuth from the CLI, use `--user-oauth-provider` and `--user-oauth-scopes` on `rpk ai mcp create` or `rpk ai mcp update`. See xref:create-server.adoc[Create an MCP Server].
 
@@ -70,8 +70,8 @@ For the field-by-field service-account-OAuth setup, see xref:create-server.adoc#
 
 == Worked examples
 
-* xref:managed/slack.adoc[Slack] — consumer-facing user-delegated OAuth example. Shows the consent flow against a real Slack workspace.
-* xref:managed/jira.adoc[Jira] — enterprise user-delegated OAuth example. Atlassian's OAuth flow differs from Slack's; this page calls out scope-management gotchas.
+* xref:managed/slack.adoc[Slack]: consumer-facing user-delegated OAuth example. Shows the consent flow against a real Slack workspace.
+* xref:managed/jira.adoc[Jira]: enterprise user-delegated OAuth example. Atlassian's OAuth flow differs from Slack's; this page calls out scope-management gotchas.
 
 == Troubleshooting
 
@@ -97,6 +97,6 @@ For the field-by-field service-account-OAuth setup, see xref:create-server.adoc#
 
 == Out of scope
 
-* *Configuring an OAuth provider* — separate workflow under the *OAuth providers* section.
-* *Service-account OAuth setup* — see xref:create-server.adoc#configure-authentication[create-server.adoc].
-* *Token vault internals* — Redpanda manages the vault; users see their own connections under *My Connections*, but the underlying storage isn't user-configurable.
+* *Configuring an OAuth provider*: separate workflow under the *OAuth providers* section.
+* *Service-account OAuth setup*: see xref:create-server.adoc#configure-authentication[create-server.adoc].
+* *Token vault internals*: Redpanda manages the vault; users see their own connections under *My Connections*, but the underlying storage isn't user-configurable.

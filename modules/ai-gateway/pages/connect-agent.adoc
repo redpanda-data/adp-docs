@@ -18,7 +18,7 @@ After completing this guide, you will be able to:
 == Prerequisites
 
 * A configured LLM provider. If you haven't created one yet, see xref:configure-provider.adoc[Configure an LLM provider].
-* For local development: nothing else — you'll install the `rpk ai` plugin in the next section.
+* For local development: nothing else; you'll install the `rpk ai` plugin in the next section.
 * For CI or programmatic clients: a Redpanda Cloud service account with OIDC client credentials. See xref:redpanda-cloud:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
 +
 // TODO: confirm whether ADP hosts its own service-account IAM post-standalone, or continues to share Redpanda Cloud Organization IAM.
@@ -69,7 +69,7 @@ export PROXY_URL="<your-gateway-base>/llm/v1/providers/<provider-name>"
 export OPENAI_API_KEY="$(rpk ai auth token)"   # or ANTHROPIC_API_KEY, etc.
 ----
 
-`rpk ai auth token` returns a short-lived OIDC access token. Refresh by running it again — most users wire it into a wrapper script or shell function.
+`rpk ai auth token` returns a short-lived OIDC access token. Refresh by running it again: most users wire it into a wrapper script or shell function.
 
 TIP: The plugin supports named profiles for pointing at multiple gateways. Run `rpk ai profile create <name> --dataplane-url <gateway-url> --auth-mode device` to create one, then `rpk ai profile use <name>` to switch. See `rpk ai profile --help` for the full set of subcommands.
 
@@ -175,7 +175,7 @@ IMPORTANT: Your client is responsible for refreshing tokens before they expire. 
 * Proactively refresh at ~80% of the token's TTL to avoid failed requests.
 * `authlib` (Python) handles renewal automatically when you pass `token_endpoint` to `OAuth2Session`.
 * For other languages, cache the token and its expiry, then request a new token before the current one expires.
-* If you're using `rpk ai`, just rerun `rpk ai auth token` — it handles refresh against the same OIDC endpoint.
+* If you're using `rpk ai`, just rerun `rpk ai auth token`: it handles refresh against the same OIDC endpoint.
 
 == Send requests with your SDK
 

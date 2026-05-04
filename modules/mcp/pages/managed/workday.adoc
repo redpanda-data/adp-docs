@@ -113,7 +113,7 @@ rpk ai mcp create workday-hr --managed-config '{
 
 // TODO: refresh this list when additional Workday business processes ship.
 
-=== Example: change a worker's date of birth and marital status
+=== Example: Change a worker's date of birth and marital status
 
 [source,bash]
 ----

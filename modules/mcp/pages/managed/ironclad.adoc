@@ -105,7 +105,7 @@ For EU-hosted accounts, use `"IRONCLAD_REGION_EU"`. For sandbox testing, use `"I
 |List documents attached to a contract.
 |===
 
-=== Example: find all contracts awaiting signature
+=== Example: Find all contracts awaiting signature
 
 [source,bash]
 ----

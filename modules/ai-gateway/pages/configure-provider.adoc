@@ -167,7 +167,7 @@ TIP: OpenAI-compatible endpoints can serve any model. Enter the exact model iden
 
 Models you select on this form become the catalog the provider exposes. Leave the list empty to allow every model the upstream catalog returns.
 
-For *OpenAI*, *Anthropic*, *Google AI*, and *AWS Bedrock*, the form shows a picker backed by the provider's catalog. Pick from the list, or type a model identifier the catalog doesn't show. For *OpenAI-compatible*, the form takes a freeform list — type the exact identifiers your upstream serves.
+For *OpenAI*, *Anthropic*, *Google AI*, and *AWS Bedrock*, the form shows a picker backed by the provider's catalog. Pick from the list, or type a model identifier the catalog doesn't show. For *OpenAI-compatible*, the form takes a freeform list: type the exact identifiers your upstream serves.
 
 For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs. See <<bedrock-inference-profiles>>.
 
@@ -183,14 +183,14 @@ The detail page also carries a *Last 7 days* KPI strip (*TOTAL SPEND*, *REQUESTS
 == Save and verify
 
 . Click *Create provider*. The button activates once *Name* and *Type* are both set; the right-hand *Summary* panel checks them off as you fill them in.
-. On the provider's detail page, the *Connection* card shows your *Proxy URL*, *Discovery* URL, *Base URL*, and *API key ref*. Copy the *Proxy URL* — this is where your applications point.
+. On the provider's detail page, the *Connection* card shows your *Proxy URL*, *Discovery* URL, *Base URL*, and *API key ref*. Copy the *Proxy URL*: this is where your applications point.
 . Scroll to the *Verify connection* section. Pick a model from the dropdown and click *Test Connection*. The status updates from _Not tested yet_ to a pass/fail indicator. Use the *Show commands* disclosure if you want to see the equivalent curl or SDK call.
 . To wire up an application, open *Connect your app* further down the page or follow xref:connect-agent.adoc[Connect your agent].
 
 A successful Test Connection result confirms that the provider's credentials, region (Bedrock), and network path are all correct. If the call fails, see <<troubleshooting>>.
 
 [[bedrock-inference-profiles]]
-== AWS Bedrock: inference profiles and IAM
+== AWS Bedrock: Inference profiles and IAM
 
 Bedrock has three concepts that affect how you configure a provider: foundation models, cross-region inference profiles, and IAM. Get these right and the *Test connection* check passes; get them wrong and you see `AccessDenied` or `ValidationException` errors.
 
@@ -274,7 +274,7 @@ A minimal policy granting access to all foundation models plus all cross-region 
 For production, scope to specific models and regions instead of using wildcards.
 
 [[anthropic-authorization-passthrough]]
-== Anthropic: authorization passthrough
+== Anthropic: Authorization passthrough
 
 If you want each client to authenticate against Anthropic with its own subscription (Claude Pro, Max, Team, or enterprise), enable *Auth passthrough* instead of configuring a server-side API key. In this mode:
 

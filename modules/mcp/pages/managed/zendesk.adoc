@@ -160,7 +160,7 @@ rpk ai mcp create acme-zendesk-oauth \
 |Fetch a single Help Center article by ID.
 |===
 
-=== Example: triage open tickets
+=== Example: Triage open tickets
 
 [source,bash]
 ----
@@ -181,7 +181,7 @@ curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-zendesk \
   }'
 ----
 
-=== Example: solve a ticket with a closing comment
+=== Example: Solve a ticket with a closing comment
 
 [source,bash]
 ----
@@ -207,7 +207,7 @@ curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-zendesk \
   }'
 ----
 
-=== Example: read a ticket with its full comment thread
+=== Example: Read a ticket with its full comment thread
 
 For "summarize this ticket" flows, inline the comments:
 
