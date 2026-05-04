@@ -247,6 +247,6 @@ Plan the deletion: disable or reconfigure dependent MCP servers first, communica
 
 == Related topics
 
-* xref:user-delegated-oauth.adoc[User-delegated OAuth]: the consent flow users walk through when an MCP server attached to this provider is invoked.
-* xref:create-server.adoc[Create an MCP Server]: including attaching a provider from the UI or CLI.
-* xref:managed/slack.adoc[Slack managed MCP], xref:managed/jira.adoc[Jira managed MCP], xref:managed/zendesk.adoc[Zendesk managed MCP], xref:managed/workday.adoc[Workday managed MCP], xref:managed/ironclad.adoc[Ironclad managed MCP], xref:managed/ramp.adoc[Ramp managed MCP]: managed MCP types that use OAuth Providers.
+* xref:user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow users walk through when an MCP server attached to this provider is invoked.
+* xref:create-server.adoc[Create an MCP Server]: Including attaching a provider from the UI or CLI.
+* xref:managed/slack.adoc[Slack managed MCP], xref:managed/jira.adoc[Jira managed MCP], xref:managed/zendesk.adoc[Zendesk managed MCP], xref:managed/workday.adoc[Workday managed MCP], xref:managed/ironclad.adoc[Ironclad managed MCP], xref:managed/ramp.adoc[Ramp managed MCP]: Managed MCP types that use OAuth Providers.

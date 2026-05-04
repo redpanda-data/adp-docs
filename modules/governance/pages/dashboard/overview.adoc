@@ -211,7 +211,7 @@ The current beta release ships the V0 overview described above. At GA:
 
 == Investigate further
 
-* xref:observability:transcripts.adoc[Read a transcript]: full conversation history for an agent run.
-* xref:governance:budgets.adoc[Token budgets and limits]: set spend caps when a provider's cost trends above expectations.
-* xref:observability:byoa-telemetry.adoc[BYOA telemetry]: wire up missing telemetry for BYOA agents that haven't streamed transcripts yet.
-* xref:agents:create-agent.adoc[Create a declarative agent]: add agents to your deployment.
+* xref:observability:transcripts.adoc[Read a transcript]: Full conversation history for an agent run.
+* xref:governance:budgets.adoc[Token budgets and limits]: Set spend caps when a provider's cost trends above expectations.
+* xref:observability:byoa-telemetry.adoc[BYOA telemetry]: Wire up missing telemetry for BYOA agents that haven't streamed transcripts yet.
+* xref:agents:create-agent.adoc[Create a declarative agent]: Add agents to your deployment.

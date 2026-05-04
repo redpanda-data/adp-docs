@@ -36,8 +36,8 @@ Authentication is one ISU per MCP instance, not per end-user. Customers that nee
 * Admin access to *Workday > Create Integration System User* and *Workday > Register API Client for Integrations*.
 * Two ADP secret-store entries:
 +
-* `WORKDAY_PASSWORD`: the ISU password.
-* `WORKDAY_REFRESH_TOKEN`: the non-expiring refresh token.
+* `WORKDAY_PASSWORD`: The ISU password.
+* `WORKDAY_REFRESH_TOKEN`: The non-expiring refresh token.
 
 == Get Workday credentials
 
@@ -185,5 +185,5 @@ If Workday returns a SOAP Fault (validation error, missing permissions, worker n
 
 == Related topics
 
-* xref:create-server.adoc[Create an MCP Server]: generic create flow.
-* xref:test-tools.adoc[Test a server's tools]: run tools from the Inspector or `rpk ai mcp tools`.
+* xref:create-server.adoc[Create an MCP Server]: Generic create flow.
+* xref:test-tools.adoc[Test a server's tools]: Run tools from the Inspector or `rpk ai mcp tools`.

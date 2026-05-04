@@ -261,7 +261,7 @@ The handler follows Zendesk's `next_page` URLs only when they point at the same 
 
 == Related topics
 
-* xref:../oauth-providers.adoc[Configure an OAuth Provider]: register the Zendesk OAuth client for User-OAuth mode.
-* xref:../user-delegated-oauth.adoc[User-delegated OAuth]: the consent flow users walk through on first call.
+* xref:../oauth-providers.adoc[Configure an OAuth Provider]: Register the Zendesk OAuth client for User-OAuth mode.
+* xref:../user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow users walk through on first call.
 * xref:../create-server.adoc[Create an MCP Server].
 * xref:../test-tools.adoc[Test a server's tools].

@@ -145,8 +145,8 @@ This handshake runs *once per user* when the connector is first added.
 . AI Gateway authenticates the user against the configured IdP (Auth0 today, Zitadel later) and presents an *Authorize access* consent screen. The screen shows:
 +
 * The OAuth Client's name (for example, _Claude (GitHub Read demo) wants to access your data_).
-* The *Resource* being authorized: the MCP server name and URL.
-* The *Requested permissions*: the gateway's internal scopes for this handshake (`mcp` and `offline_access`). These are *not* the upstream system's scopes; the upstream's scopes appear during the next handshake.
+* The *Resource* being authorized: The MCP server name and URL.
+* The *Requested permissions*: The gateway's internal scopes for this handshake (`mcp` and `offline_access`). These are *not* the upstream system's scopes; the upstream's scopes appear during the next handshake.
 * A footer reminding the user that they can revoke access from their *Connections* page in the ADP UI.
 +
 . The user clicks *Allow*. AI Gateway redirects the chat client back to the redirect URI with an authorization code.
@@ -212,7 +212,7 @@ NOTE: If the MCP server uses a service-account auth mode instead of user-delegat
 
 == Related topics
 
-* xref:mcp:create-server.adoc[Create an MCP Server]: set up the server side first.
-* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]: define how AI Gateway authenticates against upstream systems.
-* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]: the per-user upstream consent flow that runs after the chat client handshake.
-* xref:ai-gateway:connect-agent.adoc[Connect your agent]: programmatic SDK-based access (alternative to remote chat clients).
+* xref:mcp:create-server.adoc[Create an MCP Server]: Set up the server side first.
+* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]: Define how AI Gateway authenticates against upstream systems.
+* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]: The per-user upstream consent flow that runs after the chat client handshake.
+* xref:ai-gateway:connect-agent.adoc[Connect your agent]: Programmatic SDK-based access (alternative to remote chat clients).

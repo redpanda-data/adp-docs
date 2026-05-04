@@ -147,6 +147,6 @@ curl -X POST https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/my-ironclad \
 
 == Related topics
 
-* xref:../oauth-providers.adoc[Configure an OAuth Provider]: register the Ironclad OAuth app.
-* xref:../user-delegated-oauth.adoc[User-delegated OAuth]: the consent flow.
+* xref:../oauth-providers.adoc[Configure an OAuth Provider]: Register the Ironclad OAuth app.
+* xref:../user-delegated-oauth.adoc[User-delegated OAuth]: The consent flow.
 * xref:../create-server.adoc[Create an MCP Server].

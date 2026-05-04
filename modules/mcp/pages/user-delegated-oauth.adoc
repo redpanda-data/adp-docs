@@ -2,11 +2,11 @@
 :description: Have each end-user authenticate against the MCP server's upstream system with their own credentials. Redpanda stores their token in the vault and injects it at call time.
 :page-topic-type: how-to
 :personas: platform_admin, app_developer
-:learning-objective-1: Configure an MCP server to use user-delegated OAuth with a registered OAuth Provider
+:learning-objective-1: Configure an MCP server to use user-delegated OAuth with a registered OAuth provider
 :learning-objective-2: Walk an end-user through the consent flow and verify the connection
 :learning-objective-3: Troubleshoot scope upgrades, token expiry, and refresh failures
 
-User-delegated OAuth means each end-user authenticates against the MCP server's upstream system (Slack, Jira, Google, …) with their own credentials. Redpanda stores their token in the token vault and injects it at call time. Contrast with service-account OAuth, where one shared identity is used for every caller.
+User-delegated OAuth means each end-user authenticates against the MCP server's upstream system (for example, Slack, Jira, Google) with their own credentials. Redpanda stores their token in the token vault and injects it at call time. Contrast with service-account OAuth, where one shared identity is used for every caller.
 
 After completing this guide, you will be able to:
 
@@ -16,7 +16,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* An OAuth Provider resource configured in the ADP UI under *OAuth Providers*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:oauth-providers.adoc[Configure an OAuth Provider].
+* An OAuth provider resource configured in the ADP UI under *OAuth providers*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:oauth-providers.adoc[Configure an OAuth Provider].
 * The required scopes for the upstream API you plan to call.
 * For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
 * For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:managed/managed-catalog.adoc[Managed catalog] before configuring.
@@ -25,7 +25,7 @@ After completing this guide, you will be able to:
 
 . Create or edit your MCP server (see xref:create-server.adoc[Create an MCP Server]).
 . In the auth section, choose *User-delegated OAuth*.
-. Pick the configured *OAuth Provider* (`UserOAuthAuth.provider_name`).
+. Pick the configured *OAuth provider* (`UserOAuthAuth.provider_name`).
 . List the *required scopes* (`UserOAuthAuth.required_scopes`). Redpanda enforces these at consent time.
 . (Optional) Override token injection. By default Redpanda sends `Authorization: Bearer <token>`. To use a different header, set `TokenInjection.header_name`. To omit the prefix entirely (for example, an upstream that expects a bare API key as the token), set `TokenInjection.header_prefix` to the empty string.
 +
@@ -80,7 +80,7 @@ For the field-by-field service-account-OAuth setup, see xref:create-server.adoc#
 |Symptom |What to check
 
 |"OAuth provider not found"
-|The provider name on the server doesn't match an OAuth Provider in the ADP UI. Check spelling and that the provider exists.
+|The provider name on the server doesn't match an OAuth provider in the ADP UI. Check spelling and that the provider exists.
 
 |"HTTPS required" on save (self-managed only)
 |User-delegated OAuth requires `https://` URLs on the MCP server (proto rule `remote_mcp.user_oauth_requires_https`). Switch the server's URL to HTTPS.
@@ -97,6 +97,6 @@ For the field-by-field service-account-OAuth setup, see xref:create-server.adoc#
 
 == Out of scope
 
-* *Configuring an OAuth Provider* — separate workflow under the *OAuth Providers* section.
+* *Configuring an OAuth provider* — separate workflow under the *OAuth providers* section.
 * *Service-account OAuth setup* — see xref:create-server.adoc#configure-authentication[create-server.adoc].
 * *Token vault internals* — Redpanda manages the vault; users see their own connections under *My Connections*, but the underlying storage isn't user-configurable.
