@@ -4,7 +4,7 @@
 :personas: app_developer
 :page-aliases: redpanda-cloud:ai-agents:ai-gateway/builders/connect-your-agent.adoc
 :learning-objective-1: Construct the proxy URL for an LLM provider you have configured
-:learning-objective-2: Authenticate to AI Gateway with `rpk cloud login` for local development or OIDC client credentials for CI and programmatic clients
+:learning-objective-2: Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients
 :learning-objective-3: Send requests through the proxy URL with the SDK of your choice
 
 This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You'll construct the proxy URL for a provider you have already created, authenticate (with `rpk cloud login` for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
