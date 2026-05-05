@@ -171,16 +171,19 @@ The provider appears in the *OAuth providers* list.
 
 == Register from the CLI
 
-Use the `rpk ai` plugin to script provider registration:
+Use `rpk ai` to script provider registration:
+
+// TODO(rpk-ai): aliases (oauth-provider, mcp-server, llm-provider) are kept for one release per cloudv2/apps/rpai/CLAUDE.md. Verified canonical command is `rpk ai oauth create` on 2026-05-05; flip examples cleanly to canonical names if the alias gets dropped.
 
 [source,bash]
 ----
-rpk ai oauth-provider create --name ramp \
-  --type oauth2 \
+rpk ai oauth create \
+  --name ramp \
+  --display-name "Ramp" \
+  --auth-endpoint "https://app.ramp.com/v1/authorize" \
+  --token-endpoint "https://api.ramp.com/developer/v1/token" \
   --client-id "$RAMP_CLIENT_ID" \
   --client-secret-ref RAMP_CLIENT_SECRET \
-  --auth-url "https://app.ramp.com/v1/authorize" \
-  --token-url "https://api.ramp.com/developer/v1/token" \
   --scopes "transactions:read,cards:read,users:read"
 ----
 
@@ -189,25 +192,40 @@ rpk ai oauth-provider create --name ramp \
 |Flag |Notes
 
 |`--name`
-|Resource name. Lowercase letters, numbers, hyphens. Immutable.
+|Resource name. Lowercase letters, numbers, hyphens. Immutable. Required.
 
-|`--type`
-|`oauth2` for the standard authorization-code flow.
+|`--display-name`
+|Human-readable display name shown in the UI. Required.
+
+|`--auth-endpoint`
+|OAuth authorization endpoint URL. Required.
+
+|`--token-endpoint`
+|OAuth token endpoint URL. Required.
 
 |`--client-id`
-|Client ID from the upstream OAuth app.
+|Client ID from the upstream OAuth app. Required.
 
 |`--client-secret-ref`
 |Secret-store reference (`UPPER_SNAKE_CASE`).
 
-|`--auth-url`
-|Authorization endpoint.
-
-|`--token-url`
-|Token endpoint.
-
 |`--scopes`
 |Comma-separated scope list.
+
+|`--grant-types`
+|Grant types: `browser-consent` (default), `token-exchange`. Comma-separated.
+
+|`--token-auth-method`
+|Token-endpoint authentication method: `client-secret-basic` (default), `client-secret-post`, `none`.
+
+|`--pkce`
+|Require PKCE for authorization code grants.
+
+|`--revocation-endpoint`
+|OAuth token revocation endpoint URL.
+
+|`--enabled`
+|Whether the provider is enabled (default `true`).
 |===
 
 == Attach to an MCP server

@@ -144,7 +144,7 @@ A populated tools list confirms that the connection works and credentials resolv
 
 == Create from the CLI
 
-The `rpk ai` plugin offers a non-UI path for the same create flow. Useful for scripting and CI.
+`rpk ai` offers a non-UI path for the same create flow. Useful for scripting and CI.
 
 [source,bash]
 ----
@@ -185,12 +185,11 @@ rpk ai mcp update my-ramp \
 
 |`--user-oauth-scopes`
 |Comma-separated scopes the server requires. Provide every scope any tool may need; user re-consent is required if scopes change later.
-
-|`--auth-config`
-|Alternative when a server needs an auth shape that doesn't map to the convenience flags. Takes a JSON blob matching the appropriate auth oneof variant.
 |===
 
-The CLI uses your active `rpk ai` profile for the gateway URL and authentication.
+// TODO(rpk-ai): --auth-config does not exist on `rpk ai mcp create` today (verified against cloudv2/apps/rpai/internal/cmd/mcp/cmd.go on 2026-05-05). For non-convenience auth shapes, encode them inside `--managed-config` JSON. Re-add this row if a flag lands later.
+
+`rpk ai` resolves the gateway URL from your active rpk cloud profile and reads the cached `rpk cloud login` token.
 
 == Edit, disable, and delete a server
 
