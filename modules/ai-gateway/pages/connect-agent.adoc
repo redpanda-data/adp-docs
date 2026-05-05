@@ -46,7 +46,7 @@ TIP: The provider detail page generates ready-to-run snippets pre-filled with th
 [[authenticate-with-rpai]]
 == Use `rpk ai` for local development
 
-`rpk ai` is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`; the active AI Gateway URL comes from your active rpk cloud profile.
+`rpk ai` is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`. The active AI Gateway URL comes from your active rpk cloud profile.
 
 . Install `rpk ai`:
 +
@@ -189,6 +189,7 @@ Passing `token_endpoint` to the `OAuth2Session` constructor lets `authlib` handl
 
 Node.js (openid-client)::
 +
+--
 [source,javascript]
 ----
 import { Issuer } from 'openid-client';
@@ -209,6 +210,7 @@ const tokenSet = await client.grant({
 
 const accessToken = tokenSet.access_token;
 ----
+--
 ======
 
 === Token lifecycle management
@@ -234,6 +236,7 @@ export AUTH_TOKEN="<oidc-access-token>"   # from the client_credentials flow abo
 ======
 OpenAI SDK::
 +
+--
 [source,python]
 ----
 import os
@@ -250,11 +253,13 @@ response = client.chat.completions.create(
 )
 print(response.choices[0].message.content)
 ----
-+
+
 The OpenAI SDK calls the proxy's `/v1/chat/completions` path, which AI Gateway forwards to OpenAI unchanged. Use it with any OpenAI provider and, with a different `base_url`, with any OpenAI-compatible provider (vLLM, Ollama, LM Studio, Together, Groq, OpenRouter).
+--
 
 Anthropic SDK::
 +
+--
 [source,python]
 ----
 import os
@@ -272,11 +277,13 @@ message = client.messages.create(
 )
 print(message.content[0].text)
 ----
-+
+
 The Anthropic SDK hits `v1/messages` on the proxy, which AI Gateway forwards to Anthropic. If the provider is configured with *Auth passthrough*, send your own Anthropic `Authorization` header instead of an `auth_token`. AI Gateway forwards it unchanged.
+--
 
 Google Gemini SDK::
 +
+--
 [source,python]
 ----
 import os
@@ -293,16 +300,18 @@ response = client.models.generate_content(
 )
 print(response.text)
 ----
-+
+
 [IMPORTANT]
 ====
 Gemini authenticates with the `x-goog-api-key` header, not `Authorization: Bearer`. Most Google SDKs set `x-goog-api-key` automatically from the `api_key` parameter. If you hand-roll the request, set the header yourself.
 ====
+--
 
 AWS Bedrock::
 +
+--
 Bedrock is different: SigV4 signing is performed *server-side* by AI Gateway using the credentials on the provider. Your client only needs to call the proxy URL with an OIDC access token.
-+
+
 [source,python]
 ----
 import os, httpx
@@ -322,13 +331,15 @@ print(response.json())
 ----
 
 See xref:configure-provider.adoc#bedrock-inference-profiles[the Bedrock provider reference] for inference-profile selection guidance.
-+
+
 TIP: Bedrock's `Converse` API works the same way: send to `/model/\{MODEL_ID}/converse` with a Converse-shaped body. Or use the AWS SDK's `bedrockruntime` client and set its `BaseEndpoint` to the proxy URL; the SDK signs the request, AI Gateway re-signs server-side with the provider's credentials, and your client never sees AWS keys.
+--
 
 OpenAI-compatible::
 +
+--
 Use the OpenAI SDK with the proxy URL of the OpenAI-compatible provider and whatever model identifier the upstream exposes:
-+
+
 [source,python]
 ----
 import os
@@ -344,6 +355,7 @@ response = client.chat.completions.create(
     messages=[{"role": "user", "content": "Hello"}],
 )
 ----
+--
 ======
 
 [NOTE]
@@ -397,7 +409,7 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 
 == Best practices
 
-* *Use environment variables* for the proxy URL and token; never hard-code them.
+* *Use environment variables* for the proxy URL and token. Never hard-code them.
 * *Refresh OIDC tokens through your client library* so refresh is invisible to your SDK code (`authlib` for Python, `openid-client` for Node.js, etc.).
 * *Implement retry with exponential backoff* for 5xx and timeout conditions.
 * *Respect `Retry-After`* on 429 responses.
