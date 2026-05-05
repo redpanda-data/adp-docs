@@ -61,7 +61,7 @@ Some guardrail evaluators call an LLM to do their work. A toxicity classifier, f
 
 Guardrail evaluator cost surfaces in the same spending pipeline as user-facing LLM calls. The evaluator's cost is attributed to the *evaluator's configured upstream provider* — usually a small classifier model, separate from the user-facing LLM — so per-provider breakdowns separate the two automatically.
 
-For the per-evaluator cost model and how it interacts with the dashboard's spend view, see xref:governance:guardrails.adoc[Configure guardrails].
+For the per-evaluator cost model and how it interacts with the dashboard's spend view, see xref:governance:guardrails/index.adoc[Configure guardrails].
 
 // TODO: confirm with eng that guardrail evaluator cost flows into the same SpendingService as user-facing LLM cost (vs. a separate stream). Open Q A3 in the companion plan, also flagged on the Guardrails plan.
 
@@ -87,7 +87,7 @@ Cap-management arrives after GA per the Governance V0 PRD. The planned feature s
 * *Alert hooks* — webhook, email, or chat notifications when a cap is approached or exceeded.
 * *Multi-tenant cap-setting* — per-tenant caps with override semantics.
 
-Until those features ship, treat the dashboard and breakdown queries as your visibility layer and use platform-level guardrails (xref:governance:guardrails.adoc[Configure guardrails]) for selective request blocking.
+Until those features ship, treat the dashboard and breakdown queries as your visibility layer and use platform-level guardrails (xref:governance:guardrails/index.adoc[Configure guardrails]) for selective request blocking.
 
 // TODO: once the cap-management surface lands, replace this section with a forward link to the configuration how-to. If cap-management content grows beyond a single section, split this page into a sub-folder. Open Q C1 in the companion plan.
 

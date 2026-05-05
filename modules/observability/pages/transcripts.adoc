@@ -8,7 +8,7 @@
 
 Use the Transcripts view to read a complete record of an agent or MCP server execution, turn by turn. Each transcript captures the conversation between the user, the agent, any LLM calls, and any tools it invoked, along with token usage, USD cost, latency, and any errors.
 
-For conceptual background on the underlying OpenTelemetry data model, see xref:ai-agents:observability/concepts.adoc[].
+For conceptual background on the underlying OpenTelemetry data model, see xref:observability:concepts.adoc[].
 
 After reading this page, you will be able to:
 
@@ -41,7 +41,7 @@ Each row in the list represents one execution (one trace). Columns include:
 * *USD cost* — total cost for the execution, derived from per-model pricing. See <<troubleshooting>> if this column shows `0`.
 * *Duration* — wall-clock time between the first and last span.
 
-A transcript marked _reconstructed_ is one in which some turns were rebuilt from LLM message context after the original spans were evicted from `redpanda.otel_traces`. See xref:ai-agents:observability/concepts.adoc#history-reconstruction[Reconstructed transcript history] for what that means.
+A transcript marked _reconstructed_ is one in which some turns were rebuilt from LLM message context after the original spans were evicted from `redpanda.otel_traces`. See xref:observability:concepts.adoc#history-reconstruction[Reconstructed transcript history] for what that means.
 
 // TODO: Confirm final column list on the GA Console UI. Today's labels likely shift. Verify against adp-production before merge.
 
@@ -102,7 +102,7 @@ Turns are listed in order by role:
 * *ASSISTANT* — a response from the LLM. Shows the model, input/output token counts, USD cost for that turn, and latency. If the assistant turn called a tool, its tool calls are nested underneath.
 * *TOOL* — a tool invocation. Shows the tool name, the arguments passed, the result, and the latency of the call.
 
-Any turn may carry the `is_reconstructed` marker. Reconstructed turns preserve role order and the high-level content of the conversation but do not carry per-turn token counts, latency, or tool-call arguments. See xref:ai-agents:observability/concepts.adoc#history-reconstruction[Reconstructed transcript history] for the mechanics.
+Any turn may carry the `is_reconstructed` marker. Reconstructed turns preserve role order and the high-level content of the conversation but do not carry per-turn token counts, latency, or tool-call arguments. See xref:observability:concepts.adoc#history-reconstruction[Reconstructed transcript history] for the mechanics.
 
 === Errors
 
@@ -148,7 +148,7 @@ If the failure happened during a tool call, the error is attached to the TOOL tu
 == Limitations
 
 * Large time windows sample the list to keep the UI responsive. The exact transcript you need may not be in the current page; narrow the time range or add filters.
-* Reconstructed turns do not carry token counts, latency, or tool-call arguments for the reconstructed range. For byte-level fidelity, lower the ingestion lag or extend `redpanda.otel_traces` retention (see xref:ai-agents:observability/concepts.adoc#opentelemetry-traces-topic[How Redpanda stores trace data]).
+* Reconstructed turns do not carry token counts, latency, or tool-call arguments for the reconstructed range. For byte-level fidelity, lower the ingestion lag or extend `redpanda.otel_traces` retention (see xref:observability:concepts.adoc#opentelemetry-traces-topic[How Redpanda stores trace data]).
 * USD cost is only populated for models covered by the pricing table.
 // TODO: List which providers/models are priced at GA and what users see for un-priced ones (`0`, `null`, or an explicit "unknown" marker).
 // TODO: If the GA Console UI ships transcript export, document the entry point and output format here; otherwise omit.
@@ -165,7 +165,7 @@ A transcript stays in `RUNNING` until the root span closes. Common causes:
 
 === USD cost shows 0
 
-`TranscriptUsage.usd_cost` is populated by the cost-reporting pipeline from the `gen_ai.usage.*` attributes on each LLM-call span combined with a per-model pricing table. For the full list of cost-bearing attributes (including the explicit USD-cost fields), see xref:ai-agents:observability/concepts.adoc#key-attributes-by-layer[Key attributes by layer].
+`TranscriptUsage.usd_cost` is populated by the cost-reporting pipeline from the `gen_ai.usage.*` attributes on each LLM-call span combined with a per-model pricing table. For the full list of cost-bearing attributes (including the explicit USD-cost fields), see xref:observability:concepts.adoc#key-attributes-by-layer[Key attributes by layer].
 // TODO: Document which providers/models are priced at GA.
 
 If cost is `0` for a transcript that clearly used tokens, check:

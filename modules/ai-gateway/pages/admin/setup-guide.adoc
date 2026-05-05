@@ -379,4 +379,4 @@ Users can then discover and connect to the gateway using the information provide
 == Next steps
 
 * xref:routing-cel.adoc[CEL Routing Cookbook]
-* xref:integrations/index.adoc[Integrations]
+* xref:integrations:index.adoc[Integrations]

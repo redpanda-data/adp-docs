@@ -6,7 +6,7 @@
 :learning-objective-2: Inspect resources, prompts, and call history
 :learning-objective-3: Diagnose common errors (auth missing, scope upgrade required, transport mismatch) before pointing an agent at the server
 
-Test your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] using the Inspector: a built-in MCP client in the ADP UI. It runs on the same JSON-RPC connection that agents use, so if a tool works in the Inspector, it will work for an agent. Use this after creating your server (xref:create-server.adoc[Create an MCP Server]) or whenever you change a tool's schema.
+Test your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] using the Inspector: a built-in MCP client in the ADP UI. It runs on the same JSON-RPC connection that agents use, so a tool that works in the Inspector also works for an agent. Use this after creating your server (xref:mcp:create-server.adoc[Create an MCP Server]) or whenever you change a tool's schema.
 
 After completing this guide, you will be able to:
 
@@ -84,7 +84,7 @@ The Session panel keeps a running history of every call you've made through the 
 |Error |Meaning and fix
 
 |`OAuthConnectionRequired`
-|User-delegated auth has no stored token for the calling user. Redpanda includes an `authorize_url` in the error detail; complete the consent flow per xref:user-delegated-oauth.adoc[User-delegated OAuth].
+|User-delegated auth has no stored token for the calling user. Redpanda includes an `authorize_url` in the error detail; complete the consent flow per xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
 
 |`OAuthTokenExpired`
 |Stored token is expired and refresh failed. Re-consent through *My Connections*.
@@ -103,7 +103,7 @@ The Session panel keeps a running history of every call you've made through the 
 
 == Test from the CLI
 
-The `rpk ai` plugin offers a non-UI path for the same tool calls. Use it when scripting smoke tests or running checks from CI.
+Use `rpk ai` for the same tool calls outside the UI, when scripting smoke tests or running checks from CI.
 
 [source,bash]
 ----
@@ -118,7 +118,7 @@ rpk ai mcp tools call <server-name> <tool-name> --input '{"arg1":"value"}'
 rpk ai mcp get <server-name>
 ----
 
-The CLI uses your active `rpk ai` profile for the gateway URL and authentication. See xref:ai-gateway:connect-agent.adoc[Connect your agent] for installation and profile setup.
+The command resolves the gateway URL from your active rpk cloud profile and reads the cached `rpk cloud login` token. See xref:ai-gateway:connect-agent.adoc[Connect your agent] for installation and profile setup.
 
 == Out of scope
 
