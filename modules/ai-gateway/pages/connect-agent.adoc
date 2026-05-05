@@ -18,7 +18,7 @@ After completing this guide, you will be able to:
 == Prerequisites
 
 * A configured LLM provider. If you haven't created one yet, see xref:configure-provider.adoc[Configure an LLM provider].
-* For local development: nothing else; you'll install `rpk ai` in the next section.
+* For local development, nothing else. You'll install `rpk ai` in the next section.
 * For CI or programmatic clients: a Redpanda Cloud service account with OIDC client credentials. See xref:redpanda-cloud:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
 +
 // TODO: confirm whether ADP hosts its own service-account IAM post-standalone, or continues to share Redpanda Cloud Organization IAM.
