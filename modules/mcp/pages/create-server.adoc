@@ -71,13 +71,7 @@ Each managed type ships its own configuration schema. The form on this page is r
 
 // TODO: screenshot of the SQL configuration form as the exemplar (it covers the most common field shapes).
 
-For per-type fields, see xref:mcp:managed/managed-catalog.adoc[Managed catalog] for one-line entries on every type, and the deep-dive pages for SQL, Kafka, Slack, Jira, and OpenAPI:
-
-* xref:mcp:managed/sql.adoc[SQL]
-* xref:mcp:managed/kafka.adoc[Kafka]
-* xref:mcp:managed/slack.adoc[Slack]
-* xref:mcp:managed/jira.adoc[Jira]
-* xref:mcp:managed/openapi.adoc[OpenAPI]
+For per-type fields, see the xref:mcp:managed/managed-catalog.adoc[Managed catalog]: a reference of every managed MCP type Redpanda hosts, grouped by category, with a description and a link to its deep-dive page where one exists.
 
 == Configure the self-managed flow (Remote/Proxied only)
 
