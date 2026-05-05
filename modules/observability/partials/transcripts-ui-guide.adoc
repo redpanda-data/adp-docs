@@ -23,8 +23,8 @@
 //     Valid values: "agent" | "mcp"
 //
 // DEPENDENCIES:
-//   - xref:ai-agents:observability/concepts.adoc#agent-trace-hierarchy[]
-//   - xref:ai-agents:observability/concepts.adoc#mcp-server-trace-hierarchy[]
+//   - xref:observability:concepts.adoc#agent-transcript-hierarchy[]
+//   - xref:observability:concepts.adoc#mcp-server-transcript-hierarchy[]
 //
 // CONTENT TYPE:
 //   UI navigation and interface explanation (procedural context for how-to pages)
@@ -66,10 +66,10 @@ The trace list shows nested operations with visual duration bars indicating how 
 
 // Link to appropriate concepts section based on context
 ifeval::["{context}" == "agent"]
-For details on span types, see xref:ai-agents:observability/concepts.adoc#agent-trace-hierarchy[Agent trace hierarchy].
+For details on span types, see xref:observability:concepts.adoc#agent-transcript-hierarchy[Agent transcript hierarchy].
 endif::[]
 ifeval::["{context}" == "mcp"]
-For details on span types, see xref:ai-agents:observability/concepts.adoc#mcp-server-trace-hierarchy[MCP server trace hierarchy].
+For details on span types, see xref:observability:concepts.adoc#mcp-server-transcript-hierarchy[MCP server transcript hierarchy].
 endif::[]
 
 ==== Summary panel
@@ -91,6 +91,6 @@ ifeval::["{context}" == "mcp"]
 * Service: The MCP server identifier
 endif::[]
 
-If any turns were rebuilt from LLM message context after their original spans were evicted, the panel shows a _reconstructed_ marker on those turns. For the mechanics, see xref:ai-agents:observability/concepts.adoc#history-reconstruction[Reconstructed transcript history].
+If any turns were rebuilt from LLM message context after their original spans were evicted, the panel shows a _reconstructed_ marker on those turns. For the mechanics, see xref:observability:concepts.adoc#history-reconstruction[Reconstructed transcript history].
 
 // TODO: Re-verify this field list against the GA Console UI on adp-production. Beta labels may shift; update wording before GA.

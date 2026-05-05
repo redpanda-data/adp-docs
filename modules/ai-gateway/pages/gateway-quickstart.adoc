@@ -529,6 +529,6 @@ const openai = new OpenAI({
 
 * xref:routing-cel.adoc[]
 * xref:aggregation.adoc[]
-* xref:integrations/index.adoc[]
+* xref:integrations:index.adoc[]
 * xref:gateway-architecture.adoc[]
 * xref:overview.adoc[]

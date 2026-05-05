@@ -128,7 +128,6 @@ If the tools list is empty or stale, hit the *Refresh tools* action on the Overv
 
 |TLS errors when registering an `https://` URL
 |Confirm the server's certificate chains to a public CA (or the CA Redpanda's egress trusts). Self-signed certs aren't supported.
-+
 // TODO: confirm TLS / private CA story for the standalone ADP product surface.
 
 |`401 Unauthorized` from the upstream
