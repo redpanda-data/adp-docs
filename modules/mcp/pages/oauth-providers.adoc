@@ -54,11 +54,11 @@ OAuth providers are governed by their own permission set. Granting create/update
 |*Required to attach this provider to an MCP server.* Enforced as a sub-resource check in `CreateMCPServer` and `UpdateMCPServer` whenever `authConfig.userOauth.provider_name` is set or swapped. Without this permission, a principal with `mcpserver_update` could otherwise bind any provider's token vault to an MCP they control and indirectly consume its tokens.
 |===
 
-NOTE: The `_attach` permission is independent from `_get`, `_create`, `_update`, and `_delete`. Grant it only to roles that should be able to bind a given provider's token vault to an MCP server.
+NOTE: The `_attach` permission is independent from `_get`, `_create`, `_update`, and `_delete`. Grant it only to roles that need to bind a given provider's token vault to an MCP server.
 
-== Manage external identity providers for user-delegated MCP authentication
+== Browse OAuth providers
 
-The *OAuth Providers* page is your starting point. 
+The *OAuth Providers* page lists every provider registered in your organization. The list shows the following columns:
 
 [cols="1,3"]
 |===
@@ -230,7 +230,7 @@ rpk ai oauth create \
 
 == Attach to an MCP server
 
-To attach an OAuth provider to an MCP server, the principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider plus the usual `mcpserver_create` / `mcpserver_update` permission. See xref:create-server.adoc[Create an MCP Server] for the full attach flow and xref:user-delegated-oauth.adoc[User-delegated OAuth] for the consent flow that runs on first call.
+To attach an OAuth provider to an MCP server, the principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider plus the usual `mcpserver_create` / `mcpserver_update` permission. See xref:mcp:create-server.adoc[Create an MCP Server] for the full attach flow and xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth] for the consent flow that runs on first call.
 
 == Edit and rotate credentials
 
@@ -273,11 +273,11 @@ Common symptoms and fixes:
 
 == Related topics
 
-* xref:user-delegated-oauth.adoc[User-delegated OAuth]
-* xref:create-server.adoc[Create an MCP Server]
-* xref:managed/slack.adoc[Slack managed MCP]
-* xref:managed/jira.adoc[Jira managed MCP]
-* xref:managed/zendesk.adoc[Zendesk managed MCP]
-* xref:managed/workday.adoc[Workday managed MCP]
-* xref:managed/ironclad.adoc[Ironclad managed MCP]
-* xref:managed/ramp.adoc[Ramp managed MCP]
+* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:mcp:create-server.adoc[Create an MCP Server]
+* xref:mcp:managed/slack.adoc[Slack managed MCP]
+* xref:mcp:managed/jira.adoc[Jira managed MCP]
+* xref:mcp:managed/zendesk.adoc[Zendesk managed MCP]
+* xref:mcp:managed/workday.adoc[Workday managed MCP]
+* xref:mcp:managed/ironclad.adoc[Ironclad managed MCP]
+* xref:mcp:managed/ramp.adoc[Ramp managed MCP]

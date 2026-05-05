@@ -7,7 +7,7 @@
 :learning-objective-2: Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients
 :learning-objective-3: Send requests through the proxy URL with the SDK of your choice
 
-This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You'll construct the proxy URL for a provider you have already created, authenticate (with `rpk cloud login` for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
+This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with `rpk cloud login` for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
 
 After completing this guide, you will be able to:
 
@@ -17,7 +17,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* A configured LLM provider. If you haven't created one yet, see xref:configure-provider.adoc[Configure an LLM provider].
+* A configured LLM provider. If you haven't created one yet, see xref:ai-gateway:configure-provider.adoc[Configure an LLM provider].
 * For local development, nothing else. You'll install `rpk ai` in the next section.
 * For CI or programmatic clients: a Redpanda Cloud service account with OIDC client credentials. See xref:redpanda-cloud:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
 +
@@ -46,7 +46,7 @@ TIP: The provider detail page generates ready-to-run snippets pre-filled with th
 [[authenticate-with-rpai]]
 == Use `rpk ai` for local development
 
-`rpk ai` is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`. The active AI Gateway URL comes from your active rpk cloud profile.
+The `rpk ai` command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`. The active AI Gateway URL comes from your active rpk cloud profile.
 
 . Install `rpk ai`:
 +
@@ -64,7 +64,7 @@ Update later with `rpk ai upgrade`; remove with `rpk ai uninstall`.
 rpk cloud login
 ----
 +
-This caches a cloud token in `~/.config/rpk/rpk.yaml`. `rpk ai` reads this token automatically on every invocation.
+This caches a cloud token in `~/.config/rpk/rpk.yaml`. On every invocation, `rpk ai` reads the cached token automatically.
 
 . Select a profile that points at a cluster with AI Gateway v2 attached. The AI Gateway URL is cached on the profile when you create it.
 +
@@ -100,7 +100,7 @@ You can also export `RPAI_ENDPOINT` to override for the shell session.
 
 === Environment variables
 
-`rpk ai` honors these environment variables:
+The `rpk ai` command honors the following environment variables:
 
 [cols="1,3"]
 |===
@@ -330,7 +330,7 @@ response = httpx.post(
 print(response.json())
 ----
 
-See xref:configure-provider.adoc#bedrock-inference-profiles[the Bedrock provider reference] for inference-profile selection guidance.
+See xref:ai-gateway:configure-provider.adoc#bedrock-inference-profiles[the Bedrock provider reference] for inference-profile selection guidance.
 
 TIP: Bedrock's `Converse` API works the same way: send to `/model/\{MODEL_ID}/converse` with a Converse-shaped body. Or use the AWS SDK's `bedrockruntime` client and set its `BaseEndpoint` to the proxy URL; the SDK signs the request, AI Gateway re-signs server-side with the provider's credentials, and your client never sees AWS keys.
 --
@@ -409,12 +409,12 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 
 == Best practices
 
-* *Use environment variables* for the proxy URL and token. Never hard-code them.
-* *Refresh OIDC tokens through your client library* so refresh is invisible to your SDK code (`authlib` for Python, `openid-client` for Node.js, etc.).
-* *Implement retry with exponential backoff* for 5xx and timeout conditions.
-* *Respect `Retry-After`* on 429 responses.
-* *Rotate service account credentials* on a schedule your organization accepts.
-* *Observe usage* through the ADP UI on each provider's detail page. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
+* Use environment variables for the proxy URL and token. Never hard-code them.
+* Refresh OIDC tokens through your client library so refresh is invisible to your SDK code (`authlib` for Python, `openid-client` for Node.js, etc.).
+* Implement retry with exponential backoff for 5xx and timeout conditions.
+* Respect `Retry-After` on 429 responses.
+* Rotate service account credentials on a schedule your organization accepts.
+* Observe usage through the ADP UI on each provider's detail page. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
 
 == Troubleshooting
 
@@ -443,4 +443,4 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 
 == Next steps
 
-* xref:configure-provider.adoc[Configure an LLM provider]
+* xref:ai-gateway:configure-provider.adoc[Configure an LLM provider]

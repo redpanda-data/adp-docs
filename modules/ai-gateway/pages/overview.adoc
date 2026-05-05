@@ -46,7 +46,7 @@ Use the provider's own SDK: OpenAI, Anthropic, Google AI, AWS Bedrock, or any Op
 
 === Managed authentication
 
-Applications authenticate to ADP with OIDC service accounts instead of long-lived provider API keys. Service accounts use the same role and audit model as every other ADP resource, and mint short-lived tokens that are easy to revoke. For local command-line workflows, use `rpk cloud login` to authenticate and `rpk ai` to talk to the gateway. CI and programmatic clients use the OIDC client-credentials grant directly. See xref:connect-agent.adoc[Connect your agent].
+Applications authenticate to ADP with OIDC service accounts instead of long-lived provider API keys. Service accounts use the same role and audit model as every other ADP resource, and mint short-lived tokens that are easy to revoke. For local command-line workflows, use `rpk cloud login` to authenticate and `rpk ai` to talk to the gateway. CI and programmatic clients use the OIDC client-credentials grant directly. See xref:ai-gateway:connect-agent.adoc[Connect your agent].
 
 === Per-provider observability
 
@@ -78,7 +78,7 @@ AI Gateway supports five provider types. The UI labels and short descriptions ma
 |Call Claude Opus, Sonnet, and Haiku directly. Optionally forwards the client's `Authorization` header for enterprise and Max-plan subscription passthrough.
 
 |*Google AI*
-|Reach Gemini Pro, Flash, and multimodal models via Google AI Studio. Ideal for long-context workloads and image/video inputs.
+|Reach Gemini Pro, Flash, and multimodal models through Google AI Studio. Ideal for long-context workloads and image/video inputs.
 
 |*AWS Bedrock*
 |Invoke foundation models (Claude, Llama, Titan, Nova) hosted inside your AWS account. Use when data residency, IAM, or VPC egress matter more than raw feature parity. Signed with SigV4 server-side by AI Gateway.
@@ -87,7 +87,7 @@ AI Gateway supports five provider types. The UI labels and short descriptions ma
 |Point at any OpenAI-compatible endpoint (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways that ship `/v1/chat/completions`.
 |===
 
-See xref:configure-provider.adoc[Configure an LLM provider] for the full form reference for each type.
+See xref:ai-gateway:configure-provider.adoc[Configure an LLM provider] for the full form reference for each type.
 
 == When to use AI Gateway
 
@@ -116,5 +116,5 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 
 == Next steps
 
-. xref:configure-provider.adoc[Configure an LLM provider]
-. xref:connect-agent.adoc[Connect your agent]
+. xref:ai-gateway:configure-provider.adoc[Configure an LLM provider]
+. xref:ai-gateway:connect-agent.adoc[Connect your agent]

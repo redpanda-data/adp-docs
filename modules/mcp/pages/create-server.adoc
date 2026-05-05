@@ -22,7 +22,7 @@ After completing this guide, you will be able to:
 * For any auth mode that uses upstream credentials: the credentials in hand and a secret already created in the ADP secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
 +
 // TODO: xref the ADP secrets-management page once confirmed.
-* For user-delegated OAuth: an OAuth Provider resource already configured. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
+* For user-delegated OAuth: an OAuth Provider resource already configured. See xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Open the MCP Servers page
 
@@ -40,7 +40,7 @@ The marketplace picker lists every managed type as a card and includes a *Remote
 
 // TODO: screenshot of the marketplace picker, with both a managed card and the Remote (Proxied) option visible.
 
-For a tour of every managed type and which one fits your use case, see xref:managed/managed-catalog.adoc[Managed catalog]. To go deep on the self-managed path (transport choices, TLS, multi-server aggregation), see xref:register-remote.adoc[Register a self-managed server].
+For a tour of every managed type and which one fits your use case, see xref:mcp:managed/managed-catalog.adoc[Managed catalog]. To go deep on the self-managed path (transport choices, TLS, multi-server aggregation), see xref:mcp:register-remote.adoc[Register a self-managed server].
 
 == Name and basic fields
 
@@ -67,17 +67,17 @@ Every server has the same identity fields.
 
 == Configure the managed flow (managed types only)
 
-Each managed type ships its own configuration schema. The form on this page is rendered from the type's `_config.proto`, so field labels and help text come from the proto definition itself. There is no hand-written form code per type.
+Each managed type ships its own configuration schema. The form on this page is rendered from the type's `_config.proto`, so field labels and help text come directly from the proto definition. No per-type hand-written form code is required.
 
 // TODO: screenshot of the SQL configuration form as the exemplar (it covers the most common field shapes).
 
-For per-type fields, see xref:managed/managed-catalog.adoc[Managed catalog] for one-line entries on every type, and the deep-dive pages for SQL, Kafka, Slack, Jira, and OpenAPI:
+For per-type fields, see xref:mcp:managed/managed-catalog.adoc[Managed catalog] for one-line entries on every type, and the deep-dive pages for SQL, Kafka, Slack, Jira, and OpenAPI:
 
-* xref:managed/sql.adoc[SQL]
-* xref:managed/kafka.adoc[Kafka]
-* xref:managed/slack.adoc[Slack]
-* xref:managed/jira.adoc[Jira]
-* xref:managed/openapi.adoc[OpenAPI]
+* xref:mcp:managed/sql.adoc[SQL]
+* xref:mcp:managed/kafka.adoc[Kafka]
+* xref:mcp:managed/slack.adoc[Slack]
+* xref:mcp:managed/jira.adoc[Jira]
+* xref:mcp:managed/openapi.adoc[OpenAPI]
 
 == Configure the self-managed flow (Remote/Proxied only)
 
@@ -93,7 +93,7 @@ Two fields on top of the identity fields:
 
 |Transport
 |Yes
-|`SSE` (server-sent events) or `Streamable HTTP` (newer bidirectional protocol). Pick whichever your server speaks. See xref:register-remote.adoc[Register a self-managed server] for how to test which transport your server uses.
+|`SSE` (server-sent events) or `Streamable HTTP` (newer bidirectional protocol). Pick whichever your server speaks. See xref:mcp:register-remote.adoc[Register a self-managed server] for how to test which transport your server uses.
 |===
 
 == Configure authentication
@@ -117,7 +117,7 @@ Both managed and self-managed servers offer the same five authentication modes. 
 |2-legged OAuth client credentials. One shared upstream identity for every caller. Provide `client_id`, `client_secret_ref`, `token_url`, and any required `scopes`.
 
 |*User-delegated OAuth*
-|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. Pick the configured *OAuth Provider* and the required scopes. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; the resulting connection is stored in the token vault and shows up under *My Connections*. See xref:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
+|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. Pick the configured *OAuth Provider* and the required scopes. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; the resulting connection is stored in the token vault and shows up under *My Connections*. See xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
 |===
 
 NOTE: Choosing between *Service-account OAuth* and *User-delegated OAuth* is the credential-mode decision. Service-account auth gives every caller the same identity at the upstream; user-delegated auth gives each caller their own.
@@ -138,13 +138,13 @@ NOTE: Defer advanced code-mode patterns (sandboxing limits, runtime selection, d
 
 . Click *Create*. The server appears in the list with a *Type* badge: *Managed* or *Self-managed*.
 . Open the detail page. The *Overview* tab shows the *API URL*: this is the MCP URL agents connect to. Copy it for use later.
-. Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:test-tools.adoc[Test a server's tools] for how to call them.
+. Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:mcp:test-tools.adoc[Test a server's tools] for how to call them.
 
 A populated tools list confirms that the connection works and credentials resolve correctly. If the list is empty or the tab shows an error, see <<troubleshooting>>.
 
 == Create from the CLI
 
-`rpk ai` offers a non-UI path for the same create flow. Useful for scripting and CI.
+Use `rpk ai` for a non-UI path through the same create flow, useful for scripting and CI.
 
 [source,bash]
 ----
@@ -181,7 +181,7 @@ rpk ai mcp update my-ramp \
 |JSON blob carrying the managed type's `_config.proto` shape, including a `@type` URL.
 
 |`--user-oauth-provider`
-|Name of an OAuth Provider already registered under *OAuth Providers*. See xref:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893).
+|Name of an OAuth Provider already registered under *OAuth Providers*. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893).
 
 |`--user-oauth-scopes`
 |Comma-separated scopes the server requires. Provide every scope any tool may need; user re-consent is required if scopes change later.
@@ -189,7 +189,7 @@ rpk ai mcp update my-ramp \
 
 // TODO(rpk-ai): --auth-config does not exist on `rpk ai mcp create` today (verified against cloudv2/apps/rpai/internal/cmd/mcp/cmd.go on 2026-05-05). For non-convenience auth shapes, encode them inside `--managed-config` JSON. Re-add this row if a flag lands later.
 
-`rpk ai` resolves the gateway URL from your active rpk cloud profile and reads the cached `rpk cloud login` token.
+The command resolves the gateway URL from your active rpk cloud profile and reads the cached `rpk cloud login` token.
 
 == Edit, disable, and delete a server
 
@@ -225,7 +225,7 @@ rpk ai mcp update my-ramp \
 
 The following capabilities are not configured on this page; see the linked content instead.
 
-* *User-delegated OAuth consent flow*: see xref:user-delegated-oauth.adoc[User-delegated OAuth].
-* *Inspector usage*: see xref:test-tools.adoc[Test a server's tools].
+* *User-delegated OAuth consent flow*: see xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
+* *Inspector usage*: see xref:mcp:test-tools.adoc[Test a server's tools].
 * *Multi-server aggregation*: handled by AI Gateway. See xref:ai-gateway:aggregation.adoc[MCP aggregation].
-* *Per-type configuration depth*: see xref:managed/managed-catalog.adoc[Managed catalog] and the deep-dive pages.
+* *Per-type configuration depth*: see xref:mcp:managed/managed-catalog.adoc[Managed catalog] and the deep-dive pages.
