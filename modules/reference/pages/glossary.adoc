@@ -1,11 +1,28 @@
 = Glossary
 :description: Definitions of key terms used in Redpanda Agentic Data Plane documentation.
 
-- <<Agentic Data Plane>>
-- <<Redpanda Cloud>>
-- <<Redpanda Connect>>
-- <<Redpanda core>>
-- <<Redpanda features>>
-- <<Redpanda in Kubernetes>>
-- <<Redpanda licenses>>
-- <<Redpanda security>>
+Term definitions for Redpanda Agentic Data Plane (ADP) are maintained alongside the rest of the Redpanda glossary in the `redpanda-data/docs` repository on the `shared` branch (`modules/terms/partials/`). Tooltips appear inline wherever the `glossterm:` macro is used; this page is a quick index of the ADP-specific entries.
+
+For the canonical, full glossary, see xref:redpanda-cloud:reference:glossary.adoc[the Redpanda glossary].
+
+== Agentic Data Plane terms
+
+ADP-specific entries include:
+
+* glossterm:Agentic Data Plane (ADP)[]
+* glossterm:AI agent[]
+* glossterm:AI Gateway[]
+* glossterm:declarative agent[]
+* glossterm:BYOA (bring your own agent)[]
+* glossterm:MCP server[]
+* glossterm:MCP tool[]
+* glossterm:tool[]
+* glossterm:resource[]
+* glossterm:OAuth Provider[]
+* glossterm:OAuth Client[]
+* glossterm:OAuth Connection[]
+* glossterm:Token Vault[]
+* glossterm:transcript[]
+* glossterm:spending event[]
+* glossterm:Governance Dashboard[]
+* glossterm:subagent[]

@@ -62,6 +62,12 @@ The gateway also supports tenancy modeling for teams, individuals, applications,
 
 For more information, see xref:ai-gateway:overview.adoc[AI Gateway Overview].
 
+== Governance
+
+The glossterm:Governance Dashboard[] provides a cross-tenant view of agent activity, spending, MCP server inventory, and authorization events. It composes existing services into a single overview built for platform administrators and finance partners, surfacing per-provider spending, agent state, and the authorization decisions that gate every tool invocation.
+
+For more information, see xref:governance:dashboard/index.adoc[Governance Dashboard Overview].
+
 == Enterprise governance
 
 Redpanda ADP addresses critical enterprise requirements across all components.
@@ -76,7 +82,7 @@ Redpanda ADP addresses critical enterprise requirements across all components.
 
 == Use cases
 
-Some ways organizations can leverage Redpanda ADP include:
+Common Redpanda ADP use cases include:
 
 * *Automate operational workflows*: Create specialized agents for building management, infrastructure monitoring, compliance reporting, and other domain-specific tasks.
 * *Monitor manufacturing and operations*: Deploy multi-agent systems that analyze factory machine telemetry in real-time, detect anomalies, search equipment manuals, and create maintenance tickets automatically.
@@ -84,7 +90,8 @@ Some ways organizations can leverage Redpanda ADP include:
 
 == Next steps
 
-* xref:agents:overview.adoc[AI Agents Overview]
-* xref:mcp:overview.adoc[MCP Server Overview]
-* xref:observability:concepts.adoc[Transcripts Overview]
-* xref:ai-gateway:overview.adoc[AI Gateway Overview]
+* xref:agents:overview.adoc[]
+* xref:mcp:overview.adoc[]
+* xref:ai-gateway:overview.adoc[]
+* xref:governance:dashboard/index.adoc[]
+* xref:observability:concepts.adoc[]
