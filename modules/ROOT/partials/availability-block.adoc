@@ -1,28 +1,9 @@
-// Availability indicator for ADP pages
-// Shows which platforms support this feature
+// Availability indicator for ADP pages.
+// ADP ships as a single deployment shape at GA (BYOC). The block
+// renders only when a page explicitly opts in with :page-byoc: true.
 ifdef::page-byoc[]
-ifndef::page-cloud-only[]
 [.availability-block]
 ****
 *Available in:* BYOC
 ****
-endif::[]
-endif::[]
-
-ifdef::page-cloud-only[]
-ifndef::page-byoc[]
-[.availability-block]
-****
-*Available in:* Cloud
-****
-endif::[]
-endif::[]
-
-ifndef::page-byoc[]
-ifndef::page-cloud-only[]
-[.availability-block]
-****
-*Available in:* Cloud, BYOC
-****
-endif::[]
 endif::[]

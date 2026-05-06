@@ -56,13 +56,19 @@ For more information, see xref:observability:concepts.adoc[Transcripts Overview]
 
 The AI Gateway manages LLM provider access with two priorities: keeping your application up and keeping costs under control.
 
-For high availability, the gateway provides provider-agnostic routing with intelligent failover. Your users don't care which provider serves a request. They care that the application stays up. For fiscal control, you get per-tenant budgets and rate limiting, so there are no runaway costs and no surprise bills.
+For high availability, the gateway provides provider-agnostic routing with intelligent failover. Your users don't care which provider serves a request. They care that the application stays up. You can also route different tasks to different models, such as a frontier model for analysis and a smaller model for classification or triage, and see usage and cost across every model in one view. For fiscal control, you get per-tenant budgets and rate limiting, so there are no runaway costs and no surprise bills.
 
 The gateway also supports tenancy modeling for teams, individuals, applications, and service accounts, giving you chargeback transparency for internal cost allocation. You can proxy both models and MCP gateways, centralizing compliance for all LLM interactions without locking into any single provider.
 
 For more information, see xref:ai-gateway:overview.adoc[AI Gateway Overview].
 
-== Enterprise governance
+== Governance
+
+The glossterm:governance dashboard[] provides a cross-tenant view of agent activity, spending, MCP server inventory, and authorization events. It composes existing services into a single overview built for platform administrators and finance partners, surfacing per-provider spending, agent state, and the authorization decisions that gate every tool invocation.
+
+For more information, see xref:governance:dashboard/index.adoc[Governance Dashboard Overview].
+
+== Built-in governance controls
 
 Redpanda ADP addresses critical enterprise requirements across all components.
 
@@ -72,19 +78,22 @@ Redpanda ADP addresses critical enterprise requirements across all components.
 
 * *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (transcripts) capture every agent action with 100% sampling using OpenTelemetry standards. Real-time debugging tools allow you to inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in glossterm:Redpanda Console[] and replay data for agent evaluations.
 
-* *Compliance and audit*: For industries requiring multi-year audit trails, Redpanda ADP records every agent action and data source used in decision-making. Execution logs are stored in Redpanda topics and can be materialized to Iceberg tables for long-term retention and analysis.
+* *Compliance and audit*: For regulated industries with frameworks such as ISO 42001 and the EU AI Act, Redpanda ADP records every agent action and data source used in decision-making. Execution logs are stored in Redpanda topics and can be materialized to Iceberg tables for multi-year retention and analysis.
 
 == Use cases
 
-Some ways organizations can leverage Redpanda ADP include:
+Common Redpanda ADP use cases include:
 
-* *Automate operational workflows*: Create specialized agents for building management, infrastructure monitoring, compliance reporting, and other domain-specific tasks.
-* *Monitor manufacturing and operations*: Deploy multi-agent systems that analyze factory machine telemetry in real-time, detect anomalies, search equipment manuals, and create maintenance tickets automatically.
+* *Automate financial operations*: Build agents that reconcile invoices across vendors and ERP systems, monitor real-time spending against budget, or review contracts against approved templates and flag out-of-policy clauses for legal review.
+* *Streamline HR and people operations*: Answer employee questions against benefits, payroll, and HRIS systems; automate onboarding and offboarding workflows; or triage internal support tickets to the right team.
+* *Improve customer experience*: Route customer inquiries to the right team, summarize prior support history before an agent picks up the case, or surface relevant knowledge-base articles in real time.
+* *Modernize infrastructure operations*: Detect anomalies in real-time telemetry from cloud, network, or factory equipment, correlate signals across disparate monitoring systems, and auto-create maintenance tickets with the relevant context already attached.
 * *Extend enterprise productivity tools*: Integrate Microsoft Copilot or other workplace agents with internal data sources and systems that are otherwise inaccessible.
 
 == Next steps
 
-* xref:agents:overview.adoc[AI Agents Overview]
-* xref:mcp:overview.adoc[MCP Server Overview]
-* xref:observability:concepts.adoc[Transcripts Overview]
-* xref:ai-gateway:overview.adoc[AI Gateway Overview]
+* xref:agents:overview.adoc[]
+* xref:mcp:overview.adoc[]
+* xref:ai-gateway:overview.adoc[]
+* xref:governance:dashboard/index.adoc[]
+* xref:observability:concepts.adoc[]

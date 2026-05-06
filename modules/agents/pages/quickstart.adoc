@@ -17,7 +17,7 @@ After completing this quickstart, you will be able to:
 
 == Prerequisites
 
-* An ADP BYOC environment (agents are not available on ADP Cloud yet)
+* An ADP environment
 
 * xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, or Google AI)
 

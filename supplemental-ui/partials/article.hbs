@@ -1,0 +1,220 @@
+<article class="doc {{#if page.attributes.no-toc}}no-toc{{/if}}">
+{{#if (ne page.attributes.role 'home')}}
+{{> breadcrumbs}}
+{{/if}}
+{{#unless page.attributes.cloud}}
+{{> latest-banner}}
+{{/unless}}
+{{#if (eq page.attributes.role 'bloblang-playground')}}
+{{> bloblang-signup-form}}
+{{/if}}
+{{#if (eq page.attributes.role 'home')}}
+  {{> home}}
+  {{page.contents}}
+{{else}}
+  {{#with page.title}}
+    <h1 class="page">{{{this}}}</h1>
+  {{/with}}
+{{/if}}
+{{#unless (eq page.attributes.role 'component-home-v2')}}
+<div class="metadata metadata--main">
+  {{#if page.attributes.beta}}
+    <div class="beta-label">
+      <p>beta</p>
+    </div>
+  {{/if}}
+  {{#if page.attributes.limited-availability}}
+    <div class="limited-availability-label">
+      <p>Limited Availability</p>
+    </div>
+  {{/if}}
+  {{!-- Only show BYOC/Cloud badges on non-ADP pages (ADP uses availability block instead) --}}
+  {{#unless page.attributes.adp}}
+  {{#if page.attributes.byoc}}
+    <div class="byoc-label">
+      <p>BYOC</p>
+    </div>
+  {{/if}}
+  {{#if page.attributes.cloud-only}}
+    <div class="cloud-label">
+      <p>Cloud</p>
+    </div>
+  {{/if}}
+  {{/unless}}
+  {{#if page.attributes.context-switcher}}
+    {{> context-switcher}}
+  {{/if}}
+  {{> markdown-dropdown}}
+</div>
+{{/unless}}
+{{!--
+  ADP availability block removed: ADP Cloud was descoped from the
+  2026-06-15 GA, so the only deployment shape is BYOC. Showing an
+  "Available in: BYOC" admonition on every ADP page added visual noise
+  without informing the reader. This supplemental override drops the
+  block entirely; the docs-ui release should follow with the same change
+  before the next release cuts.
+--}}
+{{#if (or page.attributes.beta page.attributes.limited-availability page.attributes.byoc page.attributes.cloud-only page.attributes.context-switcher)}}
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const metadataContainer = document.querySelector(".metadata--main");
+    const navMetadataContainer = document.querySelector(".metadata--nav");
+
+    if (!metadataContainer || !navMetadataContainer) {
+      return;
+    }
+
+    // Initialize tooltips for beta badges if present
+    const topBetaBadge = metadataContainer.querySelector(".beta-label p");
+    const navBetaBadge = navMetadataContainer.querySelector(".nav-beta-label");
+    // DEBUG: If you need to debug Tippy.js tooltips in Chrome DevTools, note that the "force element state"
+    // feature doesn't work with JavaScript-based hover effects. Instead, use the Console to manually trigger events:
+    // document.querySelector('.beta-label p').dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+    // This will show the tooltip without needing to hover, making it easier to inspect the generated DOM.
+    if (topBetaBadge && navBetaBadge) {
+      tippy(topBetaBadge, {
+        content: "{{page.attributes.beta-text}}",
+        animation: "scale",
+        theme: "redpanda-term",
+        touch: "hold",
+        interactive: true,
+        allowHTML: true,
+        appendTo: () => document.body,
+      });
+      tippy(navBetaBadge, {
+        content: "{{page.attributes.beta-text}}",
+        animation: "scale",
+        theme: "redpanda-term",
+        touch: "hold",
+        interactive: true,
+        allowHTML: true,
+        appendTo: () => document.body,
+      });
+    }
+
+    // Initialize tooltips for limited availability badges if present
+    const topLimitedAvailabilityBadge = metadataContainer.querySelector(".limited-availability-label p");
+    const navLimitedAvailabilityBadge = navMetadataContainer.querySelector(".nav-limited-availability-label");
+    if (topLimitedAvailabilityBadge) {
+      tippy(topLimitedAvailabilityBadge, {
+        content: "{{page.attributes.limited-availability-text}}",
+        animation: "scale",
+        theme: "redpanda-term",
+        touch: "hold",
+        interactive: true,
+        allowHTML: true,
+        appendTo: () => document.body,
+      });
+    }
+    if (navLimitedAvailabilityBadge) {
+      tippy(navLimitedAvailabilityBadge, {
+        content: "{{page.attributes.limited-availability-text}}",
+        animation: "scale",
+        theme: "redpanda-term",
+        touch: "hold",
+        interactive: true,
+        allowHTML: true,
+        appendTo: () => document.body,
+      });
+    }
+
+    // Initialize tooltips for BYOC badges if present
+    const topByocBadge = metadataContainer.querySelector(".byoc-label p");
+    const navByocBadge = navMetadataContainer.querySelector(".nav-byoc-label");
+    if (topByocBadge) {
+      tippy(topByocBadge, {
+        content: "{{page.attributes.byoc-text}}",
+        animation: "scale",
+        theme: "redpanda-term",
+        touch: "hold",
+        interactive: true,
+        allowHTML: true,
+        appendTo: () => document.body,
+      });
+    }
+    if (navByocBadge) {
+      tippy(navByocBadge, {
+        content: "{{page.attributes.byoc-text}}",
+        animation: "scale",
+        theme: "redpanda-term",
+        touch: "hold",
+        interactive: true,
+        allowHTML: true,
+        appendTo: () => document.body,
+      });
+    }
+
+    // Initialize tooltips for Cloud badges if present
+    const topCloudBadge = metadataContainer.querySelector(".cloud-label p");
+    const navCloudBadge = navMetadataContainer.querySelector(".nav-cloud-label");
+    if (topCloudBadge) {
+      tippy(topCloudBadge, {
+        content: "{{page.attributes.cloud-only-text}}",
+        animation: "scale",
+        theme: "redpanda-term",
+        touch: "hold",
+        interactive: true,
+        allowHTML: true,
+        appendTo: () => document.body,
+      });
+    }
+    if (navCloudBadge) {
+      tippy(navCloudBadge, {
+        content: "{{page.attributes.cloud-only-text}}",
+        animation: "scale",
+        theme: "redpanda-term",
+        touch: "hold",
+        interactive: true,
+        allowHTML: true,
+        appendTo: () => document.body,
+      });
+    }
+
+    // Show nav metadata when main metadata is not visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navMetadataContainer.classList.add("hidden");
+        } else {
+          navMetadataContainer.classList.remove("hidden");
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1 // Trigger when 10% of the container is visible
+    });
+
+    observer.observe(metadataContainer);
+  });
+  </script>
+{{/if}}
+{{#if page.attributes.console-config-migrator}}
+{{> console-config-migrator}}
+{{/if}}
+{{#if (eq page.attributes.role 'component-home')}}
+  {{> component-home}}
+{{else if (eq page.attributes.role 'component-home-v2')}}
+  {{> component-home-v2}}
+{{else if (eq page.attributes.role 'bloblang-playground')}}
+  {{> bloblang-playground}}
+{{else if (eq page.attributes.role 'index-list')}}
+  {{> index-list}}
+{{else if (eq page.layout 'index')}}
+  {{> index}}
+{{else if (eq page.attributes.role 'related-labs')}}
+  {{#with (list-related-labs page.title page.attributes page.contents)  as |listLabs|}}
+    {{{listLabs}}}
+  {{/with}}
+{{else}}
+  {{#with (add-suggested-labs page.attributes page.contents)  as |suggestedLabs|}}
+    {{{suggestedLabs}}}
+  {{/with}}
+{{/if}}
+{{#if (ne page.attributes.role 'home')}}
+{{> back-to-top}}
+{{/if}}
+{{> feedback-footer}}
+{{> pagination}}
+{{> tracking-pixel}}
+</article>

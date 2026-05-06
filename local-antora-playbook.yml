@@ -26,6 +26,7 @@ content:
 ui:
   bundle:
     url: https://github.com/redpanda-data/docs-ui/releases/download/v2.14.0-adp.2/ui-bundle.zip
+  supplemental_files: ./supplemental-ui
 asciidoc:
   attributes:
   extensions:

@@ -1,5 +1,0 @@
-= Sign Up for ADP Cloud
-:description: Create your ADP Cloud account and get started with the Agentic Data Plane.
-:page-cloud-only: true
-
-// TODO: Add content
