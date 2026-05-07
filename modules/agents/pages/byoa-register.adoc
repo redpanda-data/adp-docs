@@ -1,4 +1,5 @@
 = Register Your Own Agent (BYOA)
 :description: Connect your existing AI agent to Redpanda ADP for observability and governance.
+:page-byoc-only: true
 
 // TODO: Add content
