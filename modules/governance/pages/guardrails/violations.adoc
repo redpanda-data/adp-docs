@@ -82,7 +82,7 @@ When an evaluator can't run (custom webhook unreachable, classifier model down, 
 
 // TODO: confirm the GA default and whether it's configurable per guardrail. Open Qs B2, B5 in the companion plan.
 
-The default at GA is fail-closed. Per-guardrail override is available for guardrails where availability is more important than policy coverage (for example, a brand-safety webhook that's not critical to organizational compliance).
+The default is fail-closed. Per-guardrail override is available for guardrails where availability is more important than policy coverage (for example, a brand-safety webhook that's not critical to organizational compliance).
 
 == Async versus sync evaluation
 

@@ -1,4 +1,163 @@
 = BYOA Telemetry (OpenTelemetry)
-:description: Send telemetry from your own agents to Redpanda ADP using OpenTelemetry.
+:description: Emit OpenTelemetry traces from your BYOA (Bring Your Own Agent) so the Agentic Data Plane can attribute calls, costs, and tool invocations to your agent. Covers the minimum required span contract, common optional attributes, and how it differs from a Redpanda-managed agent.
+:page-topic-type: how-to
+:personas: agent_developer, platform_admin
+:learning-objective-1: Identify the resource attributes and span attributes a BYOA agent must emit so transcripts and the governance dashboard can attribute calls correctly
+:learning-objective-2: Choose between optional enrichment attributes that improve dashboard fidelity (model, tool, agent name, conversation, cache tokens)
+:learning-objective-3: Validate a BYOA agent's telemetry by reading the resulting transcript and confirming non-zero metric values
 
-// TODO: Add content
+A *BYOA* (Bring Your Own Agent) is an agent you operate yourself, outside Redpanda's managed runtime. To make it visible across transcripts, the governance dashboard, cost rollups, and the agents list, your agent must emit OpenTelemetry traces with a specific minimum set of resource attributes and span attributes. This page documents that contract.
+
+For the full OTLP ingestion flow (deploying the Connect pipeline, authenticating, sending traces over HTTP or gRPC), see xref:observability:ingest-custom-traces.adoc[Ingest custom traces]. This page focuses on _what_ to emit; that page covers _how_ to send it.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Why this matters
+
+When an agent runs, the Agentic Data Plane reconstructs a turn-by-turn transcript from the spans the agent (and its LLM, MCP server, sub-agent calls) emit. The transcripts UI groups, labels, and totals fields read directly from span attributes. If your agent omits a required attribute, the corresponding column on the dashboard or in transcripts shows as empty, zero, or unattributed.
+
+Redpanda-managed agents emit the contract automatically through the runtime. BYOA agents must emit it themselves.
+
+== Minimum required contract
+
+These attributes _must_ appear on your agent's spans for transcripts and the governance dashboard to surface non-empty values.
+
+=== Resource attributes
+
+Set on the OTel `Resource` so every span the agent emits inherits them:
+
+[cols="1,3"]
+|===
+|Attribute |Required value
+
+|`service.name`
+|A stable identifier for your agent. Surfaces as the *Agent* / *Service* column in the transcripts list, the *Name* column in the governance Agents list, and the `service.name` filter chip. Use a slug-style name like `support-bot-prod` or `pricing-agent-eu`.
+
+// TODO: confirm whether `service.name` should match an `AgentRegistryService` resource name once BYOA registration ships, or whether the two stay decoupled (transcripts attribute by `service.name`, governance attributes by registered resource name). Open Q with team-ai.
+|===
+
+=== Span attributes
+
+Set on every relevant span:
+
+[cols="1,3"]
+|===
+|Attribute |Required value
+
+|`gen_ai.conversation.id`
+|A stable identifier shared across every span in the same conversation (system prompt, user turn, assistant turn, tool call, sub-agent call). Drives the *Conversation ID* in the transcript header and the cross-service-trace filter. Use a UUID per conversation.
+
+|`gen_ai.operation.name`
+|One of `invoke_agent`, `chat`, or `execute_tool`. Drives turn-role inference (`SYSTEM` / `USER` / `ASSISTANT` / `TOOL`). A span with no `gen_ai.operation.name` cannot be classified into a transcript role.
+
+|`gen_ai.request.model`
+|The LLM model identifier the agent calls. Surfaces in the transcript turn header and on the *Model* column in the governance dashboard. Required on `chat`-operation spans; optional on `invoke_agent` and `execute_tool` spans.
+
+|`gen_ai.usage.input_tokens` and `gen_ai.usage.output_tokens`
+|Token counts on LLM-call spans. Drive the *Tokens* card on the dashboard and the per-turn USD-cost calculation in transcripts. Without them the cost column reads `0`.
+|===
+
+If your agent emits these five attributes plus the resource `service.name`, every dashboard widget and every transcript field has a non-empty value to render.
+
+== Recommended enrichment
+
+The dashboard degrades gracefully without these, but their presence lets the UI build richer views.
+
+[cols="1,3"]
+|===
+|Attribute |Why it helps
+
+|`gen_ai.provider.name`
+|Labels the LLM provider (`openai`, `anthropic`, `gemini`, `bedrock`). Drives the *Provider* filter on the governance dashboard and the per-provider color scheme on the Spending chart. Without it, the UI groups everything under an unknown-provider bucket.
+
+|`gen_ai.agent.name`
+|A human-readable agent label distinct from `service.name`. Use when the same service runs multiple logical agents (for example, `support-bot/refunds`, `support-bot/onboarding`).
+
+|`gen_ai.tool.name`
+|On `execute_tool` spans, identifies which tool was invoked. Drives the *Tool name* attribute filter and the per-tool latency view in transcripts.
+
+|`gen_ai.usage.cache_read_input_tokens`
+|Cache-hit token count on LLM-call spans. Surfaces in the *CACHED* bucket on the dashboard and in per-turn cost. Without it, the *CACHED* bucket reads `0` even when your agent reuses a system prompt that the upstream cached.
+
+|`gen_ai.input.messages` and `gen_ai.output.messages`
+|Conversation content. Used to reconstruct turn content, and required for transcript history reconstruction when older spans are evicted from `redpanda.otel_traces` (see xref:observability:concepts.adoc#history-reconstruction[Reconstructed transcript history]). Without them, evicted spans render as empty turns rather than reconstructed turns.
+|===
+
+[NOTE]
+====
+Latency and timestamps come from OTel span `start_time` and `end_time` automatically; you don't need to add a separate `latency` attribute.
+====
+
+== Span hierarchy
+
+Transcripts read your agent's span tree to lay out turns. The recognized span types (matched by `gen_ai.operation.name` and span name) are documented in xref:observability:concepts.adoc[Transcripts and AI Observability]. The four span shapes are:
+
+* *Top-level span*: One per agent invocation. Sets `gen_ai.operation.name = "invoke_agent"`, carries the conversation ID and service name.
+* *Reasoning or chat spans*: Set `gen_ai.operation.name = "chat"` for LLM calls. Carry the model, token counts, and provider attributes.
+* *Tool spans*: Set `gen_ai.operation.name = "execute_tool"` for tool invocations. Carry the tool name and arguments.
+* *Sub-agent spans*: Set `gen_ai.operation.name = "invoke_agent"` nested under a parent agent's span when one BYOA agent calls another.
+
+Parent-child relationships are expressed through OTel's standard `parent_span_id`. Keep the tree faithful to your agent's call graph; the transcript turn order follows it.
+
+== Validate with a transcript
+
+After your agent emits a few traces, open the transcripts list and pick one of its rows:
+
+. Confirm the *Agent* column shows your `service.name` value. If it shows blank or `unknown`, the resource attribute didn't make it through.
+. Open the transcript and confirm the *Conversation ID* in the summary header matches the UUID your agent emitted.
+. Look at the assistant turn for *Model*, *Tokens*, and *USD cost*. Non-zero values mean the LLM-call span attributes are correctly emitted.
+. If you sent a tool call, expand the TOOL turn and confirm the *Tool name* renders.
+
+If any field shows blank or zero unexpectedly, the corresponding attribute is missing or misnamed in your agent's instrumentation.
+
+== Auth
+
+BYOA agents authenticate against the OTLP ingest endpoint with a service-account access token from your organization. Send the token in `Authorization: Bearer <token>` (HTTP) or `authorization: Bearer <token>` (gRPC).
+
+For the token-acquisition flow and endpoint URL format, see xref:observability:ingest-custom-traces.adoc[Ingest custom traces].
+
+// TODO: confirm the standalone-ADP service-account auth model for OTLP ingest once the standalone product ships. The current page assumes federation in Redpanda Cloud, where service-account credentials come from Cloud Organization IAM. For standalone ADP, replace with the ADP-native auth model and update the cross-link.
+
+== Where to find code examples
+
+The xref:observability:ingest-custom-traces.adoc[Ingest custom traces] page has full HTTP and gRPC examples in *Python*, *Node.js*, and *Go*, each instrumenting an LLM call with the GenAI semantic-convention attributes. Adapt the examples to your agent's framework. The attribute set is the same; only the OTel SDK ergonomics differ.
+
+// TODO: once the BYOA tutorials track ships at GA, link a worked end-to-end BYOA agent example here (from the Examples folder or a tutorials page).
+
+== Troubleshooting
+
+Common symptoms and fixes:
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|*Agent* column blank in transcripts list
+|Resource `service.name` is missing or set after the SDK was initialized. Set it at SDK construction.
+
+|*Conversation ID* missing in transcript header
+|`gen_ai.conversation.id` not on the top-level invoke_agent span. Add it on the agent's outer span; child spans inherit it through the trace.
+
+|Token / USD cost columns show `0` for assistant turns
+|`gen_ai.usage.input_tokens` and `gen_ai.usage.output_tokens` aren't on the LLM-call span. The model's response carries them; lift them onto the span before it ends.
+
+|Tool calls not visible in the transcript
+|`gen_ai.operation.name = "execute_tool"` is missing on the tool span. Also confirm the tool span is parented to an assistant span, not the root.
+
+|Agent shows up in transcripts but not in the governance dashboard's Agents list
+|Transcripts attribute by `service.name` resource attribute; the dashboard attributes by registered agent resource. BYOA agent registration ships separately. See xref:agents:byoa-register.adoc[Register your own agent (BYOA)].
+
+|Older turns in a long conversation render as `is_reconstructed`
+|Spans were evicted from `redpanda.otel_traces` retention. Reconstruction works only if your agent emitted `gen_ai.input.messages` and `gen_ai.output.messages` on later spans. See xref:observability:concepts.adoc#history-reconstruction[Reconstructed transcript history].
+|===
+
+== Related topics
+
+* xref:observability:ingest-custom-traces.adoc[Ingest custom traces]
+* xref:observability:concepts.adoc[Transcripts and AI Observability]
+* xref:observability:transcripts.adoc[Read a transcript]
+* xref:agents:byoa-register.adoc[Register your own agent (BYOA)]
