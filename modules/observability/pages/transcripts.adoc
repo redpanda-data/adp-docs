@@ -170,9 +170,14 @@ A transcript stays in `RUNNING` until the root span closes. Common causes:
 
 If cost is `0` for a transcript that clearly used tokens, check:
 
-* The model is in the pricing table.
+* The model is in the pricing table. To use a custom rate (negotiated contract, internal chargeback), see xref:governance:budgets.adoc#override-per-model-pricing[Override per-model pricing].
 * The cost-reporting pipeline is enabled on your ADP environment.
 * The LLM-call spans carry the `gen_ai.usage.*` attributes the pipeline reads — either the token-count inputs (`gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`) or the explicit USD-cost fields listed on the concepts page.
+
+[NOTE]
+====
+Cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) are attributed to the *CACHED* bucket on streaming and non-streaming responses alike. If a transcript shows zero cache cost on a request that clearly populated a prompt cache, check that the upstream actually wrote to the cache (the response includes a non-zero `cache_creation_input_tokens` or equivalent token-count field) before treating it as a discrepancy.
+====
 
 === All turns marked reconstructed
 

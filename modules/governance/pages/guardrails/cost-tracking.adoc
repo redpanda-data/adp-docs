@@ -21,7 +21,7 @@ Each evaluator type has a different cost shape:
 |Type |Cost source |Where it surfaces
 
 |*PII*
-|No per-call LLM cost. Compute time only — negligible for regex; non-trivial for entity-recognition if a NER model ships at GA.
+|No per-call LLM cost. Compute time only, negligible for regex; non-trivial for entity-recognition.
 |No transcript cost line. Compute time absorbed into gateway latency metrics.
 
 |*Toxicity*

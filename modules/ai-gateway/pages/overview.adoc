@@ -50,6 +50,7 @@ Applications authenticate to ADP with OIDC service accounts instead of long-live
 
 === Per-provider observability
 
+// TODO(review-before-publish): forward-looking framing — "is in development" and "today". Confirm whether the *Cost & usage* surface is shipped before merge; if so, drop the development qualifier and describe what users see; if not, drop the sentence entirely or rephrase to describe the current "Coming soon" placeholder without the in-development claim.
 The provider's detail page in the ADP UI records request and token counts. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
 
 == What's in the UI
@@ -110,7 +111,7 @@ It is not the right fit when you:
 AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
 
 * *Multi-provider routing, failover, and retries.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
-* *Spend limits.* Per-user, per-org, and global cost caps are not available. The provider detail page shows a *Cost & usage* placeholder labeled "Coming soon"; see xref:governance:budgets.adoc[Token budgets and limits] for the read-only spending visibility shipping at GA.
+* *Spend limits.* Per-user, per-org, and global cost caps are not available. The provider detail page shows a *Cost & usage* placeholder labeled "Coming soon"; see xref:governance:budgets.adoc[Token budgets and limits] for the read-only spending visibility.
 * *Rate limits.* Requests-per-second, per-minute, or per-day caps are not available.
 * *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the ADP UI.
 

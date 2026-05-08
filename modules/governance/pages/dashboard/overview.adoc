@@ -6,10 +6,7 @@
 :learning-objective-2: Filter the Spending chart by provider, model, and cost type, and compare to a previous period
 :learning-objective-3: Drill into the Spending, Requests, or Tokens views to investigate further
 
-[IMPORTANT]
-====
-The Governance dashboard described here is an early prototype. The design is in active flux, and details (including filter affordances, drill-down URL contracts, and chart visuals) may change before general availability. Verify against the live UI before relying on specifics.
-====
+// TODO: dashboard surface may still be refined; verify chart visuals, filter affordances, and the empty-state copy against the live UI before the next docs pass.
 
 The Governance overview shows your AI deployment's spend, requests, tokens, and agent fleet on a single page. Filter by provider and model, compare current activity against a previous period, and drill into dedicated Spending, Requests, or Tokens views to investigate further.
 
@@ -80,6 +77,8 @@ The cards across the top answer the _how much are you using right now_ question 
 
 The first three cards (Spend, Requests, Tokens) carry sparklines and a _vs previous period_ delta when *Compare to previous period* is on. The Agents card carries a state breakdown instead.
 
+NOTE: Provider, model, and user filters scope every metric card on the page, not just the Spending chart. If you select a single provider in the filter popover, the *TOTAL SPEND*, *REQUESTS*, and *TOKENS* cards all narrow to that provider's contribution. Clear the filter to return to the unscoped view.
+
 == Read the Spending chart
 
 The *Spending* card shows spend over time, broken out by provider or model. The chart subtitle explains what its lines represent for the active filter combination:
@@ -136,6 +135,8 @@ Below the chart, four totals report the active Provider/Model selection:
 
 The dashboard surfaces these as the cost-tracking pipeline records them. Specific multipliers (fast-mode premium, cross-region inference premium, tiered Gemini pricing) are baked into the per-bucket totals automatically; no manual conversion is required.
 
+To override the per-model rate card the pipeline reads from (for negotiated contracts or internal chargeback), see xref:governance:budgets.adoc#override-per-model-pricing[Override per-model pricing].
+
 == Read the Agents list
 
 The Agents card lists every agent in your deployment, managed and BYOA. Columns:
@@ -159,7 +160,9 @@ The Agents card lists every agent in your deployment, managed and BYOA. Columns:
 
 A *Filter* button above the table narrows the list by name, type, provider, or model.
 
-NOTE: Per-agent state, error count, tool-invocation count, and last-active timestamp are not in the V0 dashboard; they ship at GA. Today, click into the agent's resource page for those details.
+For per-agent state, error count, tool-invocation count, and last-active timestamp, click into the agent's resource page.
+
+// TODO: per-agent enrichment columns (state, error count, tool-invocation count, last-active timestamp, per-agent spend) are planned for the Agents list itself; remove the per-agent-resource-page workaround sentence once they ship.
 
 [[drill-down]]
 == Drill into a specific view
@@ -200,14 +203,7 @@ You can also reach the Spending, Requests, and Tokens drill-downs from a specifi
 |If a provider was deleted, its name disappears from the filter; historical lines for the deleted provider continue to render until they fall outside the active window.
 |===
 
-== What's coming at GA
-
-The current beta release ships the V0 overview described above. At GA:
-
-* *Per-agent enrichment*: The Agents list adds error counts, tool-invocation counts, last-active timestamps, and a per-agent spend column.
-* *Agent Network*: An interactive topology graph that traces every agent through its LLM providers and MCP servers. See xref:governance:dashboard/agent-network.adoc[Agent Network].
-* *Authorization denials and violations*: An aggregated feed of policy events. See xref:governance:dashboard/violations.adoc[Authorization denials and violations].
-* *Kill switch*: Pause an agent without removing it.
+// TODO: roadmap items planned for the dashboard but not yet shipped — per-agent enrichment columns (error counts, tool-invocation counts, last-active timestamps, per-agent spend); Agent Network interactive topology graph; aggregated authorization-denials and guardrail-violations feed; kill switch (pause an agent without removing it). Add user-facing pages for each one as they ship; for now, omit from public docs per the project policy not to mark roadmap items in customer prose.
 
 == Investigate further
 

@@ -84,6 +84,11 @@ rpk ai llm list
 
 If the cached cloud token has expired, `rpk ai` returns a 401 with a hint to rerun `rpk cloud login`.
 
+[NOTE]
+====
+`rpk ai help`, `rpk ai version`, and unknown subcommands run without prompting for authentication, so you can browse the CLI surface offline before signing in. Authentication is only required for commands that hit AI Gateway.
+====
+
 [TIP]
 ====
 To target a specific gateway URL for a single invocation (for example, when running against a staging gateway without switching profiles), pass `--rpai-endpoint`:
@@ -414,6 +419,7 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 * Implement retry with exponential backoff for 5xx and timeout conditions.
 * Respect `Retry-After` on 429 responses.
 * Rotate service account credentials on a schedule your organization accepts.
+// TODO(review-before-publish): forward-looking framing — "is in development" and "today". Same wording duplicated in `ai-gateway/pages/overview.adoc`. Confirm whether the *Cost & usage* surface is shipped before merge; rephrase or drop the sentence based on the current state.
 * Observe usage through the ADP UI on each provider's detail page. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
 
 == Troubleshooting

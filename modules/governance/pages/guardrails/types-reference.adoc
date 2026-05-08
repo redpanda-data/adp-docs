@@ -12,7 +12,7 @@ Use this reference to:
 * [ ] Decide which phases each evaluator type supports
 * [ ] Recognize the behavior-on-match options each evaluator type exposes
 
-Each evaluator type has its own config schema, supported phase set, behavior-on-match options, and cost shape. Sections below cover all three types currently planned for GA.
+Each evaluator type has its own config schema, supported phase set, behavior-on-match options, and cost shape. Sections below cover the three types.
 
 == PII evaluator
 
@@ -22,11 +22,11 @@ Each evaluator type has its own config schema, supported phase set, behavior-on-
 
 // TODO: lift the full config schema from `apps/aigw/internal/guardrails/pii.go` once the post-pivot proto is final. Document each field's name, type, default, and example. Likely fields: entity types to detect (allowlist or denylist), locale (US-only patterns versus EU patterns), confidence threshold.
 
-*Behavior on match* — block (default). Redact-and-pass behavior may be configurable; confirm whether the GA build exposes redact-mode and how it interacts with the per-type config.
+*Behavior on match* — block (default). Redact-and-pass behavior may be configurable; confirm whether the build exposes redact-mode and how it interacts with the per-type config.
 
 // TODO: confirm block-vs-redact options at GA. Open Q B3 in the companion plan.
 
-*Cost* — none beyond compute. Regex is negligible; entity-recognition can be non-trivial if a NER model ships at GA.
+*Cost* — none beyond compute. Regex is negligible; entity-recognition can be non-trivial.
 
 *Gotchas:*
 
