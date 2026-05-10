@@ -36,14 +36,14 @@ Sign in to ADP and select *Governance* from the sidebar. The dashboard includes 
 
 The date-range control supports these windows:
 
-* *Last 24 hours*
-* *Last 7 days* (default)
-* *Last 14 days*
-* *Last 30 days*
-* *Last 90 days*
-* *Month to date*
-* *Quarter to date*
-* *Year to date*
+* Last 24 hours
+* Last 7 days (default)
+* Last 14 days
+* Last 30 days
+* Last 90 days
+* Month to date
+* Quarter to date
+* Year to date
 
 The app rounds the end of each range up to the next hour. Ranges of 24 hours or less use hourly buckets; longer ranges use daily buckets.
 
@@ -55,13 +55,13 @@ The top of the dashboard shows three KPI tabs, each scoped to the active time ra
 |===
 |Tab |What it shows
 
-|*TOTAL SPEND*
+|Total Spend
 |Estimated LLM provider spend in dollars for the selected range
 
-|*REQUESTS*
+|Requests
 |LLM requests routed through AI Gateway for the selected range
 
-|*TOKENS*
+|Tokens
 |Input, output, and cached tokens summed together for the selected range
 |===
 
@@ -77,19 +77,19 @@ The chart supports these filters:
 |===
 |Filter |What it does
 
-|*Provider*
+|Provider
 |Narrows the chart to one or more LLM providers.
 
-|*Model*
+|Model
 |Narrows the chart to one or more models. The UI exposes model filtering after provider filtering.
 
-|*Cost type*
-|Applies to spend charts. Supported cost types are *Input*, *Output*, *Cached*, *Cache writes*, *Reasoning*, and *Tool use*.
+|Cost type
+|Applies to spend charts. Supported cost types are Input, Output, Cached, Cache writes, Reasoning, and Tool use.
 
-|*Token type*
-|Applies to token charts. Supported token types are *Input*, *Output*, and *Cached*.
+|Token type
+|Applies to token charts. Supported token types are Input, Output, and Cached.
 
-|*User*
+|User
 |Narrows the chart to one identified user.
 |===
 
@@ -106,16 +106,16 @@ The *Agents* table lists agents registered in the deployment.
 |===
 |Column |What it shows
 
-|*Name*
+|Name
 |Agent display name
 
-|*Type*
-|Agent type. The UI labels agents as *Redpanda Managed* because dataplane v1alpha3 does not distinguish managed agents from BYOA agents in this table.
+|Type
+|Agent type. The UI labels agents as Redpanda Managed because dataplane v1alpha3 does not distinguish managed agents from BYOA agents in this table.
 
-|*LLM provider*
+|LLM provider
 |The provider the agent calls
 
-|*Model*
+|Model
 |The model identifier the agent uses
 |===
 

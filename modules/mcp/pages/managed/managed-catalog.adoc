@@ -37,15 +37,15 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*AWS Bedrock*
 |Invoke foundation models (Claude, Llama, Titan) on AWS Bedrock.
-|—
+|
 
 |*Cohere*
 |Generate embeddings and chat completions with the Cohere API.
-|—
+|
 
 |*OpenAI*
 |Chat completions, embeddings, and tools with the OpenAI API.
-|—
+|
 |===
 
 == AWS
@@ -56,11 +56,11 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*AWS SNS*
 |Publish and manage topics on AWS Simple Notification Service.
-|—
+|
 
 |*AWS SQS*
 |Send, receive, and manage messages on AWS Simple Queue Service.
-|—
+|
 |===
 
 == Communication
@@ -71,11 +71,11 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Discord*
 |Post messages, read channels, and manage servers on Discord.
-|—
+|
 
 |*GitHub (Read)*
 |Read-only access to GitHub repositories, pull requests, commits, and code.
-|—
+|
 
 |*Jira*
 |Manage Jira issues, projects, and workflows.
@@ -98,7 +98,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Elasticsearch*
 |Query and index documents in an Elasticsearch cluster.
-|—
+|
 
 |*Metabase*
 |Search tables and metrics, run queries, and inspect saved questions in Metabase.
@@ -106,15 +106,15 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*MongoDB*
 |Query collections and documents in MongoDB.
-|—
+|
 
 |*Qdrant*
 |Vector search over a Qdrant collection.
-|—
+|
 
 |*Redis*
 |Read, write, and query keys in Redis.
-|—
+|
 
 |*SQL*
 |Query SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite) with MCP.
@@ -129,15 +129,15 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*GCP Pub/Sub*
 |Publish and subscribe to topics on Google Cloud Pub/Sub.
-|—
+|
 
 |*Google Calendar*
 |Read and manage Google Calendar events and schedules.
-|—
+|
 
 |*Google Drive*
 |Read and search files in Google Drive.
-|—
+|
 |===
 
 == Streaming
@@ -152,7 +152,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*NATS*
 |Publish and subscribe on NATS and NATS JetStream.
-|—
+|
 |===
 
 == Utility
@@ -163,7 +163,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Azure AD*
 |Manage Azure Active Directory users and groups with Microsoft Graph API.
-|—
+|
 
 |*BambooHR*
 |Access employee directory, time-off, and performance data from BambooHR.
@@ -171,15 +171,15 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*BILL (bill.com)*
 |Manage accounts-payable bills, vendors, AR invoices, payments, and customers in BILL.
-|—
+|
 
 |*DocuSign*
 |Send, track, and manage DocuSign signing envelopes.
-|—
+|
 
 |*Greenhouse*
 |Manage jobs, candidates, and applications in Greenhouse ATS.
-|—
+|
 
 |*Ironclad*
 |Read and manage contracts in Ironclad CLM.
@@ -187,11 +187,11 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Morningstar Portfolio Analytics*
 |Run X-Ray, performance, risk-score, hypothetical, and ESG analytics on caller-supplied portfolios with Morningstar Direct Web Services.
-|—
+|
 
 |*Morningstar Securities*
 |Search, retrieve, screen, and pull research on funds and equities with the Morningstar Direct Web Services Investment Analysis API.
-|—
+|
 
 |*NetSuite*
 |Query Oracle NetSuite records and run SuiteQL with the SuiteTalk REST API.
@@ -199,7 +199,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Okta*
 |Manage Okta users and groups.
-|—
+|
 
 |*OpenAPI*
 |Expose any OpenAPI/Swagger HTTP API as MCP tools.
@@ -211,11 +211,11 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Salesforce*
 |Query, create, update, and delete Salesforce CRM records using SOQL and the REST API.
-|—
+|
 
 |*Text Chunker*
 |Split and chunk text for RAG and LLM ingestion pipelines.
-|—
+|
 
 |*Workday*
 |Drive Workday Human Resources business processes with SOAP.
