@@ -244,7 +244,7 @@ Common symptoms and fixes:
 |The chat client's access token expired and the refresh token also expired (or the OAuth Client secret was rotated). Disconnect the connector and re-add it to mint fresh tokens.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 

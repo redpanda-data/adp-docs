@@ -99,7 +99,7 @@ API-token mode::
 +
 [source,bash]
 ----
-rpk ai mcp create acme-zendesk --managed-config '{
+rpk ai mcp create --name acme-zendesk --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.zendesk.v1.ZendeskMCPConfig",
   "subdomain": "acme",
   "basic_auth": {
@@ -113,7 +113,7 @@ User-OAuth mode::
 +
 [source,bash]
 ----
-rpk ai mcp create acme-zendesk-oauth \
+rpk ai mcp create --name acme-zendesk-oauth \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.zendesk.v1.ZendeskMCPConfig",
     "subdomain": "acme"
@@ -264,7 +264,7 @@ Common symptoms and fixes:
 |Cannot happen: the handler enforces a `type:ticket` qualifier and post-filters results. If you see something unexpected, file an issue.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 

@@ -109,8 +109,8 @@ Once the Kafka server is created, point an agent at the *API URL* on the server'
 
 // TODO: gather more Kafka failure modes from `adp-production` walkthroughs.
 
-== Out of scope
+== Limitations
 
-* *Kafka administration* (creating topics, managing ACLs) — this server is read/produce/consume-focused. For administration, use rpk or your broker's admin API.
-* *Schema registry* — not exposed by this MCP server.
-* *Streaming joins / processing* — for stream processing, use Redpanda Connect.
+* *Kafka administration* (creating topics, managing ACLs): this server is read/produce/consume-focused. For administration, use rpk or your broker's admin API.
+* *Schema registry*: not exposed by this MCP server.
+* *Streaming joins or processing*: for stream processing, use Redpanda Connect.

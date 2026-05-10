@@ -104,7 +104,7 @@ Once the SQL server is created, point an agent at the *API URL* on the server's 
 
 // TODO: gather more failure modes once we walk SQL on `adp-production`.
 
-== Out of scope
+== Limitations
 
-* *Schema migrations* — this server is read/query-focused; running DDL is not the intended use.
-* *Per-user database identities* — see <<authentication>>.
+* *Schema migrations*: this server is read/query-focused; running DDL is not the intended use.
+* *Per-user database identities*: see <<authentication>>.

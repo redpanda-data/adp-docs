@@ -51,7 +51,7 @@ Set up the OAuth app on Ramp and the matching OAuth Provider in ADP:
 +
 * *Authorization endpoint*: `\https://app.ramp.com/v1/authorize`
 * *Token endpoint*: `\https://api.ramp.com/developer/v1/token`
-* The Client ID and a secret-store reference for the Client Secret.
+* The Client ID and a secret-store reference for the Client Secret
 
 == Configure
 
@@ -84,7 +84,7 @@ Create a new Ramp MCP server in the ADP UI:
 
 [source,bash]
 ----
-rpk ai mcp create my-ramp \
+rpk ai mcp create --name my-ramp \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.ramp.v1.RampMCPConfig",
     "environment": "production"
@@ -206,7 +206,7 @@ Common symptoms and fixes:
 |The calling user's Ramp role doesn't grant the action. Ramp's role-based access control runs end-to-end: per-user OAuth means each user only sees what their Ramp account permits.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 
