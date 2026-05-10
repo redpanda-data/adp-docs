@@ -206,7 +206,7 @@ Common symptoms and fixes:
 |The calling user's Ramp role doesn't grant the action. Ramp's role-based access control runs end-to-end: per-user OAuth means each user only sees what their Ramp account permits.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 

@@ -109,8 +109,8 @@ For agents that need both read and write capabilities, define the server's `requ
 
 // TODO: capture more Atlassian-specific errors during the live walkthrough.
 
-== Out of scope
+== Limitations
 
-* *Atlassian app management* — the OAuth app and its callback URLs are managed in `developer.atlassian.com`, not in ADP.
-* *Jira Server / Data Center* (self-hosted) — this MCP type targets Atlassian Cloud. Self-hosted Jira may need a self-managed MCP server instead. See xref:../register-remote.adoc[].
-* *Confluence access* — separate scope namespace; not exposed by this MCP server.
+* *Atlassian app management*: the OAuth app and its callback URLs are managed in `developer.atlassian.com`, not in ADP.
+* *Jira Server / Data Center* (self-hosted): this MCP type targets Atlassian Cloud. Self-hosted Jira may need a self-managed MCP server instead. See xref:../register-remote.adoc[Register a self-managed MCP server].
+* *Confluence access*: separate scope namespace; not exposed by this MCP server.

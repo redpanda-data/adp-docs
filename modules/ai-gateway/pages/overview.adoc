@@ -106,7 +106,7 @@ It is not the right fit when you:
 * Need routing, failover, or cross-provider load balancing across providers. AI Gateway does not provide these capabilities.
 
 [[out-of-scope]]
-== Out of scope
+== Limitations
 
 AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
 

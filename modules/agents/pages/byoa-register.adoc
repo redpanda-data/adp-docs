@@ -176,7 +176,7 @@ The symptom-driven checks in this section cover the three observable parts of th
 // TODO: replace once standalone-ADP issuer / audience values are confirmed.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 

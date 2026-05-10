@@ -187,7 +187,7 @@ Common symptoms and fixes:
 |The `worker_id` plus `worker_id_type` doesn't resolve. Verify the type (`Employee_ID`, `Workday_ID`, `Contingent_Worker_ID`) and the value.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 

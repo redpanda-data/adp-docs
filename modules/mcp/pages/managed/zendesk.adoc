@@ -264,7 +264,7 @@ Common symptoms and fixes:
 |Cannot happen: the handler enforces a `type:ticket` qualifier and post-filters results. If you see something unexpected, file an issue.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 

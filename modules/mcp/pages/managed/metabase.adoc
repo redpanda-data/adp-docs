@@ -281,7 +281,7 @@ Common symptoms and fixes:
 |Confirm the relevant metric exists and has queryable dimensions. The agent prefers metrics when `search` or `get_table` surfaces them.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 

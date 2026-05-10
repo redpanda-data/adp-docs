@@ -95,8 +95,8 @@ For the field-by-field service-account-OAuth setup, see xref:create-server.adoc#
 |Connections persist until manually revoked. Have the user remove and re-add the connection if upstream credentials changed.
 |===
 
-== Out of scope
+== Related topics
 
-* *Configuring an OAuth provider*: separate workflow under the *OAuth providers* section.
-* *Service-account OAuth setup*: see xref:create-server.adoc#configure-authentication[create-server.adoc].
-* *Token vault internals*: Redpanda manages the vault; users see their own connections under *My Connections*, but the underlying storage isn't user-configurable.
+* xref:oauth-providers.adoc[Configure an OAuth Provider] for the separate workflow that creates the providers referenced from MCP servers.
+* xref:create-server.adoc#configure-authentication[Service-account OAuth setup] for the shared-identity alternative.
+* Token vault internals are not user-configurable. Redpanda manages the vault; users see their own connections under *My Connections*.

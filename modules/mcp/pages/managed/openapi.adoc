@@ -107,8 +107,8 @@ Once tools generate cleanly, point an agent at the *API URL* on the server's det
 
 // TODO: capture more spec-specific failure modes during the live walkthrough.
 
-== Out of scope
+== Limitations
 
-* *Custom tool logic* — the OpenAPI type is purely a spec-to-tools generator. For business logic on top of the API, use a self-managed MCP server (xref:../register-remote.adoc[]).
-* *GraphQL APIs* — OpenAPI doesn't describe GraphQL; for GraphQL APIs, use a self-managed server.
-* *gRPC services* — same.
+* *Custom tool logic*: the OpenAPI type is purely a spec-to-tools generator. For business logic on top of the API, use a xref:../register-remote.adoc[self-managed MCP server].
+* *GraphQL APIs*: OpenAPI doesn't describe GraphQL. For GraphQL APIs, use a self-managed server.
+* *gRPC services*: same as GraphQL — use a self-managed server.

@@ -150,7 +150,7 @@ Common symptoms and fixes:
 |Run `list_workflow_schemas` first to get valid IDs for your tenant.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 

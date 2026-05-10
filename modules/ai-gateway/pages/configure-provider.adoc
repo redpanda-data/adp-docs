@@ -346,7 +346,7 @@ A list/grid view toggle in the top-right switches between table and card layouts
 
 // TODO: add screenshots of common error toasts once captured from the live environment.
 
-== Out of scope
+== Limitations
 
 AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
 

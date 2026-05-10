@@ -101,7 +101,7 @@ Common symptoms and fixes:
 
 // TODO: capture more Slack-specific errors during the live walkthrough.
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 
