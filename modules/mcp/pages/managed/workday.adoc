@@ -34,8 +34,8 @@ Authentication is one ISU per MCP instance, not per end-user. Customers that nee
 
 Before you create the server, make sure you have:
 
-* A Workday tenant where you can create an Integration System User and register an API client.
-* Admin access to *Workday > Create Integration System User* and *Workday > Register API Client for Integrations*.
+* A Workday tenant where you can create an Integration System User and register an API client
+* Admin access to *Workday > Create Integration System User* and *Workday > Register API Client for Integrations*
 * Two ADP secret-store entries:
 +
 * `WORKDAY_PASSWORD`: The ISU password.
@@ -94,7 +94,7 @@ Create a new Workday MCP server in the ADP UI:
 
 [source,bash]
 ----
-rpk ai mcp create workday-hr --managed-config '{
+rpk ai mcp create --name workday-hr --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.workday.v1.WorkdayMCPConfig",
   "tenant": "acme",
   "host": "wd2-impl-services1.workday.com",

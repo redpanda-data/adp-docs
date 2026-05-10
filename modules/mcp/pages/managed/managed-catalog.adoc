@@ -3,12 +3,10 @@
 :page-topic-type: reference
 :personas: app_developer, platform_admin
 
-Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in the ADP UI and pick the type from the marketplace picker. See xref:create-server.adoc[Create an MCP Server] for the full create flow.
+Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in the ADP UI and pick the type from the marketplace picker. See xref:mcp:create-server.adoc[Create an MCP Server] for the full create flow.
 
-// TODO(review-before-publish): "currently registered" softens the claim that the catalog can change. Confirm whether to drop "currently" (treat the list as a static snapshot at publish time) or replace with a versioning note ("as of release X.Y").
-This catalog lists every managed type currently registered, grouped by `ManagedMCPCategory`. Display names and descriptions are lifted verbatim from the type registrations in `cloudv2`.
-
-// TODO: confirm the registered list at GA — counts and category assignments are subject to last-minute adds/renames. Re-verify against `apps/aigw/internal/mcp/managed/mcps/*/register_mcp.go`.
+// Source: `cloudv2` `apps/aigw/internal/mcp/managed/defaults.go` and managed type registration files on `origin/main`, verified 2026-05-10.
+This catalog lists the 36 managed MCP server types Redpanda registers by default, grouped by category.
 
 == Choosing managed vs. self-managed
 
@@ -26,10 +24,10 @@ This catalog lists every managed type currently registered, grouped by `ManagedM
 |The fixed tool set of the managed type covers your use case.
 
 |Do you need per-user identities at the upstream?
-|The managed type supports user-delegated OAuth (Slack, Jira, Google types do; SQL/Kafka don't).
+|The managed type supports user-delegated OAuth for that system.
 |===
 
-If any of these answers are "no," prefer xref:register-remote.adoc[a self-managed server] instead.
+If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-managed server] instead.
 
 == AI
 
@@ -42,11 +40,11 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 |—
 
 |*Cohere*
-|Generate embeddings and chat completions via the Cohere API.
+|Generate embeddings and chat completions with the Cohere API.
 |—
 
 |*OpenAI*
-|Chat completions, embeddings, and tools via the OpenAI API.
+|Chat completions, embeddings, and tools with the OpenAI API.
 |—
 |===
 
@@ -81,15 +79,15 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 
 |*Jira*
 |Manage Jira issues, projects, and workflows.
-|xref:managed/jira.adoc[See the deep-dive →]
+|xref:mcp:managed/jira.adoc[See the deep-dive]
 
 |*Slack*
 |Post messages and read channels on Slack.
-|xref:managed/slack.adoc[See the deep-dive →]
+|xref:mcp:managed/slack.adoc[See the deep-dive]
 
 |*Zendesk*
 |Search and manage Zendesk Support tickets, users, and Help Center articles.
-|xref:managed/zendesk.adoc[See the deep-dive →]
+|xref:mcp:managed/zendesk.adoc[See the deep-dive]
 |===
 
 == Database
@@ -101,6 +99,10 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 |*Elasticsearch*
 |Query and index documents in an Elasticsearch cluster.
 |—
+
+|*Metabase*
+|Search tables and metrics, run queries, and inspect saved questions in Metabase.
+|xref:mcp:managed/metabase.adoc[See the deep-dive]
 
 |*MongoDB*
 |Query collections and documents in MongoDB.
@@ -115,8 +117,8 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 |—
 
 |*SQL*
-|Query SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite) via MCP.
-|xref:managed/sql.adoc[See the deep-dive →]
+|Query SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite) with MCP.
+|xref:mcp:managed/sql.adoc[See the deep-dive]
 |===
 
 == Google
@@ -146,7 +148,7 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 
 |*Kafka*
 |Produce, consume, and inspect topics on Kafka or Redpanda brokers.
-|xref:managed/kafka.adoc[See the deep-dive →]
+|xref:mcp:managed/kafka.adoc[See the deep-dive]
 
 |*NATS*
 |Publish and subscribe on NATS and NATS JetStream.
@@ -159,9 +161,13 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 |===
 |Display name |Description |Deep dive
 
+|*Azure AD*
+|Manage Azure Active Directory users and groups with Microsoft Graph API.
+|—
+
 |*BambooHR*
 |Access employee directory, time-off, and performance data from BambooHR.
-|—
+|xref:mcp:managed/bamboohr.adoc[See the deep-dive]
 
 |*BILL (bill.com)*
 |Manage accounts-payable bills, vendors, AR invoices, payments, and customers in BILL.
@@ -177,23 +183,31 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 
 |*Ironclad*
 |Read and manage contracts in Ironclad CLM.
-|xref:managed/ironclad.adoc[See the deep-dive →]
+|xref:mcp:managed/ironclad.adoc[See the deep-dive]
+
+|*Morningstar Portfolio Analytics*
+|Run X-Ray, performance, risk-score, hypothetical, and ESG analytics on caller-supplied portfolios with Morningstar Direct Web Services.
+|—
+
+|*Morningstar Securities*
+|Search, retrieve, screen, and pull research on funds and equities with the Morningstar Direct Web Services Investment Analysis API.
+|—
+
+|*NetSuite*
+|Query Oracle NetSuite records and run SuiteQL with the SuiteTalk REST API.
+|xref:mcp:managed/netsuite.adoc[See the deep-dive]
 
 |*Okta*
 |Manage Okta users and groups.
 |—
 
-|*Metabase*
-|Search, browse, and query a Metabase analytics instance through its semantic layer (tables, metrics) plus SQL escape hatches.
-|xref:managed/metabase.adoc[See the deep-dive →]
-
 |*OpenAPI*
 |Expose any OpenAPI/Swagger HTTP API as MCP tools.
-|xref:managed/openapi.adoc[See the deep-dive →]
+|xref:mcp:managed/openapi.adoc[See the deep-dive]
 
 |*Ramp*
 |Manage Ramp corporate cards, transactions, spend limits, and reimbursements.
-|xref:managed/ramp.adoc[See the deep-dive →]
+|xref:mcp:managed/ramp.adoc[See the deep-dive]
 
 |*Salesforce*
 |Query, create, update, and delete Salesforce CRM records using SOQL and the REST API.
@@ -204,12 +218,12 @@ If any of these answers are "no," prefer xref:register-remote.adoc[a self-manage
 |—
 
 |*Workday*
-|Drive Workday Human Resources business processes via SOAP.
-|xref:managed/workday.adoc[See the deep-dive →]
+|Drive Workday Human Resources business processes with SOAP.
+|xref:mcp:managed/workday.adoc[See the deep-dive]
 |===
 
-== Where to go next
+== Next steps
 
-* xref:create-server.adoc[Create an MCP server] using the marketplace picker.
-* xref:test-tools.adoc[Test tools with the Inspector] before pointing an agent at the server.
-* xref:user-delegated-oauth.adoc[Configure user-delegated OAuth] for types that need per-user upstream identities.
+* xref:mcp:create-server.adoc[Create an MCP server] using the marketplace picker
+* xref:mcp:test-tools.adoc[Test tools with the Inspector] before pointing an agent at the server
+* xref:mcp:user-delegated-oauth.adoc[Configure user-delegated OAuth] for types that need per-user upstream identities

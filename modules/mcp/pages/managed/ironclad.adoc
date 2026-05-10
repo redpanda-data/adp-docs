@@ -45,7 +45,7 @@ Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
 +
 * *Authorization endpoint*: `\https://na1.ironcladapp.com/oauth/authorize` (use `eu1` for EU-hosted accounts; `demo` for sandbox)
 * *Token endpoint*: `\https://na1.ironcladapp.com/oauth/token` (adjust region accordingly)
-* The Client ID and a secret-store reference for the Client Secret.
+* The Client ID and a secret-store reference for the Client Secret
 
 == Configure
 
@@ -78,7 +78,7 @@ Create a new Ironclad MCP server in the ADP UI:
 
 [source,bash]
 ----
-rpk ai mcp create my-ironclad \
+rpk ai mcp create --name my-ironclad \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.ironclad.v1.IroncladMCPConfig",
     "region": "IRONCLAD_REGION_NA"
