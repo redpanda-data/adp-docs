@@ -3,7 +3,7 @@
 :page-topic-type: how-to
 :personas: agent_developer, platform_admin
 :learning-objective-1: Distinguish a BYOA (Bring Your Own Agent) from a Redpanda-managed agent and decide when each fits
-:learning-objective-2: Identify the A2A endpoint contract a BYOA agent must expose (well-known agent card and the `/.well-known/agent-card.json` discovery URL)
+:learning-objective-2: pass:q[Identify the A2A endpoint contract a BYOA agent must expose (well-known agent card and the `/.well-known/agent-card.json` discovery URL)]
 :learning-objective-3: Identify the service-account auth model BYOA agents use to authenticate inbound calls and emit telemetry
 
 // TODO: this page describes BYOA registration as a model. The BYOA variant of `AgentCreate.agent_type` is not yet defined in the public proto (`AgentRegistryService.CreateAgent` itself is in place), and there is no UI surface yet. Re-anchor on the BYOA-arm proto definition (`SelfManagedAgentInput` or equivalent) once it lands in `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto`. Add the click-by-click steps and CLI examples once the surface exists. Confirm with team-ai before drafting the step-by-step flow.

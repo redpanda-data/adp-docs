@@ -1,0 +1,5 @@
+= Install or Update rpk
+:description: pass:q[Install or update `rpk` to interact with Redpanda from the command line.]
+:env-cloud:
+
+include::ROOT:get-started:rpk-install.adoc[tag=single-source]

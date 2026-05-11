@@ -3,7 +3,7 @@
 :page-topic-type: how-to
 :personas: app_developer, platform_admin
 :learning-objective-1: Configure the Metabase managed MCP server with a v0.49+ API key bound to the right Metabase group
-:learning-objective-2: Identify when to use semantic-layer tools (`search`, `get_metric`, `query`) versus the native-SQL escape hatches (`run_native_query`, `run_card`)
+:learning-objective-2: pass:q[Identify when to use semantic-layer tools (`search`, `get_metric`, `query`) versus the native-SQL escape hatches (`run_native_query`, `run_card`)]
 :learning-objective-3: Run a metric-first analysis against your Metabase instance from the Inspector or an agent
 
 The *Metabase* managed MCP server lets agents read and query a Metabase analytics instance. The tool surface is a hybrid of Metabase's semantic-layer primitives (tables, metrics, fields, dimensions) and SQL-first escape hatches (native queries and saved questions), wrapping the Metabase REST API with a long-lived API key.
