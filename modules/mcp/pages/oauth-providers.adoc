@@ -173,7 +173,7 @@ The provider appears in the *OAuth providers* list.
 
 == Register from the CLI
 
-Use `rpk ai` to script provider registration:
+Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] to script provider registration:
 
 // TODO(rpk-ai): aliases (oauth-provider, mcp-server, llm-provider) are kept for one release per cloudv2/apps/rpai/CLAUDE.md. Verified canonical command is `rpk ai oauth create` on 2026-05-05; flip examples cleanly to canonical names if the alias gets dropped.
 

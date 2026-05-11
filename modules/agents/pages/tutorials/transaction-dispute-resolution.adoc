@@ -34,7 +34,7 @@ When a customer calls saying "I see a $247.83 charge from 'ACME CORP' but I neve
 
 * A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
 * xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI GPT-5.2 or Claude Sonnet 4.5 for reasoning).
-* The xref:redpanda-cloud:manage:rpk/rpk-install.adoc[Redpanda CLI (`rpk`)] installed (for testing the pipeline with sample data).
+* The xref:get-started:rpk-install.adoc[Redpanda CLI (`rpk`)] installed (for testing the pipeline with sample data).
 * Completed xref:tutorials/customer-support-agent.adoc[] (foundational multi-tool concepts).
 
 == Create MCP tools for each domain

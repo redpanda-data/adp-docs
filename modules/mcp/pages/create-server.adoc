@@ -138,7 +138,7 @@ A populated tools list confirms that the connection works and credentials resolv
 
 == Create from the CLI
 
-Use `rpk ai` for a non-UI path through the same create flow, useful for scripting and CI.
+Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] for a non-UI path through the same create flow, useful for scripting and CI.
 
 [source,bash]
 ----

@@ -1,7 +1,7 @@
 = Ingest OpenTelemetry Traces from Custom Agents
 :description: Configure a Redpanda Connect pipeline to ingest OpenTelemetry traces from custom agents into Redpanda's immutable log for unified governance and observability.
 :page-topic-type: how-to
-:learning-objective-1: Configure and deploy a Redpanda Connect pipeline to receive OpenTelemetry traces from custom agents via HTTP and publish them to `redpanda.otel_traces`
+:learning-objective-1: pass:q[Configure and deploy a Redpanda Connect pipeline to receive OpenTelemetry traces from custom agents via HTTP and publish them to `redpanda.otel_traces`]
 :learning-objective-2: Validate trace data format and compatibility with existing MCP server traces
 :learning-objective-3: Secure the ingestion endpoint using authentication mechanisms
 
@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 
 * A Redpanda Connect pipeline host (today: a Redpanda BYOC cluster with Connect enabled). Ability to manage secrets on that host.
 // TODO: Replace with the standalone-ADP ingestion target once defined (may no longer require a Redpanda Cloud cluster).
-* The latest version of xref:redpanda-cloud:manage:rpk/rpk-install.adoc[`rpk`] installed
+* The latest version of xref:get-started:rpk-install.adoc[`rpk`] installed
 * Custom agent or application instrumented with OpenTelemetry SDK
 * Basic understanding of the https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/[OpenTelemetry span format^] and https://opentelemetry.io/docs/specs/otlp/[OpenTelemetry Protocol (OTLP)^]
 
