@@ -18,7 +18,7 @@ After reading this page, you will be able to:
 
 == What are transcripts
 
-A transcript records the complete execution of an agentic behavior from start to finish. It captures every step — across multiple agents, tools, models, and services — in a single, traceable record. The AI Gateway and every glossterm:AI agent[,agent] and glossterm:MCP server[] in your Agentic Data Plane (ADP) automatically emit OpenTelemetry traces to a glossterm:topic[] called `redpanda.otel_traces`. Redpanda's immutable distributed log stores these traces.
+A transcript records the complete execution of an agentic behavior from start to finish. It captures every step (across multiple agents, tools, models, and services) in a single, traceable record. The AI Gateway and every glossterm:AI agent[,agent] and glossterm:MCP server[] in your Agentic Data Plane (ADP) automatically emit OpenTelemetry traces to a glossterm:topic[] called `redpanda.otel_traces`. Redpanda's immutable distributed log stores these traces.
 
 Transcripts capture:
 
@@ -60,7 +60,7 @@ Agent transcripts contain these span types:
 | Track reasoning time and identify iteration patterns.
 
 | `invoke_agent`
-| Agent and sub-agent invocation in multi-agent architectures, following the https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/[OpenTelemetry agent invocation semantic conventions^]. Represents one agent calling another via the glossterm:Agent2Agent (A2A) protocol[,A2A protocol].
+| Agent and sub-agent invocation in multi-agent architectures, following the https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/[OpenTelemetry agent invocation semantic conventions^]. Represents one agent calling another through the glossterm:Agent2Agent (A2A) protocol[,A2A protocol].
 | Trace calls between root agents and sub-agents, measure cross-agent latency, and identify which sub-agent was invoked.
 
 | `openai`, `anthropic`, or other LLM providers
@@ -334,12 +334,12 @@ Transcripts are optimized for execution-level observability and governance. For 
 [[history-reconstruction]]
 == Reconstructed transcript history
 
-Trace data on `redpanda.otel_traces` is subject to a retention policy. When a transcript covers a long-running conversation whose earliest spans have already been evicted, Redpanda reconstructs the missing turns from the LLM message context carried on later spans (`gen_ai.input.messages`) and sets the boolean field `is_reconstructed` to `true` on each affected turn. The UI surfaces this as a **Reconstructed** badge on those turns — `is_reconstructed` is the backing data field; "Reconstructed" is the visible label. Reconstructed turns preserve the high-level intent and role ordering of the conversation, but do not preserve byte-level fidelity: token counts, per-turn latency, and tool-call arguments are unavailable for the reconstructed range.
+Trace data on `redpanda.otel_traces` is subject to a retention policy. When a transcript covers a long-running conversation whose earliest spans have already been evicted, Redpanda reconstructs the missing turns from the LLM message context carried on later spans (`gen_ai.input.messages`) and sets the boolean field `is_reconstructed` to `true` on each affected turn. The UI surfaces this as a **Reconstructed** badge on those turns: `is_reconstructed` is the backing data field; "Reconstructed" is the visible label. Reconstructed turns preserve the high-level intent and role ordering of the conversation, but do not preserve byte-level fidelity: token counts, per-turn latency, and tool-call arguments are unavailable for the reconstructed range.
 
-// TODO: Verify model names on this page against the GA build (gpt-5.2, claude-sonnet-4-5, gpt-5-nano, gemini-3-flash-preview) — replace any that ship with a different GA identifier.
+// TODO: Verify model names on this page against the GA build (gpt-5.2, claude-sonnet-4-5, gpt-5-nano, gemini-3-flash-preview): replace any that ship with a different GA identifier.
 
 == Next steps
 
-* xref:transcripts.adoc[]
+* xref:observability:transcripts.adoc[]
 * xref:agents:monitor.adoc[]
 * xref:mcp:test-tools.adoc[]

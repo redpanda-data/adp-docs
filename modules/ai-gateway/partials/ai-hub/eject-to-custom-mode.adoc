@@ -140,7 +140,7 @@ Store these files securely. You'll reference them when configuring Custom mode r
 Define your post-ejection configuration:
 
 . *Routing rules*: Write CEL expressions that replicate AI Hub behavior, then add your custom rules
-. *Backend pools*: Identify modifications needed (timeouts, custom providers, etc.)
+. *Backend pools*: Identify modifications needed (timeouts, custom providers, and so on)
 . *Testing strategy*: Plan how you'll validate that existing functionality still works
 . *Rollout approach*: Decide whether to eject immediately or test in staging first
 
@@ -185,13 +185,13 @@ Provide builders with clear expectations:
 
 The ejection process is irreversible. Follow these steps carefully.
 
-=== Step 1: Initiate ejection
+=== Initiate ejection
 
 . Navigate to your gateway in the console.
 . Click *Settings*.
 . Click *Eject to Custom Mode* button.
 
-=== Step 2: Confirm understanding
+=== Confirm understanding
 
 The console presents warnings about ejection:
 
@@ -204,14 +204,14 @@ The console presents warnings about ejection:
 
 Check all boxes to proceed.
 
-=== Step 3: Execute ejection
+=== Execute ejection
 
 . Enter the gateway name to confirm: `[Your Gateway Name]`
 . Click *Eject to Custom Mode*.
 
 Ejection typically completes in seconds. The gateway remains available during the transition.
 
-You can also eject via API:
+You can also eject through API:
 
 [,bash]
 ----
@@ -230,7 +230,7 @@ Expected response:
 }
 ----
 
-=== Step 4: Verify ejection
+=== Verify ejection
 
 After ejection completes:
 

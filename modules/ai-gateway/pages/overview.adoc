@@ -50,7 +50,7 @@ Applications authenticate to ADP with OIDC service accounts instead of long-live
 
 === Per-provider observability
 
-// TODO(review-before-publish): forward-looking framing — "is in development" and "today". Confirm whether the *Cost & usage* surface is shipped before merge; if so, drop the development qualifier and describe what users see; if not, drop the sentence entirely or rephrase to describe the current "Coming soon" placeholder without the in-development claim.
+// TODO(review-before-publish): forward-looking framing: "is in development" and "today". Confirm whether the *Cost & usage* surface is shipped before merge; if so, drop the development qualifier and describe what users see; if not, drop the sentence entirely or rephrase to describe the current "Coming soon" placeholder without the in-development claim.
 The provider's detail page in the ADP UI records request and token counts. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
 
 == What's in the UI

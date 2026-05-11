@@ -374,7 +374,7 @@ Shows:
 
 * Full request headers
 * Full request body (formatted JSON)
-* All parameters (temperature, max_tokens, etc.)
+* All parameters (temperature, max_tokens, and so on)
 * Custom headers used for routing
 
 Example:
@@ -506,8 +506,7 @@ Token Generation Rate: 71 tokens/second
 
 3. Check error message:
 
-   * Gateway error: Issue with configuration, rate limits, etc.
-   * Provider error: Issue with upstream API (OpenAI, Anthropic, etc.)
+   * Gateway error: Issue with configuration, rate limits, and so on   * Provider error: Issue with upstream API (OpenAI, Anthropic, and so on)
 
 4. Check routing:
    * Was fallback triggered? (May indicate primary provider issue)
@@ -619,7 +618,7 @@ Use case: Chargeback/showback to customers
 
 // PLACEHOLDER: Confirm log retention policy
 
-Retention period: // PLACEHOLDER: e.g., 30 days, 90 days, configurable
+Retention period: // PLACEHOLDER: for example, 30 days, 90 days, configurable
 
 After retention period:
 
@@ -642,7 +641,7 @@ Export logs (if needed for longer retention):
 2. Click "Export to CSV"
 3. Download includes all filtered logs with full fields
 
-=== Export via API
+=== Export through API
 
 // PLACEHOLDER: If API is available for log export
 
@@ -693,7 +692,7 @@ AI Gateway does not log (if applicable):
 If redaction is supported:
 
 * Configure redaction rules for specific fields
-* Mask PII (email addresses, phone numbers, etc.)
+* Mask PII (email addresses, phone numbers, and so on)
 * Redact custom header values
 
 Example:

@@ -24,7 +24,7 @@ Every LLM call routed through AI Gateway becomes a *spending event*. Each event 
 * Request count.
 * The provider, model, user, and organization context the call ran under.
 
-Events flow through a Kafka pipeline and roll up into queryable storage. No setup required — spending is captured the moment your first agent or MCP server runs through the gateway.
+Events flow through a Kafka pipeline and roll up into queryable storage. No setup required: spending is captured the moment your first agent or MCP server runs through the gateway.
 
 Streaming and non-streaming requests are tracked the same way. Cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) are attributed correctly on streaming responses so cost rollups stay accurate when an agent reuses long system prompts.
 
@@ -68,7 +68,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 
 Some guardrail evaluators call an LLM to do their work. A toxicity classifier, for example, runs the request or response through a separate model and accrues per-call cost in the process. PII detection over regex doesn't, but anything LLM-based does.
 
-Guardrail evaluator cost surfaces in the same spending pipeline as user-facing LLM calls. The evaluator's cost is attributed to the *evaluator's configured upstream provider* — usually a small classifier model, separate from the user-facing LLM — so per-provider breakdowns separate the two automatically.
+Guardrail evaluator cost surfaces in the same spending pipeline as user-facing LLM calls. The evaluator's cost is attributed to the *evaluator's configured upstream provider* (usually a small classifier model, separate from the user-facing LLM), so per-provider breakdowns separate the two automatically.
 
 For the per-evaluator cost model and how it interacts with the dashboard's spend view, see xref:governance:guardrails/index.adoc[Configure guardrails].
 
@@ -150,7 +150,7 @@ After saving an override, send a test request through the affected model and eit
 
 If the cost still reflects the catalog price, the override may not have propagated yet. Wait a few seconds for cost-reporting to pick it up, then re-test.
 
-// TODO: roadmap items not yet shipped — configurable caps (daily/monthly, per org/agent/user, per provider/model); halt-vs-notify behavior on cap hits; per-agent caps; alert hooks (webhook/email/chat); multi-tenant cap-setting with override semantics. Once cap-management lands, add a "Set caps" how-to and split this page into a sub-folder if content outgrows a single page. Open Q C1 in the companion plan.
+// TODO: roadmap items not yet shipped: configurable caps (daily/monthly, per org/agent/user, per provider/model); halt-vs-notify behavior on cap hits; per-agent caps; alert hooks (webhook/email/chat); multi-tenant cap-setting with override semantics. Once cap-management lands, add a "Set caps" how-to and split this page into a sub-folder if content outgrows a single page. Open Q C1 in the companion plan.
 
 == Next steps
 

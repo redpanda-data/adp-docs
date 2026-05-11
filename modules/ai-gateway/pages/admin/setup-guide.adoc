@@ -22,7 +22,7 @@ After completing this guide, you will be able to:
 
 == Enable a provider
 
-Providers represent upstream services (Anthropic, OpenAI, Google AI) and associated credentials. Providers are disabled by default and must be enabled explicitly by an administrator.
+Providers represent upstream services (Anthropic, OpenAI, Google AI) and associated credentials. Providers default to disabled; an administrator must explicitly enable each one.
 
 . In ADP, navigate to *Agentic* → *AI Gateway* → *Providers*.
 . Select a provider (for example, Anthropic).
@@ -91,7 +91,7 @@ Before creating a gateway, decide which mode fits your needs.
 You can start with AI Hub mode and later eject to Custom mode if you need more control. Ejection is a one-way transition. See xref:admin/eject-to-custom-mode.adoc[].
 ====
 
-For detailed comparison, see xref:gateway-modes.adoc[].
+For detailed comparison, see xref:ai-gateway:gateway-modes.adoc[].
 
 *Next sections:*
 
@@ -186,7 +186,7 @@ Provider pools define which LLM providers handle requests, with support for prim
 * *Name*: For example, `primary-anthropic`
 * *Providers*: Select one or more providers (for example, Anthropic)
 * *Models*: Choose which models to include (for example, `anthropic/claude-sonnet-4.5`)
-* *Load balancing*: If multiple providers are selected, choose distribution strategy (round-robin, weighted, etc.)
+* *Load balancing*: If multiple providers are selected, choose distribution strategy (round-robin, weighted, and so on)
 --
 
 . (Optional) Click *Add fallback pool* to configure automatic failover:
@@ -205,7 +205,7 @@ Provider pools define which LLM providers handle requests, with support for prim
 +
 For simple routing, select *Route all requests to primary pool*.
 +
-For advanced routing based on request properties, use CEL expressions. See xref:routing-cel.adoc[] for examples.
+For advanced routing based on request properties, use CEL expressions. See xref:ai-gateway:routing-cel.adoc[] for examples.
 +
 Example CEL expression for tier-based routing:
 +
@@ -231,7 +231,7 @@ If a provider pool contains multiple providers, you can distribute traffic to ba
 
 == Configure MCP tools (optional)
 
-If your users will build glossterm:AI agent[,AI agents] that need access to glossterm:MCP tool[,tools] via glossterm:MCP[,Model Context Protocol (MCP)], configure MCP tool aggregation.
+If your users will build glossterm:AI agent[,AI agents] that need access to glossterm:MCP tool[,tools] through glossterm:MCP[,Model Context Protocol (MCP)], configure MCP tool aggregation.
 
 On the gateway details page, select the *MCP* tab to configure tool discovery and execution. The MCP proxy aggregates multiple glossterm:MCP server[,MCP servers], allowing agents to find and call tools through a single endpoint.
 
@@ -297,7 +297,7 @@ Rate limits for MCP work the same way as LLM rate limits.
 
 Repeat for each MCP server you want to aggregate.
 
-See xref:aggregation.adoc[] for detailed information about MCP aggregation.
+See xref:ai-gateway:aggregation.adoc[] for detailed information about MCP aggregation.
 
 === Configure the MCP orchestrator
 
@@ -378,5 +378,5 @@ Users can then discover and connect to the gateway using the information provide
 
 == Next steps
 
-* xref:routing-cel.adoc[CEL Routing Cookbook]
+* xref:ai-gateway:routing-cel.adoc[CEL Routing Cookbook]
 * xref:integrations:index.adoc[Integrations]

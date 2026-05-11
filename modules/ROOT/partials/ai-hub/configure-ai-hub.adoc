@@ -91,7 +91,7 @@ AI Hub mode automatically provisions 6 backend pools to handle different request
 * Authentication: x-api-key header
 * Transform: OpenAI → Anthropic Messages API
 * Timeout: Standard (60 seconds)
-* Models: All `anthropic/*` models via OpenAI-compatible endpoint
+* Models: All `anthropic/*` models through OpenAI-compatible endpoint
 --
 
 . *Anthropic with Transform (Streaming)*: Converts OpenAI format to Anthropic's native format for streaming requests
@@ -180,7 +180,7 @@ While routing rules are immutable, you can customize routing behavior through us
 
 include::ROOT:partial$ai-hub-preference-toggles.adoc[]
 
-=== Set preferences via Console
+=== Set preferences through Console
 
 . Navigate to your AI Hub gateway.
 . Click *Settings* → *Preferences*.
@@ -196,7 +196,7 @@ include::ROOT:partial$ai-hub-preference-toggles.adoc[]
 
 Changes take effect immediately for new requests.
 
-=== Set preferences via API
+=== Set preferences through API
 
 [,bash]
 ----

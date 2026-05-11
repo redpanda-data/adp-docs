@@ -30,8 +30,8 @@ Claude Code connects to AI Gateway through two primary endpoints:
 
 The gateway handles:
 
-. Authentication via bearer tokens in the `Authorization` header
-. Gateway selection via the endpoint URL
+. Authentication through bearer tokens in the `Authorization` header
+. Gateway selection through the endpoint URL
 . Model routing using the `vendor/model_id` format
 . MCP server aggregation for multi-tool workflows
 . Request logging and cost tracking per gateway
@@ -389,7 +389,7 @@ Track Claude Code activity through gateway observability features.
 |===
 
 
-=== Query logs via API
+=== Query logs through API
 
 Programmatically access logs for integration with monitoring systems:
 

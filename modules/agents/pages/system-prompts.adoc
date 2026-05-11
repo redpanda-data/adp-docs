@@ -184,7 +184,7 @@ Design prompts to recognize escalation conditions:
 When you cannot complete the task:
 1. Explain what you tried and why it didn't work
 2. Tell the user what information or capability is missing
-3. Suggest how they can help (provide more details, contact support, etc.)
+3. Suggest how they can help (provide more details, contact support, and so on)
 ----
 
 === Common error scenarios
@@ -290,7 +290,7 @@ Guide agents to:
 * Avoid redundant tool calls (check context before calling)
 * Stop when the task completes (don't continue exploring)
 
-For cost management strategies including iteration limits and monitoring, see xref:concepts.adoc[].
+For cost management strategies including iteration limits and monitoring, see xref:agents:concepts.adoc[].
 
 == Example: System prompt with all best practices
 
@@ -419,6 +419,6 @@ Decision criteria enable reliable tool selection based on request context.
 
 == Next steps
 
-* xref:quickstart.adoc[]
-* xref:overview.adoc[]
+* xref:agents:quickstart.adoc[]
+* xref:agents:overview.adoc[]
 * xref:mcp:overview.adoc[]

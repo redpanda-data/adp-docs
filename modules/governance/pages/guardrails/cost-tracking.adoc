@@ -2,7 +2,7 @@
 :description: See what each evaluator costs, where the cost surfaces in transcripts and dashboards, and how guardrail spend interacts with token budgets.
 :page-topic-type: reference
 :personas: platform_admin
-// TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (e.g., security_admin), apply it here. Open Q D4 in the companion plan.
+// TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (for example, security_admin), apply it here. Open Q D4 in the companion plan.
 
 // TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a should-ship deliverable; the cost-pool integration with Budgets fills in once eng confirms whether evaluator cost flows into the user-facing budget pool, a separate guardrail-evaluator pool, or both. Open Qs C2, C3 in the companion plan.
 
@@ -25,7 +25,7 @@ Each evaluator type has a different cost shape:
 |No transcript cost line. Compute time absorbed into gateway latency metrics.
 
 |*Toxicity*
-|Per-call LLM cost. Counts against the *evaluator's configured upstream provider* — typically a small classifier model, separate from the user-facing LLM.
+|Per-call LLM cost. Counts against the *evaluator's configured upstream provider*: Typically a small classifier model, separate from the user-facing LLM.
 |Per-call cost line in the transcript, alongside the user-facing LLM call. Aggregated into provider-breakdown views in the governance dashboard.
 
 |*Custom webhook*
@@ -37,9 +37,9 @@ Each evaluator type has a different cost shape:
 
 Guardrail-attributed cost surfaces in three places, ordered from most granular to most aggregated:
 
-* *Transcripts* — per-call cost line per fired evaluator, recorded alongside the user-facing LLM call. See xref:observability:transcripts.adoc[Read a transcript].
-* *Metrics* — aggregate cost per guardrail per provider per time window. See xref:observability:metrics.adoc[Metrics].
-* *Governance dashboard* — guardrail-attributed spend appears in the spend view, broken down by provider. See xref:governance:dashboard/overview.adoc[Read the governance overview].
+* *Transcripts*: Per-call cost line per fired evaluator, recorded alongside the user-facing LLM call. See xref:observability:transcripts.adoc[Read a transcript].
+* *Metrics*: Aggregate cost per guardrail per provider per time window. See xref:observability:metrics.adoc[Metrics].
+* *Governance dashboard*: Guardrail-attributed spend appears in the spend view, broken down by provider. See xref:governance:dashboard/overview.adoc[Read the governance overview].
 
 // TODO: confirm whether the dashboard's spend view distinguishes guardrail-evaluator spend from user-facing LLM spend. Open Q C3 in the companion plan.
 
@@ -47,19 +47,19 @@ Guardrail-attributed cost surfaces in three places, ordered from most granular t
 
 Guardrail spend can grow unexpectedly when traffic spikes or when a Toxicity guardrail runs at `BOTH` phases on a high-throughput provider. Three knobs control it:
 
-* *Per-guardrail toggle* — disable a guardrail to short-circuit its evaluator. The guardrail config is preserved; re-enable when ready. Useful as a kill switch when an evaluator's cost runs away.
-* *Phase scoping* — running a Toxicity evaluator at `OUTPUT` only (instead of `BOTH`) halves the per-request cost.
-* *Token budgets* — see xref:governance:budgets.adoc[Token budgets and limits]. Guardrail evaluator cost flows into the same spending-event pipeline as user-facing LLM cost; per-provider breakdowns separate the two.
+* *Per-guardrail toggle*: Disable a guardrail to short-circuit its evaluator. The guardrail config is preserved; re-enable when ready. Useful as a kill switch when an evaluator's cost runs away.
+* *Phase scoping*: Running a Toxicity evaluator at `OUTPUT` only (instead of `BOTH`) halves the per-request cost.
+* *Token budgets*: See xref:governance:budgets.adoc[Token budgets and limits]. Guardrail evaluator cost flows into the same spending-event pipeline as user-facing LLM cost; per-provider breakdowns separate the two.
 
-// TODO: confirm whether evaluator cost flows into the same budget pool as user-facing LLM cost, or a separate guardrail-evaluator pool. The master plan calls for "guardrail-cost separation documented" in the Budgets workflow GA scope. Open Q C2 in the companion plan.
+// TODO: confirm whether evaluator cost flows into the same budget pool as user-facing LLM cost, or a separate guardrail-evaluator pool. The parent plan calls for "guardrail-cost separation documented" in the Budgets workflow GA scope. Open Q C2 in the companion plan.
 
 == Cost versus latency tradeoff
 
 Each evaluator type has a different cost-versus-latency profile:
 
-* *PII* is cheap and fast — regex-based detection adds milliseconds, no LLM call.
-* *Toxicity* is expensive and slow — the classifier call adds tokens and latency.
-* *Custom webhook* is whatever your webhook makes it — control your own infrastructure spend and latency profile.
+* *PII* is cheap and fast: Regex-based detection adds milliseconds, no LLM call.
+* *Toxicity* is expensive and slow: The classifier call adds tokens and latency.
+* *Custom webhook* is whatever your webhook makes it: Control your own infrastructure spend and latency profile.
 
 A typical optimization: disable Toxicity on `INPUT` and run it only on `OUTPUT`. Most policy violations are about what the model generates, not what the user asks; cutting the `INPUT` phase halves both the cost and the latency of the Toxicity guardrail without losing meaningful coverage.
 

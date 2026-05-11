@@ -123,7 +123,7 @@ Google AI::
 +
 [IMPORTANT]
 ====
-Gemini uses the `x-goog-api-key` header for authentication, not `Authorization: Bearer`. This matters when you wire up clients. See xref:connect-agent.adoc[Connect your agent].
+Gemini uses the `x-goog-api-key` header for authentication, not `Authorization: Bearer`. This matters when you wire up clients. See xref:ai-gateway:connect-agent.adoc[Connect your agent].
 ====
 
 AWS Bedrock::
@@ -173,7 +173,7 @@ For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs
 
 [NOTE]
 ====
-Models are stored as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). A future Phase 2 release will add per-model metadata such as custom pricing overrides. The legacy flat `models` field still works on writes for backward compatibility.
+Redpanda stores models as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). A future Phase 2 release will add per-model metadata such as custom pricing overrides. The legacy flat `models` field still works on writes for backward compatibility.
 ====
 
 After you create the provider, the detail page renders each model as a row with capability badges (*Vision*, *Reasoning*, *Streaming*, and others lifted from the catalog), the model's 7-day spend, and a link to the per-model detail page. The model list supports search and filtering.
@@ -185,7 +185,7 @@ The detail page also carries a *Last 7 days* KPI strip (*TOTAL SPEND*, *REQUESTS
 . Click *Create provider*. The button activates once *Name* and *Type* are both set; the right-hand *Summary* panel checks them off as you fill them in.
 . On the provider's detail page, the *Connection* card shows your *Proxy URL*, *Discovery* URL, *Base URL*, and *API key ref*. Copy the *Proxy URL*: this is where your applications point.
 . Scroll to the *Verify connection* section. Pick a model from the dropdown and click *Test Connection*. The status updates from _Not tested yet_ to a pass/fail indicator. Use the *Show commands* disclosure if you want to see the equivalent curl or SDK call.
-. To wire up an application, open *Connect your app* further down the page or follow xref:connect-agent.adoc[Connect your agent].
+. To wire up an application, open *Connect your app* further down the page or follow xref:ai-gateway:connect-agent.adoc[Connect your agent].
 
 A successful Test Connection result confirms that the provider's credentials, region (Bedrock), and network path are all correct. If the call fails, see <<troubleshooting>>.
 
@@ -336,7 +336,7 @@ A list/grid view toggle in the top-right switches between table and card layouts
 |Confirm the client is sending its own `Authorization` header and the *API key* field on the provider is empty.
 
 |Gemini returns 401
-|Gemini uses the `x-goog-api-key` header, not `Authorization`. If you're seeing 401s on Gemini, check that the client is sending the correct header. See xref:connect-agent.adoc[Connect your agent].
+|Gemini uses the `x-goog-api-key` header, not `Authorization`. If you're seeing 401s on Gemini, check that the client is sending the correct header. See xref:ai-gateway:connect-agent.adoc[Connect your agent].
 
 |Provider list empty or 403
 |Confirm your account has the `dataplane_adp_llmprovider_*` permissions in ADP.
@@ -357,4 +357,4 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 
 == Next steps
 
-* xref:connect-agent.adoc[Connect your agent]
+* xref:ai-gateway:connect-agent.adoc[Connect your agent]
