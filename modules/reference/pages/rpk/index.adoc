@@ -1,0 +1,9 @@
+= rpk Commands
+:description: Reference for the `rpk` commands used to manage the Redpanda Agentic Data Plane from the command line.
+:page-layout: index
+
+This section documents the `rpk` commands you use to manage the Redpanda Agentic Data Plane (ADP) from the command line.
+
+Use `rpk ai` to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools directly from your terminal. Authentication is owned by `rpk cloud login`. The `rpk ai` commands reuse your active `rpk profile` and the cached cloud token. The active AI Gateway URL is resolved from the same profile unless you override it with `--rpai-endpoint`.
+
+For subcommands available after install (`rpk ai llm`, `rpk ai mcp`, `rpk ai oauth`, and more), run `rpk ai <command> --help` from your terminal.
