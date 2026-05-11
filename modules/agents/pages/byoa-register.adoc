@@ -31,7 +31,7 @@ The two models differ in who runs the agent, who owns scaling, and how the agent
 |Question |Choose BYOA when… |Choose a managed agent when…
 
 |Where does your agent run?
-|You have an existing runtime (LangGraph, custom Go, etc.) you want to keep.
+|You have an existing runtime (LangGraph, custom Go, and so on) you want to keep.
 |You want Redpanda to host and operate the agent runtime for you.
 
 |How is the agent defined?
@@ -133,7 +133,7 @@ Conceptually, registration captures these pieces of data:
 |*Agent endpoint URL*
 |The HTTPS base URL where your agent's `/.well-known/agent-card.json` lives. AI Gateway uses this to fetch the agent card when callers reference your agent by registered name.
 
-// TODO: confirm whether the registration message carries the agent endpoint URL directly, or requires it via the agent card only. The proto will resolve this when the BYOA arm lands.
+// TODO: confirm whether the registration message carries the agent endpoint URL directly, or requires it through the agent card only. The proto will resolve this when the BYOA arm lands.
 
 |*Agent type / variant*
 |Set to the BYOA arm of `AgentCreate.agent_type`.

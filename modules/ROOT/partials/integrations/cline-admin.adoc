@@ -42,7 +42,7 @@ Cline connects to AI Gateway through two primary endpoints:
 
 The gateway handles:
 
-. Authentication via bearer tokens in the `Authorization` header
+. Authentication through bearer tokens in the `Authorization` header
 . Model routing using the `vendor/model_id` format
 . MCP server aggregation for multi-tool workflows
 . Request logging and cost tracking per gateway
@@ -326,9 +326,9 @@ Provide these instructions to users configuring Cline in VS Code.
 
 Users configure Cline's API provider and credentials through the Cline extension interface.
 
-IMPORTANT: API provider configuration (API keys, base URLs, custom headers) is managed via Cline's extension global state, not VS Code `settings.json`. These settings are stored in the extension's internal state and must be configured through the Cline UI.
+IMPORTANT: API provider configuration (API keys, base URLs, custom headers) is managed through Cline's extension global state, not VS Code `settings.json`. These settings are stored in the extension's internal state and must be configured through the Cline UI.
 
-==== Configure via Cline UI
+==== Configure through Cline UI
 
 . Open the Cline extension panel in VS Code
 . Click the settings icon or gear menu
@@ -352,13 +352,13 @@ Configure Cline to connect to the aggregated MCP endpoint through the Cline UI o
 . Search for "Cline > Mcp: Mode"
 . Enable the MCP mode toggle
 
-==== Configure MCP server via Cline UI
+==== Configure MCP server through Cline UI
 
 . Open the Cline extension panel in VS Code
 . Navigate to MCP server settings
 . Add the Redpanda AI Gateway MCP server with the connection details
 
-==== Configure via cline_mcp_settings.json
+==== Configure through cline_mcp_settings.json
 
 Alternatively, edit `cline_mcp_settings.json` (located in the Cline extension storage directory):
 
@@ -438,7 +438,7 @@ Cline autonomous operations may generate request sequences. Look for patterns to
 |===
 
 
-=== Query logs via API
+=== Query logs through API
 
 Programmatically access logs for integration with monitoring systems:
 

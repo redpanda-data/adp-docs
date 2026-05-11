@@ -510,7 +510,7 @@ This pipeline:
 * Consumes transactions from `bank.transactions` topic
 * Filters for high-value transactions (>$500) or pre-flagged transactions
 * Calculates preliminary risk score based on location, amount, velocity, and category
-* Routes transactions with risk score ≥40 to the dispute-resolution-agent via A2A
+* Routes transactions with risk score ≥40 to the dispute-resolution-agent through A2A
 * Outputs investigation results to `bank.dispute_results` topic
 
 === Test the pipeline
@@ -656,8 +656,8 @@ For production deployments, replace the mock tools with API calls to your accoun
 
 == Next steps
 
-* xref:architecture-patterns.adoc[]
-* xref:integration-overview.adoc[]
-* xref:pipeline-integration-patterns.adoc[]
-* xref:monitor.adoc[]
+* xref:agents:architecture-patterns.adoc[]
+* xref:agents:integration-overview.adoc[]
+* xref:agents:pipeline-integration-patterns.adoc[]
+* xref:agents:monitor.adoc[]
 * xref:mcp:overview.adoc[]

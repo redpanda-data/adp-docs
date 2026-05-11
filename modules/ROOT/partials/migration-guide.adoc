@@ -189,7 +189,7 @@ response = client.messages.create(
 ----
 
 
-After (Gateway via OpenAI-compatible wrapper)
+After (Gateway through OpenAI-compatible wrapper)
 
 Because AI Gateway provides an OpenAI-compatible endpoint, we recommend migrating Anthropic SDK usage to OpenAI SDK for consistency:
 
@@ -264,7 +264,7 @@ else:
 ----
 
 
-After (Unified via Gateway)
+After (Unified through Gateway)
 
 [source,python]
 ----
@@ -403,8 +403,7 @@ Option D: Feature flag service (recommended)
 
 [source,python]
 ----
-# LaunchDarkly, Split.io, etc.
-use_gateway = feature_flags.is_enabled("ai-gateway", user_context)
+# LaunchDarkly, Split.io, and so onuse_gateway = feature_flags.is_enabled("ai-gateway", user_context)
 ----
 
 
@@ -869,7 +868,7 @@ A/B testing
 
 * Test new models without code changes
 * Compare quality/cost/latency
-* Gradual rollout via routing policies
+* Gradual rollout through routing policies
 
 == Next steps
 

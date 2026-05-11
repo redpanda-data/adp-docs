@@ -32,7 +32,7 @@ Key characteristics:
 * Limited support for custom headers (similar to Cursor IDE)
 * Supports BYOK for Business/Enterprise subscriptions
 * Built-in code completion, chat, and inline editing modes
-* Configuration via IDE settings or organization policies
+* Configuration through IDE settings or organization policies
 * High request volume from code completion features
 
 == Architecture overview
@@ -44,8 +44,8 @@ GitHub Copilot connects to AI Gateway through standardized endpoints:
 
 The gateway handles:
 
-. Authentication via bearer tokens in the `Authorization` header
-. Gateway selection via URL path routing or query parameters
+. Authentication through bearer tokens in the `Authorization` header
+. Gateway selection through URL path routing or query parameters
 . Model routing and aliasing for friendly names
 . Format transforms from OpenAI format to provider-native formats
 . Request logging and cost tracking per gateway
@@ -621,7 +621,7 @@ GitHub Copilot generates distinct request patterns:
 |Metric |Purpose
 
 |Request volume by model
-|Identify most-used models via aliases
+|Identify most-used models through aliases
 
 |Token usage by model
 |Track consumption patterns (completion vs chat)
@@ -643,7 +643,7 @@ GitHub Copilot generates distinct request patterns:
 |===
 
 
-=== Query logs via API
+=== Query logs through API
 
 Programmatically access logs for integration with monitoring systems:
 

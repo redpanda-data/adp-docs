@@ -59,7 +59,7 @@ Before you wire up the chat-client connector, make sure you have:
 
 * An MCP server already created in AI Gateway. See xref:mcp:create-server.adoc[Create an MCP Server].
 * The MCP server's *API URL*. Copy it from the server's *Overview* tab.
-* For user-delegated MCP servers: an OAuth Provider configured for the upstream system. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider].
+* For user-delegated MCP servers: An OAuth Provider configured for the upstream system. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider].
 * End-users have accounts with the chat client (Claude, ChatGPT, Gemini, Cursor) and the upstream system the MCP server connects to.
 
 == Register an OAuth Client in AI Gateway
@@ -120,7 +120,7 @@ Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and
 . Click *Add*. The connector appears in the Connectors list with a `CUSTOM` badge.
 . Click *Connect* on the new connector row. Claude opens a browser tab pointed at AI Gateway's authorization endpoint. Sign in with your AI Gateway identity (Auth0 today, Zitadel in a future release). Once approved, the connector becomes invokable in any conversation.
 +
-// TODO(review-before-publish): forward-looking framing — "Auth0 today, Zitadel in a future release" exposes an internal IdP migration plan. Confirm whether to name the IdP at all in customer prose, or drop both names and just say "your AI Gateway identity provider".
+// TODO(review-before-publish): forward-looking framing: "Auth0 today, Zitadel in a future release" exposes an internal IdP migration plan. Confirm whether to name the IdP at all in customer prose, or drop both names and just say "your AI Gateway identity provider".
 
 // TODO: capture screenshots of the Add custom connector modal and the post-connect Connectors list against `adp-production`.
 
@@ -163,7 +163,7 @@ This handshake runs *once per user* when the connector is first added.
 
 (Only for user-delegated MCP servers.)
 
-This handshake runs *once per user, per upstream*. For an MCP server using user-delegated OAuth (GitHub, Slack, Atlassian, Workday, etc.):
+This handshake runs *once per user, per upstream*. For an MCP server using user-delegated OAuth (GitHub, Slack, Atlassian, Workday, and so on):
 
 . The user invokes a tool that requires upstream auth.
 . AI Gateway has no stored upstream token for this user yet. The MCP protocol returns a `FAILED_PRECONDITION` response with an `OAuthConnectionRequired` error detail. The detail carries an `authorize_url` pointing at AI Gateway's OAuth bridge for the configured upstream provider, for example: `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/authorize?provider_name=github&scopes=read:user,repo`.

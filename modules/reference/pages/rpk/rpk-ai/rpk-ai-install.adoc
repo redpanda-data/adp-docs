@@ -21,7 +21,7 @@ rpk ai install [flags]
 |===
 |*Value* |*Type* |*Description*
 
-|--ai-version |string |Redpanda AI CLI version to install (e.g. 0.1.2) (default "latest").
+|--ai-version |string |Redpanda AI CLI version to install (for example, 0.1.2) (default "latest").
 
 |--force |- |Force install of the Redpanda AI CLI.
 

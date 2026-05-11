@@ -1,4 +1,4 @@
-* xref:index.adoc[Overview]
+* xref:ROOT:index.adoc[Overview]
 * xref:get-started:index.adoc[Get started]
 ** xref:get-started:byoc-prereqs.adoc[Prerequisites]
 ** xref:get-started:byoc-quickstart.adoc[Quickstart]

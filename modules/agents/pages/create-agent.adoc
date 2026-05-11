@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 * An ADP BYOC environment.
 * xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled.
 * At least one xref:mcp:overview.adoc[Remote MCP server] deployed with tools.
-* System prompt prepared (see xref:system-prompts.adoc[System Prompt Best Practices]).
+* System prompt prepared (see xref:agents:system-prompts.adoc[System Prompt Best Practices]).
 
 == Access the agents UI
 
@@ -85,7 +85,7 @@ For detailed model specifications and pricing:
 * link:https://docs.anthropic.com/claude/docs/models-overview[Anthropic Claude Models^]
 * link:https://ai.google.dev/gemini-api/docs/models[Google Gemini Models^]
 
-For model selection based on architecture patterns, see xref:architecture-patterns.adoc#model-selection-guide[Model selection guide].
+For model selection based on architecture patterns, see xref:agents:architecture-patterns.adoc#model-selection-guide[Model selection guide].
 
 == Write the system prompt
 
@@ -120,7 +120,7 @@ Response format:
 - [Format guideline]
 ----
 
-For complete prompt guidelines, see xref:system-prompts.adoc[System Prompt Best Practices].
+For complete prompt guidelines, see xref:agents:system-prompts.adoc[System Prompt Best Practices].
 
 == Add MCP servers and select tools
 
@@ -152,11 +152,11 @@ Subagents are internal specialists within a single agent. Each subagent can have
 
 The root agent orchestrates and delegates work to appropriate subagents based on the request.
 
-For multi-agent design patterns, see xref:architecture-patterns.adoc[Agent Architecture Patterns].
+For multi-agent design patterns, see xref:agents:architecture-patterns.adoc[Agent Architecture Patterns].
 
 === Set max iterations
 
-Max iterations determine how many reasoning loops the agent can perform before stopping. Each iteration consumes tokens and adds latency. For detailed cost calculations and the cost/capability/latency trade-off, see xref:concepts.adoc[].
+Max iterations determine how many reasoning loops the agent can perform before stopping. Each iteration consumes tokens and adds latency. For detailed cost calculations and the cost/capability/latency trade-off, see xref:agents:concepts.adoc[].
 
 In the *Execution Settings* section, configure *Max Iterations* (range: 10-100, default: 30).
 
@@ -201,7 +201,7 @@ Skills describe what your agent can do for capability-based discovery. External 
 
 . Click *Save Changes*.
 
-The updated metadata appears immediately at `\https://your-agent-url/.well-known/agent-card.json`. For more about what these fields mean and how they're used, see xref:a2a-concepts.adoc#agent-cards[Agent cards].
+The updated metadata appears immediately at `\https://your-agent-url/.well-known/agent-card.json`. For more about what these fields mean and how they're used, see xref:agents:a2a-concepts.adoc#agent-cards[Agent cards].
 
 === Review and create
 
@@ -211,7 +211,7 @@ The updated metadata appears immediately at `\https://your-agent-url/.well-known
 +
 A service account is automatically created to authenticate your agent with ADP resources. You can customize the default name (3-128 characters, cannot contain `<` or `>` characters).
 +
-For details about default permissions and how to manage service accounts, see xref:concepts.adoc#service-account-authorization[Service account authorization].
+For details about default permissions and how to manage service accounts, see xref:agents:concepts.adoc#service-account-authorization[Service account authorization].
 
 . Click *Create Agent*.
 
@@ -223,7 +223,7 @@ You can use this URL to call your agent programmatically or integrate it with ex
 
 The *Inspector* tab in ADP automatically uses this URL to connect to your agent for testing.
 
-For programmatic access or external agent integration, see xref:integration-overview.adoc[].
+For programmatic access or external agent integration, see xref:agents:integration-overview.adoc[].
 
 == Test your agent
 
@@ -237,7 +237,7 @@ For programmatic access or external agent integration, see xref:integration-over
 
 . Iterate on the system prompt or tool selection as needed.
 
-For detailed testing strategies, see xref:monitor.adoc[].
+For detailed testing strategies, see xref:agents:monitor.adoc[].
 
 == Example configurations
 
@@ -267,8 +267,8 @@ Here are example configurations for different agent types:
 
 == Next steps
 
-* xref:integration-overview.adoc[]
-* xref:system-prompts.adoc[]
+* xref:agents:integration-overview.adoc[]
+* xref:agents:system-prompts.adoc[]
 * xref:mcp:create-server.adoc[]
-* xref:architecture-patterns.adoc[]
+* xref:agents:architecture-patterns.adoc[]
 * xref:troubleshoot/troubleshoot-ai-agents.adoc[]

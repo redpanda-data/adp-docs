@@ -18,7 +18,7 @@ After completing this guide, you will be able to:
 ====
 OAuth providers and OAuth clients are different resources. An *OAuth provider* (this page) is a definition of an upstream system the gateway authenticates against. An *OAuth client* is a per-application credential issued *by* the AI Gateway's own identity provider, used by external clients to call ADP. They live under separate sidebar entries (*OAuth Providers* and *OAuth Clients*) and have separate proto, permissions, and lifecycles.
 
-To register or manage an OAuth Client (Claude Desktop, ChatGPT, Cursor, and so on) — including revoking its refresh tokens to force a re-sign-in — see xref:integrations:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
+To register or manage an OAuth Client (Claude Desktop, ChatGPT, Cursor, and so on), including revoking its refresh tokens to force a re-sign-in, see xref:integrations:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
 ====
 
 == Prerequisites

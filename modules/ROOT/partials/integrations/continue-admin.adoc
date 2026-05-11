@@ -29,8 +29,8 @@ Key characteristics:
 
 * Uses native provider formats (Anthropic format for Anthropic, OpenAI format for OpenAI)
 * Supports multiple LLM providers simultaneously with per-provider configuration
-* Custom API endpoints via `apiBase` configuration
-* Custom headers via `requestOptions.headers`
+* Custom API endpoints through `apiBase` configuration
+* Custom headers through `requestOptions.headers`
 * Built-in MCP support for tool discovery and execution
 * Autocomplete, chat, and inline edit modes
 
@@ -44,7 +44,7 @@ Continue.dev connects to AI Gateway differently than unified-format clients:
 
 The gateway handles:
 
-. Authentication via bearer tokens in the `Authorization` header
+. Authentication through bearer tokens in the `Authorization` header
 . Provider-specific request formats without transformation
 . Model routing using provider-native model identifiers
 . MCP server aggregation for multi-tool workflows
@@ -580,7 +580,7 @@ Continue.dev generates different request patterns:
 |===
 
 
-=== Query logs via API
+=== Query logs through API
 
 Programmatically access logs for integration with monitoring systems:
 

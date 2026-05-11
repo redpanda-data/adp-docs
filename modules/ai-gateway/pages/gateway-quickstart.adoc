@@ -63,7 +63,7 @@ When creating a gateway, you choose between two modes:
 * *AI Hub Mode*: Zero-configuration with pre-configured routing and backend pools. Just add provider credentials and start routing requests. Ideal for quickstarts and standard use cases.
 * *Custom Mode*: Full control over all routing rules, backend pools, and policies. Requires manual configuration. Ideal for custom routing logic and specialized requirements.
 
-See xref:gateway-modes.adoc[] to understand which mode fits your needs. This quickstart focuses on Custom mode configuration.
+See xref:ai-gateway:gateway-modes.adoc[] to understand which mode fits your needs. This quickstart focuses on Custom mode configuration.
 ====
 endif::[]
 
@@ -371,7 +371,7 @@ Guard for field existence:
 has(request.body.max_tokens) && request.body.max_tokens > 1000
 ----
 
-For more CEL examples, see xref:routing-cel.adoc[].
+For more CEL examples, see xref:ai-gateway:routing-cel.adoc[].
 
 == Connect AI tools to your gateway
 
@@ -527,8 +527,8 @@ const openai = new OpenAI({
 
 == Next steps
 
-* xref:routing-cel.adoc[]
-* xref:aggregation.adoc[]
+* xref:ai-gateway:routing-cel.adoc[]
+* xref:ai-gateway:aggregation.adoc[]
 * xref:integrations:index.adoc[]
-* xref:gateway-architecture.adoc[]
-* xref:overview.adoc[]
+* xref:ai-gateway:gateway-architecture.adoc[]
+* xref:ai-gateway:overview.adoc[]

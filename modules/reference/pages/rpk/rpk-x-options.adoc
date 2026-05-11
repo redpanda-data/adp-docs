@@ -1,6 +1,6 @@
 = rpk -X
 
-Use the `-X` flag to override any rpk-specific configuration option for a single command, without modifying your rpk profile. Each option follows the form `key=value` — for example, `rpk -X tls.enabled=true` enables TLS for the Kafka API.
+Use the `-X` flag to override any rpk-specific configuration option for a single command, without modifying your rpk profile. Each option follows the form `key=value`: for example, `rpk -X tls.enabled=true` enables TLS for the Kafka API.
 
 Every `-X` option also has an environment-variable equivalent: prefix with `RPK_` and replace periods (`.`) with underscores (`_`). For example, `tls.enabled` becomes `RPK_TLS_ENABLED`.
 

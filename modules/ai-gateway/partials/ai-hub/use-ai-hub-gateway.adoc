@@ -258,8 +258,8 @@ model = "openai/gpt-5.2"
 model = "anthropic/claude-sonnet-4.5"
 
 # ⚠️ Works but relies on pattern matching
-model = "gpt-5.2"  # Routes to OpenAI via pattern matching
-model = "claude-sonnet-4.5"  # Routes to Anthropic via pattern matching
+model = "gpt-5.2"  # Routes to OpenAI through pattern matching
+model = "claude-sonnet-4.5"  # Routes to Anthropic through pattern matching
 ----
 
 Explicit provider prefixes ensure deterministic routing and make your code more maintainable.

@@ -98,7 +98,7 @@ Response format:
 
 . Review your configuration and click *Create Agent*.
 +
-TIP: A service account is automatically created to authenticate your agent with ADP resources. For details about default permissions and how to manage service accounts, see xref:concepts.adoc#service-account-authorization[Service account authorization].
+TIP: A service account is automatically created to authenticate your agent with ADP resources. For details about default permissions and how to manage service accounts, see xref:agents:concepts.adoc#service-account-authorization[Service account authorization].
 
 . Wait for the agent status to change from *Starting* to *Running*.
 
@@ -177,8 +177,8 @@ Common quickstart issue:
 
 == Next steps
 
-* xref:overview.adoc[]
-* xref:create-agent.adoc[]
-* xref:system-prompts.adoc[]
-* xref:architecture-patterns.adoc[]
+* xref:agents:overview.adoc[]
+* xref:agents:create-agent.adoc[]
+* xref:agents:system-prompts.adoc[]
+* xref:agents:architecture-patterns.adoc[]
 * xref:mcp:overview.adoc[]

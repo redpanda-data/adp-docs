@@ -801,7 +801,7 @@ Solution:
 Orchestrator sandbox:
 
 * No file system access
-* No network access (except via MCP tools)
+* No network access (except through MCP tools)
 * No system calls
 * Memory limit: // PLACEHOLDER: for example, 128MB
 * Execution timeout: // PLACEHOLDER: for example, 30s
@@ -931,7 +931,7 @@ response = client.chat.completions.create(
 # Handle tool calls
 if response.choices[0].message.tool_calls:
     for tool_call in response.choices[0].message.tool_calls:
-        # Execute tool via gateway
+        # Execute tool through gateway
         tool_result = requests.post(
             f"{os.getenv('GATEWAY_ENDPOINT')}/mcp/tools/{tool_call.function.name}",
             headers={

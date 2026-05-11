@@ -44,7 +44,7 @@ When you create a gateway, you choose between two modes that differ in configura
 
 |*Routing preferences*
 |6 configurable toggles
-|N/A (full control via rules)
+|N/A (full control through rules)
 
 |*Modify backends*
 |Cannot modify/delete
@@ -67,7 +67,7 @@ AI Hub mode provides instant, pre-configured access to OpenAI, Anthropic, and Go
 
 AI Hub mode eliminates complex LLM gateway configuration by providing pre-built routing rules and backend pools. Platform admins add provider credentials (OpenAI, Anthropic, Google Gemini) once, and all teams immediately benefit from intelligent routing across both providers.
 
-Teams adopting LLMs typically face significant friction: configuring backends and routing rules takes hours, different providers have incompatible APIs, and developers must learn each provider's quirks. AI Hub mode solves this by providing instant access—IT adds API keys once, all teams benefit immediately.
+Teams adopting LLMs typically face significant friction: configuring backends and routing rules takes hours, different providers have incompatible APIs, and developers must learn each provider's quirks. AI Hub mode solves this by providing instant access: IT adds API keys once, all teams benefit immediately.
 
 === Pre-configured components
 
@@ -86,7 +86,7 @@ When you create an AI Hub gateway, you automatically get:
 
 * Model prefix routing: `openai/*`, `anthropic/*`
 * Model name pattern routing: `gpt-*`, `claude-*`, `o1-*`
-* Special routing: embeddings, images, audio → OpenAI only
+* Special routing: Embeddings, images, audio → OpenAI only
 * Native SDK detection: `/v1/messages` → Anthropic passthrough
 * Streaming detection → Extended timeout backends
 

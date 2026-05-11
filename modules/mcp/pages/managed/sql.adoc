@@ -43,19 +43,19 @@ It exposes a small set of tools for querying schemas and running parameterized q
 . Fill in the identity fields (`name`, `description`).
 . In the SQL configuration form, provide:
 +
-// TODO: enumerate exact fields from `proto/mcps/redpanda/mcps/sql/v1/sql_config.proto` — driver, DSN/connection-string format, query timeout, read-vs-write-tool split, max rows.
+// TODO: enumerate exact fields from `proto/mcps/redpanda/mcps/sql/v1/sql_config.proto`: driver, DSN/connection-string format, query timeout, read-vs-write-tool split, max rows.
 +
-* *Driver* — Postgres, MySQL, ClickHouse, MSSQL, or SQLite.
-* *Connection string* — driver-specific.
-* *Password reference* — `UPPER_SNAKE_CASE` secret reference.
-* *Query timeout* (optional).
+* *Driver*: Postgres, MySQL, ClickHouse, MSSQL, or SQLite
+* *Connection string*: Driver-specific
+* *Password reference*: `UPPER_SNAKE_CASE` secret reference
+* *Query timeout* (optional)
 . Click *Create*.
 
 // TODO: screenshot of the SQL form filled in for a Postgres example on `adp-production`.
 
 == Test
 
-After create, exercise the server through the Inspector tab. See xref:../test-tools.adoc[].
+After create, exercise the server through the Inspector tab. See xref:mcp:test-tools.adoc[].
 
 A canonical first call:
 
@@ -70,10 +70,10 @@ A canonical first call:
 
 The SQL managed type supports:
 
-* *None* — only useful for local SQLite without auth.
-* *Static key* — most common; the password lives in a secret reference.
+* *None*: Only useful for local SQLite without auth.
+* *Static key*: Most common; the password lives in a secret reference.
 
-User-delegated OAuth and service-account OAuth are *not* supported for SQL — there's no per-user identity model that maps to a database password.
+User-delegated OAuth and service-account OAuth are *not* supported for SQL: there's no per-user identity model that maps to a database password.
 
 // TODO: confirm exact auth modes the SQL type registers in its `register_mcp.go` once an auth-mode list is exposed on `ManagedMCPType`.
 
@@ -106,5 +106,5 @@ Once the SQL server is created, point an agent at the *API URL* on the server's 
 
 == Limitations
 
-* *Schema migrations*: this server is read/query-focused; running DDL is not the intended use.
-* *Per-user database identities*: see <<authentication>>.
+* *Schema migrations*: This server is read/query-focused; running DDL is not the intended use.
+* *Per-user database identities*: See <<authentication>>.
