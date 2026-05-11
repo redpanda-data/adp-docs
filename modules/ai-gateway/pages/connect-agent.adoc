@@ -7,7 +7,7 @@
 :learning-objective-2: Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients
 :learning-objective-3: Send requests through the proxy URL with the SDK of your choice
 
-This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with `rpk cloud login` for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
+This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with xref:reference:rpk/rpk-cloud/rpk-cloud-login.adoc[`rpk cloud login`] for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
 
 After completing this guide, you will be able to:
 
@@ -46,16 +46,16 @@ TIP: The provider detail page generates ready-to-run snippets pre-filled with th
 [[authenticate-with-rpai]]
 == Use `rpk ai` for local development
 
-The `rpk ai` command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`. The active AI Gateway URL comes from your active rpk cloud profile.
+The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`. The active AI Gateway URL comes from your active rpk cloud profile.
 
-. Install `rpk ai`:
+. xref:reference:rpk/rpk-ai/rpk-ai-install.adoc[Install `rpk ai`]:
 +
 [source,bash]
 ----
 rpk ai install
 ----
 +
-Update later with `rpk ai upgrade`; remove with `rpk ai uninstall`.
+Update later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk ai upgrade`]; remove with xref:reference:rpk/rpk-ai/rpk-ai-uninstall.adoc[`rpk ai uninstall`].
 
 . Log in to Redpanda Cloud:
 +
@@ -66,7 +66,7 @@ rpk cloud login
 +
 This caches a cloud token in `~/.config/rpk/rpk.yaml`. On every invocation, `rpk ai` reads the cached token automatically.
 
-. Select a profile that points at a cluster with AI Gateway v2 attached. The AI Gateway URL is cached on the profile when you create it.
+. Select a xref:reference:rpk/rpk-profile/rpk-profile.adoc[profile] that points at a cluster with AI Gateway v2 attached. The AI Gateway URL is cached on the profile when you create it.
 +
 [source,bash]
 ----
@@ -74,6 +74,8 @@ rpk profile use <profile-name>
 # or, to switch the cluster the active profile points at:
 rpk cloud cluster use <cluster-id>
 ----
++
+See xref:reference:rpk/rpk-cloud/rpk-cloud-cluster.adoc[`rpk cloud cluster`] for switching the active cluster.
 
 . Verify the connection:
 +

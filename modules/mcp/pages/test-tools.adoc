@@ -103,7 +103,7 @@ The Session panel keeps a running history of every call you've made through the 
 
 == Test from the CLI
 
-Use `rpk ai` for the same tool calls outside the UI, when scripting smoke tests or running checks from CI.
+Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] for the same tool calls outside the UI, when scripting smoke tests or running checks from CI.
 
 [source,bash]
 ----
