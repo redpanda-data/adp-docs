@@ -46,7 +46,7 @@ Atlassian uses a granular, prefixed scope namespace. Common scopes:
 |Read user profile.
 
 |`read:jira-work`
-|Read issues, projects, sprints, etc. (read-only operation).
+|Read issues, projects, sprints, and so on (read-only operation).
 
 |`write:jira-work`
 |Create, update, transition issues, add comments.
