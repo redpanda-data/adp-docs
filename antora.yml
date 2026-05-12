@@ -12,7 +12,7 @@ asciidoc:
     # Header configuration
     page-header-data:
       order: 1
-      color: '#F77923'
+      color: '#ea580c'
       text-color: '#ffffff'
     # UI name for single-sourced content
     ui: Redpanda Cloud
