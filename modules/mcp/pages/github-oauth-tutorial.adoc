@@ -57,7 +57,7 @@ Throughout this tutorial, fields marked with * are required.
 |===
 +
 . Click **Register application**.
-. On the application page, note your **Client ID** (for example, `Iv1.abc123...`). Copy it for later.
+. On the application page, note your **Client ID** (for example, `Iv1.abc123...`).
 . Click **Generate a new client secret** and copy it immediately (you won't see it again).
 
 [IMPORTANT]
