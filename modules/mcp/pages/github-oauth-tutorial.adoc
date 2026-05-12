@@ -66,23 +66,6 @@ Throughout this tutorial, fields marked with * are required.
 * Store your client secret securely. GitHub will not show it again after you navigate away.
 ====
 
-== Store the GitHub client secret in ADP
-
-Before creating the OAuth provider in ADP, store the client secret in ADP's secret store.
-
-. Sign in to ADP
-. Navigate to **Secrets Store** in the sidebar
-. Click **Create secret**
-. Configure the secret:
-+
-* **Secret ID**: `GITHUB_CLIENT_SECRET` (must be UPPER_SNAKE_CASE)
-* **Secret value**: Paste the client secret from GitHub
-* **Scopes**: Select `SCOPE_REDPANDA_CONNECT` and `SCOPE_REDPANDA_CLUSTER` (`AI GATEWAY` or `MCP Server` or `AI AGENT`) ???
-+
-. Click **Create secret**
-
-The secret reference `GITHUB_CLIENT_SECRET` is what you'll use when creating the OAuth provider.
-
 == Create the GitHub OAuth provider in ADP
 
 Register GitHub as an OAuth provider in the ADP UI.
@@ -123,7 +106,7 @@ Register GitHub as an OAuth provider in the ADP UI.
 
 |**Client secret ref** *
 |`GITHUB_CLIENT_SECRET`
-|The UPPER_SNAKE_CASE reference to the secret you created earlier. Must match exactly.
+|Click **New**, enter `GITHUB_CLIENT_SECRET` as the key name, and then click *Create secret*. This creates the secret in the Secrets Store and links it to this provider in ADP. If you already have a secret in Secrets Store, click **Existing** instead.
 |===
 
 === Scopes
