@@ -8,6 +8,27 @@
 
 // Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (AgentCreate, ManagedAgentSpec) and `apps/adp-ui/src/components/agents/wizard/managed-create-wizard.tsx`, verified 2026-05-15.
 // TODO: Refresh screenshots against `adp-production` during Track D polish pass.
+//
+// TODO (pre-merge verification, before going live):
+// This page describes the new wizard found in cloudv2 main on 2026-05-15.
+// As of that date, the deployed adp-production UI is still a single-page
+// form, not the wizard. Confirm with team-ai which surface ships at GA.
+//
+// If the wizard does NOT ship before content freeze (June 8), revert to the
+// deployed form structure:
+//   - Section names: Basic Information, LLM Provider Configuration, System
+//     Prompt, MCP Tools, Subagents (Optional), Service Account
+//   - Restore Resources / Resource Tier section with the deployed values:
+//     XSmall (100m CPU, 400M RAM), Small (200m CPU, 800M RAM), Medium
+//     (300m CPU, 1200M RAM), Large (400m CPU, 1600M RAM), XLarge (500m
+//     CPU, 2G RAM)
+//   - Restore Service Account Name as an editable field on create (default
+//     pattern: `cluster-<cluster-id>-agent-<agent-name>-sa`)
+//   - Mark System Prompt as required (the deployed form requires it)
+//   - Max iterations default: 30 in the deployed form (proto allows 0)
+//   - On the agent detail page, the deployed tabs are: Configuration,
+//     Integrations, A2A, Transcripts, Inspector. Restore A2A as its own
+//     tab (not on Overview) and re-add the Inspector tab as a test surface.
 
 Create a new glossterm:AI agent[] declaratively through the ADP UI. No Python or JavaScript code required. This guide walks the create wizard and the optional post-create steps for discovery metadata and testing.
 
