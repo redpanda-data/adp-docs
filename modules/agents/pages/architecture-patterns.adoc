@@ -228,6 +228,7 @@ For complete model specifications, capabilities, and pricing:
 * link:https://platform.openai.com/docs/models[OpenAI Models^]
 * link:https://docs.anthropic.com/claude/docs/models-overview[Anthropic Claude Models^]
 * link:https://ai.google.dev/gemini-api/docs/models[Google Gemini Models^]
+* link:https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html[AWS Bedrock Models^]
 
 == Design principles
 

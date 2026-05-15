@@ -19,7 +19,7 @@ After completing this quickstart, you will be able to:
 
 * An ADP environment
 
-* xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, or Google AI)
+* xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, Google AI, or AWS Bedrock)
 
 * Completed the xref:mcp:create-server.adoc[Remote MCP Quickstart] to create an MCP server with the following tools deployed:
 +
@@ -53,7 +53,7 @@ The agent orchestrates the `generate_input` and `redpanda_output` tools you crea
 . Select your AI Gateway and model:
 +
 * *AI Gateway*: Select the gateway you configured (contains provider and API key configuration)
-* *Provider*: Select a provider available in your gateway (OpenAI, Anthropic, or Google)
+* *Provider*: Select a provider available in your gateway (OpenAI, Anthropic, Google, or AWS Bedrock)
 * *Model*: Choose any balanced model from the dropdown
 
 . Write the system prompt:
