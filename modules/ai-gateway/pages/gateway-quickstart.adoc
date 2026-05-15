@@ -15,7 +15,7 @@ Before starting, ensure you have:
 
 * Access to the AI Gateway UI (provided by your administrator)
 * Admin permissions to configure providers and models
-* API key for at least one LLM provider (OpenAI, Anthropic, or Google AI)
+* Credentials for at least one LLM provider (OpenAI, Anthropic, Google AI, or AWS Bedrock). OpenAI, Anthropic, and Google AI use an API key; AWS Bedrock uses AWS credentials.
 * Python 3.8+, Node.js 18+, or cURL (for testing)
 
 == Configure a provider
@@ -23,8 +23,8 @@ Before starting, ensure you have:
 Providers represent upstream LLM services and their associated credentials. Providers are disabled by default and must be enabled explicitly.
 
 . Navigate to *Agentic* > *AI Gateway* > *Providers*.
-. Select a provider (for example, OpenAI, Anthropic, Google AI).
-. On the Configuration tab, click *Add configuration* and enter your API key.
+. Select a provider (for example, OpenAI, Anthropic, Google AI, AWS Bedrock).
+. On the Configuration tab, click *Add configuration* and enter the provider's credentials (API key for OpenAI, Anthropic, and Google AI; AWS access key and secret for Bedrock).
 . Verify the provider status shows "Active".
 
 == Enable models

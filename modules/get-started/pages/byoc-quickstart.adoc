@@ -1,15 +1,15 @@
 = ADP BYOC quickstart
-:description: Start with ADP on a Redpanda Cloud BYOC cluster on AWS.
+:description: Start with ADP on a Redpanda Cloud BYOC environment on AWS.
 :page-topic-type: how-to
 :personas: platform_admin
 :page-byoc: true
-:learning-objective-1: Check that a BYOC cluster meets the ADP prerequisites
-:learning-objective-2: Continue from BYOC cluster setup into ADP provider, MCP, and agent setup
+:learning-objective-1: Check that a BYOC environment meets the ADP prerequisites
+:learning-objective-2: Continue from BYOC environment setup into ADP provider, MCP, and agent setup
 
 // Source: `cloudv2` BYOC Terraform and Redpanda Cloud BYOC docs source, verified 2026-05-10.
 // TODO: Add click-by-click ADP BYOC setup steps after a UI walkthrough.
 
-This quickstart helps you start ADP on a Redpanda Cloud BYOC cluster on AWS.
+This quickstart helps you start ADP on a Redpanda Cloud BYOC environment on AWS.
 
 Use this guide to:
 
@@ -20,15 +20,15 @@ Use this guide to:
 
 Review xref:get-started:byoc-prereqs.adoc[ADP BYOC prerequisites].
 
-== Create or select a BYOC cluster on AWS
+== Create or select a BYOC environment on AWS
 
-Use a Redpanda Cloud BYOC cluster on AWS. For the general AWS BYOC cluster creation flow, see xref:redpanda-cloud:get-started:cluster-types/byoc/aws/create-byoc-cluster-aws.adoc[Create a BYOC cluster on AWS].
+Use a Redpanda Cloud BYOC environment on AWS. For the general AWS BYOC environment creation flow, see xref:redpanda-cloud:get-started:cluster-types/byoc/aws/create-byoc-cluster-aws.adoc[Create a BYOC environment on AWS].
 
 Before you configure ADP resources, confirm that ADP is enabled for the cluster. The provisioner switch is `adp_enabled`.
 
 == Continue with ADP setup
 
-After the BYOC cluster meets the prerequisites, continue with the ADP setup guides:
+After the BYOC environment meets the prerequisites, continue with the ADP setup guides:
 
 . xref:ai-gateway:configure-provider.adoc[Configure your LLM provider]
 . xref:mcp:create-server.adoc[Create an MCP server]

@@ -16,7 +16,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* AI Gateway deployed on a BYOC cluster running Redpanda version 25.3 or later
+* AI Gateway deployed on a BYOC environment running Redpanda version 25.3 or later
 * Administrator access to the AI Gateway UI
 * API keys for at least one LLM provider (Anthropic, OpenAI, or others)
 * Understanding of xref:ai-gateway/gateway-architecture.adoc[AI Gateway concepts]
