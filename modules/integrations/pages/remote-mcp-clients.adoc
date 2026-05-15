@@ -118,9 +118,7 @@ Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and
 |===
 +
 . Click *Add*. The connector appears in the Connectors list with a `CUSTOM` badge.
-. Click *Connect* on the new connector row. Claude opens a browser tab pointed at AI Gateway's authorization endpoint. Sign in with your AI Gateway identity (Auth0 today, Zitadel in a future release). Once approved, the connector becomes invokable in any conversation.
-+
-// TODO(review-before-publish): forward-looking framing: "Auth0 today, Zitadel in a future release" exposes an internal IdP migration plan. Confirm whether to name the IdP at all in customer prose, or drop both names and just say "your AI Gateway identity provider".
+. Click *Connect* on the new connector row. Claude opens a browser tab pointed at AI Gateway's authorization endpoint. Sign in with your AI Gateway identity provider. Once approved, the connector becomes invokable in any conversation.
 
 // TODO: capture screenshots of the Add custom connector modal and the post-connect Connectors list against `adp-production`.
 

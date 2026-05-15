@@ -58,8 +58,7 @@ Process every event with AI reasoning at scale. Invoke agents automatically from
 
 * Agents are available only on ADP BYOC environments
 * MCP servers must be hosted in ADP
-// TODO(review-before-publish): forward-looking framing: "is not currently supported" implies it's coming. Confirm whether to keep this limitation note as-is, drop "currently" to make it a static limitation, or remove the bullet entirely if the workaround (internal subagents) is the durable answer.
-* Cross-agent calling between separate agents is not currently supported (use internal subagents for delegation within a single agent)
+* Cross-agent calling between separate agents is not supported. Use internal subagents for delegation within a single agent.
 
 == Next steps
 
