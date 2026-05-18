@@ -1,4 +1,4 @@
-name: redpanda-adp
+name: agentic-data-plane
 title: Agentic Data Plane
 version: ~
 start_page: ROOT:index.adoc
@@ -10,9 +10,12 @@ asciidoc:
     env-adp: true
     page-adp: true
     # Header configuration
-    page-header-data:
+    component-metadata:
+      title: "Agentic Data Plane"
+      description: "Build AI agents with real-time data"
       order: 1
       color: '#ea580c'
       text-color: '#ffffff'
+      icon: "robot"
     # UI name for single-sourced content
     ui: Redpanda Cloud
