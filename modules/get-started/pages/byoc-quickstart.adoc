@@ -1,4 +1,4 @@
-= ADP BYOC quickstart
+= ADP BYOC Quickstart
 :description: Start with ADP on a Redpanda Cloud BYOC environment on AWS.
 :page-topic-type: how-to
 :personas: platform_admin

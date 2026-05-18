@@ -1,4 +1,4 @@
-= ADP BYOC prerequisites
+= ADP BYOC Prerequisites
 :description: Requirements for running Redpanda ADP on Redpanda Cloud BYOC environments on AWS.
 :page-topic-type: reference
 :personas: platform_admin
@@ -9,7 +9,7 @@
 // Source: `cloudv2` `terraform/provisioners/aws-redpanda-applications/*.tf`, `adp/manifests/CLAUDE.md`, and BYOC support partials, verified 2026-05-10.
 // TODO: Confirm the Redpanda Cloud UI label and status indicator for ADP enablement after an authenticated Cloud walkthrough.
 
-ADP on BYOC uses Redpanda Cloud BYOC infrastructure on AWS. Use this reference to confirm the requirements before you create ADP resources on a BYOC environment.
+ADP on BYOC uses Redpanda Bring Your Own Cloud (BYOC) infrastructure on AWS. Use this reference to confirm the requirements before you create ADP resources on a BYOC environment.
 
 Use this reference to:
 
