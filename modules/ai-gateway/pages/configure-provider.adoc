@@ -40,7 +40,7 @@ The first card on the page collects identity fields.
 
 |*Name*
 |Yes
-|Machine identifier. Lowercase letters, numbers, and hyphens only (`^[a-z][a-z0-9-]*$`), up to 63 characters. Immutable after creation. Appears in the proxy URL (`/llm/v1/providers/<name>/...`). The form auto-suggests a friendly name (for example, `red-space-bear`); override it if you want something more descriptive.
+|Machine identifier. Lowercase letters, numbers, and hyphens only (`^[a-z][a-z0-9-]*$`), up to 63 characters. Immutable after creation. Appears in the proxy URL (`/llm/v1/providers/<name>/...`). The form auto-suggests a friendly name (for example, `red-space-bear`). Override it if you want something more descriptive.
 
 |*Display name* (Advanced options)
 |No
@@ -70,7 +70,7 @@ The *Provider type* card shows five cards. Pick the one that matches your upstre
 |Invoke foundation models (Claude, Llama, Titan, Nova, Mistral, AI21 Jamba) hosted inside your AWS account. Requires an AWS region and credentials (static, STS-assumed role, or the default credential chain). Supports the native Bedrock APIs (`InvokeModel`, `Converse`) and an OpenAI-compatible Chat Completions endpoint for `gpt-oss` models. See <<bedrock-inference-profiles>> for picking the right model identifier.
 
 |*OpenAI-compatible*
-|Point at any OpenAI-compatible endpoint that ships `/v1/chat/completions` (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways. Requires a *Base URL*; authentication is optional.
+|Point at any OpenAI-compatible endpoint that ships `/v1/chat/completions` (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways. Requires a *Base URL*. Authentication is optional.
 |===
 
 Selecting a type reveals the type-specific configuration block below the picker.
@@ -178,11 +178,11 @@ Redpanda stores models as structured `ProviderModel` entries (one entry per mode
 
 After you create the provider, the detail page renders each model as a row with capability badges (*Vision*, *Reasoning*, *Streaming*, and others lifted from the catalog), the model's 7-day spend, and a link to the per-model detail page. The model list supports search and filtering.
 
-The detail page also carries a *Last 7 days* KPI strip (*TOTAL SPEND*, *REQUESTS*, *TOKENS*) with sparklines and _vs previous period_ deltas. *View all* on each card opens the relevant Governance drill-down (Spending, Requests, or Tokens) with this provider pre-filtered. See xref:governance:dashboard/overview.adoc[the governance overview] for the drill-down details.
+The detail page also carries a *Last 7 days* KPI strip (*TOTAL SPEND*, *REQUESTS*, *TOKENS*) with sparklines and _vs previous period_ deltas. *View all* on each card opens the *Cost & Usage* tab with this provider pre-filtered so you can drill into spend, request, or token trends.
 
 == Save and verify
 
-. Click *Create provider*. The button activates once *Name* and *Type* are both set; the right-hand *Summary* panel checks them off as you fill them in.
+. Click *Create provider*. The button activates after *Name* and *Type* are both set. The *Summary* panel checks them off as you fill them in.
 . On the provider's detail page, the *Connection* card shows your *Proxy URL*, *Discovery* URL, *Base URL*, and *API key ref*. Copy the *Proxy URL*: this is where your applications point.
 . Scroll to the *Verify connection* section. Pick a model from the dropdown and click *Test Connection*. The status updates from _Not tested yet_ to a pass/fail indicator. Use the *Show commands* disclosure if you want to see the equivalent curl or SDK call.
 . To wire up an application, open *Connect your app* further down the page or follow xref:ai-gateway:connect-agent.adoc[Connect your agent].
@@ -192,7 +192,7 @@ A successful Test Connection result confirms that the provider's credentials, re
 [[bedrock-inference-profiles]]
 == AWS Bedrock: Inference profiles and IAM
 
-Bedrock has three concepts that affect how you configure a provider: foundation models, cross-region inference profiles, and IAM. Get these right and the *Test connection* check passes; get them wrong and you see `AccessDenied` or `ValidationException` errors.
+Bedrock has three concepts that affect how you configure a provider: foundation models, cross-region inference profiles, and IAM. Get these right and the *Test connection* check passes. Get them wrong and you see `AccessDenied` or `ValidationException` errors.
 
 === Foundation models versus inference profiles
 
@@ -234,7 +234,7 @@ Anthropic Claude 4.6+ models (Sonnet 4.6, Opus 4.6, Opus 4.7) cannot be invoked 
 Older 4.5 and earlier Claude models still accept bare IDs.
 ====
 
-Pricing varies by profile. The bare foundation-model ID and the `global.` profile share AWS's headline rate; geo profiles (`us.`, `eu.`, `apac.`, `au.`, `jp.`) carry approximately a 10% cross-region inference premium. Use `global.` when you want the headline rate and don't need a specific geography; use `us.` / `eu.` / `apac.` when data residency matters.
+Pricing varies by profile. The bare foundation-model ID and the `global.` profile share AWS's headline rate; geo profiles (`us.`, `eu.`, `apac.`, `au.`, `jp.`) carry approximately a 10% cross-region inference premium. Use `global.` when you want the headline rate and don't need a specific geography. Use `us.` / `eu.` / `apac.` when data residency matters.
 
 === IAM policy patterns
 
@@ -302,7 +302,7 @@ The *LLM Providers* list page is the at-a-glance home for every provider in your
 |First two model identifiers exposed by the provider, plus a `+N` overflow chip when more are configured.
 
 |*Spend (7d)*
-|Spend over the last 7 days with a small sparkline and a "vs previous period" delta. The window is fixed at 7 days on this view; longer-range analysis runs through the xref:governance:dashboard/overview.adoc[governance dashboard].
+|Spend over the last 7 days with a small sparkline and a "vs previous period" delta. The window is fixed at 7 days on this view. Longer-range analysis runs through the xref:governance:dashboard/overview.adoc[governance dashboard].
 
 |*Updated*
 |Relative timestamp of the last edit.
@@ -310,11 +310,30 @@ The *LLM Providers* list page is the at-a-glance home for every provider in your
 
 A list/grid view toggle in the top-right switches between table and card layouts. The *Filter* button narrows the list by provider type, status, or name. The *Create provider* button opens the create flow described in <<open-the-create-llm-provider-page,Open the Create LLM provider page>>.
 
+[[view-cost-and-usage]]
+== View cost and usage
+
+The *Cost & Usage* tab on the *LLM Providers* page tracks spend, request volume, and token volume over time across providers and models. Use it when you want to understand which provider or model generated usage during a selected time window.
+
+The page includes these charts:
+
+* *Spend over time*: Estimated spend in USD for the selected range.
+* *Requests over time*: Request count for the selected range.
+* *Tokens over time*: Token count for the selected range.
+
+Use *Group by* to switch the chart breakdown between providers, models, and token type. Group by provider to see which upstream consumed the most budget. Group by model to see which model drove spend inside one or more providers. Group by token type to separate input, output, cached, cache-write, and reasoning usage where those buckets apply.
+
+Use *Filter* to narrow the charts by provider, model, cost type, token type, or user. Each filter appears as a chip above the chart, and you can combine them. For example, filter to one Anthropic provider, drill into `claude-opus-4-7`, then limit the spend view to input tokens.
+
+The date-range picker supports last 7 days, last 14 days, last 30 days, last 90 days, month to date, quarter to date, year to date, and custom ranges. The chart subtitle shows the selected date range and bucket size.
+
+The spend chart footer summarizes the selected view by cost bucket, including total, input, output, cached, cache writes, and reasoning when the selected traffic includes those categories.
+
 == Edit, disable, or delete a provider
 
 * *Edit*: Click *Edit* on the detail page. You can change any field *except* `Name` and `Type`, which are immutable. Model lists, credential references, and the enabled state can all change.
 * *Disable*: Click *Disable* on the detail page. The provider remains in the list, but requests to its proxy URL are rejected until you enable it again. Use this when you want to pause traffic without losing configuration.
-* *Delete*: Scroll to the *Delete this provider* section at the bottom of the detail page and click *Delete*. The action is permanent; in-flight requests fail and downstream clients receive errors until reconfigured.
+* *Delete*: Scroll to the *Delete this provider* section at the bottom of the detail page and click *Delete*. The action is permanent. In-flight requests fail and downstream clients receive errors until reconfigured.
 
 [[troubleshooting]]
 == Troubleshooting
@@ -351,7 +370,7 @@ A list/grid view toggle in the top-right switches between table and card layouts
 AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
 
 * *Multi-provider routing, failover, and retries across providers.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
-* *Spend limits.* Per-user, per-org, and global cost caps are not available. The provider detail page shows a *Cost & usage* placeholder labeled "Coming soon"; see xref:governance:budgets.adoc[Token budgets and limits].
+* *Spend limits.* Per-user, per-org, and global cost caps are not available. AI Gateway records spend and token usage for reporting in the provider *Cost & Usage* view and Governance, but it does not enforce budget caps. See xref:governance:budgets.adoc[Token budgets and limits].
 * *Rate limits.* Requests-per-second, per-minute, or per-day limits are not available.
 * *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the ADP UI.
 
