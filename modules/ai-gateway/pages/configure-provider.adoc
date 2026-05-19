@@ -67,7 +67,7 @@ The *Provider type* card shows five cards. Pick the one that matches your upstre
 |Reach Gemini Pro, Flash, and multimodal models through Google AI Studio. Ideal for long-context workloads and image/video inputs.
 
 |*AWS Bedrock*
-|Invoke foundation models (Claude, Llama, Titan, Nova, Mistral, AI21 Jamba) hosted inside your AWS account. Requires an AWS region and credentials (static, STS-assumed role, or the default credential chain). Supports the native Bedrock APIs (`InvokeModel`, `Converse`) and an OpenAI-compatible Chat Completions endpoint for `gpt-oss` models. See <<bedrock-inference-profiles>> for picking the right model identifier.
+|Invoke foundation models (Claude, Llama, Titan, Nova, Mistral, AI21 Jamba) hosted inside your AWS account. Requires an AWS region and credentials (static, STS-assumed role, or the default credential chain). Supports the native Bedrock APIs (`InvokeModel`, `Converse`) and an OpenAI-compatible Chat Completions endpoint for `gpt-oss` models. See <<bedrock-inference-profiles>> for picking the right model identifier, and xref:ai-gateway:bedrock-setup.adoc[Set up AWS Bedrock as an LLM provider] for a step-by-step IAM and access-key walkthrough.
 
 |*OpenAI-compatible*
 |Point at any OpenAI-compatible endpoint that ships `/v1/chat/completions` (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways. Requires a *Base URL*. Authentication is optional.
@@ -162,6 +162,11 @@ OpenAI-compatible::
 TIP: OpenAI-compatible endpoints can serve any model. Enter the exact model identifiers your upstream server exposes (for example, `meta-llama/Llama-3.3-70B-Instruct` or `qwen3:8b`).
 ======
 
+[NOTE]
+====
+For the OpenAI, Google AI, and AWS Bedrock provider types, AI Gateway validates that the credential references resolve before it accepts the create or update. A missing or empty secret reference is rejected at save time instead of failing at first call. The OpenAI-compatible type does not require a credential reference, so it can be created with no authentication for local runtimes such as Ollama or vLLM.
+====
+
 [[select-models]]
 == Select models
 
@@ -235,6 +240,8 @@ Older 4.5 and earlier Claude models still accept bare IDs.
 ====
 
 Pricing varies by profile. The bare foundation-model ID and the `global.` profile share AWS's headline rate; geo profiles (`us.`, `eu.`, `apac.`, `au.`, `jp.`) carry approximately a 10% cross-region inference premium. Use `global.` when you want the headline rate and don't need a specific geography. Use `us.` / `eu.` / `apac.` when data residency matters.
+
+AI Gateway preserves the regional prefix end to end when it records spend, so usage in the xref:governance:dashboard/overview.adoc[governance dashboard] and the *Cost & Usage* tab is attributed to the correct regional rate. A call to `eu.anthropic.claude-haiku-4-5` is billed at the EU Haiku rate, not the headline foundation-model rate.
 
 === IAM policy patterns
 
@@ -327,7 +334,15 @@ Use *Filter* to narrow the charts by provider, model, cost type, token type, or 
 
 The date-range picker supports last 7 days, last 14 days, last 30 days, last 90 days, month to date, quarter to date, year to date, and custom ranges. The chart subtitle shows the selected date range and bucket size.
 
+A custom range writes `customStart` and `customEnd` ISO-8601 timestamps to the page URL, so the view is shareable: copy the URL after picking a custom range and any teammate who opens it lands on the same window.
+
+The chart renders empty buckets in the selected range as zero-height bars rather than gaps, so quiet days line up with their date label and the trend stays readable when traffic is bursty.
+
+The chart palette is colorblind-safe. When multiple providers of the same type exist (for example, two OpenAI providers), the chart renders each one with a distinct hatched pattern so the series stay visually distinguishable.
+
 The spend chart footer summarizes the selected view by cost bucket, including total, input, output, cached, cache writes, and reasoning when the selected traffic includes those categories.
+
+// TODO: When the cached-token totals reconciliation fix lands (tracked internally as AI-1152), confirm the spend footer cost-bucket totals match cached-token spend across mixed cache-hit / cache-miss traffic, then this comment can be removed.
 
 == Edit, disable, or delete a provider
 

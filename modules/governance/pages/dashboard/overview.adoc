@@ -107,23 +107,27 @@ The *Agents* table lists agents registered in the deployment.
 |Column |What it shows
 
 |Name
-|Agent display name
+|Agent display name. Clicking the name opens the agent's detail page.
 
 |Type
 |Agent type. The UI labels agents as Redpanda Managed because dataplane v1alpha3 does not distinguish managed agents from BYOA agents in this table.
 
 |LLM provider
-|The provider the agent calls
+|The provider the agent calls.
 
 |Model
-|The model identifier the agent uses
+|The model identifier the agent uses.
 |===
+
+The table column headers carry filter controls. Filter by name, provider, or model to narrow the list before drilling into a specific agent's spend.
 
 == Read the Top users panel
 
-The *Top users* panel shows the highest-spending users in the selected time range. It ranks user-level spend, shows up to five users per page, and includes a heatmap for the ranked users.
+The Top users panel ranks identified users by spend in the selected time range. The panel shows five users per page, fetches the top 20 from the backend, and supports paging between groups of five.
 
-If no user-level spend exists, the panel stays empty until agents send requests on behalf of identified users.
+For the users currently visible on the page, a heatmap renders one row per user and one column per time bucket (hourly for ranges of 24 hours or less, daily otherwise). Each cell's color intensity reflects the user's spend in that bucket: gray for low or no spend, red for the heaviest spend on the page. Hover a cell to see the exact bucket spend.
+
+If no user-level spend exists, the panel stays empty until agents send requests on behalf of identified users. Anonymous traffic doesn't appear here.
 
 == Next steps
 

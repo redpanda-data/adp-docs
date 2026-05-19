@@ -163,7 +163,7 @@ Walk through the create form to register the upstream:
 +
 * *HTTP Basic*: `client_id:client_secret` sent as the Basic auth header. Most common.
 * *POST body*: Credentials sent as form fields in the token-request body.
-* *None*: For public clients that rely on PKCE only.
+* *None*: For public clients that rely on PKCE only. Pick this when the upstream OAuth app is registered as a public client and AI Gateway authenticates by proving possession of a PKCE code verifier rather than a stored client secret. Leave the client-secret reference unset.
 +
 . Provide the *Client ID* and a secret reference for the *Client secret* (for example, `SLACK_CLIENT_SECRET`).
 . Define the *Supported scopes*. Include every scope any MCP server may need.
