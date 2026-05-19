@@ -73,6 +73,13 @@ Each managed type ships its own configuration schema. The form on this page is r
 
 For per-type fields, see the xref:mcp:managed/managed-catalog.adoc[Managed catalog]: a reference of every managed MCP type Redpanda hosts, grouped by category, with a description and a link to its deep-dive page where one exists.
 
+[NOTE]
+====
+MCP enforces a 64-character limit on tool names. For managed MCP types whose generated names exceed that limit, ADP truncates the prefix and replaces it with a hash, so the long-form name becomes something like `64ghux5adn_github_read_v1_GitHubReadService_GetAuthenticatedUser`. ADP always preserves the version, service, and method suffix, so the short tool name an agent sees (for example, `get_authenticated_user`) stays stable across truncations.
+
+You don't configure the truncation. This detail matters only when you correlate tool calls in logs or transcripts against the generated proto names.
+====
+
 == Configure the self-managed flow (Remote/Proxied only)
 
 Two fields on top of the identity fields:

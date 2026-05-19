@@ -178,6 +178,52 @@ When the agent is running, ADP shows its HTTP endpoint URL on the *Configuration
 
 You can use this URL to call the agent programmatically or integrate it with external systems. See xref:agents:integration-overview.adoc[].
 
+== Issue agent credentials
+
+Every agent has a hidden service account in AI Gateway that scopes the calls the agent makes to MCP servers and the Redpanda broker. To call the agent from an external system as that service account, issue an OAuth 2.0 client credential on the agent's *Credentials* tab.
+
+The *Setup* tab on the agent detail page shows the equivalent OAuth client configuration (token endpoint, scopes, sample request) after a credential exists.
+
+[IMPORTANT]
+====
+The `client_secret` value is plaintext and returned only at create time. ADP cannot retrieve it again. Capture the value into your secret store before you leave the dialog. To rotate, create a new credential, update the consumer, then delete the old one.
+====
+
+. Open the agent and click the *Credentials* tab.
+. Click *Create credential*.
+. Optionally enter a Description (up to 1024 characters) to identify what the credential is used for, for example `customer-support-bot prod`.
+. Optionally pick an Expires at date. Leave it unset for a non-expiring credential.
+. Click *Create*.
++
+ADP shows a one-time dialog containing:
++
+* *Client ID*: An OAuth 2.0 client identifier in the form `serviceaccounts/<agent-name>`. Stable across credentials and rotations: every credential on the same agent carries the same value.
+* *Client secret*: The plaintext OAuth client secret, shown only at create time.
+
+. Copy both values into your secret store before closing the dialog. The credential row appears in the Credentials table with its description, expiry, and creation time, but the secret is never retrievable again.
+
+To list existing credentials, return to the *Credentials* tab. The list shows the metadata fields for each credential (description, expiry, creation time) but not the secret.
+
+To delete a credential, click the delete action on the credential row. Delete is idempotent: deleting a credential that no longer exists succeeds. After delete, the OAuth token endpoint rejects the corresponding `client_id` / `client_secret` pair.
+
+=== Required permissions
+
+Credential operations are governed by their own permission set:
+
+[cols="1,2"]
+|===
+|Permission |Allows
+
+|`dataplane_adp_agent_credential_create`
+|Issue new credentials for the agent.
+
+|`dataplane_adp_agent_credential_list`
+|List credential metadata for the agent.
+
+|`dataplane_adp_agent_credential_delete`
+|Delete credentials for the agent.
+|===
+
 == Configure A2A discovery metadata (optional)
 
 A2A discovery metadata lets external systems find and invoke the agent through capability-based discovery. Configure this after creation, on the agent's *A2A* tab.
