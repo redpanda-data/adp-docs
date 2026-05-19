@@ -67,6 +67,8 @@
 *** xref:governance:guardrails/cost-tracking.adoc[Cost Tracking]
 ** xref:governance:budgets.adoc[Token Budgets and Limits]
 ** xref:governance:kill-switch.adoc[Kill Switch]
+** xref:governance:permissions-overview.adoc[About ADP Permissions]
+** xref:governance:permissions-reference.adoc[ADP Permissions Reference]
 * xref:observability:index.adoc[Observability]
 ** xref:observability:concepts.adoc[Concepts]
 ** xref:observability:transcripts.adoc[Read a Transcript]

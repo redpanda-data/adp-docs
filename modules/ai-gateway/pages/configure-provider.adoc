@@ -358,9 +358,7 @@ The spend chart footer summarizes the selected view by cost bucket, including to
 |Gemini uses the `x-goog-api-key` header, not `Authorization`. If you're seeing 401s on Gemini, check that the client is sending the correct header. See xref:ai-gateway:connect-agent.adoc[Connect your agent].
 
 |Provider list empty or 403
-|Confirm your account has the `dataplane_adp_llmprovider_*` permissions in ADP.
-+
-// TODO: confirm the exact role/permission model once the standalone ADP UI launches.
+|Confirm your account has the `dataplane_adp_llmprovider_*` permissions in ADP. The Reader built-in role is the minimum required to list providers. The Writer role is required to create one. See xref:governance:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions].
 |===
 
 // TODO: add screenshots of common error toasts once captured from the live environment.
