@@ -296,8 +296,6 @@ request.body.messages.size() > 100000 ? "anthropic/claude-opus-4.6" : request.bo
   : request.body.model
 ----
 
-For CEL routing patterns, see xref:ai-gateway:routing-cel.adoc[].
-
 === Implement custom routing rules
 
 Now add your custom routing logic:
@@ -392,5 +390,4 @@ To get back to AI Hub mode:
 == Next steps
 
 * xref:ai-gateway/admin/setup-guide.adoc[Complete Custom mode configuration]
-* xref:ai-gateway:routing-cel.adoc[Learn CEL routing patterns]
 * xref:ai-gateway/gateway-architecture.adoc[Understand architecture]

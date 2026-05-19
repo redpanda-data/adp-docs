@@ -371,8 +371,6 @@ Guard for field existence:
 has(request.body.max_tokens) && request.body.max_tokens > 1000
 ----
 
-For more CEL examples, see xref:ai-gateway:routing-cel.adoc[].
-
 == Connect AI tools to your gateway
 
 The AI Gateway provides standardized endpoints that work with various AI development tools. This section shows how to configure popular tools.
@@ -527,7 +525,6 @@ const openai = new OpenAI({
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]
 * xref:ai-gateway:aggregation.adoc[]
 * xref:integrations:index.adoc[]
 * xref:ai-gateway:gateway-architecture.adoc[]

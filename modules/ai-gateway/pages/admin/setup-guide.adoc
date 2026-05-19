@@ -205,7 +205,7 @@ Provider pools define which LLM providers handle requests, with support for prim
 +
 For simple routing, select *Route all requests to primary pool*.
 +
-For advanced routing based on request properties, use CEL expressions. See xref:ai-gateway:routing-cel.adoc[] for examples.
+For advanced routing based on request properties, use CEL expressions.
 +
 Example CEL expression for tier-based routing:
 +
@@ -378,5 +378,4 @@ Users can then discover and connect to the gateway using the information provide
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[CEL Routing Cookbook]
 * xref:integrations:index.adoc[Integrations]

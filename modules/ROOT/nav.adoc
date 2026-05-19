@@ -49,7 +49,6 @@
 ** xref:ai-gateway:gateway-quickstart.adoc[Quickstart]
 ** xref:ai-gateway:gateway-architecture.adoc[Architecture]
 ** xref:ai-gateway:configure-provider.adoc[Configure Your LLM Provider]
-** xref:ai-gateway:routing-cel.adoc[CEL Routing]
 ** xref:ai-gateway:aggregation.adoc[MCP Aggregation]
 ** xref:ai-gateway:connect-agent.adoc[Connect Your Agent]
 *** xref:ai-gateway:admin/index.adoc[For Admins]

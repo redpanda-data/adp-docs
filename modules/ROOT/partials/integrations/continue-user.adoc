@@ -839,7 +839,6 @@ Autocomplete rarely needs more than 256 tokens, while chat responses can vary.
 == Next steps
 
 * xref:ai-gateway:aggregation.adoc[]
-* xref:ai-gateway:routing-cel.adoc[]
 
 == Related pages
 
