@@ -16,6 +16,6 @@ asciidoc:
       order: 1
       color: '#ea580c'
       text-color: '#ffffff'
-      icon: "robot"
+      icon: "stack-2"
     # UI name for single-sourced content
     ui: Redpanda Cloud
