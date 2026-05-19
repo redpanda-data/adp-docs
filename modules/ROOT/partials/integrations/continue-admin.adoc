@@ -735,5 +735,4 @@ This is expected behavior, not a configuration issue:
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]
 * xref:mcp/remote/overview.adoc[]

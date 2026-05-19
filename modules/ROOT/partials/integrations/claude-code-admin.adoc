@@ -492,5 +492,4 @@ Causes and solutions:
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]
 * xref:mcp/remote/overview.adoc[]

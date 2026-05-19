@@ -902,7 +902,6 @@ Generate project-specific cost reports from the gateway dashboard.
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]
 * xref:ai-gateway:aggregation.adoc[]
 
 == Related pages

@@ -815,7 +815,3 @@ Causes and solutions:
 * **Network latency**: Verify cluster is in a region with good connectivity to users
 * **Cold start delays**: Some providers may have cold start latency on first request
 * **Rate limiting overhead**: Check if rate limit enforcement is adding latency
-
-== Next steps
-
-* xref:ai-gateway:routing-cel.adoc[]
