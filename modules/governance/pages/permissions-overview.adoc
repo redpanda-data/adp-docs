@@ -29,7 +29,7 @@ A successful API call requires all three: the caller must hold a role binding wh
 
 == ADP-namespaced permissions
 
-ADP permissions live in six families, named by the namespace prefix:
+ADP permissions live in the following families, named by the namespace prefix:
 
 * `dataplane_adp_mcpserver_*`: Manage and call MCP servers (CRUD plus runtime operations like `tools_call` and `resources_read`).
 * `dataplane_adp_llmprovider_*`: Manage LLM providers and proxy LLM requests through AI Gateway. The `_invoke` permission is what your applications need at runtime.
@@ -49,7 +49,7 @@ For the full list of permissions and which built-in role grants each one, see xr
 
 == Built-in roles
 
-ADP includes seven built-in roles. The first three are general-purpose; the last four are narrow Invoker roles for runtime-only access.
+ADP includes the following built-in roles. Admin, Writer, and Reader are general-purpose. The remaining roles are narrow Invoker roles for runtime-only access.
 
 [cols="1,3"]
 |===
@@ -92,9 +92,6 @@ Account impersonation, which lets Redpanda Cloud's Console reuse a user's identi
 
 ADP permissions are part of the same Cloud RBAC system that gates control-plane resources such as resource groups, networks, and clusters. The Admin, Writer, and Reader built-in roles each cover control-plane permissions, dataplane Kafka permissions, and ADP dataplane permissions in a single bundle, so a single role binding on the Writer role at the organization scope grants a developer access to every layer.
 
-For the Cloud-wide RBAC mechanics (principals, scopes, custom roles, role-binding API), see xref:redpanda-cloud:security:authorization/rbac/rbac.adoc[Role-Based Access Control].
-
-== Next steps
+== Related topics
 
 * xref:governance:permissions-reference.adoc[ADP Permissions Reference]
-* xref:redpanda-cloud:security:authorization/rbac/rbac.adoc[Role-Based Access Control] in Redpanda Cloud
