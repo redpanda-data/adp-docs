@@ -59,7 +59,7 @@ The top of the dashboard shows three KPI tabs, each scoped to the active time ra
 |Estimated LLM provider spend in dollars for the selected range
 
 |Requests
-|LLM requests routed through AI Gateway for the selected range
+|LLM requests routed through AI Gateway for the selected range. When the range contains failed requests, a secondary line below the total flags the failed count (for example, `1.2K failed`).
 
 |Tokens
 |Input, output, and cached tokens summed together for the selected range

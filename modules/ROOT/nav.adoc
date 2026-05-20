@@ -4,7 +4,6 @@
 ** xref:get-started:byoc-quickstart.adoc[Quickstart]
 ** xref:get-started:first-agent.adoc[Build Your First Agent]
 ** xref:get-started:rpk-install.adoc[Install or Update rpk]
-** xref:get-started:invite-team.adoc[Invite Your Team]
 * xref:agents:index.adoc[Agents]
 ** xref:agents:overview.adoc[Overview]
 ** xref:agents:quickstart.adoc[Quickstart]
