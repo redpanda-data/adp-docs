@@ -439,7 +439,7 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 
 === 403 Forbidden
 
-* The service account may lack the required roles. Ask an admin to grant `dataplane_adp_llmprovider_get` at minimum.
+* The service account may lack the required roles. Ask an admin to grant `dataplane_adp_llmprovider_get` at minimum to read provider config, and `dataplane_adp_llmprovider_invoke` to proxy LLM requests through AI Gateway. See xref:governance:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions] or assign the LLMProviderInvoker built-in role for runtime-only access.
 * The provider may be disabled. Check the *Status* field on its *Connection* card.
 
 === Connection timeout or reset
