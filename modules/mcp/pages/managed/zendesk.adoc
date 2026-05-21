@@ -39,7 +39,7 @@ Before you create the server, make sure you have:
 
 . In the Zendesk Admin Center, go to *Apps and integrations > APIs > Zendesk API*.
 . On the *Settings* tab, enable *Token access*.
-. Click *Add API token*, give it a descriptive label (for example, `redpanda-aigw`), and copy the token value. It is shown only once.
+. Click *Add API token*, give it a descriptive label (for example, `redpanda-ai-gateway`), and copy the token value. It is shown only once.
 . Note the *agent email* the token will act as (the email of the user who created the token). The HTTP Basic auth string the MCP builds is `base64(<email>/token:<api_token>)`. The `/token` literal is Zendesk's API-token quirk.
 . Store the token in the ADP secret store under a name like `ZENDESK_API_TOKEN`.
 
