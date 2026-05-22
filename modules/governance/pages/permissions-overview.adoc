@@ -86,7 +86,7 @@ ADP API calls authenticate as one of two identity types:
 * *User identity (OIDC)*: A human user signed in through Redpanda Cloud's OIDC provider. The Cloud UI uses this identity when an admin manages ADP resources interactively.
 * *Service account*: A non-human identity backed by OIDC client credentials. Applications, CI jobs, and `rpk ai` use service accounts.
 
-Account impersonation, which lets Redpanda Cloud's Console reuse a user's identity for Kafka API and Schema Registry calls, applies to those two subsystems only. ADP endpoints continue to authenticate clients directly through their OIDC tokens, regardless of how account impersonation is configured at the cluster level. See xref:redpanda-cloud:security:cloud-authentication.adoc#account-impersonation[Account impersonation] for the Kafka and Schema Registry flow.
+Account impersonation, which lets Redpanda Cloud's Console reuse a user's identity for Kafka API and Schema Registry calls, applies to those two subsystems only. ADP endpoints continue to authenticate clients directly through their OIDC tokens, regardless of how account impersonation is configured at the cluster level.
 
 == Where ADP fits in Cloud RBAC
 

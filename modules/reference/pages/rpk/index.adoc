@@ -1,5 +1,5 @@
 = rpk Commands
-:description: Reference for the `rpk` commands used to manage the Redpanda Agentic Data Plane from the command line.
+:description: Reference for the rpk commands used to manage the Redpanda Agentic Data Plane from the command line.
 :page-layout: index
 
 This section documents the `rpk` commands you use to manage the Redpanda Agentic Data Plane (ADP) from the command line.

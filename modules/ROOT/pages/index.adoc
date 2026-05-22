@@ -26,7 +26,7 @@ After reading this page, you will be able to:
 
 With Redpanda AI agents, you declare the agent behavior you want and Redpanda handles execution and orchestration. Instead of writing Python or JavaScript, you define behaviors in YAML. You can orchestrate multiple specialized glossterm:subagent[,sub-agents], or bring your own frameworks like LangChain or LlamaIndex.
 
-What makes this practical at scale is xref:redpanda-cloud:develop:connect/about.adoc[Redpanda Connect]. More than 300 connectors with built-in filtering, enrichment, and routing give declarative definitions real power. Upcoming templates will provide default behaviors for common domains such as customer success, legal, and finance.
+What makes this practical at scale is Redpanda Connect. More than 300 connectors with built-in filtering, enrichment, and routing give declarative definitions real power. Upcoming templates will provide default behaviors for common domains such as customer success, legal, and finance.
 
 The result is faster time-to-production, lower maintenance (declarative definitions instead of imperative code), and organizational consistency across teams.
 
