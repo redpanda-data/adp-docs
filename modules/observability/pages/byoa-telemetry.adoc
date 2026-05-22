@@ -94,7 +94,7 @@ Latency and timestamps come from OTel span `start_time` and `end_time` automatic
 
 == Span hierarchy
 
-Transcripts read your agent's span tree to lay out turns. The recognized span types (matched by `gen_ai.operation.name` and span name) are documented in xref:observability:concepts.adoc[Transcripts and AI Observability]. The four span shapes are:
+Transcripts read your agent's span tree to lay out turns. The recognized span types (matched by `gen_ai.operation.name` and span name) are documented in xref:observability:concepts.adoc[Observability]. The four span shapes are:
 
 * *Top-level span*: One per agent invocation. Sets `gen_ai.operation.name = "invoke_agent"`, carries the conversation ID and service name.
 * *Reasoning or chat spans*: Set `gen_ai.operation.name = "chat"` for LLM calls. Carry the model, token counts, and provider attributes.
@@ -158,6 +158,6 @@ Common symptoms and fixes:
 == Related topics
 
 * xref:observability:ingest-custom-traces.adoc[Ingest custom traces]
-* xref:observability:concepts.adoc[Transcripts and AI Observability]
+* xref:observability:concepts.adoc[Observability]
 * xref:observability:transcripts.adoc[Read a transcript]
 * xref:agents:byoa-register.adoc[Register your own agent (BYOA)]

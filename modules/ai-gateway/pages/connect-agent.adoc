@@ -1,5 +1,5 @@
 = Connect Your Agent
-:description: Point your application or AI agent at an AI Gateway provider's proxy URL. Covers the URL shape, the local development workflow with `rpk ai`, the OIDC client-credentials flow for CI and application code, and SDK examples for OpenAI, Anthropic, Google AI, AWS Bedrock, and OpenAI-compatible endpoints.
+:description: Point your application or AI agent at an AI Gateway provider's proxy URL. Covers the URL shape, the local development workflow with rpk ai, the OIDC client-credentials flow for CI and application code, and SDK examples for OpenAI, Anthropic, Google AI, AWS Bedrock, and OpenAI-compatible endpoints.
 :page-topic-type: how-to
 :personas: app_developer
 :page-aliases: redpanda-cloud:ai-agents:ai-gateway/builders/connect-your-agent.adoc

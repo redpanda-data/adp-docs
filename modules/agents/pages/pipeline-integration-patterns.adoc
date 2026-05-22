@@ -140,4 +140,3 @@ This pipeline:
 * xref:mcp:overview.adoc[]
 * xref:agents:integration-overview.adoc[]
 * xref:agents:a2a-concepts.adoc[]
-* xref:redpanda-cloud:develop:connect/components/processors/about.adoc[]

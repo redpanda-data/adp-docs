@@ -1,4 +1,4 @@
-= Transcripts and AI Observability
+= Observability
 :description: Understand how Redpanda captures end-to-end execution transcripts on an immutable distributed log for agent governance and observability.
 :page-topic-type: concepts
 :personas: evaluator, agent_developer, platform_admin, data_engineer
