@@ -20,7 +20,7 @@ Use this guide to:
 == Prerequisites
 
 * Access to the Agentic Data Plane
-* The `dataplane_adp_spending_get` permission to read spend, request, and token data
+* The `dataplane_adp_spending_get` permission to read spend, request, and token data, granted by both the Writer and Reader built-in roles. See xref:governance:permissions-reference.adoc#spending-permissions[Spending permissions].
 * At least one LLM provider or agent if you want non-empty charts and tables
 
 == Open the dashboard

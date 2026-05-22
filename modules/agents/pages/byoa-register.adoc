@@ -68,7 +68,7 @@ Before you register a BYOA agent, make sure you have:
 * An agent running in your own infrastructure with a reachable HTTPS endpoint.
 * The ability to add an HTTPS route at `/.well-known/agent-card.json` (or equivalent) on that endpoint. See <<a2a-endpoint-contract>>.
 * The agent instrumented with OpenTelemetry, emitting the minimum required spans contract. See xref:observability:byoa-telemetry.adoc[BYOA telemetry (OpenTelemetry)].
-* The right permission to create agents (`dataplane_adp_agent_create`).
+* The `dataplane_adp_agent_create` permission, granted by the Writer built-in role. See xref:governance:permissions-reference.adoc#agent-management-permissions[Agent management permissions].
 * A name for the agent that follows DNS-1123 conventions (1–63 characters, lowercase letters / numbers / hyphens, starting with a letter). The name is immutable once the agent is registered.
 
 [[a2a-endpoint-contract]]
