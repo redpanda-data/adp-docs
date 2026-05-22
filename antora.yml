@@ -9,6 +9,11 @@ asciidoc:
     # Environment flags for conditional content
     env-adp: true
     page-adp: true
+    # AI suggestions for chat drawer (component-specific)
+    ai-suggestion-1: "How do I build my first agent?"
+    ai-suggestion-2: "Set up MCP with Postgres"
+    ai-suggestion-3: "Rotate an API key safely"
+    ai-suggestion-4: "What's a token budget?"
     # Header configuration
     component-metadata:
       title: "Agentic Data Plane"
