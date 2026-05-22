@@ -7,7 +7,7 @@
 :learning-objective-2: Route your first request through AI Gateway and verify it works
 :learning-objective-3: Verify request routing and token usage in the gateway overview
 
-Redpanda AI Gateway keeps your AI-powered applications running and your costs under control by routing all LLM and MCP traffic through a single managed layer with automatic failover and budget enforcement. This quickstart walks you through configuring your first gateway and routing requests through it.
+Redpanda AI Gateway, part of the Agentic Data Plane (ADP), is the managed proxy for LLM APIs. This quickstart walks you through configuring your first gateway and routing requests through it.
 
 == Prerequisites
 
@@ -15,7 +15,7 @@ Before starting, ensure you have:
 
 * Access to the AI Gateway UI (provided by your administrator)
 * Admin permissions to configure providers and models
-* API key for at least one LLM provider (OpenAI, Anthropic, or Google AI)
+* Credentials for at least one LLM provider (OpenAI, Anthropic, Google AI, or AWS Bedrock). OpenAI, Anthropic, and Google AI use an API key; AWS Bedrock uses AWS credentials.
 * Python 3.8+, Node.js 18+, or cURL (for testing)
 
 == Configure a provider
@@ -23,8 +23,8 @@ Before starting, ensure you have:
 Providers represent upstream LLM services and their associated credentials. Providers are disabled by default and must be enabled explicitly.
 
 . Navigate to *Agentic* > *AI Gateway* > *Providers*.
-. Select a provider (for example, OpenAI, Anthropic, Google AI).
-. On the Configuration tab, click *Add configuration* and enter your API key.
+. Select a provider (for example, OpenAI, Anthropic, Google AI, AWS Bedrock).
+. On the Configuration tab, click *Add configuration* and enter the provider's credentials (API key for OpenAI, Anthropic, and Google AI; AWS access key and secret for Bedrock).
 . Verify the provider status shows "Active".
 
 == Enable models
@@ -63,7 +63,7 @@ When creating a gateway, you choose between two modes:
 * *AI Hub Mode*: Zero-configuration with pre-configured routing and backend pools. Just add provider credentials and start routing requests. Ideal for quickstarts and standard use cases.
 * *Custom Mode*: Full control over all routing rules, backend pools, and policies. Requires manual configuration. Ideal for custom routing logic and specialized requirements.
 
-See xref:gateway-modes.adoc[] to understand which mode fits your needs. This quickstart focuses on Custom mode configuration.
+See xref:ai-gateway:gateway-modes.adoc[] to understand which mode fits your needs. This quickstart focuses on Custom mode configuration.
 ====
 endif::[]
 
@@ -371,8 +371,6 @@ Guard for field existence:
 has(request.body.max_tokens) && request.body.max_tokens > 1000
 ----
 
-For more CEL examples, see xref:routing-cel.adoc[].
-
 == Connect AI tools to your gateway
 
 The AI Gateway provides standardized endpoints that work with various AI development tools. This section shows how to configure popular tools.
@@ -527,8 +525,7 @@ const openai = new OpenAI({
 
 == Next steps
 
-* xref:routing-cel.adoc[]
-* xref:aggregation.adoc[]
+* xref:ai-gateway:aggregation.adoc[]
 * xref:integrations:index.adoc[]
-* xref:gateway-architecture.adoc[]
-* xref:overview.adoc[]
+* xref:ai-gateway:gateway-architecture.adoc[]
+* xref:ai-gateway:overview.adoc[]

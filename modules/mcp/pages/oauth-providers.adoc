@@ -17,6 +17,8 @@ After completing this guide, you will be able to:
 [IMPORTANT]
 ====
 OAuth providers and OAuth clients are different resources. An *OAuth provider* (this page) is a definition of an upstream system the gateway authenticates against. An *OAuth client* is a per-application credential issued *by* the AI Gateway's own identity provider, used by external clients to call ADP. They live under separate sidebar entries (*OAuth Providers* and *OAuth Clients*) and have separate proto, permissions, and lifecycles.
+
+To register or manage an OAuth Client (Claude Desktop, ChatGPT, Cursor, and so on), including revoking its refresh tokens to force a re-sign-in, see xref:integrations:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
 ====
 
 == Prerequisites
@@ -161,7 +163,7 @@ Walk through the create form to register the upstream:
 +
 * *HTTP Basic*: `client_id:client_secret` sent as the Basic auth header. Most common.
 * *POST body*: Credentials sent as form fields in the token-request body.
-* *None*: For public clients that rely on PKCE only.
+* *None*: For public clients that rely on PKCE only. Pick this when the upstream OAuth app is registered as a public client and AI Gateway authenticates by proving possession of a PKCE code verifier rather than a stored client secret. Leave the client-secret reference unset.
 +
 . Provide the *Client ID* and a secret reference for the *Client secret* (for example, `SLACK_CLIENT_SECRET`).
 . Define the *Supported scopes*. Include every scope any MCP server may need.
@@ -171,7 +173,7 @@ The provider appears in the *OAuth providers* list.
 
 == Register from the CLI
 
-Use `rpk ai` to script provider registration:
+Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] to script provider registration:
 
 // TODO(rpk-ai): aliases (oauth-provider, mcp-server, llm-provider) are kept for one release per cloudv2/apps/rpai/CLAUDE.md. Verified canonical command is `rpk ai oauth create` on 2026-05-05; flip examples cleanly to canonical names if the alias gets dropped.
 

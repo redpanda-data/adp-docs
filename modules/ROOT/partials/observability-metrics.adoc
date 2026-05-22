@@ -121,7 +121,7 @@ Breakdowns:
 * By gateway (for chargeback/showback)
 * By model (for cost optimization)
 * By provider (for negotiation leverage)
-* By custom header (if configured, e.g., `x-customer-id`)
+* By custom header (if configured, for example, `x-customer-id`)
 
 Use cases:
 
@@ -165,7 +165,7 @@ Breakdowns:
 Use cases:
 
 * Identify slow models or providers
-* Set SLO targets (e.g., "p95 < 2 seconds")
+* Set SLO targets (for example, "p95 < 2 seconds")
 * Detect performance regressions
 
 Example insights:
@@ -189,7 +189,7 @@ What it shows: Percentage of failed requests over time
 Metrics:
 
 * Total error rate (%)
-* Errors by status code (400, 401, 429, 500, etc.)
+* Errors by status code (400, 401, 429, 500, and so on)
 * Errors by model
 * Errors by provider
 
@@ -207,7 +207,7 @@ Breakdowns:
 Use cases:
 
 * Detect provider outages
-* Identify configuration issues (e.g., model not enabled)
+* Identify configuration issues (for example, model not enabled)
 * Monitor rate limit breaches
 
 Example insights:
@@ -226,7 +226,7 @@ Target: Typically 99%+ for production workloads
 Use cases:
 
 * Monitor overall health
-* Set up alerts (e.g., "Alert if success rate < 95%")
+* Set up alerts (for example, "Alert if success rate < 95%")
 
 === Fallback rate
 
@@ -360,7 +360,7 @@ Widgets:
 * Spend by gateway (stacked bar chart)
 * Spend by model (pie chart)
 * Spend by provider (pie chart)
-* Spend by custom dimension (if configured, e.g., customer ID)
+* Spend by custom dimension (if configured, for example, customer ID)
 * Spend trend (time series with forecast)
 * Budget utilization (progress bar: $X / $Y monthly limit)
 
@@ -507,7 +507,7 @@ alerts:
 
 Use case: Import into spreadsheet for analysis, reporting
 
-=== Export via API
+=== Export through API
 
 // PLACEHOLDER: If API is available for metrics
 
@@ -545,7 +545,7 @@ Response:
 Supported integrations:
 
 * *Prometheus*: Native metrics endpoint on port 9090 at `/metrics`
-* *OpenTelemetry*: Traces exported to Redpanda topics via the OpenTelemetry exporter
+* *OpenTelemetry*: Traces exported to Redpanda topics through the OpenTelemetry exporter
 
 == Common analysis tasks
 
@@ -630,7 +630,7 @@ Decision: If mini's error rate is acceptable, save 10x on costs
 === "Why did costs spike yesterday?"
 
 1. View cost trend graph
-2. Identify spike (e.g., Jan 10th: $500 vs usual $100)
+2. Identify spike (for example, Jan 10th: $500 vs usual $100)
 3. Drill down:
    * By gateway: Which gateway caused the spike?
    * By model: Did someone switch to expensive model?
@@ -807,7 +807,7 @@ Track trends, not point-in-time
 
 * Day-to-day variance is normal
 * Look for week-over-week and month-over-month trends
-* Seasonal patterns (e.g., more usage on weekdays)
+* Seasonal patterns (for example, more usage on weekdays)
 
 == Troubleshoot metrics issues
 

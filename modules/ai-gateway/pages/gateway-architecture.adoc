@@ -6,7 +6,7 @@
 :learning-objective-2: Explain the request lifecycle through policy evaluation stages
 :learning-objective-3: Identify supported providers, features, and current limitations
 
-This page provides technical details about AI Gateway's architecture, request processing, and capabilities. For an overview of AI Gateway, see xref:overview.adoc[]
+This page provides technical details about AI Gateway's architecture, request processing, and capabilities. For an overview of AI Gateway, see xref:ai-gateway:overview.adoc[]
 
 == Architecture overview
 
@@ -45,7 +45,7 @@ The control plane manages gateway configuration and policy definition:
 
 The data plane handles all runtime request processing:
 
-* **Request ingestion**: Accept requests via OpenAI-compatible API endpoints
+* **Request ingestion**: Accept requests through OpenAI-compatible API endpoints
 * **Authentication**: Validate API keys and gateway access
 * **Policy evaluation**: Apply rate limits, spend limits, and routing policies
 * **Provider pool management**: Select primary or fallback providers based on availability
@@ -82,7 +82,7 @@ Each policy evaluation happens synchronously in the request path. If rate limits
 
 For MCP tool requests, the lifecycle differs slightly to support deferred tool loading:
 
-. Application discovers tools via `/mcp` endpoint
+. Application discovers tools through `/mcp` endpoint
 . Gateway aggregates tools from approved MCP servers
 . Application receives search + orchestrator tools (deferred loading)
 . Application invokes specific tool
@@ -122,7 +122,7 @@ Immutable rules that route requests based on:
 
 *Automatic Failover:*
 
-Built-in fallback behavior when primary providers are unavailable (configurable via preference toggles).
+Built-in fallback behavior when primary providers are unavailable (configurable through preference toggles).
 
 *6 User Preference Toggles:*
 
@@ -215,5 +215,5 @@ endif::[]
 
 == Next steps
 
-* xref:gateway-quickstart.adoc[]
-* xref:aggregation.adoc[]
+* xref:ai-gateway:gateway-quickstart.adoc[]
+* xref:ai-gateway:aggregation.adoc[]

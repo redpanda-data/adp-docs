@@ -16,7 +16,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* AI Gateway deployed on a BYOC cluster running Redpanda version 25.3 or later
+* AI Gateway deployed on a BYOC environment running Redpanda version 25.3 or later
 * Administrator access to the AI Gateway UI
 * API keys for at least one LLM provider (Anthropic, OpenAI, or others)
 * Understanding of xref:ai-gateway/gateway-architecture.adoc[AI Gateway concepts]
@@ -32,7 +32,7 @@ Key characteristics:
 * Limited support for custom headers (makes multi-tenant deployments challenging)
 * Supports MCP protocol with a 40-tool limit
 * Built-in code completion and chat modes
-* Configuration via settings file (`~/.cursor/config.json`)
+* Configuration through settings file (`~/.cursor/config.json`)
 
 == Architecture overview
 
@@ -43,10 +43,10 @@ Cursor IDE connects to AI Gateway through standardized endpoints:
 
 The gateway handles:
 
-. Authentication via bearer tokens in the `Authorization` header
-. Gateway selection via the endpoint URL
+. Authentication through bearer tokens in the `Authorization` header
+. Gateway selection through the endpoint URL
 . Model routing using vendor prefixes (for example, `anthropic/claude-sonnet-4.5`)
-. Format transforms from OpenAI format to provider-native formats (for Anthropic, Google, etc.)
+. Format transforms from OpenAI format to provider-native formats (for Anthropic, Google, and so on)
 . MCP server aggregation for multi-tool workflows
 . Request logging and cost tracking per gateway
 
@@ -627,7 +627,7 @@ Cursor generates different request patterns:
 |Metric |Purpose
 
 |Request volume by provider
-|Identify which providers are most used via model prefix routing
+|Identify which providers are most used through model prefix routing
 
 |Token usage by model
 |Track consumption patterns (completion vs chat)
@@ -646,7 +646,7 @@ Cursor generates different request patterns:
 |===
 
 
-=== Query logs via API
+=== Query logs through API
 
 Programmatically access logs for integration with monitoring systems:
 
@@ -808,5 +808,4 @@ Causes and solutions:
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]
 * xref:mcp/remote/overview.adoc[]

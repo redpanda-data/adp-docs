@@ -33,13 +33,13 @@ The transcripts list shows every recent execution across the agents and MCP serv
 
 Each row in the list represents one execution (one trace). Columns include:
 
-* *Start time* — when the execution began (sortable).
-* *Agent* / *Service* — the agent or MCP server name from the span's `service.name` resource attribute.
-* *Status* — `RUNNING`, `COMPLETED`, or `ERROR`.
-* *Turn count* — number of turns in the conversation.
-* *Total tokens* — sum of input + output tokens across the conversation.
-* *USD cost* — total cost for the execution, derived from per-model pricing. See <<troubleshooting>> if this column shows `0`.
-* *Duration* — wall-clock time between the first and last span.
+* *Start time*: When the execution began (sortable).
+* *Agent* / *Service*: The agent or MCP server name from the span's `service.name` resource attribute.
+* *Status*: `RUNNING`, `COMPLETED`, or `ERROR`.
+* *Turn count*: Number of turns in the conversation.
+* *Total tokens*: Sum of input + output tokens across the conversation.
+* *USD cost*: Total cost for the execution, derived from per-model pricing. See <<troubleshooting>> if this column shows `0`.
+* *Duration*: Wall-clock time between the first and last span.
 
 A transcript marked _reconstructed_ is one in which some turns were rebuilt from LLM message context after the original spans were evicted from `redpanda.otel_traces`. See xref:observability:concepts.adoc#history-reconstruction[Reconstructed transcript history] for what that means.
 
@@ -51,12 +51,12 @@ Use filters to narrow the list to the executions you care about.
 
 // TODO: Re-verify every filter chip against the GA UI on adp-production. The list below reflects the beta Console MFE and may have moved.
 
-* *Service* — isolate operations from a single agent, MCP server, or AI Gateway.
-* *LLM Calls* — executions that invoked a language model.
-* *Tool Calls* — executions that invoked one or more tools.
-* *Errors Only* — executions with `TranscriptStatus.ERROR` or a per-turn error.
-* *Slow (>5s)* — executions exceeding five seconds end-to-end.
-* *Attribute* — exact-match filter on a specific span attribute. Supported keys include agent names, LLM model names, tool names, span/trace IDs, and `gen_ai.conversation.id`.
+* *Service*: Isolate operations from a single agent, MCP server, or AI Gateway.
+* *LLM Calls*: Executions that invoked a language model.
+* *Tool Calls*: Executions that invoked one or more tools.
+* *Errors Only*: Executions with `TranscriptStatus.ERROR` or a per-turn error.
+* *Slow (>5s)*: Executions exceeding five seconds end-to-end.
+* *Attribute*: Exact-match filter on a specific span attribute. Supported keys include agent names, LLM model names, tool names, span/trace IDs, and `gen_ai.conversation.id`.
 
 Combine filters to narrow further (for example, *Tool Calls* + *Errors Only* to find failed tool executions).
 
@@ -81,15 +81,15 @@ Click any row to open the transcript detail view. The view has two parts: a summ
 
 The summary header reports:
 
-* *Duration* — end-to-end wall-clock time.
-* *Status* — `RUNNING`, `COMPLETED`, or `ERROR`.
-* *Turn count* — number of turns (SYSTEM, USER, ASSISTANT, TOOL).
-* *Tokens* — input, output, and total.
-* *USD cost* — total cost, with a breakdown by turn on hover.
-* *LLM calls* — number of assistant turns that invoked a model.
-* *Tool calls* — number of tool invocations across the conversation.
-* *Conversation ID* — the `gen_ai.conversation.id` shared by related invocations. Follow it to find earlier or later executions in the same user session.
-* *Service* — the agent or MCP server that produced the transcript.
+* *Duration*: End-to-end wall-clock time.
+* *Status*: `RUNNING`, `COMPLETED`, or `ERROR`.
+* *Turn count*: Number of turns (SYSTEM, USER, ASSISTANT, TOOL).
+* *Tokens*: Input, output, and total.
+* *USD cost*: Total cost, with a breakdown by turn on hover.
+* *LLM calls*: Number of assistant turns that invoked a model.
+* *Tool calls*: Number of tool invocations across the conversation.
+* *Conversation ID*: The `gen_ai.conversation.id` shared by related invocations. Follow it to find earlier or later executions in the same user session.
+* *Service*: The agent or MCP server that produced the transcript.
 
 // TODO: Verify the exact field set and labels on the GA UI. The list above reflects the proto (`TranscriptSummary`, `TranscriptUsage`) plus the beta UI; the Console MFE may add or rename fields.
 
@@ -97,10 +97,10 @@ The summary header reports:
 
 Turns are listed in order by role:
 
-* *SYSTEM* — the system prompt and any priming instructions.
-* *USER* — a user message that started or continued the conversation.
-* *ASSISTANT* — a response from the LLM. Shows the model, input/output token counts, USD cost for that turn, and latency. If the assistant turn called a tool, its tool calls are nested underneath.
-* *TOOL* — a tool invocation. Shows the tool name, the arguments passed, the result, and the latency of the call.
+* *SYSTEM*: The system prompt and any priming instructions.
+* *USER*: A user message that started or continued the conversation.
+* *ASSISTANT*: A response from the LLM. Shows the model, input/output token counts, USD cost for that turn, and latency. If the assistant turn called a tool, its tool calls are nested underneath.
+* *TOOL*: A tool invocation. Shows the tool name, the arguments passed, the result, and the latency of the call.
 
 Any turn may carry the `is_reconstructed` marker. Reconstructed turns preserve role order and the high-level content of the conversation but do not carry per-turn token counts, latency, or tool-call arguments. See xref:observability:concepts.adoc#history-reconstruction[Reconstructed transcript history] for the mechanics.
 
@@ -108,8 +108,8 @@ Any turn may carry the `is_reconstructed` marker. Reconstructed turns preserve r
 
 An errored transcript shows `TranscriptStatus.ERROR` in the summary header. The specific failure appears on the turn that raised it, with:
 
-* *Code* — `TranscriptError.code` (for example, a provider error code or `INVALID_ARGUMENT`).
-* *Message* — a short description from the LLM provider, the tool, or the agent runtime.
+* *Code*: `TranscriptError.code` (for example, a provider error code or `INVALID_ARGUMENT`)
+* *Message*: A short description from the LLM provider, the tool, or the agent runtime
 
 If the failure happened during a tool call, the error is attached to the TOOL turn; if it was an LLM call, it's on the ASSISTANT turn; if neither, it's on the trace root.
 
@@ -125,7 +125,7 @@ If the failure happened during a tool call, the error is attached to the TOOL tu
 
 . Apply the *Slow (>5s)* filter.
 . Open a slow transcript and scan the per-turn latency column to find the bottleneck turn.
-. For tool-bound bottlenecks, expand the tool call to see arguments and result size — a large result often correlates with slow tool execution.
+. For tool-bound bottlenecks, expand the tool call to see arguments and result size: a large result often correlates with slow tool execution.
 
 === Analyze tool usage
 
@@ -160,7 +160,7 @@ If the failure happened during a tool call, the error is attached to the TOOL tu
 
 A transcript stays in `RUNNING` until the root span closes. Common causes:
 
-* The agent or MCP server is still executing (this is normal — wait, or open a newer transcript).
+* The agent or MCP server is still executing (this is normal: Wait, or open a newer transcript).
 * The root span never flushed because the process was killed mid-execution. Expect this to resolve once the OTLP ingestion lag clears; if it doesn't after several minutes, the trace is likely orphaned.
 
 === USD cost shows 0
@@ -170,9 +170,14 @@ A transcript stays in `RUNNING` until the root span closes. Common causes:
 
 If cost is `0` for a transcript that clearly used tokens, check:
 
-* The model is in the pricing table.
+* The model is in the pricing table. To use a custom rate (negotiated contract, internal chargeback), see xref:governance:budgets.adoc#override-per-model-pricing[Override per-model pricing].
 * The cost-reporting pipeline is enabled on your ADP environment.
-* The LLM-call spans carry the `gen_ai.usage.*` attributes the pipeline reads — either the token-count inputs (`gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`) or the explicit USD-cost fields listed on the concepts page.
+* The LLM-call spans carry the `gen_ai.usage.*` attributes the pipeline reads: Either the token-count inputs (`gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`) or the explicit USD-cost fields listed on the concepts page.
+
+[NOTE]
+====
+Cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) are attributed to the *CACHED* bucket on streaming and non-streaming responses alike. If a transcript shows zero cache cost on a request that clearly populated a prompt cache, check that the upstream actually wrote to the cache (the response includes a non-zero `cache_creation_input_tokens` or equivalent token-count field) before treating it as a discrepancy.
+====
 
 === All turns marked reconstructed
 
@@ -185,7 +190,7 @@ For long-running conversations, accept some reconstruction; for short conversati
 
 === Transcript missing entirely
 
-* Confirm the agent or MCP server actually ran — check its logs and the corresponding session or task topic.
+* Confirm the agent or MCP server actually ran: Check its logs and the corresponding session or task topic.
 * Confirm your user has read access to `redpanda.otel_traces`.
 // TODO: Replace with the standalone-ADP permission model once available.
 * Confirm the feature flag enabling Transcripts is on for your environment.

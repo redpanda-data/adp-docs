@@ -30,12 +30,12 @@ ADP supports three primary integration scenarios based on who initiates the call
 | Pipeline processes events
 | Your Redpanda Connect pipeline invokes agents for each event in a stream using the `a2a_message` processor
 | Event-driven, automated, high-volume stream processing
-| xref:pipeline-integration-patterns.adoc[]
+| xref:agents:pipeline-integration-patterns.adoc[]
 
 | External system calls agent
 | Your application or agent (hosted outside ADP) calls ADP agents using the A2A protocol
 | Backend services, CLI tools, custom UIs, multi-platform agent workflows
-| xref:a2a-concepts.adoc[]
+| xref:agents:a2a-concepts.adoc[]
 |===
 
 == Common use cases by pattern
@@ -64,7 +64,7 @@ The pipeline controls when agents execute. This pattern is ideal for automated, 
 
 Common scenarios include real-time fraud detection, sentiment scoring for customer reviews, and content moderation that classifies and routes content.
 
-For implementation details, see xref:pipeline-integration-patterns.adoc[].
+For implementation details, see xref:agents:pipeline-integration-patterns.adoc[].
 
 === External system calls agent
 
@@ -74,7 +74,7 @@ External systems send requests using the A2A protocol and receive responses sync
 
 Common scenarios include backend services analyzing data as part of workflows, CLI tools invoking agents for batch tasks, custom UIs displaying agent responses, CRM agents coordinating with Redpanda agents, and multi-platform workflows spanning different infrastructure.
 
-To learn how the A2A protocol enables this integration, see xref:a2a-concepts.adoc[].
+To learn how the A2A protocol enables this integration, see xref:agents:a2a-concepts.adoc[].
 
 == Pattern comparison
 
@@ -123,6 +123,6 @@ Access tokens grant full access to the agent. Anyone with a valid token can send
 
 == Next steps
 
-* xref:a2a-concepts.adoc[]
+* xref:agents:a2a-concepts.adoc[]
 * xref:mcp:overview.adoc[]
-* xref:pipeline-integration-patterns.adoc[]
+* xref:agents:pipeline-integration-patterns.adoc[]

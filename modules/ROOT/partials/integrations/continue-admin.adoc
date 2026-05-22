@@ -16,7 +16,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* AI Gateway deployed on a BYOC cluster running Redpanda version 25.3 or later
+* AI Gateway deployed on a BYOC environment running Redpanda version 25.3 or later
 * Administrator access to the AI Gateway UI
 * API keys for at least one LLM provider (Anthropic, OpenAI, or others)
 * Understanding of xref:ai-gateway/gateway-architecture.adoc[AI Gateway concepts]
@@ -29,8 +29,8 @@ Key characteristics:
 
 * Uses native provider formats (Anthropic format for Anthropic, OpenAI format for OpenAI)
 * Supports multiple LLM providers simultaneously with per-provider configuration
-* Custom API endpoints via `apiBase` configuration
-* Custom headers via `requestOptions.headers`
+* Custom API endpoints through `apiBase` configuration
+* Custom headers through `requestOptions.headers`
 * Built-in MCP support for tool discovery and execution
 * Autocomplete, chat, and inline edit modes
 
@@ -44,7 +44,7 @@ Continue.dev connects to AI Gateway differently than unified-format clients:
 
 The gateway handles:
 
-. Authentication via bearer tokens in the `Authorization` header
+. Authentication through bearer tokens in the `Authorization` header
 . Provider-specific request formats without transformation
 . Model routing using provider-native model identifiers
 . MCP server aggregation for multi-tool workflows
@@ -580,7 +580,7 @@ Continue.dev generates different request patterns:
 |===
 
 
-=== Query logs via API
+=== Query logs through API
 
 Programmatically access logs for integration with monitoring systems:
 
@@ -735,5 +735,4 @@ This is expected behavior, not a configuration issue:
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]
 * xref:mcp/remote/overview.adoc[]

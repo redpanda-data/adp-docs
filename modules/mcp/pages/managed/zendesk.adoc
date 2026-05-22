@@ -31,7 +31,7 @@ Before you create the server, make sure you have:
 
 * A Zendesk Support instance.
 * For *API token* mode: ability to create an API token under *Apps and integrations > APIs > Zendesk API*.
-* For *User OAuth* mode: a Zendesk OAuth client and an OAuth Provider configured in ADP. See xref:../oauth-providers.adoc[Configure an OAuth Provider].
+* For *User OAuth* mode: a Zendesk OAuth client and an OAuth Provider configured in ADP. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider].
 
 == Get Zendesk credentials
 
@@ -39,7 +39,7 @@ Before you create the server, make sure you have:
 
 . In the Zendesk Admin Center, go to *Apps and integrations > APIs > Zendesk API*.
 . On the *Settings* tab, enable *Token access*.
-. Click *Add API token*, give it a descriptive label (for example, `redpanda-aigw`), and copy the token value. It is shown only once.
+. Click *Add API token*, give it a descriptive label (for example, `redpanda-ai-gateway`), and copy the token value. It is shown only once.
 . Note the *agent email* the token will act as (the email of the user who created the token). The HTTP Basic auth string the MCP builds is `base64(<email>/token:<api_token>)`. The `/token` literal is Zendesk's API-token quirk.
 . Store the token in the ADP secret store under a name like `ZENDESK_API_TOKEN`.
 
@@ -50,7 +50,7 @@ Before you create the server, make sure you have:
 For per-user authentication, register an OAuth client on Zendesk and a matching OAuth Provider in ADP:
 
 . Configure a Zendesk OAuth client under *Apps and integrations > APIs > OAuth Clients* (Confidential client, Authorization Code grant).
-. Register a matching OAuth Provider in ADP. See xref:../oauth-providers.adoc[Configure an OAuth Provider]. Use Zendesk's authorize and token endpoints.
+. Register a matching OAuth Provider in ADP. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]. Use Zendesk's authorize and token endpoints.
 . Each end-user authenticates once through the OAuth flow; tokens are stored in the gateway's token vault.
 
 *Required scopes*: `read tickets:write hc:read` covers all 12 tools. Drop `tickets:write` if the MCP only needs to read.
@@ -99,7 +99,7 @@ API-token mode::
 +
 [source,bash]
 ----
-rpk ai mcp create acme-zendesk --managed-config '{
+rpk ai mcp create --name acme-zendesk --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.zendesk.v1.ZendeskMCPConfig",
   "subdomain": "acme",
   "basic_auth": {
@@ -113,7 +113,7 @@ User-OAuth mode::
 +
 [source,bash]
 ----
-rpk ai mcp create acme-zendesk-oauth \
+rpk ai mcp create --name acme-zendesk-oauth \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.zendesk.v1.ZendeskMCPConfig",
     "subdomain": "acme"
@@ -255,7 +255,7 @@ Common symptoms and fixes:
 |The agent role on Zendesk's side is below *Light Agent*. Upgrade the role or use API-token mode with a Light Agent or Admin email.
 
 |`OAuthConnectionRequired` (User-OAuth mode)
-|First call from a user with no stored token. The user completes Zendesk's OAuth consent flow, the token lands in the vault, and subsequent calls reuse it. See xref:../user-delegated-oauth.adoc[User-delegated OAuth].
+|First call from a user with no stored token. The user completes Zendesk's OAuth consent flow, the token lands in the vault, and subsequent calls reuse it. See xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
 
 |`scope_upgrade_required` (User-OAuth mode)
 |Server's `required_scopes` was extended after users had already consented. Users re-consent with the higher scope.
@@ -264,7 +264,7 @@ Common symptoms and fixes:
 |Cannot happen: the handler enforces a `type:ticket` qualifier and post-filters results. If you see something unexpected, file an issue.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 
@@ -273,7 +273,7 @@ This page does not cover:
 
 == Related topics
 
-* xref:../oauth-providers.adoc[Configure an OAuth Provider]
-* xref:../user-delegated-oauth.adoc[User-delegated OAuth]
-* xref:../create-server.adoc[Create an MCP Server]
-* xref:../test-tools.adoc[Test a server's tools]
+* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:mcp:create-server.adoc[Create an MCP Server]
+* xref:mcp:test-tools.adoc[Test a server's tools]

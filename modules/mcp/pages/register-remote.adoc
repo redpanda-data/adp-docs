@@ -6,7 +6,7 @@
 :learning-objective-2: Pick the right transport (SSE vs. Streamable HTTP) and authentication mode
 :learning-objective-3: Confirm tool discovery completed and the server is reachable through its proxy URL
 
-Register your existing MCP server with Redpanda to add authentication, observability, and agent aggregation without changing your server's code. This guide covers the self-managed path from xref:create-server.adoc[Create an MCP Server] in depth — choose this when you already run a server and want Redpanda to proxy it.
+Register your existing MCP server with Redpanda to add authentication, observability, and agent aggregation without changing your server's code. This guide covers the self-managed path from xref:mcp:create-server.adoc[Create an MCP Server] in depth. Choose this when you already run a server and want Redpanda to proxy it.
 
 After completing this guide, you will be able to:
 
@@ -22,7 +22,7 @@ Choose self-managed registration when:
 * You need custom tool logic that no managed type provides.
 * You want a unified MCP URL (and Inspector / observability / agent access) across servers without standing up your own gateway.
 
-If you don't already run a server, prefer a managed type — see xref:managed/managed-catalog.adoc[Managed catalog] for the catalog.
+If you don't already run a server, prefer a managed type. See xref:managed/managed-catalog.adoc[Managed catalog] for the catalog.
 
 == Prerequisites
 
@@ -30,9 +30,9 @@ If you don't already run a server, prefer a managed type — see xref:managed/ma
 +
 // TODO: confirm network reachability requirements (egress / VPC peering / public endpoint) once the standalone ADP product surface ships.
 * The endpoint URL. `http://` is allowed for everything except user-delegated OAuth, which requires `https://` (proto rule `remote_mcp.user_oauth_requires_https`).
-* Knowledge of which transport the server speaks — SSE or Streamable HTTP. If you don't know, see <<test-transport>>.
+* Knowledge of which transport the server speaks (SSE or Streamable HTTP). If you don't know, see <<test-transport>>.
 * If using static-key or service-account-OAuth: secrets pre-created in the ADP secret store, `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`).
-* If using user-delegated OAuth: an OAuth Provider already configured. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
+* If using user-delegated OAuth: an OAuth Provider already configured. See xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Create the server
 
@@ -40,7 +40,7 @@ If you don't already run a server, prefer a managed type — see xref:managed/ma
 . In the marketplace picker, choose *Remote (Proxied)*.
 +
 // TODO: screenshot of the marketplace picker with Remote (Proxied) highlighted.
-. Fill in the identity fields (`name`, `description`, `enabled`) — same constraints as in xref:create-server.adoc[Create an MCP Server].
+. Fill in the identity fields (`name`, `description`, `enabled`); same constraints as in xref:mcp:create-server.adoc[Create an MCP Server].
 . Provide the *URL* and *Transport*.
 . Configure authentication (see <<authentication>>).
 . Click *Create*.
@@ -52,17 +52,17 @@ If you don't already run a server, prefer a managed type — see xref:managed/ma
 
 Two transports are available on the proto enum `MCPTransport`:
 
-* *SSE* — server-sent events. The traditional MCP transport.
-* *Streamable HTTP* — newer bidirectional protocol.
+* *SSE*: server-sent events. The traditional MCP transport.
+* *Streamable HTTP*: newer bidirectional protocol.
 
 Pick whichever your server actually speaks. To probe a server quickly:
 
 [source,bash]
 ----
-# SSE handshake — expect a stream of `event:` lines on success.
+# SSE handshake: expect a stream of `event:` lines on success.
 curl -N -H "Accept: text/event-stream" https://your-server.example.com/mcp/sse
 
-# Streamable HTTP — expect a JSON-RPC response on success.
+# Streamable HTTP: expect a JSON-RPC response on success.
 curl -X POST -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}' \
   https://your-server.example.com/mcp
@@ -73,7 +73,7 @@ curl -X POST -H "Content-Type: application/json" \
 [[authentication]]
 == Authentication
 
-The five auth modes from xref:create-server.adoc#configure-authentication[create-server.adoc] all apply. Three patterns are particularly common for self-managed servers:
+The five auth modes from xref:mcp:create-server.adoc#configure-authentication[create-server.adoc] all apply. Three patterns are particularly common for self-managed servers:
 
 [cols="1,2"]
 |===
@@ -86,16 +86,16 @@ The five auth modes from xref:create-server.adoc#configure-authentication[create
 |The upstream system supports OAuth client credentials and you want one shared identity for all callers. Provide `client_id`, `client_secret_ref`, `token_url`, and any required `scopes`.
 
 |*Token passthrough*
-|The upstream server already validates client tokens — Redpanda just forwards the caller's `Authorization` header.
+|The upstream server already validates client tokens; Redpanda just forwards the caller's `Authorization` header.
 |===
 
-For user-delegated OAuth, the URL must be `https://` and you also need an OAuth Provider. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
+For user-delegated OAuth, the URL must be `https://` and you also need an OAuth Provider. See xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
 
 // TODO: screenshots of each auth-mode form panel after walking `adp-production`.
 
 == Tool discovery
 
-After create, Redpanda runs a live `tools/list` (the `ListMCPServerTools` RPC) against the server. The result is cached on the `MCPServer.tools` output-only field and shown on the detail page's *Overview* tab. The *Inspector* tab (see xref:test-tools.adoc[Test a server's tools]) exercises individual glossterm:tool[,tools].
+After create, Redpanda runs a live `tools/list` (the `ListMCPServerTools` RPC) against the server. The result is cached on the `MCPServer.tools` output-only field and shown on the detail page's *Overview* tab. The *Inspector* tab (see xref:mcp:test-tools.adoc[Test a server's tools]) exercises individual glossterm:tool[,tools].
 
 If the tools list is empty or stale, hit the *Refresh tools* action on the Overview tab to re-query the server.
 
@@ -108,7 +108,7 @@ If the tools list is empty or stale, hit the *Refresh tools* action on the Overv
 |Error |What it means
 
 |`OAuthConnectionRequired`
-|The user-delegated auth path needs a stored token vault entry for the calling user. Redpanda surfaces an `authorize_url` so the user can complete the consent flow. See xref:user-delegated-oauth.adoc[User-delegated OAuth].
+|The user-delegated auth path needs a stored token vault entry for the calling user. Redpanda surfaces an `authorize_url` so the user can complete the consent flow. See xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
 
 |`OAuthTokenExpired`
 |The user's stored token has expired and refresh failed. Surface the new authorize URL and have the user re-consent.
@@ -137,8 +137,8 @@ If the tools list is empty or stale, hit the *Refresh tools* action on the Overv
 |The server returned a `tools/list` response with an invalid JSON schema for one or more tool inputs. Fix the upstream tool's schema and refresh.
 |===
 
-== Out of scope
+== Related topics
 
-* *User-delegated OAuth consent flow* — see xref:user-delegated-oauth.adoc[User-delegated OAuth].
-* *Multi-server aggregation* (one MCP URL fronting many servers) — handled by AI Gateway. See xref:ai-gateway:aggregation.adoc[MCP aggregation].
-* *Server hosting and deployment guidance* — Redpanda doesn't operate self-managed servers; deployment, scaling, and patching are your responsibility.
+* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth] for the consent flow.
+* xref:ai-gateway:aggregation.adoc[MCP aggregation] for fronting many MCP servers behind a single URL with AI Gateway.
+* Server hosting and deployment guidance is your responsibility: Redpanda doesn't operate self-managed servers; deployment, scaling, and patching are up to you.

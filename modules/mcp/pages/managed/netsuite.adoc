@@ -1,0 +1,145 @@
+= NetSuite Managed MCP Server
+:description: Let agents read NetSuite records and run SuiteQL with each caller's NetSuite OAuth identity.
+:page-topic-type: how-to
+:personas: app_developer, platform_admin
+:learning-objective-1: Configure the NetSuite managed MCP server with account ID and user-delegated OAuth
+:learning-objective-2: Identify the NetSuite read-only tools available to agents
+:learning-objective-3: Test NetSuite tool calls with an authorized user's connection
+
+// Source: `cloudv2` `apps/aigw/docs/netsuite-mcp.md`, `proto/mcps/redpanda/mcps/netsuite/v1/*`, and `apps/aigw/internal/mcp/managed/mcps/netsuite/register_mcp.go` on `origin/main`, verified 2026-05-10.
+
+The *NetSuite* managed MCP server lets agents query Oracle NetSuite records and run SuiteQL with the calling user's OAuth identity. The server wraps SuiteTalk REST APIs and exposes read-only tools for records, customers, sales orders, and items.
+
+Use this guide to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+Use NetSuite when an agent needs ERP, finance, or accounting context from records that a NetSuite user can already read. Every tool is read-only.
+
+[cols="1,3"]
+|===
+|Tool |What it does
+
+|`suite_ql_query`
+|Runs a SuiteQL query and returns rows as JSON. Use this tool for joins, aggregates, and cross-record analysis.
+
+|`get_record`
+|Fetches one record by record type and internal ID. You can expand sub-resources, such as line items and addresses.
+
+|`list_records`
+|Lists records of a type with optional NetSuite filter expression and paging. Use typed helpers when they fit.
+
+|`get_customer`
+|Fetches a customer record by internal ID.
+
+|`list_customers`
+|Lists customers with optional company name, email, modified-since, inactive, and paging filters.
+
+|`list_sales_orders`
+|Lists sales orders with optional customer ID, date range, status, modified-since, and paging filters.
+
+|`search_items`
+|Searches inventory and service items by SKU, display name, item type, inactive flag, and paging filters.
+|===
+
+The managed server does not expose write tools, saved-search execution, or report execution.
+
+== Prerequisites
+
+* Access to the Agentic Data Plane.
+* A NetSuite Integration Record that uses OAuth 2.0 Authorization Code grant.
+* A NetSuite OAuth Provider in ADP for the same account.
+* Your NetSuite account ID. Production accounts use a numeric ID such as `1234567`. Sandbox accounts include a suffix such as `1234567_SB1`; release-preview accounts can use a suffix such as `1234567_RP1`.
+* NetSuite users with the *REST Web Services* permission on at least one role.
+
+// TODO: Confirm the exact ADP UI field labels for NetSuite OAuth Provider creation after an authenticated UI walkthrough.
+
+== Configure NetSuite OAuth
+
+In NetSuite, create an Integration Record with OAuth 2.0 enabled. Set the redirect URI to the OAuth callback URL for your AI Gateway deployment. Select the *REST Web Services* scope.
+
+Find your account ID under *Setup > Company > Company Information > ACCOUNT ID*. The managed server normalizes underscores to hyphens when it builds the SuiteTalk host.
+
+Register a NetSuite OAuth Provider in ADP with account-scoped endpoints:
+
+[source,text]
+----
+Authorization endpoint: https://<account-id>.app.netsuite.com/app/login/oauth2/authorize.nl
+Token endpoint:         https://<account-id>.suitetalk.api.netsuite.com/services/rest/auth/oauth2/v1/token
+Scopes:                 rest_webservices
+----
+
+Store the NetSuite client secret in the ADP secret store, then reference that secret from the OAuth Provider.
+
+== Create the managed MCP server
+
+Create a managed MCP server with the NetSuite type. NetSuite authentication is part of the managed config, so include `userOauth` inside the JSON.
+
+[source,json]
+----
+{
+  "@type": "type.googleapis.com/redpanda.mcps.netsuite.v1.NetSuiteMCPConfig",
+  "accountId": "1234567_SB1",
+  "userOauth": {
+    "providerName": "netsuite",
+    "requiredScopes": ["rest_webservices"]
+  }
+}
+----
+
+For a non-UI path, use `rpk ai mcp create` with `--managed-config`. The top-level `--user-oauth-provider` and `--user-oauth-scopes` flags apply to self-managed servers only.
+
+[source,bash]
+----
+rpk ai mcp create --name netsuite \
+  --description "NetSuite ERP with user OAuth" \
+  --managed-config '{
+    "@type": "type.googleapis.com/redpanda.mcps.netsuite.v1.NetSuiteMCPConfig",
+    "accountId": "1234567_SB1",
+    "userOauth": {
+      "providerName": "netsuite",
+      "requiredScopes": ["rest_webservices"]
+    }
+  }'
+----
+
+== Authorize and test
+
+Before a caller can use NetSuite tools, the caller must authorize the NetSuite OAuth Provider. After authorization, Redpanda stores the user's access token in the token vault and subsequent tool calls use that token automatically.
+
+Test the server in the Inspector before you connect it to an agent. Start with a narrow `suite_ql_query`, `get_customer`, or `list_customers` call to confirm that NetSuite returns records visible to the authorized user.
+
+== NetSuite query notes
+
+NetSuite record filters use NetSuite-specific forms:
+
+* Use `CONTAIN` for substring filters, not `CONTAINS`.
+* Use `M/D/YYYY` date literals for REST collection filters.
+* Match reference fields by internal ID. For example, sales-order customer filters use `entity ANY_OF [12345]`.
+* Use NetSuite status IDs such as `_pendingFulfillment` for sales-order status filters, not display labels.
+
+== Troubleshooting
+
+[cols="1,3"]
+|===
+|Symptom |What to check
+
+|Tool calls return `403`
+|Confirm the authorizing NetSuite user has the *REST Web Services* permission.
+
+|OAuth succeeds, but tool calls fail
+|Confirm the OAuth Provider endpoints and the MCP server `accountId` refer to the same NetSuite account.
+
+|A sales-order status filter returns no rows
+|Use the NetSuite internal status ID, such as `_pendingFulfillment`, instead of the display label.
+|===
+
+== Next steps
+
+* xref:mcp:user-delegated-oauth.adoc[Configure user-delegated OAuth]
+* xref:mcp:test-tools.adoc[Test a server's tools]
+* xref:agents:create-agent.adoc[Create a declarative agent] that uses the NetSuite server

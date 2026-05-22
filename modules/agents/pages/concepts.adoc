@@ -154,7 +154,7 @@ include::ROOT:partial$service-account-authorization.adoc[]
 
 == Next steps
 
-* xref:architecture-patterns.adoc[]
-* xref:quickstart.adoc[]
-* xref:system-prompts.adoc[]
+* xref:agents:architecture-patterns.adoc[]
+* xref:agents:quickstart.adoc[]
+* xref:agents:system-prompts.adoc[]
 * xref:mcp:overview.adoc[]

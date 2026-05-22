@@ -32,9 +32,9 @@ When a customer calls saying "I see a $247.83 charge from 'ACME CORP' but I neve
 
 == Prerequisites
 
-* A xref:cloud-data-platform:get-started:cluster-types/byoc/index.adoc[BYOC cluster].
+* A xref:redpanda-cloud:get-started:cluster-types/byoc/index.adoc[BYOC environment].
 * xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI GPT-5.2 or Claude Sonnet 4.5 for reasoning).
-* The xref:cloud-data-platform:manage:rpk/rpk-install.adoc[Redpanda CLI (`rpk`)] installed (for testing the pipeline with sample data).
+* The xref:get-started:rpk-install.adoc[Redpanda CLI (`rpk`)] installed (for testing the pipeline with sample data).
 * Completed xref:tutorials/customer-support-agent.adoc[] (foundational multi-tool concepts).
 
 == Create MCP tools for each domain
@@ -510,7 +510,7 @@ This pipeline:
 * Consumes transactions from `bank.transactions` topic
 * Filters for high-value transactions (>$500) or pre-flagged transactions
 * Calculates preliminary risk score based on location, amount, velocity, and category
-* Routes transactions with risk score ≥40 to the dispute-resolution-agent via A2A
+* Routes transactions with risk score ≥40 to the dispute-resolution-agent through A2A
 * Outputs investigation results to `bank.dispute_results` topic
 
 === Test the pipeline
@@ -656,8 +656,8 @@ For production deployments, replace the mock tools with API calls to your accoun
 
 == Next steps
 
-* xref:architecture-patterns.adoc[]
-* xref:integration-overview.adoc[]
-* xref:pipeline-integration-patterns.adoc[]
-* xref:monitor.adoc[]
+* xref:agents:architecture-patterns.adoc[]
+* xref:agents:integration-overview.adoc[]
+* xref:agents:pipeline-integration-patterns.adoc[]
+* xref:agents:monitor.adoc[]
 * xref:mcp:overview.adoc[]

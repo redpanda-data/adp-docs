@@ -16,7 +16,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* AI Gateway deployed on a BYOC cluster running Redpanda version 25.3 or later
+* AI Gateway deployed on a BYOC environment running Redpanda version 25.3 or later
 * Administrator access to the AI Gateway UI
 * At least one LLM provider API key (OpenAI, Anthropic, or Google Gemini)
 * Understanding of xref:ai-gateway/gateway-architecture.adoc[AI Gateway concepts]
@@ -30,8 +30,8 @@ Claude Code connects to AI Gateway through two primary endpoints:
 
 The gateway handles:
 
-. Authentication via bearer tokens in the `Authorization` header
-. Gateway selection via the endpoint URL
+. Authentication through bearer tokens in the `Authorization` header
+. Gateway selection through the endpoint URL
 . Model routing using the `vendor/model_id` format
 . MCP server aggregation for multi-tool workflows
 . Request logging and cost tracking per gateway
@@ -389,7 +389,7 @@ Track Claude Code activity through gateway observability features.
 |===
 
 
-=== Query logs via API
+=== Query logs through API
 
 Programmatically access logs for integration with monitoring systems:
 
@@ -492,5 +492,4 @@ Causes and solutions:
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]
 * xref:mcp/remote/overview.adoc[]

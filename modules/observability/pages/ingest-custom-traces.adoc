@@ -1,7 +1,7 @@
 = Ingest OpenTelemetry Traces from Custom Agents
 :description: Configure a Redpanda Connect pipeline to ingest OpenTelemetry traces from custom agents into Redpanda's immutable log for unified governance and observability.
 :page-topic-type: how-to
-:learning-objective-1: Configure and deploy a Redpanda Connect pipeline to receive OpenTelemetry traces from custom agents via HTTP and publish them to `redpanda.otel_traces`
+:learning-objective-1: pass:q[Configure and deploy a Redpanda Connect pipeline to receive OpenTelemetry traces from custom agents through HTTP and publish them to `redpanda.otel_traces`]
 :learning-objective-2: Validate trace data format and compatibility with existing MCP server traces
 :learning-objective-3: Secure the ingestion endpoint using authentication mechanisms
 
@@ -17,9 +17,9 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* A Redpanda Connect pipeline host (today: a Redpanda BYOC cluster with Connect enabled). Ability to manage secrets on that host.
+* A Redpanda Connect pipeline host (today: a Redpanda BYOC environment with Connect enabled). Ability to manage secrets on that host.
 // TODO: Replace with the standalone-ADP ingestion target once defined (may no longer require a Redpanda Cloud cluster).
-* The latest version of xref:cloud-data-platform:manage:rpk/rpk-install.adoc[`rpk`] installed
+* The latest version of xref:get-started:rpk-install.adoc[`rpk`] installed
 * Custom agent or application instrumented with OpenTelemetry SDK
 * Basic understanding of the https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/[OpenTelemetry span format^] and https://opentelemetry.io/docs/specs/otlp/[OpenTelemetry Protocol (OTLP)^]
 
@@ -29,7 +29,7 @@ If you're using LangChain with OpenTelemetry tracing, you can send traces to Red
 
 . Configure LangChain's OpenTelemetry integration by following the https://docs.langchain.com/langsmith/trace-with-opentelemetry[LangChain documentation^]. 
 
-. Deploy a Redpanda Connect pipeline using the `otlp_http` input to receive OTLP traces over HTTP. Today, create the pipeline in the **Connect** page of your Redpanda BYOC cluster. See the <<configure-the-ingestion-pipeline,Configure the ingestion pipeline>> section below for a sample configuration.
+. Deploy a Redpanda Connect pipeline using the `otlp_http` input to receive OTLP traces over HTTP. Today, create the pipeline in the **Connect** page of your Redpanda BYOC environment. See the <<configure-the-ingestion-pipeline,Configure the ingestion pipeline>> section below for a sample configuration.
 // TODO: Update the deployment entry point once the standalone-ADP ingestion flow is defined.
 
 . Configure your OTEL exporter to send traces to your Redpanda Connect pipeline using environment variables:
@@ -64,7 +64,7 @@ When these agents send traces to `redpanda.otel_traces`, you gain unified observ
 
 === Trace format requirements
 
-Custom agents must emit traces in OTLP format. The xref:connect:components:inputs/otlp_http.adoc[`otlp_http`] input accepts both OTLP Protobuf (`application/x-protobuf`) and JSON (`application/json`) payloads. For <<use-grpc,gRPC transport>>, use the xref:connect:components:inputs/otlp_grpc.adoc[`otlp_grpc`] input.
+Custom agents must emit traces in OTLP format. The xref:redpanda-connect:components:inputs/otlp_http.adoc[`otlp_http`] input accepts both OTLP Protobuf (`application/x-protobuf`) and JSON (`application/json`) payloads. For <<use-grpc,gRPC transport>>, use the xref:redpanda-connect:components:inputs/otlp_grpc.adoc[`otlp_grpc`] input.
 
 Each trace must follow the OTLP specification with these required fields:
 
@@ -142,7 +142,7 @@ gRPC::
 The `otlp_grpc` input component:
 
 * Exposes an OpenTelemetry Collector gRPC receiver
-* Accepts traces via the OTLP gRPC protocol
+* Accepts traces through the OTLP gRPC protocol
 * Converts incoming OTLP data into individual Redpanda OTEL v1 Protobuf messages
 
 The following example shows a minimal pipeline configuration. ADP automatically injects authentication handling.
@@ -173,7 +173,7 @@ The OTLP input automatically handles format conversion, so no processors are nee
 
 // TODO (standalone-ADP): Steps below assume a Redpanda Cloud cluster with Connect enabled. The standalone ADP product surface may expose a different deployment entry point. Revisit the whole subsection under Workflow #11.
 
-. In the *Connect* page of your Redpanda BYOC cluster, click *Create Pipeline*.
+. In the *Connect* page of your Redpanda BYOC environment, click *Create Pipeline*.
 . For the input, select the *otlp_http* (or *otlp_grpc*) component.
 . Skip to *Add a topic* and select `redpanda.otel_traces` from the list of existing topics. Leave the default advanced settings.
 . In the *Add permissions* step, create a service account with write access to the `redpanda.otel_traces` topic.
@@ -197,7 +197,7 @@ Configure your custom agent to send OpenTelemetry traces to the pipeline endpoin
 
 === Authenticate to the pipeline
 
-The OTLP pipeline authenticates with a service account access token (today, while ingestion runs on a Redpanda BYOC cluster). Obtain an access token using your service account credentials as described in xref:cloud-data-platform:security:cloud-authentication.adoc#authenticate-to-the-cloud-api[Authenticate to the Cloud API].
+The OTLP pipeline authenticates with a service account access token (today, while ingestion runs on a Redpanda BYOC environment). Obtain an access token using your service account credentials as described in xref:redpanda-cloud:security:cloud-authentication.adoc#authenticate-to-the-cloud-api[Authenticate to the Cloud API].
 // TODO (standalone-ADP): Update the auth model when the standalone ADP ingestion path is defined.
 
 Include the token in your requests:
@@ -497,8 +497,8 @@ Following the OpenTelemetry semantic conventions, agent spans should include the
 ** `gen_ai.operation.name` - Set to `"invoke_agent"` for agent execution spans
 ** `gen_ai.agent.name` - Human-readable name of your agent (displayed in Transcripts view)
 * LLM provider details:
-** `gen_ai.provider.name` - LLM provider identifier (e.g., `"openai"`, `"anthropic"`, `"gcp.vertex_ai"`)
-** `gen_ai.request.model` - Model name (e.g., `"gpt-4"`, `"claude-sonnet-4"`)
+** `gen_ai.provider.name` - LLM provider identifier (for example, `"openai"`, `"anthropic"`, `"gcp.vertex_ai"`)
+** `gen_ai.request.model` - Model name (for example, `"gpt-4"`, `"claude-sonnet-4"`)
 * Token usage (for cost tracking):
 ** `gen_ai.usage.input_tokens` - Number of input tokens consumed
 ** `gen_ai.usage.output_tokens` - Number of output tokens generated
@@ -520,10 +520,10 @@ Set these attributes on your spans for proper display and filtering in the Trans
 | Human-readable name displayed in Transcripts view
 
 | `gen_ai.provider.name`
-| LLM provider (e.g., `"openai"`, `"anthropic"`)
+| LLM provider (for example, `"openai"`, `"anthropic"`)
 
 | `gen_ai.request.model`
-| Model name (e.g., `"gpt-4"`, `"claude-sonnet-4"`)
+| Model name (for example, `"gpt-4"`, `"claude-sonnet-4"`)
 
 | `gen_ai.usage.input_tokens` / `gen_ai.usage.output_tokens`
 | Token counts for cost tracking
@@ -621,5 +621,5 @@ If requests succeed but traces do not appear in `redpanda.otel_traces`:
 
 * xref:observability:transcripts.adoc[]
 * xref:agents:monitor.adoc[Observability for declarative agents]
-* xref:connect:components:inputs/otlp_http.adoc[OTLP HTTP input reference]
-* xref:connect:components:inputs/otlp_grpc.adoc[OTLP gRPC input reference]
+* xref:redpanda-connect:components:inputs/otlp_http.adoc[OTLP HTTP input reference]
+* xref:redpanda-connect:components:inputs/otlp_grpc.adoc[OTLP gRPC input reference]

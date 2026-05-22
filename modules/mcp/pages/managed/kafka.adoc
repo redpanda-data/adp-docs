@@ -6,7 +6,7 @@
 :learning-objective-2: Produce a test message through the Inspector and consume it back
 :learning-objective-3: Pick the right authentication mode for your broker (PLAIN / SCRAM / mTLS / OAuth)
 
-The *Kafka* managed MCP server gives agents read and write access to topics on either an Apache Kafka cluster or a Redpanda cluster — the same protocol, the same tools. Despite the name, it works against any Kafka-compatible broker.
+The *Kafka* managed MCP server gives agents read and write access to topics on either an Apache Kafka cluster or a Redpanda cluster: the same protocol, the same tools. Despite the name, it works against any Kafka-compatible broker.
 
 After completing this guide, you will be able to:
 
@@ -29,9 +29,9 @@ The Kafka managed type proxies a managed Kafka client. It exposes tools for:
 
 * A Kafka or Redpanda cluster reachable from the Agentic Data Plane.
 +
-// TODO: confirm reachability requirements (public bootstrap, peering, etc.) once the standalone ADP product surface ships.
+// TODO: confirm reachability requirements (public bootstrap, peering, and so on) once the standalone ADP product surface ships.
 * The cluster's bootstrap servers and SASL/TLS settings.
-* For SCRAM or PLAIN: secrets in the ADP secret store for the username and password (`UPPER_SNAKE_CASE`, for example `KAFKA_SASL_USER` and `KAFKA_SASL_PASSWORD`).
+* For SCRAM or PLAIN: Secrets in the ADP secret store for the username and password (`UPPER_SNAKE_CASE`, for example `KAFKA_SASL_USER` and `KAFKA_SASL_PASSWORD`).
 
 == Configure
 
@@ -42,10 +42,10 @@ The Kafka managed type proxies a managed Kafka client. It exposes tools for:
 +
 // TODO: enumerate exact fields from `proto/mcps/redpanda/mcps/kafka/v1/kafka_config.proto`.
 +
-* *Seed brokers* — comma-separated bootstrap addresses.
-* *TLS* settings — usually on for production, off for local dev.
-* *SASL mechanism* — `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512`, or `OAUTHBEARER`.
-* *Username / password references* — `UPPER_SNAKE_CASE` secret references.
+* *Seed brokers*: Comma-separated bootstrap addresses
+* *TLS* settings: Usually on for production, off for local dev
+* *SASL mechanism*: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512`, or `OAUTHBEARER`
+* *Username / password references*: `UPPER_SNAKE_CASE` secret references
 . Click *Create*.
 
 // TODO: screenshot of the Kafka form filled in for a Redpanda Cloud cluster on `adp-production`.
@@ -59,11 +59,11 @@ The Kafka managed type proxies a managed Kafka client. It exposes tools for:
 
 // TODO: confirm exact tool names for produce/consume/list-topics and capture screenshots.
 
-See xref:../test-tools.adoc[] for general Inspector usage.
+See xref:mcp:test-tools.adoc[] for general Inspector usage.
 
 == Authentication
 
-The Kafka managed type's authentication is part of its config, not the generic MCP auth oneof — it speaks Kafka protocol auth (SASL/SSL), not MCP auth.
+The Kafka managed type's authentication is part of its config, not the generic MCP auth oneof: it speaks Kafka protocol auth (SASL/SSL), not MCP auth.
 
 [cols="1,2"]
 |===
@@ -109,8 +109,8 @@ Once the Kafka server is created, point an agent at the *API URL* on the server'
 
 // TODO: gather more Kafka failure modes from `adp-production` walkthroughs.
 
-== Out of scope
+== Limitations
 
-* *Kafka administration* (creating topics, managing ACLs) — this server is read/produce/consume-focused. For administration, use rpk or your broker's admin API.
-* *Schema registry* — not exposed by this MCP server.
-* *Streaming joins / processing* — for stream processing, use Redpanda Connect.
+* *Kafka administration* (creating topics, managing ACLs): This server is read/produce/consume-focused. For administration, use rpk or your broker's admin API.
+* *Schema registry*: Not exposed by this MCP server.
+* *Streaming joins or processing*: For stream processing, use Redpanda Connect.

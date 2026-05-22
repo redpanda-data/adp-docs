@@ -396,7 +396,6 @@ chmod 600 ~/.claude.json
 == Next steps
 
 * xref:ai-gateway:aggregation.adoc[]
-* xref:ai-gateway:routing-cel.adoc[]
 
 == Related pages
 

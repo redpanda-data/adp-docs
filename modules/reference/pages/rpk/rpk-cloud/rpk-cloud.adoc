@@ -1,0 +1,3 @@
+= rpk cloud
+
+include::ROOT:reference:partial$rpk-cloud/rpk-cloud.adoc[tag=single-source]

@@ -6,7 +6,7 @@
 :learning-objective-2: Pick the right scopes for read-only vs. read-write workflows
 :learning-objective-3: Walk a user through the consent flow and verify the connection
 
-The *Jira* managed MCP server gives agents access to Jira issues, projects, and workflows on behalf of the calling user. It's the enterprise counterpart to xref:managed/slack.adoc[the Slack deep-dive] — both use user-delegated OAuth, but Atlassian's flow has its own scope model and quirks worth calling out.
+The *Jira* managed MCP server gives agents access to Jira issues, projects, and workflows on behalf of the calling user. It's the enterprise counterpart to xref:managed/slack.adoc[the Slack deep-dive]: both use user-delegated OAuth, but Atlassian's flow has its own scope model and quirks worth calling out.
 
 After completing this guide, you will be able to:
 
@@ -32,7 +32,7 @@ The Jira managed type exposes tools for:
 +
 // TODO: confirm whether Redpanda publishes a reference Atlassian app or whether each customer brings their own.
 * An OAuth Provider in the ADP UI configured for Atlassian's authorize/token URLs and carrying the app's client credentials.
-* Familiarity with xref:../user-delegated-oauth.adoc[].
+* Familiarity with xref:mcp:user-delegated-oauth.adoc[].
 
 == Atlassian's scope model
 
@@ -46,13 +46,13 @@ Atlassian uses a granular, prefixed scope namespace. Common scopes:
 |Read user profile.
 
 |`read:jira-work`
-|Read issues, projects, sprints, etc. (read-only operation).
+|Read issues, projects, sprints, and so on (read-only operation).
 
 |`write:jira-work`
 |Create, update, transition issues, add comments.
 
 |`offline_access`
-|Issue a refresh token so Redpanda can refresh expired access tokens. *Required* for any long-lived MCP server — without it, tokens expire after one hour and users re-consent every time.
+|Issue a refresh token so Redpanda can refresh expired access tokens. *Required* for any long-lived MCP server: without it, tokens expire after one hour and users re-consent every time.
 |===
 
 // TODO: confirm minimum required scopes per tool from the Jira server's tool registration.
@@ -66,9 +66,9 @@ NOTE: Always include `offline_access` in `required_scopes`. Without it, `OAuthTo
 . Fill in identity fields (`name`, `description`).
 . In the Jira configuration form:
 +
-* *Auth* — choose *User-delegated OAuth*.
-* *OAuth Provider* — pick the Atlassian provider you configured.
-* *Required scopes* — at minimum `read:jira-user`, `read:jira-work`, `offline_access`. Add `write:jira-work` if your agents will create or update issues.
+* *Auth*: Choose *User-delegated OAuth*.
+* *OAuth Provider*: Pick the Atlassian provider you configured.
+* *Required scopes*: At minimum `read:jira-user`, `read:jira-work`, `offline_access`. Add `write:jira-work` if your agents will create or update issues.
 . Click *Create*.
 
 // TODO: capture screenshots of the Jira form on `adp-production`.
@@ -86,7 +86,7 @@ NOTE: Always include `offline_access` in `required_scopes`. Without it, `OAuthTo
 
 Point an agent at the *API URL* on the server's detail page. Each user calling the agent will trigger their own consent flow on first call.
 
-For agents that need both read and write capabilities, define the server's `required_scopes` to include all the scopes any tool might need — Atlassian doesn't allow per-tool scope upgrades, so the user consents once with the full set.
+For agents that need both read and write capabilities, define the server's `required_scopes` to include all the scopes any tool might need: Atlassian doesn't allow per-tool scope upgrades, so the user consents once with the full set.
 
 == Troubleshooting
 
@@ -109,8 +109,8 @@ For agents that need both read and write capabilities, define the server's `requ
 
 // TODO: capture more Atlassian-specific errors during the live walkthrough.
 
-== Out of scope
+== Limitations
 
-* *Atlassian app management* — the OAuth app and its callback URLs are managed in `developer.atlassian.com`, not in ADP.
-* *Jira Server / Data Center* (self-hosted) — this MCP type targets Atlassian Cloud. Self-hosted Jira may need a self-managed MCP server instead. See xref:../register-remote.adoc[].
-* *Confluence access* — separate scope namespace; not exposed by this MCP server.
+* *Atlassian app management*: The OAuth app and its callback URLs are managed in `developer.atlassian.com`, not in ADP.
+* *Jira Server / Data Center* (self-hosted): This MCP type targets Atlassian Cloud. Self-hosted Jira may need a self-managed MCP server instead. See xref:mcp:register-remote.adoc[Register a self-managed MCP server].
+* *Confluence access*: Separate scope namespace; not exposed by this MCP server.

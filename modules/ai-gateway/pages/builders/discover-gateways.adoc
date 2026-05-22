@@ -168,7 +168,7 @@ include::ROOT:partial$ai-hub-mode-indicator.adoc[]
 * Routing is pre-configured and intelligent
 * Models are automatically routed based on system-managed rules
 * You cannot see or modify routing rules (they're managed by Redpanda)
-* Limited customization via administrator-configured preference toggles
+* Limited customization through administrator-configured preference toggles
 * See xref:builders/use-ai-hub-gateway.adoc[] for AI Hub-specific guidance
 
 *Custom Mode:*
@@ -302,4 +302,4 @@ echo -e "\n=== Gateway validated successfully ==="
 
 == Next steps
 
-* xref:connect-agent.adoc[Connect Your Agent]
+* xref:ai-gateway:connect-agent.adoc[Connect Your Agent]

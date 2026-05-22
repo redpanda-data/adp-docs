@@ -25,8 +25,8 @@ It is *not* a replacement for the Ironclad web UI for complex workflow managemen
 Before you create the server, make sure you have:
 
 * An Ironclad tenant where you can register an OAuth app.
-* An OAuth Provider configured in ADP for Ironclad. See xref:../oauth-providers.adoc[Configure an OAuth Provider].
-* Familiarity with xref:../user-delegated-oauth.adoc[User-delegated OAuth].
+* An OAuth Provider configured in ADP for Ironclad. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider].
+* Familiarity with xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Get Ironclad credentials
 
@@ -45,7 +45,7 @@ Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
 +
 * *Authorization endpoint*: `\https://na1.ironcladapp.com/oauth/authorize` (use `eu1` for EU-hosted accounts; `demo` for sandbox)
 * *Token endpoint*: `\https://na1.ironcladapp.com/oauth/token` (adjust region accordingly)
-* The Client ID and a secret-store reference for the Client Secret.
+* The Client ID and a secret-store reference for the Client Secret
 
 == Configure
 
@@ -78,7 +78,7 @@ Create a new Ironclad MCP server in the ADP UI:
 
 [source,bash]
 ----
-rpk ai mcp create my-ironclad \
+rpk ai mcp create --name my-ironclad \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.ironclad.v1.IroncladMCPConfig",
     "region": "IRONCLAD_REGION_NA"
@@ -150,7 +150,7 @@ Common symptoms and fixes:
 |Run `list_workflow_schemas` first to get valid IDs for your tenant.
 |===
 
-== Out of scope
+== Limitations
 
 This page does not cover:
 
@@ -159,6 +159,6 @@ This page does not cover:
 
 == Related topics
 
-* xref:../oauth-providers.adoc[Configure an OAuth Provider]
-* xref:../user-delegated-oauth.adoc[User-delegated OAuth]
-* xref:../create-server.adoc[Create an MCP Server]
+* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:mcp:create-server.adoc[Create an MCP Server]

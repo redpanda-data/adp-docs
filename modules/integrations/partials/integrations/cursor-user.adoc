@@ -806,7 +806,6 @@ This sends only search + orchestrator tools initially, reducing token usage sign
 == Next steps
 
 * xref:ai-gateway:aggregation.adoc[]
-* xref:ai-gateway:routing-cel.adoc[]
 
 == Related pages
 

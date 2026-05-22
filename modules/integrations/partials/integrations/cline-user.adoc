@@ -724,7 +724,6 @@ The gateway automatically blocks requests that would exceed the limit.
 == Next steps
 
 * xref:ai-gateway:aggregation.adoc[]
-* xref:ai-gateway:routing-cel.adoc[]
 
 == Related pages
 

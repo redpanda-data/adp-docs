@@ -28,7 +28,7 @@ Before configuring GitHub Copilot, ensure you have:
 ** API key with access to the gateway
 * Your IDE:
 ** VS Code with GitHub Copilot extension installed
-** Or JetBrains IDE (IntelliJ IDEA, PyCharm, etc.) with GitHub Copilot plugin
+** Or JetBrains IDE (IntelliJ IDEA, PyCharm, and so on) with GitHub Copilot plugin
 
 == About GitHub Copilot and AI Gateway
 
@@ -112,7 +112,7 @@ Replace `https://gw.ai.panda.com/v1` with your gateway endpoint.
 
 IMPORTANT: This experimental feature requires configuring API keys and custom headers through the Copilot Chat UI, not in `settings.json`.
 
-==== Configure API key and headers via Copilot Chat UI
+==== Configure API key and headers through Copilot Chat UI
 
 . Open Copilot Chat in VS Code (`Cmd+I` or `Ctrl+I`)
 . Click the model selector dropdown
@@ -163,7 +163,7 @@ Add the base URL configuration in VS Code settings:
 
 Replace `https://gw.ai.panda.com/v1` with your gateway endpoint.
 
-==== Configure API key and headers via Copilot Chat UI
+==== Configure API key and headers through Copilot Chat UI
 
 IMPORTANT: Do not configure API keys or custom headers in `settings.json`. Use the Copilot Chat UI instead.
 
@@ -195,7 +195,7 @@ JetBrains IDE integration requires GitHub Copilot Enterprise with Bring Your Own
 
 === Configure BYOK with AI Gateway
 
-. Open your JetBrains IDE (IntelliJ IDEA, PyCharm, etc.)
+. Open your JetBrains IDE (IntelliJ IDEA, PyCharm, and so on)
 . Navigate to *Settings/Preferences*:
 ** macOS: `Cmd+,`
 ** Windows/Linux: `Ctrl+Alt+S`
@@ -320,7 +320,7 @@ For large organizations deploying GitHub Copilot Enterprise with AI Gateway acro
 
 === Centralized configuration management
 
-Distribute IDE configuration files via:
+Distribute IDE configuration files through:
 
 * **Git repository**: Store `settings.json` or IDE configuration in a shared repository
 * **Configuration management tools**: Puppet, Chef, Ansible
@@ -372,13 +372,13 @@ Single key for all developers:
 === Automated provisioning workflow
 
 . Developer joins organization
-. Identity system (Okta, Azure AD, etc.) triggers provisioning:
+. Identity system (Okta, Azure AD, and so on) triggers provisioning:
 .. Create Redpanda API key
 .. Assign to appropriate gateway
 .. Generate IDE configuration file with embedded keys
 .. Distribute to developer workstation
 . Developer installs IDE and GitHub Copilot
-. Configuration auto-applies (via MDM or configuration management)
+. Configuration auto-applies (through MDM or configuration management)
 . Developer starts using Copilot immediately
 
 === Observability and governance
@@ -902,7 +902,6 @@ Generate project-specific cost reports from the gateway dashboard.
 
 == Next steps
 
-* xref:ai-gateway:routing-cel.adoc[]
 * xref:ai-gateway:aggregation.adoc[]
 
 == Related pages

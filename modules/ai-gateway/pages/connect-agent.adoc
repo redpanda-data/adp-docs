@@ -4,10 +4,10 @@
 :personas: app_developer
 :page-aliases: redpanda-cloud:ai-agents:ai-gateway/builders/connect-your-agent.adoc
 :learning-objective-1: Construct the proxy URL for an LLM provider you have configured
-:learning-objective-2: Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients
+:learning-objective-2: pass:q[Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients]
 :learning-objective-3: Send requests through the proxy URL with the SDK of your choice
 
-This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with `rpk cloud login` for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
+This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with xref:reference:rpk/rpk-cloud/rpk-cloud-login.adoc[`rpk cloud login`] for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
 
 After completing this guide, you will be able to:
 
@@ -19,7 +19,7 @@ After completing this guide, you will be able to:
 
 * A configured LLM provider. If you haven't created one yet, see xref:ai-gateway:configure-provider.adoc[Configure an LLM provider].
 * For local development, nothing else. You'll install `rpk ai` in the next section.
-* For CI or programmatic clients: a Redpanda Cloud service account with OIDC client credentials. See xref:cloud-data-platform:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
+* For CI or programmatic clients: A Redpanda Cloud service account with OIDC client credentials. See xref:redpanda-cloud:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
 +
 // TODO: confirm whether ADP hosts its own service-account IAM post-standalone, or continues to share Redpanda Cloud Organization IAM.
 * A development environment with your chosen programming language.
@@ -33,9 +33,9 @@ Every provider you create in AI Gateway gets its own proxy URL:
 <gateway-base>/llm/v1/providers/<provider-name>/<upstream-path>
 ----
 
-* `<gateway-base>`: the AI Gateway base URL for your dataplane. Cluster-specific subdomain on `clusters.rdpa.co` (for example, `https://aigw.<cluster-id>.clusters.rdpa.co`). Copy the exact value from the *Proxy URL* field on any provider's *Connection* card.
-* `<provider-name>`: the name you gave the provider when you created it, for example `my-openai` or `prod-anthropic`.
-* `<upstream-path>`: the upstream provider's native API path (for example, `v1/chat/completions` for OpenAI, `v1/messages` for Anthropic).
+* `<gateway-base>`: The AI Gateway base URL for your dataplane. Cluster-specific subdomain on `clusters.rdpa.co` (for example, `https://aigw.<cluster-id>.clusters.rdpa.co`). Copy the exact value from the *Proxy URL* field on any provider's *Connection* card.
+* `<provider-name>`: The name you gave the provider when you created it, for example `my-openai` or `prod-anthropic`.
+* `<upstream-path>`: The upstream provider's native API path (for example, `v1/chat/completions` for OpenAI, `v1/messages` for Anthropic).
 
 AI Gateway forwards the request to the upstream provider, attaches the configured credentials, and records the request for observability. Your application never sees the upstream API key.
 
@@ -46,16 +46,16 @@ TIP: The provider detail page generates ready-to-run snippets pre-filled with th
 [[authenticate-with-rpai]]
 == Use `rpk ai` for local development
 
-The `rpk ai` command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`. The active AI Gateway URL comes from your active rpk cloud profile.
+The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`. The active AI Gateway URL comes from your active rpk cloud profile.
 
-. Install `rpk ai`:
+. xref:reference:rpk/rpk-ai/rpk-ai-install.adoc[Install `rpk ai`]:
 +
 [source,bash]
 ----
 rpk ai install
 ----
 +
-Update later with `rpk ai upgrade`; remove with `rpk ai uninstall`.
+Update later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk ai upgrade`]; remove with xref:reference:rpk/rpk-ai/rpk-ai-uninstall.adoc[`rpk ai uninstall`].
 
 . Log in to Redpanda Cloud:
 +
@@ -66,7 +66,7 @@ rpk cloud login
 +
 This caches a cloud token in `~/.config/rpk/rpk.yaml`. On every invocation, `rpk ai` reads the cached token automatically.
 
-. Select a profile that points at a cluster with AI Gateway v2 attached. The AI Gateway URL is cached on the profile when you create it.
+. Select a xref:reference:rpk/rpk-profile/rpk-profile.adoc[profile] that points at a cluster with AI Gateway v2 attached. The AI Gateway URL is cached on the profile when you create it.
 +
 [source,bash]
 ----
@@ -74,6 +74,8 @@ rpk profile use <profile-name>
 # or, to switch the cluster the active profile points at:
 rpk cloud cluster use <cluster-id>
 ----
++
+See xref:reference:rpk/rpk-cloud/rpk-cloud-cluster.adoc[`rpk cloud cluster`] for switching the active cluster.
 
 . Verify the connection:
 +
@@ -83,6 +85,11 @@ rpk ai llm list
 ----
 
 If the cached cloud token has expired, `rpk ai` returns a 401 with a hint to rerun `rpk cloud login`.
+
+[NOTE]
+====
+`rpk ai help`, `rpk ai version`, and unknown subcommands run without prompting for authentication, so you can browse the CLI surface offline before signing in. Authentication is only required for commands that hit AI Gateway.
+====
 
 [TIP]
 ====
@@ -410,25 +417,25 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 == Best practices
 
 * Use environment variables for the proxy URL and token. Never hard-code them.
-* Refresh OIDC tokens through your client library so refresh is invisible to your SDK code (`authlib` for Python, `openid-client` for Node.js, etc.).
+* Refresh OIDC tokens through your client library so refresh is invisible to your SDK code (`authlib` for Python, `openid-client` for Node.js, and so on).
 * Implement retry with exponential backoff for 5xx and timeout conditions.
 * Respect `Retry-After` on 429 responses.
 * Rotate service account credentials on a schedule your organization accepts.
-* Observe usage through the ADP UI on each provider's detail page. A *Cost & usage* section is in development (the UI shows a "Coming soon" placeholder today).
+* Observe usage through the ADP UI on each provider's detail page.
 
 == Troubleshooting
 
 === 401 Unauthorized
 
-* If you're using `rpk ai`: rerun `rpk cloud login` to refresh the cached cloud token. Token expiry surfaces as a 401 with this hint in the error.
-* If you're using OIDC client credentials: check the token hasn't expired and refresh it. Verify the audience is `cloudv2-production.redpanda.cloud` and the `Authorization` header is formatted `Bearer <token>`.
-* For Gemini: ensure the token is sent as `x-goog-api-key`, not `Authorization`.
-* For Anthropic with passthrough: ensure the client is sending a valid Anthropic `Authorization` header.
+* If you're using `rpk ai`: Rerun `rpk cloud login` to refresh the cached cloud token. Token expiry surfaces as a 401 with this hint in the error.
+* If you're using OIDC client credentials: Check the token hasn't expired and refresh it. Verify the audience is `cloudv2-production.redpanda.cloud` and the `Authorization` header is formatted `Bearer <token>`.
+* For Gemini: Ensure the token is sent as `x-goog-api-key`, not `Authorization`.
+* For Anthropic with passthrough: Ensure the client is sending a valid Anthropic `Authorization` header.
 
 === 404 Not found
 
 * Re-check the provider name in the proxy URL. The segment after `/providers/` must match the provider's `Name` exactly.
-* For model-not-found: confirm the model identifier is one your provider's catalog actually serves. OpenAI-compatible endpoints accept whatever model IDs the upstream exposes.
+* For model-not-found: Confirm the model identifier is one your provider's catalog actually serves. OpenAI-compatible endpoints accept whatever model IDs the upstream exposes.
 
 === 403 Forbidden
 

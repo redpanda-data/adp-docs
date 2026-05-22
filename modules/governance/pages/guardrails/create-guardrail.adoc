@@ -2,7 +2,7 @@
 :description: Configure a guardrail, pick an evaluator type and phase, attach it to one or more LLM providers, and verify that it fires.
 :page-topic-type: how-to
 :personas: platform_admin
-// TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (e.g., security_admin), apply it here. Open Q D4 in the companion plan.
+// TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (for example, security_admin), apply it here. Open Q D4 in the companion plan.
 :learning-objective-1: Create and configure a guardrail of a chosen evaluator type
 :learning-objective-2: Attach the guardrail to one or more LLM providers and enable it
 :learning-objective-3: Verify the guardrail fires and trace the violation through the transcript
@@ -67,7 +67,7 @@ Fill in the per-type config block. The form fields differ per evaluator type; se
 
 Select one or more LLM providers to attach the guardrail to. Multi-attach is supported: one guardrail can apply to many providers.
 
-// TODO: confirm whether guardrails also attach at other scopes (agents, MCP servers, organizations). The pre-pivot proto attached via `provider_ids[]` and `route_ids[]`; routes were removed in cloudv2 commit `7eff2ecbbf`. Open Qs A3, A4 in the companion plan.
+// TODO: confirm whether guardrails also attach at other scopes (agents, MCP servers, organizations). The pre-pivot proto attached through `provider_ids[]` and `route_ids[]`; routes were removed in cloudv2 commit `7eff2ecbbf`. Open Qs A3, A4 in the companion plan.
 
 == Enable the guardrail
 
@@ -100,7 +100,7 @@ The request should return an error. Open the request's transcript and confirm a 
 
 * *Evaluator returns false positives*: see xref:governance:guardrails/violations.adoc[Read violations] for tuning patterns per evaluator type.
 * *Evaluator times out or is unavailable*: see xref:governance:guardrails/violations.adoc[Read violations] for the evaluator-down section.
-* *Attached provider doesn't fire the guardrail*: confirm attachment (right provider, right phase), enabled state, and that requests are actually reaching the gateway (not bypassing via a direct provider URL).
+* *Attached provider doesn't fire the guardrail*: confirm attachment (right provider, right phase), enabled state, and that requests are actually reaching the gateway (not bypassing through a direct provider URL).
 
 == Next steps
 
