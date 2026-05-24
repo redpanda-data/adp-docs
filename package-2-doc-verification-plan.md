@@ -1,7 +1,7 @@
 # ADP Package 2 — Doc Verification & Update Plan
 
 Source briefing: https://docs.google.com/document/d/1r5anOCrF3sqptzRX9T_4Wc5ryCMwU8sHi4tnGF0Rr1Y/edit
-Scope of this pass: five features the briefing marks 🟢 Shipped or in-production — LLM Proxy, Managed MCP, Microsoft Teams integration, Cost Tracking, and MCP OAuth Clients. (LLM Proxy and Managed MCP updates have shipped locally — see PR breakdown.)
+Scope of this pass: six features the briefing marks 🟢 Shipped or in-production: LLM Proxy, Managed MCP, Microsoft Teams integration, Cost Tracking, MCP OAuth Clients, and OAuth Provider / Token Vault. (LLM Proxy, Managed MCP, Cost Tracking, MCP OAuth Clients, and Claude Code updates shipped 2026-05-24 on branch `adp-package-2-briefing-doc-catchup`.)
 Doc tree reviewed: `modules/ai-gateway`, `modules/mcp`, `modules/agents`, `modules/integrations`, `modules/governance`, `modules/reference`, `modules/ROOT/nav.adoc`.
 
 ---
@@ -12,11 +12,12 @@ Doc tree reviewed: `modules/ai-gateway`, `modules/mcp`, `modules/agents`, `modul
 |---|---|---|---|
 | LLM Proxy | 95%+ | Mostly covered; two specific gaps | ~~Add transcript-logging section; finish Claude Code integration page; clarify Redpanda-managed model catalog~~ ✅ Done 2026-05-24 |
 | Managed MCP | 95%+ | Well covered | ~~Light cleanup: add "Connection tab" naming, fill missing catalog deep-dives, optional codegen note~~ ✅ Connection-tab + deep-dive backlog flagged 2026-05-24 |
-| Microsoft Teams integration | 95%+ | **Not documented at all** | New page + nav entry + update of `integration-overview.adoc`. Paused pending eng verification — see memory `project-adp-teams-integration-doc-gap` |
-| Cost Tracking | ~90% | Well covered; two small gaps | Distinguish v1-shipped vs WIP-in-Package-2; surface the API surface more clearly |
-| MCP OAuth Clients | ~70% | Well covered; two specific gaps | Add Microsoft Copilot Studio to client list; surface "no DCR in Package 2" limitation |
+| Microsoft Teams integration | 95%+ | **Not documented at all** | New page + nav entry + update of `integration-overview.adoc`. Paused pending eng verification: see memory `project-adp-teams-integration-doc-gap` |
+| Cost Tracking | ~90% | Well covered; two small gaps | ~~Distinguish v1-shipped vs WIP-in-Package-2; surface the API surface more clearly~~ ✅ Spending API how-to added + dashboard shipped-vs-WIP flagged 2026-05-24 |
+| MCP OAuth Clients | ~70% | Well covered; two specific gaps | ~~Add Microsoft Copilot Studio to client list; surface "no DCR in Package 2" limitation~~ ✅ Done 2026-05-24 |
+| OAuth Provider / Token Vault | 95%+ | **Most thoroughly covered feature.** One minor gap | Optional: new `my-connections.adoc` page so users have a discoverable home for connection management |
 
-LLM Proxy and Managed MCP are in good shape. Microsoft Teams is the real gap — a 95%+-shipped feature with zero user-facing documentation. That is the priority.
+LLM Proxy, Managed MCP, Cost Tracking, MCP OAuth Clients, and Claude Code integration have all been updated. OAuth Provider / Token Vault is the best-documented Package 2 area and does not need significant changes in this pass. Microsoft Teams is the standing gap: a 95%+-shipped feature with zero user-facing documentation.
 
 ---
 
@@ -272,4 +273,55 @@ Five PRs total, in dependency order:
 3. ✅ **MCP Connection-tab naming flag.** Shipped 2026-05-24. Touches `modules/mcp/pages/create-server.adoc` with a TODO.
 4. **Cost Tracking: shipped-vs-WIP reconciliation + spending API how-to.** Blocked on eng confirming which dashboard surfaces are live in Package 2. Touches `dashboard/overview.adoc` and adds a section to `budgets.adoc` (or a new `governance/pages/spending-api.adoc`).
 5. **MCP OAuth Clients: Microsoft Copilot Studio + DCR limitation.** Touches `modules/integrations/pages/remote-mcp-clients.adoc`. The Copilot Studio addition is blocked on eng confirmation that the integration actually works; the DCR limitation can ship immediately.
-6. **Microsoft Teams integration page (new).** Paused — see memory `project-adp-teams-integration-doc-gap`.
+6. **Microsoft Teams integration page (new).** Paused: see memory `project-adp-teams-integration-doc-gap`.
+
+---
+
+## 6. OAuth Provider / Token Vault
+
+### What the briefing claims
+
+1. OAuth Providers register external systems (Slack, Jira, GitHub, Salesforce, Workday, and similar) that AI Gateway can authenticate against.
+2. OBO (on-behalf-of) semantics: each user of an MCP server can only do what they can do in the upstream system anyway, with their own permission level. No shared credentials.
+3. Token Vault captures user tokens during OAuth login in the browser and refreshes them automatically up to the upstream's max expiry.
+4. Two creation paths: fully customizable custom providers and pre-built "easy" template providers per popular upstream.
+5. GitHub template as the canonical example, pre-filled with most fields.
+6. MCP server configuration attaches one configured OAuth Provider; the auth lives on the provider once and is shared across many MCP servers (IT-configures-once, builders-attach-many).
+7. Claude.ai-driven UX: expired connection presents a login URL, user authorizes, MCP becomes invokable seamlessly.
+
+Briefing acknowledges one product-side polish item not yet shipped: "we will bake a custom experience per template oauth provider type in the future." Custom-flow UX is functional but rough today.
+
+### What the docs cover today
+
+This is the most thoroughly documented Package 2 feature. Coverage spans five pages plus the glossary:
+
+- `modules/mcp/pages/oauth-providers.adoc`: ~285 lines. Prerequisites, the OAuth-Providers-vs-OAuth-Clients disambiguation, full permission set (`_create`, `_get`, `_update`, `_delete`, `_attach`), Browse / Register-in-UI / Register-from-CLI flows, the Category template picker with 10 categories, Browser Consent vs JWT Bearer grant types, client-secret-basic vs client-secret-post vs none auth methods, edit and rotate, delete with consequences, troubleshooting.
+- `modules/mcp/pages/user-delegated-oauth.adoc`: ~80 lines. The OBO concept, the user consent flow with `authorize_url`, token vault storage under user identity, transparent refresh, `OAuthTokenExpired` failure mode, scope-upgrade flow, service-account-OAuth contrast.
+- `modules/mcp/pages/github-oauth-tutorial.adoc`: ~360+ lines. End-to-end tutorial: create the upstream GitHub OAuth app, register the provider in ADP, test through *My Connections*, create the user-delegated GitHub MCP server, troubleshoot scope mismatches and token expiry.
+- `modules/mcp/pages/create-server.adoc`: section *Configure authentication* documents the five auth modes, with User-delegated OAuth pulling from a registered OAuth Provider.
+- `modules/ROOT/pages/index.adoc`: surfaces the "on-behalf-of authorization model" at the top of the product overview.
+- `modules/reference/pages/glossary.adoc`: registers `OAuth provider`, `OAuth client`, `OAuth connection`, and `token vault` as terms with `glossterm:...` macros so they hyperlink consistently across the site.
+
+### Gaps to fix
+
+**Gap 1: `My Connections` is referenced but never has its own page.** Six pages mention *My Connections* as a sidebar entry where users see and revoke their OAuth connections (`user-delegated-oauth.adoc`, `github-oauth-tutorial.adoc`, `overview.adoc`, `create-server.adoc`, `test-tools.adoc`, `ai-gateway/overview.adoc`). A user trying to "find their connections to revoke one" reaches the page itself through trial, then has to piece together the behavior from references on three or four other pages.
+
+> *Plan (optional):* Add `modules/mcp/pages/my-connections.adoc` describing: where the page lives in the sidebar, what each row represents (provider + scopes + last-used + status), how to revoke a single connection, how the consent flow re-runs after revocation, and the contrast with admin-side OAuth provider management. Cross-link from the six pages that already reference it. Low priority because the references work; nice to have for discoverability.
+
+### Items the briefing implies but do not need a doc change
+
+- OAuth Providers for popular upstreams: covered by the Category picker in `oauth-providers.adoc` (Identity, Source control, Productivity, Storage, Communication, CRM, Data warehouse, Monitoring, Security, Business categories, with named example providers in each).
+- OBO semantics: surfaced in `oauth-providers.adoc` opening prose, dedicated treatment in `user-delegated-oauth.adoc`, and a top-level product-overview callout in `ROOT/pages/index.adoc`.
+- Token Vault as a named concept: glossary term plus consistent inline use across pages.
+- Custom provider creation: full form reference in `oauth-providers.adoc`.
+- GitHub template: full tutorial.
+- IT-configures-once, builders-attach-many: covered by the separate `_create` / `_update` / `_delete` vs `_attach` permission split and the NOTE at `oauth-providers.adoc` line 59. The opening prose also says "any MCP server that talks to that upstream can attach to it instead of carrying its own credentials."
+- Token refresh up to max expiry: covered in `user-delegated-oauth.adoc` (transparent refresh + re-consent on refresh failure).
+- Claude.ai expired-connection re-login flow: covered in `remote-mcp-clients.adoc` two-step OAuth flow section.
+
+### Open questions for engineering
+
+None blocking. Two soft questions:
+
+- Is there a planned `My Connections` redesign that would change what the page shows (for example, surfacing token TTL, last upstream call timestamp, or per-MCP-server attribution)? If yes, defer the dedicated page until the redesign lands.
+- The briefing's "we will bake a custom experience per template oauth provider type" implies the Category picker today pre-fills endpoints but does not deeply customize the form fields. Confirm whether the current per-template differences are limited to endpoint pre-fill, or whether scope vocabularies and additional fields already vary per template; the docs should reflect what actually differs.
