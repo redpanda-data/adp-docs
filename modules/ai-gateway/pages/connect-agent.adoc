@@ -123,6 +123,7 @@ The `rpk ai` command honors the following environment variables:
 |Map to `--rpai-profile`, `--rpai-config`, `--rpai-verbose`, `--format`. Long flag names are renamed under `rpk ai` to avoid collision with `rpk`'s globals; short flags (`-p`, `-c`, `-v`, `-o`) are unchanged.
 |===
 
+[[authenticate-with-oidc-client-credentials]]
 == Authenticate with OIDC client credentials (CI and programmatic)
 
 For application code, CI runners, server-side processes, and headless agents, use the OIDC `client_credentials` grant directly. This is the canonical authentication path for SDK-style usage; `rpk ai` is for command-line workflows, not for embedding in application code. Values are surfaced on the provider's *Connection* card; defaults at the time of writing are below.

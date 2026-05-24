@@ -174,6 +174,8 @@ Models you select on this form become the catalog the provider exposes. Leave th
 
 For *OpenAI*, *Anthropic*, *Google AI*, and *AWS Bedrock*, the form shows a picker backed by the provider's catalog. Pick from the list, or type a model identifier the catalog doesn't show. For *OpenAI-compatible*, the form takes a freeform list: type the exact identifiers your upstream serves.
 
+The catalog of available models in the picker is maintained by Redpanda. When an upstream provider publishes a new model, it usually appears in the picker within a day or two; admins don't have to wait for a Redpanda release. New models aren't enabled automatically: an admin still selects the model in the catalog to make it callable through this provider.
+
 For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs. See <<bedrock-inference-profiles>>.
 
 [NOTE]
@@ -184,6 +186,21 @@ Redpanda stores models as structured `ProviderModel` entries (one entry per mode
 After you create the provider, the detail page renders each model as a row with capability badges (*Vision*, *Reasoning*, *Streaming*, and others lifted from the catalog), the model's 7-day spend, and a link to the per-model detail page. The model list supports search and filtering.
 
 The detail page also carries a *Last 7 days* KPI strip (*TOTAL SPEND*, *REQUESTS*, *TOKENS*) with sparklines and _vs previous period_ deltas. *View all* on each card opens the *Cost & Usage* tab with this provider pre-filtered so you can drill into spend, request, or token trends.
+
+[[transcript-logging]]
+== Configure transcript logging
+
+By default, AI Gateway records the full request and response payload (including prompt content, completion content, and tool-call arguments and results) for every call this provider proxies, writing each call into xref:observability:transcripts.adoc[the Transcripts view] alongside token counts and latency. This powers turn-by-turn investigation and per-conversation drill-down in Governance.
+
+Some workloads need to suppress that payload capture: regulated PII, customer secrets, or any traffic where the message body itself must not be retained. For those, configure a dedicated "sensitive" provider with transcript logging disabled.
+
+The toggle is on the provider's create and edit form. It is per-provider, not per-request: applications cannot opt in or out at call time. To split sensitive from non-sensitive traffic, create one provider with transcript logging on and another with it off, and route each application to whichever proxy URL matches its data class.
+
+Disabling transcript logging does not suppress cost and usage telemetry. Token counts, latency, and provider/model attribution are still recorded, so the *Cost & Usage* tab and the xref:governance:dashboard/overview.adoc[Governance dashboard] continue to report spend for traffic on the provider; only the message bodies are withheld from the Transcripts view.
+
+NOTE: Changing the toggle takes effect for new requests. Transcripts already captured under the previous setting are not retroactively redacted; delete or rotate the provider if you need to purge historical content.
+
+// TODO: Verify the exact UI field label ("Transcript logging" / "Capture transcripts" / similar) and default value against adp-production. Confirm with eng whether disabling capture also suppresses the `gen_ai.prompt.*` and `gen_ai.completion.*` attributes on OTel spans, or only the long-form content fields.
 
 == Save and verify
 

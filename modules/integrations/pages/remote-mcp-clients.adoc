@@ -131,10 +131,11 @@ The flow mirrors Claude Desktop. The exact menu paths and field labels differ by
 * *ChatGPT desktop*: Recent builds support remote MCP custom connectors. Confirm the latest menu path; OpenAI iterates on this surface.
 * *Gemini apps*: Recent builds support remote MCP custom connectors.
 * *Cursor*: Supports remote MCP servers in recent builds.
+* *Microsoft Copilot Studio*: Recent builds support remote MCP custom connectors registered against an external OAuth 2.0 authorization server. Register Copilot Studio's published redirect URIs on the AI Gateway OAuth Client before connecting.
 
 The required inputs are the same as Claude Desktop: connector name, MCP URL, Client ID, Client Secret. The chat client's redirect URIs must be registered on the AI Gateway OAuth Client.
 
-// TODO: confirm and document the ChatGPT, Gemini, and Cursor menu paths once each integration ships.
+// TODO: confirm and document the ChatGPT, Gemini, Cursor, and Microsoft Copilot Studio menu paths once each integration is exercised end-to-end against adp-production. For Copilot Studio specifically: capture the Power Platform / agent designer route to "Add custom connector", the redirect URIs Microsoft publishes for the MCP connector flow, and any tenant-admin consent requirements. Briefing 2026-05-22 names Copilot Studio as a supported client but does not confirm a passing end-to-end test; verify before promising the integration in customer-facing copy.
 
 == The two-step OAuth flow
 
@@ -243,6 +244,8 @@ Common symptoms and fixes:
 |===
 
 == Limitations
+
+* *No Dynamic Client Registration (RFC 7591)*: AI Gateway does not support OAuth 2.0 Dynamic Client Registration today. Every external MCP client must be registered manually through the *OAuth Clients* page or the `rpk ai oauth-client` CLI before its first connection attempt. MCP clients that *only* support DCR (some experimental connector builds) cannot connect to AI Gateway until a corresponding OAuth Client is registered by an admin. See <<register-an-oauth-client-in-ai-gateway,Register an OAuth Client>> for the manual flow.
 
 This page does not cover:
 
