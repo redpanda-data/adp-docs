@@ -35,8 +35,8 @@ After completing this guide, you will be able to:
 
 The marketplace picker lists every managed type as a card and includes a *Remote (Proxied)* option for self-managed servers.
 
-* *Managed*: pick a card. Redpanda hosts the server in-process. The configuration form is rendered from the type's protobuf schema; field labels and help text come straight from the proto.
-* *Self-managed*: pick *Remote (Proxied)*. You provide a URL and a transport, and Redpanda proxies requests to your server.
+* *Managed*: Pick a card. Redpanda hosts the server in-process. The configuration form is rendered from the type's protobuf schema; field labels and help text come straight from the proto.
+* *Self-managed*: Pick *Remote (Proxied)*. You provide a URL and a transport, and Redpanda proxies requests to your server.
 
 // TODO: screenshot of the marketplace picker, with both a managed card and the Remote (Proxied) option visible.
 
@@ -139,9 +139,12 @@ NOTE: Defer advanced code-mode patterns (sandboxing limits, runtime selection, d
 
 . Click *Create*. The server appears in the list with a *Type* badge: *Managed* or *Self-managed*.
 . Open the detail page. The *Overview* tab shows the *API URL*: this is the MCP URL agents connect to. Copy it for use later.
+. Open the *Connection* tab to see ready-to-paste connection snippets for common MCP clients (Claude Code, Claude Desktop, ChatGPT, Cursor) pre-filled with this server's API URL.
 . Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:mcp:test-tools.adoc[Test a server's tools] for how to call them.
 
 A populated tools list confirms that the connection works and credentials resolve correctly. If the list is empty or the tab shows an error, see <<troubleshooting>>.
+
+// TODO: Verify the exact tab names on the MCP server detail page against adp-production (briefing 2026-05-22 implies three tabs: Overview / Connection / Inspector for managed servers; remote/proxied servers may surface an additional connection-config tab). Confirm with eng whether the *Connection* tab is the canonical home for client snippets, or whether they live under *Connect your app* like on the LLM provider detail page.
 
 == Create from the CLI
 

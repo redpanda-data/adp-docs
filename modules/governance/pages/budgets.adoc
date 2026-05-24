@@ -74,6 +74,121 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 
 // TODO: confirm `user_id` and `organization_id` are populated automatically from request context (OIDC claims) or require setup. Open Q A2 in the companion plan.
 
+[[query-spend-programmatically]]
+== Query spend programmatically
+
+`SpendingService.GetSpendingBreakdown` is the canonical RPC for pulling spend out of ADP. Use it for chargeback reporting, scheduled emails, internal cost dashboards, or any workflow the built-in UI doesn't cover. Every spend number the dashboard shows comes from this RPC, so query results match the UI to the cent.
+
+=== Authenticate
+
+`SpendingService` uses the same OIDC client-credentials grant as the rest of AI Gateway. Mint a service-account access token using the flow in xref:ai-gateway:connect-agent.adoc#authenticate-with-oidc-client-credentials[Authenticate with OIDC client credentials], then pass the token in the `Authorization: Bearer <token>` header on every call. The service account needs `dataplane_adp_spending_get` on the resource you're querying. See xref:governance:permissions-reference.adoc#spending-permissions[Spending permissions].
+
+// TODO: Confirm the canonical endpoint shape against `apps/aigw` on cloudv2. Likely a Connect-Go / gRPC reflection surface at `<dataplane-base>/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown`. Replace the placeholder URL below with the verified shape, and add a note on whether HTTP/JSON transcoding is exposed or whether clients must speak gRPC.
+
+=== Request shape
+
+`GetSpendingBreakdown` takes a `SpendingFilter` plus a `group_by` dimension. The filter accepts:
+
+[cols="1,3"]
+|===
+|Field |Meaning
+
+|`time_range.start_time`, `time_range.end_time`
+|RFC 3339 timestamps bracketing the window. Required.
+
+|`provider_name`
+|Restrict to one LLM provider (matches the *Name* field on the provider's detail page).
+
+|`model_id`
+|Restrict to one model identifier (`claude-sonnet-4-6`, `gpt-5.2`, and so on).
+
+|`user_id`
+|Restrict to one identified user. Anonymous traffic is excluded.
+
+|`organization_id`
+|Restrict to one organization. Multi-tenant deployments only.
+
+|`filter`
+|AIP-160 expression that combines and negates dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). Composes with the structured fields above; populate one or both.
+|===
+
+The `group_by` value chooses the breakdown dimension: `PROVIDER`, `MODEL`, `USER`, `ORGANIZATION`, or `PROVIDER_TYPE`.
+
+=== cURL example
+
+Pull per-user spend for the last 7 days against an Anthropic provider:
+
+[source,bash]
+----
+ACCESS_TOKEN="<oidc-access-token>"   # from the client_credentials flow
+DATAPLANE_BASE="https://aigw.<cluster-id>.clusters.rdpa.co"
+
+curl -s --request POST \
+  --url "${DATAPLANE_BASE}/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown" \
+  --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "filter": {
+      "time_range": {
+        "start_time": "2026-05-17T00:00:00Z",
+        "end_time":   "2026-05-24T00:00:00Z"
+      },
+      "provider_name": "prod-anthropic"
+    },
+    "group_by": "USER"
+  }' | jq
+----
+
+The response carries one row per user in the window, each with `input_tokens`, `output_tokens`, `cached_tokens`, `total_tokens` (server-derived), `total_cost_microcents`, and `request_count`. Divide `total_cost_microcents` by 10,000 to convert to dollars.
+
+=== Python example
+
+Generated client code lives in the proto bundle; if your project doesn't already import it from cloudv2, drive `SpendingService` over plain HTTPS:
+
+[source,python]
+----
+import os, requests
+from datetime import datetime, timedelta, timezone
+
+token = os.environ["ACCESS_TOKEN"]            # from the client_credentials flow
+base  = os.environ["DATAPLANE_BASE"]          # https://aigw.<cluster-id>.clusters.rdpa.co
+end   = datetime.now(timezone.utc)
+start = end - timedelta(days=7)
+
+body = {
+    "filter": {
+        "time_range": {
+            "start_time": start.isoformat().replace("+00:00", "Z"),
+            "end_time":   end.isoformat().replace("+00:00", "Z"),
+        },
+        "filter": 'provider_name="prod-anthropic"',
+    },
+    "group_by": "USER",
+}
+
+r = requests.post(
+    f"{base}/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown",
+    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+    json=body,
+)
+r.raise_for_status()
+for row in r.json().get("rows", []):
+    dollars = row["total_cost_microcents"] / 10_000
+    print(f"{row['user_id']}: ${dollars:,.2f}  ({row['request_count']} requests)")
+----
+
+// TODO: Replace the URL path with the verified Connect-Go / gRPC route once eng confirms. The proto-generated client (Connect-Go or grpc-python) is the long-term recommendation; the cURL/`requests` examples above are for quick scripting.
+
+=== Related methods
+
+`SpendingService` exposes three more methods that follow the same `SpendingFilter` shape:
+
+* `GetSpendingTimeSeries`: Bucketed spend over the time range, for chart-style consumers.
+* `GetSpendingSummary`: Total spend, tokens, and requests for the range, with no breakdown.
+* `ListSpendingEvents`: Paged per-call detail. Use this only for narrow time ranges; the event volume is high.
+
+// TODO: Confirm the method names above against the current `SpendingService` proto and add the full request/response shape for each one (or split into a dedicated spending-api.adoc if this section outgrows budgets.adoc).
+
 == Guardrail evaluator cost
 
 Some guardrail evaluators call an LLM to do their work. A toxicity classifier, for example, runs the request or response through a separate model and accrues per-call cost in the process. PII detection over regex doesn't, but anything LLM-based does.
