@@ -35,8 +35,8 @@ After completing this guide, you will be able to:
 
 The marketplace picker lists every managed type as a card and includes a *Remote (Proxied)* option for self-managed servers.
 
-* *Managed*: pick a card. Redpanda hosts the server in-process. The configuration form is rendered from the type's protobuf schema; field labels and help text come straight from the proto.
-* *Self-managed*: pick *Remote (Proxied)*. You provide a URL and a transport, and Redpanda proxies requests to your server.
+* *Managed*: Pick a card. Redpanda hosts the server in-process. The configuration form is rendered from the type's protobuf schema; field labels and help text come straight from the proto.
+* *Self-managed*: Pick *Remote (Proxied)*. You provide a URL and a transport, and Redpanda proxies requests to your server.
 
 // TODO: screenshot of the marketplace picker, with both a managed card and the Remote (Proxied) option visible.
 

@@ -183,9 +183,9 @@ for row in r.json().get("rows", []):
 
 `SpendingService` exposes three more methods that follow the same `SpendingFilter` shape:
 
-* `GetSpendingTimeSeries`: bucketed spend over the time range, for chart-style consumers.
-* `GetSpendingSummary`: total spend, tokens, and requests for the range, with no breakdown.
-* `ListSpendingEvents`: paged per-call detail. Use this only for narrow time ranges; the event volume is high.
+* `GetSpendingTimeSeries`: Bucketed spend over the time range, for chart-style consumers.
+* `GetSpendingSummary`: Total spend, tokens, and requests for the range, with no breakdown.
+* `ListSpendingEvents`: Paged per-call detail. Use this only for narrow time ranges; the event volume is high.
 
 // TODO: Confirm the method names above against the current `SpendingService` proto and add the full request/response shape for each one (or split into a dedicated spending-api.adoc if this section outgrows budgets.adoc).
 
