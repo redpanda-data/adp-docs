@@ -1,7 +1,7 @@
 = BambooHR Managed MCP Server
 :description: Let agents read BambooHR employee, time-off, and performance data with each caller's BambooHR OAuth identity.
 :page-topic-type: how-to
-:personas: app_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the BambooHR managed MCP server with a BambooHR subdomain and user-delegated OAuth
 :learning-objective-2: Identify the BambooHR tools available to agents
 :learning-objective-3: Test BambooHR tool calls with an authorized user's connection

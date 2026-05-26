@@ -1,7 +1,7 @@
 = Eject to Custom Mode
 :description: Transition an AI Hub gateway to Custom mode for full configuration control.
 :page-topic-type: how-to
-:personas: platform_admin
+:personas: platform_engineer
 :learning-objective-1: Evaluate the implications of ejecting from AI Hub to Custom mode
 :learning-objective-2: Prepare for ejection by documenting current configuration
 :learning-objective-3: Execute the ejection process and configure the gateway post-ejection

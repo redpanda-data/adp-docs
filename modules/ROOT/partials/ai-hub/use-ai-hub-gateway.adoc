@@ -1,7 +1,7 @@
 = Use AI Hub Gateway
 :description: Connect to and use AI Hub mode gateways with pre-configured intelligent routing.
 :page-topic-type: how-to
-:personas: app_developer
+:personas: agent_builder
 :learning-objective-1: Identify whether a gateway is running in AI Hub mode
 :learning-objective-2: Connect your application to an AI Hub gateway using the OpenAI SDK
 :learning-objective-3: Describe how intelligent routing directs requests to providers

@@ -1,7 +1,7 @@
 = Read the Governance Overview
 :description: Read ADP spend, request, token, agent, and top-user activity from the Governance dashboard.
 :page-topic-type: how-to
-:personas: evaluator, platform_admin, app_developer
+:personas: pilot_lead, platform_engineer, security_compliance_lead
 :learning-objective-1: Read the Total Spend, Requests, and Tokens KPI tabs
 :learning-objective-2: Filter governance charts by provider, model, cost type, token type, and user
 :learning-objective-3: Use the Agents table and Top users panel to investigate fleet and user-level spend

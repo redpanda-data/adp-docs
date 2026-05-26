@@ -1,7 +1,7 @@
 = Zendesk Managed MCP Server
 :description: Search and manage Zendesk Support tickets, users, and Help Center articles. Two auth modes (service-account API token or per-user OAuth) plus token-efficient response shaping for LLM agents.
 :page-topic-type: how-to
-:personas: app_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the Zendesk managed MCP server in API-token or User-OAuth mode
 :learning-objective-2: Pick the right scopes and Zendesk role for your workflows
 :learning-objective-3: Search, read, create, and update tickets from the Inspector or an agent

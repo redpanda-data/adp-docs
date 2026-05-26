@@ -1,7 +1,7 @@
 = Monitor Agent Activity
 :description: Monitor agent execution, analyze conversation history, track token usage, and debug issues using Inspector, Transcripts, and agent data topics.
 :page-topic-type: how-to
-:personas: agent_developer, platform_admin
+:personas: agent_builder, platform_engineer, domain_evaluator
 :learning-objective-1: pass:q[Verify agent behavior using the *Inspector* tab]
 :learning-objective-2: Track token usage and performance metrics
 :learning-objective-3: pass:q[Debug agent execution using *Transcripts*]

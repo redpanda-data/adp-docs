@@ -1,7 +1,7 @@
 = Ironclad Managed MCP Server
 :description: Read and manage contracts in Ironclad CLM. Per-user OAuth so each agent action runs as the calling end-user with their own Ironclad permissions.
 :page-topic-type: how-to
-:personas: app_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the Ironclad managed MCP server with per-user OAuth
 :learning-objective-2: Pick the right region and scopes for your tenant
 :learning-objective-3: List, fetch, and launch contract workflows from an agent

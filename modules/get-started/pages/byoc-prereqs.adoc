@@ -1,7 +1,7 @@
 = ADP BYOC Prerequisites
 :description: Requirements for running Redpanda ADP on Redpanda Cloud BYOC environments on AWS.
 :page-topic-type: reference
-:personas: platform_admin
+:personas: platform_engineer
 :page-byoc: true
 :learning-objective-1: Identify the AWS BYOC requirements for ADP
 :learning-objective-2: Identify the ADP enablement and IAM resource patterns required by Crossplane

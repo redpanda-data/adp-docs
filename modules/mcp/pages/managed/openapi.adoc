@@ -1,7 +1,7 @@
 = OpenAPI Managed MCP Server
 :description: Expose any OpenAPI- or Swagger-described HTTP API as MCP tools. Point Redpanda at a spec URL and get a fully-typed tool surface for agents, with no custom code.
 :page-topic-type: how-to
-:personas: app_developer
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the OpenAPI managed MCP server against an OpenAPI 3 spec
 :learning-objective-2: Pick the right authentication mode for the upstream API
 :learning-objective-3: Verify generated tools through the Inspector

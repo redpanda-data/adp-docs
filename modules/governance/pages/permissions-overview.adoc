@@ -1,7 +1,7 @@
 = About ADP Permissions
 :description: Understand how ADP permissions, built-in roles, and role bindings fit together to control access to AI Gateway, MCP, agents, pipelines, and governance APIs.
 :page-topic-type: concept
-:personas: platform_admin, evaluator, app_developer
+:personas: security_compliance_lead, platform_engineer
 :learning-objective-1: Explain how ADP permissions, roles, and role bindings fit together
 :learning-objective-2: Differentiate between the Admin, Writer, Reader, and Invoker built-in roles
 :learning-objective-3: Identify which built-in role grants the permissions a user or service account needs

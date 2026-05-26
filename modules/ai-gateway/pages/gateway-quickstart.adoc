@@ -2,7 +2,7 @@
 :page-aliases: redpanda-cloud:ai-agents:ai-gateway/gateway-quickstart.adoc
 :description: Get started with AI Gateway. Configure providers, create your first gateway with failover and budget controls, and route your first request.
 :page-topic-type: quickstart
-:personas: evaluator, app_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Enable an LLM provider and create your first gateway
 :learning-objective-2: Route your first request through AI Gateway and verify it works
 :learning-objective-3: Verify request routing and token usage in the gateway overview

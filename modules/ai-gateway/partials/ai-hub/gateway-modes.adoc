@@ -1,7 +1,7 @@
 = AI Gateway Modes
 :description: Understand AI Hub mode and Custom mode, and choose the right approach for your organization.
 :page-topic-type: concept
-:personas: evaluator, platform_admin, app_developer
+:personas: platform_engineer, agent_builder
 :learning-objective-1: Differentiate between AI Hub and Custom gateway modes
 :learning-objective-2: Determine which mode suits your use case based on configuration needs
 :learning-objective-3: Identify which mode a gateway is running in using Console or API

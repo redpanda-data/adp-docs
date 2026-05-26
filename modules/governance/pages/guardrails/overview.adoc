@@ -1,8 +1,7 @@
 = Guardrails Overview
 :description: Learn what guardrails are, the evaluator types you can choose from, the INPUT and OUTPUT phase model, and where violations show up.
 :page-topic-type: overview
-:personas: platform_admin, evaluator, app_developer
-// TODO: confirm persona vocabulary against docs-team-standards. The Guardrails plan uses canonical personas; if a Guardrails-specific persona exists (for example, security_admin), apply it here. Open Q D4 in the companion plan.
+:personas: security_compliance_lead, platform_engineer, agent_builder
 :learning-objective-1: Describe what a guardrail does and why you would attach one to an LLM provider
 :learning-objective-2: Distinguish between the three evaluator types (PII, Toxicity, and Custom webhook) and the situations each fits
 :learning-objective-3: Recognize where a guardrail violation surfaces and which page to read next

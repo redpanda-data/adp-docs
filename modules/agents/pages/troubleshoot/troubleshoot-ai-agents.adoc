@@ -2,7 +2,7 @@
 :description: Diagnose and fix common issues with AI agents including deployment failures, runtime behavior problems, and tool execution errors.
 :page-byoc: true
 :page-topic-type: troubleshooting
-:personas: agent_developer, app_developer, streaming_developer
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Diagnose deployment failures and resource allocation errors
 :learning-objective-2: Resolve runtime behavior issues including tool selection and iteration limits
 :learning-objective-3: Fix tool execution problems and authentication failures
