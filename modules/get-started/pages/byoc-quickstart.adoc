@@ -1,5 +1,5 @@
 = ADP Quickstart
-:description: Set up Redpanda ADP for your organization in about 20 minutes. Get an Anthropic API key, configure your first LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build a working agent that calls both.
+:description: Set up Redpanda ADP for your organization. Get an Anthropic API key, configure your first LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build a working agent that calls both.
 :page-topic-type: quickstart
 :personas: platform_engineer
 :page-byoc: true
@@ -11,7 +11,7 @@
 // TODO: replace placeholder model IDs (claude-sonnet-4-6, claude-haiku-4-5) with the catalog's current Anthropic offerings at PR time.
 // TODO: confirm the Create LLM Provider form's inline secret-creation flow on adp-production. If supported, fold step 2 into step 3 and remove the standalone Secrets step.
 
-Set up Redpanda ADP for your organization in about 20 minutes. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
+Set up Redpanda ADP for your organization. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
 
 After completing this quickstart, you will be able to:
 
@@ -24,7 +24,6 @@ After completing this quickstart, you will be able to:
 * A Redpanda Cloud BYOC environment on AWS with ADP enabled. See xref:get-started:byoc-prereqs.adoc[ADP BYOC prerequisites].
 * The Writer or Admin xref:governance:permissions-overview.adoc[built-in role] in ADP. The Reader role can list resources but cannot create them.
 * An Anthropic account. If you don't have one, the next section walks through signup.
-* About 20 minutes.
 
 == What you'll build
 
@@ -36,25 +35,26 @@ Three ADP resources, in order:
 
 After the agent works, you'll see the calls in the governance dashboard and walk through one execution turn-by-turn in the Transcripts view.
 
-All three resources are deletable at the end of the quickstart in less than a minute.
+All three resources are deletable at the end of the quickstart.
 
 == Get an Anthropic API key
 
 Anthropic requires a payment method before it issues an API key. Add billing first, then create the key.
 
-. Open https://console.anthropic.com[console.anthropic.com^] and sign in, or create a new account.
+. Open https://platform.claude.com[platform.claude.com^] and sign in, or create a new account.
 
-. In the left sidebar, click *Settings* > *Billing*. Add a payment method. (Optional but recommended: add $5 in prepaid credit so the quickstart calls don't fail on a fresh account.)
+. Add a payment method to your account if you haven't already. Anthropic requires a payment method before it issues API keys. (Optional: add a small amount of prepaid credit so the quickstart calls don't fail on a fresh account.)
 
-. Click *Settings* > *API Keys*.
+. In the sidebar, select a workspace other than *Claude Code*. The Claude Code workspace uses a separate key-creation flow that doesn't fit this quickstart.
 
-. Click *Create Key*.
+. Click *Manage* > *API keys* in the sidebar.
+
+. Click *+ Create key* in the top right.
 +
 * *Name*: `adp-quickstart`
-* *Workspace*: Default
-* *Environment*: Production
+* *Workspace*: Confirm the workspace you selected above.
 +
-Click *Create Key*.
+Leave any other fields at their defaults and click *Create*.
 
 . Copy the key (it starts with `sk-ant-`).
 +
@@ -141,7 +141,7 @@ The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL 
 
 . Click *Create*.
 
-. Wait for the server status to change from *Starting* to *Running*. This takes a few seconds because Redpanda fetches the spec, parses it, and generates one MCP tool per operation.
+. Wait for the server status to change from *Starting* to *Running*. Redpanda fetches the spec, parses it, and generates one MCP tool per operation.
 
 . On the server detail page, confirm the *Tools* list shows several entries, including:
 +
@@ -288,7 +288,7 @@ If this is a one-off quickstart, delete the resources you created so they don't 
 
 . (Optional) Delete the secret. Open *Secrets*, click `ANTHROPIC_API_KEY`, then *Delete*.
 
-. (Optional, on the Anthropic side) Revoke the API key. Open https://console.anthropic.com[console.anthropic.com^] > *Settings* > *API Keys*, find `adp-quickstart`, and click *Revoke*.
+. (Optional, on the Anthropic side) Revoke the API key. Open https://platform.claude.com[platform.claude.com^], navigate to *Manage* > *API keys* in the workspace where you created the key, find `adp-quickstart` in the list, and revoke it from the row's action menu.
 
 If you want to keep the provider but rotate the key, edit the provider and change the *API key* reference to a new secret.
 
