@@ -19,7 +19,7 @@ asciidoc:
       title: "Agentic Data Plane"
       description: "Build AI agents with real-time data"
       order: 1
-      color: '#ea580c'
+      color: '#C1331A'
       text-color: '#ffffff'
       icon: "sparkles"
     # UI name for single-sourced content
