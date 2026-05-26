@@ -60,15 +60,15 @@ Anthropic shows the API key value once. If you close the dialog without copying,
 
 . (Optional) On the *API Keys* page, confirm the new key appears with the *Active* status.
 
-== Store the key in ADP's secret store
+== Store the key in the ADP Secrets Store
 
 ADP references provider credentials by secret name, not by raw value. Create the secret first so the next step can reference it.
 
 . Sign in to ADP.
 
-. Open *Secrets* in the sidebar.
+. Open *Secrets Store* in the sidebar.
 
-. Click *Create secret*.
+. Click *Create Secret*.
 +
 * *Name*: `ANTHROPIC_API_KEY` (use `UPPER_SNAKE_CASE`)
 * *Value*: Paste the `sk-ant-` key you copied from Anthropic.
@@ -77,7 +77,7 @@ Click *Create*.
 
 . Confirm the secret appears in the list with the name `ANTHROPIC_API_KEY`.
 
-TIP: If your ADP version offers a *Create new secret* control on the LLM provider form's *API key* field, you can skip this step and create the secret inline in the next section. Either flow stores the key in the same place.
+TIP: If your ADP version offers an inline secret-creation control on the LLM provider form's *API key* field, you can skip this step and create the secret inline in the next section. Either flow stores the key in the same place.
 
 == Configure your LLM provider
 
@@ -281,7 +281,7 @@ If this is a one-off quickstart, delete the resources you created so they don't 
 
 . Delete the *LLM provider* (`anthropic-quickstart`). Same pattern. Note that the underlying secret (`ANTHROPIC_API_KEY`) is not deleted automatically.
 
-. (Optional) Delete the secret. Open *Secrets*, click `ANTHROPIC_API_KEY`, then *Delete*.
+. (Optional) Delete the secret. Open *Secrets Store*, click `ANTHROPIC_API_KEY`, then *Delete*.
 
 . (Optional, on the Anthropic side) Revoke the API key. Open https://platform.claude.com[platform.claude.com^], navigate to *Manage* > *API keys* in the workspace where you created the key, find `adp-quickstart` in the list, and revoke it from the row's action menu.
 
