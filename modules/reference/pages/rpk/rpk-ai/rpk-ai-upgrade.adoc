@@ -1,5 +1,4 @@
 = rpk ai upgrade
-:personas: platform_engineer, agent_builder
 
 Upgrade to the latest Redpanda AI CLI version.
 

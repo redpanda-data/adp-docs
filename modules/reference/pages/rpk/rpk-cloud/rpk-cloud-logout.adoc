@@ -1,4 +1,3 @@
 = rpk cloud logout
-:personas: platform_engineer, agent_builder
 
 include::ROOT:reference:partial$rpk-cloud/rpk-cloud-logout.adoc[tag=single-source]

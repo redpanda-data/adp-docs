@@ -1,5 +1,4 @@
 = Pipeline Examples
 :description: Example pipelines for common AI agent use cases.
-:personas: agent_builder, platform_engineer
 
 // TODO: Add content

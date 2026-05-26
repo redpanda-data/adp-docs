@@ -1,5 +1,4 @@
 = AI Gateway
 :page-layout: index
 :description: Redpanda's managed proxy for LLM APIs. Create an LLM provider, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
-:personas: agent_builder, platform_engineer
 

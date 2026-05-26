@@ -1,5 +1,4 @@
 = AI Agents
 :page-layout: index
 :description: Declare agent behavior using built-in connectors. No custom agent code required.
-:personas: agent_builder, platform_engineer
 

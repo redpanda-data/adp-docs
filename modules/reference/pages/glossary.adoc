@@ -1,6 +1,5 @@
 = Glossary
 :description: Definitions of key terms used in Redpanda Agentic Data Plane documentation.
-:personas: agent_builder, platform_engineer, security_compliance_lead, domain_evaluator, pilot_lead
 
 == Agentic Data Plane terms
 

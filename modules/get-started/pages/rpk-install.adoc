@@ -1,6 +1,5 @@
 = Install or Update rpk
 :description: Install or update rpk to interact with Redpanda from the command line.
-:personas: platform_engineer, agent_builder
 :env-cloud:
 
 include::ROOT:get-started:rpk-install.adoc[tag=single-source]

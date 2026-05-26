@@ -1,4 +1,3 @@
 = Guardrails
 :description: Configurable safety and policy filters that run on the request or response side of every LLM call routed through AI Gateway.
 :page-layout: index
-:personas: security_compliance_lead, platform_engineer

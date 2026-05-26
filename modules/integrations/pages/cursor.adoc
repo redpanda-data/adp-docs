@@ -1,5 +1,4 @@
 = Cursor Integration
 :description: Integrate Redpanda ADP with Cursor IDE.
-:personas: agent_builder, platform_engineer
 
 // TODO: Add content

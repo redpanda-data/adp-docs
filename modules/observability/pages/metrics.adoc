@@ -1,5 +1,4 @@
 = Metrics
 :description: Monitor AI agent metrics in Redpanda ADP.
-:personas: platform_engineer, pilot_lead
 
 // TODO: Add content

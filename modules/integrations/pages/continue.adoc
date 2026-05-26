@@ -1,5 +1,4 @@
 = Continue Integration
 :description: Integrate Redpanda ADP with Continue.
-:personas: agent_builder, platform_engineer
 
 // TODO: Add content

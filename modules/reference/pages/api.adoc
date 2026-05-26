@@ -1,5 +1,4 @@
 = API Reference
 :description: Redpanda ADP API reference documentation.
-:personas: platform_engineer, agent_builder
 
 // TODO: Add content
