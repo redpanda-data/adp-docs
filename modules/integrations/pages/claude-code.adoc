@@ -4,7 +4,7 @@
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Configure Claude Code to call an Anthropic provider hosted in AI Gateway instead of the public Anthropic API
 :learning-objective-2: Attach ADP-hosted MCP servers to Claude Code so its tools resolve against your managed tool catalog
-:learning-objective-3: Verify the connection and read usage in the *Cost & Usage* tab
+:learning-objective-3: Verify the connection and read usage
 
 Claude Code is Anthropic's command-line coding agent. When you point it at an AI Gateway proxy URL instead of the public Anthropic API, your team's LLM calls flow through ADP: API keys stay in the dataplane secret store, usage rolls up in the *Cost & Usage* tab, and the calls land in xref:observability:transcripts.adoc[the Transcripts view] for investigation.
 
