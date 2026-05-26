@@ -1,7 +1,7 @@
 = Create an Agent
 :description: Configure an ADP agent declaratively through the create form. No Python or JavaScript code required.
 :page-topic-type: how-to
-:personas: agent_developer, app_developer, streaming_developer
+:personas: agent_builder
 :learning-objective-1: Create an ADP agent through the create form
 :learning-objective-2: Configure an LLM provider, model, and execution settings
 :learning-objective-3: Connect MCP servers, add subagents, and set discovery metadata

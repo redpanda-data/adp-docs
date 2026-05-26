@@ -1,7 +1,7 @@
 = Kafka Managed MCP Server
 :description: Produce, consume, and inspect topics on Kafka or Redpanda brokers through a managed MCP server hosted in the Agentic Data Plane.
 :page-topic-type: how-to
-:personas: platform_admin, app_developer
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the Kafka managed MCP server against a Kafka or Redpanda cluster
 :learning-objective-2: Produce a test message through the Inspector and consume it back
 :learning-objective-3: Pick the right authentication mode for your broker (PLAIN / SCRAM / mTLS / OAuth)

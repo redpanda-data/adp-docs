@@ -3,7 +3,7 @@
 :page-layout: index
 :page-topic-type: overview
 :page-categories: Agentic Data Plane
-:personas: evaluator, ai_agent_developer, platform_admin
+:personas: agent_builder, platform_engineer, security_compliance_lead, pilot_lead, domain_evaluator
 :learning-objective-1: Identify the key components of Redpanda ADP and their purposes
 :learning-objective-2: Describe how each component addresses enterprise governance and reliability requirements
 :learning-objective-3: Determine whether Redpanda ADP fits your organization's requirements for AI agent deployment

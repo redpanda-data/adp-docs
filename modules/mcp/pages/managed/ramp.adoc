@@ -1,7 +1,7 @@
 = Ramp Managed MCP Server
 :description: Manage Ramp corporate cards, transactions, spend limits, and reimbursements from an LLM agent. Per-user OAuth so each agent action runs as the calling end-user.
 :page-topic-type: how-to
-:personas: app_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the Ramp managed MCP server with per-user OAuth
 :learning-objective-2: Pick the right scopes and environment for production vs sandbox
 :learning-objective-3: List transactions, manage cards, and adjust spend limits from an agent

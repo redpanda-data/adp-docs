@@ -1,7 +1,7 @@
 = Slack Managed MCP Server
 :description: Let agents post messages and read channels in your Slack workspace using each end-user's own Slack identity through user-delegated OAuth.
 :page-topic-type: how-to
-:personas: app_developer
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the Slack managed MCP server with user-delegated OAuth
 :learning-objective-2: Walk through the consent flow and verify the connection in My Connections
 :learning-objective-3: Send a test message through the Inspector

@@ -1,7 +1,7 @@
 = Register a Self-Managed MCP Server
 :description: Front your own MCP server with a managed Redpanda URL. Pick a transport, configure authentication, and let agents discover the server's tools through Redpanda.
 :page-topic-type: how-to
-:personas: platform_admin
+:personas: platform_engineer, agent_builder
 :learning-objective-1: Register a self-managed MCP server in the ADP UI
 :learning-objective-2: Pick the right transport (SSE vs. Streamable HTTP) and authentication mode
 :learning-objective-3: Confirm tool discovery completed and the server is reachable through its proxy URL

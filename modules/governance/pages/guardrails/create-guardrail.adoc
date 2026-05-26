@@ -1,8 +1,7 @@
 = Create a Guardrail
 :description: Configure a guardrail, pick an evaluator type and phase, attach it to one or more LLM providers, and verify that it fires.
 :page-topic-type: how-to
-:personas: platform_admin
-// TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (for example, security_admin), apply it here. Open Q D4 in the companion plan.
+:personas: security_compliance_lead, platform_engineer
 :learning-objective-1: Create and configure a guardrail of a chosen evaluator type
 :learning-objective-2: Attach the guardrail to one or more LLM providers and enable it
 :learning-objective-3: Verify the guardrail fires and trace the violation through the transcript

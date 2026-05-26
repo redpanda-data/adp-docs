@@ -1,7 +1,7 @@
 = ADP BYOC Quickstart
 :description: Start with ADP on a Redpanda Cloud BYOC environment on AWS.
 :page-topic-type: how-to
-:personas: platform_admin
+:personas: platform_engineer
 :page-byoc: true
 :learning-objective-1: Check that a BYOC environment meets the ADP prerequisites
 :learning-objective-2: Continue from BYOC environment setup into ADP provider, MCP, and agent setup

@@ -1,7 +1,7 @@
 = Configure User-Delegated OAuth for an MCP Server
 :description: Have each end-user authenticate against the MCP server's upstream system with their own credentials. Redpanda stores their token in the vault and injects it at call time.
 :page-topic-type: how-to
-:personas: platform_admin, app_developer
+:personas: platform_engineer, agent_builder, security_compliance_lead
 :learning-objective-1: Configure an MCP server to use user-delegated OAuth with a registered OAuth provider
 :learning-objective-2: Walk an end-user through the consent flow and verify the connection
 :learning-objective-3: Troubleshoot scope upgrades, token expiry, and refresh failures

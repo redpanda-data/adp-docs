@@ -1,6 +1,7 @@
 = Ingest OpenTelemetry Traces from Custom Agents
 :description: Configure a Redpanda Connect pipeline to ingest OpenTelemetry traces from custom agents into Redpanda's immutable log for unified governance and observability.
 :page-topic-type: how-to
+:personas: platform_engineer, agent_builder
 :learning-objective-1: pass:q[Configure and deploy a Redpanda Connect pipeline to receive OpenTelemetry traces from custom agents through HTTP and publish them to `redpanda.otel_traces`]
 :learning-objective-2: Validate trace data format and compatibility with existing MCP server traces
 :learning-objective-3: Secure the ingestion endpoint using authentication mechanisms

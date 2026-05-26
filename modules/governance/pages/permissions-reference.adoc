@@ -1,7 +1,7 @@
 = ADP Permissions Reference
 :description: Look up the permissions ADP enforces across LLM providers, MCP servers, agents, pipelines, knowledge bases, and governance APIs, and the built-in roles that grant them.
 :page-topic-type: reference
-:personas: platform_admin
+:personas: security_compliance_lead, platform_engineer
 :learning-objective-1: Look up an ADP permission by namespace
 :learning-objective-2: Find which built-in role grants a specific permission
 :learning-objective-3: Identify the operation each permission gates

@@ -1,6 +1,7 @@
 = Agent Integration
 :page-layout: index
 :description: Connect agents to external applications, pipelines, and other systems.
+:personas: agent_builder, platform_engineer
 
 Choose integration patterns and connect agents to your systems.
 

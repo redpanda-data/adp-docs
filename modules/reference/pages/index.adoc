@@ -1,3 +1,4 @@
 = Reference
 :description: API reference, glossary, and pipeline examples for the Redpanda Agentic Data Plane.
 :page-layout: index
+:personas: platform_engineer, agent_builder

@@ -1,3 +1,4 @@
 = For Builders
 :description: Discover available gateways and connect your applications and agents to AI Gateway.
 :page-layout: index
+:personas: agent_builder

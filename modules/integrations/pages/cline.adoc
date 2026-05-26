@@ -1,4 +1,5 @@
 = Cline Integration
 :description: Integrate Redpanda ADP with Cline.
+:personas: agent_builder, platform_engineer
 
 // TODO: Add content

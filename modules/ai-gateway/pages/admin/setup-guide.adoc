@@ -1,7 +1,7 @@
 = AI Gateway Setup Guide
 :description: Set up AI Gateway for your organization. Enable providers, configure failover for high availability, set budget controls, and create gateways with team-level isolation.
 :page-topic-type: how-to
-:personas: platform_admin
+:personas: platform_engineer, security_compliance_lead
 :learning-objective-1: Enable LLM providers and models in the catalog
 :learning-objective-2: Create and configure gateways with routing policies, rate limits, and spend limits
 :learning-objective-3: Set up MCP tool aggregation for AI agents

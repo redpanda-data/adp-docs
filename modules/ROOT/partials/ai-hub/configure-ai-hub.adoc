@@ -1,7 +1,7 @@
 = Configure AI Hub Gateway
 :description: Create and configure zero-config AI Hub gateways with pre-configured routing and backend pools.
 :page-topic-type: how-to
-:personas: platform_admin
+:personas: platform_engineer
 :learning-objective-1: Create an AI Hub gateway with one-click configuration
 :learning-objective-2: Configure user preference toggles to customize routing behavior
 :learning-objective-3: Manage provider credentials for OpenAI, Anthropic, and Google Gemini

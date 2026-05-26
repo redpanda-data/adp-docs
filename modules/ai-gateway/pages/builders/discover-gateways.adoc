@@ -1,7 +1,7 @@
 = Discover Available Gateways
 :description: Find which AI Gateways you can access and their configurations.
 :page-topic-type: how-to
-:personas: app_developer
+:personas: agent_builder
 :learning-objective-1: List all AI Gateways you have access to and retrieve their endpoints and IDs
 :learning-objective-2: View which models and MCP tools are available through each gateway
 :learning-objective-3: Test gateway connectivity before integration

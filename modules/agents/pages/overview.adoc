@@ -2,7 +2,7 @@
 :page-aliases: redpanda-cloud:ai-agents:agents/overview.adoc
 :description: Learn how ADP agents use a declarative approach backed by 300+ built-in connectors to replace custom agent code.
 :page-topic-type: overview
-:personas: evaluator, agent_developer, app_developer, streaming_developer
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Describe what AI agents are and their essential components
 :learning-objective-2: Explain how ADP streaming infrastructure benefits agent architectures
 :learning-objective-3: Identify use cases where ADP agents provide value

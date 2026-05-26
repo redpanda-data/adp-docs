@@ -1,7 +1,7 @@
 = BYOA Telemetry (OpenTelemetry)
 :description: Emit OpenTelemetry traces from your BYOA (Bring Your Own Agent) so the Agentic Data Plane can attribute calls, costs, and tool invocations to your agent. Covers the minimum required span contract, common optional attributes, and how it differs from a Redpanda-managed agent.
 :page-topic-type: how-to
-:personas: agent_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Identify the resource attributes and span attributes a BYOA agent must emit so transcripts and the governance dashboard can attribute calls correctly
 :learning-objective-2: Choose between optional enrichment attributes that improve dashboard fidelity (model, tool, agent name, conversation, cache tokens)
 :learning-objective-3: Validate a BYOA agent's telemetry by reading the resulting transcript and confirming non-zero metric values

@@ -1,7 +1,7 @@
 = NetSuite Managed MCP Server
 :description: Let agents read NetSuite records and run SuiteQL with each caller's NetSuite OAuth identity.
 :page-topic-type: how-to
-:personas: app_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the NetSuite managed MCP server with account ID and user-delegated OAuth
 :learning-objective-2: Identify the NetSuite read-only tools available to agents
 :learning-objective-3: Test NetSuite tool calls with an authorized user's connection

@@ -1,7 +1,7 @@
 = Create an MCP Server
 :description: Create an MCP server in the Agentic Data Plane by picking a managed type from the marketplace or registering a self-managed server you host yourself, then configure authentication, code mode, and access.
 :page-topic-type: how-to
-:personas: platform_admin, app_developer
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Create a managed or self-managed MCP server in the ADP UI
 :learning-objective-2: Configure each authentication mode and pick the right one for your use case
 :learning-objective-3: Save the server, verify the API URL, and confirm tools were discovered

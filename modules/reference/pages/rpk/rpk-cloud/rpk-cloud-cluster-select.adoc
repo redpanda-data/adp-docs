@@ -1,3 +1,4 @@
 = rpk cloud cluster select
+:personas: platform_engineer
 
 include::ROOT:reference:partial$rpk-cloud/rpk-cloud-cluster-select.adoc[tag=single-source]

@@ -1,4 +1,5 @@
 = Kill Switch
 :description: Emergency controls to stop AI agent operations.
+:personas: security_compliance_lead, pilot_lead, platform_engineer
 
 // TODO: Add content

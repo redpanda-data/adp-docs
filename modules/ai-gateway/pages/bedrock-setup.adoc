@@ -1,7 +1,7 @@
 = Set Up AWS Bedrock as an LLM Provider
 :description: Create the IAM user, policy, and access keys required for AI Gateway to invoke Amazon Bedrock models, then register the provider in ADP.
 :page-topic-type: how-to
-:personas: platform_admin
+:personas: platform_engineer
 :learning-objective-1: Create an IAM policy that grants AI Gateway permission to invoke Bedrock foundation models and cross-region inference profiles
 :learning-objective-2: Create a dedicated IAM user, attach the policy, and generate access keys for AI Gateway
 :learning-objective-3: Register Bedrock as an LLM provider in ADP and select the models you want to expose

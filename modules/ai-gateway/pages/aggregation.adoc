@@ -2,7 +2,7 @@
 :description: Learn how to use the MCP Gateway to aggregate MCP servers, configure deferred tool loading, create orchestrator workflows, and manage security.
 :page-byoc: true
 :page-topic-type: guide
-:personas: app_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure MCP aggregation with deferred tool loading to reduce token costs
 :learning-objective-2: Write orchestrator workflows to reduce multi-step interactions
 :learning-objective-3: Manage approved MCP servers with security controls and audit trails

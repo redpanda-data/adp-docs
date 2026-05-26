@@ -1,7 +1,7 @@
 = Metabase Managed MCP Server
 :description: Give an LLM agent read-and-query access to a Metabase analytics instance through the semantic layer (search, get_table, query metrics) and SQL escape hatches (run_native_query, run_card).
 :page-topic-type: how-to
-:personas: app_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the Metabase managed MCP server with a v0.49+ API key bound to the right Metabase group
 :learning-objective-2: pass:q[Identify when to use semantic-layer tools (`search`, `get_metric`, `query`) versus the native-SQL escape hatches (`run_native_query`, `run_card`)]
 :learning-objective-3: Run a metric-first analysis against your Metabase instance from the Inspector or an agent

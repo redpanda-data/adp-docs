@@ -1,4 +1,5 @@
 = rpk ai
+:personas: platform_engineer, agent_builder
 
 Manage the Redpanda AI Gateway
 

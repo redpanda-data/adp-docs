@@ -1,7 +1,7 @@
 = Register Your Own Agent (BYOA)
 :description: Register an agent you operate yourself with the Agentic Data Plane so it appears in the governance dashboard, emits transcripts, and can be called over A2A. Covers the registration model, A2A endpoint contract, service-account auth, and how BYOA differs from a managed agent.
 :page-topic-type: how-to
-:personas: agent_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Distinguish a BYOA (Bring Your Own Agent) from a Redpanda-managed agent and decide when each fits
 :learning-objective-2: pass:q[Identify the A2A endpoint contract a BYOA agent must expose (well-known agent card and the `/.well-known/agent-card.json` discovery URL)]
 :learning-objective-3: Identify the service-account auth model BYOA agents use to authenticate inbound calls and emit telemetry

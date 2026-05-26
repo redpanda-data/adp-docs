@@ -1,7 +1,7 @@
 = Workday Managed MCP Server
 :description: Drive Workday Human Resources business processes from an LLM agent. The Workday managed MCP wraps Workday's Human_Resources SOAP web services and authenticates with a service-account refresh-token grant.
 :page-topic-type: how-to
-:personas: app_developer, platform_admin
+:personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the Workday managed MCP server with an Integration System User (ISU) refresh token
 :learning-objective-2: Choose the right WSDL version and tenant settings
 :learning-objective-3: Run a Change_Personal_Information business process from the Inspector or an agent

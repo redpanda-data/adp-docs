@@ -1,3 +1,4 @@
 = For Admins
 :description: Set up and operate AI Gateway across providers, secrets, authentication, and observability for your team.
 :page-layout: index
+:personas: platform_engineer, security_compliance_lead

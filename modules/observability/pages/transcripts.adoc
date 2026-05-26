@@ -1,7 +1,7 @@
 = Read a Transcript
 :description: Open a transcript in the ADP UI, read the conversation turn by turn, and investigate errors, costs, and performance.
 :page-topic-type: how-to
-:personas: agent_developer, platform_admin
+:personas: agent_builder, domain_evaluator, platform_engineer, security_compliance_lead
 :learning-objective-1: Filter and open a transcript for a specific agent or MCP server execution
 :learning-objective-2: Read a transcript as a turn-by-turn conversation, including tool calls and token usage
 :learning-objective-3: Investigate errors, slow turns, and cost anomalies from the transcript detail view

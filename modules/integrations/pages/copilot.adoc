@@ -1,4 +1,5 @@
 = GitHub Copilot Integration
 :description: Integrate Redpanda ADP with GitHub Copilot.
+:personas: agent_builder, platform_engineer
 
 // TODO: Add content

@@ -1,8 +1,7 @@
 = Read Violations
 :description: Investigate why a guardrail fired, distinguish a violation from an evaluator failure, and tune the configuration.
 :page-topic-type: how-to
-:personas: app_developer, platform_admin
-// TODO: confirm persona vocabulary against docs-team-standards. If a Guardrails-specific persona exists (for example, security_admin), apply it here. Open Q D4 in the companion plan.
+:personas: security_compliance_lead, platform_engineer, agent_builder
 :learning-objective-1: Locate a violation entry in a transcript and identify which guardrail fired
 :learning-objective-2: Distinguish a guardrail violation from an evaluator failure and apply the right response
 :learning-objective-3: Recognize common false-positive patterns per evaluator type and tune the configuration

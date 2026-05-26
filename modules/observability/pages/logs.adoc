@@ -1,4 +1,5 @@
 = Logs
 :description: Access and analyze AI agent logs.
+:personas: platform_engineer, security_compliance_lead
 
 // TODO: Add content
