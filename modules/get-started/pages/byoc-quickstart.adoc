@@ -49,12 +49,7 @@ Anthropic requires a payment method before it issues an API key. Add billing fir
 
 . Click *Manage* > *API keys* in the sidebar.
 
-. Click *+ Create key* in the top right.
-+
-* *Name*: `adp-quickstart`
-* *Workspace*: Confirm the workspace you selected above.
-+
-Leave any other fields at their defaults and click *Create*.
+. Click *+ Create key* in the top right. In the *Create API key* dialog, name the key `adp-quickstart` and click *Add*.
 
 . Copy the key (it starts with `sk-ant-`).
 +
