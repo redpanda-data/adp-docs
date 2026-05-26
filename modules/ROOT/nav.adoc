@@ -2,7 +2,6 @@
 * xref:get-started:index.adoc[Get Started]
 ** xref:get-started:byoc-prereqs.adoc[Prerequisites]
 ** xref:get-started:byoc-quickstart.adoc[Quickstart]
-** xref:get-started:first-agent.adoc[Build Your First Agent]
 ** xref:get-started:rpk-install.adoc[Install or Update rpk]
 * xref:agents:index.adoc[Agents]
 ** xref:agents:overview.adoc[Overview]
