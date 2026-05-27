@@ -252,6 +252,12 @@ If the agent hallucinates data instead of calling a tool, tighten the system pro
 
 If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet store API being unavailable, that's the public Swagger PetStore being intermittently down. The agent is behaving correctly (the "if a tool fails, say so and stop" rule in the system prompt is what produced the apology). Retry the prompt; PetStore usually recovers within a few minutes.
 
+// The Transcripts and Governance verify sections below are conditionalized out until those admin UIs are stable in adp-production.
+// Each section is gated by its own attribute so they can be flipped on independently when ready. To surface a section,
+// define the corresponding attribute in `antora.yml` (under `asciidoc.attributes`) or as a page attribute:
+// * `env-adp-transcripts: true` for the Transcripts verify section
+// * `env-adp-governance: true` for the Governance dashboard verify section
+ifdef::env-adp-transcripts[]
 == Verify the agent in Transcripts
 
 Every agent run is recorded as a glossterm:transcript[] you can replay turn-by-turn.
@@ -267,9 +273,8 @@ Every agent run is recorded as a glossterm:transcript[] you can replay turn-by-t
 * The agent's final response to the user.
 
 For the full transcript field reference, see xref:observability:transcripts.adoc[Read a transcript].
+endif::[]
 
-// The Governance dashboard section below is conditionalized out until the governance UI ships in adp-production.
-// To surface it, define `env-adp-governance` in `antora.yml` (under `asciidoc.attributes`) or as a page attribute.
 ifdef::env-adp-governance[]
 == Verify spend in the governance dashboard
 
