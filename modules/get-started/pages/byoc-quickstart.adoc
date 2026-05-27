@@ -70,12 +70,18 @@ ADP references provider credentials by secret name, not by raw value. Create the
 
 . Click *Create Secret*.
 +
-* *Name*: `ANTHROPIC_API_KEY` (use `UPPER_SNAKE_CASE`)
+* *ID*: `ANTHROPIC_API_KEY`. The ID accepts uppercase letters, numbers, underscores, slashes, and hyphens only.
 * *Value*: Paste the `sk-ant-` key you copied from Anthropic.
+* *Scopes*: Make sure *AI Gateway* is selected. The LLM provider you create in the next section reads the secret through this scope. Leave any other default scopes in place.
 +
-Click *Create*.
+[IMPORTANT]
+====
+The secret value is encrypted and cannot be retrieved after you save the form. If you mistype the key, delete the secret and create a new one.
+====
++
+Click *Create Secret* at the bottom of the form.
 
-. Confirm the secret appears in the list with the name `ANTHROPIC_API_KEY`.
+. Confirm the secret appears in the list with the ID `ANTHROPIC_API_KEY`.
 
 TIP: If your ADP version offers an inline secret-creation control on the LLM provider form's *API key* field, you can skip this step and create the secret inline in the next section. Either flow stores the key in the same place.
 
