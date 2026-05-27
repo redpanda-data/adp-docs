@@ -17,11 +17,11 @@ After completing this quickstart, you will be able to:
 
 == Prerequisites
 
-* An ADP environment
+* A Redpanda Cloud BYOC environment on AWS with ADP enabled.
 
-* xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, Google AI, or AWS Bedrock)
+* An xref:ai-gateway:gateway-quickstart.adoc[AI Gateway] configured with at least one LLM provider (OpenAI, Anthropic, Google AI, or AWS Bedrock).
 
-* Completed the xref:mcp:create-server.adoc[Remote MCP Quickstart] to create an MCP server with the following tools deployed:
+* An MCP server created by following xref:mcp:create-server.adoc[Create an MCP Server], with the following tools deployed:
 +
 ** `generate_input`: Generates fake user event data
 ** `redpanda_output`: Publishes data to Redpanda topics
@@ -177,6 +177,7 @@ Common quickstart issue:
 
 == Next steps
 
+* xref:get-started:byoc-quickstart.adoc[ADP Quickstart]
 * xref:agents:overview.adoc[]
 * xref:agents:create-agent.adoc[]
 * xref:agents:system-prompts.adoc[]

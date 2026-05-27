@@ -21,7 +21,7 @@ An AI agent is a system built around a glossterm:large language model (LLM)[] th
 
 == How agents work
 
-When you create an agent, you configure the components through the ADP UI rather than writing code:
+When you create an agent, you configure the components through the Agentic Data Plane UI rather than writing code:
 
 * *System prompt*: Defines the agent's role, responsibilities, and constraints
 * *LLM*: Interprets user intent and decides which tools to invoke

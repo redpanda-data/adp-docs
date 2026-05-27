@@ -569,7 +569,7 @@ Look for spans with your custom `instrumentationScope.name` to identify traces f
 
 === View traces in Transcripts 
 
-After your custom agent sends traces through the pipeline, they appear in the *Transcripts* view of the ADP UI alongside traces from Remote MCP servers, declarative agents, and AI Gateway.
+After your custom agent sends traces through the pipeline, they appear in the *Transcripts* view of the Agentic Data Plane UI alongside traces from Remote MCP servers, declarative agents, and AI Gateway.
 
 ==== Identify custom agent transcripts
 

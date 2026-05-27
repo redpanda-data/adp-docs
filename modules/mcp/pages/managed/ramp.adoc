@@ -55,7 +55,7 @@ Set up the OAuth app on Ramp and the matching OAuth Provider in ADP:
 
 == Configure
 
-Create a new Ramp MCP server in the ADP UI:
+Create a new Ramp MCP server in the Agentic Data Plane UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Ramp* from the marketplace picker.

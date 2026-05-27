@@ -56,7 +56,7 @@ The managed server does not expose write tools, saved-search execution, or repor
 * Your NetSuite account ID. Production accounts use a numeric ID such as `1234567`. Sandbox accounts include a suffix such as `1234567_SB1`; release-preview accounts can use a suffix such as `1234567_RP1`.
 * NetSuite users with the *REST Web Services* permission on at least one role.
 
-// TODO: Confirm the exact ADP UI field labels for NetSuite OAuth Provider creation after an authenticated UI walkthrough.
+// TODO: Confirm the exact Agentic Data Plane UI field labels for NetSuite OAuth Provider creation after an authenticated UI walkthrough.
 
 == Configure NetSuite OAuth
 

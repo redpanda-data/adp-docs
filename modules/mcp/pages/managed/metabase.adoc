@@ -63,7 +63,7 @@ Permission errors surface from the upstream Metabase API as `metabase API error 
 
 == Configure
 
-Create a new Metabase MCP server in the ADP UI:
+Create a new Metabase MCP server in the Agentic Data Plane UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Metabase* from the marketplace picker.

@@ -402,7 +402,7 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 * *Multi-provider routing, failover, and retries across providers.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
 * *Spend limits.* Per-user, per-org, and global cost caps are not available. AI Gateway records spend and token usage for reporting in the provider *Cost & Usage* view and Governance, but it does not enforce budget caps. See xref:governance:budgets.adoc[Token budgets and limits].
 * *Rate limits.* Requests-per-second, per-minute, or per-day limits are not available.
-* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the ADP UI.
+* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the Agentic Data Plane UI.
 
 == Next steps
 

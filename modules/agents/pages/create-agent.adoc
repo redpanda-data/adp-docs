@@ -10,7 +10,7 @@
 // TODO: Refresh screenshots against `adp-production` during Track D polish pass.
 // TODO (pre-merge verification): Confirm with team-ai whether the cloudv2 main wizard ships before GA. If it does, restructure this page to match the wizard step flow (Basics, Model, Behavior, Tools, Subagents, Review) instead of the deployed single-page form.
 
-Create a new glossterm:AI agent[] declaratively through the ADP UI. No Python or JavaScript code required. This guide walks the create form section by section, then covers the post-create steps for discovery metadata and testing.
+Create a new glossterm:AI agent[] declaratively through the Agentic Data Plane UI. No Python or JavaScript code required. This guide walks the create form section by section, then covers the post-create steps for discovery metadata and testing.
 
 After reading this page, you will be able to:
 
