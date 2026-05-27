@@ -34,8 +34,6 @@ Three ADP resources, in order:
 
 After the agent works, you can walk through one execution turn-by-turn in the Transcripts view.
 
-All three resources are deletable at the end of the quickstart.
-
 == Get an Anthropic API key
 
 Anthropic requires a payment method before it issues an API key. Add billing first, then create the key.
