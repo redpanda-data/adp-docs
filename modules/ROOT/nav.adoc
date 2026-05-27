@@ -82,6 +82,7 @@
 ** xref:integrations:cline.adoc[Cline]
 ** xref:integrations:copilot.adoc[GitHub Copilot]
 * xref:reference:index.adoc[Reference]
+** xref:reference:glossary.adoc[Glossary]
 ** xref:reference:rpk/index.adoc[rpk Commands]
 *** xref:reference:rpk/rpk-ai/rpk-ai.adoc[rpk ai]
 **** xref:reference:rpk/rpk-ai/rpk-ai-agent.adoc[]
@@ -130,4 +131,3 @@
 ***** xref:reference:rpk/rpk-cloud/rpk-cloud-cluster-select.adoc[]
 *** xref:reference:rpk/rpk-profile/rpk-profile.adoc[rpk profile]
 *** xref:reference:rpk/rpk-x-options.adoc[rpk -X]
-* xref:reference:glossary.adoc[Glossary]
