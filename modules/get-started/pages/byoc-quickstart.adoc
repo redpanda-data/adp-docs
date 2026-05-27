@@ -139,11 +139,11 @@ The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL 
 
 . Leave *Base URL* blank. The PetStore spec already declares the right `servers` block, so no override is needed.
 
-. Skip the *Filter* section. PetStore exposes a small catalog and the quickstart agent can see everything.
+. Skip the *Filter* section. It supports tag, operation, path, and HTTP-method filters for trimming a large catalog; PetStore's catalog is small enough that the quickstart agent can see everything.
 
-. If the form prompts for an *Authentication* mode further down, select *None*. PetStore is a public API.
+. *Auth*: Select *No Auth*. PetStore is a public API.
 
-. Click *Create*.
+. Click *Submit*.
 
 . Wait for the server status to change from *Starting* to *Running*. Redpanda fetches the spec, parses it, and generates one MCP tool per operation.
 
