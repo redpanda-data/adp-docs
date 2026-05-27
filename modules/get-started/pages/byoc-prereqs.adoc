@@ -64,4 +64,4 @@ When `adp_enabled` is set, the source provisions ADP components in the cluster, 
 == Next steps
 
 * xref:get-started:byoc-quickstart.adoc[Start the ADP BYOC quickstart]
-* xref:redpanda-cloud:get-started:cluster-types/byoc/aws/create-byoc-cluster-aws.adoc[Create a BYOC environment on AWS] in Redpanda Cloud docs
+* xref:cloud-data-platform:get-started:cluster-types/byoc/aws/create-byoc-cluster-aws.adoc[Create a BYOC environment on AWS] in Redpanda Cloud docs

@@ -7,7 +7,7 @@
 :learning-objective-1: Identify the key components of Redpanda ADP and their purposes
 :learning-objective-2: Describe how each component addresses enterprise governance and reliability requirements
 :learning-objective-3: Determine whether Redpanda ADP fits your organization's requirements for AI agent deployment
-// TODO: Add 'redpanda-cloud:ai-agents:index.adoc' to page-aliases after ai-agents is removed from cloud-docs
+// TODO: Add 'cloud-data-platform:ai-agents:index.adoc' to page-aliases after ai-agents is removed from cloud-docs
 :page-aliases: develop:agents/about.adoc, develop:ai-agents/about.adoc
 
 As glossterm:AI agent[,AI agents] evolve from experimental prototypes to business-critical systems, companies face new challenges. How do you ensure your AI agents are reliable? How do you maintain control over costs and compliance? And how do you scale them across your organization without creating technical debt?

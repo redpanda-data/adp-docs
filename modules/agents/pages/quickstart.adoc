@@ -1,5 +1,5 @@
 = AI Agent Quickstart
-:page-aliases: redpanda-cloud:ai-agents:agents/quickstart.adoc
+:page-aliases: cloud-data-platform:ai-agents:agents/quickstart.adoc
 :description: Create your first AI agent in ADP that generates and publishes event data through natural language commands.
 :page-topic-type: tutorial
 :personas: agent_builder

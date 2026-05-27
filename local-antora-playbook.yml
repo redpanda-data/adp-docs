@@ -11,7 +11,10 @@ urls:
 output:
   clean: true
 content:
-  sources: 
+  sources:
+  - url: https://github.com/redpanda-data/docs-site
+    branches: main
+    start_paths: [home, data-platform, self-managed]
   - url: .
     branches: HEAD
   - url: https://github.com/redpanda-data/docs
@@ -25,7 +28,7 @@ content:
     branches: main
 ui:
   bundle:
-    url: https://github.com/redpanda-data/docs-ui/releases/download/v2.14.0-adp.2/ui-bundle.zip
+    url: https://github.com/redpanda-data/docs-ui/releases/latest/download/ui-bundle.zip
   supplemental_files: ./supplemental-ui
 asciidoc:
   attributes:
@@ -39,6 +42,10 @@ asciidoc:
   - '@redpanda-data/docs-extensions-and-macros/asciidoc-extensions/add-line-numbers-highlights'
 antora:
   extensions:
+  # Unified navigation extension (config-driven)
+  # Components with page-navigation attribute use that config
+  # Components without page-navigation use standard Antora navigation
+  - require: '@redpanda-data/docs-extensions-and-macros/extensions/unified-navigation'
   - require: '@redpanda-data/docs-extensions-and-macros/extensions/generate-rp-connect-info'
   - require: '@redpanda-data/docs-extensions-and-macros/extensions/unpublish-pages'
   - require: '@redpanda-data/docs-extensions-and-macros/extensions/generate-rp-connect-categories'

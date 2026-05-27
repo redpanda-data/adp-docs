@@ -1,5 +1,5 @@
 = AI Agents Overview
-:page-aliases: redpanda-cloud:ai-agents:agents/overview.adoc
+:page-aliases: cloud-data-platform:ai-agents:agents/overview.adoc
 :description: Learn how ADP agents use a declarative approach backed by 300+ built-in connectors to replace custom agent code.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer

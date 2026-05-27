@@ -2,7 +2,7 @@
 :description: Point your application or AI agent at an AI Gateway provider's proxy URL. Covers the URL shape, the local development workflow with rpk ai, the OIDC client-credentials flow for CI and application code, and SDK examples for OpenAI, Anthropic, Google AI, AWS Bedrock, and OpenAI-compatible endpoints.
 :page-topic-type: how-to
 :personas: agent_builder
-:page-aliases: redpanda-cloud:ai-agents:ai-gateway/builders/connect-your-agent.adoc
+:page-aliases: cloud-data-platform:ai-agents:ai-gateway/builders/connect-your-agent.adoc
 :learning-objective-1: Construct the proxy URL for an LLM provider you have configured
 :learning-objective-2: pass:q[Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients]
 :learning-objective-3: Send requests through the proxy URL with the SDK of your choice
@@ -19,7 +19,7 @@ After completing this guide, you will be able to:
 
 * A configured LLM provider. If you haven't created one yet, see xref:ai-gateway:configure-provider.adoc[Configure an LLM provider].
 * For local development, nothing else. You'll install `rpk ai` in the next section.
-* For CI or programmatic clients: A Redpanda Cloud service account with OIDC client credentials. See xref:redpanda-cloud:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
+* For CI or programmatic clients: A Redpanda Cloud service account with OIDC client credentials. See xref:cloud-data-platform:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
 +
 // TODO: confirm whether ADP hosts its own service-account IAM post-standalone, or continues to share Redpanda Cloud Organization IAM.
 * A development environment with your chosen programming language.

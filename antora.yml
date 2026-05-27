@@ -1,4 +1,4 @@
-name: redpanda-adp
+name: agentic-data-plane
 title: Agentic Data Plane
 version: ~
 start_page: ROOT:index.adoc
@@ -9,10 +9,18 @@ asciidoc:
     # Environment flags for conditional content
     env-adp: true
     page-adp: true
+    # AI suggestions for chat drawer (component-specific)
+    ai-suggestion-1: "How do I build my first agent?"
+    ai-suggestion-2: "Set up MCP with Postgres"
+    ai-suggestion-3: "Rotate an API key safely"
+    ai-suggestion-4: "What's a token budget?"
     # Header configuration
-    page-header-data:
+    component-metadata:
+      title: "Agentic Data Plane"
+      description: "Build AI agents with real-time data"
       order: 1
-      color: '#F77923'
+      color: '#C1331A'
       text-color: '#ffffff'
+      icon: "sparkles"
     # UI name for single-sourced content
     ui: Redpanda Cloud
