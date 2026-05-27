@@ -164,28 +164,28 @@ Combine the Anthropic provider and the PetStore MCP server into an agent.
 
 . Open *AI Agents* in the sidebar.
 
-. Click *Create Agent*.
+. Click *Create AI Agent*.
 
-. Configure basic settings:
+. In the *Basic Information* card:
 +
-* *Display name*: `pet-store-assistant`
+* *Agent Name*: `pet-store-assistant`
 * *Description*: `Quickstart agent that answers questions about the PetStore inventory`
-* *Resource tier*: *XSmall*
+* *Resources*: Select *XSmall*. The quickstart workload fits inside the smallest tier.
 
-. Select the gateway and model:
+. In the *LLM Provider Configuration* card:
 +
-* *AI Gateway*: Select your active gateway. (If you haven't created a gateway yet, follow xref:ai-gateway:gateway-quickstart.adoc[the AI Gateway quickstart] first.)
-* *Provider*: `anthropic-quickstart`
-* *Model*: `claude-sonnet-4-6`
+* *Provider*: Select `anthropic-quickstart` from the dropdown.
+* *Model*: Select `claude-sonnet-4-6`. Sonnet handles multi-step tool use more reliably than Haiku.
+* *Max Iterations*: Leave the slider at its default. The quickstart prompts don't need many iterations.
 
-. Write the system prompt:
+. In the *System Prompt* card, paste the following into the editor:
 +
 [,text]
 ----
 You are a pet store inventory assistant.
 
 You have access to PetStore API tools through MCP. Use them to answer
-questions about pets:
+questions about pets. The most useful read tools are:
 - findpetsbystatus: List pets by status (available, pending, sold)
 - getpetbyid: Look up a specific pet by ID
 - findpetsbytags: Search by tag
@@ -196,27 +196,19 @@ Rules:
   tool name in your response.
 - If a tool fails or returns no data, say so and stop. Don't retry
   with invented IDs.
+- Stick to read operations for this quickstart. Don't add, update, or
+  delete pets.
 ----
 
-. Add the MCP server:
-+
-* Click *Add MCP Server*.
-* Select `petstore-quickstart`.
-* For this quickstart, enable only the read tools to keep the agent safe:
-+
-** `findpetsbystatus`
-** `getpetbyid`
-** `findpetsbytags`
+. In the *MCP Tools* card, check the box next to `petstore-quickstart`. The card displays "Tools discovered on first use," which means the agent discovers every tool the PetStore server exposes at runtime; you don't pre-select individual tools here. The system prompt's "stick to read operations" rule constrains behavior.
 
-. Set execution parameters:
-+
-* *Max iterations*: `15` (more than enough for a multi-step question)
+. Leave the *Subagents (Optional)* card empty. The quickstart uses a single agent.
 
-. Click *Create Agent*.
+. Leave the auto-generated *Service Account Name* in the *Service Account* card as is. ADP creates the service account when you create the agent.
 
-. Wait for the agent status to change from *Starting* to *Running*.
+. Click *Create Agent* at the bottom of the form.
 
-A service account is automatically created so the agent can authenticate against ADP. For details, see xref:agents:concepts.adoc#service-account-authorization[service account authorization].
+. Wait for the agent status to change from *Starting* to *Running*. ADP also creates the service account at this point; for details, see xref:agents:concepts.adoc#service-account-authorization[service account authorization].
 
 == Test the agent in the Inspector
 
