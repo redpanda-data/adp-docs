@@ -8,7 +8,7 @@
 :learning-objective-3: Build an agent that calls both the LLM provider and the MCP server
 
 // Source: drafted against `adp-production` UI flows for LLM providers, MCP servers, and Agents; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider, MCP, and agent protos on cloudv2 origin/main.
-// TODO: verify the model IDs (claude-sonnet-4-6, claude-haiku-4-5) against the catalog at PR time; model identifiers shift.
+// Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 
 Set up Redpanda ADP for your organization. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
 
@@ -113,9 +113,11 @@ The catalog of available models is maintained by Redpanda. Models you select her
 
 . Click *Create provider*.
 
-. On the provider detail page, scroll to *Verify connection*, pick `claude-haiku-4-5` from the dropdown, and click *Test Connection*. The status flips from *Not tested yet* to a green check.
+. On the provider detail page, confirm the *Status* badge in the *Connection* card shows *Active*. The agent you build later in this quickstart will exercise the provider end-to-end.
++
+TIP: To smoke-test the key before moving on, open the *Connect* tab, pick a client (the `>_` option is curl, the fastest path), copy the snippet, and run it from your terminal. A 200 response from Anthropic confirms the provider is wired correctly.
 
-If the test fails, see the xref:ai-gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table] (most common cause: secret name typo).
+If the *Status* badge stays in a failure state, or the smoke-test request returns an authentication error, see the xref:ai-gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace ADP can read.
 
 For the full provider field reference (transcript logging, Bedrock IAM, Anthropic auth passthrough, OpenAI-compatible endpoints), see xref:ai-gateway:configure-provider.adoc[Configure an LLM provider].
 
