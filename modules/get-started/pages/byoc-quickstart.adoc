@@ -32,7 +32,7 @@ Three ADP resources, in order:
 . *PetStore glossterm:MCP server[]*. Exposes the public Swagger PetStore API as a set of glossterm:MCP tool[,MCP tools] the agent can call.
 . *Pet store assistant glossterm:AI agent[,agent]*. Combines the provider and the MCP server so a natural-language question becomes a real API call against PetStore.
 
-After the agent works, you'll see the calls in the governance dashboard and walk through one execution turn-by-turn in the Transcripts view.
+After the agent works, you can walk through one execution turn-by-turn in the Transcripts view.
 
 All three resources are deletable at the end of the quickstart.
 
@@ -252,17 +252,9 @@ If the agent hallucinates data instead of calling a tool, tighten the system pro
 
 If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet store API being unavailable, that's the public Swagger PetStore being intermittently down. The agent is behaving correctly (the "if a tool fails, say so and stop" rule in the system prompt is what produced the apology). Retry the prompt; PetStore usually recovers within a few minutes.
 
-== Verify in the governance dashboard
+== Verify the agent in Transcripts
 
-The glossterm:governance dashboard[] rolls up every LLM call and tool invocation across your ADP deployment. Confirm the quickstart calls landed there.
-
-. Open *Governance* > *Dashboard* in the sidebar.
-
-. In the *Last 24 hours* view, check three KPIs:
-+
-* *Total spend*: A small but non-zero value.
-* *Requests*: Reflects the LLM calls from your agent runs (one per turn).
-* *Tokens*: Input plus output tokens across the same calls.
+Every agent run is recorded as a glossterm:transcript[] you can replay turn-by-turn.
 
 . Open the agent's *Transcripts* tab on the agent detail page (or *Transcripts* in the sidebar for the cross-agent view). Find the most recent agent run.
 
@@ -274,7 +266,25 @@ The glossterm:governance dashboard[] rolls up every LLM call and tool invocation
 * The tool's response.
 * The agent's final response to the user.
 
-For the full governance dashboard tour, see xref:governance:dashboard/overview.adoc[Read the governance overview]. For transcript field reference, see xref:observability:transcripts.adoc[Read a transcript].
+For the full transcript field reference, see xref:observability:transcripts.adoc[Read a transcript].
+
+// The Governance dashboard section below is conditionalized out until the governance UI ships in adp-production.
+// To surface it, define `env-adp-governance` in `antora.yml` (under `asciidoc.attributes`) or as a page attribute.
+ifdef::env-adp-governance[]
+== Verify spend in the governance dashboard
+
+The glossterm:governance dashboard[] rolls up every LLM call and tool invocation across your ADP deployment.
+
+. Open *Governance* > *Dashboard* in the sidebar.
+
+. In the *Last 24 hours* view, check three KPIs:
++
+* *Total spend*: A small but non-zero value.
+* *Requests*: Reflects the LLM calls from your agent runs (one per turn).
+* *Tokens*: Input plus output tokens across the same calls.
+
+For the full governance dashboard tour, see xref:governance:dashboard/overview.adoc[Read the governance overview].
+endif::[]
 
 == Clean up
 
@@ -294,8 +304,10 @@ If you want to keep the provider but rotate the key, edit the provider and chang
 
 == Next steps
 
-Now that you have a working ADP setup, here are the three most useful things to do next:
+Now that you have a working ADP setup, here are the most useful things to do next:
 
 * Add more LLM providers (OpenAI, Google AI, AWS Bedrock, OpenAI-compatible): xref:ai-gateway:configure-provider.adoc[Configure an LLM provider]
 * Swap the PetStore demo for a real upstream (Slack, Jira, SQL, Kafka, and more): xref:mcp:managed/managed-catalog.adoc[Managed MCP catalog]
+ifdef::env-adp-governance[]
 * Track spend across teams: xref:governance:budgets.adoc[Token budgets and limits]
+endif::[]
