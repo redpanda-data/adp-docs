@@ -225,22 +225,19 @@ The *Inspector* tab is a chat surface for the agent. Type a prompt into the inpu
 +
 [,text]
 ----
-What pets are available right now?
+Tell me about pet ID 1.
 ----
 +
-The agent should:
-+
-* Call `findpetsbystatus` with `status=available`.
-* Return a summary of the pets the tool returned, naming the tool.
+The agent should call `getpetbyid` with `petId=1` and return the pet's details in an Artifact card. This endpoint is the most reliable on the public PetStore demo and works as the first smoke test.
 
 . Send the second prompt:
 +
 [,text]
 ----
-Tell me about pet ID 1.
+What pets are available right now?
 ----
 +
-The agent should call `getpetbyid` with `petId=1` and return the pet's details.
+The agent should call `findpetsbystatus` with `status=available` and return a summary of the pets, naming the tool. This PetStore endpoint is occasionally flaky; if it returns an HTTP 500, retry the prompt or see the troubleshooting note below.
 
 . (Optional) Send an open-ended prompt to confirm multi-step reasoning:
 +
