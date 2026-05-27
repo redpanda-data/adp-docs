@@ -29,7 +29,7 @@ If you're using LangChain with OpenTelemetry tracing, you can send traces to Red
 
 . Configure LangChain's OpenTelemetry integration by following the https://docs.langchain.com/langsmith/trace-with-opentelemetry[LangChain documentation^]. 
 
-. Deploy a Redpanda Connect pipeline using the `otlp_http` input to receive OTLP traces over HTTP. Today, create the pipeline in the **Connect** page of your Redpanda BYOC environment. See the <<configure-the-ingestion-pipeline,Configure the ingestion pipeline>> section below for a sample configuration.
+. Deploy a Redpanda Connect pipeline using the `otlp_http` input to receive OTLP traces over HTTP. Today, create the pipeline in the **Connect** page of your Redpanda BYOC environment. For a sample configuration, see <<configure-the-ingestion-pipeline,Configure the ingestion pipeline>>.
 // TODO: Update the deployment entry point once the standalone-ADP ingestion flow is defined.
 
 . Configure your OTEL exporter to send traces to your Redpanda Connect pipeline using environment variables:

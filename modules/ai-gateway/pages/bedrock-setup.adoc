@@ -85,7 +85,7 @@ TIP: Don't reuse an existing IAM user. A dedicated user makes it easy to rotate 
 
 == Generate access keys
 
-Generate the access keys AI Gateway will use:
+Generate the access keys AI Gateway uses:
 
 [,bash]
 ----
