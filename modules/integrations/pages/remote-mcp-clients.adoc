@@ -14,6 +14,16 @@ After completing this guide, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
+[IMPORTANT]
+====
+OAuth clients and OAuth providers govern *opposite directions* of authentication and are separate resources.
+
+* An *OAuth client* (this page) governs *inbound* authentication: an external chat app (Claude Desktop, ChatGPT, Copilot Studio, Cursor) authenticating to AI Gateway so its users can invoke MCP tools.
+* An *OAuth provider* governs *outbound* authentication: AI Gateway authenticating to an upstream system (GitHub, Slack, Salesforce) on a user's behalf when an MCP server uses user-delegated OAuth.
+
+See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider] for the outbound authentication side.
+====
+
 == When to use this
 
 Use a remote MCP client connection when:
@@ -51,7 +61,7 @@ Putting it together with a GitHub example:
 * The *OAuth Provider* points at GitHub's OAuth endpoints; AI Gateway uses it to act as each user against GitHub.
 * The *OAuth Client* is registered for Claude Desktop; Claude Desktop uses it to act as each user against AI Gateway.
 
-When a user invokes a tool, AI Gateway runs both auth handshakes: Claude to AI Gateway through the OAuth Client, then AI Gateway to GitHub through the OAuth Provider.
+When a user invokes a tool, AI Gateway runs both authentication handshakes: Claude to AI Gateway through the OAuth Client, then AI Gateway to GitHub through the OAuth Provider.
 
 == Prerequisites
 
@@ -90,8 +100,6 @@ After registration, the detail page shows the *Client ID* and *Client Secret*. C
 
 // TODO: capture screenshots of the Register Client form and the post-create detail page.
 
-NOTE: OAuth Clients and OAuth Providers are different resources with different sidebar entries. *Provider* defines how AI Gateway authenticates against an upstream system; *Client* defines how an external app authenticates against AI Gateway. They are configured independently and the same upstream (GitHub, Slack, Atlassian) often has both: one per direction.
-
 == Wire up Claude
 
 Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and the Claude organization-settings UI. The setup flow is the same in each:
@@ -111,7 +119,7 @@ Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and
 |The MCP server's *API URL* from AI Gateway. Format: `\https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>`.
 
 |*OAuth client ID* (optional, under *Advanced settings*)
-|The Client ID from the AI Gateway OAuth Client. Required for any MCP server that requires authentication. Leave blank only for public, no-auth MCP servers.
+|The Client ID from the AI Gateway OAuth Client. Required for any MCP server that requires authentication. Leave blank only for public MCP servers that don't require authentication.
 
 |*OAuth client secret* (under *Advanced settings*)
 |The Client Secret from the AI Gateway OAuth Client. Required whenever Client ID is set.
@@ -164,7 +172,7 @@ This handshake runs *once per user* when the connector is first added.
 
 This handshake runs *once per user, per upstream*. For an MCP server using user-delegated OAuth (GitHub, Slack, Atlassian, Workday, and so on):
 
-. The user invokes a tool that requires upstream auth.
+. The user invokes a tool that requires upstream authentication.
 . AI Gateway has no stored upstream token for this user yet. The MCP protocol returns a `FAILED_PRECONDITION` response with an `OAuthConnectionRequired` error detail. The detail carries an `authorize_url` pointing at AI Gateway's OAuth bridge for the configured upstream provider, for example: `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/authorize?provider_name=github&scopes=read:user,repo`.
 . The chat client renders the link in its response to the user. Inside Claude this appears as a hyperlinked URL with prose telling the user to authorize the upstream connection (for example, _Authorize the GitHub connection first_) before retrying.
 . The user clicks the link. AI Gateway redirects them to the *upstream system's own OAuth consent page* (for example, GitHub's standard authorization UI) listing the requested repositories and scopes.
@@ -173,9 +181,9 @@ This handshake runs *once per user, per upstream*. For an MCP server using user-
 
 After both steps complete, the user can invoke any tool on the MCP server transparently. They re-consent only if scopes change or the refresh tokens expire.
 
-NOTE: Claude (and other chat clients) layer their own *per-tool consent prompts* on top of the OAuth flow described here. The first time a connector tries to invoke a specific tool, Claude shows a prompt of the form _Claude wants to use \{tool_name} from \{connector_name}_ with *Always allow* / *Deny* buttons. This is the chat client's own user-trust UX, not an additional AI Gateway auth step. Once a user picks *Always allow* for a tool, Claude won't prompt again for that tool from that connector.
+NOTE: Claude (and other chat clients) layer their own *per-tool consent prompts* on top of the OAuth flow described here. The first time a connector tries to invoke a specific tool, Claude shows a prompt of the form _Claude wants to use \{tool_name} from \{connector_name}_ with *Always allow* / *Deny* buttons. This is the chat client's own user-trust UX, not an additional AI Gateway authentication step. Once a user picks *Always allow* for a tool, Claude won't prompt again for that tool from that connector.
 
-NOTE: If the MCP server uses a service-account auth mode instead of user-delegated OAuth, only Step 1 runs. AI Gateway calls the upstream with one shared identity and the user never sees the upstream consent flow.
+NOTE: If the MCP server uses a service-account authentication mode instead of user-delegated OAuth, only Step 1 runs. AI Gateway calls the upstream with one shared identity and the user never sees the upstream consent flow.
 
 == Manage and rotate
 

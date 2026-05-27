@@ -16,9 +16,12 @@ After completing this guide, you will be able to:
 
 [IMPORTANT]
 ====
-OAuth providers and OAuth clients are different resources. An *OAuth provider* (this page) is a definition of an upstream system the gateway authenticates against. An *OAuth client* is a per-application credential issued *by* the AI Gateway's own identity provider, used by external clients to call ADP. They live under separate sidebar entries (*OAuth Providers* and *OAuth Clients*) and have separate proto, permissions, and lifecycles.
+OAuth providers and OAuth clients govern *opposite directions* of authentication and are separate resources.
 
-To register or manage an OAuth Client (Claude Desktop, ChatGPT, Cursor, and so on), including revoking its refresh tokens to force a re-sign-in, see xref:integrations:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
+* An *OAuth provider* (this page) governs *outbound* authentication: AI Gateway authenticating to an upstream system (GitHub, Slack, Salesforce, and so on) on a user's behalf so MCP servers can call that upstream.
+* An *OAuth client* governs *inbound* authentication: an external app (Claude Desktop, ChatGPT, Copilot Studio) authenticating to AI Gateway so the app's users can invoke MCP tools.
+
+The two live under separate sidebar entries (*OAuth Providers* and *OAuth Clients*) with separate API definitions, permissions, and lifecycles. To register or manage an OAuth client (including revoking its refresh tokens to force a re-sign-in), see xref:integrations:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
 ====
 
 == Prerequisites
@@ -161,7 +164,7 @@ Walk through the create form to register the upstream:
 +
 . Pick a *Token-endpoint authentication method*:
 +
-* *HTTP Basic*: `client_id:client_secret` sent as the Basic auth header. Most common.
+* *HTTP Basic*: `client_id:client_secret` sent as the Basic authentication header. Most common.
 * *POST body*: Credentials sent as form fields in the token-request body.
 * *None*: For public clients that rely on PKCE only. Pick this when the upstream OAuth app is registered as a public client and AI Gateway authenticates by proving possession of a PKCE code verifier rather than a stored client secret. Leave the client-secret reference unset.
 +
