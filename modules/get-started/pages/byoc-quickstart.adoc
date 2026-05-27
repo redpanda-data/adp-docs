@@ -258,7 +258,7 @@ The glossterm:governance dashboard[] rolls up every LLM call and tool invocation
 * *Requests*: Reflects the LLM calls from your agent runs (one per turn).
 * *Tokens*: Input plus output tokens across the same calls.
 
-. Open *Transcripts* (sidebar or *Observability* > *Transcripts*). Find the most recent agent run.
+. Open the agent's *Transcripts* tab on the agent detail page (or *Transcripts* in the sidebar for the cross-agent view). Find the most recent agent run.
 
 . Walk through the transcript turn-by-turn. You should see:
 +
