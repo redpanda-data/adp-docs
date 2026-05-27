@@ -1,0 +1,45 @@
+= rpk ai llm
+:description: rpk ai llm
+
+Manage LLM providers registered with the Redpanda AI gateway.
+
+Supported provider types: openai, anthropic, google, bedrock.
+
+Aliases: `llm-provider` (compat with aigwctl), `provider`, `lp`.
+
+== Usage
+
+[,bash]
+----
+rpai llm [command]
+----
+
+== Aliases
+
+[,bash]
+----
+llm, llm-provider, provider, lp
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-h, --help |- |help for llm.
+
+|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (env: RPAI_TOKEN).
+|===

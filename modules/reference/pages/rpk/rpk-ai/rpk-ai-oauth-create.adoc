@@ -1,0 +1,58 @@
+= rpk ai oauth create
+:description: rpk ai oauth create
+
+Create an OAuth provider
+
+== Usage
+
+[,bash]
+----
+rpai oauth create [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|--auth-endpoint |string |OAuth authorization endpoint URL (required).
+
+|--client-id |string |OAuth client ID (required).
+
+|--client-secret-ref |string |secret name for the client secret (UPPER_SNAKE_CASE).
+
+|--display-name |string |human-readable display name (required).
+
+|--enabled |- |whether provider is enabled (default true).
+
+|--grant-types |strings |grant types: browser-consent, token-exchange (default [browser-consent]).
+
+|-h, --help |- |help for create.
+
+|--name |string |provider name (required).
+
+|--pkce |- |require PKCE for authorization code grants.
+
+|--revocation-endpoint |string |OAuth token revocation endpoint URL.
+
+|--scopes |strings |default OAuth scopes.
+
+|--token-auth-method |string |token endpoint auth: client-secret-basic, client-secret-post, none (default "client-secret-basic").
+
+|--token-endpoint |string |OAuth token endpoint URL (required).
+
+|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (env: RPAI_TOKEN).
+|===

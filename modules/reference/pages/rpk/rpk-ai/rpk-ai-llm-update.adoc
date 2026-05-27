@@ -1,0 +1,44 @@
+= rpk ai llm update
+:description: rpk ai llm update
+
+Update an LLM provider
+
+== Usage
+
+[,bash]
+----
+rpai llm update <name> [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|--api-key-ref |string |new API key reference — must be UPPER_SNAKE_CASE (provider-specific).
+
+|--base-url |string |new base URL (provider-specific).
+
+|--display-name |string |new display name.
+
+|--enabled |- |whether provider is enabled (default true).
+
+|-h, --help |- |help for update.
+
+|--models |strings |new models list.
+
+|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (env: RPAI_TOKEN).
+|===
