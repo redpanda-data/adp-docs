@@ -1,5 +1,6 @@
 = rpk ai agent list
 :description: rpk ai agent list
+:page-beta: true
 
 List agents — coming soon
 

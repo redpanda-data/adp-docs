@@ -37,8 +37,8 @@ The control plane manages gateway configuration and policy definition:
 
 * **Workspace management**: Multi-tenant isolation with separate namespaces for different teams or environments
 * **Provider configuration**: Enable and configure LLM providers (such as OpenAI and Anthropic)
-* **Gateway creation**: Define gateways with specific routing rules, budgets, and rate limits
-* **Policy definition**: Create CEL-based routing policies, spend limits, and rate limits
+* **Gateway creation**: Define gateways with specific budgets and rate limits
+* **Policy definition**: Configure spend limits and rate limits
 * **MCP server registration**: Configure which MCP servers are available to agents
 
 === Data plane
@@ -92,78 +92,6 @@ For MCP tool requests, the lifecycle differs slightly to support deferred tool l
 
 The gateway only loads and exposes specific tools when requested, which dramatically reduces the token overhead compared to loading all tools upfront.
 
-ifdef::ai-hub-available[]
-== AI Hub mode architecture
-
-AI Gateway supports two modes. In Custom mode, administrators configure all routing rules and backend pools manually. In AI Hub mode, the gateway provides pre-configured intelligent routing.
-
-=== Intelligent router
-
-AI Hub mode implements an intelligent router with immutable system rules and user-configurable preferences:
-
-*6 Pre-configured Backend Pools:*
-
-* OpenAI (standard requests)
-* OpenAI Streaming
-* Anthropic with OpenAI-compatible transform (standard requests)
-* Anthropic with OpenAI-compatible transform (streaming)
-* Anthropic Native (direct passthrough for `/v1/messages`)
-* Anthropic Native Streaming
-
-*17 System Routing Rules:*
-
-Immutable rules that route requests based on:
-
-* Model prefix: `openai/*`, `anthropic/*`
-* Model name patterns: `gpt-*`, `claude-*`, `o1-*`
-* Special routing: embeddings, images, audio, content moderation, legacy completions → OpenAI only
-* Native SDK detection: `/v1/messages` → Anthropic passthrough
-* Streaming detection → Extended timeout backends
-
-*Automatic Failover:*
-
-Built-in fallback behavior when primary providers are unavailable (configurable through preference toggles).
-
-*6 User Preference Toggles:*
-
-Configurable preferences that influence routing without modifying rules (see xref:admin/configure-ai-hub.adoc[] for details).
-
-Configurable preferences that influence routing without modifying rules.
-
-=== System-managed vs user-configurable resources
-
-In AI Hub mode, resources are divided into two categories:
-
-*System-Managed Resources* (immutable):
-
-* Backend pool definitions
-* Core routing rules
-* Failover logic
-* Provider selection algorithms
-
-*User-configurable resources:*
-
-* Provider credentials (OpenAI, Anthropic, Google Gemini)
-* 6 preference toggles
-* Rate limits (within bounds)
-* Spend limits
-
-This separation ensures consistent, reliable behavior while allowing customization of common preferences.
-
-=== Ejecting to Custom mode
-
-Gateways can be ejected from AI Hub mode to Custom mode in a one-way transition. After ejection:
-
-* `gateway.mode` changes from `ai_hub` to `custom`
-* All previously system-managed resources become user-configurable
-* No more automatic AI Hub version updates
-* Full control over routing rules, backend pools, and policies
-
-This allows organizations to start with zero-configuration simplicity and graduate to full control when needed.
-
-See xref:admin/eject-to-custom-mode.adoc[] for the ejection process.
-endif::[]
-
 // == Supported features
 
 // === LLM providers
@@ -181,7 +109,6 @@ endif::[]
 
 // === Policy features
 
-// * CEL-based routing expressions
 // * Rate limiting (// PLACEHOLDER: per-gateway, per-header, per-tenant?)
 // * Monthly spend limits (// PLACEHOLDER: per-gateway, per-workspace?)
 // * Provider pools with automatic failover

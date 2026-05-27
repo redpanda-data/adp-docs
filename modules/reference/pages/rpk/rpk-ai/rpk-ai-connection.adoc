@@ -1,5 +1,6 @@
 = rpk ai connection
 :description: rpk ai connection
+:page-beta: true
 
 Manage OAuth connections — coming soon
 

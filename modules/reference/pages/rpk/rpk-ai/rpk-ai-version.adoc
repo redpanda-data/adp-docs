@@ -1,5 +1,6 @@
 = rpk ai version
 :description: rpk ai version
+:page-beta: true
 
 Print rpai version and commit
 

@@ -364,11 +364,7 @@ Add custom headers for request tracking or routing:
 }
 ----
 
-Use these headers with gateway CEL routing to:
-
-* Track costs per developer
-* Route based on project type
-* Apply different rate limits per user
+These headers flow into observability so administrators can track usage and costs per developer or project.
 
 === Temperature and max tokens
 

@@ -1,5 +1,6 @@
 = rpk ai llm create
 :description: rpk ai llm create
+:page-beta: true
 
 Create an LLM provider
 

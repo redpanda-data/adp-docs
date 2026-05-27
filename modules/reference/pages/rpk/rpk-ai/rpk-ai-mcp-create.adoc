@@ -1,5 +1,6 @@
 = rpk ai mcp create
 :description: rpk ai mcp create
+:page-beta: true
 
 Create an MCP server
 

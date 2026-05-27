@@ -49,7 +49,6 @@ Response:
     {
       "id": "gw_abc123",
       "name": "production-gateway",
-      "mode": "ai_hub",
       "endpoint": "https://gw.ai.panda.com",
       "status": "active",
       "workspace_id": "ws_xyz789",
@@ -58,7 +57,6 @@ Response:
     {
       "id": "gw_def456",
       "name": "staging-gateway",
-      "mode": "custom",
       "endpoint": "https://gw-staging.ai.panda.com",
       "status": "active",
       "workspace_id": "ws_xyz789",
@@ -153,36 +151,6 @@ curl ${GATEWAY_ENDPOINT}/mcp/tools \
 With deferred loading enabled, you'll receive search and orchestrator tools initially. You can then query for specific tools as needed.
 
 // See xref:builders/use-mcp-tools.adoc[] for more details.
-
-ifdef::ai-hub-available[]
-== Identify gateway mode
-
-Gateways can operate in two modes: AI Hub mode or Custom mode. Understanding which mode your gateway uses helps you know what to expect.
-
-include::ROOT:partial$ai-hub-mode-indicator.adoc[]
-
-=== What it means for builders
-
-*AI Hub Mode:*
-
-* Routing is pre-configured and intelligent
-* Models are automatically routed based on system-managed rules
-* You cannot see or modify routing rules (they're managed by Redpanda)
-* Limited customization through administrator-configured preference toggles
-* See xref:builders/use-ai-hub-gateway.adoc[] for AI Hub-specific guidance
-
-*Custom Mode:*
-
-* Routing is configured by your administrator
-* You can view configured routing rules in the console
-* Administrator has full control over backend pools and policies
-* Standard discovery and usage patterns apply (rest of this page)
-
-[TIP]
-====
-If you need specific routing behavior or custom configuration that AI Hub doesn't support, ask your administrator about ejecting to Custom mode or creating a Custom mode gateway.
-====
-endif::[]  
 
 == Check gateway availability
 

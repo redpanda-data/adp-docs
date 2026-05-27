@@ -1,5 +1,6 @@
 = rpk ai llm
 :description: rpk ai llm
+:page-beta: true
 
 Manage LLM providers registered with the Redpanda AI gateway.
 

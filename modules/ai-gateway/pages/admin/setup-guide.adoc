@@ -3,15 +3,15 @@
 :page-topic-type: how-to
 :personas: platform_engineer, security_compliance_lead
 :learning-objective-1: Enable LLM providers and models in the catalog
-:learning-objective-2: Create and configure gateways with routing policies, rate limits, and spend limits
+:learning-objective-2: Create and configure gateways with rate limits, spend limits, and provider pools
 :learning-objective-3: Set up MCP tool aggregation for AI agents
 
-This guide walks administrators through the setup process for AI Gateway, from enabling LLM providers to configuring routing policies and MCP tool aggregation.
+This guide walks administrators through the setup process for AI Gateway, from enabling LLM providers to configuring rate limits, spend limits, provider pools, and MCP tool aggregation.
 
 After completing this guide, you will be able to:
 
 * [ ] Enable LLM providers and models in the catalog
-* [ ] Create and configure gateways with routing policies, rate limits, and spend limits
+* [ ] Create and configure gateways with rate limits, spend limits, and provider pools
 * [ ] Set up MCP tool aggregation for AI agents
 
 == Prerequisites
@@ -64,44 +64,9 @@ Model requests must use the `vendor/model_id` format in the model property of th
 * `anthropic/claude-sonnet-4.5`
 * `openai/gpt-5.2-mini`
 
-ifdef::ai-hub-available[]
-== Choose a gateway mode
-
-Before creating a gateway, decide which mode fits your needs.
-
-*AI Hub Mode* is ideal when you:
-
-* Want to minimize configuration complexity
-* Need to quickly enable LLM access for multiple teams
-* Want pre-configured intelligent routing with automatic provider failover
-* Are satisfied with managed routing rules and backend pools (17 pre-configured rules)
-* Need only basic customization (provider credentials, 6 preference toggles)
-* Use OpenAI and/or Anthropic providers
-
-*Custom Mode* is ideal when you:
-
-* Need custom routing rules based on specific business logic
-* Require full control over backend pool configuration
-* Want to implement custom failover strategies
-* Need to integrate with custom infrastructure (Azure OpenAI, AWS Bedrock, other providers)
-* Have specialized requirements not covered by AI Hub's pre-configured rules
-
-[TIP]
-====
-You can start with AI Hub mode and later eject to Custom mode if you need more control. Ejection is a one-way transition. See xref:admin/eject-to-custom-mode.adoc[].
-====
-
-For detailed comparison, see xref:ai-gateway:gateway-modes.adoc[].
-
-*Next sections:*
-
-* *AI Hub Mode*: See xref:admin/configure-ai-hub.adoc[] for setup instructions
-* *Custom Mode*: Continue with "Create a gateway" below for manual configuration
-endif::[]
-
 == Create a gateway
 
-A gateway is a logical configuration boundary (policies + routing + observability) on top of a single deployment. It's a "virtual gateway" that you can create per team, environment (staging/production), product, or customer.
+A gateway is a logical configuration boundary (policies + observability) on top of a single deployment. It's a "virtual gateway" that you can create per team, environment (staging/production), product, or customer.
 
 . Navigate to *Agentic* → *AI Gateway* → *Gateways*.
 . Click *Create Gateway*.
@@ -129,15 +94,15 @@ The gateway ID is embedded in the URL.
 
 You'll share the gateway endpoint with users who need to access this gateway.
 
-== Configure LLM routing
+== Configure LLM controls
 
-On the gateway details page, select the *LLM* tab to configure rate limits, spend limits, routing, and provider pools with fallback options.
+On the gateway details page, select the *LLM* tab to configure rate limits, spend limits, and provider pools with fallback options.
 
-The LLM routing pipeline visually represents the request lifecycle:
+The *LLM* tab covers the request lifecycle:
 
 . *Rate Limit*: Global rate limit (for example, 100 requests/second)
 . *Spend Limit / Monthly Budget*: Monthly budget with blocking enforcement (for example, $15K/month)
-. *Routing*: Primary provider pool with optional fallback provider pools
+. *Provider pools*: Primary provider pool with optional fallback provider pools
 
 === Configure rate limits
 
@@ -174,11 +139,11 @@ Spend limits prevent runaway costs by blocking requests after a monthly budget i
 
 Budget tracking uses estimated costs based on token usage and public provider pricing.
 
-=== Configure routing and provider pools
+=== Configure provider pools
 
 Provider pools define which LLM providers handle requests, with support for primary and fallback configurations.
 
-. In the *LLM* tab, locate the *Routing* section.
+. In the *LLM* tab, locate the *Provider pools* section.
 . Click *Add provider pool*.
 . Configure the primary pool:
 +
@@ -201,22 +166,7 @@ Provider pools define which LLM providers handle requests, with support for prim
   ** Server errors (5xx from primary)
 --
 
-. Configure routing rules using CEL expressions (optional):
-+
-For simple routing, select *Route all requests to primary pool*.
-+
-For advanced routing based on request properties, use CEL expressions.
-+
-Example CEL expression for tier-based routing:
-+
-[source,cel]
-----
-request.headers["x-user-tier"] == "premium"
-  ? "anthropic/claude-opus-4.6"
-  : "anthropic/claude-sonnet-4.5"
-----
-
-. Click *Save routing configuration*.
+. Click *Save*.
 
 TIP: Provider pool (UI) = Backend pool (API)
 
@@ -371,7 +321,7 @@ Now that your gateway is configured, share access with users (builders):
 
 . Provide the *Gateway Endpoint* (for example, `https://example/gateways/gw_abc123/v1`)
 . Share API credentials (ADP tokens with appropriate permissions)
-. (Optional) Document available models and any routing policies
+. (Optional) Document available models and provider pools
 . (Optional) Share rate limits and budget information
 
 Users can then discover and connect to the gateway using the information provided. See xref:builders/discover-gateways.adoc[] for user documentation.

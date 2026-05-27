@@ -302,25 +302,7 @@ Configuration:
 * Best for: Complex codebases, high-quality output requirements
 * Cost: Higher, but consistent
 
-==== Strategy 2: Task-based model switching
-
-Use the gateway's CEL routing to automatically select models based on task complexity.
-
-Gateway configuration (set in AI Gateway UI):
-
-[,cel]
-----
-// Route simple edits to cost-effective model
-request.body.messages.size() > 0 &&
-(request.body.messages[0].content.contains("fix typo") ||
-request.body.messages[0].content.contains("rename")) ?
-  "anthropic/claude-haiku" :
-  "anthropic/claude-sonnet-4.5"
-----
-
-This approach requires no changes to Cline configuration. The gateway makes routing decisions transparently.
-
-==== Strategy 3: Multiple Cline profiles
+==== Strategy 2: Multiple Cline profiles
 
 Create separate VS Code workspace settings for different projects:
 
@@ -571,8 +553,6 @@ Cline may be making redundant requests for the same information. Solutions:
 You may be using a premium model for simple tasks. Solutions:
 +
 * Switch to a cost-effective model (for example, `anthropic/claude-haiku`)
-+
-* Use gateway CEL routing to automatically select models based on task complexity
 
 . **MCP tool overhead**
 +
@@ -653,8 +633,6 @@ Match model selection to task complexity:
 |`anthropic/claude-sonnet-4.5` or `anthropic/claude-opus-4.6-5`
 |High quality for critical work
 |===
-
-Configure CEL routing in the gateway to automate model selection.
 
 === Reduce context window size
 

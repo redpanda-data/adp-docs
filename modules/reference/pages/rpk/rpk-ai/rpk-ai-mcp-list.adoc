@@ -1,5 +1,6 @@
 = rpk ai mcp list
 :description: rpk ai mcp list
+:page-beta: true
 
 List MCP servers
 

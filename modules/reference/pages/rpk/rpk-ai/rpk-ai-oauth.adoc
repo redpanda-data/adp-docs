@@ -1,5 +1,6 @@
 = rpk ai oauth
 :description: rpk ai oauth
+:page-beta: true
 
 Manage OAuth authorization-server configurations registered with the Redpanda AI gateway.
 
