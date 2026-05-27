@@ -127,20 +127,21 @@ The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL 
 
 . Open *MCP Servers* > *Create Server*.
 
-. Pick *OpenAPI* from the marketplace picker.
+. Pick *OpenAPI* from the server type picker. The *Configure OpenAPI MCP Server* form opens.
 
-. Fill in identity:
-+
-* *Name*: `petstore-quickstart`
-* *Description*: `Public PetStore API exposed as MCP tools for quickstart testing`
+. *Name*: `petstore-quickstart`. The Name accepts lowercase letters, numbers, and hyphens.
 
-. Configure the OpenAPI source:
-+
-* *Spec source*: URL
-* *Spec URL*: `https://petstore3.swagger.io/api/v3/openapi.json`
-* *Base URL override*: Leave blank. PetStore's spec includes the right `servers` block.
+. *Description*: `Public PetStore API exposed as MCP tools for quickstart testing`. Optional, but helps you find the server later.
 
-. *Authentication*: Select *None*. PetStore is a public API.
+. Leave *Code Mode* at its default. Code Mode adds search and execute tools that let agents run sandboxed code against the server's tools; the PetStore catalog is small enough that you don't need it for this quickstart.
+
+. *Spec*: `https://petstore3.swagger.io/api/v3/openapi.json`. Leave the *Spec Content* textarea empty when you provide a URL.
+
+. Leave *Base URL* blank. The PetStore spec already declares the right `servers` block, so no override is needed.
+
+. Skip the *Filter* section. PetStore exposes a small catalog and the quickstart agent can see everything.
+
+. If the form prompts for an *Authentication* mode further down, select *None*. PetStore is a public API.
 
 . Click *Create*.
 
