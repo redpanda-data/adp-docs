@@ -25,7 +25,7 @@ Providers represent upstream LLM services and their associated credentials. Prov
 . Navigate to *Agentic* > *AI Gateway* > *Providers*.
 . Select a provider (for example, OpenAI, Anthropic, Google AI, AWS Bedrock).
 . On the Configuration tab, click *Add configuration* and enter the provider's credentials (API key for OpenAI, Anthropic, and Google AI; AWS access key and secret for Bedrock).
-. Verify the provider status shows "Active".
+. Verify the provider status shows as active.
 
 == Enable models
 
@@ -33,7 +33,7 @@ After enabling a provider, enable the specific models you want to make available
 
 . Navigate to *Agentic* > *AI Gateway* > *Models*.
 . Enable the models you want to use (for example, `gpt-5.2-mini`, `claude-sonnet-4.5`, `claude-opus-4.6`).
-. Verify the models appear as "Enabled" in the model catalog.
+. Verify the models appear as enabled in the model catalog.
 
 TIP: Different providers have different reliability and cost characteristics. When choosing models, consider your use case requirements for quality, speed, and cost.
 
@@ -196,10 +196,10 @@ Confirm your request was routed through AI Gateway.
 
 . On the *Overview* tab, check the aggregate metrics:
 +
-* *Total Requests*: Should have incremented
-* *Total Tokens*: Shows combined input and output tokens
-* *Total Cost*: Estimated spend across all requests
-* *Avg Latency*: Average response time in milliseconds
+* Total Requests: Should have incremented.
+* Total Tokens: Shows combined input and output tokens.
+* Total Cost: Estimated spend across all requests.
+* Avg Latency: Average response time in milliseconds.
 
 . Scroll to the *Models* table to see per-model statistics:
 +

@@ -615,7 +615,7 @@ Causes and solutions:
 * **Expired token**: Generate a new API token and update the GitHub Copilot configuration
 * **Network connectivity**: Verify the cluster endpoint is accessible from the client network
 * **Provider not enabled**: Ensure at least one provider is enabled and has models in the catalog
-* **SSL/TLS issues**: Verify the cluster has valid SSL certificates
+* **TLS issues**: Verify the cluster has valid TLS certificates
 * **Organization policy blocking custom endpoints**: Check GitHub organization settings
 
 === Model not found errors
