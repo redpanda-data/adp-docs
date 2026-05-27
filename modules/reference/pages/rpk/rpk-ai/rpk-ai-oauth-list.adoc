@@ -1,5 +1,6 @@
 = rpk ai oauth list
 :description: rpk ai oauth list
+:page-beta: true
 
 List OAuth providers
 

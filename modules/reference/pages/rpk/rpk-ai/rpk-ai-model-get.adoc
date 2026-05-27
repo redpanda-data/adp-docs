@@ -1,5 +1,6 @@
 = rpk ai model get
 :description: rpk ai model get
+:page-beta: true
 
 Get model details from the catalog
 

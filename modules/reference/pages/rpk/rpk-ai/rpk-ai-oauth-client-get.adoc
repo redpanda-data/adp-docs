@@ -1,5 +1,6 @@
 = rpk ai oauth-client get
 :description: rpk ai oauth-client get
+:page-beta: true
 
 Get an OAuth client
 

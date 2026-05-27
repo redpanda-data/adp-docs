@@ -1,5 +1,6 @@
 = rpk ai uninstall
 :description: rpk ai uninstall
+:page-beta: true
 
 Uninstall the Redpanda AI CLI
 

@@ -1,5 +1,6 @@
 = rpk ai agent
 :description: rpk ai agent
+:page-beta: true
 
 Manage agents — coming soon
 

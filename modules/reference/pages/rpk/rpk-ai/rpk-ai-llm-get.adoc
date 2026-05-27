@@ -1,5 +1,6 @@
 = rpk ai llm get
 :description: rpk ai llm get
+:page-beta: true
 
 Get an LLM provider
 

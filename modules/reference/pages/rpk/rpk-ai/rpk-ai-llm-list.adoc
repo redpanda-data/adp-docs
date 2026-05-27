@@ -1,5 +1,6 @@
 = rpk ai llm list
 :description: rpk ai llm list
+:page-beta: true
 
 List LLM providers
 

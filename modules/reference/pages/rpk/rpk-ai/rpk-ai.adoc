@@ -1,5 +1,6 @@
 = rpk ai
 :description: rpk ai
+:page-beta: true
 
 Manage the Redpanda AI Gateway
 

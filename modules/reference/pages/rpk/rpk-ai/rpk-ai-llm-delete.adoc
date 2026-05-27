@@ -1,5 +1,6 @@
 = rpk ai llm delete
 :description: rpk ai llm delete
+:page-beta: true
 
 Delete an LLM provider
 

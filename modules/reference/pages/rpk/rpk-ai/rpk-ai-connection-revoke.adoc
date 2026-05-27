@@ -1,5 +1,6 @@
 = rpk ai connection revoke
 :description: rpk ai connection revoke
+:page-beta: true
 
 Revoke an OAuth connection — coming soon
 

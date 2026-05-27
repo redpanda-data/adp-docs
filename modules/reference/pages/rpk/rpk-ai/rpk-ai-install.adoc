@@ -1,5 +1,6 @@
 = rpk ai install
 :description: rpk ai install
+:page-beta: true
 
 Install the Redpanda AI CLI.
 

@@ -1,5 +1,6 @@
 = rpk ai oauth update
 :description: rpk ai oauth update
+:page-beta: true
 
 Update an OAuth provider
 
