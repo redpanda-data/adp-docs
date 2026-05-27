@@ -147,16 +147,14 @@ The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL 
 
 . Wait for the server status to change from *Starting* to *Running*. Redpanda fetches the spec, parses it, and generates one MCP tool per operation.
 
-. On the server detail page, confirm the *Tools* list shows several entries, including:
+. Open the *Inspector* tab. Confirm:
 +
-* `findPetsByStatus`
-* `getPetById`
-* `findPetsByTags`
-* `addPet`
+* *STATUS* shows *Connected* with a green dot.
+* The *Tools* card lists multiple entries, including `findpetsbystatus`, `getpetbyid`, `findpetsbytags`, and `addpet`. The OpenAPI MCP server lowercases tool names when it generates them from the spec's `operationId` values.
 +
 The exact tool count depends on the operations defined in the spec at fetch time.
 
-. (Optional sanity check) Open the *Inspector* tab. Pick `findPetsByStatus`. In the form, set `status` to `available`. Click *Call tool*. You should see a JSON array of pet objects. If you see an error, see xref:mcp:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
+. (Optional) Click *Ping* in the *MCP Inspector* card to confirm the server responds. If the Ping fails or the *STATUS* stays disconnected, see xref:mcp:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
 
 For the full OpenAPI MCP reference (auth modes, operation filters, base URL overrides), see xref:mcp:managed/openapi.adoc[OpenAPI managed MCP server].
 
@@ -188,9 +186,9 @@ You are a pet store inventory assistant.
 
 You have access to PetStore API tools through MCP. Use them to answer
 questions about pets:
-- findPetsByStatus: List pets by status (available, pending, sold)
-- getPetById: Look up a specific pet by ID
-- findPetsByTags: Search by tag
+- findpetsbystatus: List pets by status (available, pending, sold)
+- getpetbyid: Look up a specific pet by ID
+- findpetsbytags: Search by tag
 
 Rules:
 - Always call a tool before answering. Don't make up pet data.
@@ -206,9 +204,9 @@ Rules:
 * Select `petstore-quickstart`.
 * For this quickstart, enable only the read tools to keep the agent safe:
 +
-** `findPetsByStatus`
-** `getPetById`
-** `findPetsByTags`
+** `findpetsbystatus`
+** `getpetbyid`
+** `findpetsbytags`
 
 . Set execution parameters:
 +
@@ -233,7 +231,7 @@ What pets are available right now?
 +
 The agent should:
 +
-* Call `findPetsByStatus` with `status=available`.
+* Call `findpetsbystatus` with `status=available`.
 * Return a summary of the pets the tool returned, naming the tool.
 
 . Send the second prompt:
@@ -243,7 +241,7 @@ The agent should:
 Tell me about pet ID 1.
 ----
 +
-The agent should call `getPetById` with `petId=1` and return the pet's details.
+The agent should call `getpetbyid` with `petId=1` and return the pet's details.
 
 . (Optional) Send an open-ended prompt to confirm multi-step reasoning:
 +
@@ -252,7 +250,7 @@ The agent should call `getPetById` with `petId=1` and return the pet's details.
 Find a pet tagged "friendly" and tell me whether it's available.
 ----
 +
-The agent may call `findPetsByTags` first, then `getPetById` for one of the matches, then summarize.
+The agent may call `findpetsbytags` first, then `getpetbyid` for one of the matches, then summarize.
 
 If the agent hallucinates data instead of calling a tool, tighten the system prompt's "Always call a tool before answering" rule. See xref:agents:system-prompts.adoc[system prompt best practices] for patterns.
 
