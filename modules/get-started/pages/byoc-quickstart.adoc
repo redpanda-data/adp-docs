@@ -8,8 +8,7 @@
 :learning-objective-3: Build an agent that calls both the LLM provider and the MCP server
 
 // Source: drafted against `adp-production` UI flows for LLM providers, MCP servers, and Agents; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider, MCP, and agent protos on cloudv2 origin/main.
-// TODO: replace placeholder model IDs (claude-sonnet-4-6, claude-haiku-4-5) with the catalog's current Anthropic offerings at PR time.
-// TODO: confirm the Create LLM Provider form's inline secret-creation flow on adp-production. If supported, fold step 2 into step 3 and remove the standalone Secrets step.
+// TODO: verify the model IDs (claude-sonnet-4-6, claude-haiku-4-5) against the catalog at PR time; model identifiers shift.
 
 Set up Redpanda ADP for your organization. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
 
@@ -93,23 +92,24 @@ Now point ADP at Anthropic.
 
 . Click *Create provider*.
 
-. Fill in identity:
-+
-* *Name*: `anthropic-quickstart` (or accept the auto-suggested name)
-* *Display name*: Leave blank to use the *Name*.
+. *Name*: Enter `anthropic-quickstart` or accept the auto-suggested name.
 
 . *Provider type*: Select *Anthropic*.
 
-. *Base URL*: Leave blank to use the default Anthropic API endpoint.
+. *API key reference*: On the *Existing* tab, pick `ANTHROPIC_API_KEY` from the dropdown.
++
+TIP: If you skipped the *Secrets Store* step earlier, switch to the *New* tab to create the secret inline from this form. Either flow stores the key in the same place.
 
-. *API key*: Reference `ANTHROPIC_API_KEY` from the previous step.
+. Leave *Authorization passthrough* off. This quickstart uses one shared key, not per-user OAuth.
 
-. Leave *Auth passthrough* off. This quickstart uses one shared key, not per-user OAuth.
+. Leave the default *Base URL* in place. The form prefills the standard Anthropic endpoint.
 
-. *Models*: Pick two from the catalog:
+. *Models*: Select two from the catalog:
 +
 * `claude-haiku-4-5` (fast and inexpensive, good for testing)
 * `claude-sonnet-4-6` (higher quality, better tool use, used by the agent in the next sections)
++
+The catalog of available models is maintained by Redpanda. Models you select here become the catalog this provider exposes to agents and applications; you can change the list later from the provider detail page.
 
 . Click *Create provider*.
 
