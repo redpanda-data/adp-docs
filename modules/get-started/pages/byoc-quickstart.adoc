@@ -20,7 +20,7 @@ After completing this quickstart, you will be able to:
 
 == Prerequisites
 
-* A Redpanda Cloud BYOC environment on AWS with ADP enabled. See xref:get-started:byoc-prereqs.adoc[ADP BYOC prerequisites].
+* A Redpanda Cloud BYOC environment on AWS with ADP enabled.
 * The Writer or Admin xref:governance:permissions-overview.adoc[built-in role] in ADP. The Reader role can list resources but cannot create them.
 * An Anthropic account. If you don't have one, the next section walks through signup.
 

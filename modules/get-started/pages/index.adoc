@@ -1,3 +1,0 @@
-= Get Started
-:description: Set up your ADP environment, build your first agent, and invite your team.
-:page-layout: index
