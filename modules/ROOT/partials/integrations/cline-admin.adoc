@@ -43,7 +43,7 @@ Cline connects to AI Gateway through two primary endpoints:
 The gateway handles:
 
 . Authentication through bearer tokens in the `Authorization` header
-. Model routing using the `vendor/model_id` format
+. Model selection using the `vendor/model_id` format
 . MCP server aggregation for multi-tool workflows
 . Request logging and cost tracking per gateway
 
@@ -118,23 +118,12 @@ Create a dedicated gateway to isolate Cline traffic and apply specific policies.
 . Click *Create*
 . Copy the gateway endpoint URL from the gateway details page
 
-=== Configure LLM routing
-
-Set up routing policies for Cline requests.
-
-==== Basic routing with failover
+=== Configure provider pools with fallback
 
 Configure a primary provider with automatic failover:
 
 . Navigate to the gateway's *LLM* tab
-. Under *Routing*, click *Add route*
-. Configure the route:
-+
-[source,cel]
-----
-true  # Matches all requests
-----
-
+. Under *Provider pools*, click *Add pool*
 . Add a *Primary provider pool*:
 +
 * Provider: Anthropic
@@ -149,22 +138,7 @@ true  # Matches all requests
 
 . Click *Save*
 
-Cline requests route to Anthropic by default and fail over to OpenAI if Anthropic is unavailable.
-
-==== Workspace-based routing
-
-Route requests based on VS Code workspace or project context (if Cline passes workspace identifiers):
-
-[source,cel]
-----
-request.headers["x-workspace-type"][0] == "production"
-----
-
-Create separate routes:
-
-* Production route: Claude Opus 4.6.5 (highest quality, critical code)
-* Development route: Claude Sonnet 4.5 (balanced cost and quality)
-* Experimental route: OpenAI GPT-5.2 (cost-effective testing)
+Cline requests go to Anthropic by default and fail over to OpenAI if Anthropic is unavailable.
 
 === Apply rate limits
 

@@ -3,7 +3,7 @@
 :page-topic-type: how-to
 :personas: platform_engineer
 :learning-objective-1: Configure AI Gateway endpoints for Cursor IDE connectivity
-:learning-objective-2: Set up OpenAI-compatible transforms for multi-provider routing
+:learning-objective-2: Set up OpenAI-compatible transforms across multiple providers
 :learning-objective-3: Deploy multi-tenant authentication strategies for Cursor clients
 
 Configure Redpanda AI Gateway to support Cursor IDE clients accessing multiple LLM providers and MCP tools through OpenAI-compatible endpoints.
@@ -11,7 +11,7 @@ Configure Redpanda AI Gateway to support Cursor IDE clients accessing multiple L
 After reading this page, you will be able to:
 
 * [ ] Configure AI Gateway endpoints for Cursor IDE connectivity.
-* [ ] Set up OpenAI-compatible transforms for multi-provider routing.
+* [ ] Set up OpenAI-compatible transforms across multiple providers.
 * [ ] Deploy multi-tenant authentication strategies for Cursor clients.
 
 == Prerequisites
@@ -45,7 +45,7 @@ The gateway handles:
 
 . Authentication through bearer tokens in the `Authorization` header
 . Gateway selection through the endpoint URL
-. Model routing using vendor prefixes (for example, `anthropic/claude-sonnet-4.5`)
+. Model selection using vendor prefixes (for example, `anthropic/claude-sonnet-4.5`)
 . Format transforms from OpenAI format to provider-native formats (for Anthropic, Google, and so on)
 . MCP server aggregation for multi-tool workflows
 . Request logging and cost tracking per gateway
@@ -140,62 +140,23 @@ Create a dedicated gateway to isolate Cursor traffic and apply specific policies
 
 The gateway ID is embedded in the gateway endpoint URL.
 
-=== Configure unified LLM routing
+=== Configure provider pools with fallback
 
-Cursor sends all requests to a single endpoint (`/v1/chat/completions`) and uses model prefixes for routing. Configure the gateway to route based on the requested model prefix.
-
-==== Model prefix routing
-
-Configure routing that inspects the model field to determine the target provider:
+Cursor sends all requests to a single endpoint (`/v1/chat/completions`) and uses model prefixes (for example, `anthropic/claude-sonnet-4.5`, `openai/gpt-5.2`) to identify the target provider.
 
 . Navigate to the gateway's *LLM* tab
-. Under *Routing*, click *Add route*
-. Configure Anthropic routing:
-+
-[source,cel]
-----
-request.body.model.startsWith("anthropic/")
-----
-
-. Add a *Primary provider pool*:
-+
-* Provider: Anthropic
-* Model: All enabled Anthropic models
-* Transform: OpenAI to Anthropic
-* Load balancing: Round robin (if multiple Anthropic configurations exist)
-
-. Click *Save*
-. Add another route for OpenAI:
-+
-[source,cel]
-----
-request.body.model.startsWith("openai/")
-----
-
-. Add a *Primary provider pool*:
+. Under *Provider pools*, click *Add pool*
+. Configure a primary provider pool (for example, OpenAI):
 +
 * Provider: OpenAI
 * Model: All enabled OpenAI models
 * Transform: None (already OpenAI format)
+* Load balancing: Round robin (if multiple OpenAI configurations exist)
 
+. (Optional) Add a fallback pool (for example, Anthropic with the OpenAI-to-Anthropic transform).
 . Click *Save*
 
-Cursor requests route to the appropriate provider based on the model prefix.
-
-==== Default routing with fallback
-
-Configure a catch-all route for requests without vendor prefixes:
-
-[source,cel]
-----
-true  # Matches all requests not matched by previous routes
-----
-
-Add a primary provider (for example, OpenAI) with fallback to Anthropic:
-
-* Primary: OpenAI (for requests with no prefix)
-* Fallback: Anthropic (if OpenAI is unavailable)
-* Failover conditions: Rate limits, timeouts, 5xx errors
+The gateway automatically fails over to the fallback pool when the primary returns 429, times out, or returns a 5xx error.
 
 === Apply rate limits
 
@@ -221,12 +182,10 @@ The gateway blocks requests exceeding these limits and returns HTTP 429 errors.
 
 ==== Rate limit considerations for code completion
 
-Cursor's code completion feature generates frequent requests. Consider separate rate limits for completion vs chat:
+Cursor's code completion feature generates frequent requests. Consider separate gateways for completion vs chat if you need different rate limits per use case:
 
 * Completion models (for example, `openai/gpt-5.2-mini`): Higher rate limits
 * Chat models (for example, `anthropic/claude-sonnet-4.5`): Standard rate limits
-
-Configure routing rules that apply different rate limits based on model selection.
 
 === Set spending limits
 
@@ -378,26 +337,13 @@ Implement token rotation for security:
 
 For organizations with multiple teams, use one of these multi-tenant strategies.
 
-=== Strategy 1: Tenant-specific subdomains
+=== Strategy 1: One gateway per team
 
-Configure different subdomains for each tenant or team:
+Create a separate gateway for each tenant or team. Each gateway has its own rate limits, spending limits, and API tokens.
 
-. Set up DNS records pointing to your AI Gateway cluster:
-+
-* `team-alpha.aigateway.example.com` → Gateway ID: `alpha-cursor-gateway`
-* `team-beta.aigateway.example.com` → Gateway ID: `beta-cursor-gateway`
-
-. Configure the gateway to extract tenant identity from the `Host` header:
-+
-[source,cel]
-----
-request.headers["host"][0].startsWith("team-alpha")
-----
-
-. Distribute tenant-specific URLs to each team
-. Each team configures Cursor with their specific subdomain
-
-This approach works with standard Cursor configuration without requiring custom headers.
+. In ADP, create one gateway per team (for example, `team-alpha-cursor-gateway`, `team-beta-cursor-gateway`).
+. Distribute each team's gateway endpoint and API token to its users.
+. Each team configures Cursor with their team's gateway URL.
 
 **Configuration example for Team Alpha:**
 
@@ -405,80 +351,21 @@ This approach works with standard Cursor configuration without requiring custom 
 ----
 {
   "apiProvider": "openai",
-  "apiBaseUrl": "https://team-alpha.aigateway.example.com/ai-gateway/v1",
+  "apiBaseUrl": "https://{CLUSTER_ID}.cloud.redpanda.com/ai-gateway/{ALPHA_GATEWAY_ID}/v1",
   "apiKey": "TEAM_ALPHA_TOKEN"
 }
 ----
 
-=== Strategy 2: Path-based routing
+=== Strategy 2: Single shared gateway
 
-Use URL path prefixes to identify tenants:
+For simpler deployments, use one gateway for all Cursor users with shared access:
 
-. Configure gateway routing to extract tenant from the request path:
-+
-[source,cel]
-----
-request.path.startsWith("/ai-gateway/alpha/")
-----
+. Create one gateway for all Cursor users.
+. Generate a shared API token.
+. Distribute the endpoint and token to all users.
+. Use overall rate limits and spending limits to control aggregate usage.
 
-. Create routing rules that map path prefixes to specific gateways or policies
-. Distribute tenant-specific base URLs
-
-**Configuration example for Team Alpha:**
-
-[source,json]
-----
-{
-  "apiProvider": "openai",
-  "apiBaseUrl": "https://{CLUSTER_ID}.cloud.redpanda.com/ai-gateway/alpha/v1",
-  "apiKey": "TEAM_ALPHA_TOKEN"
-}
-----
-
-This approach requires gateway-level path rewriting to remove the tenant prefix before forwarding to LLM providers.
-
-=== Strategy 3: Query parameter routing
-
-Embed tenant identity in query parameters:
-
-. Configure Cursor to append query parameters to the base URL:
-+
-[source,json]
-----
-{
-  "apiProvider": "openai",
-  "apiBaseUrl": "https://{CLUSTER_ID}.cloud.redpanda.com/ai-gateway/v1?tenant=alpha",
-  "apiKey": "TEAM_ALPHA_TOKEN"
-}
-----
-
-. Configure gateway routing to extract tenant from query parameters:
-+
-[source,cel]
-----
-request.url.query["tenant"][0] == "alpha"
-----
-
-. Create routing rules and rate limits based on the tenant parameter
-
-This approach works with standard Cursor configuration but exposes tenant identity in URLs.
-
-=== Strategy 4: API token-based routing
-
-Use different API tokens to identify tenants:
-
-. Generate separate API tokens for each tenant
-. Tag tokens with metadata indicating the tenant
-. Configure gateway routing based on token identity:
-+
-[source,cel]
-----
-request.auth.metadata["tenant"] == "alpha"
-----
-
-. Apply tenant-specific routing, rate limits, and spending limits
-
-This approach is most transparent to users but requires gateway support for token metadata inspection.
+This approach is the simplest but provides no per-team cost tracking or isolation.
 
 === Choosing a multi-tenant strategy
 
@@ -486,25 +373,15 @@ This approach is most transparent to users but requires gateway support for toke
 |===
 |Strategy |Pros |Cons |Best For
 
-|Subdomains
-|Clean, standards-based, no URL modifications
-|Requires DNS configuration, certificate management
-|Organizations with infrastructure control
+|One gateway per team
+|Per-team budgets, rate limits, and isolation
+|More gateways to manage, more tokens to distribute
+|Organizations with multiple teams or budgets
 
-|Path-based
-|No DNS required, flexible routing
-|Requires path rewriting, tenant exposed in logs
-|Simpler deployments, testing environments
-
-|Query parameters
-|No infrastructure changes
-|Tenant exposed in URLs and logs, less clean
-|Quick deployments, temporary solutions
-
-|Token-based
-|Transparent to users, centralized control
-|Requires advanced gateway features
-|Large deployments, strong security requirements
+|Single shared gateway
+|Simplest configuration and management
+|No per-team isolation or limits
+|Small organizations, proof of concept
 |===
 
 == Configure Cursor IDE clients
@@ -627,7 +504,7 @@ Cursor generates different request patterns:
 |Metric |Purpose
 
 |Request volume by provider
-|Identify which providers are most used through model prefix routing
+|Identify which providers are most used through model prefix
 
 |Token usage by model
 |Track consumption patterns (completion vs chat)
@@ -745,7 +622,6 @@ Causes and solutions:
 * **Model not enabled in catalog**: Enable the model in the gateway's model catalog
 * **Incorrect model prefix**: Use the correct vendor prefix (for example, `anthropic/claude-sonnet-4.5` not just `claude-sonnet-4.5`)
 * **Transform not configured**: Verify OpenAI-compatible transform is enabled for non-OpenAI providers
-* **Routing rule mismatch**: Check that routing rules correctly match the model prefix
 
 === Transform errors or unexpected responses
 
@@ -794,17 +670,14 @@ Causes and solutions:
 * **Budget exhausted**: Verify monthly spending limit has not been reached
 * **Per-user limits too restrictive**: Adjust per-user rate limits if using multi-tenant strategies
 
-=== Multi-tenant routing failures
+=== Multi-tenant authorization failures
 
-Symptom: Requests route to wrong gateway or fail authorization.
+Symptom: Requests fail authorization or hit the wrong gateway.
 
 Causes and solutions:
 
-* **Subdomain not configured**: Verify DNS records and SSL certificates for tenant-specific subdomains
-* **Path prefix mismatch**: Check that path-based routing rules correctly extract tenant identity
-* **Query parameter missing**: Ensure query parameter is appended to all requests
-* **Token metadata incorrect**: Verify token is tagged with correct tenant metadata
-* **Routing rule conflicts**: Check for overlapping routing rules that may cause unexpected routing
+* **Wrong gateway endpoint**: Verify each team uses the gateway URL that matches their tokens
+* **Token does not match gateway**: Confirm the API token belongs to the gateway the user is calling
 
 == Next steps
 

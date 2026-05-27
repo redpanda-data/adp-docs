@@ -155,26 +155,18 @@ Each log entry contains:
 | Includes message content, metadata
 |===
 
-=== Routing and policy info
+=== Policy info
 
 [cols="1,2,2"]
 |===
 | Field | Description | Example
 
-| *CEL Expression* 
-| Routing rule applied (if any) 
-| `request.headers["tier"] == "premium" ? ...`
-
-| *CEL Result* 
-| Model selected by CEL 
-| `openai/gpt-5.2`
-
-| *Rate Limit Status* 
-| Whether rate limited 
+| *Rate Limit Status*
+| Whether rate limited
 | `allowed`, `throttled`, `blocked`
 
-| *Spend Limit Status* 
-| Whether budget exceeded 
+| *Spend Limit Status*
+| Whether budget exceeded
 | `allowed`, `blocked`
 
 | *Policy Stage* 
@@ -432,12 +424,10 @@ Example:
 ----
 
 
-=== Routing details tab
+=== Policy details tab
 
 Shows:
 
-* CEL expression evaluated (if any)
-* CEL result (which model was selected)
 * Provider pool used (primary/fallback)
 * Fallback trigger reason (if applicable)
 * Rate limit evaluation (allowed/blocked)
@@ -447,13 +437,6 @@ Example:
 
 [source,yaml]
 ----
-CEL Expression: |
-  request.headers["x-user-tier"] == "premium"
-    ? "openai/gpt-5.2"
-    : "openai/gpt-5.2-mini"
-
-CEL Result: "openai/gpt-5.2"
-
 Provider Pool: primary
 Fallback Triggered: false
 
@@ -508,9 +491,8 @@ Token Generation Rate: 71 tokens/second
 
    * Gateway error: Issue with configuration, rate limits, and so on   * Provider error: Issue with upstream API (OpenAI, Anthropic, and so on)
 
-4. Check routing:
+4. Check fallback:
    * Was fallback triggered? (May indicate primary provider issue)
-   * Was CEL rule applied correctly?
 
 Common causes:
 
@@ -552,7 +534,6 @@ AND Latency > 3000ms
 
 2. *Check Performance Details*:
 
-   * Is gateway processing slow? (Likely CEL complexity)
    * Is provider API slow? (Upstream latency)
    * Is token generation rate normal? (Tokens/second)
 
@@ -564,7 +545,6 @@ AND Latency > 3000ms
 
 Common causes:
 
-* Complex CEL routing rules
 * Provider performance degradation
 * Large context windows (high token count)
 * Network issues
@@ -679,7 +659,7 @@ AI Gateway logs by default:
 * Request body (full prompt content)
 * Response body (full AI response)
 * Token usage, cost, latency
-* Routing decisions, policy evaluations
+* Policy evaluations
 
 AI Gateway does not log (if applicable):
 

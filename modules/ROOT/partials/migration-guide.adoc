@@ -726,12 +726,11 @@ Expected gateway overhead: // PLACEHOLDER: Xms p50, Yms p99
 
 If latency is significantly higher:
 
-1. Check geographic routing (gateway → provider region)
+1. Check geographic distance (gateway → provider region)
 2. Verify provider pool configuration (no unnecessary fallbacks)
-3. Review CEL routing complexity
-4. Check for rate limiting (adds retry latency)
+3. Check for rate limiting (adds retry latency)
 
-Solution: Review geographic routing and provider pool configuration.
+Solution: Review gateway region and provider pool configuration.
 
 === Requests not appearing in dashboard
 
@@ -833,8 +832,6 @@ response = client.chat.completions.create(
 ----
 
 
-NOTE: Gateway may use custom headers for routing (for example, CEL expressions can reference `request.headers["X-User-ID"]`)
-
 == Post-migration benefits
 
 After successful migration, you gain:
@@ -868,7 +865,7 @@ A/B testing
 
 * Test new models without code changes
 * Compare quality/cost/latency
-* Gradual rollout through routing policies
+* Gradual rollout through provider pool configuration
 
 == Next steps
 

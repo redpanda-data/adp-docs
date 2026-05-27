@@ -4,7 +4,7 @@
 :personas: platform_engineer
 :learning-objective-1: Configure AI Gateway endpoints for GitHub Copilot connectivity
 :learning-objective-2: Deploy multi-tenant authentication strategies for Copilot clients
-:learning-objective-3: Set up model aliasing and BYOK routing for GitHub Copilot
+:learning-objective-3: Set up model aliasing and BYOK provider pools for GitHub Copilot
 
 Configure Redpanda AI Gateway to support GitHub Copilot clients accessing multiple LLM providers through OpenAI-compatible endpoints with bring-your-own-key (BYOK) support.
 
@@ -12,7 +12,7 @@ After reading this page, you will be able to:
 
 * [ ] Configure AI Gateway endpoints for GitHub Copilot connectivity.
 * [ ] Deploy multi-tenant authentication strategies for Copilot clients.
-* [ ] Set up model aliasing and BYOK routing for GitHub Copilot.
+* [ ] Set up model aliasing and BYOK provider pools for GitHub Copilot.
 
 == Prerequisites
 
@@ -45,11 +45,11 @@ GitHub Copilot connects to AI Gateway through standardized endpoints:
 The gateway handles:
 
 . Authentication through bearer tokens in the `Authorization` header
-. Gateway selection through URL path routing or query parameters
-. Model routing and aliasing for friendly names
+. Gateway selection through URL path or query parameters
+. Model aliasing for friendly names
 . Format transforms from OpenAI format to provider-native formats
 . Request logging and cost tracking per gateway
-. BYOK routing for different teams or users
+. BYOK setup for different teams or users
 
 == Enable LLM providers
 
@@ -138,7 +138,7 @@ Create a dedicated gateway to isolate GitHub Copilot traffic and apply specific 
 . Click *Create*
 . Copy the gateway ID from the gateway details page
 
-The gateway ID is required for routing requests to this gateway.
+The gateway ID is required for sending requests to this gateway.
 
 === Configure model aliasing
 
@@ -173,62 +173,23 @@ GitHub Copilot expects model names like `gpt-5.2` without vendor prefixes. Confi
 
 When GitHub Copilot requests `gpt-5.2`, the gateway routes to OpenAI's `gpt-5.2` model. Users can optionally request `claude-sonnet` for Anthropic models if the IDE configuration supports model selection.
 
-=== Configure unified LLM routing
+=== Configure provider pools with fallback
 
-GitHub Copilot sends all requests to a single endpoint (`/v1/chat/completions`). Configure the gateway to route based on the requested model name.
-
-==== Model-based routing
-
-Configure routing that inspects the model field to determine the target provider:
+GitHub Copilot sends all requests to a single endpoint (`/v1/chat/completions`). Configure a primary provider pool with optional fallback:
 
 . Navigate to the gateway's *LLM* tab
-. Under *Routing*, click *Add route*
-. Configure OpenAI routing:
-+
-[source,cel]
-----
-request.body.model.startsWith("gpt-") || request.body.model.startsWith("o1-")
-----
-
-. Add a *Primary provider pool*:
+. Under *Provider pools*, click *Add pool*
+. Configure the primary provider pool:
 +
 * Provider: OpenAI
 * Model: All enabled OpenAI models
 * Transform: None (already OpenAI format)
 * Load balancing: Round robin (if multiple OpenAI configurations exist)
 
-. Click *Save*
-. Add another route for Anthropic models:
-+
-[source,cel]
-----
-request.body.model.startsWith("claude-")
-----
-
-. Add a *Primary provider pool*:
-+
-* Provider: Anthropic
-* Model: All enabled Anthropic models
-* Transform: OpenAI to Anthropic
-
+. (Optional) Add a fallback pool (for example, Anthropic) with the OpenAI-to-Anthropic transform.
 . Click *Save*
 
-GitHub Copilot requests route to the appropriate provider based on the model alias.
-
-==== Default routing with fallback
-
-Configure a catch-all route for requests without specific model prefixes:
-
-[source,cel]
-----
-true  # Matches all requests not matched by previous routes
-----
-
-Add a primary provider (for example, OpenAI) with fallback to Anthropic:
-
-* Primary: OpenAI (for requests with no specific model)
-* Fallback: Anthropic (if OpenAI is unavailable)
-* Failover conditions: Rate limits, timeouts, 5xx errors
+The gateway automatically fails over to the fallback pool when the primary returns 429, times out, or returns a 5xx error.
 
 === Apply rate limits
 
@@ -381,74 +342,7 @@ This approach allows true multi-tenancy with proper gateway isolation per team.
 * Not available for all GitHub Copilot-supported IDEs
 * Users must configure extension in addition to GitHub Copilot
 
-=== Strategy 2: Query parameter routing
-
-Embed tenant identity in query parameters for multi-tenant routing without custom headers.
-
-. Configure gateway routing to extract tenant from query parameters:
-+
-[source,cel]
-----
-request.url.query["tenant"][0] == "team-alpha"
-----
-
-. Distribute tenant-specific endpoints to each team
-. Configure GitHub Copilot organization settings with the tenant-specific base URL
-
-**Configuration example for Team Alpha:**
-
-Organization-level GitHub Copilot settings:
-
-[source,json]
-----
-{
-  "copilot": {
-    "api_base_url": "https://{CLUSTER_ID}.cloud.redpanda.com/ai-gateway/v1?tenant=team-alpha",
-    "api_key": "TEAM_ALPHA_TOKEN"
-  }
-}
-----
-
-**Benefits:**
-
-* Works with standard GitHub Copilot configuration
-* No additional extensions required
-* Simple to implement
-
-**Limitations:**
-
-* Tenant identity exposed in URLs and logs
-* Less clean than header-based routing
-* URL parameters may be logged by intermediate proxies
-
-=== Strategy 3: Token-based gateway mapping
-
-Use different API tokens to identify which gateway to route to:
-
-. Generate separate API tokens for each tenant or team
-. Tag tokens with metadata indicating the target gateway
-. Configure gateway routing based on token identity:
-+
-[source,cel]
-----
-request.auth.metadata["gateway_id"] == "team-alpha-gateway"
-----
-
-. Apply tenant-specific routing, rate limits, and spending limits based on the token
-
-**Benefits:**
-
-* Transparent to users
-* No URL modifications needed
-* Centralized control through token management
-
-**Limitations:**
-
-* Requires gateway support for token metadata inspection
-* Token management overhead increases with number of tenants
-* All tenants use the same base URL
-
-=== Strategy 4: Single-tenant mode
+=== Strategy 2: Single-tenant mode
 
 For simpler deployments, configure a single gateway with shared access:
 
@@ -460,7 +354,7 @@ For simpler deployments, configure a single gateway with shared access:
 **Benefits:**
 
 * Simplest configuration
-* No tenant routing complexity
+* No multi-tenant complexity
 * Easy to manage
 
 **Limitations:**
@@ -479,16 +373,6 @@ For simpler deployments, configure a single gateway with shared access:
 |Clean tenant separation, custom headers
 |Requires extension, VS Code only
 |Organizations standardized on VS Code
-
-|Query parameters
-|No extensions needed, simple setup
-|Tenant exposed in URLs, less clean
-|Quick deployments, small teams
-
-|Token-based
-|Transparent to users, centralized control
-|Requires advanced gateway features
-|Large organizations with many teams
 
 |Single-tenant
 |Simplest configuration and management
@@ -513,16 +397,6 @@ For GitHub Enterprise customers, configure Copilot at the organization level:
 ----
 {
   "api_base_url": "https://{CLUSTER_ID}.cloud.redpanda.com/ai-gateway/v1",
-  "api_key": "YOUR_API_TOKEN"
-}
-----
-
-. If using query parameter routing, append the tenant identifier:
-+
-[source,json]
-----
-{
-  "api_base_url": "https://{CLUSTER_ID}.cloud.redpanda.com/ai-gateway/v1?tenant=YOUR_TEAM",
   "api_key": "YOUR_API_TOKEN"
 }
 ----
@@ -737,7 +611,7 @@ Symptom: Connection errors when GitHub Copilot tries to send requests.
 
 Causes and solutions:
 
-* **Invalid base URL**: Verify the configured endpoint matches the gateway URL (including query parameters if using query-based routing)
+* **Invalid base URL**: Verify the configured endpoint matches the gateway URL
 * **Expired token**: Generate a new API token and update the GitHub Copilot configuration
 * **Network connectivity**: Verify the cluster endpoint is accessible from the client network
 * **Provider not enabled**: Ensure at least one provider is enabled and has models in the catalog
@@ -753,7 +627,6 @@ Causes and solutions:
 * **Model not enabled in catalog**: Enable the model in the gateway's model catalog
 * **Model alias missing**: Create an alias for the model name GitHub Copilot expects (for example, `gpt-5.2`)
 * **Incorrect model name**: Verify GitHub Copilot is requesting a model name that exists in your aliases
-* **Routing rule mismatch**: Check that routing rules correctly match the requested model name
 
 === Transform errors or unexpected responses
 
@@ -792,15 +665,13 @@ Causes and solutions:
 * **Per-user limits too restrictive**: Adjust per-user rate limits if using multi-tenant strategies
 * **Spike in usage**: Code completion can generate sudden usage spikes, consider burstable rate limits
 
-=== Multi-tenant routing failures
+=== Multi-tenant authorization failures
 
-Symptom: Requests route to wrong gateway or fail authorization.
+Symptom: Requests fail authorization or hit the wrong gateway.
 
 Causes and solutions:
 
-* **Query parameter missing**: Ensure query parameter is appended to all requests if using query-based routing
-* **Token metadata incorrect**: Verify token is tagged with correct gateway metadata
-* **Routing rule conflicts**: Check for overlapping routing rules that may cause unexpected routing
+* **Wrong gateway endpoint**: Verify each team uses the gateway URL that matches their tokens
 * **Organization policy override**: Verify GitHub organization settings aren't overriding user configurations
 * **Extension not configured**: If using OAI Compatible Provider extension, verify proper installation and configuration
 

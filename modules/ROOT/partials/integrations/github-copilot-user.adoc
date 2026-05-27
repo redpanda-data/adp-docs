@@ -3,7 +3,7 @@
 :page-topic-type: how-to
 :personas: agent_builder
 :learning-objective-1: Configure GitHub Copilot in VS Code and JetBrains IDEs to route requests through AI Gateway
-:learning-objective-2: Set up multi-tenancy with gateway routing for cost tracking
+:learning-objective-2: Set up multi-tenancy with per-team gateways for cost tracking
 :learning-objective-3: Configure enterprise BYOK deployments for team-wide Copilot access
 
 After xref:ai-gateway:gateway-quickstart.adoc[configuring your AI Gateway], set up GitHub Copilot to route LLM requests through the gateway for centralized observability, cost management, and provider flexibility.
@@ -11,7 +11,7 @@ After xref:ai-gateway:gateway-quickstart.adoc[configuring your AI Gateway], set 
 After reading this page, you will be able to:
 
 * [ ] Configure GitHub Copilot in VS Code and JetBrains IDEs to route requests through AI Gateway.
-* [ ] Set up multi-tenancy with gateway routing for cost tracking.
+* [ ] Set up multi-tenancy with per-team gateways for cost tracking.
 * [ ] Configure enterprise BYOK deployments for team-wide Copilot access.
 
 == Prerequisites
@@ -269,18 +269,10 @@ Use a single gateway with custom headers for attribution:
 }
 ----
 
-Configure gateway CEL routing to read these headers:
-
-[,cel]
-----
-request.headers["x-team"] == "backend-team" ? "openai/gpt-5.2" : "openai/gpt-5.2-mini"
-----
-
 Benefits:
 
 * Single gateway to manage
 * Flexible cost attribution
-* Header-based routing policies
 
 Filter observability dashboard by `x-team` or `x-project` headers to generate team-specific reports.
 
@@ -398,24 +390,6 @@ Track usage across the organization:
 ** Individual developer exceeds threshold (potential misuse)
 ** Department budget approaching limit
 ** Unusual request patterns (security concern)
-
-=== Policy enforcement
-
-Use gateway CEL routing to enforce policies:
-
-[,cel]
-----
-// Limit junior developers to cost-effective models
-request.headers["x-user-level"] == "junior"
-  ? "openai/gpt-5.2-mini"
-  : "anthropic/claude-sonnet-4.5"
-
-// Block access for contractors to expensive models
-request.headers["x-user-type"] == "contractor" &&
-request.body.model.contains("opus")
-  ? error("Contractors cannot use Opus models")
-  : request.body.model
-----
 
 == Verify configuration
 
@@ -872,18 +846,7 @@ Use the AI Gateway dashboard to identify optimization opportunities:
 
 === Set team-based budgets
 
-Use separate gateways or CEL routing to enforce team budgets:
-
-[,cel]
-----
-// Limit team to 1 million tokens per month
-request.headers["x-team"] == "frontend" &&
-monthly_tokens > 1000000
-  ? error("Team budget exceeded")
-  : request.body.model
-----
-
-Configure alerts in the dashboard when teams approach their limits.
+Use separate gateways per team to track and enforce budgets. Configure alerts in the dashboard when teams approach their limits.
 
 === Track costs per project
 

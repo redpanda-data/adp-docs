@@ -856,38 +856,6 @@ Best practice:
 * Write tools only in staging gateway (with approval workflows)
 * Wrap dangerous operations in MCP server with safeguards (for example, "require confirmation token")
 
-== MCP + LLM routing
-
-=== Combine MCP with CEL routing
-
-Use case: Route agents to different MCP servers based on customer tier
-
-CEL expression:
-
-[source,cel]
-----
-request.headers["x-customer-tier"] == "enterprise"
-  ? "gateway-with-premium-mcp-servers"
-  : "gateway-with-basic-mcp-servers"
-----
-
-
-Result:
-
-* Enterprise customers: Access to proprietary data, expensive APIs
-* Basic customers: Access to public data, free APIs
-
-=== MCP with provider pools
-
-Scenario: Different agents use different models + different tools
-
-Configuration:
-
-* Gateway A: GPT-5.2 + database + CRM MCP servers
-* Gateway B: Claude Sonnet + web search + analytics MCP servers
-
-Use case: Optimize model-tool pairing (some models better at certain tools)
-
 == Integration examples
 
 [tabs]

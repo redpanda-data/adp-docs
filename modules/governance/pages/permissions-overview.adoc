@@ -36,7 +36,7 @@ ADP permissions live in the following families, named by the namespace prefix:
 * `dataplane_adp_agent_*` and `dataplane_adp_agent_credential_*`: Manage declarative AI agents and the OIDC credentials issued to them.
 * `dataplane_adp_spending_*`: Read AI spending data for governance and cost reporting.
 * `dataplane_aiagent_a2a_*`: Invoke agent-to-agent (A2A) operations on running agents.
-* `dataplane_aigateway_*`: Manage enterprise AI Gateway features (rate limits, spend limits, routing rules, guardrails, model providers, audit, pricing, IAM).
+* `dataplane_aigateway_*`: Manage enterprise AI Gateway features (rate limits, spend limits, guardrails, model providers, audit, pricing, IAM).
 
 Two more families belong to Redpanda Connect resources that ADP uses:
 

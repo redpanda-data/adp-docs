@@ -32,7 +32,7 @@ The gateway handles:
 
 . Authentication through bearer tokens in the `Authorization` header
 . Gateway selection through the endpoint URL
-. Model routing using the `vendor/model_id` format
+. Model selection using the `vendor/model_id` format
 . MCP server aggregation for multi-tool workflows
 . Request logging and cost tracking per gateway
 
@@ -109,23 +109,12 @@ Create a dedicated gateway to isolate Claude Code traffic and apply specific pol
 
 The gateway ID is embedded in the gateway endpoint URL.
 
-=== Configure LLM routing
-
-Set up routing policies for Claude Code requests.
-
-==== Basic routing with failover
+=== Configure provider pools with fallback
 
 Configure a primary provider with automatic failover:
 
 . Navigate to the gateway's *LLM* tab
-. Under *Routing*, click *Add route*
-. Configure the route:
-+
-[source,cel]
-----
-true  # Matches all requests
-----
-
+. Under *Provider pools*, click *Add pool*
 . Add a *Primary provider pool*:
 +
 * Provider: Anthropic
@@ -140,21 +129,7 @@ true  # Matches all requests
 
 . Click *Save*
 
-Claude Code requests route to Anthropic by default and fail over to OpenAI if Anthropic is unavailable.
-
-==== User-based routing
-
-Route requests based on user identity (if Claude Code passes user identifiers):
-
-[source,cel]
-----
-request.headers["x-user-tier"] == "premium"
-----
-
-Create separate routes:
-
-* Premium route: Claude Opus 4.6.5 (highest quality)
-* Standard route: Claude Sonnet 4.5 (balanced cost and quality)
+Claude Code requests go to Anthropic by default and fail over to OpenAI if Anthropic is unavailable.
 
 === Apply rate limits
 

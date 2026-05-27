@@ -210,32 +210,11 @@ Repeat the backend configuration process for each provider:
 * Mistral: `/v1/mistral`, OpenAI-compatible format
 * Ollama (if proxying local models): `/v1/ollama`, OpenAI-compatible format
 
-=== Configure LLM routing
-
-Set up routing policies for Continue.dev requests.
-
-==== Per-provider routing
-
-Configure routing rules that apply to each backend:
-
-. Navigate to the gateway's *Routing* tab
-. For each backend, click *Add Route*
-. Configure basic routing:
-+
-[source,cel]
-----
-true  # Matches all requests to this backend
-----
-
-. Add a primary provider configuration with your Anthropic API key
-. (Optional) Add a fallback configuration for redundancy if you have multiple API keys
-. Click *Save*
-
-==== Provider failover
+=== Configure provider failover
 
 For providers with multiple API keys, configure failover:
 
-. In the backend's routing configuration, add multiple provider configurations
+. In the backend's provider pool configuration, add multiple provider configurations
 . Set failover conditions:
 +
 * Rate limits (HTTP 429)
