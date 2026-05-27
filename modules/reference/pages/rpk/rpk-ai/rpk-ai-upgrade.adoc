@@ -1,6 +1,7 @@
 = rpk ai upgrade
+:description: rpk ai upgrade
 
-Upgrade to the latest Redpanda AI CLI version.
+Upgrade to the latest Redpanda AI CLI version
 
 == Usage
 

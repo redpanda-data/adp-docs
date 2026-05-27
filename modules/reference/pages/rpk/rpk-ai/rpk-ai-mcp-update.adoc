@@ -1,0 +1,46 @@
+= rpk ai mcp update
+:description: rpk ai mcp update
+
+Update an MCP server
+
+== Usage
+
+[,bash]
+----
+rpai mcp update <name> [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|--description |string |human-readable description of the server.
+
+|--enabled |- |whether server is enabled (default true).
+
+|-h, --help |- |help for update.
+
+|--transport |string |new transport.
+
+|--url |string |new server URL.
+
+|--user-oauth-provider |string |for remote servers: name of the OAuthProvider whose per-user tokens should authenticate upstream requests. Managed MCPs carry their own auth oneof inside the per-MCP config and are not updated via this flag.
+
+|--user-oauth-scopes |strings |minimum OAuth scopes a user's connection must have (user_oauth.required_scopes).
+
+|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (env: RPAI_TOKEN).
+|===

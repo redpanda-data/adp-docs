@@ -1,0 +1,48 @@
+= rpk ai mcp tools list
+:description: rpk ai mcp tools list
+
+List tools on an MCP server by calling tools/list through the aigw MCP proxy.
+
+Hits the server's /mcp/v1/<name> endpoint, so the same auth and token-vault
+path used by tools/call is exercised here. Useful for checking that a managed
+MCP's tool schema loaded correctly and that a user-delegated server is
+reachable with the caller's vault token.
+
+With --code-mode the session targets the virtual code-mode sibling endpoint
+(/mcp/v1/<name>-code), which exposes the sandbox meta-tools (search,
+execute). To see the parent's tool catalog from the sandbox, invoke the
+search tool explicitly:
+
+  rpai mcp tools call <server> search --code-mode
+
+== Usage
+
+[,bash]
+----
+rpai mcp tools list <server> [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|--code-mode |- |Target the virtual code-mode sibling endpoint (<server>-code) instead of the primary.
+
+|-h, --help |- |help for list.
+
+|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (env: RPAI_TOKEN).
+|===

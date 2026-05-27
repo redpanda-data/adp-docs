@@ -1,4 +1,0 @@
-= API Reference
-:description: Redpanda ADP API reference documentation.
-
-// TODO: Add content

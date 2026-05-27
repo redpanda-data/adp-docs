@@ -1,4 +1,5 @@
 = rpk ai
+:description: rpk ai
 
 Manage the Redpanda AI Gateway
 

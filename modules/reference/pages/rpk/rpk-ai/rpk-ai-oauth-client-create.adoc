@@ -1,0 +1,54 @@
+= rpk ai oauth-client create
+:description: rpk ai oauth-client create
+
+Register an OAuth client. The generated client_secret is printed
+once to stderr with a "copy this now" banner — it cannot be retrieved
+afterward. Store it in whatever secret manager the external tool uses.
+
+== Usage
+
+[,bash]
+----
+rpai oauth-client create [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|--allowed-resource |strings |MCP URL this client can request tokens for; "*" = any. repeatable (default [*]).
+
+|--display-name |string |human-readable display name shown on the consent card (required).
+
+|--enabled |- |whether the client may request tokens (default true).
+
+|--grant-types |strings |grant types: authorization_code, refresh_token (default [authorization_code,refresh_token]).
+
+|-h, --help |- |help for create.
+
+|--logo-uri |string |https:// logo URI shown on the consent card.
+
+|--name |string |client name (required; AIP-122 resource identifier).
+
+|--pkce-required |- |require PKCE (RFC 7636) on authorization requests (default true).
+
+|--redirect-uri |strings |allowed redirect URI (exact match; repeatable, required).
+
+|--token-endpoint-auth-method |string |token endpoint auth: client_secret_basic, client_secret_post, none (default "client_secret_basic").
+
+|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (env: RPAI_TOKEN).
+|===

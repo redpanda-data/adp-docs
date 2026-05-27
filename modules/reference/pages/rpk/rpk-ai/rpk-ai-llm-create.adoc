@@ -1,0 +1,54 @@
+= rpk ai llm create
+:description: rpk ai llm create
+
+Create an LLM provider
+
+== Usage
+
+[,bash]
+----
+rpai llm create [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|--api-key-ref |string |API key or AWS Secret Access Key secret reference (bedrock).
+
+|--authorization-passthrough |- |forward client's Authorization header to upstream (Anthropic enterprise/Max OAuth).
+
+|--base-url |string |base URL.
+
+|--bedrock-access-key-id-ref |string |AWS Access Key ID or secret reference for Bedrock.
+
+|--bedrock-region |string |AWS region for Bedrock (e.g. us-east-1).
+
+|--display-name |string |display name.
+
+|--enabled |- |whether provider is enabled (default true).
+
+|-h, --help |- |help for create.
+
+|--models |strings |supported models.
+
+|--name |string |provider name (required).
+
+|--type |string |provider type: openai, anthropic, google, bedrock.
+
+|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (env: RPAI_TOKEN).
+|===

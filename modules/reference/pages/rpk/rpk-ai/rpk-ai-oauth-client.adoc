@@ -1,0 +1,50 @@
+= rpk ai oauth-client
+:description: rpk ai oauth-client
+
+Manage OAuth clients registered with the AI gateway's in-dataplane
+OAuth Authorization Server.
+
+An OAuthClient is the external tool (Claude.ai, ChatGPT, Cursor, …) that
+requests access tokens for an MCP. Create one per tool you want to allow
+in; the client_secret is returned exactly once on create and cannot be
+retrieved afterward. Rotate via delete + re-create until Phase 2 lands
+a dedicated rotation RPC.
+
+Aliases: `oauth-clients`, `oc`.
+
+== Usage
+
+[,bash]
+----
+rpai oauth-client [command]
+----
+
+== Aliases
+
+[,bash]
+----
+oauth-client, oauth-clients, oc
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-h, --help |- |help for oauth-client.
+
+|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (env: RPAI_TOKEN).
+|===
