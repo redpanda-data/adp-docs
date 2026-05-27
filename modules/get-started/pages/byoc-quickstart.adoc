@@ -1,35 +1,314 @@
-= ADP BYOC Quickstart
-:description: Start with ADP on a Redpanda Cloud BYOC environment on AWS.
-:page-topic-type: how-to
+= ADP Quickstart
+:description: Set up Redpanda ADP for your organization. Get an Anthropic API key, configure your first LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build a working agent that calls both.
+:page-topic-type: quickstart
 :personas: platform_engineer
 :page-byoc: true
-:learning-objective-1: Check that a BYOC environment meets the ADP prerequisites
-:learning-objective-2: Continue from BYOC environment setup into ADP provider, MCP, and agent setup
+:learning-objective-1: Configure your first LLM provider in ADP with an Anthropic API key
+:learning-objective-2: Create an OpenAPI-backed MCP server using a public Swagger spec
+:learning-objective-3: Build an agent that calls both the LLM provider and the MCP server
 
-// Source: `cloudv2` BYOC Terraform and Redpanda Cloud BYOC docs source, verified 2026-05-10.
-// TODO: Add click-by-click ADP BYOC setup steps after a UI walkthrough.
+// Source: drafted against `adp-production` UI flows for LLM providers, MCP servers, and Agents; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider, MCP, and agent protos on cloudv2 origin/main.
+// Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 
-This quickstart helps you start ADP on a Redpanda Cloud BYOC environment on AWS.
+Set up Redpanda ADP for your organization. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
 
-Use this guide to:
+After completing this quickstart, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
 
 == Prerequisites
 
-Review xref:get-started:byoc-prereqs.adoc[ADP BYOC prerequisites].
+* A Redpanda Cloud BYOC environment on AWS with ADP enabled. See xref:get-started:byoc-prereqs.adoc[ADP BYOC prerequisites].
+* The Writer or Admin xref:governance:permissions-overview.adoc[built-in role] in ADP. The Reader role can list resources but cannot create them.
+* An Anthropic account. If you don't have one, the next section walks through signup.
 
-== Create or select a BYOC environment on AWS
+== What you'll build
 
-Use a Redpanda Cloud BYOC environment on AWS. For the general AWS BYOC environment creation flow, see xref:redpanda-cloud:get-started:cluster-types/byoc/aws/create-byoc-cluster-aws.adoc[Create a BYOC environment on AWS].
+Three ADP resources, in order:
 
-Before you configure ADP resources, confirm that ADP is enabled for the cluster. The provisioner switch is `adp_enabled`.
+. *Anthropic LLM provider*. Routes Claude API calls through ADP so credentials, usage, and glossterm:transcript[,transcripts] stay on the platform.
+. *PetStore glossterm:MCP server[]*. Exposes the public Swagger PetStore API as a set of glossterm:MCP tool[,MCP tools] the agent can call.
+. *Pet store assistant glossterm:AI agent[,agent]*. Combines the provider and the MCP server so a natural-language question becomes a real API call against PetStore.
 
-== Continue with ADP setup
+After the agent works, you can walk through one execution turn-by-turn in the Transcripts view.
 
-After the BYOC environment meets the prerequisites, continue with the ADP setup guides:
+== Get an Anthropic API key
 
-. xref:ai-gateway:configure-provider.adoc[Configure your LLM provider]
-. xref:mcp:create-server.adoc[Create an MCP server]
-. xref:agents:create-agent.adoc[Create a declarative agent]
+Anthropic requires a payment method before it issues an API key. Add billing first, then create the key.
+
+. Open https://platform.claude.com[platform.claude.com^] and sign in, or create a new account.
+
+. Add a payment method to your account if you haven't already. Anthropic requires a payment method before it issues API keys. (Optional: add a small amount of prepaid credit so the quickstart calls don't fail on a fresh account.)
+
+. In the sidebar, select a workspace other than *Claude Code*. The Claude Code workspace uses a separate key-creation flow that doesn't fit this quickstart.
+
+. Click *Manage* > *API keys* in the sidebar.
+
+. Click *+ Create key* in the top right. In the *Create API key* dialog, name the key `adp-quickstart` and click *Add*.
+
+. Copy the key (it starts with `sk-ant-`).
++
+[IMPORTANT]
+====
+Anthropic shows the API key value once. If you close the dialog without copying, you can't recover it. Paste the key into a secure note before continuing. The next section moves the key into ADP's secret store so you don't have to keep it on your local machine.
+====
+
+. (Optional) On the *API Keys* page, confirm the new key appears with the *Active* status.
+
+== Store the key in the ADP Secrets Store
+
+ADP references provider credentials by secret name, not by raw value. Create the secret first so the next step can reference it.
+
+. Sign in to ADP.
+
+. Open *Secrets Store* in the sidebar.
+
+. Click *Create Secret*.
++
+* *ID*: `ANTHROPIC_API_KEY`. The ID accepts uppercase letters, numbers, underscores, slashes, and hyphens only.
+* *Value*: Paste the `sk-ant-` key you copied from Anthropic.
+* *Scopes*: Make sure *AI Gateway* is selected. The LLM provider you create in the next section reads the secret through this scope. Leave any other default scopes in place.
++
+[IMPORTANT]
+====
+The secret value is encrypted and cannot be retrieved after you save the form. If you mistype the key, delete the secret and create a new one.
+====
++
+Click *Create Secret* at the bottom of the form.
+
+. Confirm the secret appears in the list with the ID `ANTHROPIC_API_KEY`.
+
+TIP: If your ADP version offers an inline secret-creation control on the LLM provider form's *API key* field, you can skip this step and create the secret inline in the next section. Either flow stores the key in the same place.
+
+== Configure your LLM provider
+
+Now point ADP at Anthropic.
+
+. Open *LLM Providers* in the sidebar.
+
+. Click *Create provider*.
+
+. *Name*: Enter `anthropic-quickstart` or accept the auto-suggested name.
+
+. *Provider type*: Select *Anthropic*.
+
+. *API key reference*: On the *Existing* tab, pick `ANTHROPIC_API_KEY` from the dropdown.
++
+TIP: If you skipped the *Secrets Store* step earlier, switch to the *New* tab to create the secret inline from this form. Either flow stores the key in the same place.
+
+. Leave *Authorization passthrough* off. This quickstart uses one shared key, not per-user OAuth.
+
+. Leave the default *Base URL* in place. The form prefills the standard Anthropic endpoint.
+
+. *Models*: Select two from the catalog:
++
+* `claude-haiku-4-5` (fast and inexpensive, good for testing)
+* `claude-sonnet-4-6` (higher quality, better tool use, used by the agent in the next sections)
++
+The catalog of available models is maintained by Redpanda. Models you select here become the catalog this provider exposes to agents and applications; you can change the list later from the provider detail page.
+
+. Click *Create provider*.
+
+. On the provider detail page, confirm the *Status* badge in the *Connection* card shows *Active*. The agent you build later in this quickstart will exercise the provider end-to-end.
+
+If the *Status* badge stays in a failure state, see the xref:ai-gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace ADP can read.
+
+For the full provider field reference (transcript logging, Bedrock IAM, Anthropic auth passthrough, OpenAI-compatible endpoints), see xref:ai-gateway:configure-provider.adoc[Configure an LLM provider].
+
+== Create an MCP server with a public OpenAPI spec
+
+The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL and generates one MCP tool per operation. You'll point it at the public Swagger PetStore, which exposes a small pet-inventory API with no authentication.
+
+[NOTE]
+====
+PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:mcp:managed/managed-catalog.adoc[Managed MCP catalog]) once you've confirmed the rest of the flow works.
+====
+
+. Open *MCP Servers* > *Create Server*.
+
+. Pick *OpenAPI* from the server type picker. The *Configure OpenAPI MCP Server* form opens.
+
+. *Name*: `petstore-quickstart`. The Name accepts lowercase letters, numbers, and hyphens.
+
+. *Description*: `Public PetStore API exposed as MCP tools for quickstart testing`. Optional, but helps you find the server later.
+
+. Leave *Code Mode* at its default. Code Mode adds search and execute tools that let agents run sandboxed code against the server's tools; the PetStore catalog is small enough that you don't need it for this quickstart.
+
+. *Spec*: `https://petstore3.swagger.io/api/v3/openapi.json`. Leave the *Spec Content* textarea empty when you provide a URL.
+
+. Leave *Base URL* blank. The PetStore spec already declares the right `servers` block, so no override is needed.
+
+. Skip the *Filter* section. It supports tag, operation, path, and HTTP-method filters for trimming a large catalog; PetStore's catalog is small enough that the quickstart agent can see everything.
+
+. *Auth*: Select *No Auth*. PetStore is a public API.
+
+. Click *Submit*.
+
+. Wait for the server status to change from *Starting* to *Running*. Redpanda fetches the spec, parses it, and generates one MCP tool per operation.
+
+. Open the *Inspector* tab. Confirm:
++
+* *STATUS* shows *Connected* with a green dot.
+* The *Tools* card lists multiple entries, including `findpetsbystatus`, `getpetbyid`, `findpetsbytags`, and `addpet`. The OpenAPI MCP server lowercases tool names when it generates them from the spec's `operationId` values.
++
+The exact tool count depends on the operations defined in the spec at fetch time.
+
+. (Optional) Click *Ping* in the *MCP Inspector* card to confirm the server responds. If the Ping fails or the *STATUS* stays disconnected, see xref:mcp:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
+
+For the full OpenAPI MCP reference (auth modes, operation filters, base URL overrides), see xref:mcp:managed/openapi.adoc[OpenAPI managed MCP server].
+
+== Build your agent
+
+Combine the Anthropic provider and the PetStore MCP server into an agent.
+
+. Open *AI Agents* in the sidebar.
+
+. Click *Create AI Agent*.
+
+. In the *Basic Information* card:
++
+* *Agent Name*: `pet-store-assistant`
+* *Description*: `Quickstart agent that answers questions about the PetStore inventory`
+* *Resources*: Select *XSmall*. The quickstart workload fits inside the smallest tier.
+
+. In the *LLM Provider Configuration* card:
++
+* *Provider*: Select `anthropic-quickstart` from the dropdown.
+* *Model*: Select `claude-sonnet-4-6`. Sonnet handles multi-step tool use more reliably than Haiku.
+* *Max Iterations*: Leave the slider at its default. The quickstart prompts don't need many iterations.
+
+. In the *System Prompt* card, paste the following into the editor:
++
+[,text]
+----
+You are a pet store inventory assistant.
+
+You have access to PetStore API tools through MCP. Use them to answer
+questions about pets. The most useful read tools are:
+- findpetsbystatus: List pets by status (available, pending, sold)
+- getpetbyid: Look up a specific pet by ID
+- findpetsbytags: Search by tag
+
+Rules:
+- Always call a tool before answering. Don't make up pet data.
+- After each tool call, summarize what the tool returned and cite the
+  tool name in your response.
+- If a tool fails or returns no data, say so and stop. Don't retry
+  with invented IDs.
+- Stick to read operations for this quickstart. Don't add, update, or
+  delete pets.
+----
+
+. In the *MCP Tools* card, check the box next to `petstore-quickstart`. The card displays "Tools discovered on first use," which means the agent discovers every tool the PetStore server exposes at runtime; you don't pre-select individual tools here. The system prompt's "stick to read operations" rule constrains behavior.
+
+. Leave the *Subagents (Optional)* card empty. The quickstart uses a single agent.
+
+. Leave the auto-generated *Service Account Name* in the *Service Account* card as is. ADP creates the service account when you create the agent.
+
+. Click *Create Agent* at the bottom of the form.
+
+. Wait for the agent status to change from *Starting* to *Running*. ADP also creates the service account at this point; for details, see xref:agents:concepts.adoc#service-account-authorization[service account authorization].
+
+== Test the agent in the Inspector
+
+The *Inspector* tab is a chat surface for the agent. Type a prompt into the input at the bottom of the page and click the paper-plane icon in the input's bottom-right corner to send. Each prompt creates a *Task* card in the conversation that walks through the agent's execution turn-by-turn: TaskStatusUpdate entries (Submitted → Working → Completed) with token counts, individual tool-call cards showing the tool name and latency, and an *Artifact* card holding the final response. *Clear context* (at the bottom of the input) resets the conversation between tests.
+
+. On the agent detail page, open the *Inspector* tab.
+
+. Send the first prompt:
++
+[,text]
+----
+Tell me about pet ID 1.
+----
++
+The agent should call `getpetbyid` with `petId=1` and return the pet's details in an Artifact card. This endpoint is the most reliable on the public PetStore demo and works as the first smoke test.
+
+. Send the second prompt:
++
+[,text]
+----
+What pets are available right now?
+----
++
+The agent should call `findpetsbystatus` with `status=available` and return a summary of the pets, naming the tool. This PetStore endpoint is occasionally flaky; if it returns an HTTP 500, retry the prompt or see the troubleshooting note below.
+
+. (Optional) Send an open-ended prompt to confirm multi-step reasoning:
++
+[,text]
+----
+Find a pet tagged "friendly" and tell me whether it's available.
+----
++
+The agent may call `findpetsbytags` first, then `getpetbyid` for one of the matches, then summarize.
+
+If the agent hallucinates data instead of calling a tool, tighten the system prompt's "Always call a tool before answering" rule. See xref:agents:system-prompts.adoc[system prompt best practices] for patterns.
+
+If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet store API being unavailable, that's the public Swagger PetStore being intermittently down. The agent is behaving correctly (the "if a tool fails, say so and stop" rule in the system prompt is what produced the apology). Retry the prompt; PetStore usually recovers within a few minutes.
+
+// The Transcripts and Governance verify sections below are conditionalized out until those admin UIs are stable in adp-production.
+// Each section is gated by its own attribute so they can be flipped on independently when ready. To surface a section,
+// define the corresponding attribute in `antora.yml` (under `asciidoc.attributes`) or as a page attribute:
+// * `env-adp-transcripts: true` for the Transcripts verify section
+// * `env-adp-governance: true` for the Governance dashboard verify section
+ifdef::env-adp-transcripts[]
+== Verify the agent in Transcripts
+
+Every agent run is recorded as a glossterm:transcript[] you can replay turn-by-turn.
+
+. Open the agent's *Transcripts* tab on the agent detail page (or *Transcripts* in the sidebar for the cross-agent view). Find the most recent agent run.
+
+. Walk through the transcript turn-by-turn. You should see:
++
+* The user's prompt.
+* The agent's LLM call to Anthropic.
+* The agent's tool call to the PetStore MCP server.
+* The tool's response.
+* The agent's final response to the user.
+
+For the full transcript field reference, see xref:observability:transcripts.adoc[Read a transcript].
+endif::[]
+
+ifdef::env-adp-governance[]
+== Verify spend in the governance dashboard
+
+The glossterm:governance dashboard[] rolls up every LLM call and tool invocation across your ADP deployment.
+
+. Open *Governance* > *Dashboard* in the sidebar.
+
+. In the *Last 24 hours* view, check three KPIs:
++
+* *Total spend*: A small but non-zero value.
+* *Requests*: Reflects the LLM calls from your agent runs (one per turn).
+* *Tokens*: Input plus output tokens across the same calls.
+
+For the full governance dashboard tour, see xref:governance:dashboard/overview.adoc[Read the governance overview].
+endif::[]
+
+== Clean up
+
+If this is a one-off quickstart, delete the resources you created so they don't continue to count against your account.
+
+. Delete the *agent* (`pet-store-assistant`) first. Open the agent detail page, scroll to the *Delete* section, and click *Delete*.
+
+. Delete the *MCP server* (`petstore-quickstart`). Same pattern.
+
+. Delete the *LLM provider* (`anthropic-quickstart`). Same pattern. Note that the underlying secret (`ANTHROPIC_API_KEY`) is not deleted automatically.
+
+. (Optional) Delete the secret. Open *Secrets Store*, click `ANTHROPIC_API_KEY`, then *Delete*.
+
+. (Optional, on the Anthropic side) Revoke the API key. Open https://platform.claude.com[platform.claude.com^], navigate to *Manage* > *API keys* in the workspace where you created the key, find `adp-quickstart` in the list, and revoke it from the row's action menu.
+
+If you want to keep the provider but rotate the key, edit the provider and change the *API key* reference to a new secret.
+
+== Next steps
+
+Now that you have a working ADP setup, here are the most useful things to do next:
+
+* Add more LLM providers (OpenAI, Google AI, AWS Bedrock, OpenAI-compatible): xref:ai-gateway:configure-provider.adoc[Configure an LLM provider]
+* Swap the PetStore demo for a real upstream (Slack, Jira, SQL, Kafka, and more): xref:mcp:managed/managed-catalog.adoc[Managed MCP catalog]
+ifdef::env-adp-governance[]
+* Track spend across teams: xref:governance:budgets.adoc[Token budgets and limits]
+endif::[]
