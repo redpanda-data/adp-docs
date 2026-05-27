@@ -1,6 +1,6 @@
 site:
   title: Redpanda Docs
-  start_page: redpanda-adp:ROOT:index.adoc
+  start_page: agentic-data-plane:ROOT:index.adoc
   url: http://localhost:5002
   robots: disallow
   keys:
@@ -29,7 +29,6 @@ content:
 ui:
   bundle:
     url: https://github.com/redpanda-data/docs-ui/releases/latest/download/ui-bundle.zip
-  supplemental_files: ./supplemental-ui
 asciidoc:
   attributes:
   extensions:
