@@ -125,6 +125,11 @@ For the full provider field reference (transcript logging, Bedrock IAM, Anthropi
 
 The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL and generates one MCP tool per operation. You'll point it at the public Swagger PetStore, which exposes a small pet-inventory API with no authentication.
 
+[NOTE]
+====
+PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:mcp:managed/managed-catalog.adoc[Managed MCP catalog]) once you've confirmed the rest of the flow works.
+====
+
 . Open *MCP Servers* > *Create Server*.
 
 . Pick *OpenAPI* from the server type picker. The *Configure OpenAPI MCP Server* form opens.
@@ -212,6 +217,8 @@ Rules:
 
 == Test the agent in the Inspector
 
+The *Inspector* tab is a chat surface for the agent. Type a prompt into the input at the bottom of the page and click the paper-plane icon in the input's bottom-right corner to send. Each prompt creates a *Task* card in the conversation that walks through the agent's execution turn-by-turn: TaskStatusUpdate entries (Submitted → Working → Completed) with token counts, individual tool-call cards showing the tool name and latency, and an *Artifact* card holding the final response. *Clear context* (at the bottom of the input) resets the conversation between tests.
+
 . On the agent detail page, open the *Inspector* tab.
 
 . Send the first prompt:
@@ -245,6 +252,8 @@ Find a pet tagged "friendly" and tell me whether it's available.
 The agent may call `findpetsbytags` first, then `getpetbyid` for one of the matches, then summarize.
 
 If the agent hallucinates data instead of calling a tool, tighten the system prompt's "Always call a tool before answering" rule. See xref:agents:system-prompts.adoc[system prompt best practices] for patterns.
+
+If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet store API being unavailable, that's the public Swagger PetStore being intermittently down. The agent is behaving correctly (the "if a tool fails, say so and stop" rule in the system prompt is what produced the apology). Retry the prompt; PetStore usually recovers within a few minutes.
 
 == Verify in the governance dashboard
 
