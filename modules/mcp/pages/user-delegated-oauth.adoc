@@ -24,7 +24,7 @@ After completing this guide, you will be able to:
 == Configure the server
 
 . Create or edit your MCP server (see xref:mcp:create-server.adoc[Create an MCP Server]).
-. In the auth section, choose *User-delegated OAuth*.
+. In the authentication section, choose *User-delegated OAuth*.
 . Pick the configured *OAuth provider* (`UserOAuthAuth.provider_name`).
 . List the *required scopes* (`UserOAuthAuth.required_scopes`). Redpanda enforces these at consent time.
 . (Optional) Override token injection. By default Redpanda sends `Authorization: Bearer <token>`. To use a different header, set `TokenInjection.header_name`. To omit the prefix entirely (for example, an upstream that expects a bare API key as the token), set `TokenInjection.header_prefix` to the empty string.
@@ -38,7 +38,7 @@ TIP: To configure user-delegated OAuth from the CLI, use `--user-oauth-provider`
 
 == The user connection flow
 
-The first time a user calls a tool that needs this server's auth, Redpanda doesn't have a stored token for them. The behavior is:
+The first time a user calls a tool that needs this server's authentication, Redpanda doesn't have a stored token for them. The behavior is:
 
 . The MCP RPC returns `FAILED_PRECONDITION` with an `OAuthConnectionRequired` error detail. The detail carries an `authorize_url`.
 . The ADP UI surfaces a consent prompt to the user, pointing at the `authorize_url`.
