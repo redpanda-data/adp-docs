@@ -112,10 +112,8 @@ The catalog of available models is maintained by Redpanda. Models you select her
 . Click *Create provider*.
 
 . On the provider detail page, confirm the *Status* badge in the *Connection* card shows *Active*. The agent you build later in this quickstart will exercise the provider end-to-end.
-+
-TIP: To smoke-test the key before moving on, open the *Connect* tab, pick a client (the `>_` option is curl, the fastest path), copy the snippet, and run it from your terminal. A 200 response from Anthropic confirms the provider is wired correctly.
 
-If the *Status* badge stays in a failure state, or the smoke-test request returns an authentication error, see the xref:ai-gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace ADP can read.
+If the *Status* badge stays in a failure state, see the xref:ai-gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace ADP can read.
 
 For the full provider field reference (transcript logging, Bedrock IAM, Anthropic auth passthrough, OpenAI-compatible endpoints), see xref:ai-gateway:configure-provider.adoc[Configure an LLM provider].
 
