@@ -45,7 +45,7 @@ Two more families belong to Redpanda Connect resources that ADP uses:
 
 These permissions only resolve on clusters that have ADP enabled. Granting them to a principal on a non-ADP cluster has no effect.
 
-For the full list of permissions and which built-in role grants each one, see xref:governance:permissions-reference.adoc[ADP Permissions Reference].
+For the full list of permissions and which built-in role grants each one, see xref:control:permissions-reference.adoc[ADP Permissions Reference].
 
 == Built-in roles
 
@@ -94,4 +94,4 @@ ADP permissions are part of the same Cloud RBAC system that gates control-plane 
 
 == Related topics
 
-* xref:governance:permissions-reference.adoc[ADP Permissions Reference]
+* xref:control:permissions-reference.adoc[ADP Permissions Reference]

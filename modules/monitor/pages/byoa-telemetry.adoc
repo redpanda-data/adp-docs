@@ -8,7 +8,7 @@
 
 A *BYOA* (Bring Your Own Agent) is an agent you operate yourself, outside Redpanda's managed runtime. To make it visible across transcripts, the governance dashboard, cost rollups, and the agents list, your agent must emit OpenTelemetry traces with a specific minimum set of resource attributes and span attributes. This page documents that contract.
 
-For the full OTLP ingestion flow (deploying the Connect pipeline, authenticating, sending traces over HTTP or gRPC), see xref:observability:ingest-custom-traces.adoc[Ingest custom traces]. This page focuses on _what_ to emit; that page covers _how_ to send it.
+For the full OTLP ingestion flow (deploying the Connect pipeline, authenticating, sending traces over HTTP or gRPC), see xref:monitor:ingest-custom-traces.adoc[Ingest custom traces]. This page focuses on _what_ to emit; that page covers _how_ to send it.
 
 After reading this page, you will be able to:
 
@@ -84,7 +84,7 @@ The dashboard degrades gracefully without these, but their presence lets the UI 
 |Cache-hit token count on LLM-call spans. Surfaces in the *CACHED* bucket on the dashboard and in per-turn cost. Without it, the *CACHED* bucket reads `0` even when your agent reuses a system prompt that the upstream cached.
 
 |`gen_ai.input.messages` and `gen_ai.output.messages`
-|Conversation content. Used to reconstruct turn content, and required for transcript history reconstruction when older spans are evicted from `redpanda.otel_traces` (see xref:observability:concepts.adoc#history-reconstruction[Reconstructed transcript history]). Without them, evicted spans render as empty turns rather than reconstructed turns.
+|Conversation content. Used to reconstruct turn content, and required for transcript history reconstruction when older spans are evicted from `redpanda.otel_traces` (see xref:monitor:concepts.adoc#history-reconstruction[Reconstructed transcript history]). Without them, evicted spans render as empty turns rather than reconstructed turns.
 |===
 
 [NOTE]
@@ -94,7 +94,7 @@ Latency and timestamps come from OTel span `start_time` and `end_time` automatic
 
 == Span hierarchy
 
-Transcripts read your agent's span tree to lay out turns. The recognized span types (matched by `gen_ai.operation.name` and span name) are documented in xref:observability:concepts.adoc[Observability]. The four span shapes are:
+Transcripts read your agent's span tree to lay out turns. The recognized span types (matched by `gen_ai.operation.name` and span name) are documented in xref:monitor:concepts.adoc[Observability]. The four span shapes are:
 
 * *Top-level span*: One per agent invocation. Sets `gen_ai.operation.name = "invoke_agent"`, carries the conversation ID and service name.
 * *Reasoning or chat spans*: Set `gen_ai.operation.name = "chat"` for LLM calls. Carry the model, token counts, and provider attributes.
@@ -118,13 +118,13 @@ If any field shows blank or zero unexpectedly, the corresponding attribute is mi
 
 BYOA agents authenticate against the OTLP ingest endpoint with a service-account access token from your organization. Send the token in `Authorization: Bearer <token>` (HTTP) or `authorization: Bearer <token>` (gRPC).
 
-For the token-acquisition flow and endpoint URL format, see xref:observability:ingest-custom-traces.adoc[Ingest custom traces].
+For the token-acquisition flow and endpoint URL format, see xref:monitor:ingest-custom-traces.adoc[Ingest custom traces].
 
 // TODO: confirm the standalone-ADP service-account auth model for OTLP ingest once the standalone product ships. The current page assumes federation in Redpanda Cloud, where service-account credentials come from Cloud Organization IAM. For standalone ADP, replace with the ADP-native auth model and update the cross-link.
 
 == Where to find code examples
 
-The xref:observability:ingest-custom-traces.adoc[Ingest custom traces] page has full HTTP and gRPC examples in *Python*, *Node.js*, and *Go*, each instrumenting an LLM call with the GenAI semantic-convention attributes. Adapt the examples to your agent's framework. The attribute set is the same; only the OTel SDK ergonomics differ.
+The xref:monitor:ingest-custom-traces.adoc[Ingest custom traces] page has full HTTP and gRPC examples in *Python*, *Node.js*, and *Go*, each instrumenting an LLM call with the GenAI semantic-convention attributes. Adapt the examples to your agent's framework. The attribute set is the same; only the OTel SDK ergonomics differ.
 
 // TODO: once the BYOA tutorials track ships at GA, link a worked end-to-end BYOA agent example here (from the Examples folder or a tutorials page).
 
@@ -149,15 +149,15 @@ Common symptoms and fixes:
 |`gen_ai.operation.name = "execute_tool"` is missing on the tool span. Also confirm the tool span is parented to an assistant span, not the root.
 
 |Agent shows up in transcripts but not in the governance dashboard's Agents list
-|Transcripts attribute by `service.name` resource attribute; the dashboard attributes by registered agent resource. BYOA agent registration ships separately. See xref:agents:byoa-register.adoc[Register your own agent (BYOA)].
+|Transcripts attribute by `service.name` resource attribute; the dashboard attributes by registered agent resource. BYOA agent registration ships separately. See xref:connect:byoa-register.adoc[Register your own agent (BYOA)].
 
 |Older turns in a long conversation render as `is_reconstructed`
-|Spans were evicted from `redpanda.otel_traces` retention. Reconstruction works only if your agent emitted `gen_ai.input.messages` and `gen_ai.output.messages` on later spans. See xref:observability:concepts.adoc#history-reconstruction[Reconstructed transcript history].
+|Spans were evicted from `redpanda.otel_traces` retention. Reconstruction works only if your agent emitted `gen_ai.input.messages` and `gen_ai.output.messages` on later spans. See xref:monitor:concepts.adoc#history-reconstruction[Reconstructed transcript history].
 |===
 
 == Related topics
 
-* xref:observability:ingest-custom-traces.adoc[Ingest custom traces]
-* xref:observability:concepts.adoc[Observability]
-* xref:observability:transcripts.adoc[Read a transcript]
-* xref:agents:byoa-register.adoc[Register your own agent (BYOA)]
+* xref:monitor:ingest-custom-traces.adoc[Ingest custom traces]
+* xref:monitor:concepts.adoc[Observability]
+* xref:monitor:transcripts.adoc[Read a transcript]
+* xref:connect:byoa-register.adoc[Register your own agent (BYOA)]

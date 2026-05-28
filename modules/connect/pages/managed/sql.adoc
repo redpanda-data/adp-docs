@@ -55,7 +55,7 @@ It exposes a small set of tools for querying schemas and running parameterized q
 
 == Test
 
-After create, exercise the server through the Inspector tab. See xref:mcp:test-tools.adoc[].
+After create, exercise the server through the Inspector tab. See xref:connect:test-tools.adoc[].
 
 A canonical first call:
 

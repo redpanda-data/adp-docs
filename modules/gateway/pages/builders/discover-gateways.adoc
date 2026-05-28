@@ -270,4 +270,4 @@ echo -e "\n=== Gateway validated successfully ==="
 
 == Next steps
 
-* xref:ai-gateway:connect-agent.adoc[Connect Your Agent]
+* xref:gateway:connect-agent.adoc[Connect Your Agent]

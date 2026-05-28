@@ -6,7 +6,7 @@
 :learning-objective-2: Explain the request lifecycle through policy evaluation stages
 :learning-objective-3: Identify supported providers, features, and current limitations
 
-This page provides technical details about AI Gateway's architecture, request processing, and capabilities. For an overview of AI Gateway, see xref:ai-gateway:overview.adoc[]
+This page provides technical details about AI Gateway's architecture, request processing, and capabilities. For an overview of AI Gateway, see xref:gateway:overview.adoc[]
 
 == Architecture overview
 
@@ -142,5 +142,5 @@ The gateway only loads and exposes specific tools when requested, which dramatic
 
 == Next steps
 
-* xref:ai-gateway:gateway-quickstart.adoc[]
-* xref:ai-gateway:aggregation.adoc[]
+* xref:get-started:gateway-quickstart.adoc[]
+* xref:gateway:aggregation.adoc[]

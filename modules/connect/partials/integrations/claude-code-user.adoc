@@ -6,7 +6,7 @@
 :learning-objective-2: Set up MCP server integration through AI Gateway
 :learning-objective-3: Verify Claude Code is routing requests through the gateway
 
-After xref:ai-gateway:gateway-quickstart.adoc[configuring your AI Gateway], set up Claude Code to route LLM requests and access MCP tools through the gateway's unified endpoints.
+After xref:get-started:gateway-quickstart.adoc[configuring your AI Gateway], set up Claude Code to route LLM requests and access MCP tools through the gateway's unified endpoints.
 
 After reading this page, you will be able to:
 
@@ -20,8 +20,8 @@ Before configuring Claude Code, ensure you have:
 
 * Claude Code CLI installed (download from https://github.com/anthropics/claude-code[Anthropic's GitHub^])
 * An active Redpanda AI Gateway with:
-** At least one LLM provider enabled (see xref:ai-gateway:gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
-** A gateway created and configured (see xref:ai-gateway:gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
+** At least one LLM provider enabled (see xref:get-started:gateway-quickstart.adoc#step-1-enable-a-provider[Enable a provider])
+** A gateway created and configured (see xref:get-started:gateway-quickstart.adoc#step-3-create-a-gateway[Create a gateway])
 * Your AI Gateway credentials:
 ** Gateway endpoint URL (for example, `\https://gw-abc123.ai.panda.com`)
 ** API key with access to the gateway
@@ -343,7 +343,7 @@ If your gateway is configured with fallback providers, check the logs to see if 
 
 . **MCP tool aggregation overhead**
 +
-Aggregating tools from multiple MCP servers adds processing time. Use deferred tool loading to reduce this overhead (see xref:ai-gateway:aggregation.adoc[]).
+Aggregating tools from multiple MCP servers adds processing time. Use deferred tool loading to reduce this overhead (see xref:gateway:aggregation.adoc[]).
 
 . **Rate limiting**
 +
@@ -395,9 +395,9 @@ chmod 600 ~/.claude.json
 
 == Next steps
 
-* xref:ai-gateway:aggregation.adoc[]
+* xref:gateway:aggregation.adoc[]
 
 == Related pages
 
-* xref:ai-gateway:gateway-quickstart.adoc[]: Create and configure your AI Gateway
+* xref:get-started:gateway-quickstart.adoc[]: Create and configure your AI Gateway
 * xref:ai-gateway/gateway-architecture.adoc[]: Learn about AI Gateway architecture and benefits

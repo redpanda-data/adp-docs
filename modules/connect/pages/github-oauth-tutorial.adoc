@@ -367,9 +367,9 @@ You could next create an agent using this GitHub MCP server. Each user who calls
 
 == Related topics
 
-* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]
-* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]
-* xref:mcp:create-server.adoc[Create an MCP Server]
-* xref:mcp:managed/managed-catalog.adoc[Managed MCP Catalog]
+* xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:connect:create-server.adoc[Create an MCP Server]
+* xref:connect:managed/managed-catalog.adoc[Managed MCP Catalog]
 * https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps[GitHub OAuth Apps documentation^]
 * https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps[GitHub OAuth scopes^]

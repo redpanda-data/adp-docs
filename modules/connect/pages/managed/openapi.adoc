@@ -66,7 +66,7 @@ OpenAPI is the most flexible managed type for auth: the upstream API can need an
 |API supports OAuth client credentials and you want one shared identity.
 
 |*User-delegated OAuth*
-|API supports OAuth on behalf of users and you want per-user identities. Requires an OAuth Provider configured for that API. See xref:mcp:user-delegated-oauth.adoc[].
+|API supports OAuth on behalf of users and you want per-user identities. Requires an OAuth Provider configured for that API. See xref:connect:user-delegated-oauth.adoc[].
 |===
 
 == Test
@@ -77,7 +77,7 @@ OpenAPI is the most flexible managed type for auth: the upstream API can need an
 
 // TODO: capture screenshots of a non-trivial OpenAPI spec rendered in the Inspector once we walk a real example on `adp-production`.
 
-See xref:mcp:test-tools.adoc[] for general Inspector usage.
+See xref:connect:test-tools.adoc[] for general Inspector usage.
 
 == Use with agents
 
@@ -109,6 +109,6 @@ Once tools generate cleanly, point an agent at the *API URL* on the server's det
 
 == Limitations
 
-* *Custom tool logic*: The OpenAPI type is purely a spec-to-tools generator. For business logic on top of the API, use a xref:mcp:register-remote.adoc[self-managed MCP server].
+* *Custom tool logic*: The OpenAPI type is purely a spec-to-tools generator. For business logic on top of the API, use a xref:connect:register-remote.adoc[self-managed MCP server].
 * *GraphQL APIs*: OpenAPI doesn't describe GraphQL. For GraphQL APIs, use a self-managed server.
 * *gRPC services*: Same as GraphQL: use a self-managed server.

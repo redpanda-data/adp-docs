@@ -21,9 +21,9 @@ After reading this page, you will be able to:
 == Prerequisites
 
 * An ADP BYOC environment.
-* At least one xref:ai-gateway:configure-provider.adoc[LLM provider configured] in AI Gateway.
-* Optional: One or more xref:mcp:overview.adoc[MCP servers] registered in ADP if you want the agent to call tools.
-* A system prompt prepared in advance (see xref:agents:system-prompts.adoc[System prompt best practices]).
+* At least one xref:gateway:configure-provider.adoc[LLM provider configured] in AI Gateway.
+* Optional: One or more xref:connect:mcp-overview.adoc[MCP servers] registered in ADP if you want the agent to call tools.
+* A system prompt prepared in advance (see xref:connect:system-prompts.adoc[System prompt best practices]).
 
 == Open the create form
 
@@ -68,10 +68,10 @@ Start with Medium for production workloads. Monitor CPU and memory usage, then a
 
 In the *LLM Provider Configuration* section, select the glossterm:large language model (LLM)[] provider and model the agent uses to interpret user intent and decide which tools to invoke.
 
-. Select a *Provider*. Required. The dropdown lists every LLM provider configured on this cluster (for example, `support-bedrock-v2`). To add a new provider, see xref:ai-gateway:configure-provider.adoc[Configure an LLM provider].
+. Select a *Provider*. Required. The dropdown lists every LLM provider configured on this cluster (for example, `support-bedrock-v2`). To add a new provider, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
 . Select a *Model*. Required. The model list is populated by the selected provider (for example, `us.anthropic.claude-haiku-4-5-20251001-v1:0`).
 +
-For model selection guidance, see xref:agents:architecture-patterns.adoc#model-selection-guide[Model selection guide].
+For model selection guidance, see xref:connect:architecture-patterns.adoc#model-selection-guide[Model selection guide].
 
 . Set *Max Iterations*. Default is 30. The proto contract allows 0-200. Max iterations is the upper bound on agent reasoning loops per request. Each iteration consumes tokens and adds latency.
 +
@@ -126,7 +126,7 @@ Response format:
 - [Format guideline]
 ----
 
-For full guidance on writing effective prompts, see xref:agents:system-prompts.adoc[System prompt best practices].
+For full guidance on writing effective prompts, see xref:connect:system-prompts.adoc[System prompt best practices].
 
 == Connect MCP tools
 
@@ -143,7 +143,7 @@ In the *MCP Tools* section, select the glossterm:Model Context Protocol (MCP)[] 
 
 TIP: Apply the principle of least privilege. Connect only the servers the agent needs.
 
-For registering MCP servers, see xref:mcp:create-server.adoc[Create an MCP server].
+For registering MCP servers, see xref:connect:create-server.adoc[Create an MCP server].
 
 == Add subagents
 
@@ -159,7 +159,7 @@ The *Subagents (Optional)* section is for adding internal specialists within the
 
 The root agent orchestrates and delegates work to the appropriate subagent based on the request.
 
-For multi-agent design patterns, see xref:agents:architecture-patterns.adoc[Agent architecture patterns].
+For multi-agent design patterns, see xref:connect:architecture-patterns.adoc[Agent architecture patterns].
 
 == Configure the service account
 
@@ -167,7 +167,7 @@ In the *Service Account* section, set the name for the service account that auth
 
 . Review the auto-generated *Service Account Name*. The default uses the pattern `cluster-<cluster-id>-agent-<agent-name>-sa`.
 . Optionally, override the name. Up to 128 characters. The name cannot contain `<` or `>`.
-. The service account is created automatically when you create the agent. ADP applies default permissions; for details and how to manage service accounts, see xref:agents:concepts.adoc#service-account-authorization[Service account authorization].
+. The service account is created automatically when you create the agent. ADP applies default permissions; for details and how to manage service accounts, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
 
 == Create the agent
 
@@ -176,7 +176,7 @@ In the *Service Account* section, set the name for the service account that auth
 
 When the agent is running, ADP shows its HTTP endpoint URL on the *Configuration* tab. Copy the value from the endpoint field.
 
-You can use this URL to call the agent programmatically or integrate it with external systems. See xref:agents:integration-overview.adoc[].
+You can use this URL to call the agent programmatically or integrate it with external systems. See xref:connect:integration-overview.adoc[].
 
 == Issue agent credentials
 
@@ -251,7 +251,7 @@ For agent card design guidance, see link:https://agent2agent.info/docs/guides/cr
 
 . Save your changes. The updated metadata appears immediately at `\https://<your-agent-url>/.well-known/agent-card.json`.
 
-For more about agent cards and how they're consumed, see xref:agents:a2a-concepts.adoc#agent-cards[Agent cards].
+For more about agent cards and how they're consumed, see xref:connect:a2a-concepts.adoc#agent-cards[Agent cards].
 
 == Test your agent
 
@@ -270,7 +270,7 @@ Two tabs on the agent detail page support testing and observability:
 
 . Iterate on the system prompt, MCP tool selection, or model choice as needed.
 
-For detailed observability strategies, see xref:agents:monitor.adoc[].
+For detailed observability strategies, see xref:monitor:monitor.adoc[].
 
 == Example configurations
 
@@ -301,8 +301,8 @@ For detailed observability strategies, see xref:agents:monitor.adoc[].
 
 == Next steps
 
-* xref:agents:integration-overview.adoc[]
-* xref:agents:system-prompts.adoc[]
-* xref:mcp:create-server.adoc[]
-* xref:agents:architecture-patterns.adoc[]
+* xref:connect:integration-overview.adoc[]
+* xref:connect:system-prompts.adoc[]
+* xref:connect:create-server.adoc[]
+* xref:connect:architecture-patterns.adoc[]
 * xref:troubleshoot/troubleshoot-ai-agents.adoc[]

@@ -205,7 +205,7 @@ Enable Cline to discover and use tools from multiple MCP servers through a singl
 |Descriptive name (for example, `filesystem-tools`, `code-analysis-tools`)
 
 |Endpoint URL
-|MCP server endpoint (for example, xref:integrations:remote-mcp-clients.adoc[Remote MCP server] URL)
+|MCP server endpoint (for example, xref:connect:remote-mcp-clients.adoc[Remote MCP server] URL)
 
 |Authentication
 |Bearer token or other authentication mechanism
@@ -547,4 +547,4 @@ Causes and solutions:
 
 == Next steps
 
-* xref:integrations:remote-mcp-clients.adoc[]
+* xref:connect:remote-mcp-clients.adoc[]

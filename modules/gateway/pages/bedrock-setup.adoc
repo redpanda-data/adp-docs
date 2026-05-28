@@ -8,7 +8,7 @@
 
 // Source: cloudv2 `apps/aigw/docs/customer/bedrock-setup-guide.md` on origin/main, verified 2026-05-19.
 
-This guide walks you through the AWS-side setup AI Gateway needs to invoke Amazon Bedrock, then through the Agentic Data Plane UI flow that registers Bedrock as an LLM provider. For background on how Bedrock foundation models, cross-region inference profiles, and IAM patterns map to the provider form, see xref:ai-gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] on the main provider configuration page.
+This guide walks you through the AWS-side setup AI Gateway needs to invoke Amazon Bedrock, then through the Agentic Data Plane UI flow that registers Bedrock as an LLM provider. For background on how Bedrock foundation models, cross-region inference profiles, and IAM patterns map to the provider form, see xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] on the main provider configuration page.
 
 After completing this guide, you will be able to:
 
@@ -50,7 +50,7 @@ aws iam create-policy \
   }'
 ----
 
-The second resource entry enables cross-region inference profiles such as `us.anthropic.claude-sonnet-4-6`, which AI Gateway uses when the model identifier carries a geography prefix. See xref:ai-gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] for the full prefix list and pricing implications.
+The second resource entry enables cross-region inference profiles such as `us.anthropic.claude-sonnet-4-6`, which AI Gateway uses when the model identifier carries a geography prefix. See xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] for the full prefix list and pricing implications.
 
 NOTE: Anthropic Claude 4.6 and later models cannot be invoked with the bare foundation-model ID and require an inference profile. Without the second `Resource` entry, those calls fail with `AccessDenied`.
 
@@ -162,11 +162,11 @@ For example, requests to `eu.anthropic.claude-haiku-4-5` bill at the EU Haiku ra
 |The model isn't enabled in the region you chose. Open the AWS Bedrock console, switch to the target region, and enable model access for the foundation models you want to expose.
 
 |`Invocation of model ID … with on-demand throughput isn't supported`
-|You called a Claude 4.6 or later model with a bare foundation-model ID. Switch to an inference profile, for example `us.anthropic.claude-sonnet-4-6` instead of `anthropic.claude-sonnet-4-6`. See xref:ai-gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM].
+|You called a Claude 4.6 or later model with a bare foundation-model ID. Switch to an inference profile, for example `us.anthropic.claude-sonnet-4-6` instead of `anthropic.claude-sonnet-4-6`. See xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM].
 |===
 
 == Next steps
 
-* xref:ai-gateway:configure-provider.adoc[Configure an LLM provider]
-* xref:ai-gateway:connect-agent.adoc[Connect your agent]
-* xref:governance:dashboard/overview.adoc[Read the governance overview]
+* xref:gateway:configure-provider.adoc[Configure an LLM provider]
+* xref:gateway:connect-agent.adoc[Connect your agent]
+* xref:control:dashboard/overview.adoc[Read the governance overview]

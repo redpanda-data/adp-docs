@@ -18,8 +18,8 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* An ADP environment with at least one LLM provider configured. See xref:ai-gateway:configure-provider.adoc[Configure your LLM provider].
-* For a *Custom webhook* evaluator, a publicly reachable HTTPS endpoint that implements the gateway's webhook contract. See xref:governance:guardrails/types-reference.adoc[Evaluator types reference].
+* An ADP environment with at least one LLM provider configured. See xref:gateway:configure-provider.adoc[Configure your LLM provider].
+* For a *Custom webhook* evaluator, a publicly reachable HTTPS endpoint that implements the gateway's webhook contract. See xref:control:guardrails/types-reference.adoc[Evaluator types reference].
 * For evaluators that need their own credentials (for example, a hosted PII service), the credential stored in the ADP secret store using `UPPER_SNAKE_CASE`.
 
 // TODO: standalone-ADP wording. Replace with the concrete sign-in URL, IAM role, and OIDC audience once the standalone product surface ships. Open Q D1 in the companion plan.
@@ -38,7 +38,7 @@ Choose one of the supported evaluator types:
 * *Toxicity*: runs content through a toxicity classifier. Per-call LLM cost.
 * *Custom webhook*: delegates the decision to your HTTPS endpoint. Gateway charges nothing per call.
 
-For each type's full config schema and behavior, see xref:governance:guardrails/types-reference.adoc[Evaluator types reference].
+For each type's full config schema and behavior, see xref:control:guardrails/types-reference.adoc[Evaluator types reference].
 
 // TODO: confirm the evaluator type set at GA. Open Q A5 in the companion plan.
 
@@ -58,7 +58,7 @@ Decision rule:
 
 == Configure the evaluator
 
-Fill in the per-type config block. The form fields differ per evaluator type; see xref:governance:guardrails/types-reference.adoc[Evaluator types reference] for the full schema of each type.
+Fill in the per-type config block. The form fields differ per evaluator type; see xref:control:guardrails/types-reference.adoc[Evaluator types reference] for the full schema of each type.
 
 // TODO: walk through the PII form as the exemplar (most common starting case) once the post-pivot field set is confirmed. Lift exact field names and labels from the proto. Open Qs A1, A2 in the companion plan.
 
@@ -85,7 +85,7 @@ curl -X POST https://your-adp-environment/v1/chat/completions \
   -d '{"messages":[{"role":"user","content":"My SSN is 123-45-6789"}]}'
 ----
 
-The request should return an error. Open the request's transcript and confirm a violation entry appears for the guardrail. See xref:observability:transcripts.adoc[Read a transcript] for the transcript walkthrough and xref:governance:guardrails/violations.adoc[Read violations] for what to do when a violation surprises you.
+The request should return an error. Open the request's transcript and confirm a violation entry appears for the guardrail. See xref:monitor:transcripts.adoc[Read a transcript] for the transcript walkthrough and xref:control:guardrails/violations.adoc[Read violations] for what to do when a violation surprises you.
 
 == Edit, disable, or delete
 
@@ -97,12 +97,12 @@ The request should return an error. Open the request's transcript and confirm a 
 
 == Troubleshooting
 
-* *Evaluator returns false positives*: see xref:governance:guardrails/violations.adoc[Read violations] for tuning patterns per evaluator type.
-* *Evaluator times out or is unavailable*: see xref:governance:guardrails/violations.adoc[Read violations] for the evaluator-down section.
+* *Evaluator returns false positives*: see xref:control:guardrails/violations.adoc[Read violations] for tuning patterns per evaluator type.
+* *Evaluator times out or is unavailable*: see xref:control:guardrails/violations.adoc[Read violations] for the evaluator-down section.
 * *Attached provider doesn't fire the guardrail*: confirm attachment (right provider, right phase), enabled state, and that requests are actually reaching the gateway (not bypassing through a direct provider URL).
 
 == Next steps
 
-* xref:governance:guardrails/types-reference.adoc[Evaluator types reference]
-* xref:governance:guardrails/violations.adoc[Read violations]
-* xref:governance:guardrails/cost-tracking.adoc[Cost tracking]
+* xref:control:guardrails/types-reference.adoc[Evaluator types reference]
+* xref:control:guardrails/violations.adoc[Read violations]
+* xref:control:guardrails/cost-tracking.adoc[Cost tracking]

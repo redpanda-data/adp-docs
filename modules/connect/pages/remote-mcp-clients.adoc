@@ -21,7 +21,7 @@ OAuth clients and OAuth providers govern *opposite directions* of authentication
 * An *OAuth client* (this page) governs *inbound* authentication: an external chat app (Claude Desktop, ChatGPT, Copilot Studio, Cursor) authenticating to AI Gateway so its users can invoke MCP tools.
 * An *OAuth provider* governs *outbound* authentication: AI Gateway authenticating to an upstream system (GitHub, Slack, Salesforce) on a user's behalf when an MCP server uses user-delegated OAuth.
 
-See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider] for the outbound authentication side.
+See xref:connect:oauth-providers.adoc[Configure an OAuth Provider] for the outbound authentication side.
 ====
 
 == When to use this
@@ -34,7 +34,7 @@ Use a remote MCP client connection when:
 
 Use a different approach when:
 
-* You need programmatic, server-side tool invocation. See xref:ai-gateway:connect-agent.adoc[Connect your agent] for SDK-based access.
+* You need programmatic, server-side tool invocation. See xref:gateway:connect-agent.adoc[Connect your agent] for SDK-based access.
 * You need an in-house chat UI. Build against the AI Gateway's MCP endpoints directly with the SDK of your choice.
 
 == Architecture: Three resources work together
@@ -46,10 +46,10 @@ Wiring a remote chat client to an MCP server uses three resources in AI Gateway:
 |Resource |Role
 
 |*MCP server*
-|The tool surface itself. Managed (Redpanda hosts it) or self-managed (you host it). See xref:mcp:create-server.adoc[Create an MCP Server].
+|The tool surface itself. Managed (Redpanda hosts it) or self-managed (you host it). See xref:connect:create-server.adoc[Create an MCP Server].
 
 |*OAuth Provider*
-|Defines how AI Gateway authenticates against the upstream system on behalf of users (for example, GitHub) when the MCP server uses user-delegated OAuth. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]. Optional: only needed if the MCP server requires per-user upstream identity.
+|Defines how AI Gateway authenticates against the upstream system on behalf of users (for example, GitHub) when the MCP server uses user-delegated OAuth. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. Optional: only needed if the MCP server requires per-user upstream identity.
 
 |*OAuth Client*
 |Defines how an external chat app (Claude Desktop, ChatGPT, Gemini, Cursor) authenticates *against AI Gateway* on behalf of users. The chat client gets a `client_id` + `client_secret` it uses to negotiate access tokens. *This is what makes the chat-client integration possible.*
@@ -67,9 +67,9 @@ When a user invokes a tool, AI Gateway runs both authentication handshakes: Clau
 
 Before you wire up the chat-client connector, make sure you have:
 
-* An MCP server already created in AI Gateway. See xref:mcp:create-server.adoc[Create an MCP Server].
+* An MCP server already created in AI Gateway. See xref:connect:create-server.adoc[Create an MCP Server].
 * The MCP server's *API URL*. Copy it from the server's *Overview* tab.
-* For user-delegated MCP servers: An OAuth Provider configured for the upstream system. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider].
+* For user-delegated MCP servers: An OAuth Provider configured for the upstream system. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * End-users have accounts with the chat client (Claude, ChatGPT, Gemini, Cursor) and the upstream system the MCP server connects to.
 
 == Register an OAuth Client in AI Gateway
@@ -239,7 +239,7 @@ Common symptoms and fixes:
 |The chat client's callback URL isn't registered on the OAuth Client. Add the URL the chat client publishes (Claude Desktop has two; check Claude's docs for the current set).
 
 |Connector authorized but no tools appear
-|The MCP server has zero tools, or `tools/list` failed at connection time. Open the server in the Inspector to confirm tools are discovered. See xref:mcp:test-tools.adoc[Test a server's tools].
+|The MCP server has zero tools, or `tools/list` failed at connection time. Open the server in the Inspector to confirm tools are discovered. See xref:connect:test-tools.adoc[Test a server's tools].
 
 |Tool call returns an _authorize_ link to the user
 |First call from a user with no stored upstream token. The user follows the link, completes upstream consent, and the call retries automatically (Step 2 of the flow above).
@@ -259,11 +259,11 @@ This page does not cover:
 
 * *Custom desktop or mobile UIs*: Build against the AI Gateway MCP endpoints directly using your platform's HTTP client; you don't need an OAuth Client unless you want the same external-app flow.
 * *Agent-to-agent calls (A2A)*: See the Agents docs; remote MCP clients are end-user-facing.
-* *MCP server authoring*: See xref:mcp:create-server.adoc[Create an MCP Server] for the server side.
+* *MCP server authoring*: See xref:connect:create-server.adoc[Create an MCP Server] for the server side.
 
 == Related topics
 
-* xref:mcp:create-server.adoc[Create an MCP Server]
-* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]
-* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]
-* xref:ai-gateway:connect-agent.adoc[Connect your agent]
+* xref:connect:create-server.adoc[Create an MCP Server]
+* xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:gateway:connect-agent.adoc[Connect your agent]

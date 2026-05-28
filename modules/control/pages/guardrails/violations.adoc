@@ -26,8 +26,8 @@ A violation is distinct from an *evaluator failure*: A failure is when the evalu
 
 Violations surface in two places:
 
-* *Transcripts*: Each request's transcript carries a violation entry per fired guardrail, alongside the LLM call entry, tool calls, and cost data. See xref:observability:transcripts.adoc[Read a transcript] for the full transcript walkthrough.
-* *Metrics*: Aggregate violation counts per guardrail per provider per time window. See xref:observability:metrics.adoc[Metrics].
+* *Transcripts*: Each request's transcript carries a violation entry per fired guardrail, alongside the LLM call entry, tool calls, and cost data. See xref:monitor:transcripts.adoc[Read a transcript] for the full transcript walkthrough.
+* *Metrics*: Aggregate violation counts per guardrail per provider per time window. See xref:monitor:metrics.adoc[Metrics].
 
 // TODO: confirm the violation field shape in the transcript proto. The Transcripts plan (workflow #7) didn't call out a violation field specifically; coordinate with that workflow's author so the xref above resolves to a real proto field. Open Q C1 in the companion plan.
 
@@ -91,6 +91,6 @@ Per the AI Gateway design, evaluators run async where possible: specifically, `O
 
 == Next steps
 
-* xref:governance:guardrails/types-reference.adoc[Evaluator types reference]
-* xref:governance:guardrails/cost-tracking.adoc[Cost tracking]
-* xref:observability:transcripts.adoc[Read a transcript]
+* xref:control:guardrails/types-reference.adoc[Evaluator types reference]
+* xref:control:guardrails/cost-tracking.adoc[Cost tracking]
+* xref:monitor:transcripts.adoc[Read a transcript]

@@ -50,13 +50,13 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |Surface |Use it for
 
 |*Cost & Usage* tab (*LLM Providers* page)
-|Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, or user. See xref:ai-gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
+|Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, or user. See xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
 
 |*Governance dashboard*
-|Summary cards (total spend, agent count, request count, trend), provider breakdown chart, events timeline, agents and MCP servers tables. The single-pane-of-glass view across your whole deployment. See xref:governance:dashboard/overview.adoc[Read the governance overview].
+|Summary cards (total spend, agent count, request count, trend), provider breakdown chart, events timeline, agents and MCP servers tables. The single-pane-of-glass view across your whole deployment. See xref:control:dashboard/overview.adoc[Read the governance overview].
 
 |*Transcripts*
-|Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:observability:transcripts.adoc[Read a transcript].
+|Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:monitor:transcripts.adoc[Read a transcript].
 
 |*Breakdown queries*
 |Aggregated spend by *provider*, *model*, *user*, *organization*, or *provider type*. Available through the dashboard's provider-breakdown widget and through `GetSpendingBreakdown` for programmatic access.
@@ -80,7 +80,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 
 === Authenticate
 
-`SpendingService` uses the same OIDC client-credentials grant as the rest of AI Gateway. Mint a service-account access token using the flow in xref:ai-gateway:connect-agent.adoc#authenticate-with-oidc-client-credentials[Authenticate with OIDC client credentials], then pass the token in the `Authorization: Bearer <token>` header on every call. The service account needs `dataplane_adp_spending_get` on the resource you're querying. See xref:governance:permissions-reference.adoc#spending-permissions[Spending permissions].
+`SpendingService` uses the same OIDC client-credentials grant as the rest of AI Gateway. Mint a service-account access token using the flow in xref:gateway:connect-agent.adoc#authenticate-with-oidc-client-credentials[Authenticate with OIDC client credentials], then pass the token in the `Authorization: Bearer <token>` header on every call. The service account needs `dataplane_adp_spending_get` on the resource you're querying. See xref:control:permissions-reference.adoc#spending-permissions[Spending permissions].
 
 // TODO: Confirm the canonical endpoint shape against `apps/aigw` on cloudv2. Likely a Connect-Go / gRPC reflection surface at `<dataplane-base>/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown`. Replace the placeholder URL below with the verified shape, and add a note on whether HTTP/JSON transcoding is exposed or whether clients must speak gRPC.
 
@@ -194,7 +194,7 @@ Some guardrail evaluators call an LLM to do their work. A toxicity classifier, f
 
 Guardrail evaluator cost surfaces in the same spending pipeline as user-facing LLM calls. The evaluator's cost is attributed to the *evaluator's configured upstream provider* (usually a small classifier model, separate from the user-facing LLM), so per-provider breakdowns separate the two automatically.
 
-For the per-evaluator cost model and how it interacts with the dashboard's spend view, see xref:governance:guardrails/index.adoc[Configure guardrails].
+For the per-evaluator cost model and how it interacts with the dashboard's spend view, see xref:control:guardrails/index.adoc[Configure guardrails].
 
 // TODO: confirm with eng that guardrail evaluator cost flows into the same SpendingService as user-facing LLM cost (vs. a separate stream). Open Q A3 in the companion plan, also flagged on the Guardrails plan.
 
@@ -278,6 +278,6 @@ If the cost still reflects the catalog price, the override may not have propagat
 
 == Next steps
 
-* xref:governance:dashboard/overview.adoc[Read the governance overview]
-* xref:observability:transcripts.adoc[Read a transcript]
-* xref:governance:guardrails/index.adoc[Configure guardrails]
+* xref:control:dashboard/overview.adoc[Read the governance overview]
+* xref:monitor:transcripts.adoc[Read a transcript]
+* xref:control:guardrails/index.adoc[Configure guardrails]

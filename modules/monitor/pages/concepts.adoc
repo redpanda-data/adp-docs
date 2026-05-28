@@ -340,6 +340,6 @@ Trace data on `redpanda.otel_traces` is subject to a retention policy. When a tr
 
 == Next steps
 
-* xref:observability:transcripts.adoc[]
-* xref:agents:monitor.adoc[]
-* xref:mcp:test-tools.adoc[]
+* xref:monitor:transcripts.adoc[]
+* xref:monitor:monitor.adoc[]
+* xref:connect:test-tools.adoc[]

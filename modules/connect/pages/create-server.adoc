@@ -22,7 +22,7 @@ After completing this guide, you will be able to:
 * For any auth mode that uses upstream credentials: the credentials in hand and a secret already created in the ADP secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
 +
 // TODO: xref the ADP secrets-management page once confirmed.
-* For user-delegated OAuth: an OAuth Provider resource already configured. See xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
+* For user-delegated OAuth: an OAuth Provider resource already configured. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Open the MCP Servers page
 
@@ -40,7 +40,7 @@ The marketplace picker lists every managed type as a card and includes a *Remote
 
 // TODO: screenshot of the marketplace picker, with both a managed card and the Remote (Proxied) option visible.
 
-For a tour of every managed type and which one fits your use case, see xref:mcp:managed/managed-catalog.adoc[Managed catalog]. To go deep on the self-managed path (transport choices, TLS, multi-server aggregation), see xref:mcp:register-remote.adoc[Register a self-managed server].
+For a tour of every managed type and which one fits your use case, see xref:connect:managed/managed-catalog.adoc[Managed catalog]. To go deep on the self-managed path (transport choices, TLS, multi-server aggregation), see xref:connect:register-remote.adoc[Register a self-managed server].
 
 == Name and basic fields
 
@@ -71,7 +71,7 @@ Each managed type ships its own configuration schema. The form on this page is r
 
 // TODO: screenshot of the SQL configuration form as the exemplar (it covers the most common field shapes).
 
-For per-type fields, see the xref:mcp:managed/managed-catalog.adoc[Managed catalog]: a reference of every managed MCP type Redpanda hosts, grouped by category, with a description and a link to its deep-dive page where one exists.
+For per-type fields, see the xref:connect:managed/managed-catalog.adoc[Managed catalog]: a reference of every managed MCP type Redpanda hosts, grouped by category, with a description and a link to its deep-dive page where one exists.
 
 [NOTE]
 ====
@@ -94,7 +94,7 @@ Two fields on top of the identity fields:
 
 |Transport
 |Yes
-|`SSE` (server-sent events) or `Streamable HTTP` (newer bidirectional protocol). Pick whichever your server speaks. See xref:mcp:register-remote.adoc[Register a self-managed server] for how to test which transport your server uses.
+|`SSE` (server-sent events) or `Streamable HTTP` (newer bidirectional protocol). Pick whichever your server speaks. See xref:connect:register-remote.adoc[Register a self-managed server] for how to test which transport your server uses.
 |===
 
 == Configure authentication
@@ -118,7 +118,7 @@ Both managed and self-managed servers offer the same five authentication modes. 
 |2-legged OAuth client credentials. One shared upstream identity for every caller. Provide `client_id`, `client_secret_ref`, `token_url`, and any required `scopes`.
 
 |*User-delegated OAuth*
-|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. Pick the configured *OAuth Provider* and the required scopes. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; Redpanda stores the resulting connection in the token vault, where it shows up under *My Connections*. See xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
+|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. Pick the configured *OAuth Provider* and the required scopes. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; Redpanda stores the resulting connection in the token vault, where it shows up under *My Connections*. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
 |===
 
 NOTE: Choosing between *Service-account OAuth* and *User-delegated OAuth* is the credential-mode decision. Service-account auth gives every caller the same identity at the upstream; user-delegated auth gives each caller their own.
@@ -140,7 +140,7 @@ NOTE: Defer advanced code-mode patterns (sandboxing limits, runtime selection, d
 . Click *Create*. The server appears in the list with a *Type* badge: *Managed* or *Self-managed*.
 . Open the detail page. The *Overview* tab shows the *API URL*: this is the MCP URL agents connect to. Copy it for use later.
 . Open the *Connection* tab to see ready-to-paste connection snippets for common MCP clients (Claude Code, Claude Desktop, ChatGPT, Cursor) pre-filled with this server's API URL.
-. Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:mcp:test-tools.adoc[Test a server's tools] for how to call them.
+. Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:connect:test-tools.adoc[Test a server's tools] for how to call them.
 
 A populated tools list confirms that the connection works and credentials resolve correctly. If the list is empty or the tab shows an error, see <<troubleshooting>>.
 
@@ -198,7 +198,7 @@ rpk ai mcp update github-proxy \
 |JSON blob carrying the managed type's `_config.proto` shape, including a `@type` URL.
 
 |`--user-oauth-provider`
-|Self-managed servers only. Name of an OAuth Provider already registered under *OAuth Providers*. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893). Managed servers that support user-delegated OAuth carry their auth shape inside `--managed-config`.
+|Self-managed servers only. Name of an OAuth Provider already registered under *OAuth Providers*. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893). Managed servers that support user-delegated OAuth carry their auth shape inside `--managed-config`.
 
 |`--user-oauth-scopes`
 |Self-managed servers only. Comma-separated scopes the server requires. Provide every scope any tool may need; user re-consent is required if scopes change later.
@@ -240,7 +240,7 @@ The command resolves the gateway URL from your active rpk cloud profile and read
 
 == Related topics
 
-* xref:mcp:user-delegated-oauth.adoc[]
-* xref:mcp:test-tools.adoc[]
-* xref:ai-gateway:aggregation.adoc[]
-* xref:mcp:managed/managed-catalog.adoc[]
+* xref:connect:user-delegated-oauth.adoc[]
+* xref:connect:test-tools.adoc[]
+* xref:gateway:aggregation.adoc[]
+* xref:connect:managed/managed-catalog.adoc[]

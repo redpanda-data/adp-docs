@@ -17,7 +17,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* A configured LLM provider. If you haven't created one yet, see xref:ai-gateway:configure-provider.adoc[Configure an LLM provider].
+* A configured LLM provider. If you haven't created one yet, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
 * For local development, nothing else. You'll install `rpk ai` in the next section.
 * For CI or programmatic clients: A Redpanda Cloud service account with OIDC client credentials. See xref:cloud-data-platform:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
 +
@@ -338,7 +338,7 @@ response = httpx.post(
 print(response.json())
 ----
 
-See xref:ai-gateway:configure-provider.adoc#bedrock-inference-profiles[the Bedrock provider reference] for inference-profile selection guidance.
+See xref:gateway:configure-provider.adoc#bedrock-inference-profiles[the Bedrock provider reference] for inference-profile selection guidance.
 
 TIP: Bedrock's `Converse` API works the same way: send to `/model/\{MODEL_ID}/converse` with a Converse-shaped body. Or use the AWS SDK's `bedrockruntime` client and set its `BaseEndpoint` to the proxy URL; the SDK signs the request, AI Gateway re-signs server-side with the provider's credentials, and your client never sees AWS keys.
 --
@@ -440,7 +440,7 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 
 === 403 Forbidden
 
-* The service account may lack the required roles. Ask an admin to grant `dataplane_adp_llmprovider_get` at minimum to read provider config, and `dataplane_adp_llmprovider_invoke` to proxy LLM requests through AI Gateway. See xref:governance:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions] or assign the LLMProviderInvoker built-in role for runtime-only access.
+* The service account may lack the required roles. Ask an admin to grant `dataplane_adp_llmprovider_get` at minimum to read provider config, and `dataplane_adp_llmprovider_invoke` to proxy LLM requests through AI Gateway. See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions] or assign the LLMProviderInvoker built-in role for runtime-only access.
 * The provider may be disabled. Check the *Status* field on its *Connection* card.
 
 === Connection timeout or reset
@@ -451,4 +451,4 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 
 == Next steps
 
-* xref:ai-gateway:configure-provider.adoc[Configure an LLM provider]
+* xref:gateway:configure-provider.adoc[Configure an LLM provider]

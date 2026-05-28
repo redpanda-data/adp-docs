@@ -3,7 +3,7 @@
 :page-topic-type: reference
 :personas: agent_builder, platform_engineer
 
-Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in the Agentic Data Plane UI and pick the type from the marketplace picker. See xref:mcp:create-server.adoc[Create an MCP Server] for the full create flow.
+Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in the Agentic Data Plane UI and pick the type from the marketplace picker. See xref:connect:create-server.adoc[Create an MCP Server] for the full create flow.
 
 // Source: `cloudv2` `apps/aigw/internal/mcp/managed/defaults.go` and managed type registration files on `origin/main`, verified 2026-05-10.
 This catalog lists the 36 managed MCP server types Redpanda registers by default, grouped by category.
@@ -27,7 +27,7 @@ This catalog lists the 36 managed MCP server types Redpanda registers by default
 |The managed type supports user-delegated OAuth for that system.
 |===
 
-If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-managed server] instead.
+If any of these answers are "no," prefer xref:connect:register-remote.adoc[a self-managed server] instead.
 
 == AI
 
@@ -79,15 +79,15 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Jira*
 |Manage Jira issues, projects, and workflows.
-|xref:mcp:managed/jira.adoc[See the deep-dive]
+|xref:connect:managed/jira.adoc[See the deep-dive]
 
 |*Slack*
 |Post messages and read channels on Slack.
-|xref:mcp:managed/slack.adoc[See the deep-dive]
+|xref:connect:managed/slack.adoc[See the deep-dive]
 
 |*Zendesk*
 |Search and manage Zendesk Support tickets, users, and Help Center articles.
-|xref:mcp:managed/zendesk.adoc[See the deep-dive]
+|xref:connect:managed/zendesk.adoc[See the deep-dive]
 |===
 
 == Database
@@ -102,7 +102,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Metabase*
 |Search tables and metrics, run queries, and inspect saved questions in Metabase.
-|xref:mcp:managed/metabase.adoc[See the deep-dive]
+|xref:connect:managed/metabase.adoc[See the deep-dive]
 
 |*MongoDB*
 |Query collections and documents in MongoDB.
@@ -118,7 +118,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*SQL*
 |Query SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite) with MCP.
-|xref:mcp:managed/sql.adoc[See the deep-dive]
+|xref:connect:managed/sql.adoc[See the deep-dive]
 |===
 
 == Google
@@ -148,7 +148,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Kafka*
 |Produce, consume, and inspect topics on Kafka or Redpanda brokers.
-|xref:mcp:managed/kafka.adoc[See the deep-dive]
+|xref:connect:managed/kafka.adoc[See the deep-dive]
 
 |*NATS*
 |Publish and subscribe on NATS and NATS JetStream.
@@ -167,7 +167,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*BambooHR*
 |Access employee directory, time-off, and performance data from BambooHR.
-|xref:mcp:managed/bamboohr.adoc[See the deep-dive]
+|xref:connect:managed/bamboohr.adoc[See the deep-dive]
 
 |*BILL (bill.com)*
 |Manage accounts-payable bills, vendors, AR invoices, payments, and customers in BILL.
@@ -183,7 +183,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Ironclad*
 |Read and manage contracts in Ironclad CLM.
-|xref:mcp:managed/ironclad.adoc[See the deep-dive]
+|xref:connect:managed/ironclad.adoc[See the deep-dive]
 
 |*Morningstar Portfolio Analytics*
 |Run X-Ray, performance, risk-score, hypothetical, and ESG analytics on caller-supplied portfolios with Morningstar Direct Web Services.
@@ -195,7 +195,7 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*NetSuite*
 |Query Oracle NetSuite records and run SuiteQL with the SuiteTalk REST API.
-|xref:mcp:managed/netsuite.adoc[See the deep-dive]
+|xref:connect:managed/netsuite.adoc[See the deep-dive]
 
 |*Okta*
 |Manage Okta users and groups.
@@ -203,11 +203,11 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*OpenAPI*
 |Expose any OpenAPI/Swagger HTTP API as MCP tools.
-|xref:mcp:managed/openapi.adoc[See the deep-dive]
+|xref:connect:managed/openapi.adoc[See the deep-dive]
 
 |*Ramp*
 |Manage Ramp corporate cards, transactions, spend limits, and reimbursements.
-|xref:mcp:managed/ramp.adoc[See the deep-dive]
+|xref:connect:managed/ramp.adoc[See the deep-dive]
 
 |*Salesforce*
 |Query, create, update, and delete Salesforce CRM records using SOQL and the REST API.
@@ -219,11 +219,11 @@ If any of these answers are "no," prefer xref:mcp:register-remote.adoc[a self-ma
 
 |*Workday*
 |Drive Workday Human Resources business processes with SOAP.
-|xref:mcp:managed/workday.adoc[See the deep-dive]
+|xref:connect:managed/workday.adoc[See the deep-dive]
 |===
 
 == Next steps
 
-* xref:mcp:create-server.adoc[]
-* xref:mcp:test-tools.adoc[]
-* xref:mcp:user-delegated-oauth.adoc[]
+* xref:connect:create-server.adoc[]
+* xref:connect:test-tools.adoc[]
+* xref:connect:user-delegated-oauth.adoc[]

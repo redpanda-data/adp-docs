@@ -16,7 +16,7 @@ Use this reference to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-For an explanation of how permissions, roles, and role bindings fit together, see xref:governance:permissions-overview.adoc[About ADP Permissions].
+For an explanation of how permissions, roles, and role bindings fit together, see xref:control:permissions-overview.adoc[About ADP Permissions].
 
 == How to read this reference
 
@@ -234,7 +234,7 @@ The `dataplane_adp_agent_credential_*` permissions gate the OIDC client credenti
 
 == Spending permissions
 
-The `dataplane_adp_spending_*` permissions gate the governance APIs that surface AI spend, request counts, and token volume. See xref:governance:budgets.adoc[Token Budgets and Limits] for what spending data ADP records automatically.
+The `dataplane_adp_spending_*` permissions gate the governance APIs that surface AI spend, request counts, and token volume. See xref:control:budgets.adoc[Token Budgets and Limits] for what spending data ADP records automatically.
 
 [cols="2,2,1,1"]
 |===
@@ -430,4 +430,4 @@ The `dataplane_knowledgebase_*` permissions gate retrieval-augmented generation 
 
 == Related topics
 
-* xref:governance:permissions-overview.adoc[About ADP Permissions]
+* xref:control:permissions-overview.adoc[About ADP Permissions]

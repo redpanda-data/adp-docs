@@ -869,4 +869,4 @@ A/B testing
 
 == Next steps
 
-* xref:ai-gateway:aggregation.adoc[]
+* xref:gateway:aggregation.adoc[]

@@ -37,7 +37,7 @@ The challenge: users phrase requests differently ("Where's my package?", "Track 
 == Prerequisites
 
 * A xref:cloud-data-platform:get-started:cluster-types/byoc/index.adoc[BYOC environment].
-* xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
+* xref:get-started:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
 
 == Design the MCP tools
 
@@ -267,7 +267,7 @@ Use these documented test IDs when testing the agent. If you replace the mock to
 
 == Next steps
 
-* xref:mcp:overview.adoc[]
-* xref:agents:system-prompts.adoc[]
-* xref:agents:architecture-patterns.adoc[]
+* xref:connect:mcp-overview.adoc[]
+* xref:connect:system-prompts.adoc[]
+* xref:connect:architecture-patterns.adoc[]
 * xref:troubleshoot/troubleshoot-ai-agents.adoc[]

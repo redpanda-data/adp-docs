@@ -32,7 +32,7 @@ The Jira managed type exposes tools for:
 +
 // TODO: confirm whether Redpanda publishes a reference Atlassian app or whether each customer brings their own.
 * An OAuth Provider in the Agentic Data Plane UI configured for Atlassian's authorize/token URLs and carrying the app's client credentials.
-* Familiarity with xref:mcp:user-delegated-oauth.adoc[].
+* Familiarity with xref:connect:user-delegated-oauth.adoc[].
 
 == Atlassian's scope model
 
@@ -112,5 +112,5 @@ For agents that need both read and write capabilities, define the server's `requ
 == Limitations
 
 * *Atlassian app management*: The OAuth app and its callback URLs are managed in `developer.atlassian.com`, not in ADP.
-* *Jira Server / Data Center* (self-hosted): This MCP type targets Atlassian Cloud. Self-hosted Jira may need a self-managed MCP server instead. See xref:mcp:register-remote.adoc[Register a self-managed MCP server].
+* *Jira Server / Data Center* (self-hosted): This MCP type targets Atlassian Cloud. Self-hosted Jira may need a self-managed MCP server instead. See xref:connect:register-remote.adoc[Register a self-managed MCP server].
 * *Confluence access*: Separate scope namespace; not exposed by this MCP server.

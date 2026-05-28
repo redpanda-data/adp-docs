@@ -59,7 +59,7 @@ The Kafka managed type proxies a managed Kafka client. It exposes tools for:
 
 // TODO: confirm exact tool names for produce/consume/list-topics and capture screenshots.
 
-See xref:mcp:test-tools.adoc[] for general Inspector usage.
+See xref:connect:test-tools.adoc[] for general Inspector usage.
 
 == Authentication
 

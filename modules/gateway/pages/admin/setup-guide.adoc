@@ -247,7 +247,7 @@ Rate limits for MCP work the same way as LLM rate limits.
 
 Repeat for each MCP server you want to aggregate.
 
-See xref:ai-gateway:aggregation.adoc[] for detailed information about MCP aggregation.
+See xref:gateway:aggregation.adoc[] for detailed information about MCP aggregation.
 
 === Configure the MCP orchestrator
 
@@ -328,4 +328,4 @@ Users can then discover and connect to the gateway using the information provide
 
 == Next steps
 
-* xref:integrations:index.adoc[Integrations]
+* xref:connect:index.adoc[Integrations]

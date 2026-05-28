@@ -19,9 +19,9 @@ After completing this quickstart, you will be able to:
 
 * A Redpanda Cloud BYOC environment on AWS with ADP enabled.
 
-* An xref:ai-gateway:gateway-quickstart.adoc[AI Gateway] configured with at least one LLM provider (OpenAI, Anthropic, Google AI, or AWS Bedrock).
+* An xref:get-started:gateway-quickstart.adoc[AI Gateway] configured with at least one LLM provider (OpenAI, Anthropic, Google AI, or AWS Bedrock).
 
-* An MCP server created by following xref:mcp:create-server.adoc[Create an MCP Server], with the following tools deployed:
+* An MCP server created by following xref:connect:create-server.adoc[Create an MCP Server], with the following tools deployed:
 +
 ** `generate_input`: Generates fake user event data
 ** `redpanda_output`: Publishes data to Redpanda topics
@@ -34,7 +34,7 @@ An Event Data Manager agent that:
 * Publishes events to Redpanda topics
 * Understands natural language requests like "Generate 5 login events and publish them"
 
-The agent orchestrates the `generate_input` and `redpanda_output` tools you created in xref:mcp:create-server.adoc[].
+The agent orchestrates the `generate_input` and `redpanda_output` tools you created in xref:connect:create-server.adoc[].
 
 == Create the agent
 
@@ -87,7 +87,7 @@ Response format:
 . Select MCP tools:
 +
 * Click *Add MCP Server*
-* Select the `event-data-generator` server you created in xref:mcp:create-server.adoc[]
+* Select the `event-data-generator` server you created in xref:connect:create-server.adoc[]
 * Check both tools:
 ** `generate_input`
 ** `redpanda_output`
@@ -98,7 +98,7 @@ Response format:
 
 . Review your configuration and click *Create Agent*.
 +
-TIP: A service account is automatically created to authenticate your agent with ADP resources. For details about default permissions and how to manage service accounts, see xref:agents:concepts.adoc#service-account-authorization[Service account authorization].
+TIP: A service account is automatically created to authenticate your agent with ADP resources. For details about default permissions and how to manage service accounts, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
 
 . Wait for the agent status to change from *Starting* to *Running*.
 
@@ -178,8 +178,8 @@ Common quickstart issue:
 == Next steps
 
 * xref:get-started:byoc-quickstart.adoc[ADP Quickstart]
-* xref:agents:overview.adoc[]
-* xref:agents:create-agent.adoc[]
-* xref:agents:system-prompts.adoc[]
-* xref:agents:architecture-patterns.adoc[]
-* xref:mcp:overview.adoc[]
+* xref:connect:agents-overview.adoc[]
+* xref:connect:create-agent.adoc[]
+* xref:connect:system-prompts.adoc[]
+* xref:connect:architecture-patterns.adoc[]
+* xref:connect:mcp-overview.adoc[]

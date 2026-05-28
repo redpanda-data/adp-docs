@@ -48,15 +48,15 @@ Streaming responses change the timing slightly: where async evaluation is suppor
 |No gateway charge per call. Your webhook's compute cost is your own.
 |===
 
-For per-type config schemas, supported phases, and behavior on match, see xref:governance:guardrails/types-reference.adoc[Evaluator types reference].
+For per-type config schemas, supported phases, and behavior on match, see xref:control:guardrails/types-reference.adoc[Evaluator types reference].
 
 // TODO: confirm the evaluator type set shipping at GA. RFC 0002 specifies PII + Toxicity + Custom webhook. The phase5-aigw-guardrails branch in cloudv2 ships PII + a "keyword" evaluator that may rename to Toxicity, stay as a fourth type, or be dropped. Open Q A5 in the companion plan.
 
 == What happens when a guardrail fires
 
-When an evaluator decides to block a request, the gateway stops forwarding it (or stops returning the response, on OUTPUT) and returns an error to the caller. Every fired guardrail records a *violation* entry on the request's transcript, captured in the same observability pipeline that records the LLM call itself. Read the transcript to see which guardrail fired, at which phase, and what content matched. See xref:observability:transcripts.adoc[Read a transcript].
+When an evaluator decides to block a request, the gateway stops forwarding it (or stops returning the response, on OUTPUT) and returns an error to the caller. Every fired guardrail records a *violation* entry on the request's transcript, captured in the same observability pipeline that records the LLM call itself. Read the transcript to see which guardrail fired, at which phase, and what content matched. See xref:monitor:transcripts.adoc[Read a transcript].
 
-A different scenario is handled separately: the evaluator itself errored out (for example, a custom webhook timed out or a classifier model is unavailable). See xref:governance:guardrails/violations.adoc[Read violations] for evaluator-down behavior, fail-closed versus fail-open defaults, and per-guardrail overrides.
+A different scenario is handled separately: the evaluator itself errored out (for example, a custom webhook timed out or a classifier model is unavailable). See xref:control:guardrails/violations.adoc[Read violations] for evaluator-down behavior, fail-closed versus fail-open defaults, and per-guardrail overrides.
 
 // TODO: confirm fail-closed vs. fail-open default at GA, and whether it's configurable per guardrail. Open Qs B2 and B5 in the companion plan.
 
@@ -68,7 +68,7 @@ A guardrail attaches to one or more LLM providers. Each provider can carry many 
 
 == Where to go next
 
-* xref:governance:guardrails/create-guardrail.adoc[Create a guardrail]: walk through configuring and attaching your first guardrail.
-* xref:governance:guardrails/types-reference.adoc[Evaluator types reference]: full config schemas for PII, Toxicity, and Custom-webhook evaluators.
-* xref:governance:guardrails/violations.adoc[Read violations]: investigate why a guardrail fired and tune false-positive rates.
-* xref:governance:guardrails/cost-tracking.adoc[Cost tracking]: see what each evaluator costs and where the cost surfaces.
+* xref:control:guardrails/create-guardrail.adoc[Create a guardrail]: walk through configuring and attaching your first guardrail.
+* xref:control:guardrails/types-reference.adoc[Evaluator types reference]: full config schemas for PII, Toxicity, and Custom-webhook evaluators.
+* xref:control:guardrails/violations.adoc[Read violations]: investigate why a guardrail fired and tune false-positive rates.
+* xref:control:guardrails/cost-tracking.adoc[Cost tracking]: see what each evaluator costs and where the cost surfaces.

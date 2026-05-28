@@ -21,7 +21,7 @@ OAuth providers and OAuth clients govern *opposite directions* of authentication
 * An *OAuth provider* (this page) governs *outbound* authentication: AI Gateway authenticating to an upstream system (GitHub, Slack, Salesforce, and so on) on a user's behalf so MCP servers can call that upstream.
 * An *OAuth client* governs *inbound* authentication: an external app (Claude Desktop, ChatGPT, Copilot Studio) authenticating to AI Gateway so the app's users can invoke MCP tools.
 
-The two live under separate sidebar entries (*OAuth Providers* and *OAuth Clients*) with separate API definitions, permissions, and lifecycles. To register or manage an OAuth client (including revoking its refresh tokens to force a re-sign-in), see xref:integrations:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
+The two live under separate sidebar entries (*OAuth Providers* and *OAuth Clients*) with separate API definitions, permissions, and lifecycles. To register or manage an OAuth client (including revoking its refresh tokens to force a re-sign-in), see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
 ====
 
 == Prerequisites
@@ -235,7 +235,7 @@ rpk ai oauth create \
 
 == Attach to an MCP server
 
-To attach an OAuth provider to an MCP server, the principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider plus the usual `mcpserver_create` / `mcpserver_update` permission. See xref:mcp:create-server.adoc[Create an MCP Server] for the full attach flow and xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth] for the consent flow that runs on first call.
+To attach an OAuth provider to an MCP server, the principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider plus the usual `mcpserver_create` / `mcpserver_update` permission. See xref:connect:create-server.adoc[Create an MCP Server] for the full attach flow and xref:connect:user-delegated-oauth.adoc[User-delegated OAuth] for the consent flow that runs on first call.
 
 == Edit and rotate credentials
 
@@ -278,11 +278,11 @@ Common symptoms and fixes:
 
 == Related topics
 
-* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth]
-* xref:mcp:create-server.adoc[Create an MCP Server]
-* xref:mcp:managed/slack.adoc[Slack managed MCP]
-* xref:mcp:managed/jira.adoc[Jira managed MCP]
-* xref:mcp:managed/zendesk.adoc[Zendesk managed MCP]
-* xref:mcp:managed/workday.adoc[Workday managed MCP]
-* xref:mcp:managed/ironclad.adoc[Ironclad managed MCP]
-* xref:mcp:managed/ramp.adoc[Ramp managed MCP]
+* xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:connect:create-server.adoc[Create an MCP Server]
+* xref:connect:managed/slack.adoc[Slack managed MCP]
+* xref:connect:managed/jira.adoc[Jira managed MCP]
+* xref:connect:managed/zendesk.adoc[Zendesk managed MCP]
+* xref:connect:managed/workday.adoc[Workday managed MCP]
+* xref:connect:managed/ironclad.adoc[Ironclad managed MCP]
+* xref:connect:managed/ramp.adoc[Ramp managed MCP]
