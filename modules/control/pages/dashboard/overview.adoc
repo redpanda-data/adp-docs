@@ -1,4 +1,4 @@
-= Read the Governance Overview
+= See All Your Agents in One Place
 :description: Read ADP spend, request, token, agent, and top-user activity from the Governance dashboard.
 :page-topic-type: how-to
 :personas: pilot_lead, platform_engineer, security_compliance_lead

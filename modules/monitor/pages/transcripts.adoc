@@ -1,4 +1,4 @@
-= Read a Transcript
+= See What Your Agent Did
 :description: Open a transcript in the Agentic Data Plane UI, read the conversation turn by turn, and investigate errors, costs, and performance.
 :page-topic-type: how-to
 :personas: agent_builder, domain_evaluator, platform_engineer, security_compliance_lead
