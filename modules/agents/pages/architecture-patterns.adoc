@@ -259,5 +259,3 @@ Provide clear error messages to users. Log errors for debugging.
 * xref:agents:integration-overview.adoc[]
 * xref:agents:a2a-concepts.adoc[]
 * xref:mcp:overview.adoc[]
-* xref:agents:overview.adoc[]
-* xref:mcp:overview.adoc[]

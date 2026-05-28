@@ -140,6 +140,6 @@ NetSuite record filters use NetSuite-specific forms:
 
 == Next steps
 
-* xref:mcp:user-delegated-oauth.adoc[Configure user-delegated OAuth]
-* xref:mcp:test-tools.adoc[Test a server's tools]
-* xref:agents:create-agent.adoc[Create a declarative agent] that uses the NetSuite server
+* xref:mcp:user-delegated-oauth.adoc[]
+* xref:mcp:test-tools.adoc[]
+* xref:agents:create-agent.adoc[]

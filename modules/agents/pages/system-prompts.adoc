@@ -420,5 +420,4 @@ Decision criteria enable reliable tool selection based on request context.
 == Next steps
 
 * xref:agents:quickstart.adoc[]
-* xref:agents:overview.adoc[]
 * xref:mcp:overview.adoc[]

@@ -69,8 +69,8 @@ The Agentic Data Plane UI has four top-level areas:
 
 == Next steps
 
-. *Create your first MCP server.* xref:mcp:create-server.adoc[Create an MCP Server] walks through the marketplace picker, the managed and self-managed flows, every authentication mode, and code mode.
-. *Test what you built.* xref:mcp:test-tools.adoc[Test a server's tools] uses the Inspector tab to call tools, resources, and prompts live.
-. *Wire up user-delegated OAuth* when your users authenticate against the upstream system with their own credentials. See xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth].
-. *Register an existing server* you already run yourself. See xref:mcp:register-remote.adoc[Register a self-managed server].
-. *Browse the managed catalog* for the full list of types, their categories, and per-type configuration links. See xref:mcp:managed/managed-catalog.adoc[Managed catalog].
+* xref:mcp:create-server.adoc[]
+* xref:mcp:test-tools.adoc[]
+* xref:mcp:user-delegated-oauth.adoc[]
+* xref:mcp:register-remote.adoc[]
+* xref:mcp:managed/managed-catalog.adoc[]

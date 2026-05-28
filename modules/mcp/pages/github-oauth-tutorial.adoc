@@ -365,13 +365,6 @@ You could next create an agent using this GitHub MCP server. Each user who calls
 |You need the `dataplane_aigateway_oauthprovider_attach` permission on the GitHub provider. Contact your ADP administrator to grant this permission.
 |===
 
-== Next steps
-
-* **Add more scopes**: If you need additional GitHub permissions, edit the OAuth provider to add scopes. Existing users will be prompted to re-consent with the upgraded scope.
-* **Create additional MCP servers**: You can create multiple GitHub MCP servers (for example, "GitHub Read" and "GitHub Write") attached to the same OAuth provider but exposing different tool sets.
-* **Monitor connections**: Users can view and revoke their GitHub connections anytime in **My Connections**.
-* **Review audit logs**: As an admin, you can review which users have connected to GitHub and track MCP server usage.
-
 == Related topics
 
 * xref:mcp:oauth-providers.adoc[Configure an OAuth Provider]

@@ -139,6 +139,5 @@ If the tools list is empty or stale, hit the *Refresh tools* action on the Overv
 
 == Related topics
 
-* xref:mcp:user-delegated-oauth.adoc[User-delegated OAuth] for the consent flow.
-* xref:ai-gateway:aggregation.adoc[MCP aggregation] for fronting many MCP servers behind a single URL with AI Gateway.
-* Server hosting and deployment guidance is your responsibility: Redpanda doesn't operate self-managed servers; deployment, scaling, and patching are up to you.
+* xref:mcp:user-delegated-oauth.adoc[]
+* xref:ai-gateway:aggregation.adoc[]

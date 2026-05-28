@@ -280,4 +280,4 @@ If the cost still reflects the catalog price, the override may not have propagat
 
 * xref:governance:dashboard/overview.adoc[Read the governance overview]
 * xref:observability:transcripts.adoc[Read a transcript]
-* xref:governance:guardrails/index.adoc[Configure guardrails] for selective request blocking
+* xref:governance:guardrails/index.adoc[Configure guardrails]

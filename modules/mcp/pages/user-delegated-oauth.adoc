@@ -97,6 +97,5 @@ For the field-by-field service-account-OAuth setup, see xref:mcp:create-server.a
 
 == Related topics
 
-* xref:mcp:oauth-providers.adoc[Configure an OAuth Provider] for the separate workflow that creates the providers referenced from MCP servers.
+* xref:mcp:oauth-providers.adoc[]
 * xref:mcp:create-server.adoc#configure-authentication[Service-account OAuth setup] for the shared-identity alternative.
-* Token vault internals are not user-configurable. Redpanda manages the vault; users see their own connections under *My Connections*.

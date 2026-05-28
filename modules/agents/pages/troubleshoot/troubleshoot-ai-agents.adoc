@@ -481,6 +481,5 @@ For comprehensive guidance on monitoring agent activity, analyzing conversation 
 == Next steps
 
 * xref:agents:system-prompts.adoc[]
-* xref:agents:concepts.adoc[]
 * xref:mcp:overview.adoc[]
 * xref:agents:architecture-patterns.adoc[]

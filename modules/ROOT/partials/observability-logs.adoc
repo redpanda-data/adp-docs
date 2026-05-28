@@ -22,7 +22,7 @@ Use logs for:
 * Understanding which provider handled a request
 * Investigating latency spikes or errors for specific users
 
-Use metrics for: Aggregate analytics, trends, cost tracking across time. See xref:ai-gateway/observability-metrics.adoc[].
+Use metrics for: Aggregate analytics, trends, cost tracking across time. See xref:observability:metrics.adoc[].
 
 == Where to find logs
 
@@ -603,7 +603,7 @@ Retention period: // PLACEHOLDER: for example, 30 days, 90 days, configurable
 After retention period:
 
 * Logs are deleted automatically
-* Aggregate metrics retained longer (see xref:ai-gateway/observability-metrics.adoc[])
+* Aggregate metrics retained longer (see xref:observability:metrics.adoc[])
 
 Export logs (if needed for longer retention):
 
@@ -746,4 +746,4 @@ Note: Cost estimates are approximate. Use provider invoices for billing.
 
 == Next steps
 
-* xref:ai-gateway/observability-metrics.adoc[]
+* xref:observability:metrics.adoc[]
