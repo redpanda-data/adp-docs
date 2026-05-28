@@ -36,6 +36,6 @@
 * Settings reference
 ** xref:control:permissions-reference.adoc[Roles and permissions matrix]
 ** xref:control:guardrails/types-reference.adoc[Safety rule providers]
-** xref:get-started:rpk-install.adoc[Install rpk]
+** xref:reference:rpk-install.adoc[Install rpk]
 ** xref:reference:rpk/index.adoc[rpk command reference]
 ** xref:reference:glossary.adoc[Glossary]

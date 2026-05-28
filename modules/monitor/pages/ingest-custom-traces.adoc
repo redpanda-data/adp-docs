@@ -20,7 +20,7 @@ After reading this page, you will be able to:
 
 * A Redpanda Connect pipeline host (today: a Redpanda BYOC environment with Connect enabled). Ability to manage secrets on that host.
 // TODO: Replace with the standalone-ADP ingestion target once defined (may no longer require a Redpanda Cloud cluster).
-* The latest version of xref:get-started:rpk-install.adoc[`rpk`] installed
+* The latest version of xref:reference:rpk-install.adoc[`rpk`] installed
 * Custom agent or application instrumented with OpenTelemetry SDK
 * Basic understanding of the https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/[OpenTelemetry span format^] and https://opentelemetry.io/docs/specs/otlp/[OpenTelemetry Protocol (OTLP)^]
 
