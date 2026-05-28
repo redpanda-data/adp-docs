@@ -96,4 +96,4 @@ Monitor iteration counts during complex requests to ensure they complete within 
 == Next steps
 
 * xref:monitor:concepts.adoc[]
-* xref:troubleshoot/troubleshoot-ai-agents.adoc[]
+* xref:monitor:troubleshoot-ai-agents.adoc[]

@@ -106,4 +106,3 @@ The request should return an error. Open the request's transcript and confirm a 
 
 * xref:control:guardrails/types-reference.adoc[Evaluator types reference]
 * xref:control:guardrails/violations.adoc[Read violations]
-* xref:control:guardrails/cost-tracking.adoc[Cost tracking]

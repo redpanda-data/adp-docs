@@ -93,5 +93,4 @@ Per the AI Gateway design, evaluators run async where possible: specifically, `O
 == Next steps
 
 * xref:control:guardrails/types-reference.adoc[Evaluator types reference]
-* xref:control:guardrails/cost-tracking.adoc[Cost tracking]
 * xref:monitor:transcripts.adoc[Read a transcript]

@@ -255,7 +255,7 @@ This demonstrates error recovery without hallucination. The "Never make up track
 
 == Troubleshoot
 
-For comprehensive troubleshooting guidance, see xref:troubleshoot/troubleshoot-ai-agents.adoc[].
+For comprehensive troubleshooting guidance, see xref:monitor:troubleshoot-ai-agents.adoc[].
 
 === Test with mock data
 
@@ -271,4 +271,4 @@ Use these documented test IDs when testing the agent. If you replace the mock to
 * xref:connect:mcp-overview.adoc[]
 * xref:connect:system-prompts.adoc[]
 * xref:connect:architecture-patterns.adoc[]
-* xref:troubleshoot/troubleshoot-ai-agents.adoc[]
+* xref:monitor:troubleshoot-ai-agents.adoc[]

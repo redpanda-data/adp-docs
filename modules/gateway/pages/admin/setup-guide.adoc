@@ -329,4 +329,5 @@ Users can then discover and connect to the gateway using the information provide
 
 == Next steps
 
-* xref:connect:index.adoc[Integrations]
+* xref:connect:claude-code.adoc[Connect Claude Code]
+* xref:connect:remote-mcp-clients.adoc[Remote MCP clients]

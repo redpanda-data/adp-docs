@@ -56,7 +56,7 @@ For more information, see xref:connect:agents-overview.adoc[].
 
 The glossterm:governance dashboard[] provides a cross-tenant view of agent activity, spending, MCP server inventory, and authorization events. It composes existing services into a single overview built for platform administrators and finance partners, surfacing per-provider spending, agent state, and the authorization decisions that gate every tool invocation.
 
-For more information, see xref:control:dashboard/index.adoc[Governance Dashboard Overview].
+For more information, see xref:control:dashboard/overview.adoc[Governance Dashboard Overview].
 
 == Built-in governance controls
 

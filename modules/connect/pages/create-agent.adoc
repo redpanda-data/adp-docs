@@ -306,4 +306,4 @@ For detailed observability strategies, see xref:monitor:monitor.adoc[].
 * xref:connect:system-prompts.adoc[]
 * xref:connect:create-server.adoc[]
 * xref:connect:architecture-patterns.adoc[]
-* xref:troubleshoot/troubleshoot-ai-agents.adoc[]
+* xref:monitor:troubleshoot-ai-agents.adoc[]

@@ -44,7 +44,7 @@ Each evaluator type has its own config schema, supported phase set, behavior-on-
 
 *Behavior on match*: Block.
 
-*Cost*: Per-call LLM cost. Counts against the *evaluator's configured upstream provider* (typically a small classifier model, separate from the user-facing LLM). Token cost surfaces alongside the user-facing LLM call in the same transcript. See xref:control:guardrails/cost-tracking.adoc[Cost tracking].
+*Cost*: Per-call LLM cost. Counts against the *evaluator's configured upstream provider* (typically a small classifier model, separate from the user-facing LLM). Token cost surfaces alongside the user-facing LLM call in the same transcript.
 
 *Gotchas:*
 

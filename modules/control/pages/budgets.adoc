@@ -195,7 +195,7 @@ Some guardrail evaluators call an LLM to do their work. A toxicity classifier, f
 
 Guardrail evaluator cost surfaces in the same spending pipeline as user-facing LLM calls. The evaluator's cost is attributed to the *evaluator's configured upstream provider* (usually a small classifier model, separate from the user-facing LLM), so per-provider breakdowns separate the two automatically.
 
-For the per-evaluator cost model and how it interacts with the dashboard's spend view, see xref:control:guardrails/index.adoc[Configure guardrails].
+For the per-evaluator cost model and how it interacts with the dashboard's spend view, see xref:control:guardrails/overview.adoc[Configure guardrails].
 
 // TODO: confirm with eng that guardrail evaluator cost flows into the same SpendingService as user-facing LLM cost (vs. a separate stream). Open Q A3 in the companion plan, also flagged on the Guardrails plan.
 
@@ -281,4 +281,4 @@ If the cost still reflects the catalog price, the override may not have propagat
 
 * xref:control:dashboard/overview.adoc[Read the governance overview]
 * xref:monitor:transcripts.adoc[Read a transcript]
-* xref:control:guardrails/index.adoc[Configure guardrails]
+* xref:control:guardrails/overview.adoc[Configure guardrails]
