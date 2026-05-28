@@ -1,4 +1,5 @@
 = Create a Guardrail
+:page-aliases: governance:guardrails/create-guardrail.adoc
 :description: Configure a guardrail, pick an evaluator type and phase, attach it to one or more LLM providers, and verify that it fires.
 :page-topic-type: how-to
 :personas: security_compliance_lead, platform_engineer

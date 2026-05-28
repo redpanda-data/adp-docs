@@ -1,4 +1,5 @@
 = Token Budgets and Limits
+:page-aliases: governance:budgets.adoc
 :description: See what AI spending the Agentic Data Plane records automatically and where to view it.
 :page-topic-type: overview
 :personas: platform_engineer, pilot_lead

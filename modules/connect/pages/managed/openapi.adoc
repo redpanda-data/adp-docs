@@ -1,4 +1,5 @@
 = OpenAPI Managed MCP Server
+:page-aliases: mcp:managed/openapi.adoc
 :description: Expose any OpenAPI- or Swagger-described HTTP API as MCP tools. Point Redpanda at a spec URL and get a fully-typed tool surface for agents, with no custom code.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

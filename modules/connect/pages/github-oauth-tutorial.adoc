@@ -1,4 +1,5 @@
 = Set Up GitHub OAuth Provider and MCP Server
+:page-aliases: mcp:github-oauth-tutorial.adoc
 :description: Complete walkthrough for configuring GitHub as an OAuth provider and creating a user-delegated GitHub MCP server.
 :page-topic-type: tutorial
 :personas: agent_builder, platform_engineer

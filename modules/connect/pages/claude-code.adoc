@@ -1,4 +1,5 @@
 = Use Claude Code with ADP
+:page-aliases: integrations:claude-code.adoc
 :description: Point Claude Code at an ADP-managed Anthropic provider so your team's LLM calls flow through AI Gateway with centralized credentials, usage tracking, and per-provider transcript logging. Optionally attach MCP servers hosted in ADP.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

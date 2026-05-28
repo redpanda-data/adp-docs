@@ -1,4 +1,5 @@
 = Configure an LLM Provider
+:page-aliases: ai-gateway:configure-provider.adoc
 :description: Create an LLM provider in AI Gateway to proxy requests to OpenAI, Anthropic, Google AI, AWS Bedrock, or any OpenAI-compatible endpoint through a managed Redpanda URL.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder

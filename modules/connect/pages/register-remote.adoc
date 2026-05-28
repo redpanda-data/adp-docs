@@ -1,4 +1,5 @@
 = Register a Self-Managed MCP Server
+:page-aliases: mcp:register-remote.adoc
 :description: Front your own MCP server with a managed Redpanda URL. Pick a transport, configure authentication, and let agents discover the server's tools through Redpanda.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder

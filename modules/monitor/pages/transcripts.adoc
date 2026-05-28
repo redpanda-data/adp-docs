@@ -1,4 +1,5 @@
 = Read a Transcript
+:page-aliases: observability:transcripts.adoc
 :description: Open a transcript in the Agentic Data Plane UI, read the conversation turn by turn, and investigate errors, costs, and performance.
 :page-topic-type: how-to
 :personas: agent_builder, domain_evaluator, platform_engineer, security_compliance_lead

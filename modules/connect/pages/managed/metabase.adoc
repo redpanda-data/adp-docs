@@ -1,4 +1,5 @@
 = Metabase Managed MCP Server
+:page-aliases: mcp:managed/metabase.adoc
 :description: Give an LLM agent read-and-query access to a Metabase analytics instance through the semantic layer (search, get_table, query metrics) and SQL escape hatches (run_native_query, run_card).
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

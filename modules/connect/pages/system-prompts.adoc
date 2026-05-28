@@ -1,4 +1,5 @@
 = System Prompt Best Practices
+:page-aliases: agents:system-prompts.adoc
 :description: Write system prompts that produce reliable, predictable agent behavior through clear constraints and tool guidance.
 :page-topic-type: best-practices
 :personas: agent_builder

@@ -1,4 +1,5 @@
 = Create an MCP Server
+:page-aliases: mcp:create-server.adoc
 :description: Create an MCP server in the Agentic Data Plane by picking a managed type from the marketplace or registering a self-managed server you host yourself, then configure authentication, code mode, and access.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

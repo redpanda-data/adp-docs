@@ -1,4 +1,5 @@
 = Agent Architecture Patterns
+:page-aliases: agents:architecture-patterns.adoc
 :description: Design maintainable agent systems with single-agent and multi-agent patterns based on domain complexity.
 :page-byoc: true
 :page-topic-type: best-practices

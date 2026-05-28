@@ -1,4 +1,5 @@
 = Slack Managed MCP Server
+:page-aliases: mcp:managed/slack.adoc
 :description: Let agents post messages and read channels in your Slack workspace using each end-user's own Slack identity through user-delegated OAuth.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

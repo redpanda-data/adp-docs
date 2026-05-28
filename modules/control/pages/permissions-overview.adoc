@@ -1,4 +1,5 @@
 = About ADP Permissions
+:page-aliases: governance:permissions-overview.adoc
 :description: Understand how ADP permissions, built-in roles, and role bindings fit together to control access to AI Gateway, MCP, agents, pipelines, and governance APIs.
 :page-topic-type: concept
 :personas: security_compliance_lead, platform_engineer

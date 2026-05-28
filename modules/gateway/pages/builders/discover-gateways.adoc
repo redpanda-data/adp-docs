@@ -1,4 +1,5 @@
 = Discover Available Gateways
+:page-aliases: ai-gateway:builders/discover-gateways.adoc
 :description: Find which AI Gateways you can access and their configurations.
 :page-topic-type: how-to
 :personas: agent_builder

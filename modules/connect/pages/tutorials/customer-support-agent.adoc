@@ -1,4 +1,5 @@
 = Learn Multi-Tool Agent Orchestration
+:page-aliases: agents:tutorials/customer-support-agent.adoc
 :description: Learn how agents coordinate multiple tools, make decisions based on conversation context, and handle errors through building a customer support agent.
 :page-topic-type: tutorial
 :personas: agent_builder

@@ -1,4 +1,5 @@
 = Logs
+:page-aliases: observability:logs.adoc
 :description: Access and analyze AI agent logs.
 
 // TODO: Add content
