@@ -24,7 +24,7 @@
 ** xref:control:dashboard/overview.adoc[See all your agents in one place]
 ** xref:control:guardrails/overview.adoc[Guardrails Overview]
 ** xref:control:guardrails/create-guardrail.adoc[Create a Guardrail]
-** xref:control:budgets.adoc[Set spending limits]
+** xref:control:budgets.adoc[Set spend limits]
 ** xref:control:permissions-overview.adoc[Control who can do what]
 
 * xref:gateway:index.adoc[Routing & LLM settings]

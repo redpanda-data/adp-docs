@@ -258,7 +258,7 @@ Continue.dev's autocomplete feature generates frequent, short requests. Configur
 * Autocomplete models (for example, `gpt-5.2-mini`): 100 requests per minute per user
 * Chat models (for example, `claude-sonnet-4.5`): 20 requests per minute per user
 
-=== Set spending limits
+=== Set spend limits
 
 Control LLM costs across all providers:
 
@@ -667,7 +667,7 @@ Causes and solutions:
 * **Wrong model for autocomplete**: Use a fast model like `gpt-5.2-mini` in `tabAutocompleteModel`
 * **Rate limits too restrictive**: Increase rate limits for autocomplete backend
 * **High backend latency**: Check backend metrics and consider provider failover
-* **Token exhaustion**: Verify spending limits haven't been reached
+* **Token exhaustion**: Verify spend limits haven't been reached
 
 === Tools not appearing in Continue.dev
 
@@ -689,7 +689,7 @@ Causes and solutions:
 * **Autocomplete using expensive model**: Configure `tabAutocompleteModel` to use `gpt-5.2-mini` instead of larger models
 * **Deferred tool loading disabled**: Enable deferred tool loading to reduce tokens by 80-90%
 * **No rate limits**: Apply per-minute rate limits to prevent runaway usage
-* **Missing spending limits**: Set monthly budget limits with blocking enforcement
+* **Missing spend limits**: Set monthly budget limits with blocking enforcement
 * **Chat using wrong model**: Route chat requests to cost-effective models (for example, `claude-sonnet-4.5` instead of `claude-opus-4.6`)
 
 === Requests failing with 429 errors
@@ -700,7 +700,7 @@ Causes and solutions:
 
 * **Rate limit exceeded**: Review and increase rate limits if usage is legitimate (autocomplete needs higher limits)
 * **Upstream provider rate limits**: Check if the upstream LLM provider is rate-limiting; configure failover to alternate API keys
-* **Budget exhausted**: Verify monthly spending limit has not been reached
+* **Budget exhausted**: Verify monthly spend limit has not been reached
 
 === Different results from different providers
 

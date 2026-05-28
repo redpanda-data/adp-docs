@@ -221,7 +221,7 @@ GitHub Copilot's code completion feature generates extremely frequent requests (
 * Separate rate limits for different request types if the gateway supports request classification
 * Monitoring initial usage patterns to adjust limits appropriately
 
-=== Set spending limits
+=== Set spend limits
 
 Control LLM costs across all providers:
 
@@ -349,7 +349,7 @@ For simpler deployments, configure a single gateway with shared access:
 . Create one gateway for all GitHub Copilot users
 . Generate a shared API token
 . Configure GitHub Copilot at the organization level
-. Use rate limits and spending limits to control overall usage
+. Use rate limits and spend limits to control overall usage
 
 **Benefits:**
 
@@ -648,7 +648,7 @@ Causes and solutions:
 
 * **Code completion using expensive model**: Configure completion to use `gpt-5.2-mini` instead of larger models
 * **No rate limits**: Apply per-minute rate limits to prevent runaway usage
-* **Missing spending limits**: Set monthly budget limits with blocking enforcement
+* **Missing spend limits**: Set monthly budget limits with blocking enforcement
 * **Chat using wrong model**: Ensure chat/explanation features use cost-effective models
 * **Transform overhead**: Monitor if transforms add significant token overhead
 * **High completion request volume**: Expected behavior, adjust budgets or implement stricter rate limits
@@ -661,7 +661,7 @@ Causes and solutions:
 
 * **Rate limit exceeded**: Review and increase rate limits if usage is legitimate (code completion needs very high limits)
 * **Upstream provider rate limits**: Check if the upstream LLM provider is rate-limiting; configure failover to alternate providers
-* **Budget exhausted**: Verify monthly spending limit has not been reached
+* **Budget exhausted**: Verify monthly spend limit has not been reached
 * **Per-user limits too restrictive**: Adjust per-user rate limits if using multi-tenant strategies
 * **Spike in usage**: Code completion can generate sudden usage spikes, consider burstable rate limits
 
