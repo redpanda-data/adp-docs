@@ -234,7 +234,7 @@ The `dataplane_adp_agent_credential_*` permissions gate the OIDC client credenti
 
 == Spending permissions
 
-The `dataplane_adp_spending_*` permissions gate the governance APIs that surface AI spend, request counts, and token volume. See xref:control:budgets.adoc[Token Budgets and Limits] for what spending data ADP records automatically.
+The `dataplane_adp_spending_*` permissions gate the governance APIs that surface AI spend, request counts, and token volume. See xref:control:budgets.adoc[] for what spending data ADP records automatically.
 
 [cols="2,2,1,1"]
 |===
