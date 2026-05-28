@@ -22,7 +22,7 @@ Use metrics for:
 * Capacity planning
 * Model/provider comparison
 
-Use logs for: Debugging specific requests, viewing full prompts/responses. See xref:ai-gateway/observability-logs.adoc[].
+Use logs for: Debugging specific requests, viewing full prompts/responses. See xref:observability:logs.adoc[].
 
 == Where to find metrics
 
@@ -855,4 +855,4 @@ Solution:
 
 == Next steps
 
-* xref:ai-gateway/observability-logs.adoc[]
+* xref:observability:logs.adoc[]

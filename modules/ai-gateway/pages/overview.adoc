@@ -50,11 +50,11 @@ Applications authenticate to ADP with OIDC service accounts instead of long-live
 
 === Per-provider observability
 
-The provider's detail page in the ADP UI records spend, request counts, and token counts for the last 7 days. The *Cost & Usage* tab on the *LLM Providers* page expands that view with time-series charts, provider and model grouping, date ranges, and filters for provider, model, cost type, token type, and user.
+The provider's detail page in the Agentic Data Plane UI records spend, request counts, and token counts for the last 7 days. The *Cost & Usage* tab on the *LLM Providers* page expands that view with time-series charts, provider and model grouping, date ranges, and filters for provider, model, cost type, token type, and user.
 
 == What's in the UI
 
-In the ADP UI you'll find four areas:
+In the Agentic Data Plane UI you'll find four areas:
 
 * *LLM Providers*: Create, edit, enable, and delete providers, and review provider-level cost and usage. This is the home of AI Gateway configuration.
 * *MCP Servers*: Register glossterm:MCP[] tool servers for agents. Separate from the AI Gateway proxy URL.
@@ -112,7 +112,7 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 * *Multi-provider routing, failover, and retries.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
 * *Spend limits.* Per-user, per-org, and global cost caps are not available. AI Gateway records spend and token usage for reporting in the provider *Cost & Usage* view and Governance, but it does not enforce budget caps. See xref:governance:budgets.adoc[Token budgets and limits] for the read-only spending visibility.
 * *Rate limits.* Requests-per-second, per-minute, or per-day caps are not available.
-* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the ADP UI.
+* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the Agentic Data Plane UI.
 
 == Next steps
 

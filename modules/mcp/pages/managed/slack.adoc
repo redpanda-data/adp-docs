@@ -32,12 +32,12 @@ Before you create the server, make sure you have:
 * A Slack OAuth app registered (your own or a Redpanda-published reference app).
 +
 // TODO: confirm whether Redpanda ships a reference Slack OAuth app or whether each customer brings their own. Document the path.
-* An OAuth Provider configured in the ADP UI under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider].
+* An OAuth Provider configured in the Agentic Data Plane UI under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:mcp:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:mcp:user-delegated-oauth.adoc[].
 
 == Configure
 
-Create a new Slack MCP server in the ADP UI:
+Create a new Slack MCP server in the Agentic Data Plane UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Slack* from the marketplace picker.

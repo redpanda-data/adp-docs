@@ -6,7 +6,7 @@
 :learning-objective-2: Attach the guardrail to one or more LLM providers and enable it
 :learning-objective-3: Verify the guardrail fires and trace the violation through the transcript
 
-// TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the live walkthrough fills in once eng confirms the post-pivot Guardrail resource shape and `aigwctl` (or the ADP UI) is reachable from a sandbox cluster.
+// TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the live walkthrough fills in once eng confirms the post-pivot Guardrail resource shape and `aigwctl` (or the Agentic Data Plane UI) is reachable from a sandbox cluster.
 
 This page walks through configuring your first guardrail end-to-end: pick an evaluator type, choose a phase, fill in the per-type config, attach it to LLM providers, and confirm it fires.
 
@@ -26,9 +26,9 @@ After reading this page, you will be able to:
 
 == Open the Guardrails surface
 
-// TODO: finalize this section once the ADP UI ships a Guardrails surface. As of 2026-04-28, `apps/adp-ui/src/routes/` has no `guardrails/` route. The walkthrough may need to lead with `aigwctl` instead of the UI and add the UI flow in a later refresh. Open Qs C4 and C5 in the companion plan.
+// TODO: finalize this section once the Agentic Data Plane UI ships a Guardrails surface. As of 2026-04-28, `apps/adp-ui/src/routes/` has no `guardrails/` route. The walkthrough may need to lead with `aigwctl` instead of the UI and add the UI flow in a later refresh. Open Qs C4 and C5 in the companion plan.
 
-In the ADP UI, open *Governance* → *Guardrails* → *Create guardrail*.
+In the Agentic Data Plane UI, open *Governance* → *Guardrails* → *Create guardrail*.
 
 == Pick an evaluator type
 

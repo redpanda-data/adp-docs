@@ -57,7 +57,7 @@ For per-user authentication, register an OAuth client on Zendesk and a matching 
 
 == Configure
 
-Create a new Zendesk MCP server in the ADP UI:
+Create a new Zendesk MCP server in the Agentic Data Plane UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Zendesk* from the marketplace picker.

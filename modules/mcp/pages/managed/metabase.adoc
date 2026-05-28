@@ -31,7 +31,7 @@ It is *not* a Metabase admin tool. Creating dashboards, editing cards, configuri
 
 Metabase API keys (v0.49+) inherit the *permissions of the group they're bound to*. The MCP sends the resolved key in the `X-API-Key` header on every upstream request.
 
-There is no per-user delegation: one API key per MCP instance, applied to every tool call. To give different agents different access, mount multiple MCP instances bound to different Metabase groups.
+The Metabase MCP uses one API key per MCP instance, applied to every tool call, with no per-user delegation. To give different agents different access, mount multiple MCP instances bound to different Metabase groups.
 
 Auth is implemented as `oneof auth { StaticKeyAuth api_key }` (single variant today, future-proof for adding session or OAuth modes without a wire-format break).
 
@@ -63,7 +63,7 @@ Permission errors surface from the upstream Metabase API as `metabase API error 
 
 == Configure
 
-Create a new Metabase MCP server in the ADP UI:
+Create a new Metabase MCP server in the Agentic Data Plane UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Metabase* from the marketplace picker.

@@ -79,7 +79,7 @@ Single agents are simpler to build and maintain. You have one system prompt, one
 
 However, all capabilities must coexist in one agent. Adding features increases complexity rapidly, making single agents difficult to scale to multi-domain problems.
 
-TIP: You can migrate from a single agent to a root agent with subagents without starting over. Add subagents to an existing agent using the ADP UI, then gradually move tools and responsibilities to the new subagents.
+TIP: You can migrate from a single agent to a root agent with subagents without starting over. Add subagents to an existing agent using the Agentic Data Plane UI, then gradually move tools and responsibilities to the new subagents.
 
 == Root agent with subagents pattern
 
@@ -199,7 +199,7 @@ For best results:
 
 == Model selection guide
 
-Choose models based on task complexity, latency requirements, and cost constraints. The ADP UI displays available models with descriptions when creating agents.
+Choose models based on task complexity, latency requirements, and cost constraints. The Agentic Data Plane UI displays available models with descriptions when creating agents.
 
 === Match models to task complexity
 
@@ -258,6 +258,4 @@ Provide clear error messages to users. Log errors for debugging.
 
 * xref:agents:integration-overview.adoc[]
 * xref:agents:a2a-concepts.adoc[]
-* xref:mcp:overview.adoc[]
-* xref:agents:overview.adoc[]
 * xref:mcp:overview.adoc[]

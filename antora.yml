@@ -1,7 +1,7 @@
 name: agentic-data-plane
 title: Agentic Data Plane
 version: ~
-start_page: ROOT:index.adoc
+start_page: get-started:adp-overview.adoc
 nav:
 - modules/ROOT/nav.adoc
 asciidoc:

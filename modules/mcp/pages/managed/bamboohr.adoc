@@ -48,7 +48,7 @@ Use BambooHR when an agent needs HR context from BambooHR without sharing one up
 * A BambooHR company subdomain, such as `mycompany` for `mycompany.bamboohr.com`. The managed config accepts letters, numbers, and hyphens.
 * BambooHR users with the permissions required to read the employee, time-off, or performance data your agent needs.
 
-// TODO: Confirm the exact ADP UI field labels for attaching user-delegated OAuth to managed BambooHR after an authenticated UI walkthrough.
+// TODO: Confirm the exact Agentic Data Plane UI field labels for attaching user-delegated OAuth to managed BambooHR after an authenticated UI walkthrough.
 // TODO: Add a CLI example only after confirming how `rpk ai` sets MCPServer `auth_config.user_oauth` for managed types that do not carry auth inside the managed config.
 
 == Configure BambooHR OAuth
@@ -103,6 +103,6 @@ Test the server in the Inspector before you connect it to an agent. Start with `
 
 == Next steps
 
-* xref:mcp:user-delegated-oauth.adoc[Configure user-delegated OAuth]
-* xref:mcp:test-tools.adoc[Test a server's tools]
-* xref:agents:create-agent.adoc[Create a declarative agent] that uses the BambooHR server
+* xref:mcp:user-delegated-oauth.adoc[]
+* xref:mcp:test-tools.adoc[]
+* xref:agents:create-agent.adoc[]

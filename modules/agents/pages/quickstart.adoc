@@ -1,7 +1,7 @@
 = AI Agent Quickstart
 :page-aliases: cloud-data-platform:ai-agents:agents/quickstart.adoc
 :description: Create your first AI agent in ADP that generates and publishes event data through natural language commands.
-:page-topic-type: tutorial
+:page-topic-type: quickstart
 :personas: agent_builder
 :learning-objective-1: Create an AI agent in ADP that uses MCP tools
 :learning-objective-2: Configure the agent with a system prompt and model selection
@@ -17,11 +17,11 @@ After completing this quickstart, you will be able to:
 
 == Prerequisites
 
-* An ADP environment
+* A Redpanda Cloud BYOC environment on AWS with ADP enabled.
 
-* xref:ai-gateway:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (OpenAI, Anthropic, Google AI, or AWS Bedrock)
+* An xref:ai-gateway:gateway-quickstart.adoc[AI Gateway] configured with at least one LLM provider (OpenAI, Anthropic, Google AI, or AWS Bedrock).
 
-* Completed the xref:mcp:create-server.adoc[Remote MCP Quickstart] to create an MCP server with the following tools deployed:
+* An MCP server created by following xref:mcp:create-server.adoc[Create an MCP Server], with the following tools deployed:
 +
 ** `generate_input`: Generates fake user event data
 ** `redpanda_output`: Publishes data to Redpanda topics
@@ -34,7 +34,7 @@ An Event Data Manager agent that:
 * Publishes events to Redpanda topics
 * Understands natural language requests like "Generate 5 login events and publish them"
 
-The agent orchestrates the `generate_input` and `redpanda_output` tools you created in the Remote MCP quickstart.
+The agent orchestrates the `generate_input` and `redpanda_output` tools you created in xref:mcp:create-server.adoc[].
 
 == Create the agent
 
@@ -87,7 +87,7 @@ Response format:
 . Select MCP tools:
 +
 * Click *Add MCP Server*
-* Select the `event-data-generator` server (created in the MCP quickstart)
+* Select the `event-data-generator` server you created in xref:mcp:create-server.adoc[]
 * Check both tools:
 ** `generate_input`
 ** `redpanda_output`
@@ -177,6 +177,7 @@ Common quickstart issue:
 
 == Next steps
 
+* xref:get-started:byoc-quickstart.adoc[ADP Quickstart]
 * xref:agents:overview.adoc[]
 * xref:agents:create-agent.adoc[]
 * xref:agents:system-prompts.adoc[]

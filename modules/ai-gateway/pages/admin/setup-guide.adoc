@@ -54,7 +54,7 @@ The infrastructure that serves the model differs based on the provider you selec
 
 . Click *Save changes*.
 
-Only enabled models will be accessible through gateways. You can enable or disable models at any time without affecting existing gateways.
+Only enabled models are accessible through gateways. You can enable or disable models at any time without affecting existing gateways.
 
 === Model naming convention
 

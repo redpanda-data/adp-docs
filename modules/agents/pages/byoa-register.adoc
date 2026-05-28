@@ -36,7 +36,7 @@ The two models differ in who runs the agent, who owns scaling, and how the agent
 
 |How is the agent defined?
 |It's already coded; you don't want to translate it into the declarative agent format.
-|You want a YAML / declarative definition you edit in the ADP UI.
+|You want a YAML / declarative definition you edit in the Agentic Data Plane UI.
 
 |Who scales and operates it?
 |Your team owns scaling, deploys, and the failure model.

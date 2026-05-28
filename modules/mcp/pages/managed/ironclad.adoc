@@ -49,7 +49,7 @@ Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
 
 == Configure
 
-Create a new Ironclad MCP server in the ADP UI:
+Create a new Ironclad MCP server in the Agentic Data Plane UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Ironclad* from the marketplace picker.

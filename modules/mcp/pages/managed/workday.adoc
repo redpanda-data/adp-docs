@@ -56,7 +56,7 @@ Set up authentication on the Workday side before configuring the MCP:
 
 == Configure
 
-Create a new Workday MCP server in the ADP UI:
+Create a new Workday MCP server in the Agentic Data Plane UI:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Workday* from the marketplace picker.
