@@ -1,5 +1,4 @@
 = Read Violations
-:page-aliases: governance:guardrails/violations.adoc
 :description: Investigate why a guardrail fired, distinguish a violation from an evaluator failure, and tune the configuration.
 :page-topic-type: how-to
 :personas: security_compliance_lead, platform_engineer, agent_builder

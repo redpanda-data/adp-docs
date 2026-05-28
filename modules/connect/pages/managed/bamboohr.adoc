@@ -1,5 +1,4 @@
 = BambooHR Managed MCP Server
-:page-aliases: mcp:managed/bamboohr.adoc
 :description: Let agents read BambooHR employee, time-off, and performance data with each caller's BambooHR OAuth identity.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

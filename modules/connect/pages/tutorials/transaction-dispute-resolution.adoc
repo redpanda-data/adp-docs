@@ -1,5 +1,4 @@
 = Build Multi-Agent Systems for Transaction Dispute Resolution
-:page-aliases: agents:tutorials/transaction-dispute-resolution.adoc
 :description: Learn how to build multi-agent systems with domain separation, handle sensitive financial data, and monitor multi-agent execution through transaction investigation.
 :page-topic-type: tutorial
 :personas: agent_builder, platform_engineer
@@ -660,5 +659,5 @@ For production deployments, replace the mock tools with API calls to your accoun
 * xref:connect:architecture-patterns.adoc[]
 * xref:connect:integration-overview.adoc[]
 * xref:connect:pipeline-integration-patterns.adoc[]
-* xref:monitor:monitor.adoc[]
+* xref:monitor:monitor-agents.adoc[]
 * xref:connect:mcp-overview.adoc[]

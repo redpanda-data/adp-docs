@@ -1,5 +1,4 @@
 = AI Gateway Setup Guide
-:page-aliases: ai-gateway:admin/setup-guide.adoc
 :description: Set up AI Gateway for your organization. Enable providers, configure failover for high availability, set budget controls, and create gateways with team-level isolation.
 :page-topic-type: how-to
 :personas: platform_engineer, security_compliance_lead

@@ -1,5 +1,4 @@
 = Read the Governance Overview
-:page-aliases: governance:dashboard/overview.adoc
 :description: Read ADP spend, request, token, agent, and top-user activity from the Governance dashboard.
 :page-topic-type: how-to
 :personas: pilot_lead, platform_engineer, security_compliance_lead

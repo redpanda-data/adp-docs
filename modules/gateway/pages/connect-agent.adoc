@@ -2,7 +2,7 @@
 :description: Point your application or AI agent at an AI Gateway provider's proxy URL. Covers the URL shape, the local development workflow with rpk ai, the OIDC client-credentials flow for CI and application code, and SDK examples for OpenAI, Anthropic, Google AI, AWS Bedrock, and OpenAI-compatible endpoints.
 :page-topic-type: how-to
 :personas: agent_builder
-:page-aliases: cloud-data-platform:ai-agents:ai-gateway/builders/connect-your-agent.adoc, ai-gateway:connect-agent.adoc
+:page-aliases: cloud-data-platform:ai-agents:ai-gateway/builders/connect-your-agent.adoc
 :learning-objective-1: Construct the proxy URL for an LLM provider you have configured
 :learning-objective-2: pass:q[Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients]
 :learning-objective-3: Send requests through the proxy URL with the SDK of your choice

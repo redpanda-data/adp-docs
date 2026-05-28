@@ -1,5 +1,4 @@
 = ADP Permissions Reference
-:page-aliases: governance:permissions-reference.adoc
 :description: Look up the permissions ADP enforces across LLM providers, MCP servers, agents, pipelines, knowledge bases, and governance APIs, and the built-in roles that grant them.
 :page-topic-type: reference
 :personas: security_compliance_lead, platform_engineer

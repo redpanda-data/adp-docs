@@ -1,5 +1,4 @@
 = Register Your Own Agent (BYOA)
-:page-aliases: agents:byoa-register.adoc
 :description: Register an agent you operate yourself with the Agentic Data Plane so it appears in the governance dashboard, emits transcripts, and can be called over A2A. Covers the registration model, A2A endpoint contract, service-account auth, and how BYOA differs from a managed agent.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

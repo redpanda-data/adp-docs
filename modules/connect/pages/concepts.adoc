@@ -1,5 +1,4 @@
 = Agent Concepts
-:page-aliases: agents:concepts.adoc
 :description: Understand how declaratively configured agents execute reasoning loops, manage context, invoke tools, and handle errors.
 :page-topic-type: concepts
 :personas: agent_builder

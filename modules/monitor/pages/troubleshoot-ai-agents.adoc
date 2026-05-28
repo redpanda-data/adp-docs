@@ -1,5 +1,4 @@
 = Troubleshoot AI Agents
-:page-aliases: agents:troubleshoot/troubleshoot-ai-agents.adoc
 :description: Diagnose and fix common issues with AI agents including deployment failures, runtime behavior problems, and tool execution errors.
 :page-byoc: true
 :page-topic-type: troubleshooting
@@ -477,7 +476,7 @@ processors:
 
 == Monitor and debug agents
 
-For comprehensive guidance on monitoring agent activity, analyzing conversation history, tracking token usage, and debugging issues, see xref:monitor:monitor.adoc[].
+For comprehensive guidance on monitoring agent activity, analyzing conversation history, tracking token usage, and debugging issues, see xref:monitor:monitor-agents.adoc[].
 
 == Next steps
 

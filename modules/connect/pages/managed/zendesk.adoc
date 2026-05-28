@@ -1,5 +1,4 @@
 = Zendesk Managed MCP Server
-:page-aliases: mcp:managed/zendesk.adoc
 :description: Search and manage Zendesk Support tickets, users, and Help Center articles. Two auth modes (service-account API token or per-user OAuth) plus token-efficient response shaping for LLM agents.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

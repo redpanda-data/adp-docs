@@ -1,5 +1,4 @@
 = Metrics
-:page-aliases: observability:metrics.adoc
 :description: Monitor AI agent metrics in Redpanda ADP.
 
 // TODO: Add content

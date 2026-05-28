@@ -1,5 +1,4 @@
 = SQL Managed MCP Server
-:page-aliases: mcp:managed/sql.adoc
 :description: Query SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite) through a managed MCP server hosted by Redpanda.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

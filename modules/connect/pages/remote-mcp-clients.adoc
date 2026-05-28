@@ -1,5 +1,4 @@
 = Connect Remote MCP Clients to AI Gateway
-:page-aliases: integrations:remote-mcp-clients.adoc
 :description: Connect external MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps) to MCP servers hosted in AI Gateway. Covers the three-piece architecture (MCP server, OAuth Provider, OAuth Client) and the two-step OAuth flow that runs end-to-end.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer, security_compliance_lead

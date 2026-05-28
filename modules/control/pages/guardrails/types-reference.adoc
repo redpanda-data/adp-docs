@@ -1,5 +1,4 @@
 = Evaluator Types Reference
-:page-aliases: governance:guardrails/types-reference.adoc
 :description: Definitive reference for every evaluator type's config schema, supported phases, behavior on match, and gotchas.
 :page-topic-type: reference
 :personas: security_compliance_lead, platform_engineer

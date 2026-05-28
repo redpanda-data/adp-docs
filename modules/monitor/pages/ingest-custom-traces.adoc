@@ -1,5 +1,4 @@
 = Ingest OpenTelemetry Traces from Custom Agents
-:page-aliases: observability:ingest-custom-traces.adoc
 :description: Configure a Redpanda Connect pipeline to ingest OpenTelemetry traces from custom agents into Redpanda's immutable log for unified governance and observability.
 :page-topic-type: how-to
 :learning-objective-1: pass:q[Configure and deploy a Redpanda Connect pipeline to receive OpenTelemetry traces from custom agents through HTTP and publish them to `redpanda.otel_traces`]
@@ -621,6 +620,6 @@ If requests succeed but traces do not appear in `redpanda.otel_traces`:
 == Next steps
 
 * xref:monitor:transcripts.adoc[]
-* xref:monitor:monitor.adoc[]
+* xref:monitor:monitor-agents.adoc[]
 * xref:connect:components:inputs/otlp_http.adoc[OTLP HTTP input reference]
 * xref:connect:components:inputs/otlp_grpc.adoc[OTLP gRPC input reference]

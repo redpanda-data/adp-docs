@@ -1,5 +1,4 @@
 = Guardrails Overview
-:page-aliases: governance:guardrails/overview.adoc
 :description: Learn what guardrails are, the evaluator types you can choose from, the INPUT and OUTPUT phase model, and where violations show up.
 :page-topic-type: overview
 :personas: security_compliance_lead, platform_engineer, agent_builder

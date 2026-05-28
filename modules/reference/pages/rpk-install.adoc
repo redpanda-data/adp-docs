@@ -1,5 +1,4 @@
 = Install or Update rpk
-:page-aliases: get-started:rpk-install.adoc
 :description: Install or update rpk to interact with Redpanda from the command line.
 :env-cloud:
 

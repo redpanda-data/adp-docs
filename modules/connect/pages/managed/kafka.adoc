@@ -1,5 +1,4 @@
 = Kafka Managed MCP Server
-:page-aliases: mcp:managed/kafka.adoc
 :description: Produce, consume, and inspect topics on Kafka or Redpanda brokers through a managed MCP server hosted in the Agentic Data Plane.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

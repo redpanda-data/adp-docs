@@ -1,5 +1,4 @@
 = Create an Agent
-:page-aliases: agents:create-agent.adoc
 :description: Configure an ADP agent declaratively through the create form. No Python or JavaScript code required.
 :page-topic-type: how-to
 :personas: agent_builder
@@ -271,7 +270,7 @@ Two tabs on the agent detail page support testing and observability:
 
 . Iterate on the system prompt, MCP tool selection, or model choice as needed.
 
-For detailed observability strategies, see xref:monitor:monitor.adoc[].
+For detailed observability strategies, see xref:monitor:monitor-agents.adoc[].
 
 == Example configurations
 

@@ -1,5 +1,4 @@
 = MCP Gateway
-:page-aliases: ai-gateway:aggregation.adoc
 :description: Learn how to use the MCP Gateway to aggregate MCP servers, configure deferred tool loading, create orchestrator workflows, and manage security.
 :page-byoc: true
 :page-topic-type: guide

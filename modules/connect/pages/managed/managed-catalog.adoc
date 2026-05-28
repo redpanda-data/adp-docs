@@ -1,5 +1,4 @@
 = Managed MCP Server Catalog
-:page-aliases: mcp:managed/managed-catalog.adoc
 :description: Reference of every managed MCP server type Redpanda hosts in-process, grouped by category, with display name, description, and a link to a deep-dive where one exists.
 :page-topic-type: reference
 :personas: agent_builder, platform_engineer

@@ -1,5 +1,4 @@
 = Configure an OAuth Provider
-:page-aliases: mcp:oauth-providers.adoc
 :description: Register an OAuth provider in ADP so MCP servers can authenticate users (or service accounts) against an upstream system like Slack, Jira, GitHub, or Salesforce.
 :page-topic-type: how-to
 :personas: platform_engineer, security_compliance_lead

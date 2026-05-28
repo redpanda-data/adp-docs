@@ -1,5 +1,4 @@
 = AI Gateway Architecture
-:page-aliases: ai-gateway:gateway-architecture.adoc
 :description: Technical architecture of Redpanda AI Gateway, including how the control plane, data plane, and observability plane deliver high availability, cost governance, and multi-tenant isolation.
 :page-topic-type: concept
 :personas: platform_engineer, agent_builder, security_compliance_lead
