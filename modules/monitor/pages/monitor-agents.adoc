@@ -79,7 +79,7 @@ The *Inspector* tab provides real-time conversation testing. Use it to test agen
 
 === Access Inspector
 
-. In ADP, navigate to *Agentic AI* > *AI Agents*.
+. In ADP, navigate to *AI Agents*.
 . Click your agent name.
 . Open the *Inspector* tab.
 . Enter test queries and review responses.

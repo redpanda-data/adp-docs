@@ -46,7 +46,7 @@ Before creating agents, create the tools they'll use. You'll organize tools by d
 Account tools retrieve customer and transaction data with PII protection.
 
 . Sign in to ADP.
-. Go to *Agentic AI* > *Remote MCP*.
+. Go to *Remote MCP*.
 . Click *Create MCP Server*.
 . Configure the server:
 +
@@ -218,7 +218,7 @@ The root agent orchestrates sub-agents and makes final recommendations. You'll c
 Sub-agents inherit the LLM provider, model, resource tier, and max iterations from the root agent. This tutorial uses GPT-5 Mini and max iterations of 15 to optimize performance. Using slower models (GPT-5.2, Claude Sonnet 4.5) or high max iterations (50+) will cause sub-agents to execute slowly. Each sub-agent call could take 60-90 seconds instead of 10-15 seconds.
 ====
 
-. Go to *Agentic AI* > *AI Agents*.
+. Go to *AI Agents*.
 . Click *Create Agent*.
 . Configure the root agent:
 +
@@ -324,7 +324,7 @@ Wait for the agent status to show *Running*.
 
 Test the multi-agent system with realistic dispute scenarios. Each scenario demonstrates different patterns: clear fraud, legitimate transactions, escalation cases, and edge cases.
 
-. Go to *Agentic AI* > *AI Agents*.
+. Go to *AI Agents*.
 . Click on `dispute-resolution-agent`.
 . Open the *Inspector* tab.
 
@@ -396,7 +396,7 @@ Process disputes automatically from transaction streams. When transactions meet 
 
 The pipeline needs the agent card URL to invoke the dispute resolution agent.
 
-. Go to *Agentic AI* > *AI Agents*.
+. Go to *AI Agents*.
 . Click on `dispute-resolution-agent`.
 . Open the *A2A* tab.
 . Copy the agent URL displayed at the top.
@@ -624,7 +624,7 @@ Only transactions meeting the risk threshold invoke the dispute resolution agent
 Use the pipeline metadata timestamp to find the corresponding agent execution in the *Transcripts* view.
 
 . Note the `processed_at` timestamp from the pipeline output (for example: `2026-01-26T18:30:45.000Z`).
-. Go to *Agentic AI* > *Transcripts*.
+. Go to *Transcripts*.
 . Find transcripts for `dispute-resolution-agent` that match your timestamp.
 
 [NOTE]

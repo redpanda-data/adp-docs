@@ -117,7 +117,7 @@ Create a dedicated gateway to isolate GitHub Copilot traffic and apply specific 
 
 === Gateway configuration
 
-. Navigate to *Agentic* > *AI Gateway* > *Gateways*
+. Navigate to *AI Gateway* > *Gateways*
 . Click *Create Gateway*
 . Enter gateway details:
 +

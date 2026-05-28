@@ -25,7 +25,7 @@ After reading this page, you will be able to:
 ====
 Using the UI::
 +
-. In ADP, navigate to *Agentic* > *AI Gateway* > *Gateways*.
+. In ADP, navigate to *AI Gateway* > *Gateways*.
 . Review the list of gateways you can access. For each gateway, you'll see the gateway name, ID, endpoint URL, status, available models, and provider performance.
 +
 Click the Configuration, API, MCP Tools, and Changelog tabs for additional information.
