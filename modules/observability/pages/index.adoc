@@ -1,3 +1,0 @@
-= Observability
-:description: Inspect, debug, and govern agentic AI with execution transcripts, metrics, and logs from Redpanda's Agentic Data Plane.
-:page-layout: index

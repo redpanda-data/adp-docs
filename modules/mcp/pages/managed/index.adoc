@@ -1,4 +1,0 @@
-= Managed Catalog
-:page-layout: index
-:description: Managed MCP servers Redpanda hosts in-process, with deep-dive guides for the most common types.
-

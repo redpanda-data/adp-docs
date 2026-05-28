@@ -1,4 +1,0 @@
-= Continue Integration
-:description: Integrate Redpanda ADP with Continue.
-
-// TODO: Add content

@@ -1,3 +1,0 @@
-= MCP Servers
-:description: Connect AI agents to your databases, queues, CRMs, and other business systems through MCP servers managed by the Agentic Data Plane.
-:page-layout: index
