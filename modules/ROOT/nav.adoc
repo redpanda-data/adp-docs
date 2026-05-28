@@ -4,7 +4,7 @@
 ** xref:agents:quickstart.adoc[AI Agent Quickstart]
 
 * Connect data & tools
-** xref:mcp:managed/managed-catalog.adoc[Plug in Salesforce, a database, or any tool]
+** xref:mcp:managed/managed-catalog.adoc[Plug in any app, database, or tool]
 ** xref:agents:create-agent.adoc[Turn your data source into an agent]
 ** xref:mcp:create-server.adoc[Build a tool server for your own data]
 ** xref:mcp:register-remote.adoc[Connect a tool server you host yourself]
