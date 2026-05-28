@@ -1,0 +1,283 @@
+= Token Budgets and Limits
+:description: See what AI spending the Agentic Data Plane records automatically and where to view it.
+:page-topic-type: overview
+:personas: platform_engineer, pilot_lead
+:learning-objective-1: Identify what spending data the Agentic Data Plane records automatically
+:learning-objective-2: Locate where to view spend in the dashboard, in transcripts, and through breakdown queries
+
+// TODO: configurable caps, halt-vs-notify enforcement, alerts, and per-tenant cap-setting are roadmap items not yet shipped. Add a how-to and reframe this overview as a comparison once those features land; for now, omit from customer prose per the project policy not to mark roadmap items.
+
+The Agentic Data Plane records every LLM call as a spending event the moment your first agent or MCP server runs through the gateway. Read that data through the governance dashboard, through individual transcripts, and through breakdown queries by provider, model, user, organization, or provider type.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+
+== What ADP records automatically
+
+Every LLM call routed through AI Gateway becomes a *spending event*. Each event captures:
+
+* Input tokens, output tokens, and cached tokens.
+* Total cost (in microcents).
+* Request count.
+* The provider, model, user, and organization context the call ran under.
+
+Events flow through a Kafka pipeline and roll up into queryable storage. No setup required: spending is captured the moment your first agent or MCP server runs through the gateway.
+
+Streaming and non-streaming requests are tracked the same way. Cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) are attributed correctly on streaming responses so cost rollups stay accurate when an agent reuses long system prompts.
+
+[NOTE]
+====
+Cost is reported in *microcents*. 1 cent = 100 microcents, $1 = 10,000 microcents. Divide `total_cost_microcents` by 10,000 to convert to dollars.
+====
+
+// TODO: confirm whether spending events are captured by default for every deployment, or whether some deployments require an opt-in flag. Open Q A1 in the companion plan.
+
+=== Per-request pricing variations
+
+A few request- or response-time signals change the rate ADP applies to a single call. You don't configure these; the spending pipeline picks them up from the upstream response or request and bills accordingly.
+
+* *Anthropic fast mode*: Anthropic exposes a fast-mode option on some models (for example, Opus 4.6 fast) that carries a per-token premium over the default rate. ADP reads the `speed` field on each Anthropic response and bills fast-mode calls at the model's fast-mode rate. Requests without a `speed` field fall back to the default rate card.
+* *Context-tier pricing*: A few models charge a different rate once a request crosses a context-length threshold. Gemini Pro, for example, prices requests above a 128K-token context at a higher tier than shorter requests. ADP passes the call's context-token count to the rate card so requests at or above the threshold bill at the tiered rate automatically.
+
+== Where to view your spend
+
+You don't view spend on this page. The *LLM Providers* page, dashboard, transcripts, and breakdown queries are the read surfaces:
+
+[cols="1,3"]
+|===
+|Surface |Use it for
+
+|*Cost & Usage* tab (*LLM Providers* page)
+|Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, or user. See xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
+
+|*Governance dashboard*
+|Summary cards (total spend, agent count, request count, trend), provider breakdown chart, events timeline, agents and MCP servers tables. The single-pane-of-glass view across your whole deployment. See xref:control:dashboard/overview.adoc[Read the governance overview].
+
+|*Transcripts*
+|Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:monitor:transcripts.adoc[Read a transcript].
+
+|*Breakdown queries*
+|Aggregated spend by *provider*, *model*, *user*, *organization*, or *provider type*. Available through the dashboard's provider-breakdown widget and through `GetSpendingBreakdown` for programmatic access.
+|===
+
+The breakdown dimensions all read from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_id`, or `organization_id`. Combine dimensions to scope a query (for example, "all spend on Anthropic for user `alice` in April").
+
+For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` expression that lets you combine and negate dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). The convenience fields and the `filter` expression compose; populate one or both. The server compiles the result to a single SQL `WHERE` clause, which avoids per-dimension fan-out queries.
+
+[NOTE]
+====
+`total_tokens` is derived server-side from input + output + cache tokens. You don't need to compute it client-side, and the value is consistent across all four `SpendingService` methods.
+====
+
+// TODO: confirm `user_id` and `organization_id` are populated automatically from request context (OIDC claims) or require setup. Open Q A2 in the companion plan.
+
+[[query-spend-programmatically]]
+== Query spend programmatically
+
+`SpendingService.GetSpendingBreakdown` is the canonical RPC for pulling spend out of ADP. Use it for chargeback reporting, scheduled emails, internal cost dashboards, or any workflow the built-in UI doesn't cover. Every spend number the dashboard shows comes from this RPC, so query results match the UI to the cent.
+
+=== Authenticate
+
+`SpendingService` uses the same OIDC client-credentials grant as the rest of AI Gateway. Mint a service-account access token using the flow in xref:gateway:connect-agent.adoc#authenticate-with-oidc-client-credentials[Authenticate with OIDC client credentials], then pass the token in the `Authorization: Bearer <token>` header on every call. The service account needs `dataplane_adp_spending_get` on the resource you're querying. See xref:control:permissions-reference.adoc#spending-permissions[Spending permissions].
+
+// TODO: Confirm the canonical endpoint shape against `apps/aigw` on cloudv2. Likely a Connect-Go / gRPC reflection surface at `<dataplane-base>/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown`. Replace the placeholder URL below with the verified shape, and add a note on whether HTTP/JSON transcoding is exposed or whether clients must speak gRPC.
+
+=== Request shape
+
+`GetSpendingBreakdown` takes a `SpendingFilter` plus a `group_by` dimension. The filter accepts:
+
+[cols="1,3"]
+|===
+|Field |Meaning
+
+|`time_range.start_time`, `time_range.end_time`
+|RFC 3339 timestamps bracketing the window. Required.
+
+|`provider_name`
+|Restrict to one LLM provider (matches the *Name* field on the provider's detail page).
+
+|`model_id`
+|Restrict to one model identifier (`claude-sonnet-4-6`, `gpt-5.2`, and so on).
+
+|`user_id`
+|Restrict to one identified user. Anonymous traffic is excluded.
+
+|`organization_id`
+|Restrict to one organization. Multi-tenant deployments only.
+
+|`filter`
+|AIP-160 expression that combines and negates dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). Composes with the structured fields above; populate one or both.
+|===
+
+The `group_by` value chooses the breakdown dimension: `PROVIDER`, `MODEL`, `USER`, `ORGANIZATION`, or `PROVIDER_TYPE`.
+
+=== cURL example
+
+Pull per-user spend for the last 7 days against an Anthropic provider:
+
+[source,bash]
+----
+ACCESS_TOKEN="<oidc-access-token>"   # from the client_credentials flow
+DATAPLANE_BASE="https://aigw.<cluster-id>.clusters.rdpa.co"
+
+curl -s --request POST \
+  --url "${DATAPLANE_BASE}/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown" \
+  --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "filter": {
+      "time_range": {
+        "start_time": "2026-05-17T00:00:00Z",
+        "end_time":   "2026-05-24T00:00:00Z"
+      },
+      "provider_name": "prod-anthropic"
+    },
+    "group_by": "USER"
+  }' | jq
+----
+
+The response carries one row per user in the window, each with `input_tokens`, `output_tokens`, `cached_tokens`, `total_tokens` (server-derived), `total_cost_microcents`, and `request_count`. Divide `total_cost_microcents` by 10,000 to convert to dollars.
+
+=== Python example
+
+Generated client code lives in the proto bundle; if your project doesn't already import it from cloudv2, drive `SpendingService` over plain HTTPS:
+
+[source,python]
+----
+import os, requests
+from datetime import datetime, timedelta, timezone
+
+token = os.environ["ACCESS_TOKEN"]            # from the client_credentials flow
+base  = os.environ["DATAPLANE_BASE"]          # https://aigw.<cluster-id>.clusters.rdpa.co
+end   = datetime.now(timezone.utc)
+start = end - timedelta(days=7)
+
+body = {
+    "filter": {
+        "time_range": {
+            "start_time": start.isoformat().replace("+00:00", "Z"),
+            "end_time":   end.isoformat().replace("+00:00", "Z"),
+        },
+        "filter": 'provider_name="prod-anthropic"',
+    },
+    "group_by": "USER",
+}
+
+r = requests.post(
+    f"{base}/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown",
+    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+    json=body,
+)
+r.raise_for_status()
+for row in r.json().get("rows", []):
+    dollars = row["total_cost_microcents"] / 10_000
+    print(f"{row['user_id']}: ${dollars:,.2f}  ({row['request_count']} requests)")
+----
+
+// TODO: Replace the URL path with the verified Connect-Go / gRPC route once eng confirms. The proto-generated client (Connect-Go or grpc-python) is the long-term recommendation; the cURL/`requests` examples above are for quick scripting.
+
+=== Related methods
+
+`SpendingService` exposes three more methods that follow the same `SpendingFilter` shape:
+
+* `GetSpendingTimeSeries`: Bucketed spend over the time range, for chart-style consumers.
+* `GetSpendingSummary`: Total spend, tokens, and requests for the range, with no breakdown.
+* `ListSpendingEvents`: Paged per-call detail. Use this only for narrow time ranges; the event volume is high.
+
+// TODO: Confirm the method names above against the current `SpendingService` proto and add the full request/response shape for each one (or split into a dedicated spending-api.adoc if this section outgrows budgets.adoc).
+
+== Guardrail evaluator cost
+
+Some guardrail evaluators call an LLM to do their work. A toxicity classifier, for example, runs the request or response through a separate model and accrues per-call cost in the process. PII detection over regex doesn't, but anything LLM-based does.
+
+Guardrail evaluator cost surfaces in the same spending pipeline as user-facing LLM calls. The evaluator's cost is attributed to the *evaluator's configured upstream provider* (usually a small classifier model, separate from the user-facing LLM), so per-provider breakdowns separate the two automatically.
+
+For the per-evaluator cost model and how it interacts with the dashboard's spend view, see xref:control:guardrails/overview.adoc[Configure guardrails].
+
+// TODO: confirm with eng that guardrail evaluator cost flows into the same SpendingService as user-facing LLM cost (vs. a separate stream). Open Q A3 in the companion plan, also flagged on the Guardrails plan.
+
+== Multi-tenant viewing patterns
+
+The `SpendingFilter` exposes `organization_id` and `user_id`, so every dashboard query and every API call can scope to a single tenant or user. Use this to:
+
+* See per-tenant spend in the dashboard's provider-breakdown view.
+* Pull per-user cost reports through `GetSpendingBreakdown`.
+* Identify which organization or user is driving the highest cost on a specific provider.
+
+// TODO: cap-setting at any scope (per-tenant, per-user, per-agent) is a roadmap item, not shipped. Drop this TODO once that surface lands and add a "Set caps" how-to next to the viewing surface above. Until then, customer prose stays viewing-only.
+
+// TODO: confirm whether `organization_id` is multi-tenant-aware in the public ADP API, or whether it's an internal-only field. The proto exposes the filter; runtime population is the open item. Open Q B1 in the companion plan.
+
+[[override-per-model-pricing]]
+== Override per-model pricing
+
+The Agentic Data Plane ships with a default rate card per provider, covering input, output, and cache-read prices for every model in the built-in catalog. The cost-reporting pipeline reads from this rate card when it computes per-call spend, which is why every dollar value on the dashboard, in transcripts, and in `SpendingService` queries works without any setup.
+
+If your organization negotiates non-standard pricing, or you want to track spend against an internal chargeback rate, override the rate card on a per-model basis. Per-model overrides apply to every spending event for that model from the moment they're saved.
+
+=== When to override
+
+Override the rate card when:
+
+* You have a custom contract with a provider that prices a model below or above the published list price.
+* You want internal chargeback reporting against a different rate than the provider charges.
+* You want to attach pricing to a self-hosted or OpenAI-compatible model the catalog doesn't price by default.
+
+Leave the rate card at its defaults if you're paying list price and don't need chargeback adjustments.
+
+=== Edit the rate card
+
+Open the per-model pricing editor from the governance UI:
+
+// TODO: confirm the exact UI route on `adp-production` once walked. Likely under the governance dashboard's model-detail surface or under *LLM Providers > \{provider} > \{model}*; capture the route + screenshots before merging.
+
+For each model, the editor exposes three buckets matching the cost-reporting categories:
+
+[cols="1,3"]
+|===
+|Bucket |What it prices
+
+|*Input*
+|Cost per 1M prompt tokens, including tool-use inputs.
+
+|*Output*
+|Cost per 1M completion tokens. For models that emit reasoning tokens (Anthropic 4.x, OpenAI o-series), reasoning is included in this bucket.
+
+|*Cache write*
+|Cost per 1M tokens written to a prompt cache. Split into three TTL tiers because providers charge differently per tier:
+
+* *5-minute*: Short-lived prompt caches.
+* *1-hour*: Extended-TTL caches (Anthropic v4.x, OpenAI 4.x).
+* *Unknown TTL*: Fallback bucket for usage events that don't carry a TTL tag.
+|===
+
+The catalog default for the bucket appears alongside your override; clear the override to fall back to the catalog price.
+
+=== How overrides apply
+
+Three rules govern how the cost-reporting pipeline applies overrides:
+
+* Overrides apply to *new spending events* from the moment they're saved. Historical events keep the rate card that was in effect when the event was recorded. The dashboard's _Compare to previous period_ overlay reflects that.
+* Overrides are scoped to one model at a time. To roll out a new contract across an entire provider's catalog, edit each model in turn.
+* Cache-read pricing follows the catalog default. Only cache-write tiers are overridable. Cache-read tokens still surface in the *CACHED* bucket on the dashboard and in `SpendingService` responses.
+
+// TODO: confirm whether overrides surface in `SpendingService.GetSpendingBreakdown` responses (for example, as a flag indicating which line items used overrides) or are applied invisibly. Walk against `adp-production` once the override editor is live there.
+
+=== Verify what's billed
+
+After saving an override, send a test request through the affected model and either:
+
+* Open the resulting transcript and check the per-turn USD cost matches your override math (input + output + any cache write you triggered).
+* Run `GetSpendingBreakdown` with the model filtered in and confirm the dollar value lands on the expected figure.
+
+If the cost still reflects the catalog price, the override may not have propagated yet. Wait a few seconds for cost-reporting to pick it up, then re-test.
+
+// TODO: roadmap items not yet shipped: configurable caps (daily/monthly, per org/agent/user, per provider/model); halt-vs-notify behavior on cap hits; per-agent caps; alert hooks (webhook/email/chat); multi-tenant cap-setting with override semantics. Once cap-management lands, add a "Set caps" how-to and split this page into a sub-folder if content outgrows a single page. Open Q C1 in the companion plan.
+
+== Next steps
+
+* xref:control:dashboard/overview.adoc[Read the governance overview]
+* xref:monitor:transcripts.adoc[Read a transcript]
+* xref:control:guardrails/overview.adoc[Configure guardrails]

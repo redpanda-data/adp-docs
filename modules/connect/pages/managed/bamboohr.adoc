@@ -1,0 +1,108 @@
+= BambooHR Managed MCP Server
+:description: Let agents read BambooHR employee, time-off, and performance data with each caller's BambooHR OAuth identity.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Configure the BambooHR managed MCP server with a BambooHR subdomain and user-delegated OAuth
+:learning-objective-2: Identify the BambooHR tools available to agents
+:learning-objective-3: Test BambooHR tool calls with an authorized user's connection
+
+// Source: `cloudv2` `apps/aigw/docs/bamboohr-mcp.md`, `proto/mcps/redpanda/mcps/bamboohr/v1/*`, and `apps/aigw/internal/mcp/managed/mcps/bamboohr/register_mcp.go` on `origin/main`, verified 2026-05-10.
+
+The *BambooHR* managed MCP server lets agents read BambooHR employee directory, time-off, and performance data with the calling user's OAuth identity. The BambooHR configuration stores only the company subdomain. OAuth credentials and user tokens come from the OAuth Provider and token vault.
+
+Use this guide to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+Use BambooHR when an agent needs HR context from BambooHR without sharing one upstream API key across every caller. Each caller authorizes with BambooHR, and tool calls run with the BambooHR permissions available to that caller.
+
+[cols="1,3"]
+|===
+|Tool |What it does
+
+|`get_employee`
+|Fetches a single employee by ID. Use employee ID `0` to return the authenticated user's own record. You can pass a comma-separated `fields` list, or leave it empty to return all fields the caller can access.
+
+|`get_employee_directory`
+|Lists all employee directory entries visible to the authenticated user.
+
+|`get_time_off_requests`
+|Queries time-off requests by date range. You can filter by employee ID, status, or time-off type. Supported statuses are `approved`, `denied`, `superceded`, `requested`, and `canceled`.
+
+|`whos_out`
+|Returns absences and holidays in a date range. If you omit dates, the server starts with today and ends 14 days later.
+
+|`get_performance_feedback`
+|Returns peer or manager feedback for an employee. You can filter by `completed`, `pending`, or all feedback.
+|===
+
+== Prerequisites
+
+* Access to the Agentic Data Plane.
+* A BambooHR workspace where you can create an OAuth 2.0 application.
+* A BambooHR OAuth Provider in ADP. BambooHR OAuth authorize and token endpoints include your company subdomain.
+* A BambooHR company subdomain, such as `mycompany` for `mycompany.bamboohr.com`. The managed config accepts letters, numbers, and hyphens.
+* BambooHR users with the permissions required to read the employee, time-off, or performance data your agent needs.
+
+// TODO: Confirm the exact Agentic Data Plane UI field labels for attaching user-delegated OAuth to managed BambooHR after an authenticated UI walkthrough.
+// TODO: Add a CLI example only after confirming how `rpk ai` sets MCPServer `auth_config.user_oauth` for managed types that do not carry auth inside the managed config.
+
+== Configure BambooHR OAuth
+
+In BambooHR, create an OAuth 2.0 application in the BambooHR developer settings. Use the OAuth callback URL for your AI Gateway deployment.
+
+Register a BambooHR OAuth Provider in ADP with tenant-specific endpoints:
+
+[source,text]
+----
+Authorization endpoint: https://api.bamboohr.com/api/gateway.php/<subdomain>/v1/oauth2/authorize
+Token endpoint:         https://api.bamboohr.com/api/gateway.php/<subdomain>/v1/oauth2/token
+----
+
+Store the BambooHR client secret in the ADP secret store, then reference that secret from the OAuth Provider.
+
+== Create the managed MCP server
+
+Create a managed MCP server with the BambooHR type. Set the `subdomain` field and attach the BambooHR OAuth Provider as user-delegated OAuth on the MCP server.
+
+The BambooHR managed config contains only the company subdomain:
+
+[source,json]
+----
+{
+  "@type": "type.googleapis.com/redpanda.mcps.bamboohr.v1.BambooHRMCPConfig",
+  "subdomain": "mycompany"
+}
+----
+
+== Authorize and test
+
+Before a caller can use BambooHR tools, the caller must authorize the BambooHR OAuth Provider. After authorization, Redpanda stores the user's access token in the token vault and subsequent tool calls use that token automatically.
+
+Test the server in the Inspector before you connect it to an agent. Start with `get_employee_directory` or `get_employee` with employee ID `0`, because both calls confirm that the user's OAuth connection resolves and BambooHR returns data visible to that user.
+
+== Troubleshooting
+
+[cols="1,3"]
+|===
+|Symptom |What to check
+
+|Tool calls return permission errors
+|Confirm the BambooHR user can access the requested HR data. Restricted BambooHR roles can return permission errors, especially for performance data.
+
+|OAuth succeeds, but tool calls fail
+|Confirm the OAuth Provider endpoints use the same BambooHR subdomain as the MCP server configuration.
+
+|The server cannot find the BambooHR company
+|Confirm `subdomain` contains only the part before `.bamboohr.com`, such as `mycompany`.
+|===
+
+== Next steps
+
+* xref:connect:user-delegated-oauth.adoc[]
+* xref:connect:test-tools.adoc[]
+* xref:connect:create-agent.adoc[]

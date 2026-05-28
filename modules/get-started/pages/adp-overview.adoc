@@ -30,7 +30,7 @@ For high availability, the gateway provides provider-agnostic routing with intel
 
 The gateway also supports tenancy modeling for teams, individuals, applications, and service accounts, giving you chargeback transparency for internal cost allocation. You can proxy both models and MCP gateways, centralizing compliance for all LLM interactions without locking into any single provider.
 
-For more information, see xref:ai-gateway:overview.adoc[AI Gateway Overview].
+For more information, see xref:gateway:overview.adoc[AI Gateway Overview].
 
 == MCP servers
 
@@ -40,7 +40,7 @@ MCP servers are lightweight, support OIDC-based authentication, and enforce dete
 
 With real-time debugging capabilities, you reduce integration time while getting enterprise-grade security. You can reuse your existing infrastructure and data sources rather than building new integrations from scratch.
 
-For more information, see xref:mcp:overview.adoc[MCP Servers Overview].
+For more information, see xref:connect:mcp-overview.adoc[MCP Servers Overview].
 
 == AI agents
 
@@ -50,13 +50,13 @@ What makes this practical at scale is Redpanda Connect. More than 300 connectors
 
 The result is faster time-to-production, lower maintenance (declarative definitions instead of imperative code), and organizational consistency across teams.
 
-For more information, see xref:agents:overview.adoc[].
+For more information, see xref:connect:agents-overview.adoc[].
 
 == Governance
 
 The glossterm:governance dashboard[] provides a cross-tenant view of agent activity, spending, MCP server inventory, and authorization events. It composes existing services into a single overview built for platform administrators and finance partners, surfacing per-provider spending, agent state, and the authorization decisions that gate every tool invocation.
 
-For more information, see xref:governance:dashboard/index.adoc[Governance Dashboard Overview].
+For more information, see xref:control:dashboard/overview.adoc[Governance Dashboard Overview].
 
 == Built-in governance controls
 
@@ -66,7 +66,7 @@ Redpanda ADP addresses critical enterprise requirements across all components.
 
 * *Unified authorization*: All components use OIDC-based authentication with an on-behalf-of authorization model. When a user invokes an agent, the agent inherits the intersection of its own permissions and the user's permissions. This ensures proper data access scoping.
 
-* *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) capture every agent action with 100% sampling using OpenTelemetry standards. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in the Agentic Data Plane UI and replay data for agent evaluations. For more information, see xref:observability:concepts.adoc[Transcripts Overview].
+* *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) capture every agent action with 100% sampling using OpenTelemetry standards. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in the Agentic Data Plane UI and replay data for agent evaluations. For more information, see xref:monitor:concepts.adoc[Transcripts Overview].
 
 * *Compliance and audit*: For regulated industries with frameworks such as ISO 42001 and the EU AI Act, Redpanda ADP records every agent action and data source used in decision-making. Execution logs are stored in Redpanda topics and can be materialized to Iceberg tables for multi-year retention and analysis.
 
@@ -83,4 +83,4 @@ Common Redpanda ADP use cases include:
 == Next steps
 
 * xref:get-started:byoc-quickstart.adoc[ADP Quickstart] — Set up ADP for your organization (administrators).
-* xref:agents:quickstart.adoc[AI Agent Quickstart] — Build your first AI agent (builders).
+* xref:get-started:quickstart.adoc[AI Agent Quickstart] — Build your first AI agent (builders).

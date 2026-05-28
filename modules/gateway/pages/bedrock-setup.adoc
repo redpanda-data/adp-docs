@@ -1,0 +1,172 @@
+= Set Up AWS Bedrock as an LLM Provider
+:description: Create the IAM user, policy, and access keys required for AI Gateway to invoke Amazon Bedrock models, then register the provider in ADP.
+:page-topic-type: how-to
+:personas: platform_engineer
+:learning-objective-1: Create an IAM policy that grants AI Gateway permission to invoke Bedrock foundation models and cross-region inference profiles
+:learning-objective-2: Create a dedicated IAM user, attach the policy, and generate access keys for AI Gateway
+:learning-objective-3: Register Bedrock as an LLM provider in ADP and select the models you want to expose
+
+// Source: cloudv2 `apps/aigw/docs/customer/bedrock-setup-guide.md` on origin/main, verified 2026-05-19.
+
+This guide walks you through the AWS-side setup AI Gateway needs to invoke Amazon Bedrock, then through the Agentic Data Plane UI flow that registers Bedrock as an LLM provider. For background on how Bedrock foundation models, cross-region inference profiles, and IAM patterns map to the provider form, see xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] on the main provider configuration page.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* A Redpanda Cloud cluster with ADP enabled.
+* An AWS account with Bedrock model access enabled in the region you plan to call. Model availability varies by region; see link:https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html[Bedrock models by region^].
+* Access to the AWS CLI configured with credentials that can create IAM users, policies, and access keys.
+* Access to the Redpanda Cloud UI.
+
+== Create the IAM policy
+
+Create a policy that grants the two Bedrock invoke actions on both foundation-model ARNs and cross-region inference-profile ARNs:
+
+[,bash]
+----
+aws iam create-policy \
+  --policy-name RedpandaBedrockInvoke \
+  --policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "BedrockInvoke",
+        "Effect": "Allow",
+        "Action": [
+          "bedrock:InvokeModel",
+          "bedrock:InvokeModelWithResponseStream"
+        ],
+        "Resource": [
+          "arn:aws:bedrock:*::foundation-model/*",
+          "arn:aws:bedrock:*:*:inference-profile/*"
+        ]
+      }
+    ]
+  }'
+----
+
+The second resource entry enables cross-region inference profiles such as `us.anthropic.claude-sonnet-4-6`, which AI Gateway uses when the model identifier carries a geography prefix. See xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] for the full prefix list and pricing implications.
+
+NOTE: Anthropic Claude 4.6 and later models cannot be invoked with the bare foundation-model ID and require an inference profile. Without the second `Resource` entry, those calls fail with `AccessDenied`.
+
+To restrict the policy to specific models and regions for production, replace the wildcard resources with explicit ARNs. For example:
+
+[,json]
+----
+{
+  "Resource": [
+    "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-sonnet-4-6",
+    "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-haiku-4-5-20251001"
+  ]
+}
+----
+
+== Create the IAM user
+
+Create a dedicated IAM user for AI Gateway and attach the policy:
+
+[,bash]
+----
+aws iam create-user --user-name redpanda-bedrock-invoker
+
+aws iam attach-user-policy \
+  --user-name redpanda-bedrock-invoker \
+  --policy-arn arn:aws:iam::<account-id>:policy/RedpandaBedrockInvoke
+----
+
+Replace `<account-id>` with the account ID returned in the `create-policy` output (visible in the policy ARN).
+
+TIP: Don't reuse an existing IAM user. A dedicated user makes it easy to rotate credentials or revoke access without affecting other AWS workloads.
+
+== Generate access keys
+
+Generate the access keys AI Gateway uses:
+
+[,bash]
+----
+aws iam create-access-key --user-name redpanda-bedrock-invoker
+----
+
+Save the `AccessKeyId` and `SecretAccessKey` from the output. You need both in the next section to register them as Redpanda Cloud secrets.
+
+CAUTION: AWS displays the secret access key only at creation. Store it in a password manager or pass it directly into the secret-creation flow in the next section.
+
+== Verify Bedrock access (optional)
+
+Confirm the IAM user can invoke Bedrock before moving to the UI:
+
+[,bash]
+----
+aws bedrock-runtime invoke-model \
+  --model-id us.anthropic.claude-haiku-4-5-20251001-v1:0 \
+  --region us-east-1 \
+  --content-type application/json \
+  --accept application/json \
+  --body "$(echo -n '{"anthropic_version":"bedrock-2023-05-31","max_tokens":32,"messages":[{"role":"user","content":"Hello"}]}' | base64)" \
+  /tmp/bedrock-test.json \
+  && jq . /tmp/bedrock-test.json && rm /tmp/bedrock-test.json
+----
+
+A successful model response confirms the IAM policy, region, and credentials are correct. If you see `AccessDenied`, check the policy resource list and confirm Bedrock model access is enabled in the target region.
+
+== Register Bedrock as an LLM provider
+
+. Sign in to the Redpanda Cloud UI and open ADP.
+. Open *LLM Providers* in the sidebar and click *Create provider*.
+. Select *AWS Bedrock* as the provider type.
+. Enter a Name such as `my-bedrock`. Use lowercase letters, digits, and hyphens. The name is immutable and appears in the proxy URL.
+. Select the Region where you want to invoke Bedrock, such as `us-east-1`.
+. Configure the credentials:
++
+.. In the Access key ID ref dropdown, type a secret name such as `AWS_ACCESS_KEY_ID`. The inline secret-creation form opens.
+.. Paste the `AccessKeyId` value from the IAM user setup and click *Create*. The secret is stored in the cloud secret store, scoped to AI Gateway.
+.. Repeat for Secret access key ref. Use a name such as `AWS_SECRET_ACCESS_KEY` and paste the `SecretAccessKey` value.
++
+Secret names are normalized to `UPPER_SNAKE_CASE` automatically and are scoped to AI Gateway so only LLM providers can reference them.
+
+. Select the models you want to expose through this provider, for example:
++
+* `anthropic.claude-sonnet-4-6`
+* `anthropic.claude-haiku-4-5-20251001`
+* `amazon.nova-pro-v1:0`
++
+For Anthropic Claude 4.6 and later, pick the inference profile (for example, `us.anthropic.claude-sonnet-4-6`) rather than the bare foundation-model ID.
+
+. Click *Create provider*.
+. On the provider detail page, scroll to the Verify connection section, pick a model, and click *Test Connection*. A successful response confirms that the credentials, region, and IAM policy are correctly configured.
+
+== Cross-region inference profile billing
+
+When you call a cross-region inference profile (any model identifier with a `us.`, `eu.`, `apac.`, `au.`, `jp.`, or `global.` prefix), AI Gateway bills at the regional rate for that profile. The regional prefix is preserved end to end so usage in the Governance dashboard and the *Cost & Usage* tab on *LLM Providers* reflects the correct per-region price.
+
+For example, requests to `eu.anthropic.claude-haiku-4-5` bill at the EU Haiku rate, not the headline foundation-model rate. The `global.` profile shares the headline rate; the geography-specific profiles (`us.`, `eu.`, `apac.`, `au.`, `jp.`) carry approximately a 10% cross-region inference premium.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`AccessDenied` from Bedrock
+|Confirm the IAM policy includes both `bedrock:InvokeModel` and `bedrock:InvokeModelWithResponseStream`, and that the resource list covers the model or inference profile you're calling. For Claude 4.6 and later, the policy must include `arn:aws:bedrock:*:*:inference-profile/*` or an explicit inference-profile ARN.
+
+|`secret "<NAME>" not found`
+|Confirm the secret exists in the cloud secret store and the reference in the provider configuration matches exactly. Secret names are `UPPER_SNAKE_CASE`.
+
+|`ValidationException: model ID not supported`
+|The model isn't enabled in the region you chose. Open the AWS Bedrock console, switch to the target region, and enable model access for the foundation models you want to expose.
+
+|`Invocation of model ID … with on-demand throughput isn't supported`
+|You called a Claude 4.6 or later model with a bare foundation-model ID. Switch to an inference profile, for example `us.anthropic.claude-sonnet-4-6` instead of `anthropic.claude-sonnet-4-6`. See xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM].
+|===
+
+== Next steps
+
+* xref:gateway:configure-provider.adoc[Configure an LLM provider]
+* xref:gateway:connect-agent.adoc[Connect your agent]
+* xref:control:dashboard/overview.adoc[Read the governance overview]

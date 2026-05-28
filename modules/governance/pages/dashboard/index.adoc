@@ -1,4 +1,0 @@
-= Governance Dashboard
-:page-layout: index
-:description: See your AI deployment's spending, fleet, and activity in one place, with drill-down into the transcript behind any number, agent, or event.
-

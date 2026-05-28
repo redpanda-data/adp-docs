@@ -21,7 +21,7 @@ After completing this quickstart, you will be able to:
 == Prerequisites
 
 * A Redpanda Cloud BYOC environment on AWS with ADP enabled.
-* The Writer or Admin xref:governance:permissions-overview.adoc[built-in role] in ADP. The Reader role can list resources but cannot create them.
+* The Writer or Admin xref:control:permissions-overview.adoc[built-in role] in ADP. The Reader role can list resources but cannot create them.
 * An Anthropic account. If you don't have one, the next section walks through signup.
 
 == What you'll build
@@ -113,9 +113,9 @@ The catalog of available models is maintained by Redpanda. Models you select her
 
 . On the provider detail page, confirm the *Status* badge in the *Connection* card shows *Active*. The agent you build later in this quickstart will exercise the provider end-to-end.
 
-If the *Status* badge stays in a failure state, see the xref:ai-gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace ADP can read.
+If the *Status* badge stays in a failure state, see the xref:gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace ADP can read.
 
-For the full provider field reference (transcript logging, Bedrock IAM, Anthropic auth passthrough, OpenAI-compatible endpoints), see xref:ai-gateway:configure-provider.adoc[Configure an LLM provider].
+For the full provider field reference (transcript logging, Bedrock IAM, Anthropic auth passthrough, OpenAI-compatible endpoints), see xref:gateway:configure-provider.adoc[Configure an LLM provider].
 
 == Create an MCP server with a public OpenAPI spec
 
@@ -123,7 +123,7 @@ The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL 
 
 [NOTE]
 ====
-PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:mcp:managed/managed-catalog.adoc[Managed MCP catalog]) once you've confirmed the rest of the flow works.
+PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) once you've confirmed the rest of the flow works.
 ====
 
 . Open *MCP Servers* > *Create Server*.
@@ -155,9 +155,9 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 +
 The exact tool count depends on the operations defined in the spec at fetch time.
 
-. (Optional) Click *Ping* in the *MCP Inspector* card to confirm the server responds. If the Ping fails or the *STATUS* stays disconnected, see xref:mcp:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
+. (Optional) Click *Ping* in the *MCP Inspector* card to confirm the server responds. If the Ping fails or the *STATUS* stays disconnected, see xref:connect:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
 
-For the full OpenAPI MCP reference (auth modes, operation filters, base URL overrides), see xref:mcp:managed/openapi.adoc[OpenAPI managed MCP server].
+For the full OpenAPI MCP reference (auth modes, operation filters, base URL overrides), see xref:connect:managed/openapi.adoc[OpenAPI managed MCP server].
 
 == Build your agent
 
@@ -209,7 +209,7 @@ Rules:
 
 . Click *Create Agent* at the bottom of the form.
 
-. Wait for the agent status to change from *Starting* to *Running*. ADP also creates the service account at this point; for details, see xref:agents:concepts.adoc#service-account-authorization[service account authorization].
+. Wait for the agent status to change from *Starting* to *Running*. ADP also creates the service account at this point; for details, see xref:connect:concepts.adoc#service-account-authorization[service account authorization].
 
 == Test the agent in the Inspector
 
@@ -244,7 +244,7 @@ Find a pet tagged "friendly" and tell me whether it's available.
 +
 The agent may call `findpetsbytags` first, then `getpetbyid` for one of the matches, then summarize.
 
-If the agent hallucinates data instead of calling a tool, tighten the system prompt's "Always call a tool before answering" rule. See xref:agents:system-prompts.adoc[system prompt best practices] for patterns.
+If the agent hallucinates data instead of calling a tool, tighten the system prompt's "Always call a tool before answering" rule. See xref:connect:system-prompts.adoc[system prompt best practices] for patterns.
 
 If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet store API being unavailable, that's the public Swagger PetStore being intermittently down. The agent is behaving correctly (the "if a tool fails, say so and stop" rule in the system prompt is what produced the apology). Retry the prompt; PetStore usually recovers within a few minutes.
 
@@ -268,7 +268,7 @@ Every agent run is recorded as a glossterm:transcript[] you can replay turn-by-t
 * The tool's response.
 * The agent's final response to the user.
 
-For the full transcript field reference, see xref:observability:transcripts.adoc[Read a transcript].
+For the full transcript field reference, see xref:monitor:transcripts.adoc[Read a transcript].
 endif::[]
 
 ifdef::env-adp-governance[]
@@ -284,7 +284,7 @@ The glossterm:governance dashboard[] rolls up every LLM call and tool invocation
 * *Requests*: Reflects the LLM calls from your agent runs (one per turn).
 * *Tokens*: Input plus output tokens across the same calls.
 
-For the full governance dashboard tour, see xref:governance:dashboard/overview.adoc[Read the governance overview].
+For the full governance dashboard tour, see xref:control:dashboard/overview.adoc[Read the governance overview].
 endif::[]
 
 == Clean up
@@ -307,8 +307,8 @@ If you want to keep the provider but rotate the key, edit the provider and chang
 
 Now that you have a working ADP setup, here are the most useful things to do next:
 
-* Add more LLM providers (OpenAI, Google AI, AWS Bedrock, OpenAI-compatible): xref:ai-gateway:configure-provider.adoc[Configure an LLM provider]
-* Swap the PetStore demo for a real upstream (Slack, Jira, SQL, Kafka, and more): xref:mcp:managed/managed-catalog.adoc[Managed MCP catalog]
+* Add more LLM providers (OpenAI, Google AI, AWS Bedrock, OpenAI-compatible): xref:gateway:configure-provider.adoc[Configure an LLM provider]
+* Swap the PetStore demo for a real upstream (Slack, Jira, SQL, Kafka, and more): xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]
 ifdef::env-adp-governance[]
-* Track spend across teams: xref:governance:budgets.adoc[Token budgets and limits]
+* Track spend across teams: xref:control:budgets.adoc[Token budgets and limits]
 endif::[]

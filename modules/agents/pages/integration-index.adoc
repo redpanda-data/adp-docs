@@ -1,6 +1,0 @@
-= Agent Integration
-:page-layout: index
-:description: Connect agents to external applications, pipelines, and other systems.
-
-Choose integration patterns and connect agents to your systems.
-

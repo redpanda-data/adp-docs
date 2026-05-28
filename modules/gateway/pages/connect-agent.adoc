@@ -1,0 +1,454 @@
+= Connect Your Agent
+:description: Point your application or AI agent at an AI Gateway provider's proxy URL. Covers the URL shape, the local development workflow with rpk ai, the OIDC client-credentials flow for CI and application code, and SDK examples for OpenAI, Anthropic, Google AI, AWS Bedrock, and OpenAI-compatible endpoints.
+:page-topic-type: how-to
+:personas: agent_builder
+:page-aliases: cloud-data-platform:ai-agents:ai-gateway/builders/connect-your-agent.adoc
+:learning-objective-1: Construct the proxy URL for an LLM provider you have configured
+:learning-objective-2: pass:q[Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients]
+:learning-objective-3: Send requests through the proxy URL with the SDK of your choice
+
+This guide shows how to connect your glossterm:AI agent[] or application to AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with xref:reference:rpk/rpk-cloud/rpk-cloud-login.adoc[`rpk cloud login`] for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* A configured LLM provider. If you haven't created one yet, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
+* For local development, nothing else. You'll install `rpk ai` in the next section.
+* For CI or programmatic clients: A Redpanda Cloud service account with OIDC client credentials. See xref:cloud-data-platform:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
++
+// TODO: confirm whether ADP hosts its own service-account IAM post-standalone, or continues to share Redpanda Cloud Organization IAM.
+* A development environment with your chosen programming language.
+
+== Proxy URL anatomy
+
+Every provider you create in AI Gateway gets its own proxy URL:
+
+[source,text]
+----
+<gateway-base>/llm/v1/providers/<provider-name>/<upstream-path>
+----
+
+* `<gateway-base>`: The AI Gateway base URL for your dataplane. Cluster-specific subdomain on `clusters.rdpa.co` (for example, `https://aigw.<cluster-id>.clusters.rdpa.co`). Copy the exact value from the *Proxy URL* field on any provider's *Connection* card.
+* `<provider-name>`: The name you gave the provider when you created it, for example `my-openai` or `prod-anthropic`.
+* `<upstream-path>`: The upstream provider's native API path (for example, `v1/chat/completions` for OpenAI, `v1/messages` for Anthropic).
+
+AI Gateway forwards the request to the upstream provider, attaches the configured credentials, and records the request for observability. Your application never sees the upstream API key.
+
+TIP: The provider detail page generates ready-to-run snippets pre-filled with the correct proxy URL and paths. When in doubt, copy from the *Connect your app* section there.
+
+// Updated for PRs #30273 / #30327 / #30360 (rpk ai managed plugin).
+[[authenticate-with-rpk-ai]]
+[[authenticate-with-rpai]]
+== Use `rpk ai` for local development
+
+The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`. The active AI Gateway URL comes from your active rpk cloud profile.
+
+. xref:reference:rpk/rpk-ai/rpk-ai-install.adoc[Install `rpk ai`]:
++
+[source,bash]
+----
+rpk ai install
+----
++
+Update later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk ai upgrade`]; remove with xref:reference:rpk/rpk-ai/rpk-ai-uninstall.adoc[`rpk ai uninstall`].
+
+. Log in to Redpanda Cloud:
++
+[source,bash]
+----
+rpk cloud login
+----
++
+This caches a cloud token in `~/.config/rpk/rpk.yaml`. On every invocation, `rpk ai` reads the cached token automatically.
+
+. Select a xref:reference:rpk/rpk-profile/rpk-profile.adoc[profile] that points at a cluster with AI Gateway v2 attached. The AI Gateway URL is cached on the profile when you create it.
++
+[source,bash]
+----
+rpk profile use <profile-name>
+# or, to switch the cluster the active profile points at:
+rpk cloud cluster use <cluster-id>
+----
++
+See xref:reference:rpk/rpk-cloud/rpk-cloud-cluster.adoc[`rpk cloud cluster`] for switching the active cluster.
+
+. Verify the connection:
++
+[source,bash]
+----
+rpk ai llm list
+----
+
+If the cached cloud token has expired, `rpk ai` returns a 401 with a hint to rerun `rpk cloud login`.
+
+[NOTE]
+====
+`rpk ai help`, `rpk ai version`, and unknown subcommands run without prompting for authentication, so you can browse the CLI surface offline before signing in. Authentication is only required for commands that hit AI Gateway.
+====
+
+[TIP]
+====
+To target a specific gateway URL for a single invocation (for example, when running against a staging gateway without switching profiles), pass `--rpai-endpoint`:
+
+[source,bash]
+----
+rpk ai --rpai-endpoint https://aigw.<cluster-id>.clusters.rdpa.co llm list
+----
+
+You can also export `RPAI_ENDPOINT` to override for the shell session.
+====
+
+// TODO(rpk-ai): rpai suppresses auth/profile subtrees in plugin mode today (cloudv2 apps/rpai/internal/cmd/root.go:127-135). If that changes, document `rpk ai auth` and `rpk ai profile` here.
+
+=== Environment variables
+
+The `rpk ai` command honors the following environment variables:
+
+[cols="1,3"]
+|===
+|Variable |Purpose
+
+|`RPAI_TOKEN`
+|Bearer token for the gateway. Normally injected automatically from your cached `rpk cloud login` token; set explicitly to override.
+
+|`RPAI_ENDPOINT`
+|AI Gateway URL. Normally resolved from your active rpk cloud profile; set explicitly to override.
+
+|`RPAI_PROFILE`, `RPAI_CONFIG`, `RPAI_VERBOSE`, `RPAI_FORMAT`
+|Map to `--rpai-profile`, `--rpai-config`, `--rpai-verbose`, `--format`. Long flag names are renamed under `rpk ai` to avoid collision with `rpk`'s globals; short flags (`-p`, `-c`, `-v`, `-o`) are unchanged.
+|===
+
+[[authenticate-with-oidc-client-credentials]]
+== Authenticate with OIDC client credentials (CI and programmatic)
+
+For application code, CI runners, server-side processes, and headless agents, use the OIDC `client_credentials` grant directly. This is the canonical authentication path for SDK-style usage; `rpk ai` is for command-line workflows, not for embedding in application code. Values are surfaced on the provider's *Connection* card; defaults at the time of writing are below.
+
+[cols="1,2", options="header"]
+|===
+|Parameter |Value (today)
+
+|Discovery URL
+|`\https://auth.prd.cloud.redpanda.com/.well-known/openid-configuration`. Also surfaced as the *Discovery* field on the provider's Connection card.
+
+|Token endpoint
+|`\https://auth.prd.cloud.redpanda.com/oauth/token`
+
+|Audience
+|`cloudv2-production.redpanda.cloud`
+
+|Grant type
+|`client_credentials`
+|===
+
+[tabs]
+======
+cURL::
++
+--
+[source,bash]
+----
+AUTH_TOKEN=$(curl -s --request POST \
+    --url 'https://auth.prd.cloud.redpanda.com/oauth/token' \
+    --header 'content-type: application/x-www-form-urlencoded' \
+    --data grant_type=client_credentials \
+    --data client_id=<client-id> \
+    --data client_secret=<client-secret> \
+    --data audience=cloudv2-production.redpanda.cloud | jq -r .access_token)
+----
+
+Replace `<client-id>` and `<client-secret>` with your service account credentials.
+--
+
+Python (authlib)::
++
+--
+[source,python]
+----
+from authlib.integrations.requests_client import OAuth2Session
+import requests
+
+# Discover token endpoint from OIDC metadata
+metadata = requests.get(
+    "https://auth.prd.cloud.redpanda.com/.well-known/openid-configuration"
+).json()
+token_endpoint = metadata["token_endpoint"]
+
+client = OAuth2Session(
+    client_id="<client-id>",
+    client_secret="<client-secret>",
+    token_endpoint=token_endpoint,
+)
+
+token = client.fetch_token(
+    grant_type="client_credentials",
+    audience="cloudv2-production.redpanda.cloud",
+)
+
+access_token = token["access_token"]
+----
+
+Passing `token_endpoint` to the `OAuth2Session` constructor lets `authlib` handle renewal automatically. For `client_credentials` grants, it fetches a new token rather than using a refresh token.
+--
+
+Node.js (openid-client)::
++
+--
+[source,javascript]
+----
+import { Issuer } from 'openid-client';
+
+const issuer = await Issuer.discover(
+  'https://auth.prd.cloud.redpanda.com'
+);
+
+const client = new issuer.Client({
+  client_id: '<client-id>',
+  client_secret: '<client-secret>',
+});
+
+const tokenSet = await client.grant({
+  grant_type: 'client_credentials',
+  audience: 'cloudv2-production.redpanda.cloud',
+});
+
+const accessToken = tokenSet.access_token;
+----
+--
+======
+
+=== Token lifecycle management
+
+IMPORTANT: Your client is responsible for refreshing tokens before they expire. OIDC access tokens have a limited TTL set by the identity provider and are not automatically renewed by AI Gateway. Check the `expires_in` field in the token response for the exact duration.
+
+* Proactively refresh at ~80% of the token's TTL to avoid failed requests.
+* `authlib` (Python) handles renewal automatically when you pass `token_endpoint` to `OAuth2Session`.
+* For other languages, cache the token and its expiry, then request a new token before the current one expires.
+* For SDK code, refresh OIDC client-credentials tokens through your client library (see the `authlib` example above).
+
+== Send requests with your SDK
+
+The examples in this section assume you've set:
+
+[source,bash]
+----
+export PROXY_URL="<your-gateway-base>/llm/v1/providers/<provider-name>"
+export AUTH_TOKEN="<oidc-access-token>"   # from the client_credentials flow above
+----
+
+[tabs]
+======
+OpenAI SDK::
++
+--
+[source,python]
+----
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    base_url=os.environ["PROXY_URL"],       # .../llm/v1/providers/my-openai
+    api_key=os.environ["AUTH_TOKEN"],        # OIDC access token
+)
+
+response = client.chat.completions.create(
+    model="gpt-4o",                          # native OpenAI model ID
+    messages=[{"role": "user", "content": "Hello from AI Gateway"}],
+)
+print(response.choices[0].message.content)
+----
+
+The OpenAI SDK calls the proxy's `/v1/chat/completions` path, which AI Gateway forwards to OpenAI unchanged. Use it with any OpenAI provider and, with a different `base_url`, with any OpenAI-compatible provider (vLLM, Ollama, LM Studio, Together, Groq, OpenRouter).
+--
+
+Anthropic SDK::
++
+--
+[source,python]
+----
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    base_url=os.environ["PROXY_URL"],       # .../llm/v1/providers/my-anthropic
+    auth_token=os.environ["AUTH_TOKEN"],     # OIDC access token
+)
+
+message = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello from AI Gateway"}],
+)
+print(message.content[0].text)
+----
+
+The Anthropic SDK hits `v1/messages` on the proxy, which AI Gateway forwards to Anthropic. If the provider is configured with *Auth passthrough*, send your own Anthropic `Authorization` header instead of an `auth_token`. AI Gateway forwards it unchanged.
+--
+
+Google Gemini SDK::
++
+--
+[source,python]
+----
+import os
+from google import genai
+
+client = genai.Client(
+    api_key=os.environ["AUTH_TOKEN"],        # forwarded as x-goog-api-key
+    http_options={"base_url": os.environ["PROXY_URL"]},  # .../llm/v1/providers/my-google
+)
+
+response = client.models.generate_content(
+    model="gemini-2.0-flash",
+    contents="Hello from AI Gateway",
+)
+print(response.text)
+----
+
+[IMPORTANT]
+====
+Gemini authenticates with the `x-goog-api-key` header, not `Authorization: Bearer`. Most Google SDKs set `x-goog-api-key` automatically from the `api_key` parameter. If you hand-roll the request, set the header yourself.
+====
+--
+
+AWS Bedrock::
++
+--
+Bedrock is different: SigV4 signing is performed *server-side* by AI Gateway using the credentials on the provider. Your client only needs to call the proxy URL with an OIDC access token.
+
+[source,python]
+----
+import os, httpx
+
+# Bedrock 4.6+ Anthropic models require an inference profile (us./eu./apac./global.).
+# Replace with the inference profile your provider exposes.
+response = httpx.post(
+    f"{os.environ['PROXY_URL']}/model/us.anthropic.claude-sonnet-4-6/invoke",
+    headers={"Authorization": f"Bearer {os.environ['AUTH_TOKEN']}"},
+    json={
+        "anthropic_version": "bedrock-2023-05-31",
+        "messages": [{"role": "user", "content": "Hello"}],
+        "max_tokens": 1024,
+    },
+)
+print(response.json())
+----
+
+See xref:gateway:configure-provider.adoc#bedrock-inference-profiles[the Bedrock provider reference] for inference-profile selection guidance.
+
+TIP: Bedrock's `Converse` API works the same way: send to `/model/\{MODEL_ID}/converse` with a Converse-shaped body. Or use the AWS SDK's `bedrockruntime` client and set its `BaseEndpoint` to the proxy URL; the SDK signs the request, AI Gateway re-signs server-side with the provider's credentials, and your client never sees AWS keys.
+--
+
+OpenAI-compatible::
++
+--
+Use the OpenAI SDK with the proxy URL of the OpenAI-compatible provider and whatever model identifier the upstream exposes:
+
+[source,python]
+----
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    base_url=os.environ["PROXY_URL"],       # .../llm/v1/providers/my-vllm
+    api_key=os.environ["AUTH_TOKEN"],
+)
+
+response = client.chat.completions.create(
+    model="meta-llama/Llama-3.3-70B-Instruct",  # as exposed by your upstream
+    messages=[{"role": "user", "content": "Hello"}],
+)
+----
+--
+======
+
+[NOTE]
+====
+The provider detail page also has client guides for *Claude Code*, *Codex*, and *Gemini* (the desktop client). Open *Connect your app* on the provider's page to see the per-client setup instructions.
+====
+
+== Streaming responses
+
+Streaming passes through unchanged. Use the SDK's native streaming API; the proxy forwards the stream byte-for-byte.
+
+[source,python]
+----
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Write a short poem"}],
+    stream=True,
+)
+
+for chunk in response:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end="", flush=True)
+----
+
+== Handle errors
+
+AI Gateway returns standard HTTP status codes. The upstream provider's error body passes through, so your existing SDK error handling works:
+
+[cols="1,3"]
+|===
+|Status |Meaning
+
+|400
+|Bad request. Invalid parameters or malformed JSON.
+
+|401
+|Authentication failed. Token invalid, expired, or (for Gemini) sent in the wrong header.
+
+|403
+|Forbidden. The service account lacks the required role, or the provider is disabled.
+
+|404
+|Provider or model not found. Verify the provider name in the URL and the model identifier.
+
+|429
+|Rate limited by the upstream provider. AI Gateway does not enforce its own rate limits today. Respect `Retry-After` if present.
+
+|5xx
+|Upstream or gateway error. Retry with exponential backoff.
+|===
+
+== Best practices
+
+* Use environment variables for the proxy URL and token. Never hard-code them.
+* Refresh OIDC tokens through your client library so refresh is invisible to your SDK code (`authlib` for Python, `openid-client` for Node.js, and so on).
+* Implement retry with exponential backoff for 5xx and timeout conditions.
+* Respect `Retry-After` on 429 responses.
+* Rotate service account credentials on a schedule your organization accepts.
+* Observe usage through the Agentic Data Plane UI on each provider's detail page.
+
+== Troubleshooting
+
+=== 401 Unauthorized
+
+* If you're using `rpk ai`: Rerun `rpk cloud login` to refresh the cached cloud token. Token expiry surfaces as a 401 with this hint in the error.
+* If you're using OIDC client credentials: Check the token hasn't expired and refresh it. Verify the audience is `cloudv2-production.redpanda.cloud` and the `Authorization` header is formatted `Bearer <token>`.
+* For Gemini: Ensure the token is sent as `x-goog-api-key`, not `Authorization`.
+* For Anthropic with passthrough: Ensure the client is sending a valid Anthropic `Authorization` header.
+
+=== 404 Not found
+
+* Re-check the provider name in the proxy URL. The segment after `/providers/` must match the provider's `Name` exactly.
+* For model-not-found: Confirm the model identifier is one your provider's catalog actually serves. OpenAI-compatible endpoints accept whatever model IDs the upstream exposes.
+
+=== 403 Forbidden
+
+* The service account may lack the required roles. Ask an admin to grant `dataplane_adp_llmprovider_get` at minimum to read provider config, and `dataplane_adp_llmprovider_invoke` to proxy LLM requests through AI Gateway. See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions] or assign the LLMProviderInvoker built-in role for runtime-only access.
+* The provider may be disabled. Check the *Status* field on its *Connection* card.
+
+=== Connection timeout or reset
+
+* Verify the proxy URL is correct (copy directly from the provider's *Connection* card).
+* Check that the provider isn't pointing at a private base URL your client can't reach (OpenAI-compatible providers only).
+* Confirm the upstream provider's status page.
+
+== Next steps
+
+* xref:gateway:configure-provider.adoc[Configure an LLM provider]

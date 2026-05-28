@@ -1,0 +1,375 @@
+= Set Up GitHub OAuth Provider and MCP Server
+:description: Complete walkthrough for configuring GitHub as an OAuth provider and creating a user-delegated GitHub MCP server.
+:page-topic-type: tutorial
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Create a GitHub OAuth app and register it as an OAuth provider in ADP
+:learning-objective-2: Test the OAuth connection proactively using My Connections
+:learning-objective-3: Create and configure a GitHub managed MCP server with user-delegated OAuth
+
+This tutorial shows how to connect Redpanda ADP to GitHub using OAuth, so users can authenticate with their own GitHub credentials when calling GitHub MCP tools.
+
+After completing this tutorial, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Before you begin
+
+* You need a GitHub account with permission to create OAuth apps (personal account or organization with appropriate role).
+* You need ADP administrator permissions to create OAuth providers and MCP servers.
+* You should understand the difference between user-delegated OAuth (each user authenticates as themselves) and service-account OAuth (all users share one identity). This tutorial covers user-delegated OAuth.
+
+[TIP]
+====
+GitHub recommends considering GitHub Apps instead of OAuth Apps for production use, as they offer fine-grained permissions and short-lived tokens. However, OAuth Apps work well for getting started with Redpanda ADP's AI Gateway integration.
+====
+
+== Create a GitHub OAuth app
+
+Register an OAuth application in GitHub to obtain the client ID and client secret.
+
+[NOTE]
+====
+Throughout this tutorial, fields marked with * are required.
+====
+
+. Sign in to GitHub and navigate to **Settings → Developer settings → OAuth Apps**.
+. Click **New OAuth App** (or **Register a new application** if this is your first OAuth app).
+. Fill in the application details:
++
+[cols="1,2"]
+|===
+|Field |Value
+
+|**Application name**
+|`ADP AI Gateway` (or your preferred name)
+
+|**Homepage URL**
+|`\https://aigw.<cluster-id>.clusters.rdpa.co`+
+*This must match exactly.* Replace `<cluster-id>` with your actual cluster ID, such as `\https://aigw.d6kjl4h19241bg3ek3t0.cluster.rdpa.co`.
+
+|**Application description**
+|Optional. For example: "Redpanda AI Gateway GitHub integration".
+
+|**Authorization callback URL**
+|`\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback` +
+*This must match exactly.* Replace `<cluster-id>` with your actual cluster ID, such as `\https://aigw.d6kjl4h19241bg3ek3t0.cluster.rdpa.co/oauth/v1/callback`.
+|===
++
+. Click **Register application**.
+. On the application page, note your **Client ID** (for example, `Iv1.abc123...`). Copy it for later.
+. Click **Generate a new client secret** and copy it immediately (you won't see it again).
+
+[IMPORTANT]
+====
+* GitHub OAuth apps support only **one** callback URL (unlike GitHub apps which support multiple).
+* Store your client secret securely. GitHub will not show it again after you navigate away.
+====
+
+== Create the GitHub OAuth provider in ADP
+
+Register GitHub as an OAuth provider in the Agentic Data Plane UI.
+
+. In ADP, navigate to **OAuth Providers** in the sidebar.
+. Click **Create provider** and select **GitHub** from the catalog.
+. Fill in the provider details:
+
+=== Provider details
+
+[cols="1,2,2"]
+|===
+|Field |Value |Notes
+
+|**Name** *
+|A name for this OAuth provider, for example, `github`.
+|Lowercase letters, numbers, and hyphens only. This is the machine identifier used when attaching the provider to an MCP server. Immutable after creation.
+
+|**Client ID** *
+|The client ID from your GitHub OAuth app, for example, `Iv1.abc123...`
+|This is found in GitHub Settings → Developer settings → OAuth Apps → [Your App].
+
+|**Display name** *
+|`GitHub`
+|Human-readable name shown in the Agentic Data Plane UI.
+
+|**Authorization endpoint** *
+|`\https://github.com/login/oauth/authorize`
+|GitHub's OAuth authorization URL where users are redirected to grant permission.
+
+|**Token endpoint** *
+|`\https://github.com/login/oauth/access_token`
+|GitHub's OAuth token exchange endpoint where authorization codes are exchanged for access tokens.
+
+|**Revocation Endpoint**
+|Leave empty
+|GitHub doesn't provide a standard RFC 7009 token revocation endpoint. ADP will handle token lifecycle without this.
+
+|**Client secret ref** *
+|`GITHUB_CLIENT_SECRET`
+|Click **New**. Enter `GITHUB_CLIENT_SECRET` as the key name, paste in your client secret from GitHub, and then click *Create secret*. This creates the secret in the Secrets Store and links it to this provider in ADP. If you already have a secret in Secrets Store, click **Existing** instead.
+|===
+
+=== Scopes
+
+Define the GitHub scopes your MCP servers will need. Click in the **Scopes** field and add the following scopes:
+
+* `repo` - Full control of private repositories (read and write)
+* `read:user` - Read user profile information
+* `read:org` - Read organization membership
+* `workflow` - Update GitHub Actions workflows
+
+[TIP]
+====
+**Common GitHub OAuth scopes:**
+
+* `repo` - Access to private repositories
+* `public_repo` - Access to public repositories only
+* `read:user`, `user:email` - Read user profile and email
+* `read:org` - Read organization membership
+* `workflow` - Manage GitHub Actions workflows
+* `gist` - Create and read gists
+
+See the https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps[GitHub OAuth scopes documentation] for the complete list.
+
+**Scope management**: Include every scope any MCP server attached to this provider might need. Users must re-consent when scopes are added later, so it's better to include all necessary scopes upfront.
+====
+
+=== Grant types
+
+* **Browser consent** ✓ (checked) - OAuth 2.0 Authorization Code flow. This is the standard flow for user-delegated OAuth.
+* **Token exchange** ☐ (unchecked) - RFC 8693 token exchange. Leave unchecked unless you're implementing advanced token exchange scenarios.
+
+=== Token endpoint auth method
+
+Select **Client Secret (Basic)**
+
+This sends credentials as `client_id:client_secret` in the HTTP Basic Authorization header, which is GitHub's expected authentication method.
+
+[cols="1,2"]
+|===
+|Method |When to use
+
+|**Client Secret (Basic)**
+|Most common. GitHub expects this method. Credentials sent in Authorization header.
+
+|**Client Secret (POST)**
+|Credentials sent in the POST body. Use only if the provider requires it.
+
+|**None (PKCE only)**
+|For public clients with no client secret. Not applicable for GitHub OAuth Apps.
+|===
+
+=== Require PKCE
+
+**Enabled** (toggle on)
+
+Proof Key for Code Exchange (PKCE) adds an extra layer of security to the OAuth flow. 
+
+[NOTE]
+====
+PKCE (RFC 7636) protects against authorization code interception attacks. When enabled, the gateway generates a code challenge before redirecting the user to GitHub and verifies it when exchanging the authorization code for a token.
+====
+
+=== Complete creation
+
+. Review all fields to ensure they match the values above
+. Click **Create provider**
+
+The provider appears in the **OAuth Providers** list with status "Enabled".
+
+== Test the connection in My Connections
+
+Before creating an MCP server, proactively test the OAuth flow to verify your provider configuration is correct.
+
+. Navigate to **My Connections** in the sidebar (under ADP → My Connections).
+. Find the **GitHub** provider card.
++
+. Click **Connect**.
+. You'll be redirected to GitHub's authorization page.
+. Review the requested permissions (scopes) and click **Authorize [Your App Name]**.
+. GitHub redirects you back to ADP.
+. The GitHub provider card now shows status "Connected".
+
+[TIP]
+====
+If the connection fails:
+
+* Check that the **Homepage URL** and **Authorization callback URL** in your GitHub OAuth app exactly match the expected URLs with your cluster ID.
+* Verify the **Client ID** and **Client secret ref** in the ADP OAuth provider are correct.
+* Check that the secret `GITHUB_CLIENT_SECRET` exists and contains the correct value.
+
+See <<Troubleshooting>> for more debugging tips.
+====
+
+== Create the GitHub MCP server
+
+Now create an MCP server that uses the GitHub OAuth provider for user-delegated authentication.
+
+. Navigate to **MCP Servers** in the sidebar (under ADP → MCP Servers).
+. Click **Create server**.
+. The catalog shows managed MCP servers organized by category (AI, Databases, Streaming, Collaboration, AWS, Google, Utilities).
+. Use the search bar or browse to find and select **GitHub**.
++
+[NOTE]
+====
+GitHub is a managed MCP server, meaning Redpanda provides and maintains the implementation. You only need to configure authentication and select which tools to expose.
+====
+
+=== Configure the GitHub MCP server
+
+Fill in the basic server details:
+
+[cols="1,2,2"]
+|===
+|Field |Example value |Notes
+
+|**Name** *
+|`my-gh`
+|Unique identifier. Lowercase letters, numbers, and hyphens only.
+
+|**Description**
+|`What this server does (shown in detail views)`
+|Optional human-readable description.
+
+|**Code mode**
+|Toggle on/off
+|Enable to add search and run tools that let agents run sandboxed code against this server's tools. Typically enabled for development/testing.
+
+|**Restrict to org**
+|`redpanda-data`
+|GitHub-specific field. If set, confines this MCP to the named GitHub org (for example, "redpanda-data"). Leave empty for unrestricted access to all repositories the user can access.
+|===
+
+=== Configure authentication
+
+. In the **Auth** dropdown, select **User OAuth**.
++
+This enables user-delegated authentication where each user authenticates with their own GitHub credentials.
++
+. In the **User OAuth** section that appears:
+
+[cols="1,2,2"]
+|===
+|Field |Value |Notes
+
+|**Provider name** *
+|`GitHub`
+|Select the GitHub OAuth provider you created earlier from the dropdown. If "Not set" appears, you haven't created a provider yet or it's not visible.
+
+|**Required scopes**
+|Click **+ Add required scopes**
+|Add the same scopes you defined in the OAuth provider, adding each scope to a new line. If a user's stored connection has fewer scopes than specified here, they'll be prompted to re-consent with upgraded scopes. 
+|===
+
+=== Token injection (advanced)
+
+The **Injection** section controls how the resolved OAuth token is placed on upstream requests:
+
+[cols="1,2,2"]
+|===
+|Field |Default value |Notes
+
+|**Header name**
+|`Authorization`
+|HTTP header name for the token. GitHub expects `Authorization`, so keep the default.
+
+|**Header prefix**
+|`Bearer`
+|Value prefix before the token. GitHub expects `Bearer <token>`, so keep the default. Set empty to omit the prefix entirely (for upstreams that expect a bare API key as the token).
+|===
+
+[TIP]
+====
+**How to authenticate to GitHub** link explains GitHub's expected authentication format. For standard GitHub OAuth, the defaults (`Authorization: Bearer <token>`) are correct.
+====
+
+=== Complete creation
+
+. Review all fields.
+. Click **Submit**.
+
+The GitHub MCP server appears in the **MCP Servers** list showing:
+
+* **Name**: `my-gh` (or your chosen name)
+* **Type**: Managed (badge)
+* **Status**: Enabled (badge)
+* **Tools**: A list of available tools like `get_authenticated_user`, `list_my_orgs`, `list_org_repos`, and more
+
+[IMPORTANT]
+====
+**User OAuth vs service account OAuth:**
+
+* **User OAuth** (what we're configuring): Each end-user authenticates with their own GitHub account. The upstream GitHub API sees requests as coming from that individual user and applies their permissions.
+* **Service account OAuth**: All users share one GitHub identity. The upstream sees every request as coming from the same service account.
+
+For most scenarios where users need to access their own repositories or respect GitHub's per-user permissions, choose **User OAuth**.
+====
+
+== Verify the MCP server works
+
+Test that the MCP server is correctly configured and can authenticate users.
+
+. In the Agentic Data Plane UI, find your GitHub MCP server in the **MCP Servers** list.
+. Click it to view details.
+. If you tested the connection in My Connections, you're already connected and can test immediately.
+. If you skipped the My Connections test, the first time you call a tool from this server, you'll be prompted to authorize GitHub.
++
+The flow is:
++
+.. Call a tool (for example, through a Claude Desktop integration pointing to this MCP server).
+.. ADP returns `OAuthConnectionRequired` with an authorization URL.
+.. The UI prompts you to connect to GitHub.
+.. You authorize in GitHub.
+.. The tool call automatically retries and succeeds.
++
+. After successful authorization, subsequent tool calls use your stored GitHub token with no additional prompts (until the token expires or scopes change).
+
+== What you accomplished
+
+You have now:
+
+* Created a GitHub OAuth app with the correct callback URL
+* Registered GitHub as an OAuth provider in ADP
+* Tested the OAuth connection proactively
+* Created a GitHub managed MCP server with user-delegated OAuth
+* Verified that users can authenticate and call GitHub tools
+
+You could next create an agent using this GitHub MCP server. Each user who calls tools from this MCP server will authenticate with their own GitHub account. User tokens are stored securely in ADP's token vault and automatically refreshed before expiry.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |Solution
+
+|`redirect_uri_mismatch` error during authorization
+|The callback URL in your GitHub OAuth app doesn't match ADP's callback. Go to GitHub Settings → Developer settings → OAuth Apps → [Your App] and verify the **Authorization callback URL** is exactly `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`.
+
+|`invalid_client` error during token exchange
+|The Client ID or Client secret is incorrect, or the authentication method doesn't match. Verify the Client ID in the OAuth provider matches GitHub, and that `GITHUB_CLIENT_SECRET` contains the correct client secret. Ensure **Token Endpoint Auth Method** is set to "Client Secret (Basic)".
+
+|`invalid_scope` error during consent
+|One of the scopes you requested isn't valid for GitHub OAuth apps. Check the https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps[GitHub OAuth scopes documentation] and remove or rename invalid scopes.
+
+|"OAuth provider not found" when creating MCP server
+|The provider name doesn't match. Verify you created the provider with name `github` (lowercase) and are selecting the correct provider in the MCP server configuration.
+
+|Connection works in My Connections but fails in MCP server
+|The MCP server's required scopes might be different from what you consented to in My Connections. Edit the OAuth provider to include all necessary scopes, then re-consent in My Connections.
+
+|Token expired or `OAuthTokenExpired` error
+|GitHub tokens eventually expire or can be revoked. The user needs to re-authorize in My Connections or by triggering the consent flow again on the next tool call.
+
+|Permission denied when attaching provider to MCP server
+|You need the `dataplane_aigateway_oauthprovider_attach` permission on the GitHub provider. Contact your ADP administrator to grant this permission.
+|===
+
+== Related topics
+
+* xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:connect:create-server.adoc[Create an MCP Server]
+* xref:connect:managed/managed-catalog.adoc[Managed MCP Catalog]
+* https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps[GitHub OAuth Apps documentation^]
+* https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps[GitHub OAuth scopes^]
