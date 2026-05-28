@@ -1,0 +1,3 @@
+= Control & govern
+:description: Govern agent activity with the dashboard, guardrails, spending limits, and permissions.
+:page-layout: index

@@ -1,10 +1,9 @@
-* Quickstarts
-** xref:get-started:adp-overview.adoc[Overview]
+* xref:get-started:adp-overview.adoc[Quickstarts]
 ** xref:get-started:byoc-quickstart.adoc[ADP Quickstart]
 ** xref:get-started:gateway-quickstart.adoc[AI Gateway Quickstart]
 ** xref:get-started:quickstart.adoc[AI Agent Quickstart]
 
-* Connect data & tools
+* xref:connect:index.adoc[Connect data & tools]
 ** xref:connect:managed/managed-catalog.adoc[Plug in any app, database, or tool]
 ** xref:connect:create-agent.adoc[Turn your data source into an agent]
 ** xref:connect:create-server.adoc[Build a tool server for your own data]
@@ -14,26 +13,26 @@
 ** xref:connect:claude-code.adoc[Claude Code]
 ** xref:connect:remote-mcp-clients.adoc[Remote MCP clients]
 
-* Monitor & debug
+* xref:monitor:index.adoc[Monitor & debug]
 ** xref:monitor:transcripts.adoc[See what your agent did]
 ** xref:monitor:troubleshoot-ai-agents.adoc[Investigate a broken run]
 ** xref:monitor:metrics.adoc[Check speed, cost, and errors]
 ** xref:control:guardrails/violations.adoc[Review blocked requests]
 ** xref:monitor:byoa-telemetry.adoc[Send telemetry from agents you host]
 
-* Control & govern
+* xref:control:index.adoc[Control & govern]
 ** xref:control:dashboard/overview.adoc[See all your agents in one place]
 ** xref:control:guardrails/overview.adoc[Fix agents calling things they shouldn't]
 ** xref:control:guardrails/create-guardrail.adoc[Set safety rules for all agents]
 ** xref:control:budgets.adoc[Set spending limits]
 ** xref:control:permissions-overview.adoc[Control who can do what]
 
-* Routing & LLM settings
+* xref:gateway:index.adoc[Routing & LLM settings]
 ** xref:gateway:overview.adoc[How the gateway works]
 ** xref:gateway:configure-provider.adoc[Configure LLM provider]
 *** xref:gateway:bedrock-setup.adoc[Set up AWS Bedrock]
 
-* Settings reference
+* xref:reference:index.adoc[Settings reference]
 ** xref:control:permissions-reference.adoc[Roles and permissions matrix]
 ** xref:control:guardrails/types-reference.adoc[Safety rule providers]
 ** xref:reference:rpk-install.adoc[Install rpk]

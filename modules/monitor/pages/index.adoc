@@ -1,0 +1,3 @@
+= Monitor & debug
+:description: See what your agents did, investigate runs, and check speed, cost, and errors.
+:page-layout: index
