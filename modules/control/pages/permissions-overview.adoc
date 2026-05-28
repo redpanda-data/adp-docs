@@ -9,7 +9,7 @@
 // Source: `cloudv2` `pkg/permissions/permissions_constants.go`, `apps/aigw/internal/llm/authz.go`, `apps/aigw/internal/mcp/authz.go`, and `apps/ai-agent/internal/agent/authorization.go` on origin/main, verified 2026-05-18.
 // TODO: confirm screenshots of the role-binding flow in the Cloud UI once UX-790 (Console-side fine-grained authZ) ships.
 
-The Agentic Data Plane uses Redpanda Cloud's role-based access control (RBAC) to gate every API call. Each LLM provider, MCP server, agent, pipeline, knowledge base, and governance endpoint enforces a specific permission, and you assign permissions to users and service accounts by binding them to a role. This page explains the three-layer model so you can pick the right built-in role for a workload, or compose your own.
+The Agentic Data Plane uses Redpanda's role-based access control (RBAC) to gate every API call. Each LLM provider, MCP server, agent, pipeline, knowledge base, and governance endpoint enforces a specific permission, and you assign permissions to users and service accounts by binding them to a role. This page explains the three-layer model so you can pick the right built-in role for a workload, or compose your own.
 
 After reading this page, you will be able to:
 
@@ -83,10 +83,10 @@ Pick the narrowest role that covers a workload. For example, an application that
 
 ADP API calls authenticate as one of two identity types:
 
-* *User identity (OIDC)*: A human user signed in through Redpanda Cloud's OIDC provider. The Cloud UI uses this identity when an admin manages ADP resources interactively.
+* *User identity (OIDC)*: A human user signed in through Redpanda's OIDC provider. The Cloud UI uses this identity when an admin manages ADP resources interactively.
 * *Service account*: A non-human identity backed by OIDC client credentials. Applications, CI jobs, and `rpk ai` use service accounts.
 
-Account impersonation, which lets Redpanda Cloud's Console reuse a user's identity for Kafka API and Schema Registry calls, applies to those two subsystems only. ADP endpoints continue to authenticate clients directly through their OIDC tokens, regardless of how account impersonation is configured at the cluster level.
+Account impersonation, which lets Redpanda Console reuse a user's identity for Kafka API and Schema Registry calls, applies to those two subsystems only. ADP endpoints continue to authenticate clients directly through their OIDC tokens, regardless of how account impersonation is configured at the cluster level.
 
 == Where ADP fits in Cloud RBAC
 

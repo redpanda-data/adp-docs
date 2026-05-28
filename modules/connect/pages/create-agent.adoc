@@ -163,7 +163,7 @@ For multi-agent design patterns, see xref:connect:architecture-patterns.adoc[Age
 
 == Configure the service account
 
-In the *Service Account* section, set the name for the service account that authenticates the agent to other systems in the Redpanda Cloud Platform (for example, MCP servers and the Redpanda broker).
+In the *Service Account* section, set the name for the service account that authenticates the agent to other systems in Redpanda (for example, MCP servers and the Redpanda broker).
 
 . Review the auto-generated *Service Account Name*. The default uses the pattern `cluster-<cluster-id>-agent-<agent-name>-sa`.
 . Optionally, override the name. Up to 128 characters. The name cannot contain `<` or `>`.
