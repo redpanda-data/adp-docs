@@ -1,4 +1,4 @@
-= rpk Commands
+= rpk Command Reference
 :description: Reference for the rpk commands used to manage the Redpanda Agentic Data Plane from the command line.
 :page-layout: index
 

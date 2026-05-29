@@ -62,7 +62,7 @@ This granularity enables the agent to chain tools (check order status, see it's 
 Create a Remote MCP server with the three tools.
 
 . Sign in to ADP.
-. Go to *Agentic AI* > *Remote MCP*.
+. Go to *Remote MCP*.
 . Click *Create MCP Server*.
 . Configure the server:
 +
@@ -113,7 +113,7 @@ The system prompt teaches the agent how to orchestrate tools. Without explicit g
 
 Create the customer support agent with the system prompt.
 
-. Go to *Agentic AI* > *AI Agents*.
+. Go to *AI Agents*.
 . Click *Create Agent*.
 . Configure the agent:
 +

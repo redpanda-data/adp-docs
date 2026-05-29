@@ -1,4 +1,4 @@
-= ADP Permissions Reference
+= Roles and Permissions Reference
 :description: Look up the permissions ADP enforces across LLM providers, MCP servers, agents, pipelines, knowledge bases, and governance APIs, and the built-in roles that grant them.
 :page-topic-type: reference
 :personas: security_compliance_lead, platform_engineer
@@ -234,7 +234,7 @@ The `dataplane_adp_agent_credential_*` permissions gate the OIDC client credenti
 
 == Spending permissions
 
-The `dataplane_adp_spending_*` permissions gate the governance APIs that surface AI spend, request counts, and token volume. See xref:control:budgets.adoc[Token Budgets and Limits] for what spending data ADP records automatically.
+The `dataplane_adp_spending_*` permissions gate the governance APIs that surface AI spend, request counts, and token volume. See xref:control:budgets.adoc[] for what spending data ADP records automatically.
 
 [cols="2,2,1,1"]
 |===

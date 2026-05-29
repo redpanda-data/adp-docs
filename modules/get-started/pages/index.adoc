@@ -1,0 +1,3 @@
+= Get Started
+:description: Stand up Redpanda ADP and ship your first agent.
+:page-layout: index

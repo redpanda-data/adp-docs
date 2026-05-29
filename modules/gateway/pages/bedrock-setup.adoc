@@ -18,10 +18,10 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* A Redpanda Cloud cluster with ADP enabled.
+* A Redpanda BYOC environment on AWS with ADP enabled.
 * An AWS account with Bedrock model access enabled in the region you plan to call. Model availability varies by region; see link:https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html[Bedrock models by region^].
 * Access to the AWS CLI configured with credentials that can create IAM users, policies, and access keys.
-* Access to the Redpanda Cloud UI.
+* Access to the Redpanda UI.
 
 == Create the IAM policy
 
@@ -92,7 +92,7 @@ Generate the access keys AI Gateway uses:
 aws iam create-access-key --user-name redpanda-bedrock-invoker
 ----
 
-Save the `AccessKeyId` and `SecretAccessKey` from the output. You need both in the next section to register them as Redpanda Cloud secrets.
+Save the `AccessKeyId` and `SecretAccessKey` from the output. You need both in the next section to register them as Redpanda secrets.
 
 CAUTION: AWS displays the secret access key only at creation. Store it in a password manager or pass it directly into the secret-creation flow in the next section.
 
@@ -116,7 +116,7 @@ A successful model response confirms the IAM policy, region, and credentials are
 
 == Register Bedrock as an LLM provider
 
-. Sign in to the Redpanda Cloud UI and open ADP.
+. Sign in to Redpanda and open ADP.
 . Open *LLM Providers* in the sidebar and click *Create provider*.
 . Select *AWS Bedrock* as the provider type.
 . Enter a Name such as `my-bedrock`. Use lowercase letters, digits, and hyphens. The name is immutable and appears in the proxy URL.

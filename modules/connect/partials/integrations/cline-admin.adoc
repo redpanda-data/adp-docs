@@ -97,7 +97,7 @@ Create a dedicated gateway to isolate Cline traffic and apply specific policies.
 
 === Gateway configuration
 
-. Navigate to *Agentic* > *AI Gateway* > *Gateways*
+. Navigate to *AI Gateway* > *Gateways*
 . Click *Create Gateway*
 . Enter gateway details:
 +
@@ -164,7 +164,7 @@ Cline can generate multiple requests during autonomous operations. Higher limits
 
 The gateway blocks requests exceeding these limits and returns HTTP 429 errors.
 
-=== Set spending limits
+=== Set spend limits
 
 Control LLM costs during autonomous operations:
 
@@ -520,7 +520,7 @@ Causes and solutions:
 * **Deferred tool loading disabled**: Enable deferred tool loading to reduce tokens by 80-90%
 * **Autonomous loops**: Monitor for repeated similar requests (may indicate autonomous operation stuck in a loop)
 * **No rate limits**: Apply per-minute rate limits to prevent runaway autonomous usage
-* **Missing spending limits**: Set monthly budget limits with blocking enforcement
+* **Missing spend limits**: Set monthly budget limits with blocking enforcement
 * **Expensive models for autonomous work**: Route autonomous operations to cost-effective models (for example, Claude Sonnet instead of Opus)
 * **Too many tools in context**: Reduce the number of aggregated MCP servers or enable deferred loading
 
@@ -532,7 +532,7 @@ Causes and solutions:
 
 * **Rate limit exceeded**: Review and increase rate limits if autonomous usage is legitimate
 * **Upstream provider rate limits**: Check if the upstream LLM provider is rate-limiting; configure failover pools
-* **Budget exhausted**: Verify monthly spending limit has not been reached
+* **Budget exhausted**: Verify monthly spend limit has not been reached
 * **Autonomous operation too aggressive**: Configure Cline to slow down request rate
 
 === Autonomous operations timing out

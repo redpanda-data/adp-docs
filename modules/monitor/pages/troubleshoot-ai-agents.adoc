@@ -25,7 +25,7 @@ Fix issues that prevent agents from connecting to required resources.
 
 **Solution:**
 
-. Verify MCP server status in *Agentic AI* > *Remote MCP*.
+. Verify MCP server status in *Remote MCP*.
 . Check MCP server logs for errors.
 . Restart the MCP server if needed.
 . Verify agent has permission to access the MCP server.

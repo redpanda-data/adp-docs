@@ -1,4 +1,4 @@
-= BYOA Telemetry (OpenTelemetry)
+= Send BYOA Telemetry
 :description: Emit OpenTelemetry traces from your BYOA (Bring Your Own Agent) so the Agentic Data Plane can attribute calls, costs, and tool invocations to your agent. Covers the minimum required span contract, common optional attributes, and how it differs from a Redpanda-managed agent.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

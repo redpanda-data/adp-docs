@@ -67,7 +67,7 @@ Before you register a BYOA agent, make sure you have:
 
 * An agent running in your own infrastructure with a reachable HTTPS endpoint.
 * The ability to add an HTTPS route at `/.well-known/agent-card.json` (or equivalent) on that endpoint. See <<a2a-endpoint-contract>>.
-* The agent instrumented with OpenTelemetry, emitting the minimum required spans contract. See xref:monitor:byoa-telemetry.adoc[BYOA telemetry (OpenTelemetry)].
+* The agent instrumented with OpenTelemetry, emitting the minimum required spans contract. See xref:monitor:byoa-telemetry.adoc[BYOA telemetry].
 * The `dataplane_adp_agent_create` permission, granted by the Writer built-in role. See xref:control:permissions-reference.adoc#agent-management-permissions[Agent management permissions].
 * A name for the agent that follows DNS-1123 conventions (1–63 characters, lowercase letters / numbers / hyphens, starting with a letter). The name is immutable once the agent is registered.
 
@@ -149,7 +149,7 @@ After registering, confirm three things end-to-end:
 
 . *Discovery*: The agent appears in *AgentRegistryService.ListAgents* and in the governance dashboard's Agents list. *Type* shows as *BYOA*.
 . *A2A reachability*: A test A2A call to `https://aigw.<cluster-id>.clusters.rdpa.co/agents/<your-agent-name>/v1/message:send` returns the expected response (or a `FAILED_PRECONDITION` if your agent isn't running, but no `404 Not Found`).
-. *Telemetry*: Open the transcripts list, filter by your agent's `service.name`, and confirm a recent execution shows up with non-zero token counts and a non-empty conversation ID. If it doesn't, see xref:monitor:byoa-telemetry.adoc[BYOA telemetry (OpenTelemetry)] troubleshooting.
+. *Telemetry*: Open the transcripts list, filter by your agent's `service.name`, and confirm a recent execution shows up with non-zero token counts and a non-empty conversation ID. If it doesn't, see xref:monitor:byoa-telemetry.adoc[BYOA telemetry] troubleshooting.
 
 == Troubleshooting
 
@@ -168,7 +168,7 @@ The symptom-driven checks in this section cover the three observable parts of th
 |The agent endpoint URL on the registration record doesn't match where your agent is actually running, or the agent isn't serving `/.well-known/agent-card.json`. Update the registration with the correct URL, or fix the well-known route.
 
 |Transcripts list shows the agent column blank for your agent's runs
-|Your agent's OTel `service.name` resource attribute doesn't match the registered name (or isn't being emitted at all). See xref:monitor:byoa-telemetry.adoc[BYOA telemetry (OpenTelemetry)].
+|Your agent's OTel `service.name` resource attribute doesn't match the registered name (or isn't being emitted at all). See xref:monitor:byoa-telemetry.adoc[BYOA telemetry].
 
 |Inbound A2A calls fail with `401 Unauthorized`
 |Your agent is rejecting the access token AI Gateway presents. Confirm your agent's token validator points at the right issuer and accepts the right audience.
@@ -187,6 +187,6 @@ This page does not cover:
 == Related topics
 
 * xref:connect:a2a-concepts.adoc[Agent-to-agent concepts]
-* xref:monitor:byoa-telemetry.adoc[BYOA telemetry (OpenTelemetry)]
+* xref:monitor:byoa-telemetry.adoc[BYOA telemetry]
 * xref:connect:concepts.adoc[Agent concepts]
 * xref:connect:create-agent.adoc[Create a declarative agent]

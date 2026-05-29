@@ -1,3 +1,3 @@
-= Connect data & tools
+= Connect Data & Tools
 :description: Connect agents, MCP servers, and the apps and data sources behind them.
 :page-layout: index

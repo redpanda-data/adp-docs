@@ -1,4 +1,4 @@
-= AI Gateway Overview
+= How AI Gateway Works
 :description: AI Gateway is ADP's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer, security_compliance_lead

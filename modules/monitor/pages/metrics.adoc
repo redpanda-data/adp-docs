@@ -1,4 +1,4 @@
-= Metrics
+= Check Speed, Cost, and Errors
 :description: Monitor AI agent metrics in Redpanda ADP.
 
 // TODO: Add content

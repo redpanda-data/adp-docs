@@ -29,7 +29,7 @@ This guide does not cover building agents that *call* Claude Code. For that, see
 
 * An Anthropic LLM provider configured in AI Gateway. If you haven't created one, follow xref:gateway:configure-provider.adoc[Configure an LLM provider] and pick *Anthropic* as the type. Enable at least one Claude model (for example, `claude-sonnet-4-6` or `claude-opus-4-7`) in the model picker.
 * Claude Code installed on the developer's workstation. See https://docs.anthropic.com/claude-code[Anthropic's Claude Code documentation].
-* A Redpanda Cloud service account with permission to invoke the provider (`dataplane_adp_llmprovider_invoke`). See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions]. Both shared-developer-tooling and per-developer setups use the same OIDC client-credentials grant; the differences are operational.
+* A Redpanda service account with permission to invoke the provider (`dataplane_adp_llmprovider_invoke`). See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions]. Both shared-developer-tooling and per-developer setups use the same OIDC client-credentials grant; the differences are operational.
 
 == Get the proxy URL
 

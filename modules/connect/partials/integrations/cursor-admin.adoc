@@ -117,7 +117,7 @@ Create a dedicated gateway to isolate Cursor traffic and apply specific policies
 
 === Gateway configuration
 
-. Navigate to *Agentic* > *AI Gateway* > *Gateways*
+. Navigate to *AI Gateway* > *Gateways*
 . Click *Create Gateway*
 . Enter gateway details:
 +
@@ -187,7 +187,7 @@ Cursor's code completion feature generates frequent requests. Consider separate 
 * Completion models (for example, `openai/gpt-5.2-mini`): Higher rate limits
 * Chat models (for example, `anthropic/claude-sonnet-4.5`): Standard rate limits
 
-=== Set spending limits
+=== Set spend limits
 
 Control LLM costs across all providers:
 
@@ -339,7 +339,7 @@ For organizations with multiple teams, use one of these multi-tenant strategies.
 
 === Strategy 1: One gateway per team
 
-Create a separate gateway for each tenant or team. Each gateway has its own rate limits, spending limits, and API tokens.
+Create a separate gateway for each tenant or team. Each gateway has its own rate limits, spend limits, and API tokens.
 
 . In ADP, create one gateway per team (for example, `team-alpha-cursor-gateway`, `team-beta-cursor-gateway`).
 . Distribute each team's gateway endpoint and API token to its users.
@@ -363,7 +363,7 @@ For simpler deployments, use one gateway for all Cursor users with shared access
 . Create one gateway for all Cursor users.
 . Generate a shared API token.
 . Distribute the endpoint and token to all users.
-. Use overall rate limits and spending limits to control aggregate usage.
+. Use overall rate limits and spend limits to control aggregate usage.
 
 This approach is the simplest but provides no per-team cost tracking or isolation.
 
@@ -655,7 +655,7 @@ Causes and solutions:
 * **Code completion using expensive model**: Configure completion mode to use `openai/gpt-5.2-mini` instead of larger models
 * **Deferred tool loading disabled**: Enable deferred tool loading to reduce tokens by 80-90%
 * **No rate limits**: Apply per-minute rate limits to prevent runaway usage
-* **Missing spending limits**: Set monthly budget limits with blocking enforcement
+* **Missing spend limits**: Set monthly budget limits with blocking enforcement
 * **Chat using wrong model**: Route chat requests to cost-effective models (for example, `anthropic/claude-sonnet-4.5` instead of `anthropic/claude-opus-4.6-5`)
 * **Transform overhead**: Monitor if transforms add significant token overhead
 
@@ -667,7 +667,7 @@ Causes and solutions:
 
 * **Rate limit exceeded**: Review and increase rate limits if usage is legitimate (code completion needs higher limits)
 * **Upstream provider rate limits**: Check if the upstream LLM provider is rate-limiting; configure failover to alternate providers
-* **Budget exhausted**: Verify monthly spending limit has not been reached
+* **Budget exhausted**: Verify monthly spend limit has not been reached
 * **Per-user limits too restrictive**: Adjust per-user rate limits if using multi-tenant strategies
 
 === Multi-tenant authorization failures

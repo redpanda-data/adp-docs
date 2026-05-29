@@ -22,7 +22,7 @@ Before starting, ensure you have:
 
 Providers represent upstream LLM services and their associated credentials. Providers are disabled by default and must be enabled explicitly.
 
-. Navigate to *Agentic* > *AI Gateway* > *Providers*.
+. Navigate to *AI Gateway* > *Providers*.
 . Select a provider (for example, OpenAI, Anthropic, Google AI, AWS Bedrock).
 . On the Configuration tab, click *Add configuration* and enter the provider's credentials (API key for OpenAI, Anthropic, and Google AI; AWS access key and secret for Bedrock).
 . Verify the provider status shows as active.
@@ -31,7 +31,7 @@ Providers represent upstream LLM services and their associated credentials. Prov
 
 After enabling a provider, enable the specific models you want to make available through your gateways.
 
-. Navigate to *Agentic* > *AI Gateway* > *Models*.
+. Navigate to *AI Gateway* > *Models*.
 . Enable the models you want to use (for example, `gpt-5.2-mini`, `claude-sonnet-4.5`, `claude-opus-4.6`).
 . Verify the models appear as enabled in the model catalog.
 
@@ -55,7 +55,7 @@ A gateway is a logical configuration boundary that defines rate limits, spend li
 * Team isolation: One gateway per team for budget tracking
 * Customer multi-tenancy: One gateway per customer for isolated policies
 
-. Navigate to *Agentic* > *AI Gateway* > *Gateways*.
+. Navigate to *AI Gateway* > *Gateways*.
 . Click *Create Gateway*.
 . Configure the gateway:
 +
