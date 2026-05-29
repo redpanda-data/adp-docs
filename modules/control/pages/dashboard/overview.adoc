@@ -6,9 +6,9 @@
 :learning-objective-2: Filter governance charts by provider, model, cost type, token type, and user
 :learning-objective-3: Use the Agents table and Top users panel to investigate fleet and user-level spend
 
-// Source: `cloudv2` `apps/adp-ui/src/routes/governance/index.tsx`, governance components, and `apps/adp-ui/docs/design/0003-governance-v0.md` on `origin/main`, verified 2026-05-10.
+// Source: `cloudv2` `apps/adp-ui/src/routes/governance/index.tsx`, governance components, and `apps/adp-ui/docs/design/0003-governance-v0.md` on `origin/main`, re-verified 2026-05-29.
 // TODO: Capture screenshots and exact empty-state copy after an authenticated walkthrough of the protected Agentic Data Plane UI.
-// TODO: Package 2 briefing (2026-05-22) lists "grouping by user / agent" and "drill-down into agent and user" as still-WIP for Jun 15 ship. The surfaces below already describe a *user* filter on the chart, a per-user *Top users* panel with heatmap, an *Agents* table, and `SpendingFilter.user_id` on the breakdown API. Before next release: reconcile with eng (Johannes / governance team) which of these are live in Package 2 today vs. coming with the Jun 15 cut. If any are still WIP, mark them as "coming in Package 2" or remove until they ship. Do not document unshipped surfaces. Specific items to confirm: (1) per-user filter on the dashboard chart, (2) Top users panel + heatmap, (3) Agents-table drill-down to per-agent spend, (4) per-agent grouping on `GetSpendingBreakdown`, (5) per-user filter on the AI Gateway *Cost & Usage* tab.
+// Verified 2026-05-29 against origin/main: the per-user chart filter, Top users panel + heatmap, Agents table with detail drill-down, and the Cost & Usage per-user filter are all live. Per-agent analysis runs through the USER breakdown dimension (an agent's identity is its service-account email); `GetSpendingBreakdown` has no dedicated agent dimension.
 
 The Governance dashboard brings AI Gateway usage and agent inventory into one view. Use it to compare spend, request volume, and token volume over a selected time range, then narrow the chart by provider, model, cost type, token type, or user.
 

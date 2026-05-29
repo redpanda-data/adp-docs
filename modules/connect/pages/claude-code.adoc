@@ -111,14 +111,12 @@ Claude Code can call MCP servers for tool access. To use the MCP servers you alr
 
 [source,bash]
 ----
-claude mcp add <server-name> https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/servers/<server-name>
+claude mcp add <server-name> https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>
 ----
 
 For OAuth-protected MCP servers (most managed types), Claude Code prompts the developer to complete the consent flow on first use. ADP stores the resulting token in the per-user xref:connect:user-delegated-oauth.adoc[token vault], so subsequent invocations reuse it.
 
 To front many MCP servers behind a single Claude Code endpoint, use xref:gateway:aggregation.adoc[MCP aggregation] and point Claude Code at the aggregated URL.
-
-// TODO: Confirm the exact MCP URL shape (`/mcp/v1/servers/<name>` vs. another path) against adp-production once the MCP servers detail page surfaces the canonical URL.
 
 == Verify the connection
 

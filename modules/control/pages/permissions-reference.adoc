@@ -246,6 +246,40 @@ The `dataplane_adp_spending_*` permissions gate the governance APIs that surface
 |✓
 |===
 
+== Budget permissions
+
+The `dataplane_adp_budget_*` permissions gate per-agent LLM spend budgets. See xref:control:budgets.adoc#set-a-spend-limit[Set a spend limit].
+
+[cols="2,2,1,1"]
+|===
+|Permission |Operation |Writer |Reader
+
+|`dataplane_adp_budget_create`
+|Create a budget
+|✓
+|
+
+|`dataplane_adp_budget_get`
+|View a budget and its current-period spend
+|✓
+|✓
+
+|`dataplane_adp_budget_list`
+|List budgets
+|✓
+|✓
+
+|`dataplane_adp_budget_update`
+|Modify a budget
+|✓
+|
+
+|`dataplane_adp_budget_delete`
+|Delete a budget
+|✓
+|
+|===
+
 == A2A runtime permissions
 
 The `dataplane_aiagent_a2a_*` permissions gate agent-to-agent (A2A) runtime traffic. The AIAgentInvoker built-in role grants every permission in this namespace.
