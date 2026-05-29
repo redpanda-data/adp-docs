@@ -1,0 +1,27 @@
+name: Auto-assign GA doc review issues
+
+# Assigns Michele to any issue labeled `ga-doc-review` so SME feedback during
+# the GA documentation review lands in one queue. Covers both paths: issues
+# created with the label (the pre-filled `?labels=ga-doc-review` link) and
+# issues labeled after creation.
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  assign:
+    if: github.event.label.name == 'ga-doc-review' || contains(github.event.issue.labels.*.name, 'ga-doc-review')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              assignees: ['micheleRP'],
+            });
