@@ -1,18 +1,81 @@
 = Set Spend Limits
-:description: See what AI spending the Agentic Data Plane records automatically and where to view it.
-:page-topic-type: overview
+:description: Cap LLM spend with per-agent budgets, and see what the Agentic Data Plane records automatically and where to view it.
+:page-topic-type: how-to
 :personas: platform_engineer, pilot_lead
-:learning-objective-1: Identify what spending data the Agentic Data Plane records automatically
-:learning-objective-2: Locate where to view spend in the dashboard, in transcripts, and through breakdown queries
+:learning-objective-1: Set a per-agent budget that caps LLM spend and warns before the cap
+:learning-objective-2: Identify what spending data the Agentic Data Plane records automatically
+:learning-objective-3: Locate where to view spend in the dashboard, in transcripts, and through breakdown queries
 
-// TODO: configurable caps, halt-vs-notify enforcement, alerts, and per-tenant cap-setting are roadmap items not yet shipped. Add a how-to and reframe this overview as a comparison once those features land; for now, omit from customer prose per the project policy not to mark roadmap items.
+The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the governance dashboard, through individual transcripts, and through breakdown queries by provider, model, user, or provider type.
 
-The Agentic Data Plane records every LLM call as a spending event the moment your first agent or MCP server runs through the gateway. Read that data through the governance dashboard, through individual transcripts, and through breakdown queries by provider, model, user, organization, or provider type.
-
-After reading this page, you will be able to:
+After completing these steps, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+[[set-a-spend-limit]]
+== Set a spend limit
+
+A *budget* caps LLM spend over a recurring period. When an agent's spend for the period reaches the budget's hard limit, AI Gateway rejects that agent's next LLM request with `HTTP 429` until the period resets. A separate warning threshold fires before the cap is reached, so you can react before an agent is cut off.
+
+ADP enforces budgets per agent. In a budget, an _agent_ is its service-account email: the same identity that appears as `user_id` in spend data.
+
+=== How a budget works
+
+[cols="1,3"]
+|===
+|Setting |What it does
+
+|Limit
+|The hard cap on per-period spend, in USD microcents (1 cent = 1,000,000 microcents). When a matching agent's accrued spend for the period reaches this value, the agent's next LLM request through the gateway gets `HTTP 429`. Spend resets to zero at the start of each period.
+
+|Warning threshold
+|A spend level, lower than the limit, at which ADP fires a warning (a log entry and a metric). Requests still pass. Must be greater than zero and less than the limit.
+
+|Period
+|How often the spend pool resets: daily, weekly, or monthly. Periods are calendar-aligned in UTC: daily at 00:00 UTC, weekly at 00:00 UTC Monday, monthly at 00:00 UTC on the first of the month.
+
+|Target agent
+|Which agent the budget applies to. Leave it unset to create the tenant default budget. Set it to an agent's service-account email to create a per-agent override.
+|===
+
+=== Default and per-agent override budgets
+
+You can have one default budget per tenant and at most one override per agent:
+
+* The *default* budget (no target agent) gives every agent its own independent pool of the limit per period. One agent reaching its cap doesn't affect another.
+* A *per-agent override* targets a single agent by service-account email and replaces the default for that agent. Use an override to give a specific agent a higher or lower cap than the fleet default.
+
+The target agent is immutable. To move an override to a different agent, delete it and create a new one. When you read a budget, it also reports the current period's spend, when the period started, when it resets, and (for the default budget) the agent currently closest to its cap.
+
+=== Manage budgets through the API
+
+`BudgetService` exposes standard create, read, update, and delete operations:
+
+[cols="1,2"]
+|===
+|Method |Use it to
+
+|`CreateBudget`
+|Create the tenant default or a per-agent override.
+
+|`GetBudget`, `ListBudgets`
+|Read one budget, or list all budgets, each with current-period spend status.
+
+|`UpdateBudget`
+|Change the limit, warning threshold, or period. Send a field mask naming the fields you change.
+
+|`DeleteBudget`
+|Remove a budget. Deleting the default removes the per-agent pools; deleting an override falls that agent back to the default.
+|===
+
+A service account needs the matching `dataplane_adp_budget_*` permission for each operation (`create`, `get`, `list`, `update`, or `delete`). See xref:control:permissions-reference.adoc#budget-permissions[Budget permissions].
+
+[NOTE]
+====
+Budgets currently cap spend per agent. Tenant-wide shared pools; limits scoped by model, provider, or organization; and notification delivery (email, webhook, or chat) when a budget warns or blocks are planned but not yet available. Today a warning threshold produces a log entry and a metric.
+====
 
 == What ADP records automatically
 
@@ -29,7 +92,7 @@ Streaming and non-streaming requests are tracked the same way. Cache-write token
 
 [NOTE]
 ====
-Cost is reported in *microcents*. 1 cent = 100 microcents, $1 = 10,000 microcents. Divide `total_cost_microcents` by 10,000 to convert to dollars.
+Cost is reported in *microcents*. 1 cent = 1,000,000 microcents, so $1 = 100,000,000 microcents. Divide `total_cost_microcents` by 100,000,000 to convert to dollars.
 ====
 
 // TODO: confirm whether spending events are captured by default for every deployment, or whether some deployments require an opt-in flag. Open Q A1 in the companion plan.
@@ -59,10 +122,10 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:monitor:transcripts.adoc[Read a transcript].
 
 |*Breakdown queries*
-|Aggregated spend by *provider*, *model*, *user*, *organization*, or *provider type*. Available through the dashboard's provider-breakdown widget and through `GetSpendingBreakdown` for programmatic access.
+|Aggregated spend by *provider*, *model*, *user*, or *provider type*. Available through the dashboard's provider-breakdown widget and through `GetSpendingBreakdown` for programmatic access.
 |===
 
-The breakdown dimensions all read from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_id`, or `organization_id`. Combine dimensions to scope a query (for example, "all spend on Anthropic for user `alice` in April").
+Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_id`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, or provider type; `organization_id` is a filter only, not a breakdown dimension.
 
 For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` expression that lets you combine and negate dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). The convenience fields and the `filter` expression compose; populate one or both. The server compiles the result to a single SQL `WHERE` clause, which avoids per-dimension fan-out queries.
 
@@ -71,7 +134,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 `total_tokens` is derived server-side from input + output + cache tokens. You don't need to compute it client-side, and the value is consistent across all four `SpendingService` methods.
 ====
 
-// TODO: confirm `user_id` and `organization_id` are populated automatically from request context (OIDC claims) or require setup. Open Q A2 in the companion plan.
+`user_id` and `organization_id` are populated automatically from the request's authenticated identity (the caller's email and organization), so spend is attributed without any setup on your part.
 
 [[query-spend-programmatically]]
 == Query spend programmatically
@@ -82,17 +145,17 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 
 `SpendingService` uses the same OIDC client-credentials grant as the rest of AI Gateway. Mint a service-account access token using the flow in xref:gateway:connect-agent.adoc#authenticate-with-oidc-client-credentials[Authenticate with OIDC client credentials], then pass the token in the `Authorization: Bearer <token>` header on every call. The service account needs `dataplane_adp_spending_get` on the resource you're querying. See xref:control:permissions-reference.adoc#spending-permissions[Spending permissions].
 
-// TODO: Confirm the canonical endpoint shape against `apps/aigw` on cloudv2. Likely a Connect-Go / gRPC reflection surface at `<dataplane-base>/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown`. Replace the placeholder URL below with the verified shape, and add a note on whether HTTP/JSON transcoding is exposed or whether clients must speak gRPC.
+// NOTE: `SpendingService` is part of the `redpanda.api.adp.v1alpha1` package; reach it over the Connect protocol (POST + JSON) at `<dataplane-base>/redpanda.api.adp.v1alpha1.SpendingService/<Method>`. The request shapes in this section are proto-accurate but were not exercised against a live cluster. Confirm the exact wire encoding (Connect JSON vs. gRPC, enum value form) on your deployment before relying on the examples.
 
 === Request shape
 
-`GetSpendingBreakdown` takes a `SpendingFilter` plus a `group_by` dimension. The filter accepts:
+`GetSpendingBreakdown` takes a `SpendingFilter` plus a `dimension`. The filter accepts:
 
 [cols="1,3"]
 |===
 |Field |Meaning
 
-|`time_range.start_time`, `time_range.end_time`
+|`start_time`, `end_time`
 |RFC 3339 timestamps bracketing the window. Required.
 
 |`provider_name`
@@ -111,7 +174,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 |AIP-160 expression that combines and negates dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). Composes with the structured fields above; populate one or both.
 |===
 
-The `group_by` value chooses the breakdown dimension: `PROVIDER`, `MODEL`, `USER`, `ORGANIZATION`, or `PROVIDER_TYPE`.
+The `dimension` value chooses the breakdown dimension. Valid values are the `BreakdownDimension` enum: `BREAKDOWN_DIMENSION_PROVIDER`, `BREAKDOWN_DIMENSION_MODEL`, `BREAKDOWN_DIMENSION_USER`, and `BREAKDOWN_DIMENSION_PROVIDER_TYPE`.
 
 === cURL example
 
@@ -123,22 +186,20 @@ ACCESS_TOKEN="<oidc-access-token>"   # from the client_credentials flow
 DATAPLANE_BASE="https://aigw.<cluster-id>.clusters.rdpa.co"
 
 curl -s --request POST \
-  --url "${DATAPLANE_BASE}/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown" \
+  --url "${DATAPLANE_BASE}/redpanda.api.adp.v1alpha1.SpendingService/GetSpendingBreakdown" \
   --header "Authorization: Bearer ${ACCESS_TOKEN}" \
   --header 'Content-Type: application/json' \
   --data '{
     "filter": {
-      "time_range": {
-        "start_time": "2026-05-17T00:00:00Z",
-        "end_time":   "2026-05-24T00:00:00Z"
-      },
+      "start_time": "2026-05-17T00:00:00Z",
+      "end_time":   "2026-05-24T00:00:00Z",
       "provider_name": "prod-anthropic"
     },
-    "group_by": "USER"
+    "dimension": "BREAKDOWN_DIMENSION_USER"
   }' | jq
 ----
 
-The response carries one row per user in the window, each with `input_tokens`, `output_tokens`, `cached_tokens`, `total_tokens` (server-derived), `total_cost_microcents`, and `request_count`. Divide `total_cost_microcents` by 10,000 to convert to dollars.
+The response carries one `entries` row per user in the window. Each entry has a `key` (the user) and a `stats` object with `total_cost_microcents`, `total_requests`, `total_tokens` (server-derived), and per-bucket `input`, `output`, and `cached` usage. Divide `total_cost_microcents` by 100,000,000 to convert to dollars.
 
 === Python example
 
@@ -156,37 +217,34 @@ start = end - timedelta(days=7)
 
 body = {
     "filter": {
-        "time_range": {
-            "start_time": start.isoformat().replace("+00:00", "Z"),
-            "end_time":   end.isoformat().replace("+00:00", "Z"),
-        },
+        "start_time": start.isoformat().replace("+00:00", "Z"),
+        "end_time":   end.isoformat().replace("+00:00", "Z"),
         "filter": 'provider_name="prod-anthropic"',
     },
-    "group_by": "USER",
+    "dimension": "BREAKDOWN_DIMENSION_USER",
 }
 
 r = requests.post(
-    f"{base}/redpanda.aigateway.spending.v1.SpendingService/GetSpendingBreakdown",
+    f"{base}/redpanda.api.adp.v1alpha1.SpendingService/GetSpendingBreakdown",
     headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
     json=body,
 )
 r.raise_for_status()
-for row in r.json().get("rows", []):
-    dollars = row["total_cost_microcents"] / 10_000
-    print(f"{row['user_id']}: ${dollars:,.2f}  ({row['request_count']} requests)")
+for entry in r.json().get("entries", []):
+    stats = entry["stats"]
+    dollars = int(stats["total_cost_microcents"]) / 100_000_000
+    print(f"{entry['key']}: ${dollars:,.2f}  ({stats['total_requests']} requests)")
 ----
 
-// TODO: Replace the URL path with the verified Connect-Go / gRPC route once eng confirms. The proto-generated client (Connect-Go or grpc-python) is the long-term recommendation; the cURL/`requests` examples above are for quick scripting.
+The proto-generated client (Connect-Go or grpc-python) is the long-term recommendation; the cURL and `requests` examples are for quick scripting.
 
 === Related methods
 
 `SpendingService` exposes three more methods that follow the same `SpendingFilter` shape:
 
-* `GetSpendingTimeSeries`: Bucketed spend over the time range, for chart-style consumers.
-* `GetSpendingSummary`: Total spend, tokens, and requests for the range, with no breakdown.
-* `ListSpendingEvents`: Paged per-call detail. Use this only for narrow time ranges; the event volume is high.
-
-// TODO: Confirm the method names above against the current `SpendingService` proto and add the full request/response shape for each one (or split into a dedicated spending-api.adoc if this section outgrows budgets.adoc).
+* `GetSpendingSummary`: Total spend, tokens, and requests for the range, with no breakdown. Also returns the previous comparable period so you can show a trend.
+* `GetSpendingTimeSeries`: Spend bucketed over the time range (hourly or daily), for chart-style consumers.
+* `GetSpendingTimeSeriesByDimension`: Time-series buckets split by a breakdown dimension (top-N keys by cost), for stacked charts. Reports `truncated_key_count` when more keys matched than were returned.
 
 == Guardrail evaluator cost
 
@@ -206,7 +264,7 @@ The `SpendingFilter` exposes `organization_id` and `user_id`, so every dashboard
 * Pull per-user cost reports through `GetSpendingBreakdown`.
 * Identify which organization or user is driving the highest cost on a specific provider.
 
-// TODO: cap-setting at any scope (per-tenant, per-user, per-agent) is a roadmap item, not shipped. Drop this TODO once that surface lands and add a "Set caps" how-to next to the viewing surface above. Until then, customer prose stays viewing-only.
+To cap spend (not just view it), see <<set-a-spend-limit,Set a spend limit>>. Budgets are enforced per agent today; per-tenant and per-user caps are not yet available.
 
 // TODO: confirm whether `organization_id` is multi-tenant-aware in the public ADP API, or whether it's an internal-only field. The proto exposes the filter; runtime population is the open item. Open Q B1 in the companion plan.
 
