@@ -127,7 +127,7 @@ The catalog groups presets into categories you can filter with the category chip
 . Pick a *Grant type*:
 +
 * *Browser Consent*: The user approves access in their browser (OAuth 2.0 Authorization Code flow). The default for user-delegated OAuth.
-* *Token Exchange*: RFC 8693 server-to-server token exchange. Shown in the form but not yet functional (future release); the gateway will swap the user's identity-provider JWT for a provider-scoped token without browser interaction.
+* *Token Exchange*: RFC 8693 server-to-server token exchange. Shown in the form but not yet functional (future release); the gateway exchanges the user's identity-provider JWT for a provider-scoped token without browser interaction.
 +
 . Pick a *Token-endpoint authentication method*:
 +
