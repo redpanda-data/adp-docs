@@ -32,22 +32,22 @@ After completing this guide, you will be able to:
 
 == Fill in the Provider card
 
-The first card on the page collects identity fields.
+The first card on the page collects identity fields. Enter a *Display name*; the form auto-derives the *Resource ID* from it as you type.
 
 [cols="1,1,3"]
 |===
 |Field |Required |Notes
 
-|*Name*
+|*Display name*
 |Yes
-|Machine identifier. Lowercase letters, numbers, and hyphens only (`^[a-z][a-z0-9-]*$`), up to 63 characters. Immutable after creation. Appears in the proxy URL (`/llm/v1/providers/<name>/...`). The form auto-suggests a friendly name (for example, `red-space-bear`). Override it if you want something more descriptive.
+|Human-readable label shown in dashboards and model selectors. Up to 253 characters. The form auto-derives the *Resource ID* from this value.
 
-|*Display name* (Advanced options)
-|No
-|Human-readable label shown in dashboards and model selectors. Up to 253 characters. Leave blank to use the *Name*.
+|*Resource ID*
+|Yes
+|Machine identifier used in API calls and CLI commands. Lowercase letters, numbers, and hyphens only (`^[a-z][a-z0-9-]*$`), up to 63 characters. Immutable after creation. Appears in the proxy URL (`/llm/v1/providers/<resource-id>/...`). Auto-derived from the *Display name*; edit it if you want something different.
 |===
 
-Display name lives in the *Advanced options* expander on the same card.
+The *Summary* panel labels the *Resource ID* as *Name*.
 
 == Choose a provider type
 
@@ -77,6 +77,8 @@ Selecting a type reveals the type-specific configuration block below the picker.
 
 == Fill in the type-specific configuration
 
+Each *API key reference* and credential field points at a secret-store entry, not the secret value itself. Use the *Existing* tab to pick a secret already in your dataplane's secret store, or the *New* tab to create one inline.
+
 [tabs]
 ======
 OpenAI::
@@ -88,7 +90,7 @@ OpenAI::
 |*Base URL*
 |Optional. Leave empty for the standard OpenAI API (`https://api.openai.com/v1`). Override for Azure OpenAI or other OpenAI-hosted endpoints.
 
-|*API key*
+|*API key reference*
 |Required. Secret-store reference for the OpenAI API key. Must be `UPPER_SNAKE_CASE`, for example `OPENAI_API_KEY`.
 |===
 
@@ -101,10 +103,10 @@ Anthropic::
 |*Base URL*
 |Optional. Leave empty for the standard Anthropic API (`https://api.anthropic.com`).
 
-|*API key*
-|Required unless *Auth passthrough* is on. `UPPER_SNAKE_CASE`, for example `ANTHROPIC_API_KEY`.
+|*API key reference*
+|Required unless *Authorization passthrough* is on. `UPPER_SNAKE_CASE`, for example `ANTHROPIC_API_KEY`.
 
-|*Auth passthrough*
+|*Authorization passthrough*
 |Optional toggle. When on, the client's `Authorization` header is forwarded to Anthropic instead of using a server-side API key. Used for enterprise and Max-plan OAuth passthrough: each client authenticates with its own Anthropic subscription. Leave the API key reference empty when using passthrough.
 |===
 
@@ -117,7 +119,7 @@ Google AI::
 |*Base URL*
 |Optional. Leave empty for the standard Google AI API (`https://generativelanguage.googleapis.com`).
 
-|*API key*
+|*API key reference*
 |Required. Secret-store reference for the Google AI API key. `UPPER_SNAKE_CASE`, for example `GOOGLE_AI_API_KEY`.
 |===
 +
@@ -138,13 +140,14 @@ AWS Bedrock::
 |*Base URL*
 |Optional. Override the default regional Bedrock endpoint.
 
-|*Credentials*
-|Choose one of:
+|*Access key ID reference*
+|Secret-store reference for the AWS access key ID, `UPPER_SNAKE_CASE` (typically `AWS_ACCESS_KEY_ID`). Leave both credential references empty to fall back to the default credential chain (environment variables, IRSA, EKS Pod Identity, or instance profile).
 
-* *Default credential chain* (leave the credentials oneof unset). Uses environment variables, IRSA, EKS Pod Identity, or instance profile.
-* *Static credentials*. Secret-store references for the access key ID and secret access key, both `UPPER_SNAKE_CASE` (typically `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`).
-* *Assume role*. Provide a `role_arn`, optional `external_id` (required when the role's trust policy mandates it), and optional `session_name` (surfaces in CloudTrail audit).
+|*Secret access key reference*
+|Secret-store reference for the AWS secret access key, `UPPER_SNAKE_CASE` (typically `AWS_SECRET_ACCESS_KEY`).
 |===
++
+The create form exposes static credentials (and the default-chain fallback when you leave both references empty). To configure an assume-role credential (`role_arn`, optional `external_id` when the role's trust policy mandates it, and optional `session_name` that surfaces in CloudTrail), use the API or the `rpk ai llm` CLI instead of the form.
 
 OpenAI-compatible::
 +
@@ -155,7 +158,7 @@ OpenAI-compatible::
 |*Base URL*
 |Required. URL of your OpenAI-compatible endpoint, for example `http://vllm.internal:8000/v1`, `http://ollama.local:11434/v1`, or an aggregator like Together / Groq / OpenRouter.
 
-|*API key*
+|*API key reference*
 |Optional. Leave empty for no-auth endpoints (common for local runtimes). `UPPER_SNAKE_CASE` if set.
 |===
 +
@@ -172,7 +175,7 @@ For the OpenAI, Google AI, and AWS Bedrock provider types, AI Gateway validates 
 
 Models you select on this form become the catalog the provider exposes. Leave the list empty to allow every model the upstream catalog returns.
 
-For *OpenAI*, *Anthropic*, *Google AI*, and *AWS Bedrock*, the form shows a picker backed by the provider's catalog. Pick from the list, or type a model identifier the catalog doesn't show. For *OpenAI-compatible*, the form takes a freeform list: type the exact identifiers your upstream serves.
+For *OpenAI*, *Anthropic*, *Google AI*, and *AWS Bedrock*, the form shows a picker backed by the provider's catalog. Each model in the picker shows its input and output price per million tokens. Pick from the list, or type a model identifier the catalog doesn't show. For *OpenAI-compatible*, the form takes a freeform list: type the exact identifiers your upstream serves.
 
 The catalog of available models in the picker is maintained by Redpanda. When an upstream provider publishes a new model, it usually appears in the picker within a day or two; admins don't have to wait for a Redpanda release. New models aren't enabled automatically: an admin still selects the model in the catalog to make it callable through this provider.
 
@@ -190,17 +193,26 @@ The detail page also carries a *Last 7 days* KPI strip (*TOTAL SPEND*, *REQUESTS
 [[transcript-logging]]
 == Configure transcript logging
 
-By default, AI Gateway records the full request and response payload (including prompt content, completion content, and tool-call arguments and results) for every call this provider proxies, writing each call into xref:monitor:transcripts.adoc[the Transcripts view] alongside token counts and latency. This powers turn-by-turn investigation and per-conversation drill-down in Governance.
+The *Transcripts* card controls whether AI Gateway records the message bodies this provider proxies. It has two independent toggles, *both off by default*:
 
-Some workloads need to suppress that payload capture: regulated PII, customer secrets, or any traffic where the message body itself must not be retained. For those, configure a dedicated "sensitive" provider with transcript logging disabled.
+[cols="1,3"]
+|===
+|Toggle |What it captures
 
-The toggle is on the provider's create and edit form. It is per-provider, not per-request: applications cannot opt in or out at call time. To split sensitive from non-sensitive traffic, create one provider with transcript logging on and another with it off, and route each application to whichever proxy URL matches its data class.
+|*Record inputs*
+|Captures the full request body (prompt content and tool-call arguments) on observability traces.
 
-Disabling transcript logging does not suppress cost and usage telemetry. Token counts, latency, and provider/model attribution are still recorded, so the *Cost & Usage* tab and the xref:control:dashboard/overview.adoc[Governance dashboard] continue to report spend for traffic on the provider; only the message bodies are withheld from the Transcripts view.
+|*Record outputs*
+|Captures the full response body (completion content and tool-call results) on observability traces.
+|===
 
-NOTE: Changing the toggle takes effect for new requests. Transcripts already captured under the previous setting are not retroactively redacted; delete or rotate the provider if you need to purge historical content.
+Because both toggles default to off, AI Gateway does not retain message bodies for a new provider until you turn them on. Enable them to power turn-by-turn investigation and per-conversation drill-down in xref:monitor:transcripts.adoc[the Transcripts view]. Leave them off for workloads where the message body must not be retained, such as regulated PII or customer secrets.
 
-// TODO: Verify the exact UI field label ("Transcript logging" / "Capture transcripts" / similar) and default value against adp-production. Confirm with eng whether disabling capture also suppresses the `gen_ai.prompt.*` and `gen_ai.completion.*` attributes on OTel spans, or only the long-form content fields.
+These are per-provider settings, not per-request: applications cannot opt in or out at call time. To split sensitive from non-sensitive traffic, create one provider with recording on and another with it off, and route each application to whichever proxy URL matches its data class.
+
+Recording settings do not affect cost and usage telemetry. Token counts, latency, and provider/model attribution are always recorded, so the *Cost & Usage* tab and the xref:control:dashboard/overview.adoc[Governance dashboard] report spend for traffic on the provider regardless of these toggles; only the message bodies are withheld when the toggles are off.
+
+NOTE: Changing a toggle takes effect for new requests. Transcripts already captured under the previous setting are not retroactively redacted; delete or rotate the provider if you need to purge historical content.
 
 == Save and verify
 
@@ -300,13 +312,13 @@ For production, scope to specific models and regions instead of using wildcards.
 [[anthropic-authorization-passthrough]]
 == Anthropic: Authorization passthrough
 
-If you want each client to authenticate against Anthropic with its own subscription (Claude Pro, Max, Team, or enterprise), enable *Auth passthrough* instead of configuring a server-side API key. In this mode:
+If you want each client to authenticate against Anthropic with its own subscription (Claude Pro, Max, Team, or enterprise), enable *Authorization passthrough* instead of configuring a server-side API key. In this mode:
 
 * Leave the *API key* field empty.
 * Clients must send their own Anthropic `Authorization` header with every request. AI Gateway forwards it unchanged.
 * Use this when you want to aggregate individual client subscriptions rather than share a single API account.
 
-The provider detail page shows whether Auth passthrough is enabled in the *Connection* card.
+The provider detail page shows whether Authorization passthrough is enabled in the *Connection* card.
 
 == Browse providers in the list view
 
@@ -320,7 +332,7 @@ The *LLM Providers* list page is the at-a-glance home for every provider in your
 |User-given name plus the provider-type icon (OpenAI, Anthropic, Google, AWS Bedrock, OpenAI-compatible) and a copyable preview of the proxy base URL.
 
 |*Status*
-|*Enabled* or *Disabled*.
+|Shows *Active* for an enabled provider. A disabled provider rejects requests to its proxy URL until you enable it again.
 
 |*Models*
 |First two model identifiers exposed by the provider, plus a `+N` overflow chip when more are configured.
@@ -400,10 +412,10 @@ The spend chart footer summarizes the selected view by cost bucket, including to
 AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
 
 * *Multi-provider routing, failover, and retries across providers.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
-* *Spend limits.* Per-user, per-org, and global cost caps are not available. AI Gateway records spend and token usage for reporting in the provider *Cost & Usage* view and Governance, but it does not enforce budget caps. See xref:control:budgets.adoc[Token budgets and limits].
-* *Rate limits.* Requests-per-second, per-minute, or per-day limits are not available.
+* *Rate limits.* Requests-per-second, per-minute, or per-day limits are not available. To cap spend rather than request rate, use xref:control:budgets.adoc[budgets], which enforce a per-agent hard cap.
 * *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the Agentic Data Plane UI.
 
 == Next steps
 
 * xref:gateway:connect-agent.adoc[Connect your agent]
+* xref:control:budgets.adoc[Set spend limits with budgets]

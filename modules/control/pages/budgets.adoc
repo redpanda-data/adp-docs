@@ -49,6 +49,21 @@ You can have one default budget per tenant and at most one override per agent:
 
 The target agent is immutable. To move an override to a different agent, delete it and create a new one. When you read a budget, it also reports the current period's spend, when the period started, when it resets, and (for the default budget) the agent currently closest to its cap.
 
+=== Set a budget in the UI
+
+Open *LLM Providers* in the sidebar and select the *Budgets* tab. The tab lists every budget with its *Scope* (the tenant default or a target agent), *Period*, current *Usage* against the cap, *Warn at* threshold, and when it was last *Updated*.
+
+To create the tenant default budget:
+
+. Click *Create default budget*.
+. Under *Budget*, set *Cap usage at* to a dollar amount and choose a period (day, week, or month). Use the quick-set chips ($25, $100, $500, $1,000) for common values.
+. Drag the *Warn at* slider to set the warning threshold as a percentage of the cap (80% by default).
+. Review the *Configuration preview* panel, which summarizes the budget, period, and the warn and block thresholds in dollars, then click *Create default budget*.
+
+To give one agent a different cap, click *Add override*, pick the agent (each agent can have at most one override; agents that already have one are greyed out), then set the *Budget* and *Warn at* controls the same way. The *Resource name* is auto-derived from the picked agent and is immutable; the *Display name* is editable.
+
+// TODO: The create/override forms describe the warn threshold as emitting "a webhook and a Console banner." Per budget.proto, warn notification delivery is a future milestone (today the threshold produces a log entry and a metric, as documented below). Confirm with eng whether webhook + banner delivery is live before describing it here. The Budgets UI tab is also still feature-flag-gated (`adp-agent-budgets`); confirm GA timing before publishing this walkthrough.
+
 === Manage budgets through the API
 
 `BudgetService` exposes standard create, read, update, and delete operations:

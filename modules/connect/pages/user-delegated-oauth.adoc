@@ -46,9 +46,17 @@ The first time a user calls a tool that needs this server's authentication, Redp
 . The upstream provider redirects back to Redpanda with a token. Redpanda stores it in the token vault under that user's identity.
 . The original tool call retries automatically. Subsequent calls reuse the stored token.
 
-After consent, the user can see and revoke their connection under *My Connections* in the Agentic Data Plane UI.
+After consent, the user can see and revoke their connection under *Connections* in the Agentic Data Plane UI.
 
-// TODO: screenshot of the consent prompt and the resulting *My Connections* entry.
+// TODO: screenshot of the consent prompt and the resulting *Connections* entry.
+
+== Manage your connections
+
+The *Connections* page in the sidebar is each user's view of their own third-party connections: it lists one card per configured OAuth provider, so a user can authorize the providers their MCP servers need without waiting for a tool call to trigger the consent flow.
+
+Each card shows the provider's name, the scopes it requests, and a status of *Not connected* or connected. Click *Connect* to run the consent flow for that provider and store a token in the vault under your identity. Connections persist until you revoke them; remove and re-add a connection if the upstream credentials change.
+
+NOTE: Connections are per-user. Each user authorizes their own accounts, and one user's connections are not visible to or usable by another.
 
 == Scope upgrades
 
@@ -86,12 +94,12 @@ For the field-by-field service-account-OAuth setup, see xref:connect:create-serv
 |User-delegated OAuth requires `https://` URLs on the MCP server (proto rule `remote_mcp.user_oauth_requires_https`). Switch the server's URL to HTTPS.
 
 |`OAuthConnectionRequired` returned even after the user consented
-|The user's vault entry might have been revoked or the token expired with no refresh. Have the user re-consent through *My Connections*.
+|The user's vault entry might have been revoked or the token expired with no refresh. Have the user re-consent through *Connections*.
 
 |`scope_upgrade_required` returned
 |The required scopes on the server changed (or the user originally consented with fewer scopes). The user re-consents with the higher scope.
 
-|*My Connections* shows stale entries
+|*Connections* shows stale entries
 |Connections persist until manually revoked. Have the user remove and re-add the connection if upstream credentials changed.
 |===
 

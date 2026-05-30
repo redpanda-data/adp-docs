@@ -91,44 +91,11 @@ Walk through the create form to register the upstream:
 . Sign in to ADP.
 . Open *OAuth Providers* in the sidebar.
 . Click *Create provider*.
-. Pick the upstream's *Category*. The picker offers presets for popular providers. When you pick one, the form pre-fills the standard authorization and token endpoints.
+. Pick a preset from the catalog, or choose *Custom Provider* to enter the endpoints yourself. Picking a preset pre-fills the standard authorization and token endpoints and recommended scopes.
 +
-[cols="1,2"]
-|===
-|Category |Examples
-
-|*Identity*
-|Okta, Microsoft Entra (Azure AD), Google
-
-|*Source control*
-|GitHub, GitLab, Bitbucket
-
-|*Productivity*
-|Notion, Linear, Asana, Atlassian
-
-|*Storage*
-|Dropbox, Box
-
-|*Communication*
-|Slack, Zoom, Webex, Discord, Zendesk
-
-|*CRM*
-|Salesforce, HubSpot
-
-|*Data warehouse*
-|Snowflake, Databricks
-
-|*Monitoring*
-|Datadog, Splunk, Sentry, PagerDuty
-
-|*Security*
-|Cloudflare, Tailscale, 1Password
-
-|*Business*
-|Workday, DocuSign, ServiceNow
-|===
+The catalog groups presets into categories you can filter with the category chips: *Identity & SSO*, *Code & Dev*, *Productivity*, *Files & Storage*, *Communication*, *CRM & Support*, *Data Platform*, *Observability*, *Infrastructure*, and *HR & Legal*. Selectable presets today are *GitHub*, *Google*, *Okta*, *Microsoft / Azure AD*, and *Slack*; more are rolling out. For any upstream without a preset, use *Custom Provider* and enter its endpoints manually.
 +
-// TODO: capture screenshots of the well-known catalog picker.
+// TODO: capture screenshots of the catalog picker. Update the selectable-preset list as more presets are enabled (UI allowlist: apps/adp-ui/src/lib/oauth-provider-presets.ts).
 +
 . Fill in the identity fields:
 +
@@ -141,7 +108,7 @@ Walk through the create form to register the upstream:
 |Lowercase letters, numbers, and hyphens only. Used to reference the provider in MCP server configuration. Immutable after create.
 
 |*Display name*
-|No
+|Yes
 |Human-readable label shown in the UI.
 
 |*Authorization endpoint*
@@ -160,7 +127,7 @@ Walk through the create form to register the upstream:
 . Pick a *Grant type*:
 +
 * *Browser Consent*: The user approves access in their browser (OAuth 2.0 Authorization Code flow). The default for user-delegated OAuth.
-* *JWT Bearer*: RFC 8693 token exchange. Phase 4 feature; the gateway swaps the user's identity-provider JWT for a provider-scoped token without browser interaction.
+* *Token Exchange*: RFC 8693 server-to-server token exchange. Shown in the form but not yet functional (future release); the gateway will swap the user's identity-provider JWT for a provider-scoped token without browser interaction.
 +
 . Pick a *Token-endpoint authentication method*:
 +
@@ -168,11 +135,12 @@ Walk through the create form to register the upstream:
 * *POST body*: Credentials sent as form fields in the token-request body.
 * *None*: For public clients that rely on PKCE only. Pick this when the upstream OAuth app is registered as a public client and AI Gateway authenticates by proving possession of a PKCE code verifier rather than a stored client secret. Leave the client-secret reference unset.
 +
-. Provide the *Client ID* and a secret reference for the *Client secret* (for example, `SLACK_CLIENT_SECRET`).
-. Define the *Supported scopes*. Include every scope any MCP server may need.
-. Click *Create*.
+. Provide the *Client ID* and a *Client Secret Ref* (a secret-store key in `UPPER_SNAKE_CASE`, for example `SLACK_CLIENT_SECRET`). Use the *Existing* tab to pick a secret already in the store, or *New* to create one inline. Leave the reference empty only for public clients that authenticate with PKCE.
+. Define the *Scopes*. Include every scope any MCP server may need.
+. Optionally turn on *Require PKCE* to add PKCE (RFC 7636) to the consent flow. Leave *Enabled* on so the provider can start consent flows.
+. Click *Create Provider*.
 
-The provider appears in the *OAuth providers* list.
+The provider appears in the *OAuth Providers* list.
 
 == Register from the CLI
 
@@ -236,6 +204,16 @@ rpk ai oauth create \
 == Attach to an MCP server
 
 To attach an OAuth provider to an MCP server, the principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider plus the usual `mcpserver_create` / `mcpserver_update` permission. See xref:connect:create-server.adoc[Create an MCP Server] for the full attach flow and xref:connect:user-delegated-oauth.adoc[User-delegated OAuth] for the consent flow that runs on first call.
+
+== View provider details
+
+Click a provider in the list to open its detail page. The header shows the display name, status badge, and resource name, with *Connect*, *Edit*, and *Delete* actions. The page groups the configuration into cards:
+
+* *Authorization Callback URL*: the gateway callback to register on the upstream OAuth app.
+* *OAuth Endpoints*: the authorization, token/refresh, and revocation endpoints.
+* *Client Configuration*: Client ID, Client Secret Ref, Auth Method, and whether PKCE is required.
+* *Scopes & Grant Types*: the default scopes and grant types.
+* *Metadata*: when the provider was created and last updated.
 
 == Edit and rotate credentials
 
