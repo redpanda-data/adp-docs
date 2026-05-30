@@ -124,7 +124,7 @@ On submit, AI Gateway mints the `client_id`. Confidential clients (those using a
 Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and the Claude organization-settings UI. The setup flow is the same in each:
 
 . Open *Settings > Connectors* (or *Customize > Connectors* in newer builds; Anthropic surfaces a _Connectors have moved to Customize_ notice during the migration).
-. Click *Add custom connector*. The *Add custom connector BETA* modal opens.
+. Click *Add custom connector*.
 . Fill in the connector details:
 +
 [cols="1,3"]
