@@ -3,7 +3,7 @@
 :page-topic-type: tutorial
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Create a GitHub OAuth app and register it as an OAuth provider in ADP
-:learning-objective-2: Test the OAuth connection proactively using My Connections
+:learning-objective-2: Test the OAuth connection proactively on the Connections page
 :learning-objective-3: Create and configure a GitHub managed MCP server with user-delegated OAuth
 
 This tutorial shows how to connect Redpanda ADP to GitHub using OAuth, so users can authenticate with their own GitHub credentials when calling GitHub MCP tools.
@@ -178,11 +178,11 @@ PKCE (RFC 7636) protects against authorization code interception attacks. When e
 
 The provider appears in the **OAuth Providers** list with status "Enabled".
 
-== Test the connection in My Connections
+== Test the connection on the Connections page
 
 Before creating an MCP server, proactively test the OAuth flow to verify your provider configuration is correct.
 
-. Navigate to **My Connections** in the sidebar (under ADP → My Connections).
+. Navigate to **Connections** in the sidebar.
 . Find the **GitHub** provider card.
 +
 . Click **Connect**.
@@ -312,8 +312,8 @@ Test that the MCP server is correctly configured and can authenticate users.
 
 . In the Agentic Data Plane UI, find your GitHub MCP server in the **MCP Servers** list.
 . Click it to view details.
-. If you tested the connection in My Connections, you're already connected and can test immediately.
-. If you skipped the My Connections test, the first time you call a tool from this server, you'll be prompted to authorize GitHub.
+. If you tested the connection in Connections, you're already connected and can test immediately.
+. If you skipped the Connections test, the first time you call a tool from this server, you'll be prompted to authorize GitHub.
 +
 The flow is:
 +
@@ -355,11 +355,11 @@ You could next create an agent using this GitHub MCP server. Each user who calls
 |"OAuth provider not found" when creating MCP server
 |The provider name doesn't match. Verify you created the provider with name `github` (lowercase) and are selecting the correct provider in the MCP server configuration.
 
-|Connection works in My Connections but fails in MCP server
-|The MCP server's required scopes might be different from what you consented to in My Connections. Edit the OAuth provider to include all necessary scopes, then re-consent in My Connections.
+|Connection works in Connections but fails in MCP server
+|The MCP server's required scopes might be different from what you consented to in Connections. Edit the OAuth provider to include all necessary scopes, then re-consent in Connections.
 
 |Token expired or `OAuthTokenExpired` error
-|GitHub tokens eventually expire or can be revoked. The user needs to re-authorize in My Connections or by triggering the consent flow again on the next tool call.
+|GitHub tokens eventually expire or can be revoked. The user needs to re-authorize in Connections or by triggering the consent flow again on the next tool call.
 
 |Permission denied when attaching provider to MCP server
 |You need the `dataplane_aigateway_oauthprovider_attach` permission on the GitHub provider. Contact your ADP administrator to grant this permission.

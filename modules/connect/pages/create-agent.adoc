@@ -28,7 +28,7 @@ After reading this page, you will be able to:
 == Open the create form
 
 . Sign in to ADP and open the *AI Agents* page.
-. Click *Create agent*. The *Create AI Agent* form opens.
+. Click *Create agent*.
 
 The form arranges configuration into sections. Required fields are marked with a red asterisk. Click *Create Agent* at the bottom when every required field is filled.
 

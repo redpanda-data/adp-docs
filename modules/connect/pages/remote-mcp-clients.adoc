@@ -76,36 +76,55 @@ Before you wire up the chat-client connector, make sure you have:
 
 Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
 
-. Sign in to ADP and open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway.
+. Sign in to ADP and open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its *Name*, *Grant Types*, *Status*, and *Scopes*.
 . Click *Register Client*.
+. Pick a well-known client to prefill its redirect URIs and recommended scopes, or choose *Custom Client* to register one from scratch. The catalog includes *Claude.ai Custom Connectors*, *Claude Desktop*, *ChatGPT*, *Cursor*, and *Windsurf*. For any client not in the catalog (for example, Gemini apps or Microsoft Copilot Studio), use *Custom Client* and paste the redirect URIs the tool publishes.
 . Fill in the form:
 +
 [cols="1,3"]
 |===
 |Field |Notes
 
-|*Name*
-|Human-readable identifier. Pick something descriptive: `Claude Desktop (GitHub MCP)` or `Cursor (production)`.
+|*Display name*
+|Human-readable label shown in the UI and on the consent screen, for example `Claude.ai Custom Connectors`.
 
-|*Grant types*
-|*Authorization Code* and *Refresh Token*. This is the standard combination for browser-based chat clients with long-lived tokens. Most external chat clients require both.
+|*Name*
+|Machine identifier, and the OAuth `client_id`. Lowercase letters, numbers, and hyphens only. Immutable after creation.
+
+|*Logo URI*
+|Optional HTTPS URL for a logo shown on the consent screen.
 
 |*Redirect URIs*
-|The URIs the gateway redirects to after a user approves. Each chat client publishes its own callback URLs; copy them from the chat client's connector documentation. Multiple URIs are allowed. Claude Desktop, for example, uses two: `\https://claude.ai/api/mcp/auth_callback` and `\https://claude.ai/api/organizations/custom-connectors/oauth/callback`.
+|The exact URIs the gateway redirects to after a user approves. Each chat client publishes its own; a well-known client prefills them. Multiple URIs are allowed. Claude.ai, for example, uses two: `\https://claude.ai/api/mcp/auth_callback` and `\https://claude.ai/api/organizations/custom-connectors/oauth/callback`; Claude Desktop uses `\http://127.0.0.1:54545/callback`.
+
+|*Allowed MCP Resources*
+|Which MCP servers this client may request tokens for. Defaults to `*` (any MCP server hosted on this gateway). Click *Restrict* to limit the client to specific MCP resource URLs.
+
+|*Grant Types*
+|*Authorization Code* (RFC 6749 §4.1) and *Refresh Token* (RFC 6749 §6, rotating single-use). This is the standard combination for browser-based chat clients with long-lived tokens.
+
+|*Token Endpoint Auth Method*
+|How the client authenticates to the token endpoint: *Client Secret (Basic)* (default), *Client Secret (POST)*, or *None (PKCE only)* for public clients that can't store a secret.
+
+|*Require PKCE*
+|Strongly recommended and enforced by default (RFC 7636). Adds an extra layer of security to the consent flow.
+
+|*Enabled*
+|Whether the client can start new consent flows. Disabled clients reject new flows.
 |===
 +
-. Click *Register*.
+. Click *Register Client*.
 
-After registration, the detail page shows the *Client ID* and *Client Secret*. Copy both. The Client Secret is shown only once; rotate it through the secret store if you need to recover it later.
+On submit, AI Gateway mints the `client_id`. Confidential clients (those using a Client Secret authentication method) also receive a `client_secret`, *shown only once*. Copy it immediately. The *OAuth Server Endpoints* panel shows the *Authorization Endpoint* and *Token/Refresh Endpoint* (under `/oauth/idp/`) and the `mcp` scope; paste these into the external app's OAuth configuration.
 
-// TODO: capture screenshots of the Register Client form and the post-create detail page.
+// TODO: capture screenshots of the Register Client catalog, the custom form, and the post-create detail page.
 
 == Wire up Claude
 
 Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and the Claude organization-settings UI. The setup flow is the same in each:
 
 . Open *Settings > Connectors* (or *Customize > Connectors* in newer builds; Anthropic surfaces a _Connectors have moved to Customize_ notice during the migration).
-. Click *Add custom connector*. The *Add custom connector BETA* modal opens.
+. Click *Add custom connector*.
 . Fill in the connector details:
 +
 [cols="1,3"]
@@ -134,12 +153,13 @@ NOTE: Anthropic's modal warns that connectors are user-trust-based; Anthropic do
 
 == Wire up other chat clients
 
-The flow mirrors Claude Desktop. The exact menu paths and field labels differ by client:
+The flow mirrors Claude Desktop. *ChatGPT*, *Cursor*, and *Windsurf* have catalog presets in the *Register Client* flow that prefill their redirect URIs; the others use a *Custom Client*. The exact menu paths and field labels differ by client:
 
 * *ChatGPT desktop*: Recent builds support remote MCP custom connectors. Confirm the latest menu path; OpenAI iterates on this surface.
-* *Gemini apps*: Recent builds support remote MCP custom connectors.
 * *Cursor*: Supports remote MCP servers in recent builds.
-* *Microsoft Copilot Studio*: Recent builds support remote MCP custom connectors registered against an external OAuth 2.0 authorization server. Register Copilot Studio's published redirect URIs on the AI Gateway OAuth Client before connecting.
+* *Windsurf*: Supports remote MCP servers in recent builds.
+* *Gemini apps*: Recent builds support remote MCP custom connectors. Register through *Custom Client*.
+* *Microsoft Copilot Studio*: Recent builds support remote MCP custom connectors registered against an external OAuth 2.0 authorization server. Register through *Custom Client*, and add Copilot Studio's published redirect URIs to the AI Gateway OAuth Client before connecting.
 
 The required inputs are the same as Claude Desktop: connector name, MCP URL, Client ID, Client Secret. The chat client's redirect URIs must be registered on the AI Gateway OAuth Client.
 
@@ -189,11 +209,13 @@ NOTE: If the MCP server uses a service-account authentication mode instead of us
 
 Maintain registered OAuth Clients without re-creating them:
 
-* *List registered clients*: Open *OAuth clients*. Each row shows the Name, Grant Types, and Redirect URIs.
-* *Edit a client*: Change the redirect URIs or grant types. The Client ID is immutable.
-* *Rotate the secret*: Generate a new Client Secret on the detail page. Update the value in every chat client that uses this OAuth Client; old tokens continue to work until they expire.
+* *List registered clients*: Open *OAuth Clients*. Each row shows the Name, Grant Types, Status, and Scopes.
+* *Edit a client*: Change the display name, logo URI, redirect URIs, allowed MCP resources, grant types, or token endpoint authentication method. The `client_id` is immutable; delete and recreate the client if you need a new one.
+* *Reissue the secret*: The Client Secret is shown only once at creation and can't be regenerated in place. To issue a new secret, delete and recreate the client, then update every chat client that used it.
 * *Revoke all tokens*: Invalidate every refresh token AI Gateway has issued under this client without deleting the client itself (see <<revoke-all-tokens>>).
 * *Delete a client*: Invalidates every active token issued under it. Token revocation runs automatically as part of delete, so users connected through this client are signed out immediately. Every chat-client connector that depends on this OAuth Client breaks until reconfigured against a replacement.
+
+// TODO: confirm there is no in-place secret-rotation control (the edit page copy implies delete-and-recreate is the only path to a new secret). Verify against the OAuth client edit flow on adp-production.
 
 [[revoke-all-tokens]]
 === Revoke all tokens

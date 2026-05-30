@@ -3,7 +3,7 @@
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the Slack managed MCP server with user-delegated OAuth
-:learning-objective-2: Walk through the consent flow and verify the connection in My Connections
+:learning-objective-2: Walk through the consent flow and verify the connection on the Connections page
 :learning-objective-3: Send a test message through the Inspector
 
 The *Slack* managed MCP server is the canonical user-delegated OAuth example for ADP. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time: so messages posted by the agent appear as the user, not as a shared bot.
@@ -59,10 +59,10 @@ After creating the server, run a tool that requires Slack auth to verify the con
 . Run a tool that requires the user's identity, for example `chat_postMessage`.
 . The first call returns `OAuthConnectionRequired` with a Slack `authorize_url`. The Inspector surfaces it as a consent prompt.
 . Click *Authorize*. You're redirected to Slack; pick the workspace and approve the requested scopes.
-. Slack redirects back to ADP. Your connection now appears under *My Connections*.
+. Slack redirects back to ADP. Your connection now appears under *Connections*.
 . Re-run the original tool call. The message posts to Slack as your user.
 
-// TODO: screenshots of the consent prompt, Slack's approval screen, and the My Connections entry post-consent.
+// TODO: screenshots of the consent prompt, Slack's approval screen, and the Connections entry post-consent.
 
 == Authentication scopes
 
@@ -87,7 +87,7 @@ Common symptoms and fixes:
 |Symptom |What to check
 
 |`OAuthConnectionRequired` even after consent
-|The token might be revoked or expired with no refresh. Check *My Connections*; remove and re-add if needed.
+|The token might be revoked or expired with no refresh. Check *Connections*; remove and re-add if needed.
 
 |`scope_upgrade_required`
 |The server's required scopes were widened after the user consented. The user re-consents to grant the new scope.

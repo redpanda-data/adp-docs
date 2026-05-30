@@ -9,6 +9,7 @@
 ** xref:connect:create-agent.adoc[Create an Agent]
 ** xref:connect:create-server.adoc[Create an MCP Server]
 ** xref:connect:register-remote.adoc[Register a Self-Managed MCP Server]
+** xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
 ** xref:connect:user-delegated-oauth.adoc[Configure User-Delegated OAuth]
 ** xref:connect:byoa-register.adoc[Register Your Own Agent (BYOA)]
 ** xref:connect:claude-code.adoc[Use Claude Code with ADP]
