@@ -128,7 +128,7 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |Surface |Use it for
 
 |*Cost & Usage* tab (*LLM Providers* page)
-|Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, or user. See xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
+|Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, user, or agent. See xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
 
 |*Governance dashboard*
 |Summary cards (total spend, agent count, request count, trend), provider breakdown chart, events timeline, agents and MCP servers tables. The single-pane-of-glass view across your whole deployment. See xref:control:dashboard/overview.adoc[Read the governance overview].
@@ -137,10 +137,10 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:monitor:transcripts.adoc[Read a transcript].
 
 |*Breakdown queries*
-|Aggregated spend by *provider*, *model*, *user*, or *provider type*. Available through the dashboard's provider-breakdown widget and through `GetSpendingBreakdown` for programmatic access.
+|Aggregated spend by *provider*, *model*, *user*, *agent*, or *provider type*, available through `GetSpendingBreakdown` for programmatic access. The dashboard's provider-breakdown widget covers the provider dimension.
 |===
 
-Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_id`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, or provider type; `organization_id` is a filter only, not a breakdown dimension.
+Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_id`, `agent_id`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, agent, or provider type; `organization_id` is a filter only, not a breakdown dimension.
 
 For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` expression that lets you combine and negate dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). The convenience fields and the `filter` expression compose; populate one or both. The server compiles the result to a single SQL `WHERE` clause, which avoids per-dimension fan-out queries.
 
@@ -182,6 +182,9 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 |`user_id`
 |Restrict to one identified user. Anonymous traffic is excluded.
 
+|`agent_id`
+|Restrict to one agent: the service-account email recorded on the on-behalf-of path. Leave it empty to match every row, including direct user calls; set it to scope spend to a single agent.
+
 |`organization_id`
 |Restrict to one organization. Multi-tenant deployments only.
 
@@ -189,7 +192,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 |AIP-160 expression that combines and negates dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). Composes with the structured fields above; populate one or both.
 |===
 
-The `dimension` value chooses the breakdown dimension. Valid values are the `BreakdownDimension` enum: `BREAKDOWN_DIMENSION_PROVIDER`, `BREAKDOWN_DIMENSION_MODEL`, `BREAKDOWN_DIMENSION_USER`, and `BREAKDOWN_DIMENSION_PROVIDER_TYPE`.
+The `dimension` value chooses the breakdown dimension. Valid values are the `BreakdownDimension` enum: `BREAKDOWN_DIMENSION_PROVIDER`, `BREAKDOWN_DIMENSION_MODEL`, `BREAKDOWN_DIMENSION_USER`, `BREAKDOWN_DIMENSION_AGENT`, and `BREAKDOWN_DIMENSION_PROVIDER_TYPE`. A breakdown on `BREAKDOWN_DIMENSION_AGENT` keys on the agent's service-account email and excludes rows with no agent (direct user calls), the same way the other dimensions skip empty keys.
 
 === cURL example
 

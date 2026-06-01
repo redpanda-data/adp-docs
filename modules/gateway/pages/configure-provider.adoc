@@ -359,7 +359,7 @@ The page includes these charts:
 
 Use *Group by* to switch the chart breakdown between providers, models, and token type. Group by provider to see which upstream consumed the most budget. Group by model to see which model drove spend inside one or more providers. Group by token type to separate input, output, cached, cache-write, and reasoning usage where those buckets apply.
 
-Use *Filter* to narrow the charts by provider, model, cost type, token type, or user. Each filter appears as a chip above the chart, and you can combine them. For example, filter to one Anthropic provider, drill into `claude-opus-4-7`, then limit the spend view to input tokens.
+Use *Filter* to narrow the charts by provider, model, cost type, token type, user, or agent. Each filter appears as a chip above the chart, and you can combine them. For example, filter to one Anthropic provider, drill into `claude-opus-4-7`, then limit the spend view to input tokens. Selecting an agent also narrows the provider options to the providers that agent used.
 
 The date-range picker supports last 7 days, last 14 days, last 30 days, last 90 days, month to date, quarter to date, year to date, and custom ranges. The chart subtitle shows the selected date range and bucket size.
 
