@@ -137,7 +137,7 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:monitor:transcripts.adoc[Read a transcript].
 
 |*Breakdown queries*
-|Aggregated spend by *provider*, *model*, *user*, *agent*, or *provider type*. Available through the dashboard's provider-breakdown widget and through `GetSpendingBreakdown` for programmatic access.
+|Aggregated spend by *provider*, *model*, *user*, *agent*, or *provider type*, available through `GetSpendingBreakdown` for programmatic access. The dashboard's provider-breakdown widget covers the provider dimension.
 |===
 
 Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_id`, `agent_id`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, agent, or provider type; `organization_id` is a filter only, not a breakdown dimension.
