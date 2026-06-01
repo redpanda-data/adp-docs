@@ -1,4 +1,4 @@
-= Observability
+= How Observability Works
 :description: Understand how Redpanda captures end-to-end execution transcripts on an immutable distributed log for agent governance and observability.
 :page-topic-type: concepts
 :personas: domain_evaluator, security_compliance_lead, platform_engineer, agent_builder

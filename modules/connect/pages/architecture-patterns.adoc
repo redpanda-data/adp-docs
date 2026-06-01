@@ -1,4 +1,4 @@
-= Agent Architecture Patterns
+= Choose an Agent Architecture
 :description: Design maintainable agent systems with single-agent and multi-agent patterns based on domain complexity.
 :page-byoc: true
 :page-topic-type: best-practices

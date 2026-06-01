@@ -40,7 +40,7 @@ MCP servers are lightweight, support OIDC-based authentication, and enforce dete
 
 With real-time debugging capabilities, you reduce integration time while getting enterprise-grade security. You can reuse your existing infrastructure and data sources rather than building new integrations from scratch.
 
-For more information, see xref:connect:mcp-overview.adoc[MCP Servers Overview].
+For more information, see xref:connect:mcp-overview.adoc[].
 
 == AI agents
 

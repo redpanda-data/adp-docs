@@ -1,4 +1,4 @@
-= MCP Servers Overview
+= How MCP Servers Work
 :description: Connect AI agents to your databases, queues, CRMs, and other business systems through MCP servers, including fully managed types Redpanda hosts for you and self-managed servers proxied through the Agentic Data Plane.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer

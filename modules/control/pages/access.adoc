@@ -1,0 +1,5 @@
+= Manage Access
+:description: Control who can do what in the Agentic Data Plane with roles and permissions.
+:page-layout: index
+
+Control who can do what in the Agentic Data Plane. Assign roles to users and service accounts, and look up the permissions each role grants.

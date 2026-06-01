@@ -1,4 +1,4 @@
-= Pipeline Integration Patterns
+= Integrate with Redpanda Pipelines
 :description: Build Redpanda Connect pipelines that invoke agents for event-driven processing and streaming enrichment.
 :page-topic-type: best-practices
 :personas: agent_builder, platform_engineer
