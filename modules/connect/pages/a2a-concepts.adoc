@@ -1,4 +1,4 @@
-= A2A Protocol
+= Connect Agents with A2A
 :description: Learn how the A2A protocol enables agent discovery and communication.
 :page-topic-type: concepts
 :personas: agent_builder

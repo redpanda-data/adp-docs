@@ -1,4 +1,4 @@
-= Integration Patterns Overview
+= Choose an Integration Pattern
 :description: Choose the right integration pattern for connecting agents, pipelines, and external applications.
 :page-topic-type: best-practices
 :personas: agent_builder, platform_engineer

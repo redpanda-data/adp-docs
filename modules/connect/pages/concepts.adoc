@@ -1,4 +1,4 @@
-= Agent Concepts
+= Understand Agent Concepts
 :description: Understand how declaratively configured agents execute reasoning loops, manage context, invoke tools, and handle errors.
 :page-topic-type: concepts
 :personas: agent_builder

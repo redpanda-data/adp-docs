@@ -1,3 +1,5 @@
 = Reference
 :description: Field and command reference for Agentic Data Plane.
 :page-layout: index
+
+Look up the details. This section covers the `rpk` command-line reference and the Agentic Data Plane glossary.
