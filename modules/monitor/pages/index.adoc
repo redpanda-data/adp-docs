@@ -1,3 +1,5 @@
 = Monitor & Debug
 :description: See what your agents did, investigate runs, and check speed, cost, and errors.
 :page-layout: index
+
+See what your agents are doing and why. Monitor agent activity, read individual run transcripts, troubleshoot failures, and track speed, cost, and errors.

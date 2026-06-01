@@ -1,3 +1,5 @@
 = Routing & LLM Settings
 :description: Configure AI Gateway, LLM providers, and routing.
 :page-layout: index
+
+AI Gateway is the proxy that routes agent traffic to your LLM providers. Learn how it works, configure providers, and connect your agents to the gateway.
