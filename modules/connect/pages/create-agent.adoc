@@ -301,6 +301,7 @@ For detailed observability strategies, see xref:monitor:monitor-agents.adoc[].
 
 == Next steps
 
+* xref:connect:triggers/overview.adoc[]
 * xref:connect:integration-overview.adoc[]
 * xref:connect:system-prompts.adoc[]
 * xref:connect:create-server.adoc[]

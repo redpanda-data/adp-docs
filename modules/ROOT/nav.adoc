@@ -10,6 +10,8 @@
 ** xref:connect:system-prompts.adoc[Write Effective System Prompts]
 ** xref:connect:create-agent.adoc[Create an Agent]
 ** xref:connect:byoa-register.adoc[Register Your Own Agent (BYOA)]
+** xref:connect:triggers/overview.adoc[Trigger Agents from External Channels]
+*** xref:connect:triggers/microsoft-teams.adoc[Connect an Agent to Microsoft Teams]
 ** xref:connect:tutorials/index.adoc[Tutorials]
 *** xref:connect:tutorials/customer-support-agent.adoc[Learn Multi-Tool Agent Orchestration]
 *** xref:connect:tutorials/transaction-dispute-resolution.adoc[Build Multi-Agent Systems for Transaction Dispute Resolution]
