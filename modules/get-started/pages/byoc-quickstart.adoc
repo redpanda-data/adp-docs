@@ -1,4 +1,5 @@
 = ADP Quickstart
+:page-aliases: quickstart.adoc, cloud-data-platform:ai-agents:agents/quickstart.adoc
 :description: Set up Redpanda ADP for your organization. Get an Anthropic API key, configure your first LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build a working agent that calls both.
 :page-topic-type: quickstart
 :personas: platform_engineer
@@ -247,6 +248,24 @@ The agent may call `findpetsbytags` first, then `getpetbyid` for one of the matc
 If the agent hallucinates data instead of calling a tool, tighten the system prompt's "Always call a tool before answering" rule. See xref:connect:system-prompts.adoc[system prompt best practices] for patterns.
 
 If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet store API being unavailable, that's the public Swagger PetStore being intermittently down. The agent is behaving correctly (the "if a tool fails, say so and stop" rule in the system prompt is what produced the apology). Retry the prompt; PetStore usually recovers within a few minutes.
+
+== Iterate on your agent
+
+Agent configuration isn't fixed once you create it. Edit the system prompt or model, save, and re-test in the Inspector to see how behavior changes.
+
+. On the agent detail page, click *Edit configuration*.
+
+. Adjust the *System Prompt* to change how the agent responds. For example:
++
+* Add a constraint: `Never call more than one tool per response.`
+* Change the output format: `Always format pet details as a bulleted list.`
+* Add a confirmation step: `Before answering, restate which tool you plan to call and why.`
+
+. Click *Save*.
+
+. Open the *Inspector* tab, click *Clear context*, and re-send one of the earlier prompts to compare the agent's behavior against your change.
+
+For system prompt patterns and anti-patterns, see xref:connect:system-prompts.adoc[Write effective system prompts].
 
 // The Transcripts and Governance verify sections below are conditionalized out until those admin UIs are stable in adp-production.
 // Each section is gated by its own attribute so they can be flipped on independently when ready. To surface a section,

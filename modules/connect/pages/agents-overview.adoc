@@ -62,7 +62,7 @@ Process every event with AI reasoning at scale. Invoke agents automatically from
 
 == Next steps
 
-* xref:get-started:quickstart.adoc[]
+* xref:get-started:byoc-quickstart.adoc[]
 * xref:connect:concepts.adoc[]
 * xref:connect:architecture-patterns.adoc[]
 * xref:connect:integration-overview.adoc[]

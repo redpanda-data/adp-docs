@@ -82,5 +82,5 @@ Common Redpanda ADP use cases include:
 
 == Next steps
 
-* xref:get-started:byoc-quickstart.adoc[ADP Quickstart] — Set up ADP for your organization (administrators).
-* xref:get-started:quickstart.adoc[AI Agent Quickstart] — Build your first AI agent (builders).
+* xref:get-started:byoc-quickstart.adoc[ADP Quickstart] — Set up ADP and build your first agent, end to end.
+* xref:get-started:gateway-quickstart.adoc[AI Gateway Quickstart] — Configure the AI Gateway and your first LLM provider.

@@ -2,7 +2,6 @@
 ** xref:get-started:adp-overview.adoc[Redpanda ADP Overview]
 ** xref:get-started:byoc-quickstart.adoc[ADP Quickstart]
 ** xref:get-started:gateway-quickstart.adoc[AI Gateway Quickstart]
-** xref:get-started:quickstart.adoc[AI Agent Quickstart]
 
 * xref:connect:agents.adoc[Build Agents]
 ** xref:connect:agents-overview.adoc[How Agents Work]
