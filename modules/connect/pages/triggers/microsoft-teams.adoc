@@ -8,7 +8,7 @@
 
 A Microsoft Teams trigger connects a deployed agent to Microsoft Teams so people in your organization can chat with it in personal DMs. Three systems are involved: the Teams Developer Portal (the bot and Teams app), the Azure portal (authentication and permissions), and the Redpanda Cloud console (the agent's trigger).
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
