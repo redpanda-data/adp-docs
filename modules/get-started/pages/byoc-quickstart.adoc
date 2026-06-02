@@ -1,4 +1,5 @@
 = ADP Quickstart
+:page-aliases: quickstart.adoc, cloud-data-platform:ai-agents:agents/quickstart.adoc
 :description: Set up Redpanda ADP for your organization. Get an Anthropic API key, configure your first LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build a working agent that calls both.
 :page-topic-type: quickstart
 :personas: platform_engineer
@@ -123,7 +124,7 @@ The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL 
 
 [NOTE]
 ====
-PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) once you've confirmed the rest of the flow works.
+PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) after you've confirmed the rest of the flow works.
 ====
 
 . Open *MCP Servers* > *Create Server*.
@@ -136,11 +137,11 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 
 . Leave *Code Mode* at its default. Code Mode adds search and execute tools that let agents run sandboxed code against the server's tools; the PetStore catalog is small enough that you don't need it for this quickstart.
 
-. *Spec*: `https://petstore3.swagger.io/api/v3/openapi.json`. Leave the *Spec Content* textarea empty when you provide a URL.
+. *Spec*: `https://petstore3.swagger.io/api/v3/openapi.json`. Leave the *Spec Content* text area empty when you provide a URL.
 
-. Leave *Base URL* blank. The PetStore spec already declares the right `servers` block, so no override is needed.
+. Leave *Base URL* blank. The PetStore spec already declares the right `servers` block, so no override is needed. 
 
-. Skip the *Filter* section. It supports tag, operation, path, and HTTP-method filters for trimming a large catalog; PetStore's catalog is small enough that the quickstart agent can see everything.
+. Skip all other optional configuration fields.
 
 . *Auth*: Select *No Auth*. PetStore is a public API.
 
@@ -150,12 +151,12 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 
 . Open the *Inspector* tab. Confirm:
 +
-* *STATUS* shows *Connected* with a green dot.
+* *STATUS* shows *Enabled*.
 * The *Tools* card lists multiple entries, including `findpetsbystatus`, `getpetbyid`, `findpetsbytags`, and `addpet`. The OpenAPI MCP server lowercases tool names when it generates them from the spec's `operationId` values.
 +
 The exact tool count depends on the operations defined in the spec at fetch time.
 
-. (Optional) Click *Ping* in the *MCP Inspector* card to confirm the server responds. If the Ping fails or the *STATUS* stays disconnected, see xref:connect:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
+. (Optional) Click *Ping* in the *MCP Inspector* card to confirm the server responds. If the Ping fails, or if the *STATUS* is disconnected, see xref:connect:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
 
 For the full OpenAPI MCP reference (auth modes, operation filters, base URL overrides), see xref:connect:managed/openapi.adoc[OpenAPI managed MCP server].
 
@@ -247,6 +248,24 @@ The agent may call `findpetsbytags` first, then `getpetbyid` for one of the matc
 If the agent hallucinates data instead of calling a tool, tighten the system prompt's "Always call a tool before answering" rule. See xref:connect:system-prompts.adoc[system prompt best practices] for patterns.
 
 If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet store API being unavailable, that's the public Swagger PetStore being intermittently down. The agent is behaving correctly (the "if a tool fails, say so and stop" rule in the system prompt is what produced the apology). Retry the prompt; PetStore usually recovers within a few minutes.
+
+== Iterate on your agent
+
+Agent configuration isn't fixed after you create it. Edit the system prompt or model, save, and re-test in the Inspector to see how behavior changes.
+
+. On the agent detail page, click *Edit configuration*.
+
+. Adjust the *System Prompt* to change how the agent responds. For example:
++
+* Add a constraint: `Never call more than one tool per response.`
+* Change the output format: `Always format pet details as a bulleted list.`
+* Add a confirmation step: `Before answering, restate which tool you plan to call and why.`
+
+. Click *Save*.
+
+. Open the *Inspector* tab, click *Clear context*, and re-send one of the earlier prompts to compare the agent's behavior against your change.
+
+For system prompt patterns and anti-patterns, see xref:connect:system-prompts.adoc[Write effective system prompts].
 
 // The Transcripts and Governance verify sections below are conditionalized out until those admin UIs are stable in adp-production.
 // Each section is gated by its own attribute so they can be flipped on independently when ready. To surface a section,

@@ -419,5 +419,5 @@ Decision criteria enable reliable tool selection based on request context.
 
 == Next steps
 
-* xref:get-started:quickstart.adoc[]
+* xref:get-started:byoc-quickstart.adoc[]
 * xref:connect:mcp-overview.adoc[]
