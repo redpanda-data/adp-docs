@@ -137,11 +137,11 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 
 . Leave *Code Mode* at its default. Code Mode adds search and execute tools that let agents run sandboxed code against the server's tools; the PetStore catalog is small enough that you don't need it for this quickstart.
 
-. *Spec*: `https://petstore3.swagger.io/api/v3/openapi.json`. Leave the *Spec Content* textarea empty when you provide a URL.
+. *Spec*: `https://petstore3.swagger.io/api/v3/openapi.json`. Leave the *Spec Content* text area empty when you provide a URL.
 
-. Leave *Base URL* blank. The PetStore spec already declares the right `servers` block, so no override is needed.
+. Leave *Base URL* blank. The PetStore spec already declares the right `servers` block, so no override is needed. 
 
-. Skip the *Filter* section. It supports tag, operation, path, and HTTP-method filters for trimming a large catalog; PetStore's catalog is small enough that the quickstart agent can see everything.
+. Skip all other optional configuration fields.
 
 . *Auth*: Select *No Auth*. PetStore is a public API.
 
@@ -151,12 +151,12 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 
 . Open the *Inspector* tab. Confirm:
 +
-* *STATUS* shows *Connected* with a green dot.
+* *STATUS* shows *Enabled*.
 * The *Tools* card lists multiple entries, including `findpetsbystatus`, `getpetbyid`, `findpetsbytags`, and `addpet`. The OpenAPI MCP server lowercases tool names when it generates them from the spec's `operationId` values.
 +
 The exact tool count depends on the operations defined in the spec at fetch time.
 
-. (Optional) Click *Ping* in the *MCP Inspector* card to confirm the server responds. If the Ping fails or the *STATUS* stays disconnected, see xref:connect:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
+. (Optional) Click *Ping* in the *MCP Inspector* card to confirm the server responds. If the Ping fails, or if the *STATUS* is disconnected, see xref:connect:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
 
 For the full OpenAPI MCP reference (auth modes, operation filters, base URL overrides), see xref:connect:managed/openapi.adoc[OpenAPI managed MCP server].
 
