@@ -124,7 +124,7 @@ The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL 
 
 [NOTE]
 ====
-PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) once you've confirmed the rest of the flow works.
+PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) after you've confirmed the rest of the flow works.
 ====
 
 . Open *MCP Servers* > *Create Server*.
@@ -251,7 +251,7 @@ If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet
 
 == Iterate on your agent
 
-Agent configuration isn't fixed once you create it. Edit the system prompt or model, save, and re-test in the Inspector to see how behavior changes.
+Agent configuration isn't fixed after you create it. Edit the system prompt or model, save, and re-test in the Inspector to see how behavior changes.
 
 . On the agent detail page, click *Edit configuration*.
 
