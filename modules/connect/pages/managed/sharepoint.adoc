@@ -31,7 +31,7 @@ The SharePoint managed type wraps the Microsoft Graph API (`https://graph.micros
 |Search for SharePoint sites. The search term passes straight to Graph's `/sites?search=` endpoint. An empty search returns no results, so pass `*` to list every site or a name fragment to narrow the search.
 
 |`get_site`
-|Fetch a single site by ID.
+|Fetch a single site by ID or hostname path.
 
 |`list_drive_items`
 |Browse a site's default document library. Lists the library root by default; pass `folder_id` to descend into a folder.
@@ -151,12 +151,11 @@ The `required_scopes` value is enforced against each user's connection. A connec
 [source,bash]
 ----
 rpk ai mcp create --name sharepoint \
-  --description "SharePoint MCP — Microsoft Graph, per-user OAuth" \
+  --description "SharePoint MCP over Microsoft Graph with per-user OAuth" \
   --managed-config '{
-    "@type": "type.googleapis.com/redpanda.mcps.sharepoint.v1.SharePointMCPConfig"
-  }' \
-  --user-oauth-provider sharepoint \
-  --user-oauth-scopes Sites.ReadWrite.All
+    "@type": "type.googleapis.com/redpanda.mcps.sharepoint.v1.SharePointMCPConfig",
+    "user_oauth": { "provider_name": "sharepoint", "required_scopes": ["Sites.ReadWrite.All"] }
+  }'
 ----
 
 == Authorize a user and test
