@@ -1,0 +1,60 @@
+= Trigger Agents from External Channels
+:description: Triggers connect a deployed agent to the outside world, so people and systems can invoke it from a Microsoft Teams DM, on a schedule, and more.
+:page-topic-type: overview
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Describe what an agent trigger is and how a trigger invokes an agent
+:learning-objective-2: Identify the available trigger types and which ones are ready to use
+:learning-objective-3: Interpret the status that an agent's Triggers tab reports for each trigger
+
+A trigger is a configured way an agent gets invoked from the outside. Without a trigger, an agent only responds to direct calls against its API. Add a trigger and you connect that agent to a channel: someone messages it from a Microsoft Teams DM, or it runs automatically on a schedule. Each trigger is its own resource on the agent, with independent create, edit, and delete, so you can attach several to the same agent.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Available trigger types
+
+[cols="1,2,1"]
+|===
+|Type |What it does |Availability
+
+|Microsoft Teams
+|Lets people chat with the agent from a Microsoft Teams DM.
+|Available
+
+|Schedule
+|Runs the agent automatically on a cron schedule, sending a fixed message on each run.
+|Available
+
+|Slack
+|Lets people chat with the agent from Slack.
+|Coming soon
+
+|Webhook
+|Invokes the agent when an external system posts to a URL.
+|Coming soon
+|===
+
+== How triggers work
+
+Triggers live on the agent's detail page, on the *Triggers* tab. Click *Add trigger* to pick a type and fill in its configuration. The configuration depends on the type: a Microsoft Teams trigger takes the bot credentials it needs to exchange messages with Teams, while a Schedule trigger takes a cron expression and the message to send on each run.
+
+Some trigger types expose a messaging endpoint. For a Microsoft Teams trigger, Redpanda generates a messaging endpoint URL after you add the trigger, which you then register with your bot in Azure so Teams knows where to deliver messages. See xref:connect:triggers/microsoft-teams.adoc[Connect an Agent to Microsoft Teams] for the full setup.
+
+== Trigger status
+
+Adding a trigger does not validate it on the spot. Redpanda reports each trigger's health asynchronously, and the Triggers tab shows one of three states:
+
+* Pending: No observer has reported on the trigger yet. A trigger sits here briefly right after you add it.
+* Active: The observer reports the trigger is healthy and ready.
+* Error: The observer reports a problem. The status message explains the reason, such as an authentication failure from a misconfigured bot.
+
+The tab refreshes status automatically. You can also refresh on demand.
+
+== Next steps
+
+* xref:connect:triggers/microsoft-teams.adoc[]
+* xref:connect:create-agent.adoc[]
+* xref:connect:agents-overview.adoc[]

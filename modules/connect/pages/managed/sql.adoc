@@ -8,7 +8,7 @@
 
 The *SQL* managed MCP server gives agents read access to a SQL database through MCP. Redpanda runs the server in-process; you provide a connection string and credentials.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}

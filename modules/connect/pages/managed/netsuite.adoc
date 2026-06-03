@@ -10,7 +10,7 @@
 
 The *NetSuite* managed MCP server lets agents query Oracle NetSuite records and run SuiteQL with the calling user's OAuth identity. The server wraps SuiteTalk REST APIs and exposes read-only tools for records, customers, sales orders, and items.
 
-Use this guide to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}

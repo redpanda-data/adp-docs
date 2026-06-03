@@ -8,7 +8,7 @@
 
 The *Kafka* managed MCP server gives agents read and write access to topics on either an Apache Kafka cluster or a Redpanda cluster: the same protocol, the same tools. Despite the name, it works against any Kafka-compatible broker.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}

@@ -8,7 +8,7 @@
 
 The *Ramp* managed MCP server lets an LLM read and act on your company's Ramp spend data: listing and inspecting transactions, browsing cards, managing spend limits, querying users and departments, looking up vendors, and reviewing reimbursements.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}

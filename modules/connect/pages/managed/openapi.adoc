@@ -8,7 +8,7 @@
 
 The *OpenAPI* managed MCP server is the "bring your own API" escape hatch. Hand it an OpenAPI 3 (or Swagger 2) spec, and it generates one MCP tool per operation in the spec. No custom code, no per-API managed type: useful when the API you want to expose is not in the catalog.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}

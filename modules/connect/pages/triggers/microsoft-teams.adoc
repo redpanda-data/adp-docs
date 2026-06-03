@@ -1,0 +1,190 @@
+= Connect an Agent to Microsoft Teams
+:description: Add a Microsoft Teams trigger to a deployed agent so people in your organization can chat with it directly in Teams DMs.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Register a Microsoft Teams bot and configure its Azure app registration for single-tenant access
+:learning-objective-2: Add a Microsoft Teams trigger to an agent and retrieve its messaging endpoint
+:learning-objective-3: Publish the bot to your organization and verify the agent responds in a Teams DM
+
+A Microsoft Teams trigger connects a deployed agent to Microsoft Teams so people in your organization can chat with it in personal DMs. Three systems are involved: the Teams Developer Portal (the bot and Teams app), the Azure portal (authentication and permissions), and the Redpanda Cloud console (the agent's trigger).
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* A deployed agent in Redpanda Cloud. If you don't have one, see xref:connect:create-agent.adoc[Create an Agent].
+* Microsoft Entra admin access for your organization, which you need to grant API permission consent and approve the app.
+* Access to the https://dev.teams.microsoft.com[Teams Developer Portal^] and the https://admin.teams.microsoft.com[Teams Admin Center^].
+
+[NOTE]
+====
+Microsoft and Redpanda each need a value from the other: you need the bot credentials from Microsoft before Redpanda can generate the messaging endpoint URL, and you need that URL to finish the bot setup. This guide creates the bot first, adds the trigger in Redpanda to get the endpoint, then returns to Microsoft to finish.
+====
+
+== Create a bot in the Teams Developer Portal
+
+. Go to https://dev.teams.microsoft.com/tools[dev.teams.microsoft.com/tools^].
+. Click *Tools*, then *Bot management*.
+. Click *New Bot*, give it a name, and create it.
+. Leave the endpoint address blank for now. You get the URL from Redpanda later.
+
+== Generate a client secret
+
+Still in the bot's settings:
+
+. Click *Client secrets*.
+. Click *New client secret*.
+. Copy the generated secret value and store it securely. The secret is shown only once.
+
+You now have two values from the Teams side: the bot's application (client) ID, shown in the bot settings, and the client secret you just generated.
+
+== Configure the app registration in Azure
+
+Creating a bot in the Teams Developer Portal automatically creates a matching app registration in Microsoft Entra. Adjust its settings.
+
+=== Find the app registration
+
+. Go to the https://portal.azure.com[Azure portal^].
+. Search for *App registrations*.
+. Open the *Owned applications* tab and select your bot's app registration.
+. On the *Overview* page, note the application (client) ID and the directory (tenant) ID. You need both when you add the trigger.
+
+=== Set the account type to single-tenant
+
+[IMPORTANT]
+====
+The app registration must be single-tenant. A multi-tenant configuration causes 401 authorization errors on every inbound message. If the bot stops responding after setup, check this first. Changes can take up to 60 minutes to propagate.
+====
+
+. In the left sidebar, click *Authentication*.
+. On the *Supported accounts* tab, set the supported account types to Accounts in this organizational directory only.
+. Save.
+
+=== Add Microsoft Graph permissions
+
+The Teams integration uses Microsoft Graph to resolve user email addresses from Azure AD object IDs, which requires application-level permissions.
+
+. In the left sidebar, click *API permissions*.
+. Click *Add a permission*, then select Microsoft Graph.
+. Select Application permissions. The integration runs as a background service, not on behalf of a signed-in user, so don't choose delegated permissions.
+. Add each of these permissions:
++
+[cols="1,2"]
+|===
+|Permission |Why it's needed
+
+|`User.ReadBasic.All`
+|Resolve email addresses from Azure AD object IDs.
+
+|`Chat.Read.All`
+|Read chat messages, as required by Teams.
+
+|`Chat.ReadBasic.All`
+|Read chat metadata, as required by Teams.
+|===
+
+. Click *Grant admin consent for [your organization]*. The status of each permission changes from _Not granted_ to _Granted_.
++
+[NOTE]
+====
+Granting admin consent requires an Entra admin role, such as Global Administrator or Privileged Role Administrator. If the button is unavailable, ask an admin to grant consent.
+====
+
+== Add the Microsoft Teams trigger to your agent
+
+. In the Redpanda Cloud console, open your agent.
+. Click the *Triggers* tab, then click *Add trigger*.
+. Select *Microsoft Teams*.
+. Fill in the trigger:
++
+[cols="1,2"]
+|===
+|Field |Value
+
+|Display name
+|A name for this trigger, for example `Production bot`.
+
+|Application (client) ID
+|The application (client) ID from the app registration Overview page.
+
+|Directory (tenant) ID
+|The directory (tenant) ID from the app registration Overview page.
+
+|Client secret
+|Select a secret that holds the client secret you generated, or create one. Redpanda stores the value in the secret store and keeps only a reference on the trigger.
+|===
+
+. Add the trigger. Redpanda generates a messaging endpoint URL for the trigger, similar to:
++
+[source,text]
+----
+https://msteams-bridge.<cluster-id>.clusters.rdpa.co/msteams/v1/<agent-name>
+----
+
+. Copy the messaging endpoint URL exactly as shown. You need it in the next step.
+
+// TODO: confirm the exact messaging endpoint host and path against a live cluster, and add screenshots of the Triggers tab, the Add trigger drawer, and the endpoint reveal once captured against adp-production.
+
+== Set the endpoint URL on the bot
+
+. Go back to the https://dev.teams.microsoft.com/tools[Teams Developer Portal^].
+. Open *Tools* > *Bot management* and select your bot.
+. Paste the messaging endpoint URL into the endpoint address field.
+. Save.
+
+== Create and publish the Teams app
+
+. In the Teams Developer Portal, click *Apps*, then *Create a new app*, and give it a name.
+. On the *Basic Information* tab, fill in the description, developer name, website, privacy policy, terms of use, and the application (client) ID from the app registration.
+. Click *App features*, then *Bot*, and select the bot you created. Under the scopes where people can use the bot, select Personal.
+. Click *Publish* > *Publish to your org*. This submits the app for admin approval.
+
+== Approve the app in the Teams Admin Center
+
+. Go to https://admin.teams.microsoft.com[admin.teams.microsoft.com^].
+. Open *Teams apps* > *Manage apps* and search for your app.
+. Select the app, then click *Publish* to approve it.
+
+The app can take up to 24 hours to appear in the Teams app catalog after approval.
+
+[TIP]
+====
+By default the app is available to everyone in the organization. To restrict it, assign it to specific users or groups under *Manage apps*. To pin it to the Teams sidebar, add it to a setup policy under *Setup policies*.
+====
+
+== Verify
+
+. Open Microsoft Teams, find the bot in your personal chat, and send it a message. The agent's response streams back into the chat.
+. In the console, open the agent's *Triggers* tab and confirm the trigger status is *Active*.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|The bot never responds, or replies with a 401 error
+|The app registration is most likely set to multi-tenant. In the Azure portal, open the app registration, click *Authentication*, and set the supported account types to Accounts in this organizational directory only. Allow up to 60 minutes for the change to propagate.
+
+|Teams shows the message _Permissions needed. Ask your IT admin..._
+|A Teams admin has not yet approved the app. Approve it in the Teams Admin Center.
+
+|The "Grant admin consent" button is unavailable
+|The signed-in Azure user lacks admin privileges. Ask a Global Administrator to grant consent on the API permissions page.
+
+|The bot works but shows display names instead of email addresses
+|The `User.ReadBasic.All` Graph permission is missing, or admin consent was not granted. Recheck the Microsoft Graph permissions step.
+
+|The trigger status stays on *Pending*
+|Redpanda has not reported on the trigger yet. Confirm the messaging endpoint URL is set on the bot exactly as Redpanda displayed it, then refresh the status.
+|===
+
+== Related topics
+
+* xref:connect:triggers/overview.adoc[]
+* xref:connect:create-agent.adoc[]
+* xref:connect:agents-overview.adoc[]

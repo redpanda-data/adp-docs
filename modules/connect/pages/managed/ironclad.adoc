@@ -8,7 +8,7 @@
 
 The *Ironclad* managed MCP server gives an LLM read and write access to https://ironcladapp.com/[Ironclad], a contract lifecycle management (CLM) platform. Useful for agents that need to find contracts, check signature status, launch new contracts from templates, or retrieve executed documents.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
