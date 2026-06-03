@@ -8,7 +8,7 @@
 
 The *Slack* managed MCP server is the canonical user-delegated OAuth example for ADP. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time: so messages posted by the agent appear as the user, not as a shared bot.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}

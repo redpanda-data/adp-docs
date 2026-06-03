@@ -8,7 +8,7 @@
 
 The *Workday* managed MCP server lets agents drive Workday Human Resources business processes (multi-step, approval-driven workflows like onboarding, hiring, and personal-info changes) through Workday's `Human_Resources` SOAP API.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}

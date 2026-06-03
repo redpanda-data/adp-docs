@@ -10,7 +10,7 @@
 
 The *BambooHR* managed MCP server lets agents read BambooHR employee directory, time-off, and performance data with the calling user's OAuth identity. The BambooHR configuration stores only the company subdomain. OAuth credentials and user tokens come from the OAuth Provider and token vault.
 
-Use this guide to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}

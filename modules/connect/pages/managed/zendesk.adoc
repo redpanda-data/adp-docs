@@ -8,7 +8,7 @@
 
 The *Zendesk* managed MCP server lets agents search, read, create, and update tickets in your Zendesk Support instance, look up users and organizations, and search Help Center articles.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}

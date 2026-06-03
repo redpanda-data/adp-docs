@@ -8,7 +8,7 @@
 
 The *Jira* managed MCP server gives agents access to Jira issues, projects, and workflows on behalf of the calling user. It's the enterprise counterpart to xref:managed/slack.adoc[the Slack deep-dive]: both use user-delegated OAuth, but Atlassian's flow has its own scope model and quirks worth calling out.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
