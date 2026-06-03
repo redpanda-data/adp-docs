@@ -19,7 +19,7 @@ After completing these steps, you will be able to:
 
 A *budget* caps LLM spend over a recurring period. When an agent's spend for the period reaches the budget's hard limit, AI Gateway rejects that agent's next LLM request with `HTTP 429` until the period resets. A separate warning threshold fires before the cap is reached, so you can react before an agent is cut off.
 
-ADP enforces budgets per agent. In a budget, an _agent_ is its service-account email: the same identity that appears as `user_id` in spend data.
+ADP enforces budgets per agent. In a budget, an _agent_ is its service-account email: the same identity that appears as `user_email` in spend data.
 
 === How a budget works
 
@@ -140,7 +140,7 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |Aggregated spend by *provider*, *model*, *user*, *agent*, or *provider type*, available through `GetSpendingBreakdown` for programmatic access. The dashboard's provider-breakdown widget covers the provider dimension.
 |===
 
-Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_id`, `agent_id`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, agent, or provider type; `organization_id` is a filter only, not a breakdown dimension.
+Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_email`, `agent_id`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, agent, or provider type; `organization_id` is a filter only, not a breakdown dimension.
 
 For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` expression that lets you combine and negate dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). The convenience fields and the `filter` expression compose; populate one or both. The server compiles the result to a single SQL `WHERE` clause, which avoids per-dimension fan-out queries.
 
@@ -149,7 +149,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 `total_tokens` is derived server-side from input + output + cache tokens. You don't need to compute it client-side, and the value is consistent across all four `SpendingService` methods.
 ====
 
-`user_id` and `organization_id` are populated automatically from the request's authenticated identity (the caller's email and organization), so spend is attributed without any setup on your part.
+`user_email` and `organization_id` are populated automatically from the request's authenticated identity (the caller's email and organization), so spend is attributed without any setup on your part.
 
 [[query-spend-programmatically]]
 == Query spend programmatically
@@ -179,8 +179,8 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 |`model_id`
 |Restrict to one model identifier (`claude-sonnet-4-6`, `gpt-5.2`, and so on).
 
-|`user_id`
-|Restrict to one identified user. Anonymous traffic is excluded.
+|`user_email`
+|Restrict to one identified user, matched on the caller's email. Anonymous traffic is excluded.
 
 |`agent_id`
 |Restrict to one agent: the service-account email recorded on the on-behalf-of path. Leave it empty to match every row, including direct user calls; set it to scope spend to a single agent.
@@ -276,7 +276,7 @@ For the per-evaluator cost model and how it interacts with the dashboard's spend
 
 == Multi-tenant viewing patterns
 
-The `SpendingFilter` exposes `organization_id` and `user_id`, so every dashboard query and every API call can scope to a single tenant or user. Use this to:
+The `SpendingFilter` exposes `organization_id` and `user_email`, so every dashboard query and every API call can scope to a single tenant or user. Use this to:
 
 * See per-tenant spend in the dashboard's provider-breakdown view.
 * Pull per-user cost reports through `GetSpendingBreakdown`.

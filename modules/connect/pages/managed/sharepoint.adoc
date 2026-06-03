@@ -1,0 +1,210 @@
+= SharePoint Managed MCP Server
+:description: Let agents read and write SharePoint sites, document libraries, lists, and files through the Microsoft Graph API, using each end-user's own Microsoft identity through user-delegated OAuth.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Register a Microsoft Entra app and an OAuth Provider for the SharePoint managed MCP server
+:learning-objective-2: Create the SharePoint managed MCP server with the correct Microsoft Graph scopes
+:learning-objective-3: Authorize a user and run the SharePoint tools from the Inspector or an agent
+
+The *SharePoint* managed MCP server lets agents read and write SharePoint sites, document libraries, lists, and files through the https://learn.microsoft.com/en-us/graph/api/resources/sharepoint[Microsoft Graph API^]. Each agent caller authenticates against Microsoft with their own identity through user-delegated OAuth, so every call stays bounded by the signed-in user's own SharePoint permissions: the server never holds workspace-wide access.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+[NOTE]
+====
+The SharePoint managed MCP server is in early access and is gated behind the `alpha` feature gate. It appears in the marketplace picker and is creatable only on deployments where early-access features are enabled. Contact Redpanda support if you don't see SharePoint in the picker.
+====
+
+== What this MCP server does
+
+The SharePoint managed type wraps the Microsoft Graph API (`https://graph.microsoft.com/v1.0`) and authenticates per-user through the gateway's OAuth token vault. It exposes eight tools across sites, document libraries, lists, and files:
+
+[cols="1,2"]
+|===
+|Tool |Description
+
+|`list_sites`
+|Search for SharePoint sites. The search term passes straight to Graph's `/sites?search=` endpoint. An empty search returns no results, so pass `*` to list every site or a name fragment to narrow the search.
+
+|`get_site`
+|Fetch a single site by ID.
+
+|`list_drive_items`
+|Browse a site's default document library. Lists the library root by default; pass `folder_id` to descend into a folder.
+
+|`get_file_content`
+|Read the content of a file in a site's document library.
+
+|`upload_file`
+|Upload a file to a site's document library. Requires the `Sites.ReadWrite.All` scope.
+
+|`search_content`
+|Search content across a site by keyword.
+
+|`list_lists`
+|List the SharePoint lists on a site.
+
+|`list_list_items`
+|List the items in a SharePoint list.
+|===
+
+The file tools operate on the site's own drive (`/sites/{id}/drive/...`), never on a user's personal OneDrive.
+
+== Prerequisites
+
+Before you create the server, make sure you have:
+
+* Access to a Microsoft SharePoint tenant.
+* Permission to register an app in the https://entra.microsoft.com[Microsoft Entra admin center^] (or an Entra admin who can register one for you).
+* A way to write the OAuth client secret into the ADP secret store.
+* For most tenants, a tenant admin who can grant admin consent for the Microsoft Graph scopes. See <<grant-admin-consent,Grant admin consent>>.
+* Familiarity with xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+
+== Register the Microsoft Entra app
+
+In the Microsoft Entra admin center, go to *App registrations > New registration* and create an app:
+
+. Give the app a descriptive name, for example `Redpanda AI Gateway - SharePoint MCP`.
+. Set *Supported account types* to single tenant.
+. Set the *Redirect URI* to platform *Web* with the gateway's OAuth callback for your dataplane:
++
+[source,no-highlight]
+----
+https://aigw.<dataplane-id>.clusters.rdpa.co/oauth/v1/callback
+----
++
+Replace `<dataplane-id>` with your dataplane identifier. The callback path is `/oauth/v1/callback`.
+. After registering, note the *Application (client) ID* and *Directory (tenant) ID* from the app's Overview page. You need both when you configure the OAuth Provider.
+
+[TIP]
+====
+Single-tenant apps should use the tenant-specific Microsoft OAuth endpoints (`https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/...`), not the `/common/` endpoints, which can return `AADSTS` errors for single-tenant apps.
+====
+
+== Add Microsoft Graph permissions
+
+In the app's *API permissions*, select *Add a permission > Microsoft Graph > Delegated permissions*, then add:
+
+[cols="1,2"]
+|===
+|Scope |Why
+
+|`Sites.ReadWrite.All`
+|Read and write everything the server touches: sites, document libraries, files, lists, and `upload_file`. For read-only deployments, use `Sites.Read.All` instead, which drops `upload_file`.
+
+|`offline_access`
+|Issues refresh tokens so connections stay valid over time.
+|===
+
+The `openid`, `profile`, `email`, and `User.Read` scopes come from the OAuth Provider's standard scopes.
+
+[IMPORTANT]
+====
+Use the *Microsoft Graph* permissions, not the legacy *Office 365 SharePoint Online* API in the picker. The server calls Microsoft Graph only.
+
+Use the `Sites.*` scopes, not `Files.*`. Every endpoint the server calls is under `/sites/{id}/...`, which `Sites.ReadWrite.All` authorizes. `Files.ReadWrite.All` would additionally grant access to users' personal OneDrive, which the server never uses.
+====
+
+== Create a client secret
+
+In the app's *Certificates & secrets*, select *New client secret*, give it a description, choose an expiry, and select *Add*. Copy the secret value immediately, because Microsoft shows it only once.
+
+Store the secret in the ADP secret store under an `UPPER_SNAKE_CASE` key, for example `SHAREPOINT_CLIENT_SECRET`. The OAuth Provider references the secret by name, so the plaintext never enters the MCP server configuration.
+
+[[grant-admin-consent]]
+== Grant admin consent
+
+The SharePoint Graph scopes are high-privilege delegated scopes, so most tenants require a tenant admin to consent before any user can connect. A Global Administrator, Privileged Role Administrator, or Cloud Application Administrator opens the app, selects *API permissions*, then selects *Grant admin consent for `<org>`*.
+
+Admin consent does not escalate access: delegated scopes always stay bounded by the signed-in user's own SharePoint permissions. Admin consent approves the app to request the scopes so that individual users aren't each prompted. Without it, a non-admin user sees a "Need admin approval" message on the consent screen.
+
+== Configure the OAuth Provider
+
+Register an OAuth Provider in ADP that points at Microsoft's tenant-specific endpoints and references the client secret. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. Use these values:
+
+* *Authorization endpoint*: `https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/authorize`
+* *Token endpoint*: `https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/token`
+* *Client ID*: the Application (client) ID from the Entra app.
+* *Client secret reference*: the secret-store key, for example `SHAREPOINT_CLIENT_SECRET`.
+* *Token auth method*: client secret in the POST body, with PKCE enabled (matches the Microsoft preset).
+* *Scopes*: `openid`, `email`, `profile`, `User.Read`, `Sites.ReadWrite.All`, `offline_access`.
+
+== Create the server
+
+Create a new SharePoint MCP server in the Agentic Data Plane UI:
+
+. Open *MCP Servers > Create Server*.
+. Pick *SharePoint* from the marketplace picker.
+. Fill in the identity fields (`name`, `description`).
+. Under *Auth*, select *User-delegated OAuth* and pick the SharePoint OAuth Provider you configured.
+. Set *Required scopes* to `Sites.ReadWrite.All` (or `Sites.Read.All` for a read-only server).
+. Click *Create*.
+
+The `required_scopes` value is enforced against each user's connection. A connection with insufficient scopes returns `scope_upgrade_required`, and the user re-consents with the higher scope.
+
+=== Configure from the CLI
+
+[source,bash]
+----
+rpk ai mcp create --name sharepoint \
+  --description "SharePoint MCP — Microsoft Graph, per-user OAuth" \
+  --managed-config '{
+    "@type": "type.googleapis.com/redpanda.mcps.sharepoint.v1.SharePointMCPConfig"
+  }' \
+  --user-oauth-provider sharepoint \
+  --user-oauth-scopes Sites.ReadWrite.All
+----
+
+== Authorize a user and test
+
+The SharePoint server uses per-user OAuth, so the first call from a user who hasn't connected yet returns an authorization prompt:
+
+. Open the *Inspector* tab.
+. Run a tool that requires the user's identity, for example `list_sites` with the argument `{"search": "*"}`.
+. The first call returns `OAuthConnectionRequired` with a Microsoft `authorize_url`. The Inspector surfaces it as a consent prompt.
+. Open the authorize URL in a browser signed in as the user, approve the Microsoft consent screen, and let Microsoft redirect back to the gateway callback. The token lands in the vault keyed to the user's identity.
+. Re-run `list_sites`. It now returns the sites the user can see.
+
+[TIP]
+====
+`list_sites` passes the search term straight to Graph's `/sites?search=` endpoint, which returns nothing for an empty search. Pass `*` to list every site, or a name fragment to narrow the search.
+====
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|SharePoint isn't in the marketplace picker
+|The server is gated behind the `alpha` feature gate. Confirm that early-access features are enabled on your deployment, or contact Redpanda support.
+
+|`OAuthConnectionRequired`
+|First call from a user with no stored token. The user completes Microsoft's OAuth consent flow, the token lands in the vault, and subsequent calls reuse it. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+
+|"Need admin approval" on the Microsoft consent screen
+|A tenant admin hasn't granted admin consent for the Graph scopes. See xref:connect:managed/sharepoint.adoc#grant-admin-consent[Grant admin consent].
+
+|`scope_upgrade_required`
+|The server's `required_scopes` was extended after users had already consented. Users re-consent with the higher scope.
+
+|`AADSTS` errors during authorization
+|A single-tenant app is using the `/common/` OAuth endpoints. Switch the OAuth Provider to the tenant-specific endpoints (`https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/...`).
+
+|`list_sites` returns no sites
+|An empty search returns nothing. Pass `*` to list every site, or a name fragment.
+
+|`upload_file` fails with a permissions error
+|`upload_file` requires the `Sites.ReadWrite.All` scope. A read-only server configured with `Sites.Read.All` cannot upload.
+|===
+
+== Related topics
+
+* xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:connect:create-server.adoc[Create an MCP Server]
+* xref:connect:test-tools.adoc[Test a server's tools]
