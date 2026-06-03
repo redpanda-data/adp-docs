@@ -113,7 +113,7 @@ The system prompt teaches the agent how to orchestrate tools. Without explicit g
 
 Create the customer support agent with the system prompt.
 
-. Go to *AI Agents*.
+. Go to *Agents*.
 . Click *Create Agent*.
 . Configure the agent:
 +

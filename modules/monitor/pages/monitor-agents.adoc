@@ -42,7 +42,7 @@ Use *Transcripts* to diagnose specific issues:
 If the agent is not responding:
 
 . Check the timeline for recent transcripts. If none appear, the agent may be stopped.
-. Verify agent status in the main *AI Agents* view.
+. Verify agent status in the main *Agents* view.
 . Look for error transcripts with deployment or initialization failures.
 
 If the agent fails during execution:
@@ -79,7 +79,7 @@ The *Inspector* tab provides real-time conversation testing. Use it to test agen
 
 === Access Inspector
 
-. In ADP, navigate to *AI Agents*.
+. In ADP, navigate to *Agents*.
 . Click your agent name.
 . Open the *Inspector* tab.
 . Enter test queries and review responses.

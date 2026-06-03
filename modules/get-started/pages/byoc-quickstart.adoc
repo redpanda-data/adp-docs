@@ -164,9 +164,9 @@ For the full OpenAPI MCP reference (auth modes, operation filters, base URL over
 
 Combine the Anthropic provider and the PetStore MCP server into an agent.
 
-. Open *AI Agents* in the sidebar.
+. Open *Agents* in the sidebar.
 
-. Click *Create AI Agent*.
+. Click *Create Agent*.
 
 . In the *Basic Information* card:
 +

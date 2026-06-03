@@ -218,7 +218,7 @@ The root agent orchestrates sub-agents and makes final recommendations. You'll c
 Sub-agents inherit the LLM provider, model, resource tier, and max iterations from the root agent. This tutorial uses GPT-5 Mini and max iterations of 15 to optimize performance. Using slower models (GPT-5.2, Claude Sonnet 4.5) or high max iterations (50+) will cause sub-agents to execute slowly. Each sub-agent call could take 60-90 seconds instead of 10-15 seconds.
 ====
 
-. Go to *AI Agents*.
+. Go to *Agents*.
 . Click *Create Agent*.
 . Configure the root agent:
 +
@@ -324,7 +324,7 @@ Wait for the agent status to show *Running*.
 
 Test the multi-agent system with realistic dispute scenarios. Each scenario demonstrates different patterns: clear fraud, legitimate transactions, escalation cases, and edge cases.
 
-. Go to *AI Agents*.
+. Go to *Agents*.
 . Click on `dispute-resolution-agent`.
 . Open the *Inspector* tab.
 
@@ -396,7 +396,7 @@ Process disputes automatically from transaction streams. When transactions meet 
 
 The pipeline needs the agent card URL to invoke the dispute resolution agent.
 
-. Go to *AI Agents*.
+. Go to *Agents*.
 . Click on `dispute-resolution-agent`.
 . Open the *A2A* tab.
 . Copy the agent URL displayed at the top.

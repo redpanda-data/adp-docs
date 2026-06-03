@@ -51,7 +51,7 @@
 ** xref:monitor:concepts.adoc[How Observability Works]
 ** xref:monitor:monitor-agents.adoc[Monitor Agent Activity]
 ** xref:monitor:transcripts.adoc[See What Your Agent Did]
-** xref:monitor:troubleshoot-ai-agents.adoc[Troubleshoot AI Agents]
+** xref:monitor:troubleshoot-ai-agents.adoc[Troubleshoot Agents]
 ** xref:monitor:metrics.adoc[Check Speed, Cost, and Errors]
 ** xref:monitor:logs.adoc[Logs]
 ** xref:monitor:byoa-telemetry.adoc[Send BYOA Telemetry]
