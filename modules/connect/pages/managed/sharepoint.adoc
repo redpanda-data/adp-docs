@@ -8,7 +8,7 @@
 
 The *SharePoint* managed MCP server lets agents read and write SharePoint sites, document libraries, lists, and files through the https://learn.microsoft.com/en-us/graph/api/resources/sharepoint[Microsoft Graph API^]. Each agent caller authenticates against Microsoft with their own identity through user-delegated OAuth, so every call stays bounded by the signed-in user's own SharePoint permissions: the server never holds workspace-wide access.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
