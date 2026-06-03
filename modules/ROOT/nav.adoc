@@ -28,6 +28,7 @@
 **** xref:connect:managed/netsuite.adoc[NetSuite]
 **** xref:connect:managed/openapi.adoc[OpenAPI]
 **** xref:connect:managed/ramp.adoc[Ramp]
+**** xref:connect:managed/sharepoint.adoc[SharePoint]
 **** xref:connect:managed/slack.adoc[Slack]
 **** xref:connect:managed/sql.adoc[SQL]
 **** xref:connect:managed/workday.adoc[Workday]
