@@ -25,7 +25,7 @@ It is *not* a replacement for the Ironclad web UI for complex workflow managemen
 Before you create the server, make sure you have:
 
 * An Ironclad tenant where you can register an OAuth app.
-* An OAuth Provider configured in ADP for Ironclad. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An OAuth Provider configured in Redpanda ADP for Ironclad. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Get Ironclad credentials
@@ -49,7 +49,7 @@ Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
 
 == Configure
 
-Create a new Ironclad MCP server in the Agentic Data Plane UI:
+Create a new Ironclad MCP server in ADP:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Ironclad* from the marketplace picker.

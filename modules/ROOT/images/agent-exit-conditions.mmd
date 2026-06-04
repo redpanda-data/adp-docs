@@ -1,0 +1,11 @@
+%%{init: {'theme':'base', 'themeVariables': {'fontFamily':'Arial, Helvetica, sans-serif', 'edgeLabelBackground':'#ffffff', 'lineColor':'#1b2a6b'}}}%%
+flowchart LR
+    A("A: Reasoning loop") --> B{"B: Exit condition?"}
+    B -->|Task complete| C("C: Return response")
+    B -->|Max iterations| D("D: Return partial result")
+    B -->|Unrecoverable error| E("E: Return error")
+    B -->|No| F("F: Continue loop")
+    F --> A
+
+    classDef box fill:#ffffff,stroke:#1b2a6b,stroke-width:1.5px,color:#1b2a6b;
+    class A,B,C,D,E,F box;

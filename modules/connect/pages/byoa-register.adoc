@@ -10,7 +10,7 @@ A *BYOA* (bring-your-own-agent) agent is an agent you build and run yourself, in
 
 Registration creates a *metadata record*. The Agentic Data Plane tracks the agent and attributes its telemetry and cost, but it does not host or run the agent, and it does not proxy calls to it. Your agent runs entirely in your own infrastructure.
 
-A self-managed agent participates in ADP through two integration points:
+A self-managed agent participates in Redpanda ADP through two integration points:
 
 * *Registration*: The agent has an entry in the agent registry, so it appears on the governance dashboard alongside managed agents and in cost-attribution queries.
 * *Telemetry*: The agent emits OpenTelemetry traces, with its registered name as the `service.name`, into the same pipeline as managed agents, so transcripts and cost rollups attribute its calls.
@@ -39,7 +39,7 @@ The two models differ in who runs the agent, who owns scaling, and how the agent
 
 |How is the agent defined?
 |It's already coded; you don't want to translate it into the declarative agent format.
-|You want a YAML / declarative definition you edit in the Agentic Data Plane UI.
+|You want a YAML / declarative definition you edit in ADP.
 
 |Who scales and operates it?
 |Your team owns scaling, deploys, and the failure model.
@@ -72,7 +72,7 @@ Before you register a self-managed agent, make sure you have:
 
 == Register the agent
 
-You register a self-managed agent through `AgentRegistryService.CreateAgent`. The registration carries the agent's metadata, and you leave the agent-type configuration unset:
+You can register a self-managed agent from the *Agents* page in the console, with the `rpk` CLI, or through `AgentRegistryService.CreateAgent`. The registration carries the agent's metadata, and you leave the agent-type configuration unset:
 
 [cols="1,3"]
 |===

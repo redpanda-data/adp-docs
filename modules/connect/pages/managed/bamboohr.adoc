@@ -44,7 +44,7 @@ Use BambooHR when an agent needs HR context from BambooHR without sharing one up
 
 * Access to the Agentic Data Plane.
 * A BambooHR workspace where you can create an OAuth 2.0 application.
-* A BambooHR OAuth Provider in ADP. BambooHR OAuth authorize and token endpoints include your company subdomain.
+* A BambooHR OAuth Provider in Redpanda ADP. BambooHR OAuth authorize and token endpoints include your company subdomain.
 * A BambooHR company subdomain, such as `mycompany` for `mycompany.bamboohr.com`. The managed config accepts letters, numbers, and hyphens.
 * BambooHR users with the permissions required to read the employee, time-off, or performance data your agent needs.
 

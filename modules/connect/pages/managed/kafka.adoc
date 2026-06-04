@@ -31,7 +31,7 @@ The Kafka managed type proxies a managed Kafka client. It exposes tools for:
 +
 // TODO: confirm reachability requirements (public bootstrap, peering, and so on) once the standalone ADP product surface ships.
 * The cluster's bootstrap servers and SASL/TLS settings.
-* For SCRAM or PLAIN: Secrets in the ADP secret store for the username and password (`UPPER_SNAKE_CASE`, for example `KAFKA_SASL_USER` and `KAFKA_SASL_PASSWORD`).
+* For SCRAM or PLAIN: Secrets in the Redpanda ADP secret store for the username and password (`UPPER_SNAKE_CASE`, for example `KAFKA_SASL_USER` and `KAFKA_SASL_PASSWORD`).
 
 == Configure
 

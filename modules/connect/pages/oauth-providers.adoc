@@ -30,7 +30,7 @@ Before you register the provider, make sure you have:
 
 * An OAuth 2.0 application registered with the upstream provider, with the gateway's redirect URI configured. The redirect URI is the AI Gateway's OAuth callback (typically `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`).
 * The OAuth app's *client ID* and *client secret*.
-* A secret already created in the ADP secret store for the client secret. Secret references must be `UPPER_SNAKE_CASE`, for example `SLACK_CLIENT_SECRET`.
+* A secret already created in the Redpanda ADP secret store for the client secret. Secret references must be `UPPER_SNAKE_CASE`, for example `SLACK_CLIENT_SECRET`.
 +
 // TODO: xref the ADP secrets-management page once confirmed.
 * The list of *scopes* the upstream API needs. Include every scope any MCP server attached to this provider may need; users re-consent when scopes are added later.

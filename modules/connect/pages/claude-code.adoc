@@ -1,4 +1,4 @@
-= Use Claude Code with ADP
+= Use Claude Code with Redpanda ADP
 :description: Point Claude Code at an ADP-managed Anthropic provider so your team's LLM calls flow through AI Gateway with centralized credentials, usage tracking, and per-provider transcript logging. Optionally attach MCP servers hosted in ADP.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

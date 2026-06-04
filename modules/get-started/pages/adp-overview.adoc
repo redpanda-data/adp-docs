@@ -66,7 +66,7 @@ Redpanda ADP addresses critical enterprise requirements across all components.
 
 * *Unified authorization*: All components use OIDC-based authentication with an on-behalf-of authorization model. When a user invokes an agent, the agent inherits the intersection of its own permissions and the user's permissions. This ensures proper data access scoping.
 
-* *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) capture every agent action with 100% sampling using OpenTelemetry standards. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in the Agentic Data Plane UI and replay data for agent evaluations. For more information, see xref:monitor:concepts.adoc[Transcripts Overview].
+* *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) capture every agent action with 100% sampling using OpenTelemetry standards. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in ADP and replay data for agent evaluations. For more information, see xref:monitor:concepts.adoc[Transcripts Overview].
 
 * *Compliance and audit*: For regulated industries with frameworks such as ISO 42001 and the EU AI Act, Redpanda ADP records every agent action and data source used in decision-making. Execution logs are stored in Redpanda topics and can be materialized to Iceberg tables for multi-year retention and analysis.
 

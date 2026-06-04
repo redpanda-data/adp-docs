@@ -6,7 +6,7 @@
 :learning-objective-2: Walk through the consent flow and verify the connection on the Connections page
 :learning-objective-3: Send a test message through the Inspector
 
-The *Slack* managed MCP server is the canonical user-delegated OAuth example for ADP. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time: so messages posted by the agent appear as the user, not as a shared bot.
+The *Slack* managed MCP server is the canonical user-delegated OAuth example for Redpanda ADP. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time: so messages posted by the agent appear as the user, not as a shared bot.
 
 After reading this page, you will be able to:
 
@@ -32,12 +32,12 @@ Before you create the server, make sure you have:
 * A Slack OAuth app registered (your own or a Redpanda-published reference app).
 +
 // TODO: confirm whether Redpanda ships a reference Slack OAuth app or whether each customer brings their own. Document the path.
-* An OAuth Provider configured in the Agentic Data Plane UI under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An OAuth Provider configured in ADP under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:connect:user-delegated-oauth.adoc[].
 
 == Configure
 
-Create a new Slack MCP server in the Agentic Data Plane UI:
+Create a new Slack MCP server in ADP:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Slack* from the marketplace picker.

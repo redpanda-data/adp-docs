@@ -1,5 +1,5 @@
 = See What Your Agent Did
-:description: Open a transcript in the Agentic Data Plane UI, read the conversation turn by turn, and investigate errors, costs, and performance.
+:description: Open a transcript in ADP, read the conversation turn by turn, and investigate errors, costs, and performance.
 :page-topic-type: how-to
 :personas: agent_builder, domain_evaluator, platform_engineer, security_compliance_lead
 :learning-objective-1: Filter and open a transcript for a specific agent or MCP server execution
@@ -23,7 +23,7 @@ After reading this page, you will be able to:
 
 == Open the Transcripts view
 
-. Sign in to the Agentic Data Plane UI.
+. Sign in to Redpanda ADP.
 // TODO: Replace with the standalone ADP URL + sign-in flow once available.
 . Open *Transcripts* from the primary navigation.
 

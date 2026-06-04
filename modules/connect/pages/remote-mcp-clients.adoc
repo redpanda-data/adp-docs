@@ -76,7 +76,7 @@ Before you wire up the chat-client connector, make sure you have:
 
 Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
 
-. Sign in to ADP and open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its *Name*, *Grant Types*, *Status*, and *Scopes*.
+. Sign in to Redpanda ADP and open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its *Name*, *Grant Types*, *Status*, and *Scopes*.
 . Click *Register Client*.
 . Pick a well-known client to prefill its redirect URIs and recommended scopes, or choose *Custom Client* to register one from scratch. The catalog includes *Claude.ai Custom Connectors*, *Claude Desktop*, *ChatGPT*, *Cursor*, and *Windsurf*. For any client not in the catalog (for example, Gemini apps or Microsoft Copilot Studio), use *Custom Client* and paste the redirect URIs the tool publishes.
 . Fill in the form:
@@ -180,7 +180,7 @@ This handshake runs *once per user* when the connector is first added.
 * The OAuth Client's name (for example, _Claude (GitHub Read demo) wants to access your data_).
 * The *Resource* being authorized: The MCP server name and URL.
 * The *Requested permissions*: The gateway's internal scopes for this handshake (`mcp` and `offline_access`). These are *not* the upstream system's scopes; the upstream's scopes appear during the next handshake.
-* A footer reminding the user that they can revoke access from their *Connections* page in the Agentic Data Plane UI.
+* A footer reminding the user that they can revoke access from their *Connections* page in ADP.
 +
 . The user clicks *Allow*. AI Gateway redirects the chat client back to the redirect URI with an authorization code.
 . The chat client exchanges the code for an access token and a refresh token. Tokens are stored locally in the chat client's credential store.

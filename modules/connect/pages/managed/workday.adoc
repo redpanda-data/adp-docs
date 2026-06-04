@@ -36,7 +36,7 @@ Before you create the server, make sure you have:
 
 * A Workday tenant where you can create an Integration System User and register an API client
 * Admin access to *Workday > Create Integration System User* and *Workday > Register API Client for Integrations*
-* Two ADP secret-store entries:
+* Two Redpanda ADP secret-store entries:
 +
 * `WORKDAY_PASSWORD`: The ISU password.
 * `WORKDAY_REFRESH_TOKEN`: The non-expiring refresh token.
@@ -56,7 +56,7 @@ Set up authentication on the Workday side before configuring the MCP:
 
 == Configure
 
-Create a new Workday MCP server in the Agentic Data Plane UI:
+Create a new Workday MCP server in ADP:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Workday* from the marketplace picker.

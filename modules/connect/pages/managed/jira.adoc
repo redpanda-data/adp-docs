@@ -31,7 +31,7 @@ The Jira managed type exposes tools for:
 * An Atlassian OAuth 2.0 (3LO) app registered against `https://api.atlassian.com`.
 +
 // TODO: confirm whether Redpanda publishes a reference Atlassian app or whether each customer brings their own.
-* An OAuth Provider in the Agentic Data Plane UI configured for Atlassian's authorize/token URLs and carrying the app's client credentials.
+* An OAuth Provider in Redpanda ADP configured for Atlassian's authorize/token URLs and carrying the app's client credentials.
 * Familiarity with xref:connect:user-delegated-oauth.adoc[].
 
 == Atlassian's scope model

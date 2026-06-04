@@ -422,7 +422,7 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 * Implement retry with exponential backoff for 5xx and timeout conditions.
 * Respect `Retry-After` on 429 responses.
 * Rotate service account credentials on a schedule your organization accepts.
-* Observe usage through the Agentic Data Plane UI on each provider's detail page.
+* Observe usage in Redpanda ADP on each provider's detail page.
 
 == Troubleshooting
 

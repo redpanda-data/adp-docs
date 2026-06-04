@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 
 == The three-layer model
 
-ADP authorization composes three pieces. Each layer answers a different question.
+Redpanda ADP authorization composes three pieces. Each layer answers a different question.
 
 * *Permission*: What action is allowed? A permission is a string like `dataplane_adp_llmprovider_invoke` that names exactly one operation on one resource type. The gRPC service that handles an API call checks the caller's permission set before executing.
 * *Role*: Which permissions go together? A role is a named bundle of permissions. ADP ships built-in roles for common access patterns (Admin, Writer, Reader, and a set of Invoker sub-roles), and you can define custom roles for more specific needs.

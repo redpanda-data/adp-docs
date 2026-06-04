@@ -69,7 +69,7 @@ Throughout this tutorial, fields marked with * are required.
 
 == Create the GitHub OAuth provider in ADP
 
-Register GitHub as an OAuth provider in the Agentic Data Plane UI.
+Register GitHub as an OAuth provider in ADP.
 
 . In ADP, navigate to **OAuth Providers** in the sidebar.
 . Click **Create provider** and select **GitHub** from the catalog.
@@ -91,7 +91,7 @@ Register GitHub as an OAuth provider in the Agentic Data Plane UI.
 
 |**Display name** *
 |`GitHub`
-|Human-readable name shown in the Agentic Data Plane UI.
+|Human-readable name shown in ADP.
 
 |**Authorization endpoint** *
 |`\https://github.com/login/oauth/authorize`
@@ -310,7 +310,7 @@ For most scenarios where users need to access their own repositories or respect 
 
 Test that the MCP server is correctly configured and can authenticate users.
 
-. In the Agentic Data Plane UI, find your GitHub MCP server in the **MCP Servers** list.
+. In ADP, find your GitHub MCP server in the **MCP Servers** list.
 . Click it to view details.
 . If you tested the connection in Connections, you're already connected and can test immediately.
 . If you skipped the Connections test, the first time you call a tool from this server, you'll be prompted to authorize GitHub.

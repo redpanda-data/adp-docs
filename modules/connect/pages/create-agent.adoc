@@ -10,7 +10,7 @@
 // TODO: Refresh screenshots against `adp-production` during Track D polish pass.
 // TODO (pre-merge verification): Confirm with team-ai whether the cloudv2 main wizard ships before GA. If it does, restructure this page to match the wizard step flow (Basics, Model, Behavior, Tools, Subagents, Review) instead of the deployed single-page form.
 
-Create a new glossterm:AI agent[] declaratively through the Agentic Data Plane UI. No Python or JavaScript code required. This guide walks the create form section by section, then covers the post-create steps for discovery metadata and testing.
+Create a new glossterm:AI agent[] declaratively through Redpanda ADP. No Python or JavaScript code required. This guide walks the create form section by section, then covers the post-create steps for discovery metadata and testing.
 
 After reading this page, you will be able to:
 
@@ -29,6 +29,7 @@ After reading this page, you will be able to:
 
 . Sign in to ADP and open the *Agents* page.
 . Click *Create agent*.
+. Choose the managed agent option, where Redpanda hosts and runs the agent for you. (To register an agent you build and run yourself, see xref:connect:byoa-register.adoc[].)
 
 The form arranges configuration into sections. Required fields are marked with a red asterisk. Click *Create Agent* at the bottom when every required field is filled.
 

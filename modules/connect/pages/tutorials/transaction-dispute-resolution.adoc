@@ -45,7 +45,7 @@ Before creating agents, create the tools they'll use. You'll organize tools by d
 
 Account tools retrieve customer and transaction data with PII protection.
 
-. Sign in to ADP.
+. Sign in to Redpanda ADP.
 . Go to *Remote MCP*.
 . Click *Create MCP Server*.
 . Configure the server:

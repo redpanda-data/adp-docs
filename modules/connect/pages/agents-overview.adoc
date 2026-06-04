@@ -7,7 +7,7 @@
 :learning-objective-2: Explain how ADP streaming infrastructure benefits agent architectures
 :learning-objective-3: Identify use cases where ADP agents provide value
 
-ADP AI agents take a declarative approach: instead of writing Python or JavaScript agent code, you declare the behavior you want by selecting an LLM, writing a system prompt, and connecting tools drawn from 300+ built-in Redpanda Connect connectors. The framework handles execution, tool orchestration, and scaling, backed by real-time streaming infrastructure and built-in filtering and data enrichment.
+Redpanda ADP AI agents take a declarative approach: instead of writing Python or JavaScript agent code, you declare the behavior you want by selecting an LLM, writing a system prompt, and connecting tools drawn from 300+ built-in Redpanda Connect connectors. The framework handles execution, tool orchestration, and scaling, backed by real-time streaming infrastructure and built-in filtering and data enrichment.
 
 After reading this page, you will be able to:
 
@@ -21,7 +21,7 @@ An AI agent is a system built around a glossterm:large language model (LLM)[] th
 
 == How agents work
 
-When you create an agent, you configure the components through the Agentic Data Plane UI rather than writing code:
+When you create an agent, you configure the components through ADP rather than writing code:
 
 * *System prompt*: Defines the agent's role, responsibilities, and constraints
 * *LLM*: Interprets user intent and decides which tools to invoke

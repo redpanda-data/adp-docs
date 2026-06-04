@@ -61,7 +61,7 @@ This granularity enables the agent to chain tools (check order status, see it's 
 
 Create a Remote MCP server with the three tools.
 
-. Sign in to ADP.
+. Sign in to Redpanda ADP.
 . Go to *Remote MCP*.
 . Click *Create MCP Server*.
 . Configure the server:

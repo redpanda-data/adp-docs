@@ -8,7 +8,7 @@
 
 // Source: cloudv2 `apps/aigw/docs/customer/bedrock-setup-guide.md` on origin/main, verified 2026-05-19.
 
-This guide walks you through the AWS-side setup AI Gateway needs to invoke Amazon Bedrock, then through the Agentic Data Plane UI flow that registers Bedrock as an LLM provider. For background on how Bedrock foundation models, cross-region inference profiles, and IAM patterns map to the provider form, see xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] on the main provider configuration page.
+This guide walks you through the AWS-side setup AI Gateway needs to invoke Amazon Bedrock, then through the Redpanda ADP flow that registers Bedrock as an LLM provider. For background on how Bedrock foundation models, cross-region inference profiles, and IAM patterns map to the provider form, see xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] on the main provider configuration page.
 
 After completing this guide, you will be able to:
 

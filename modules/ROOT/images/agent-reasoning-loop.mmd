@@ -1,0 +1,17 @@
+%%{init: {'theme':'base', 'themeVariables': {'fontFamily':'Arial, Helvetica, sans-serif', 'edgeLabelBackground':'#ffffff', 'lineColor':'#1b2a6b'}}}%%
+flowchart TD
+    A("A: User request") --> B("B: LLM receives context")
+    B --> C{"C: LLM decision"}
+    C -->|Need more info| F("F: Request clarification")
+    C -->|Invoke tool| D("D: Tool executes")
+    C -->|Task complete| G("G: Return response to user")
+    D --> E("E: Results added to context")
+    E --> B
+    F --> A
+    H["H: Context includes<br/>system prompt + history + tool results"] -.-> B
+
+    classDef box fill:#ffffff,stroke:#1b2a6b,stroke-width:1.5px,color:#1b2a6b;
+    classDef note fill:#ffffff,stroke:#e53935,stroke-width:1.5px,color:#e53935,stroke-dasharray:5 5;
+    class A,B,C,D,E,F,G box;
+    class H note;
+    linkStyle 8 stroke:#e53935,stroke-width:1.5px,stroke-dasharray:5 5;

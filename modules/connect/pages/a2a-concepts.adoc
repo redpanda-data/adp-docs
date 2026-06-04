@@ -6,7 +6,7 @@
 :learning-objective-2: Explain how agent cards enable discovery
 :learning-objective-3: Identify how authentication secures agent communication
 
-The Agent-to-Agent (A2A) protocol is an open standard for agent communication and discovery. ADP uses A2A for both external integration and internal pipeline-to-agent communication.
+The Agent-to-Agent (A2A) protocol is an open standard for agent communication and discovery. Redpanda ADP uses A2A for both external integration and internal pipeline-to-agent communication.
 
 After reading this page, you will be able to:
 
@@ -38,7 +38,7 @@ The agent card is a JSON document that describes what the agent can do and how t
 [#agent-card-location]
 === Agent card location
 
-ADP agents expose their agent cards at the `/.well-known/agent-card.json` subpath of the agent URL. You can find the agent URL on the agent overview page in the Agentic Data Plane UI under *Agents*.
+ADP agents expose their agent cards at the `/.well-known/agent-card.json` subpath of the agent URL. You can find the agent URL on the *Agents* page.
 
 For example, if your agent URL is `\https://my-agent.ai-agents.abc123.cloud.redpanda.com`, your agent card URL is `\https://my-agent.ai-agents.abc123.cloud.redpanda.com/.well-known/agent-card.json`.
 

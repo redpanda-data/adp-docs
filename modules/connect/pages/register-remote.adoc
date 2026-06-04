@@ -2,7 +2,7 @@
 :description: Front your own MCP server with a managed Redpanda URL. Pick a transport, configure authentication, and let agents discover the server's tools through Redpanda.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder
-:learning-objective-1: Register a self-managed MCP server in the Agentic Data Plane UI
+:learning-objective-1: Register a self-managed MCP server in ADP
 :learning-objective-2: Pick the right transport (SSE vs. Streamable HTTP) and authentication mode
 :learning-objective-3: Confirm tool discovery completed and the server is reachable through its proxy URL
 
@@ -31,7 +31,7 @@ If you don't already run a server, prefer a managed type. See xref:managed/manag
 // TODO: confirm network reachability requirements (egress / VPC peering / public endpoint) once the standalone ADP product surface ships.
 * The endpoint URL. `http://` is allowed for everything except user-delegated OAuth, which requires `https://` (proto rule `remote_mcp.user_oauth_requires_https`).
 * Knowledge of which transport the server speaks (SSE or Streamable HTTP). If you don't know, see <<test-transport>>.
-* If using static-key or service-account-OAuth: secrets pre-created in the ADP secret store, `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`).
+* If using static-key or service-account-OAuth: secrets pre-created in the Redpanda ADP secret store, `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`).
 * If using user-delegated OAuth: an OAuth Provider already configured. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Create the server
