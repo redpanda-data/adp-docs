@@ -1,14 +1,14 @@
-= MCP Gateway
-:description: Learn how to use the MCP Gateway to aggregate MCP servers, configure deferred tool loading, create orchestrator workflows, and manage security.
+= MCP Aggregation
+:description: Learn how to aggregate MCP servers, configure deferred tool loading, create orchestrator workflows, and manage security.
 :page-topic-type: guide
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Configure MCP aggregation with deferred tool loading to reduce token costs
 :learning-objective-2: Write orchestrator workflows to reduce multi-step interactions
 :learning-objective-3: Manage approved MCP servers with security controls and audit trails
 
-The MCP Gateway provides glossterm:MCP[,Model Context Protocol (MCP)] aggregation, allowing glossterm:AI agent[,AI agents] to access glossterm:MCP tool[,tools] from multiple MCP servers through a single unified endpoint. This eliminates the need for agents to manage multiple MCP connections and significantly reduces token costs through deferred tool loading.
+glossterm:MCP[,Model Context Protocol (MCP)] aggregation lets glossterm:AI agent[,AI agents] access glossterm:MCP tool[,tools] from multiple MCP servers through a single unified endpoint. This eliminates the need for agents to manage multiple MCP connections and significantly reduces token costs through deferred tool loading.
 
-MCP Gateway benefits:
+MCP aggregation benefits:
 
 * Single endpoint: One MCP endpoint aggregates all approved MCP servers
 * Token reduction: Fewer tokens through deferred tool loading (depending on configuration)

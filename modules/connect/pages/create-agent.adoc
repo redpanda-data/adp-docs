@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* At least one xref:gateway:configure-provider.adoc[LLM provider configured] in AI Gateway.
+* At least one xref:gateway:configure-provider.adoc[LLM provider configured] in ADP.
 * Optional: One or more xref:connect:mcp-overview.adoc[MCP servers] registered in ADP if you want the agent to call tools.
 * A system prompt prepared in advance (see xref:connect:system-prompts.adoc[System prompt best practices]).
 
@@ -46,7 +46,7 @@ On the *Basics* step, configure the identity fields that appear in the registry 
 
 On the *Model* step, select the glossterm:large language model (LLM)[] provider and model the agent uses to interpret user intent and decide which tools to invoke.
 
-. Select an *LLM provider*. Required. The dropdown lists every LLM provider configured in AI Gateway (for example, `support-bedrock-v2`). To add a new provider, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
+. Select an *LLM provider*. Required. The dropdown lists every LLM provider configured in ADP (for example, `support-bedrock-v2`). To add a new provider, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
 . Select a *Model*. Required. The list is populated by the selected provider (for example, `us.anthropic.claude-haiku-4-5-20251001-v1:0`). If the provider has no allowlist, you can type the model identifier directly.
 +
 For model selection guidance, see xref:connect:architecture-patterns.adoc#model-selection-guide[Model selection guide].
@@ -148,7 +148,7 @@ You can use this URL to call the agent programmatically or integrate it with ext
 
 == Issue agent credentials
 
-Every agent has a hidden service account in AI Gateway that scopes the calls the agent makes to MCP servers and the Redpanda broker. To call the agent from an external system as that service account, issue an OAuth 2.0 client credential on the agent's *Credentials* tab.
+Every agent has a hidden service account in ADP that scopes the calls the agent makes to MCP servers and the Redpanda broker. To call the agent from an external system as that service account, issue an OAuth 2.0 client credential on the agent's *Credentials* tab.
 
 The *Setup* tab on the agent detail page shows the equivalent OAuth client configuration (token endpoint, scopes, sample request) after a credential exists.
 
