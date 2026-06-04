@@ -32,7 +32,6 @@ When a customer calls saying "I see a $247.83 charge from 'ACME CORP' but I neve
 
 == Prerequisites
 
-* Access to a Redpanda ADP environment. Redpanda provisions it for you when you purchase ADP.
 * xref:get-started:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI GPT-5.2 or Claude Sonnet 4.5 for reasoning).
 * The xref:reference:rpk-install.adoc[Redpanda CLI (`rpk`)] installed (for testing the pipeline with sample data).
 * Completed xref:tutorials/customer-support-agent.adoc[] (foundational multi-tool concepts).

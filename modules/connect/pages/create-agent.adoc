@@ -19,7 +19,6 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* Access to a Redpanda ADP environment. Redpanda provisions the underlying Redpanda Data Platform environment when you purchase ADP.
 * At least one xref:gateway:configure-provider.adoc[LLM provider configured] in AI Gateway.
 * Optional: One or more xref:connect:mcp-overview.adoc[MCP servers] registered in ADP if you want the agent to call tools.
 * A system prompt prepared in advance (see xref:connect:system-prompts.adoc[System prompt best practices]).

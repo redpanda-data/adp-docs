@@ -36,7 +36,6 @@ The challenge: users phrase requests differently ("Where's my package?", "Track 
 
 == Prerequisites
 
-* Access to a Redpanda ADP environment. Redpanda provisions it for you when you purchase ADP.
 * xref:get-started:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
 
 == Design the MCP tools
