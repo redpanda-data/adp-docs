@@ -43,8 +43,6 @@ Two more families belong to Redpanda Connect resources that ADP uses:
 * `dataplane_pipeline_*`: Manage and invoke Redpanda Connect pipelines.
 * `dataplane_knowledgebase_*`: Manage retrieval-augmented generation knowledge bases.
 
-These permissions only resolve on clusters that have ADP enabled. Granting them to a principal on a non-ADP cluster has no effect.
-
 For the full list of permissions and which built-in role grants each one, see xref:control:permissions-reference.adoc[ADP Permissions Reference].
 
 == Built-in roles

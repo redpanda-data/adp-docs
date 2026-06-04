@@ -18,7 +18,6 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* A Redpanda BYOC environment on AWS with ADP enabled.
 * An AWS account with Bedrock model access enabled in the region you plan to call. Model availability varies by region; see link:https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html[Bedrock models by region^].
 * Access to the AWS CLI configured with credentials that can create IAM users, policies, and access keys.
 * Access to the Redpanda UI.

@@ -1,9 +1,8 @@
 = Redpanda ADP Quickstart
-:page-aliases: quickstart.adoc, cloud-data-platform:ai-agents:agents/quickstart.adoc
+:page-aliases: byoc-quickstart.adoc, quickstart.adoc, cloud-data-platform:ai-agents:agents/quickstart.adoc
 :description: Set up Redpanda ADP for your organization. Get an Anthropic API key, configure your first LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build a working agent that calls both.
 :page-topic-type: quickstart
 :personas: platform_engineer
-:page-byoc: true
 :learning-objective-1: Configure your first LLM provider in ADP with an Anthropic API key
 :learning-objective-2: Create an OpenAPI-backed MCP server using a public Swagger spec
 :learning-objective-3: Build an agent that calls both the LLM provider and the MCP server
@@ -11,7 +10,7 @@
 // Source: drafted against `adp-production` UI flows for LLM providers, MCP servers, and Agents; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider, MCP, and agent protos on cloudv2 origin/main.
 // Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 
-Set up Redpanda ADP for your organization. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
+This quickstart shows how to set up Redpanda ADP for your organization. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
 
 After completing this quickstart, you will be able to:
 
@@ -21,7 +20,6 @@ After completing this quickstart, you will be able to:
 
 == Prerequisites
 
-* A Redpanda BYOC environment on AWS with ADP enabled.
 * The Writer or Admin xref:control:permissions-overview.adoc[built-in role] in ADP. The Reader role can list resources but cannot create them.
 * An Anthropic account. If you don't have one, the next section walks through signup.
 
@@ -68,16 +66,17 @@ ADP references provider credentials by secret name, not by raw value. Create the
 
 . Click *Create Secret*.
 +
-* *ID*: `ANTHROPIC_API_KEY`. The ID accepts uppercase letters, numbers, underscores, slashes, and hyphens only.
+* *ID*: `ANTHROPIC_API_KEY`. The ID accepts letters, numbers, slashes, underscores, and hyphens only. ADP automatically uppercases the ID, and you can't change it after you save.
 * *Value*: Paste the `sk-ant-` key you copied from Anthropic.
 * *Scopes*: Make sure *AI Gateway* is selected. The LLM provider you create in the next section reads the secret through this scope. Leave any other default scopes in place.
+* *Labels*: Skip. Labels are optional key/value metadata for organizing secrets.
 +
 [IMPORTANT]
 ====
 The secret value is encrypted and cannot be retrieved after you save the form. If you mistype the key, delete the secret and create a new one.
 ====
 +
-Click *Create Secret* at the bottom of the form.
+Click *Create secret* at the bottom of the form.
 
 . Confirm the secret appears in the list with the ID `ANTHROPIC_API_KEY`.
 
@@ -91,7 +90,9 @@ Now point ADP at Anthropic.
 
 . Click *Create provider*.
 
-. *Name*: Enter `anthropic-quickstart` or accept the auto-suggested name.
+. *Display name*: Enter `anthropic-quickstart`. This label appears in dashboards and model selectors.
+
+. Leave the auto-derived *Resource ID*. ADP generates it from the display name, using lowercase letters, numbers, and hyphens. The ID is used in API calls and CLI commands and can't be changed after creation.
 
 . *Provider type*: Select *Anthropic*.
 
@@ -162,25 +163,31 @@ For the full OpenAPI MCP reference (auth modes, operation filters, base URL over
 
 == Build your agent
 
-Combine the Anthropic provider and the PetStore MCP server into an agent.
+Combine the Anthropic provider and the PetStore MCP server into an agent. ADP walks you through a managed agent in a step-by-step wizard.
 
 . Open *Agents* in the sidebar.
 
 . Click *Create Agent*.
 
-. In the *Basic Information* card:
+. Choose how the agent runs. Select the managed option, *Redpanda manages it*, so Redpanda deploys, runs, and observes the agent for you. Click *Continue*.
 +
-* *Agent Name*: `pet-store-assistant`
-* *Description*: `Quickstart agent that answers questions about the PetStore inventory`
-* *Resources*: Select *XSmall*. The quickstart workload fits inside the smallest tier.
+NOTE: The other option, *I host it myself*, registers an agent you run on your own infrastructure. This quickstart uses the managed runtime.
 
-. In the *LLM Provider Configuration* card:
+. On the *Basics* step, set the following, then click *Continue*:
 +
-* *Provider*: Select `anthropic-quickstart` from the dropdown.
+* *Display name*: `pet-store-assistant`. This name appears in the registry list and the detail header.
+* *Agent ID*: Leave the auto-derived value. ADP generates the ID from the display name, and you can't change it after creation.
+* *Description*: `Quickstart agent that answers questions about the PetStore inventory`.
+* *Tags*: Skip. Tags are optional metadata for filtering and grouping.
+
+. On the *Model* step, set the following, then click *Continue*:
++
+* *LLM provider*: Select `anthropic-quickstart`. This provider supplies the credentials and routing for the agent.
 * *Model*: Select `claude-sonnet-4-6`. Sonnet handles multi-step tool use more reliably than Haiku.
-* *Max Iterations*: Leave the slider at its default. The quickstart prompts don't need many iterations.
++
+Leave the *Advanced* options, such as *Max iterations*, at their defaults.
 
-. In the *System Prompt* card, paste the following into the editor:
+. On the *Behavior* step, paste the following into the *System prompt* editor, then click *Continue*:
 +
 [,text]
 ----
@@ -202,15 +209,13 @@ Rules:
   delete pets.
 ----
 
-. In the *MCP Tools* card, check the box next to `petstore-quickstart`. The card displays "Tools discovered on first use," which means the agent discovers every tool the PetStore server exposes at runtime; you don't pre-select individual tools here. The system prompt's "stick to read operations" rule constrains behavior.
+. On the *Tools* step, select `petstore-quickstart` under *MCP servers*, then click *Continue*. The agent discovers the server's tools at runtime; you don't pre-select individual tools. The system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
 
-. Leave the *Subagents (Optional)* card empty. The quickstart uses a single agent.
+. On the *Subagents* step, leave the list empty to keep the agent flat, then click *Continue*. The quickstart uses a single agent.
 
-. Leave the auto-generated *Service Account Name* in the *Service Account* card as is. ADP creates the service account when you create the agent.
+. On the *Review* step, confirm the summary, then click *Create agent*.
 
-. Click *Create Agent* at the bottom of the form.
-
-. Wait for the agent status to change from *Starting* to *Running*. ADP also creates the service account at this point; for details, see xref:connect:concepts.adoc#service-account-authorization[service account authorization].
+. Wait for the agent status to change from *Starting* to *Running*. ADP creates the agent's service account at this point; for details, see xref:connect:concepts.adoc#service-account-authorization[service account authorization].
 
 == Test the agent in the Inspector
 
@@ -253,15 +258,15 @@ If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet
 
 Agent configuration isn't fixed after you create it. Edit the system prompt or model, save, and re-test in the Inspector to see how behavior changes.
 
-. On the agent detail page, click *Edit configuration*.
+. On the agent detail page, open the *Overview* tab. The tab shows the agent's full configuration as an editable form.
 
-. Adjust the *System Prompt* to change how the agent responds. For example:
+. Adjust the *System prompt* to change how the agent responds. For example:
 +
 * Add a constraint: `Never call more than one tool per response.`
 * Change the output format: `Always format pet details as a bulleted list.`
 * Add a confirmation step: `Before answering, restate which tool you plan to call and why.`
 
-. Click *Save*.
+. Click *Save changes*.
 
 . Open the *Inspector* tab, click *Clear context*, and re-send one of the earlier prompts to compare the agent's behavior against your change.
 

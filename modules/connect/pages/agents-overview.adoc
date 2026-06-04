@@ -56,13 +56,12 @@ Process every event with AI reasoning at scale. Invoke agents automatically from
 
 == Limitations
 
-* Agents are available only on ADP BYOC environments
 * MCP servers must be hosted in ADP
 * Cross-agent calling between separate agents is not supported. Use internal subagents for delegation within a single agent.
 
 == Next steps
 
-* xref:get-started:byoc-quickstart.adoc[]
+* xref:get-started:adp-quickstart.adoc[]
 * xref:connect:concepts.adoc[]
 * xref:connect:architecture-patterns.adoc[]
 * xref:connect:integration-overview.adoc[]

@@ -32,7 +32,6 @@ When a customer calls saying "I see a $247.83 charge from 'ACME CORP' but I neve
 
 == Prerequisites
 
-* A xref:cloud-data-platform:get-started:cluster-types/byoc/index.adoc[BYOC environment].
 * xref:get-started:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI GPT-5.2 or Claude Sonnet 4.5 for reasoning).
 * The xref:reference:rpk-install.adoc[Redpanda CLI (`rpk`)] installed (for testing the pipeline with sample data).
 * Completed xref:tutorials/customer-support-agent.adoc[] (foundational multi-tool concepts).
@@ -215,31 +214,24 @@ The root agent orchestrates sub-agents and makes final recommendations. You'll c
 
 [IMPORTANT]
 ====
-Sub-agents inherit the LLM provider, model, resource tier, and max iterations from the root agent. This tutorial uses GPT-5 Mini and max iterations of 15 to optimize performance. Using slower models (GPT-5.2, Claude Sonnet 4.5) or high max iterations (50+) will cause sub-agents to execute slowly. Each sub-agent call could take 60-90 seconds instead of 10-15 seconds.
+Sub-agents inherit the LLM provider, model, and max iterations from the root agent. This tutorial uses GPT-5 Mini and max iterations of 15 to optimize performance. Using slower models (GPT-5.2, Claude Sonnet 4.5) or high max iterations (50+) will cause sub-agents to execute slowly. Each sub-agent call could take 60-90 seconds instead of 10-15 seconds.
 ====
 
 . Go to *Agents*.
 . Click *Create Agent*.
-. Configure the root agent:
-+
-* *Name*: `dispute-resolution-agent`
-* *Description*: `Orchestrates transaction dispute investigations`
-* *Resource Tier*: Large
-* *AI Gateway*: Select the gateway you configured
-* *Provider*: OpenAI
-* *Model*: GPT-5 Mini (fast, cost-effective for structured workflows)
-* *Max Iterations*: 15
-
-. In the *System Prompt* field, enter:
+. Choose the managed option, *Redpanda manages it*, then click *Continue*.
+. On the *Basics* step, enter a *Display name* of `dispute-resolution-agent` and a *Description* of `Orchestrates transaction dispute investigations`. Click *Continue*.
+. On the *Model* step, select your *LLM provider* and the *Model* `GPT-5 Mini` (fast, cost-effective for structured workflows). Expand *Advanced* and set *Max iterations* to 15. Click *Continue*.
+. On the *Behavior* step, enter the root agent system prompt, then click *Continue*:
 +
 [source,text]
 ----
 include::ROOT:example$agents/dispute-root-agent-prompt.txt[]
 ----
 
-. Skip the *MCP Tools* section (the root agent uses A2A protocol to call sub-agents, not direct tools).
+. On the *Tools* step, don't select any *MCP servers*. The root agent uses the A2A protocol to call its sub-agents, not direct tools. Click *Continue*.
 
-. In the *Subagents* section, click *+ Add Subagent*.
+. On the *Subagents* step, click *Add subagent*.
 
 === Add account agent subagent
 
@@ -250,73 +242,73 @@ The account agent retrieves customer account and transaction data.
 * *Name*: `account-agent`
 * *Description*: `Retrieves customer account and transaction data`
 
-. In the subagent's *System Prompt* field, enter:
+. In the subagent's *System prompt* field, enter:
 +
 [source,text]
 ----
 include::ROOT:example$agents/account-agent-prompt.txt[]
 ----
 
-. In the subagent's *MCP Tools* section, select `account-tools`.
+. In the subagent's *MCP tools* section, select `account-tools`.
 
 === Add fraud agent subagent
 
 The fraud agent calculates fraud risk scores and identifies fraud indicators.
 
-. Click *+ Add Subagent* again.
+. Click *Add subagent* again.
 . Configure the subagent:
 +
 * *Name*: `fraud-agent`
 * *Description*: `Calculates fraud risk scores and identifies fraud indicators`
 
-. In the subagent's *System Prompt* field, enter:
+. In the subagent's *System prompt* field, enter:
 +
 [source,text]
 ----
 include::ROOT:example$agents/fraud-agent-prompt.txt[]
 ----
 
-. In the subagent's *MCP Tools* section, select `fraud-tools`.
+. In the subagent's *MCP tools* section, select `fraud-tools`.
 
 === Add merchant agent subagent
 
 The merchant agent verifies merchant legitimacy and reputation.
 
-. Click *+ Add Subagent* again.
+. Click *Add subagent* again.
 . Configure the subagent:
 +
 * *Name*: `merchant-agent`
 * *Description*: `Verifies merchant legitimacy and reputation`
 
-. In the subagent's *System Prompt* field, enter:
+. In the subagent's *System prompt* field, enter:
 +
 [source,text]
 ----
 include::ROOT:example$agents/merchant-agent-prompt.txt[]
 ----
 
-. In the subagent's *MCP Tools* section, select `merchant-tools`.
+. In the subagent's *MCP tools* section, select `merchant-tools`.
 
 === Add compliance agent subagent
 
 The compliance agent handles audit logging and regulatory requirements.
 
-. Click *+ Add Subagent* again.
+. Click *Add subagent* again.
 . Configure the subagent:
 +
 * *Name*: `compliance-agent`
 * *Description*: `Handles audit logging and regulatory requirements`
 
-. In the subagent's *System Prompt* field, enter:
+. In the subagent's *System prompt* field, enter:
 +
 [source,text]
 ----
 include::ROOT:example$agents/compliance-agent-prompt.txt[]
 ----
 
-. In the subagent's *MCP Tools* section, select `compliance-tools`.
+. In the subagent's *MCP tools* section, select `compliance-tools`.
 
-. Click *Create Agent* to create the root agent with all four subagents.
+. Click *Continue*, then on the *Review* step click *Create agent* to create the root agent with all four subagents.
 
 Wait for the agent status to show *Running*.
 

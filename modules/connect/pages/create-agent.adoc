@@ -6,11 +6,10 @@
 :learning-objective-2: Configure an LLM provider, model, and execution settings
 :learning-objective-3: Connect MCP servers, add subagents, and set discovery metadata
 
-// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (AgentCreate, ManagedAgentSpec) cross-referenced against the deployed `adp-production` UI, verified 2026-05-15.
-// TODO: Refresh screenshots against `adp-production` during Track D polish pass.
-// TODO (pre-merge verification): Confirm with team-ai whether the cloudv2 main wizard ships before GA. If it does, restructure this page to match the wizard step flow (Basics, Model, Behavior, Tools, Subagents, Review) instead of the deployed single-page form.
+// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (AgentCreate, ManagedAgentSpec) cross-referenced against the managed-agent creation wizard in the `adp-testing` environment, verified 2026-06-04.
+// This page follows the six-step wizard (Basics, Model, Behavior, Tools, Subagents, Review). Re-verify field labels at PR time; ADP UI labels are still in flux pre-GA.
 
-Create a new glossterm:AI agent[] declaratively through Redpanda ADP. No Python or JavaScript code required. This guide walks the create form section by section, then covers the post-create steps for discovery metadata and testing.
+Create a new glossterm:AI agent[] declaratively through Redpanda ADP. No Python or JavaScript code required. This guide walks through the create wizard step by step, then covers the post-create steps for discovery metadata and testing.
 
 After reading this page, you will be able to:
 
@@ -20,67 +19,47 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* An ADP BYOC environment.
 * At least one xref:gateway:configure-provider.adoc[LLM provider configured] in AI Gateway.
 * Optional: One or more xref:connect:mcp-overview.adoc[MCP servers] registered in ADP if you want the agent to call tools.
 * A system prompt prepared in advance (see xref:connect:system-prompts.adoc[System prompt best practices]).
 
-== Open the create form
+== Open the create wizard
 
 . Sign in to ADP and open the *Agents* page.
-. Click *Create agent*.
-. Choose the managed agent option, where Redpanda hosts and runs the agent for you. (To register an agent you build and run yourself, see xref:connect:byoa-register.adoc[].)
+. Click *Create Agent*.
+. Choose how the agent runs. Select the managed option, *Redpanda manages it*, so Redpanda deploys, runs, and observes the agent for you. (To register an agent you build and run yourself, see xref:connect:byoa-register.adoc[].)
+. Click *Continue*.
 
-The form arranges configuration into sections. Required fields are marked with a red asterisk. Click *Create Agent* at the bottom when every required field is filled.
+ADP configures the agent through a six-step wizard: Basics, Model, Behavior, Tools, Subagents, and Review. Required fields are marked with a red asterisk. Click *Continue* to advance to the next step, or *Back* to revisit an earlier one.
 
-== Configure agent details
+== Basics
 
-In the *Basic Information* section, configure identity fields and the resource tier that appear in the registry list, transcripts, and audit logs.
+On the *Basics* step, configure the identity fields that appear in the registry list, transcripts, and audit logs.
 
-. Enter an *Agent Name*. Required. Up to 128 characters. Shown in the registry list and detail header (for example, `Customer Support Agent`).
+. Enter a *Display name*. Required. Shown in the registry list and detail header (for example, `Customer Support Agent`).
+. Review the *Agent ID*. ADP auto-derives it from the display name, using lowercase letters, numbers, and hyphens (up to 63 characters). The ID is used in URLs and CLI commands and can't be changed after creation.
 . Optionally, add a *Description*. Up to 1024 characters.
-. Select a *Resources* tier. The tier sets CPU and memory limits for the agent runtime:
-+
-[cols="1,2", options="header"]
-|===
-|Tier |Resources
-
-|*XSmall*
-|100m CPU, 400M RAM. Default. Suitable for single-user testing and simple queries.
-
-|*Small*
-|200m CPU, 800M RAM. Light workloads with a few concurrent users.
-
-|*Medium*
-|300m CPU, 1200M RAM. Recommended starting point for most production workloads.
-
-|*Large*
-|400m CPU, 1600M RAM. High concurrency or memory-intensive tools.
-
-|*XLarge*
-|500m CPU, 2G RAM. Very high concurrency or large data processing.
-|===
-+
-Start with Medium for production workloads. Monitor CPU and memory usage, then adjust if you see resource constraints.
-
 . Optionally, add *Tags* as key/value pairs to organize and filter agents in the registry.
+. Click *Continue*.
 
-== Configure the LLM provider
+== Model
 
-In the *LLM Provider Configuration* section, select the glossterm:large language model (LLM)[] provider and model the agent uses to interpret user intent and decide which tools to invoke.
+On the *Model* step, select the glossterm:large language model (LLM)[] provider and model the agent uses to interpret user intent and decide which tools to invoke.
 
-. Select a *Provider*. Required. The dropdown lists every LLM provider configured on this cluster (for example, `support-bedrock-v2`). To add a new provider, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
-. Select a *Model*. Required. The model list is populated by the selected provider (for example, `us.anthropic.claude-haiku-4-5-20251001-v1:0`).
+. Select an *LLM provider*. Required. The dropdown lists every LLM provider configured in AI Gateway (for example, `support-bedrock-v2`). To add a new provider, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
+. Select a *Model*. Required. The list is populated by the selected provider (for example, `us.anthropic.claude-haiku-4-5-20251001-v1:0`). If the provider has no allowlist, you can type the model identifier directly.
 +
 For model selection guidance, see xref:connect:architecture-patterns.adoc#model-selection-guide[Model selection guide].
 
-. Set *Max Iterations*. Default is 30. The proto contract allows 0-200. Max iterations is the upper bound on agent reasoning loops per request. Each iteration consumes tokens and adds latency.
+. Optionally, expand *Advanced* and set *Max iterations*. Leave it at 0 to use the runtime default. Max iterations is the upper bound on agent reasoning loops per request; the proto contract allows 0-200. Each iteration consumes tokens and adds latency.
 +
-Choose based on task complexity:
+If you override the default, choose based on task complexity:
 +
 * Simple queries (10-20): Single tool call, direct answers, minimal reasoning.
 * Balanced workflows (20-40): Multiple tool calls, data aggregation, moderate analysis.
 * Complex analysis (40-100): Exploratory queries, extensive tool chaining, deep reasoning.
+
+. Click *Continue*.
 
 For external model specifications and pricing:
 
@@ -89,20 +68,14 @@ For external model specifications and pricing:
 * link:https://ai.google.dev/gemini-api/docs/models[Google Gemini models^]
 * link:https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html[AWS Bedrock models^]
 
-== Write the system prompt
+== Behavior
 
-In the *System Prompt* section, write the prompt that defines the agent's role, responsibilities, constraints, and output format. The system prompt is required.
-
-The editor offers three views:
-
-* *Editor*: Rich-text style editor for casual prompt drafting.
-* *Markdown*: Markdown-aware editor for structured prompts with headings and lists.
-* *Raw*: Plain-text editor for prompts you maintain elsewhere.
+On the *Behavior* step, write the *System prompt* that defines the agent's role, responsibilities, constraints, and output format. The system prompt is required and is sent on every invocation as the first message.
 
 A typical prompt defines:
 
 * Agent role and responsibilities
-* Available tools (matches the tools you select in *MCP Tools*)
+* Available tools (matches the servers you select on the *Tools* step)
 * Safety rules and constraints
 * Expected output format
 
@@ -129,51 +102,45 @@ Response format:
 
 For full guidance on writing effective prompts, see xref:connect:system-prompts.adoc[System prompt best practices].
 
-== Connect MCP tools
+When you're done, click *Continue*.
 
-In the *MCP Tools* section, select the glossterm:Model Context Protocol (MCP)[] servers that expose tools to the agent. This section is optional. You can change the list at any time after creation.
+== Tools
 
-. For each MCP server you want the agent to call, select the checkbox in the server row.
-. Each row shows the server's badges:
-+
-* *Managed*: An MCP server hosted in ADP.
-* *Remote*: A self-hosted MCP server registered with ADP.
-* *Tools discovered on first use*: The full tool list resolves when the agent first calls the server.
+On the *Tools* step, select the glossterm:Model Context Protocol (MCP)[] servers that expose tools to the agent. This step is optional, and you can change the list at any time after creation.
 
-. The agent calls tools based on the LLM's interpretation of the system prompt and the user request. Keep the system prompt aligned with the servers you select so the model knows what's available.
+. Under *MCP servers*, select each server you want the agent to call.
+. The agent discovers each server's tools at runtime; you don't pre-select individual tools. The agent calls them based on the LLM's interpretation of the system prompt and the user request. Keep the system prompt aligned with the servers you select so the model knows what's available.
+. Click *Continue*.
 
 TIP: Apply the principle of least privilege. Connect only the servers the agent needs.
 
 For registering MCP servers, see xref:connect:create-server.adoc[Create an MCP server].
 
-== Add subagents
+== Subagents
 
-The *Subagents (Optional)* section is for adding internal specialists within the same agent. Each subagent has its own name, description, system prompt, and MCP tools, but all subagents share the parent agent's provider, model, and execution settings.
+On the *Subagents* step, optionally add internal specialists within the same agent. Each subagent has its own name, description, system prompt, and MCP tools, but all subagents share the parent agent's provider, model, and execution settings.
 
-. Click *+ Add Subagent*.
-. Configure the subagent:
+. To add a specialist, click *Add subagent* and configure it:
 +
 * *Name*: Required. Up to 63 characters. Must start with a lowercase letter and contain only lowercase letters, digits, and hyphens (for example, `order-agent`). The name is also a DNS-1123 / AIP-122 compliant identifier.
 * *Description*: Optional. Up to 1024 characters.
-* *System Prompt*: Up to 16,384 characters. Domain-specific instructions for what the subagent does.
-* *MCP Tools*: Select the tools this subagent can access.
+* *System prompt*: Up to 16,384 characters. Domain-specific instructions for what the subagent does.
+* *MCP tools*: Select the tools this subagent can access.
+
+. To keep the agent flat, leave the list empty.
+. Click *Continue*.
 
 The root agent orchestrates and delegates work to the appropriate subagent based on the request.
 
 For multi-agent design patterns, see xref:connect:architecture-patterns.adoc[Agent architecture patterns].
 
-== Configure the service account
+== Review and create
 
-In the *Service Account* section, set the name for the service account that authenticates the agent to other systems in Redpanda (for example, MCP servers and the Redpanda broker).
-
-. Review the auto-generated *Service Account Name*. The default uses the pattern `cluster-<cluster-id>-agent-<agent-name>-sa`.
-. Optionally, override the name. Up to 128 characters. The name cannot contain `<` or `>`.
-. The service account is created automatically when you create the agent. ADP applies default permissions; for details and how to manage service accounts, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
-
-== Create the agent
-
-. Click *Create Agent* at the bottom of the form.
+. On the *Review* step, check the summary of your *Basics*, *Model*, *Behavior*, *Tools*, and *Subagents* selections. To change anything, click *Edit* on the relevant card to jump back to that step.
+. Click *Create agent*.
 . Wait for the agent to reach the *Running* state.
+
+ADP creates the agent's service account automatically when you create the agent. The default name uses the pattern `cluster-<cluster-id>-agent-<agent-name>-sa`, and ADP applies default permissions. For details and how to manage service accounts, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
 
 When the agent is running, ADP shows its HTTP endpoint URL on the *Configuration* tab. Copy the value from the endpoint field.
 
@@ -277,7 +244,6 @@ For detailed observability strategies, see xref:monitor:monitor-agents.adoc[].
 
 === Simple query agent
 
-* *Resources*: XSmall (100m CPU, 400M RAM)
 * *Model*: GPT-5 Mini (fast, cost-effective)
 * *Tools*: Single MCP server exposing a `get_orders` tool
 * *Max iterations*: 10
@@ -285,7 +251,6 @@ For detailed observability strategies, see xref:monitor:monitor-agents.adoc[].
 
 === Complex analytics agent
 
-* *Resources*: Medium (300m CPU, 1200M RAM)
 * *Model*: Claude Sonnet 4.5 (balanced)
 * *Tools*: Multiple servers for data query, aggregation, and formatting
 * *Max iterations*: 30
@@ -293,7 +258,6 @@ For detailed observability strategies, see xref:monitor:monitor-agents.adoc[].
 
 === Multi-agent orchestrator
 
-* *Resources*: Large (400m CPU, 1600M RAM)
 * *Model*: Claude Opus 4.5 (advanced reasoning)
 * *Tools*: Tools the root agent delegates to subagents
 * *Subagents*: `order-agent`, `inventory-agent`, `customer-agent`
