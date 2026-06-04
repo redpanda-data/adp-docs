@@ -17,7 +17,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* Access to ADP.
+* Access to Redpanda ADP.
 * An API key (or AWS credentials for Bedrock) for the upstream provider you want to configure.
 * One or more secrets already created in your dataplane's secret store for the provider's credentials. Secret references must use `UPPER_SNAKE_CASE`. For example: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `AWS_ACCESS_KEY_ID`.
 +
@@ -413,7 +413,7 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 
 * *Multi-provider routing, failover, and retries across providers.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
 * *Rate limits.* Requests-per-second, per-minute, or per-day limits are not available. To cap spend rather than request rate, use xref:control:budgets.adoc[budgets], which enforce a per-agent hard cap.
-* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in the Agentic Data Plane UI.
+* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in ADP.
 
 == Next steps
 

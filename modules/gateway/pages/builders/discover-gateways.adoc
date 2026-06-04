@@ -16,7 +16,7 @@ After reading this page, you will be able to:
 
 == Before you begin
 
-* You have an ADP account with access to at least one AI Gateway
+* You have a Redpanda ADP account with access to at least one AI Gateway
 * You have access to ADP or API credentials
 
 == List your accessible gateways

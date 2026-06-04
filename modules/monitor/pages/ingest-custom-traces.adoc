@@ -117,7 +117,7 @@ The `otlp_http` input component:
 * Accepts traces at the standard `/v1/traces` endpoint
 * Converts incoming OTLP data into individual Redpanda OTEL v1 Protobuf messages
 
-The following example shows a minimal pipeline configuration. ADP automatically injects authentication handling, so you don't need to configure `auth_token` in the input.
+The following example shows a minimal pipeline configuration. Redpanda ADP automatically injects authentication handling, so you don't need to configure `auth_token` in the input.
 
 [,yaml]
 ----
@@ -569,7 +569,7 @@ Look for spans with your custom `instrumentationScope.name` to identify traces f
 
 === View traces in Transcripts 
 
-After your custom agent sends traces through the pipeline, they appear in the *Transcripts* view of the Agentic Data Plane UI alongside traces from Remote MCP servers, declarative agents, and AI Gateway.
+After your custom agent sends traces through the pipeline, they appear in the *Transcripts* view in ADP alongside traces from Remote MCP servers, declarative agents, and AI Gateway.
 
 ==== Identify custom agent transcripts
 

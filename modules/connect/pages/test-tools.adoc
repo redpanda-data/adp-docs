@@ -6,7 +6,7 @@
 :learning-objective-2: Inspect resources, prompts, and call history
 :learning-objective-3: Diagnose common errors (auth missing, scope upgrade required, transport mismatch) before pointing an agent at the server
 
-Test your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] using the Inspector: a built-in MCP client in the Agentic Data Plane UI. It runs on the same JSON-RPC connection that agents use, so a tool that works in the Inspector also works for an agent. Use this after creating your server (xref:connect:create-server.adoc[Create an MCP Server]) or whenever you change a tool's schema.
+Test your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] using the Inspector: a built-in MCP client in Redpanda ADP. It runs on the same JSON-RPC connection that agents use, so a tool that works in the Inspector also works for an agent. Use this after creating your server (xref:connect:create-server.adoc[Create an MCP Server]) or whenever you change a tool's schema.
 
 After completing this guide, you will be able to:
 

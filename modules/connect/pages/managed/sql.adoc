@@ -34,7 +34,7 @@ It exposes a small set of tools for querying schemas and running parameterized q
 +
 // TODO: confirm network reachability requirements (egress / VPC peering / public endpoint) for the standalone ADP product surface.
 * A connection string or the connection components (host, port, database, user).
-* A secret in the ADP secret store containing the database password (`UPPER_SNAKE_CASE`, for example `SQL_PASSWORD`).
+* A secret in the Redpanda ADP secret store containing the database password (`UPPER_SNAKE_CASE`, for example `SQL_PASSWORD`).
 
 == Configure
 

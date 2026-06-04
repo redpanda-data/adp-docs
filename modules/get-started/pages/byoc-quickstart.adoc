@@ -1,4 +1,4 @@
-= ADP Quickstart
+= Redpanda ADP Quickstart
 :page-aliases: quickstart.adoc, cloud-data-platform:ai-agents:agents/quickstart.adoc
 :description: Set up Redpanda ADP for your organization. Get an Anthropic API key, configure your first LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build a working agent that calls both.
 :page-topic-type: quickstart
@@ -164,9 +164,9 @@ For the full OpenAPI MCP reference (auth modes, operation filters, base URL over
 
 Combine the Anthropic provider and the PetStore MCP server into an agent.
 
-. Open *AI Agents* in the sidebar.
+. Open *Agents* in the sidebar.
 
-. Click *Create AI Agent*.
+. Click *Create Agent*.
 
 . In the *Basic Information* card:
 +

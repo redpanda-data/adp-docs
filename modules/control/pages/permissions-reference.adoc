@@ -8,7 +8,7 @@
 
 // Source: `cloudv2` `pkg/permissions/permissions_constants.go` on origin/main, verified 2026-05-18.
 
-Every ADP API call enforces a single permission. This reference lists every ADP-namespaced permission, the operation it gates, and which built-in role grants it.
+Every Redpanda ADP API call enforces a single permission. This reference lists every ADP-namespaced permission, the operation it gates, and which built-in role grants it.
 
 Use this reference to:
 

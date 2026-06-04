@@ -60,7 +60,7 @@ Before you create the server, make sure you have:
 
 * Access to a Microsoft SharePoint tenant.
 * Permission to register an app in the https://entra.microsoft.com[Microsoft Entra admin center^] (or an Entra admin who can register one for you).
-* A way to write the OAuth client secret into the ADP secret store.
+* A way to write the OAuth client secret into the Redpanda ADP secret store.
 * For most tenants, a tenant admin who can grant admin consent for the Microsoft Graph scopes. See <<grant-admin-consent,Grant admin consent>>.
 * Familiarity with xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
@@ -135,7 +135,7 @@ Register an OAuth Provider in ADP that points at Microsoft's tenant-specific end
 
 == Create the server
 
-Create a new SharePoint MCP server in the Agentic Data Plane UI:
+Create a new SharePoint MCP server in ADP:
 
 . Open *MCP Servers > Create Server*.
 . Pick *SharePoint* from the marketplace picker.

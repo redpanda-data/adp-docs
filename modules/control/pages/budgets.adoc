@@ -19,7 +19,7 @@ After completing these steps, you will be able to:
 
 A *budget* caps LLM spend over a recurring period. When an agent's spend for the period reaches the budget's hard limit, AI Gateway rejects that agent's next LLM request with `HTTP 429` until the period resets. A separate warning threshold fires before the cap is reached, so you can react before an agent is cut off.
 
-ADP enforces budgets per agent. In a budget, an _agent_ is its service-account email: the same identity that appears as `agent_id` in spend data.
+Redpanda ADP enforces budgets per agent. In a budget, an _agent_ is its service-account email: the same identity that appears as `agent_id` in spend data.
 
 === How a budget works
 

@@ -2,7 +2,7 @@
 :description: Create an MCP server in the Agentic Data Plane by picking a managed type from the marketplace or registering a self-managed server you host yourself, then configure authentication, code mode, and access.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Create a managed or self-managed MCP server in the Agentic Data Plane UI
+:learning-objective-1: Create a managed or self-managed MCP server in ADP
 :learning-objective-2: Configure each authentication mode and pick the right one for your use case
 :learning-objective-3: Save the server, verify the API URL, and confirm tools were discovered
 
@@ -19,14 +19,14 @@ After completing this guide, you will be able to:
 * Access to the Agentic Data Plane.
 +
 // TODO: confirm sign-in URL and IAM/role requirements once the standalone Agentic Data Plane UI ships.
-* For any auth mode that uses upstream credentials: the credentials in hand and a secret already created in the ADP secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
+* For any auth mode that uses upstream credentials: the credentials in hand and a secret already created in the Redpanda ADP secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
 +
 // TODO: xref the ADP secrets-management page once confirmed.
 * For user-delegated OAuth: an OAuth Provider resource already configured. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Open the MCP Servers page
 
-. Sign in to the Agentic Data Plane UI and open *MCP Servers*.
+. Sign in to ADP and open *MCP Servers*.
 +
 // TODO: screenshot of the MCP Servers list page on `adp-production`.
 . Click *Create Server*.

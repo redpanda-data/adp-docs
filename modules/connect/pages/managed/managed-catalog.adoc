@@ -3,7 +3,7 @@
 :page-topic-type: reference
 :personas: agent_builder, platform_engineer
 
-Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in the Agentic Data Plane UI and pick the type from the marketplace picker. See xref:connect:create-server.adoc[Create an MCP Server] for the full create flow.
+Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in Redpanda ADP and pick the type from the marketplace picker. See xref:connect:create-server.adoc[Create an MCP Server] for the full create flow.
 
 // Source: `cloudv2` `apps/aigw/internal/mcp/managed/defaults.go` and managed type registration files on `origin/main`, verified 2026-05-10.
 This catalog lists the 36 managed MCP server types Redpanda registers by default, grouped by category.

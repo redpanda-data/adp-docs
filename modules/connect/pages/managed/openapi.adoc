@@ -90,7 +90,7 @@ Once tools generate cleanly, point an agent at the *API URL* on the server's det
 |Symptom |What to check
 
 |"Failed to load spec"
-|Confirm the spec URL is reachable from ADP and serves valid JSON or YAML. CORS doesn't matter (Redpanda fetches server-side).
+|Confirm the spec URL is reachable from Redpanda ADP and serves valid JSON or YAML. CORS doesn't matter (Redpanda fetches server-side).
 
 |Tools list doesn't include an expected operation
 |The operation may be missing an `operationId`, or the operation include/exclude filters might be excluding it.

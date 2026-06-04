@@ -18,7 +18,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* An ADP environment with at least one LLM provider configured. See xref:gateway:configure-provider.adoc[Configure your LLM provider].
+* A Redpanda ADP environment with at least one LLM provider configured. See xref:gateway:configure-provider.adoc[Configure your LLM provider].
 * For a *Custom webhook* evaluator, a publicly reachable HTTPS endpoint that implements the gateway's webhook contract. See xref:control:guardrails/types-reference.adoc[Evaluator types reference].
 * For evaluators that need their own credentials (for example, a hosted PII service), the credential stored in the ADP secret store using `UPPER_SNAKE_CASE`.
 
@@ -28,7 +28,7 @@ After reading this page, you will be able to:
 
 // TODO: finalize this section once the Agentic Data Plane UI ships a Guardrails surface. As of 2026-04-28, `apps/adp-ui/src/routes/` has no `guardrails/` route. The walkthrough may need to lead with `aigwctl` instead of the UI and add the UI flow in a later refresh. Open Qs C4 and C5 in the companion plan.
 
-In the Agentic Data Plane UI, open *Governance* → *Guardrails* → *Create guardrail*.
+In ADP, open *Guardrails*, then click *Create guardrail*.
 
 == Pick an evaluator type
 

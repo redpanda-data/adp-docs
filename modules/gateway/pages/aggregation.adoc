@@ -757,7 +757,7 @@ Possible causes:
 
 Solution:
 
-1. Verify MCP server is active in ADP
+1. Verify MCP server is active in Redpanda ADP
 2. Verify tool is in enabled_tools list
 3. If deferred loading: Agent must call `search_tools` first
 
