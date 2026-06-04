@@ -16,7 +16,6 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* Access to a Redpanda ADP environment with AI Gateway
 * Administrator access to the AI Gateway UI
 * API keys for at least one LLM provider (Anthropic, OpenAI, or others)
 * Understanding of xref:ai-gateway/gateway-architecture.adoc[AI Gateway concepts]
