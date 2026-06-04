@@ -37,24 +37,14 @@ Expected output: List of enabled models
 
 Run both direct and gateway-routed requests simultaneously to validate behavior before full cutover.
 
-[source,text]
-----
-┌─────────────────┐
-│  Application    │
-└────────┬────────┘
-         │
-    ┌────▼─────┐
-    │ Feature  │
-    │  Flag    │
-    └────┬─────┘
-         │
-    ┌────▼──────────────┐
-    │                   │
-┌───▼─────┐      ┌─────▼─────┐
-│ Direct  │      │  Gateway  │
-│Provider │      │  Route    │
-└─────────┘      └───────────┘
-----
+.Parallel operation routing
+[mermaid,width=100%]
+....
+flowchart TB
+    App["Application"] --> Flag["Feature flag"]
+    Flag --> Direct["Direct provider"]
+    Flag --> Gateway["Gateway route"]
+....
 
 
 Benefits:

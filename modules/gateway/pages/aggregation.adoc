@@ -49,47 +49,25 @@ Model Context Protocol (MCP) is a standard for exposing tools (functions) that A
 
 == Architecture
 
-[source,text]
-----
-┌─────────────────┐
-│   AI Agent      │
-│  (Claude, GPT)  │
-└────────┬────────┘
-         │
-         │ 1. Discover tools with /mcp endpoint
-         │ 2. Invoke specific tool
-         │
-┌────────▼────────────────────────────────┐
-│      AI Gateway (MCP Aggregator)        │
-│                                         │
-│  ┌─────────────────────────────────┐   │
-│  │  Deferred tool loading          │   │
-│  │  (Send search + orchestrator    │   │
-│  │   initially, defer others)      │   │
-│  └─────────────────────────────────┘   │
-│                                         │
-│  ┌─────────────────────────────────┐   │
-│  │  Orchestrator (JavaScript)      │   │
-│  │  (Reduce round trips for        │   │
-│  │   multi-step workflows)         │   │
-│  └─────────────────────────────────┘   │
-│                                         │
-│  ┌─────────────────────────────────┐   │
-│  │  Approved MCP Server Registry   │   │
-│  │  (Admin-controlled)             │   │
-│  └─────────────────────────────────┘   │
-└────────┬────────────────────────────────┘
-         │
-         │ Routes to appropriate MCP server
-         │
-    ┌────▼─────┬──────────┬─────────┐
-    │          │          │         │
-┌───▼────┐ ┌──▼─────┐ ┌──▼──────┐ ┌▼──────┐
-│ MCP    │ │ MCP    │ │  MCP    │ │ MCP   │
-│Database│ │Filesystem│ │ Slack  │ │Search │
-│Server  │ │ Server │ │ Server  │ │Server │
-└────────┘ └────────┘ └─────────┘ └───────┘
-----
+.MCP aggregation architecture
+[mermaid,width=100%]
+....
+flowchart TB
+    Agent["AI Agent<br/>(Claude, GPT)"]
+    Agent -->|"1. Discover tools via /mcp endpoint<br/>2. Invoke specific tool"| Gateway
+
+    subgraph Gateway["AI Gateway (MCP Aggregator)"]
+        direction TB
+        Deferred["Deferred tool loading<br/>(search + orchestrator sent initially, others deferred)"]
+        Orchestrator["Orchestrator in JavaScript<br/>(reduces round trips for multi-step workflows)"]
+        Registry["Approved MCP server registry<br/>(admin-controlled)"]
+    end
+
+    Gateway -->|"Routes to appropriate MCP server"| DB["MCP Database server"]
+    Gateway --> FS["MCP Filesystem server"]
+    Gateway --> Slack["MCP Slack server"]
+    Gateway --> Search["MCP Search server"]
+....
 
 
 == MCP request lifecycle
