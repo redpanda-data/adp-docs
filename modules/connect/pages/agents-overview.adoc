@@ -56,7 +56,6 @@ Process every event with AI reasoning at scale. Invoke agents automatically from
 
 == Limitations
 
-* Agents run only in Redpanda ADP
 * MCP servers must be hosted in ADP
 * Cross-agent calling between separate agents is not supported. Use internal subagents for delegation within a single agent.
 
