@@ -10,7 +10,7 @@
 // Source: drafted against `adp-production` UI flows for LLM providers, MCP servers, and Agents; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider, MCP, and agent protos on cloudv2 origin/main.
 // Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 
-Set up Redpanda ADP for your organization. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
+This quickstart shows how to set up Redpanda ADP for your organization. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
 
 After completing this quickstart, you will be able to:
 
