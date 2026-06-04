@@ -421,7 +421,7 @@ const openai = new OpenAI({
 
 == Next steps
 
-* xref:get-started:byoc-quickstart.adoc[ADP Quickstart]
+* xref:get-started:adp-quickstart.adoc[ADP Quickstart]
 * xref:gateway:aggregation.adoc[]
 * xref:gateway:gateway-architecture.adoc[]
 * xref:gateway:overview.adoc[]

@@ -155,6 +155,6 @@ include::connect:partial$service-account-authorization.adoc[]
 == Next steps
 
 * xref:connect:architecture-patterns.adoc[]
-* xref:get-started:byoc-quickstart.adoc[]
+* xref:get-started:adp-quickstart.adoc[]
 * xref:connect:system-prompts.adoc[]
 * xref:connect:mcp-overview.adoc[]

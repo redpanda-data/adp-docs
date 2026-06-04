@@ -36,7 +36,7 @@ The challenge: users phrase requests differently ("Where's my package?", "Track 
 
 == Prerequisites
 
-* A xref:cloud-data-platform:get-started:cluster-types/byoc/index.adoc[BYOC environment].
+* Access to a Redpanda ADP environment. Redpanda provisions it for you when you purchase ADP.
 * xref:get-started:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
 
 == Design the MCP tools
@@ -115,18 +115,10 @@ Create the customer support agent with the system prompt.
 
 . Go to *Agents*.
 . Click *Create Agent*.
-. Configure the agent:
-+
-* *Name*: `customer-support-agent`
-* *Description*: `Helps customers track orders and shipping`
-* *Resource Tier*: Medium
-* *AI Gateway*: Select the gateway you configured
-* *Provider*: OpenAI or Anthropic
-* *Model*: OpenAI GPT-5.2 or Claude Sonnet 4.5 (models with strong reasoning)
-* *MCP Server*: Select `customer-support-tools`
-* *Max Iterations*: 15
-
-. In the *System Prompt* field, enter this configuration:
+. Choose the managed option, *Redpanda manages it*, then click *Continue*.
+. On the *Basics* step, enter a *Display name* of `customer-support-agent` and a *Description* of `Helps customers track orders and shipping`. Click *Continue*.
+. On the *Model* step, select your *LLM provider* and a *Model* with strong reasoning (such as GPT-5.2 or Claude Sonnet 4.5). Expand *Advanced* and set *Max iterations* to 15. Click *Continue*.
+. On the *Behavior* step, enter this system prompt:
 +
 [source,text]
 ----
@@ -174,7 +166,9 @@ Example response structure:
 4. Ask if they need anything else
 ----
 
-. Click *Create Agent*.
+. On the *Tools* step, select `customer-support-tools` under *MCP servers*, then click *Continue*.
+. On the *Subagents* step, leave the list empty and click *Continue*.
+. On the *Review* step, click *Create agent*.
 
 Wait for the agent status to show *Running*.
 
