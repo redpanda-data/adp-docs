@@ -295,7 +295,7 @@ ifdef::env-adp-governance[]
 
 The glossterm:governance dashboard[] rolls up every LLM call and tool invocation across your ADP deployment.
 
-. Open *Governance* > *Dashboard* in the sidebar.
+. Open the dashboard in Redpanda ADP.
 
 . In the *Last 24 hours* view, check three KPIs:
 +
