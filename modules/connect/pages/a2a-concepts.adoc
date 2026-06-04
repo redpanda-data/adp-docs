@@ -44,6 +44,8 @@ For example, if your agent URL is `\https://my-agent.ai-agents.abc123.cloud.redp
 
 The `.well-known` path follows internet standards for service discovery, making agents discoverable without configuration.
 
+The agent card is served without authentication. The A2A protocol requires the discovery card to be publicly reachable, because a caller fetches it to learn how to authenticate with the agent. Invoking the agent still requires authentication. For details, see the xref:connect:a2a-concepts.adoc#authentication[Authentication] section.
+
 To configure the agent card, see xref:connect:create-agent.adoc#configure-a2a-discovery-metadata-optional[Configure A2A discovery metadata].
 
 == Where A2A is used in ADP
@@ -81,9 +83,12 @@ This discovery model allows:
 * Existing agents to update their capabilities while callers adapt dynamically
 * Callers to understand exactly what agents do through self-describing agent cards
 
+[#authentication]
 == Authentication
 
 A2A-compliant agents require authentication to prevent unauthorized access.
+
+The agent card is the exception. ADP serves the card at the `/.well-known/agent-card.json` subpath without authentication, so that callers can discover how to authenticate before they hold a token. Every other request to the agent, including agent invocation, requires a valid access token.
 
 ADP agents use OAuth2 client credentials flow. When you create an agent, the system provisions a service account with a client ID and secret.
 
