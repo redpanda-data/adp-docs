@@ -18,7 +18,7 @@ After completing this guide, you will be able to:
 
 * Blocked input: ADP stops the request before it reaches the model and returns your configured blocked input message.
 * Blocked output: ADP returns your configured blocked output message instead of the model's response.
-* Anonymized PII: when the sensitive-information policy is set to anonymize, the request continues with each match replaced in place by its entity type, such as `{EMAIL}`.
+* Anonymized PII: When the sensitive-information policy is set to anonymize, the request continues with each match replaced in place by its entity type, such as `{EMAIL}`.
 
 Automated reasoning never blocks. It records findings on the trace for your application to act on.
 
@@ -32,19 +32,19 @@ For streaming responses, ADP skips output evaluation and marks the skip on the t
 
 If a guardrail blocks legitimate traffic:
 
-* Content filters: lower the strength for the affected category, or set its action to detect while you tune.
-* Sensitive information: narrow the entity types or regex patterns to the data you actually care about. Structured payloads such as code or JSON can contain strings that resemble PII.
-* Denied topics: tighten each topic's definition and examples so the semantic match is more specific.
-* Contextual grounding: lower the threshold so only clearly ungrounded or irrelevant responses are caught.
+* Content filters: Lower the strength for the affected category, or set its action to detect while you tune.
+* Sensitive information: Narrow the entity types or regex patterns to the data you actually care about. Structured payloads such as code or JSON can contain strings that resemble PII.
+* Denied topics: Tighten each topic's definition and examples so the semantic match is more specific.
+* Contextual grounding: Lower the threshold so only clearly ungrounded or irrelevant responses are caught.
 
-To stage a change without enforcing it, turn off a policy's Evaluate this policy toggle, or set the policy's action to detect, and review the results on the trace before you block.
+To stage a change without enforcing it, turn off a policy's *Evaluate this policy* toggle, or set the policy's action to detect, and review the results on the trace before you block.
 
 == A guardrail doesn't fire
 
 If you expect a guardrail to act and it doesn't:
 
 * Confirm the guardrail is enabled. A disabled guardrail keeps its configuration but skips evaluation.
-* Confirm the specific policy's Evaluate this policy toggle is on. A saved-but-not-evaluated policy takes no action.
+* Confirm the specific policy's *Evaluate this policy* toggle is on. A saved-but-not-evaluated policy takes no action.
 * Confirm the provider the request used references this guardrail. A guardrail acts only on providers that reference it.
 * Confirm the direction. An output-only policy such as contextual grounding never acts on input, and output policies are skipped for streaming responses.
 * Confirm the request actually went through the provider. Direct-to-provider requests that bypass ADP are not evaluated.
