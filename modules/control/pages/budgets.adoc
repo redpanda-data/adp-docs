@@ -6,7 +6,7 @@
 :learning-objective-2: Identify what spending data the Agentic Data Plane records automatically
 :learning-objective-3: Locate where to view spend in the dashboard, in transcripts, and through breakdown queries
 
-The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the governance dashboard, through individual transcripts, and through breakdown queries by provider, model, user, or provider type.
+The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the governance dashboard, through individual transcripts, and through breakdown queries by provider, model, user, agent, or provider type.
 
 After completing these steps, you will be able to:
 
