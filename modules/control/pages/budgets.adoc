@@ -269,9 +269,9 @@ The proto-generated client (Connect-Go or grpc-python) is the long-term recommen
 
 == Guardrail cost
 
-Guardrails are evaluated by AWS Bedrock, which bills guardrail usage to the AWS account whose credentials the guardrail's backend uses. This cost is separate from ADP's LLM spend tracking: it does not appear in the spend view or `SpendingService`, which account only for LLM provider token usage through the gateway.
+AWS Bedrock evaluates guardrails and bills guardrail usage to the AWS account whose credentials the guardrail's backend uses. This cost is separate from ADP's LLM spend tracking: it does not appear in the spend view or `SpendingService`, which account only for LLM provider token usage through the gateway.
 
-Bedrock charges for guardrail evaluation whether or not a request is blocked. Blocking an input avoids the downstream model-inference charge; blocking an output still incurs inference up to the point of generation. Deterministic checks such as word filters and custom regex patterns are not billed, while model-based policies such as content filters, denied topics, and contextual grounding are, so turn off the directions and policies you don't need. For current rates, see the https://aws.amazon.com/bedrock/pricing/[AWS Bedrock pricing^].
+Bedrock charges for guardrail evaluation whether or not it blocks a request. Blocking an input avoids the downstream model-inference charge; blocking an output still incurs inference up to the point of generation. Bedrock doesn't charge for deterministic checks such as word filters and custom regex patterns, but it does charge for model-based policies such as content filters, denied topics, and contextual grounding, so turn off the directions and policies you don't need. For current rates, see the https://aws.amazon.com/bedrock/pricing/[AWS Bedrock pricing^].
 
 For what each policy does, see xref:control:guardrails/overview.adoc[How guardrails work] and xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
 

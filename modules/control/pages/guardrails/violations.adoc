@@ -6,9 +6,9 @@
 :learning-objective-2: Find guardrail activity in a request's transcript
 :learning-objective-3: Diagnose a guardrail that blocks too much or doesn't fire
 
-When a guardrail acts on a request, the caller sees a blocked message and the action is recorded on the request's trace. This release does not include a dedicated violations dashboard, so you review blocked requests through transcripts.
+When a guardrail acts on a request, the caller sees a blocked message and ADP records the action on the request's trace. This release does not include a dedicated violations dashboard, so you review blocked requests through glossterm:transcript[,transcripts].
 
-After reading this page, you will be able to:
+After completing this guide, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
@@ -24,9 +24,9 @@ Automated reasoning never blocks. It records findings on the trace for your appl
 
 == Where guardrail activity is recorded
 
-Guardrail activity is recorded as attributes on the request's OpenTelemetry trace, which you read in the request's transcript alongside the LLM call, tool calls, and cost data. See xref:monitor:transcripts.adoc[See what your agent did].
+ADP records guardrail activity as attributes on the request's OpenTelemetry trace, which you read in the request's transcript alongside the LLM call, tool calls, and cost data. See xref:monitor:transcripts.adoc[See what your agent did].
 
-For streaming responses, output evaluation is skipped, and the trace marks the skipped output evaluation. Input evaluation still applies to streaming requests.
+For streaming responses, ADP skips output evaluation and marks the skip on the trace. Input evaluation still applies to streaming requests.
 
 == A guardrail blocks too much
 

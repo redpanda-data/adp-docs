@@ -1,14 +1,14 @@
 = How Guardrails Work
-:description: Learn how ADP guardrails use AWS Bedrock policies to inspect and control LLM requests and responses, the six policy types you can turn on, and how a blocked request surfaces.
+:description: Learn how ADP guardrails use AWS Bedrock policies to inspect and control LLM requests and responses, and how a blocked request surfaces.
 :page-topic-type: overview
 :personas: security_compliance_lead, platform_engineer, agent_builder
 :learning-objective-1: Describe what a guardrail does and how you attach one to an LLM provider
-:learning-objective-2: Identify the six policy types and the situations each fits
+:learning-objective-2: Identify the available policy types and the situations each fits
 :learning-objective-3: Recognize how a blocked request surfaces and which page to read next
 
 A guardrail is a set of safety and policy filters that inspect and control how agents and gateways use models. A guardrail can block prompt injection, deny off-topic content, redact or block personally identifiable information (PII), and check responses for factual grounding. You attach a guardrail to an LLM provider, and ADP applies it to every request and response that flows through that provider.
 
-Guardrails are backed by AWS Bedrock Guardrails. Each guardrail reconciles against the Bedrock control plane, so it needs an AWS region and Bedrock credentials, even when it protects a non-Bedrock provider such as OpenAI, Anthropic, or Google. For those providers, ADP runs the guardrail by calling Bedrock's evaluation API around each request.
+ADP guardrails run on AWS Bedrock Guardrails. Each guardrail reconciles against the Bedrock control plane, so it needs an AWS region and Bedrock credentials, even when it protects a non-Bedrock provider such as OpenAI, Anthropic, or Google. For those providers, ADP runs the guardrail by calling Bedrock's evaluation API around each request.
 
 After reading this page, you will be able to:
 
@@ -16,9 +16,9 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-== The six policy types
+== Policy types
 
-A guardrail bundles up to six policies. Every policy is optional, so you turn on only the ones you need.
+A guardrail bundles a set of optional policies. Turn on only the ones you need.
 
 [cols="1,3"]
 |===
@@ -54,7 +54,7 @@ A guardrail evaluates both sides of an LLM call:
 
 Some policies are direction-specific. Content-filter prompt-attack detection runs on input only, contextual grounding runs on output only, and automated reasoning runs on output and only reports findings.
 
-For streaming responses, output evaluation is skipped in this release. Input evaluation still applies.
+For streaming responses, ADP skips output evaluation in this release. Input evaluation still applies.
 
 == Where you attach a guardrail
 
@@ -64,7 +64,7 @@ You attach a guardrail by setting an LLM provider's guardrail. Each provider ref
 
 When a policy blocks an input, ADP stops the request and returns your configured blocked input message to the caller. When a policy blocks an output, ADP returns your configured blocked output message instead of the model's response. The sensitive-information policy can also anonymize matched PII in place rather than block, replacing each match with its entity type, such as `{EMAIL}`.
 
-Guardrail activity is recorded as attributes on the request's OpenTelemetry trace, which you read in transcripts. This release does not include a separate violations dashboard. See xref:control:guardrails/violations.adoc[Review blocked requests] for how a blocked request surfaces.
+ADP records guardrail activity as attributes on the request's OpenTelemetry trace, which you read in glossterm:transcript[,transcripts]. This release does not include a separate violations dashboard. See xref:control:guardrails/violations.adoc[Review blocked requests] for how a blocked request surfaces.
 
 == Next steps
 

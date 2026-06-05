@@ -20,7 +20,7 @@ After completing this guide, you will be able to:
 * At least one LLM provider to attach the guardrail to. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
 * For the sensitive-information, content-filter, contextual-grounding, and automated-reasoning policies, confirm the features you need are available in your chosen Bedrock region.
 
-== Step 1: Add the details
+== Add the details
 
 . In ADP, open *Guardrails*, then click *Create guardrail*.
 . On the Details step, set the following:
@@ -49,7 +49,7 @@ After completing this guide, you will be able to:
 |===
 . Click *Next*.
 
-== Step 2: Configure the backend
+== Configure the backend
 
 The backend is the AWS region and credentials the guardrail uses to reach Bedrock.
 
@@ -65,9 +65,9 @@ The backend is the AWS region and credentials the guardrail uses to reach Bedroc
 * Assume IAM role: supply a role ARN, with an optional external ID and session name.
 . Click *Next*.
 
-== Step 3: Turn on policies
+== Turn on policies
 
-All six policies are optional. Turn on only the ones you need, then configure each. For the full configuration of every policy, see xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
+All policies are optional. Turn on only the ones you need, then configure each. For the full configuration of every policy, see xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
 
 * Content filters: harmful-content categories (hate, insults, sexual, violence, misconduct, and prompt attacks).
 * Word filters: exact words and phrases from your own lists and platform-managed lists such as profanity.
@@ -90,9 +90,9 @@ Once the policies are configured and the guardrail is attached, set the guardrai
 
 == Verify the guardrail blocks
 
-Send a request through an attached provider that should trip a policy. For example, with the sensitive-information policy set to block on input, send a prompt that contains an email address or other PII.
+Send a request through an attached provider that trips a policy. For example, with the sensitive-information policy set to block on input, send a prompt that contains an email address or other PII.
 
-The request returns your blocked input message instead of a model response. Open the request's transcript and confirm the guardrail recorded its action. See xref:monitor:transcripts.adoc[See what your agent did] for the transcript walkthrough and xref:control:guardrails/violations.adoc[Review blocked requests] for how blocked requests surface.
+The request returns your blocked input message instead of a model response. Open the request's glossterm:transcript[] and confirm the guardrail recorded its action. See xref:monitor:transcripts.adoc[See what your agent did] for the transcript walkthrough and xref:control:guardrails/violations.adoc[Review blocked requests] for how blocked requests surface.
 
 == Edit, disable, or delete a guardrail
 

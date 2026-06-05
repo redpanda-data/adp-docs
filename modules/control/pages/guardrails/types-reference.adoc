@@ -1,9 +1,9 @@
 = Guardrail Policy Reference
-:description: Reference for the six guardrail policy types, their configuration fields, actions, directions, and limits.
+:description: Reference for the guardrail policy types, their configuration fields, actions, directions, and limits.
 :page-topic-type: reference
 :personas: security_compliance_lead, platform_engineer
 
-A guardrail bundles up to six policies, each backed by AWS Bedrock Guardrails. Every policy is optional. This page documents each policy's configuration, the actions it can take, and which direction (input, output, or both) it evaluates.
+A guardrail bundles a set of policies, each backed by AWS Bedrock Guardrails. Every policy is optional. This page documents each policy's configuration, the actions it can take, and which direction (input, output, or both) it evaluates.
 
 Two settings recur across policies:
 
@@ -66,7 +66,7 @@ Block content by meaning rather than exact words, so the policy catches paraphra
 |What the topic covers, up to 1000 characters. The definition drives the semantic match, so be specific.
 
 |Examples
-|Up to five example phrases, each up to 100 characters, that should match the topic.
+|Up to five example phrases, each up to 100 characters, that match the topic.
 
 |Action
 |Per direction (input and output): `None` (detect) or `Block`.
@@ -94,7 +94,7 @@ The built-in entity types are: `ADDRESS`, `AGE`, `NAME`, `EMAIL`, `PHONE`, `USER
 
 == Contextual grounding
 
-For RAG-style applications, check model output against a source and the user's query. This policy evaluates output only and has two independent sub-filters.
+For retrieval-augmented generation (RAG) applications, check model output against a source and the user's query. This policy evaluates output only and has two independent sub-filters.
 
 [cols="1,3"]
 |===
@@ -118,7 +118,7 @@ Mathematically verify model output against formal Bedrock Automated Reasoning po
 |Field |Description
 
 |Policy ARNs
-|One or two Bedrock Automated Reasoning policy ARNs to attach. Each ARN must point at a specific numeric version (for example, ending in `:1` or `:2`); the `DRAFT` version is rejected. Create and publish the policies in the AWS Bedrock console first, then reference their versioned ARNs here.
+|One or two Bedrock Automated Reasoning policy Amazon Resource Names (ARNs) to attach. Each ARN must point at a specific numeric version (for example, ending in `:1` or `:2`); the `DRAFT` version is rejected. Create and publish the policies in the AWS Bedrock console first, then reference their versioned ARNs here.
 
 |Confidence threshold
 |A value between `0.0` and `1.0`. Below this confidence, a finding is reported as non-definitive.
