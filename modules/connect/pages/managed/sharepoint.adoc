@@ -201,9 +201,8 @@ The SharePoint server uses per-user OAuth, so the first call from a user who has
 |`upload_file` requires the `Sites.ReadWrite.All` scope. A read-only server configured with `Sites.Read.All` cannot upload.
 |===
 
-== Related topics
+== Next steps
 
 * xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
 * xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
 * xref:connect:create-server.adoc[Create an MCP Server]
-* xref:connect:test-tools.adoc[Test a server's tools]

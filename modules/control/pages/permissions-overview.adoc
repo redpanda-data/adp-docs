@@ -43,7 +43,7 @@ Two more families belong to Redpanda Connect resources that ADP uses:
 * `dataplane_pipeline_*`: Manage and invoke Redpanda Connect pipelines.
 * `dataplane_knowledgebase_*`: Manage retrieval-augmented generation knowledge bases.
 
-For the full list of permissions and which built-in role grants each one, see xref:control:permissions-reference.adoc[ADP Permissions Reference].
+For the full list of permissions and which built-in role grants each one, see xref:control:permissions-reference.adoc[Roles and Permissions Reference].
 
 == Built-in roles
 
@@ -90,6 +90,6 @@ Account impersonation, which lets Redpanda Console reuse a user's identity for K
 
 ADP permissions are part of the same Cloud RBAC system that gates control-plane resources such as resource groups, networks, and clusters. The Admin, Writer, and Reader built-in roles each cover control-plane permissions, dataplane Kafka permissions, and ADP dataplane permissions in a single bundle, so a single role binding on the Writer role at the organization scope grants a developer access to every layer.
 
-== Related topics
+== Next steps
 
-* xref:control:permissions-reference.adoc[ADP Permissions Reference]
+* xref:control:permissions-reference.adoc[Roles and Permissions Reference]

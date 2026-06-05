@@ -365,11 +365,8 @@ You could next create an agent using this GitHub MCP server. Each user who calls
 |You need the `dataplane_aigateway_oauthprovider_attach` permission on the GitHub provider. Contact your ADP administrator to grant this permission.
 |===
 
-== Related topics
+== Next steps
 
 * xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
 * xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
 * xref:connect:create-server.adoc[Create an MCP Server]
-* xref:connect:managed/managed-catalog.adoc[Managed MCP Catalog]
-* https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps[GitHub OAuth Apps documentation^]
-* https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps[GitHub OAuth scopes^]

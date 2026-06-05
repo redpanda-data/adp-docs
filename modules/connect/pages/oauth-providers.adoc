@@ -254,13 +254,8 @@ Common symptoms and fixes:
 |A scope in *Supported scopes* isn't valid for the upstream. Check the upstream's scope reference and remove or rename the offending scope.
 |===
 
-== Related topics
+== Next steps
 
 * xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
 * xref:connect:create-server.adoc[Create an MCP Server]
-* xref:connect:managed/slack.adoc[Slack managed MCP]
-* xref:connect:managed/jira.adoc[Jira managed MCP]
-* xref:connect:managed/zendesk.adoc[Zendesk managed MCP]
-* xref:connect:managed/workday.adoc[Workday managed MCP]
-* xref:connect:managed/ironclad.adoc[Ironclad managed MCP]
-* xref:connect:managed/ramp.adoc[Ramp managed MCP]
+* xref:connect:managed/managed-catalog.adoc[Plug in an App, Database, or Tool]

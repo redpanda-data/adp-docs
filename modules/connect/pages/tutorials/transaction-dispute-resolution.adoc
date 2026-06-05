@@ -650,6 +650,4 @@ For production deployments, replace the mock tools with API calls to your accoun
 
 * xref:connect:architecture-patterns.adoc[]
 * xref:connect:integration-overview.adoc[]
-* xref:connect:pipeline-integration-patterns.adoc[]
 * xref:monitor:monitor-agents.adoc[]
-* xref:connect:mcp-overview.adoc[]

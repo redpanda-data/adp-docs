@@ -195,7 +195,7 @@ This page does not cover:
 * *Custom report execution*: This MCP wraps SOAP business processes, not reports. Use Workday RaaS or the report API for custom reports.
 * *Read-side data exploration*: There is no general _search Workday_ tool. Add specific business-process tools as needed.
 
-== Related topics
+== Next steps
 
 * xref:connect:create-server.adoc[Create an MCP Server]
 * xref:connect:test-tools.adoc[Test a server's tools]

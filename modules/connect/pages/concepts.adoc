@@ -156,5 +156,4 @@ include::connect:partial$service-account-authorization.adoc[]
 
 * xref:connect:architecture-patterns.adoc[]
 * xref:get-started:adp-quickstart.adoc[]
-* xref:connect:system-prompts.adoc[]
 * xref:connect:mcp-overview.adoc[]

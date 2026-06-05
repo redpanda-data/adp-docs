@@ -53,7 +53,7 @@ Claude Code reads the Anthropic base URL and an authentication token from enviro
 OIDC service account (default)::
 +
 --
-Use the OIDC `client_credentials` grant to mint an access token, then hand the token to Claude Code through `ANTHROPIC_AUTH_TOKEN`. This is the same flow xref:gateway:connect-agent.adoc[Connect your agent] documents for SDK clients; the only thing different here is how Claude Code reads the token.
+Use the OIDC `client_credentials` grant to mint an access token, then hand the token to Claude Code through `ANTHROPIC_AUTH_TOKEN`. This is the same flow xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] documents for SDK clients; the only thing different here is how Claude Code reads the token.
 
 . Mint an access token. The full cURL, Python, and Node.js examples live in xref:gateway:connect-agent.adoc#authenticate-with-oidc-client-credentials[Authenticate with OIDC client credentials]. The short version:
 +
@@ -155,10 +155,8 @@ claude "say hello"
 |The developer hasn't yet completed the consent flow for that MCP server. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]; Claude Code surfaces the `authorize_url` in the error so the developer can finish the handshake.
 |===
 
-== Related topics
+== Next steps
 
 * xref:gateway:configure-provider.adoc[]
 * xref:gateway:connect-agent.adoc[]
-* xref:gateway:configure-provider.adoc#anthropic-authorization-passthrough[Anthropic: Authorization passthrough]
 * xref:connect:remote-mcp-clients.adoc[]
-* xref:gateway:aggregation.adoc[]

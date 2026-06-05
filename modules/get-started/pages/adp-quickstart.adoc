@@ -175,7 +175,7 @@ NOTE: The other option, *I host it myself*, registers an agent you run on your o
 
 . On the *Basics* step, set the following, then click *Continue*:
 +
-* *Display name*: `pet-store-assistant`. This name appears in the registry list and the detail header.
+* *Display name*: `pet-store-assistant`. This name appears in the agent registry list and the detail header.
 * *Agent ID*: Leave the auto-derived value. ADP generates the ID from the display name, and you can't change it after creation.
 * *Description*: `Quickstart agent that answers questions about the PetStore inventory`.
 * *Tags*: Skip. Tags are optional metadata for filtering and grouping.
@@ -329,10 +329,8 @@ If you want to keep the provider but rotate the key, edit the provider and chang
 
 == Next steps
 
-Now that you have a working ADP setup, here are the most useful things to do next:
-
 * Add more LLM providers (OpenAI, Google AI, AWS Bedrock, OpenAI-compatible): xref:gateway:configure-provider.adoc[Configure an LLM provider]
-* Swap the PetStore demo for a real upstream (Slack, Jira, SQL, Kafka, and more): xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]
+* Swap the PetStore demo for a real upstream (Slack, Jira, SQL, Kafka, and more): xref:connect:managed/managed-catalog.adoc[]
 ifdef::env-adp-governance[]
-* Track spend across teams: xref:control:budgets.adoc[Token budgets and limits]
+* Track spend across teams: xref:control:budgets.adoc[]
 endif::[]

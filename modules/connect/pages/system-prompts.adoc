@@ -292,7 +292,7 @@ Guide agents to:
 
 For cost management strategies including iteration limits and monitoring, see xref:connect:concepts.adoc[].
 
-== Example: System prompt with all best practices
+== Example: System prompt with best practices
 
 This complete example demonstrates all the patterns described in this guide:
 

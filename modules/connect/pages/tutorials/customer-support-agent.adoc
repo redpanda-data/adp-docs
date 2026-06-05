@@ -263,4 +263,3 @@ Use these documented test IDs when testing the agent. If you replace the mock to
 * xref:connect:mcp-overview.adoc[]
 * xref:connect:system-prompts.adoc[]
 * xref:connect:architecture-patterns.adoc[]
-* xref:monitor:troubleshoot-ai-agents.adoc[]

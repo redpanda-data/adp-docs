@@ -63,7 +63,4 @@ Process every event with AI reasoning at scale. Invoke agents automatically from
 
 * xref:get-started:adp-quickstart.adoc[]
 * xref:connect:concepts.adoc[]
-* xref:connect:architecture-patterns.adoc[]
-* xref:connect:integration-overview.adoc[]
 * xref:connect:create-agent.adoc[]
-* xref:connect:triggers/overview.adoc[]

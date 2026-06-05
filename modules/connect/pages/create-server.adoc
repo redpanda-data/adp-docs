@@ -16,9 +16,6 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* Access to the Agentic Data Plane.
-+
-// TODO: confirm sign-in URL and IAM/role requirements once the standalone Agentic Data Plane UI ships.
 * For any auth mode that uses upstream credentials: the credentials in hand and a secret already created in the Redpanda ADP secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
 +
 // TODO: xref the ADP secrets-management page once confirmed.
@@ -71,7 +68,7 @@ Each managed type ships its own configuration schema. The form on this page is r
 
 // TODO: screenshot of the SQL configuration form as the exemplar (it covers the most common field shapes).
 
-For per-type fields, see the xref:connect:managed/managed-catalog.adoc[Managed catalog]: a reference of every managed MCP type Redpanda hosts, grouped by category, with a description and a link to its deep-dive page where one exists.
+For per-type fields, see the xref:connect:managed/managed-catalog.adoc[Managed catalog]: a reference of every managed MCP type Redpanda hosts, grouped by category, with a description and a link to its setup guide where one exists.
 
 [NOTE]
 ====
@@ -238,9 +235,8 @@ The command resolves the gateway URL from your active rpk cloud profile and read
 
 // TODO: add screenshots of common error toasts after walking the live cluster.
 
-== Related topics
+== Next steps
 
 * xref:connect:user-delegated-oauth.adoc[]
 * xref:connect:test-tools.adoc[]
-* xref:gateway:aggregation.adoc[]
 * xref:connect:managed/managed-catalog.adoc[]
