@@ -8,7 +8,7 @@
 
 // Source: `cloudv2` `apps/adp-ui/src/routes/governance/index.tsx`, governance components, and `apps/adp-ui/docs/design/0003-governance-v0.md` on `origin/main`, re-verified 2026-05-29.
 // TODO: Capture screenshots and exact empty-state copy after an authenticated walkthrough of the protected Agentic Data Plane UI.
-// Verified 2026-05-29 against origin/main: the per-user chart filter, Top users panel + heatmap, Agents table with detail drill-down, and the Cost & Usage per-user filter are all live. Per-agent analysis runs through the USER breakdown dimension (an agent's identity is its service-account email); `GetSpendingBreakdown` has no dedicated agent dimension.
+// Verified 2026-05-29 against origin/main: the per-user chart filter, Top users panel + heatmap, Agents table with detail drill-down, and the Cost & Usage per-user filter are all live. Per-agent spend keys on the agent resource name (`agents/<slug>`); `GetSpendingBreakdown` exposes a dedicated `BREAKDOWN_DIMENSION_AGENT`. Updated 2026-06-05 per the cloudv2 agent_id->agent_name identity change (PR #61).
 
 The Governance dashboard brings AI Gateway usage and agent inventory into one view. Use it to compare spend, request volume, and token volume over a selected time range, then narrow the chart by provider, model, cost type, token type, or user.
 
@@ -111,7 +111,7 @@ The *Agents* table lists agents registered in the deployment.
 |Agent display name. Clicking the name opens the agent's detail page.
 
 |Type
-|Agent type. The UI labels agents as Redpanda Managed because dataplane v1alpha3 does not distinguish managed agents from BYOA agents in this table.
+|Agent type. This column currently labels every agent Redpanda Managed and does not yet distinguish managed agents from BYOA agents.
 
 |LLM provider
 |The provider the agent calls.
