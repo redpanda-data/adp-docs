@@ -124,7 +124,7 @@ Google AI::
 +
 [IMPORTANT]
 ====
-Gemini uses the `x-goog-api-key` header for authentication, not `Authorization: Bearer`. This matters when you wire up clients. See xref:gateway:connect-agent.adoc[Connect your agent].
+Gemini uses the `x-goog-api-key` header for authentication, not `Authorization: Bearer`. This matters when you wire up clients. See xref:gateway:connect-agent.adoc[Connect your app to an LLM provider].
 ====
 
 AWS Bedrock::
@@ -218,7 +218,7 @@ NOTE: Changing a toggle takes effect for new requests. Transcripts already captu
 . Click *Create provider*. The button activates after *Name* and *Type* are both set. The *Summary* panel checks them off as you fill them in.
 . On the provider's detail page, the *Connection* card shows your *Proxy URL*, *Discovery* URL, *Base URL*, and *API key ref*. Copy the *Proxy URL*: this is where your applications point.
 . Scroll to the *Verify connection* section. Pick a model from the dropdown and click *Test Connection*. The status updates from _Not tested yet_ to a pass/fail indicator. Use the *Show commands* disclosure if you want to see the equivalent curl or SDK call.
-. To wire up an application, open *Connect your app* further down the page or follow xref:gateway:connect-agent.adoc[Connect your agent].
+. To wire up an application, open *Connect your app* further down the page or follow xref:gateway:connect-agent.adoc[Connect your app to an LLM provider].
 
 A successful Test Connection result confirms that the provider's credentials, region (Bedrock), and network path are all correct. If the call fails, see <<troubleshooting>>.
 
@@ -398,7 +398,7 @@ The spend chart footer summarizes the selected view by cost bucket, including to
 |Confirm the client is sending its own `Authorization` header and the *API key* field on the provider is empty.
 
 |Gemini returns 401
-|Gemini uses the `x-goog-api-key` header, not `Authorization`. If you're seeing 401s on Gemini, check that the client is sending the correct header. See xref:gateway:connect-agent.adoc[Connect your agent].
+|Gemini uses the `x-goog-api-key` header, not `Authorization`. If you're seeing 401s on Gemini, check that the client is sending the correct header. See xref:gateway:connect-agent.adoc[Connect your app to an LLM provider].
 
 |Provider list empty or 403
 |Confirm your account has the `dataplane_adp_llmprovider_*` permissions in ADP. The Reader built-in role is the minimum required to list providers. The Writer role is required to create one. See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions].
@@ -416,5 +416,5 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 
 == Next steps
 
-* xref:gateway:connect-agent.adoc[Connect your agent]
+* xref:gateway:connect-agent.adoc[Connect your app to an LLM provider]
 * xref:control:budgets.adoc[Set spend limits with budgets]

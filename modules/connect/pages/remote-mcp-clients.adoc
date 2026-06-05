@@ -34,7 +34,7 @@ Use a remote MCP client connection when:
 
 Use a different approach when:
 
-* You need programmatic, server-side tool invocation. See xref:gateway:connect-agent.adoc[Connect your agent] for SDK-based access.
+* You need programmatic, server-side tool invocation. See xref:gateway:connect-agent.adoc[Connect your app to an LLM provider] for SDK-based access.
 * You need an in-house chat UI. Build against the AI Gateway's MCP endpoints directly with the SDK of your choice.
 
 == Architecture: Three resources work together

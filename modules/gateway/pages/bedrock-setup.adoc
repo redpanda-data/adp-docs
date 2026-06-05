@@ -167,5 +167,5 @@ For example, requests to `eu.anthropic.claude-haiku-4-5` bill at the EU Haiku ra
 == Next steps
 
 * xref:gateway:configure-provider.adoc[Configure an LLM provider]
-* xref:gateway:connect-agent.adoc[Connect your agent]
+* xref:gateway:connect-agent.adoc[Connect your app to an LLM provider]
 * xref:control:dashboard/overview.adoc[Read the governance overview]
