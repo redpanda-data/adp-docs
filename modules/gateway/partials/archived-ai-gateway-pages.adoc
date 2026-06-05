@@ -1,0 +1,1155 @@
+////
+ARCHIVED — NOT RENDERED.
+
+This partial preserves two AI Gateway pages that were removed from the docs on
+2026-06-04 because their content described the older "gateway-object" model
+(gateways with IDs, provider pools/failover, gateway rate/spend limits, MCP
+Orchestrator) that does not match the shipped GA model (LLM Providers + OIDC,
+with per-agent budgets under Control & Govern). They were pulled from the nav
+and all rendered xrefs were retargeted.
+
+This file is intentionally NOT include::d by any page, so nothing here renders.
+It exists only to retain the content. To restore a page, move the relevant
+section back to its module's pages/ directory, restore the document title and
+page attributes, re-add the nav entry, and re-point xrefs.
+
+Original locations:
+  - get-started/gateway-quickstart      -> modules/get-started/pages/gateway-quickstart.adoc
+  - gateway/gateway-architecture         -> modules/gateway/pages/gateway-architecture.adoc
+  - gateway/admin/setup-guide            -> modules/gateway/pages/admin/setup-guide.adoc
+  - gateway/builders/discover-gateways   -> modules/gateway/pages/builders/discover-gateways.adoc
+
+Note: gateway/aggregation.adoc (now "MCP Aggregation") is a CURRENT page and was
+intentionally kept. It is not part of this archive.
+////
+
+// ===========================================================================
+// ARCHIVED PAGE 1 of 2 — formerly modules/get-started/pages/gateway-quickstart.adoc
+// ===========================================================================
+
+= AI Gateway Quickstart
+:page-aliases: cloud-data-platform:ai-agents:ai-gateway/gateway-quickstart.adoc
+:description: Get started with AI Gateway. Configure providers, create your first gateway with failover and budget controls, and route your first request.
+:page-topic-type: quickstart
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Enable an LLM provider and create your first gateway
+:learning-objective-2: Route your first request through AI Gateway and verify it works
+:learning-objective-3: Verify request routing and token usage in the gateway overview
+
+Redpanda AI Gateway, part of the Agentic Data Plane (ADP), is the managed proxy for LLM APIs. This quickstart walks you through configuring your first gateway and routing requests through it.
+
+== Prerequisites
+
+Before starting, ensure you have:
+
+* Access to the AI Gateway UI (provided by your administrator)
+* Admin permissions to configure providers and models
+* Credentials for at least one LLM provider (OpenAI, Anthropic, Google AI, or AWS Bedrock). OpenAI, Anthropic, and Google AI use an API key; AWS Bedrock uses AWS credentials.
+* Python 3.8+, Node.js 18+, or cURL (for testing)
+
+== Configure a provider
+
+Providers represent upstream LLM services and their associated credentials. Providers are disabled by default and must be enabled explicitly.
+
+. Navigate to *AI Gateway* > *Providers*.
+. Select a provider (for example, OpenAI, Anthropic, Google AI, AWS Bedrock).
+. On the Configuration tab, click *Add configuration* and enter the provider's credentials (API key for OpenAI, Anthropic, and Google AI; AWS access key and secret for Bedrock).
+. Verify the provider status shows as active.
+
+== Enable models
+
+After enabling a provider, enable the specific models you want to make available through your gateways.
+
+. Navigate to *AI Gateway* > *Models*.
+. Enable the models you want to use (for example, `gpt-5.2-mini`, `claude-sonnet-4.5`, `claude-opus-4.6`).
+. Verify the models appear as enabled in the model catalog.
+
+TIP: Different providers have different reliability and cost characteristics. When choosing models, consider your use case requirements for quality, speed, and cost.
+
+=== Model naming convention
+
+Requests through AI Gateway must use the `vendor/model_id` format. For example:
+
+* OpenAI models: `openai/gpt-5.2`, `openai/gpt-5.2-mini`
+* Anthropic models: `anthropic/claude-sonnet-4.5`, `anthropic/claude-opus-4.6`
+* Google Gemini models: `google/gemini-2.0-flash`, `google/gemini-2.0-pro`
+
+This format allows the gateway to route requests to the correct provider.
+
+== Create a gateway
+
+A gateway is a logical configuration boundary that defines rate limits, spend limits, and observability scope. Common gateway patterns include the following:
+
+* Environment separation: Create separate gateways for staging and production
+* Team isolation: One gateway per team for budget tracking
+* Customer multi-tenancy: One gateway per customer for isolated policies
+
+. Navigate to *AI Gateway* > *Gateways*.
+. Click *Create Gateway*.
+. Configure the gateway:
++
+** Display name: Choose a descriptive name (for example, `my-first-gateway`)
+** Workspace: Select a workspace (conceptually similar to a resource group)
+** Description: Add context about this gateway's purpose
+** Optional metadata for documentation
+
+After creation, copy the gateway endpoint from the overview page. You'll need this for sending requests. The gateway ID is embedded in the endpoint URL. For example:
+
+[source,bash]
+----
+Endpoint: https://example/gateways/d633lffcc16s73ct95mg/v1
+Gateway ID: d633lffcc16s73ct95mg
+----
+
+== Send your first request
+
+Now that you've configured a provider and created a gateway, send a test request to verify everything works.
+
+[tabs]
+====
+Python::
++
+--
+[source,python]
+----
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="<your-gateway-endpoint>",
+    api_key="<your-redpanda-api-key>",  # Or use gateway's auth
+)
+
+response = client.chat.completions.create(
+    model="openai/gpt-5.2",  # Use vendor/model format
+    messages=[
+        {"role": "user", "content": "Hello!"}
+    ],
+)
+
+print(response.choices[0].message.content)
+----
+
+Expected output:
+
+[source,text]
+----
+Hello! How can I help you today?
+----
+--
+
+Node.js::
++
+--
+[source,javascript]
+----
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  baseURL: '<your-gateway-endpoint>',
+  apiKey: '<your-redpanda-api-key>',  // Or use gateway's auth
+});
+
+const response = await client.chat.completions.create({
+  model: 'anthropic/claude-sonnet-4-5-20250929',  // Use vendor/model format
+  messages: [
+    { role: 'user', content: 'Hello!' }
+  ],
+});
+
+console.log(response.choices[0].message.content);
+----
+
+Expected output:
+
+[source,text]
+----
+Hello! How can I help you today?
+----
+--
+
+cURL::
++
+--
+[source,bash]
+----
+curl <your-gateway-endpoint>/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <your-redpanda-api-key>" \
+  -d '{
+    "model": "openai/gpt-5.2",
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ]
+  }'
+----
+
+Expected output:
+
+[source,json]
+----
+{
+  "id": "chatcmpl-abc123",
+  "object": "chat.completion",
+  "model": "openai/gpt-5.2",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hello! How can I help you today?"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 9,
+    "completion_tokens": 9,
+    "total_tokens": 18
+  }
+}
+----
+--
+====
+
+=== Troubleshooting
+
+If your request fails, check these common issues:
+
+* 401 Unauthorized: Verify your API key is valid
+* 404 Not Found: Confirm the base URL matches your gateway endpoint
+* Model not found: Ensure the model is enabled in the model catalog and that you're using the correct `vendor/model` format.
+
+== Verify in the gateway overview
+
+Confirm your request was routed through AI Gateway.
+
+. On the *Overview* tab, check the aggregate metrics:
++
+* Total Requests: Should have incremented.
+* Total Tokens: Shows combined input and output tokens.
+* Total Cost: Estimated spend across all requests.
+* Avg Latency: Average response time in milliseconds.
+
+. Scroll to the *Models* table to see per-model statistics:
++
+The model you used in your request should appear with its request count, token usage (input/output), estimated cost, latency, and error rate.
+
+== Configure rate limits, spend limits, and provider pools (optional)
+
+On the Gateways page, select the *LLM* tab to configure the gateway's request controls:
+
+. *Rate Limit*: Control request throughput (for example, 100 requests/second)
+. *Spend Limit*: Set monthly budget caps (for example, $15K/month with blocking enforcement)
+. *Provider Pools*: Define primary and fallback providers
+
+=== Configure provider pool with fallback
+
+For high availability, configure a fallback provider that activates when the primary fails:
+
+. Add a second provider (for example, Anthropic).
+. In your gateway's *LLM* configuration:
++
+* *Primary pool*: OpenAI (preferred for quality)
+* *Fallback pool*: Anthropic (activates on rate limits, timeouts, or errors)
+
+. Save the configuration.
+
+The gateway automatically fails over to the fallback pool when it detects:
+
+* Rate limit exceeded
+* Request timeout
+* 5xx server errors from primary provider
+
+// Monitor the fallback rate in observability to detect primary provider issues early.
+
+== Configure MCP tools (optional)
+
+If you're using glossterm:AI agent[,AI agents], configure glossterm:MCP[,Model Context Protocol (MCP)] tool aggregation.
+
+On the Gateways page, select the *MCP* tab to configure tool discovery and execution. The MCP proxy aggregates multiple glossterm:MCP server[,MCP servers] behind a single endpoint, allowing agents to discover and call glossterm:MCP tool[,tools] through the gateway.
+
+Configure the MCP settings:
+
+* *Display name*: Descriptive name for the provider pool
+* *Model*: Choose which model handles tool execution
+* *Load balancing*: If multiple providers are available, select a strategy (for example, round robin)
+
+=== Available MCP tools
+
+The gateway provides these built-in MCP tools:
+
+* *Data catalog API*: Query your data catalog
+* *Memory store*: Persistent storage for agent state
+* *Vector search*: Semantic search over embeddings
+* *MCP Orchestrator*: Built-in tool for programmatic multi-tool workflows
+
+The *MCP Orchestrator* enables agents to generate JavaScript code that calls multiple tools in a single orchestrated step, reducing round trips. For example, a workflow requiring 47 file reads can be reduced from 49 round trips to just 1.
+
+To add external tools (for example, Slack, GitHub), add their MCP server endpoints to your gateway configuration.
+
+=== Deferred tool loading
+
+When many tools are aggregated, listing all tools upfront can consume significant tokens. With deferred tool loading, the MCP gateway initially returns only:
+
+* A tool search capability
+* The MCP Orchestrator
+
+Agents then search for specific tools they need, retrieving only that subset. This can reduce token usage by 80-90% when you have many tools configured.
+
+== Connect AI tools to your gateway
+
+The AI Gateway provides standardized endpoints that work with various AI development tools. This section shows how to configure popular tools.
+
+=== MCP endpoint
+
+If you've configured MCP tools in your gateway, AI agents can connect to the aggregated MCP endpoint:
+
+* *MCP endpoint URL*: `<your-gateway-endpoint>/mcp`
+* *Required headers*:
+** `Authorization: Bearer <your-api-key>`
+
+This endpoint aggregates all MCP servers configured in your gateway.
+
+=== Environment variables
+
+For consistent configuration, set these environment variables:
+
+[source,bash]
+----
+export REDPANDA_GATEWAY_URL="<your-gateway-endpoint>"
+export REDPANDA_API_KEY="<your-api-key>"
+----
+
+=== Claude Code
+
+Configure Claude Code using HTTP transport for the MCP connection:
+
+[source,bash]
+----
+claude mcp add --transport http redpanda-aigateway <your-gateway-endpoint>/mcp \
+  --header "Authorization: Bearer <your-api-key>"
+----
+
+Alternatively, edit `~/.claude/config.json`:
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "redpanda-ai-gateway": {
+      "transport": "http",
+      "url": "<your-gateway-endpoint>/mcp",
+      "headers": {
+        "Authorization": "Bearer <your-api-key>"
+      }
+    }
+  },
+  "apiProviders": {
+    "redpanda": {
+      "baseURL": "<your-gateway-endpoint>"
+    }
+  }
+}
+----
+
+// NOTE (archive): the original page guarded the following links with ifdef::integrations-available[].
+For detailed Claude Code setup, see the Claude Code integration guide.
+
+=== Continue.dev
+
+Edit your Continue config file (`~/.continue/config.json`):
+
+[source,json]
+----
+{
+  "models": [
+    {
+      "title": "Redpanda AI Gateway - GPT-5.2",
+      "provider": "openai",
+      "model": "openai/gpt-5.2",
+      "apiBase": "<your-gateway-endpoint>",
+      "apiKey": "<your-api-key>"
+    },
+    {
+      "title": "Redpanda AI Gateway - Claude",
+      "provider": "anthropic",
+      "model": "anthropic/claude-sonnet-4.5",
+      "apiBase": "<your-gateway-endpoint>",
+      "apiKey": "<your-api-key>"
+    },
+    {
+      "title": "Redpanda AI Gateway - Gemini",
+      "provider": "google",
+      "model": "google/gemini-2.0-flash",
+      "apiBase": "<your-gateway-endpoint>",
+      "apiKey": "<your-api-key>"
+    }
+  ]
+}
+----
+
+=== Cursor IDE
+
+Configure Cursor in Settings (*Cursor* -> *Settings* or `Cmd+,`):
+
+[source,json]
+----
+{
+  "cursor.ai.providers.openai.apiBase": "<your-gateway-endpoint>"
+}
+----
+
+=== Custom applications
+
+For custom applications using OpenAI, Anthropic, or Google Gemini SDKs:
+
+*Python with OpenAI SDK*:
+
+[source,python]
+----
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="<your-gateway-endpoint>",
+    api_key="<your-api-key>",
+)
+----
+
+*Python with Anthropic SDK*:
+
+[source,python]
+----
+from anthropic import Anthropic
+
+client = Anthropic(
+    base_url="<your-gateway-endpoint>",
+    api_key="<your-api-key>",
+)
+----
+
+*Node.js with OpenAI SDK*:
+
+[source,javascript]
+----
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  baseURL: '<your-gateway-endpoint>',
+  apiKey: process.env.REDPANDA_API_KEY,
+});
+----
+
+// Original Next steps: ADP Quickstart, gateway:aggregation, gateway:gateway-architecture, gateway:overview
+
+
+// ===========================================================================
+// ARCHIVED PAGE 2 of 2 — formerly modules/gateway/pages/gateway-architecture.adoc
+// ===========================================================================
+
+= Understand AI Gateway Architecture
+:description: Technical architecture of Redpanda AI Gateway, including how the control plane, data plane, and observability plane deliver high availability, cost governance, and multi-tenant isolation.
+:page-topic-type: concept
+:personas: platform_engineer, agent_builder, security_compliance_lead
+:learning-objective-1: Describe the three architectural planes of AI Gateway
+:learning-objective-2: Explain the request lifecycle through policy evaluation stages
+:learning-objective-3: Identify supported providers, features, and current limitations
+
+This page provides technical details about AI Gateway's architecture, request processing, and capabilities. For an overview of AI Gateway, see xref:gateway:overview.adoc[]
+
+== Architecture overview
+
+AI Gateway consists of a glossterm:control plane[] for configuration and management, a glossterm:data plane[] for request processing and routing, and an observability plane for monitoring and analytics.
+
+// PLACEHOLDER: Add architecture diagram showing:
+// 1. Control Plane:
+//    - Workspace management
+//    - Provider/model configuration
+//    - Gateway creation and policy definition
+//    - Admin console
+//
+// 2. Data Plane:
+//    - Request ingestion
+//    - Policy evaluation (rate limits -> spend limits -> routing -> execution)
+//    - Provider pool selection and failover
+//    - MCP aggregation layer
+//    - Response logging and metrics
+//
+// 3. Observability Plane:
+//    - Request logs storage
+//    - Metrics aggregation
+//    - Dashboard UI
+
+=== Control plane
+
+The control plane manages gateway configuration and policy definition:
+
+* **Workspace management**: Multi-tenant isolation with separate namespaces for different teams or environments
+* **Provider configuration**: Enable and configure LLM providers (such as OpenAI and Anthropic)
+* **Gateway creation**: Define gateways with specific budgets and rate limits
+* **Policy definition**: Configure spend limits and rate limits
+* **MCP server registration**: Configure which MCP servers are available to agents
+
+=== Data plane
+
+The data plane handles all runtime request processing:
+
+* **Request ingestion**: Accept requests through OpenAI-compatible API endpoints
+* **Authentication**: Validate API keys and gateway access
+* **Policy evaluation**: Apply rate limits, spend limits, and routing policies
+* **Provider pool management**: Select primary or fallback providers based on availability
+* **MCP proxy**: Aggregate tools from multiple MCP servers with deferred loading
+* **Response transformation**: Normalize provider-specific responses to OpenAI format
+* **Metrics collection**: Record token usage, latency, and cost for every request
+
+=== Observability plane
+
+The observability plane provides monitoring and analytics:
+
+* **Request logs**: Store full request/response history with prompt and completion content
+* **Metrics aggregation**: Calculate token usage, costs, latency percentiles, and error rates
+* **Dashboard UI**: Display real-time and historical analytics per gateway, model, or provider
+* **Cost tracking**: Estimate spend based on provider pricing and token consumption
+
+== Request lifecycle
+
+When a request flows through AI Gateway, it passes through several policy and routing stages before reaching the LLM provider. Understanding this lifecycle helps you configure policies effectively and troubleshoot issues:
+
+. Application sends request to gateway endpoint
+. Gateway authenticates request
+. Rate limit policy evaluates (allow/deny)
+. Spend limit policy evaluates (allow/deny)
+. Routing policy evaluates (which model/provider to use)
+. Provider pool selects backend (primary/fallback)
+. Request forwarded to LLM provider
+. Response returned to application
+. Request logged with tokens, cost, latency, status
+
+Each policy evaluation happens synchronously in the request path. If rate limits or spend limits reject the request, the gateway returns an error immediately without calling the LLM provider, which helps you control costs.
+
+=== MCP tool request lifecycle
+
+For MCP tool requests, the lifecycle differs slightly to support deferred tool loading:
+
+. Application discovers tools through `/mcp` endpoint
+. Gateway aggregates tools from approved MCP servers
+. Application receives search + orchestrator tools (deferred loading)
+. Application invokes specific tool
+. Gateway routes to appropriate MCP server
+. Tool execution result returned
+. Request logged with execution time, status
+
+The gateway only loads and exposes specific tools when requested, which dramatically reduces the token overhead compared to loading all tools upfront.
+
+// Original Next steps: gateway-quickstart, gateway:aggregation
+
+
+// ===========================================================================
+// ARCHIVED PAGE 3 of 4 — formerly modules/gateway/pages/admin/setup-guide.adoc
+// ===========================================================================
+
+= AI Gateway Setup Guide
+:description: Set up AI Gateway for your organization. Enable providers, configure failover for high availability, set budget controls, and create gateways with team-level isolation.
+:page-topic-type: how-to
+:personas: platform_engineer, security_compliance_lead
+:learning-objective-1: Enable LLM providers and models in the catalog
+:learning-objective-2: Create and configure gateways with rate limits, spend limits, and provider pools
+:learning-objective-3: Set up MCP tool aggregation for AI agents
+
+This guide walks administrators through the setup process for AI Gateway, from enabling LLM providers to configuring rate limits, spend limits, provider pools, and MCP tool aggregation.
+
+After completing this guide, you will be able to:
+
+* [ ] Enable LLM providers and models in the catalog
+* [ ] Create and configure gateways with rate limits, spend limits, and provider pools
+* [ ] Set up MCP tool aggregation for AI agents
+
+== Prerequisites
+
+* Access to Redpanda ADP with administrator privileges
+* API keys for at least one LLM provider (OpenAI, Anthropic, Google AI)
+* (Optional) MCP server endpoints if you plan to use tool aggregation
+
+== Enable a provider
+
+Providers represent upstream services (Anthropic, OpenAI, Google AI) and associated credentials. Providers default to disabled; an administrator must explicitly enable each one.
+
+. In ADP, navigate to *Agentic* > *AI Gateway* > *Providers*.
+. Select a provider (for example, Anthropic).
+. On the Configuration tab for the provider, click *Add configuration*.
+. Enter your API Key for the provider.
++
+TIP: Store provider API keys securely. Each provider configuration can have multiple API keys for rotation and redundancy.
+
+. Click *Save* to enable the provider.
+
+Repeat this process for each LLM provider you want to make available through AI Gateway.
+
+== Enable models
+
+The model catalog is the set of models made available through the gateway. Models are disabled by default. After enabling a provider, you can enable its models.
+
+The infrastructure that serves the model differs based on the provider you select. For example, OpenAI has different reliability and availability metrics than Anthropic. When you consider all metrics, you can design your gateway to use different providers for different use cases.
+
+. Navigate to *Agentic* > *AI Gateway* > *Models*.
+. Review the list of available models from enabled providers.
+. For each model you want to expose through gateways, toggle it to *Enabled*. For example:
++
+--
+* `openai/gpt-5.2`
+* `openai/gpt-5.2-mini`
+* `anthropic/claude-sonnet-4.5`
+* `anthropic/claude-opus-4.6`
+--
+
+. Click *Save changes*.
+
+Only enabled models are accessible through gateways. You can enable or disable models at any time without affecting existing gateways.
+
+=== Model naming convention
+
+Model requests must use the `vendor/model_id` format in the model property of the request body. This format allows AI Gateway to route requests to the appropriate provider. For example:
+
+* `openai/gpt-5.2`
+* `anthropic/claude-sonnet-4.5`
+* `openai/gpt-5.2-mini`
+
+== Create a gateway
+
+A gateway is a logical configuration boundary (policies + observability) on top of a single deployment. It's a "virtual gateway" that you can create per team, environment (staging/production), product, or customer.
+
+. Navigate to *Agentic* > *AI Gateway* > *Gateways*.
+. Click *Create Gateway*.
+. Configure the gateway:
++
+--
+* *Name*: Choose a descriptive name (for example, `production-gateway`, `team-ml-gateway`, `staging-gateway`)
+* *Workspace*: Select the workspace this gateway belongs to
++
+TIP: A workspace is conceptually similar to a resource group in Redpanda streaming.
++
+* *Description* (optional): Add context about this gateway's purpose
+* *Tags* (optional): Add metadata for organization and filtering
+--
+
+. Click *Create*.
+
+. After creation, note the following information:
++
+--
+* *Gateway endpoint*: URL for API requests (for example, `https://example/gateways/d633lffcc16s73ct95mg/v1`)
++
+The gateway ID is embedded in the URL.
+--
+
+You'll share the gateway endpoint with users who need to access this gateway.
+
+== Configure LLM controls
+
+On the gateway details page, select the *LLM* tab to configure rate limits, spend limits, and provider pools with fallback options.
+
+The *LLM* tab covers the request lifecycle:
+
+. *Rate Limit*: Global rate limit (for example, 100 requests/second)
+. *Spend Limit / Monthly Budget*: Monthly budget with blocking enforcement (for example, $15K/month)
+. *Provider pools*: Primary provider pool with optional fallback provider pools
+
+=== Configure rate limits
+
+Rate limits control how many requests can be processed within a time window.
+
+. In the *LLM* tab, locate the *Rate Limit* section.
+. Click *Add rate limit*.
+. Configure the limit:
++
+--
+* *Requests per second*: Maximum requests per second (for example, `100`)
+* *Burst allowance* (optional): Allow temporary bursts above the limit
+--
+
+. Click *Save*.
+
+Rate limits apply to all requests through this gateway, regardless of model or provider.
+
+=== Configure spend limits and budgets
+
+Spend limits prevent runaway costs by blocking requests after a monthly budget is exceeded.
+
+. In the *LLM* tab, locate the *Spend Limit* section.
+. Click *Configure budget*.
+. Set the budget:
++
+--
+* *Monthly budget*: Maximum spend per month (for example, `$15000`)
+* *Enforcement*: Choose *Block* to reject requests after the budget is exceeded, or *Alert* to notify but allow requests
+* *Notification threshold* (optional): Alert when X% of budget is consumed (for example, `80%`)
+--
+
+. Click *Save*.
+
+Budget tracking uses estimated costs based on token usage and public provider pricing.
+
+=== Configure provider pools
+
+Provider pools define which LLM providers handle requests, with support for primary and fallback configurations.
+
+. In the *LLM* tab, locate the *Provider pools* section.
+. Click *Add provider pool*.
+. Configure the primary pool:
++
+--
+* *Name*: For example, `primary-anthropic`
+* *Providers*: Select one or more providers (for example, Anthropic)
+* *Models*: Choose which models to include (for example, `anthropic/claude-sonnet-4.5`)
+* *Load balancing*: If multiple providers are selected, choose distribution strategy (round-robin, weighted, and so on)
+--
+
+. (Optional) Click *Add fallback pool* to configure automatic failover:
++
+--
+* *Name*: For example, `fallback-openai`
+* *Providers*: Select fallback provider (for example, OpenAI)
+* *Models*: Choose fallback models (for example, `openai/gpt-5.2`)
+* *Trigger conditions*: When to activate fallback:
+  ** Rate limit exceeded (429 from primary)
+  ** Timeout (primary provider slow)
+  ** Server errors (5xx from primary)
+--
+
+. Click *Save*.
+
+TIP: Provider pool (UI) = Backend pool (API)
+
+=== Load balancing and multi-provider distribution
+
+If a provider pool contains multiple providers, you can distribute traffic to balance load or optimize for cost/performance:
+
+* Round-robin: Distribute evenly across all providers
+* Weighted: Assign weights (for example, 80% to Anthropic, 20% to OpenAI)
+* Least latency: Route to fastest provider based on recent performance
+* Cost-optimized: Route to cheapest provider for each model
+
+== Configure MCP tools (optional)
+
+If your users will build glossterm:AI agent[,AI agents] that need access to glossterm:MCP tool[,tools] through glossterm:MCP[,Model Context Protocol (MCP)], configure MCP tool aggregation.
+
+On the gateway details page, select the *MCP* tab to configure tool discovery and execution. The MCP proxy aggregates multiple glossterm:MCP server[,MCP servers], allowing agents to find and call tools through a single endpoint.
+
+=== Configure MCP rate limits
+
+Rate limits for MCP work the same way as LLM rate limits.
+
+. In the *MCP* tab, locate the *Rate Limit* section.
+. Click *Add rate limit*.
+. Configure the maximum requests per second and optional burst allowance.
+. Click *Save*.
+
+=== Add MCP servers
+
+. In the *MCP* tab, click *Create MCP Server*.
+. Configure the server:
++
+--
+* *Server ID*: Unique identifier for this server
+* *Display Name*: Human-readable name (for example, `database-server`, `slack-server`)
+* *Server Address*: Endpoint URL for the MCP server (for example, `https://mcp-database.example.com`)
+--
+
+. Configure server settings:
++
+--
+* *Timeout (seconds)*: Maximum time to wait for a response from this server
+* *Enabled*: Whether this server is active and accepting requests
+* *Defer Loading Override*: Controls whether tools from this server are loaded upfront or on demand
++
+[cols="1,2"]
+|===
+|Option |Description
+
+|Inherit from gateway
+|Use the gateway-level deferred loading setting (default)
+
+|Enabled
+|Always defer loading from this server. Agents receive only a search tool initially and query for specific tools when needed. This can reduce token usage by 80-90%.
+
+|Disabled
+|Always load all tools from this server upfront.
+|===
+
+* *Forward OIDC Token Override*: Controls whether the client's OIDC token is forwarded to this MCP server
++
+[cols="1,2"]
+|===
+|Option |Description
+
+|Inherit from gateway
+|Use the gateway-level OIDC forwarding setting (default)
+
+|Enabled
+|Always forward the OIDC token to this server
+
+|Disabled
+|Never forward the OIDC token to this server
+|===
+--
+
+. Click *Save* to add the server to this gateway.
+
+Repeat for each MCP server you want to aggregate.
+
+// Original xref: gateway:aggregation.adoc (MCP Aggregation) — current page, kept.
+
+=== Configure the MCP orchestrator
+
+The MCP orchestrator is a built-in MCP server that enables programmatic tool calling. Agents can generate JavaScript code to call multiple tools in a single orchestrated step, reducing the number of round trips.
+
+Example: A workflow requiring 47 file reads can be reduced from 49 round trips to just 1 round trip using the orchestrator.
+
+The orchestrator is pre-configured when you initialize the MCP gateway. Its server configuration (Server ID, Display Name, Transport, Command, and Timeout) is system-managed and cannot be modified.
+
+You can configure blocked tool patterns to prevent specific tools from being called through the orchestrator:
+
+. In the *MCP* tab, select the orchestrator server to edit it.
+. Under *Blocked Tools*, click *Add Pattern* to add glob patterns for tools that should be blocked from execution.
++
+Example patterns:
++
+--
+* `server_id:*` - Block all tools from a specific server
+* `*:dangerous_tool` - Block a specific tool across all servers
+* `specific:tool` - Block a single tool on a specific server
+--
++
+NOTE: The orchestrator's own tools are blocked by default to prevent recursive execution.
+
+. Click *Save*.
+
+== Verify your setup
+
+After completing the setup, verify that the gateway is working correctly:
+
+=== Test the gateway endpoint
+
+[source,bash]
+----
+curl ${GATEWAY_ENDPOINT}/models \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}"
+----
+
+Expected result: List of enabled models.
+
+=== Send a test request
+
+[source,bash]
+----
+curl ${GATEWAY_ENDPOINT}/chat/completions \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/gpt-5.2-mini",
+    "messages": [{"role": "user", "content": "Hello, AI Gateway!"}],
+    "max_tokens": 50
+  }'
+----
+
+Expected result: Successful completion response.
+
+=== Check the gateway overview
+
+. Navigate to *Gateways* > Select your gateway > *Overview*.
+. Check the aggregate metrics to verify your test request was processed:
++
+--
+* Total Requests: Should have incremented
+* Total Tokens: Should show tokens consumed
+* Total Cost: Should show estimated cost
+--
+
+== Share access with users
+
+Now that your gateway is configured, share access with users (builders):
+
+. Provide the *Gateway Endpoint* (for example, `https://example/gateways/gw_abc123/v1`)
+. Share API credentials (ADP tokens with appropriate permissions)
+. (Optional) Document available models and provider pools
+. (Optional) Share rate limits and budget information
+
+Users can then discover and connect to the gateway using the information provided. // Original xref: builders/discover-gateways.adoc (archived below).
+
+// Original Next steps: connect:claude-code, connect:remote-mcp-clients
+
+
+// ===========================================================================
+// ARCHIVED PAGE 4 of 4 — formerly modules/gateway/pages/builders/discover-gateways.adoc
+// ===========================================================================
+
+= Discover Available Gateways
+:description: Find which AI Gateways you can access and their configurations.
+:page-topic-type: how-to
+:personas: agent_builder
+:learning-objective-1: List all AI Gateways you have access to and retrieve their endpoints and IDs
+:learning-objective-2: View which models and MCP tools are available through each gateway
+:learning-objective-3: Test gateway connectivity before integration
+
+As a builder, you need to know which gateways are available to you before integrating your agent or application. This page shows you how to discover accessible gateways, understand their configurations, and verify connectivity.
+
+After reading this page, you will be able to:
+
+* [ ] List all AI Gateways you have access to and retrieve their endpoints and IDs
+* [ ] View which models and MCP tools are available through each gateway
+* [ ] Test gateway connectivity before integration
+
+== Before you begin
+
+* You have a Redpanda ADP account with access to at least one AI Gateway
+* You have access to ADP or API credentials
+
+== List your accessible gateways
+
+[tabs]
+====
+Using the UI::
++
+. In ADP, navigate to *AI Gateway* > *Gateways*.
+. Review the list of gateways you can access. For each gateway, you'll see the gateway name, ID, endpoint URL, status, available models, and provider performance.
++
+Click the Configuration, API, MCP Tools, and Changelog tabs for additional information.
+
+Using the API::
++
+To list gateways programmatically:
++
+[source,bash]
+----
+curl https://api.redpanda.com/v1/gateways \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}"
+----
++
+Response:
++
+[source,json]
+----
+{
+  "gateways": [
+    {
+      "id": "gw_abc123",
+      "name": "production-gateway",
+      "endpoint": "https://gw.ai.panda.com",
+      "status": "active",
+      "workspace_id": "ws_xyz789",
+      "created_at": "2025-01-15T10:30:00Z"
+    },
+    {
+      "id": "gw_def456",
+      "name": "staging-gateway",
+      "endpoint": "https://gw-staging.ai.panda.com",
+      "status": "active",
+      "workspace_id": "ws_xyz789",
+      "created_at": "2025-01-10T08:15:00Z"
+    }
+  ]
+}
+----
+====
+
+== Understand gateway information
+
+Each gateway provides specific information you'll need for integration:
+
+=== Gateway endpoint
+
+The gateway endpoint is the URL where you send all API requests. It replaces direct provider URLs (like `api.openai.com` or `api.anthropic.com`). The gateway ID is embedded directly in the endpoint URL.
+
+Example:
+[source,bash]
+----
+https://example/gateways/gw_abc123/v1
+----
+
+Your application configures this as the `base_url` in your SDK client.
+
+=== Available models
+
+Each gateway exposes specific models based on administrator configuration. Models use the `vendor/model_id` format:
+
+* `openai/gpt-5.2`
+* `anthropic/claude-sonnet-4.5`
+* `openai/gpt-5.2-mini`
+
+To see which models are available through a specific gateway:
+
+[source,bash]
+----
+curl ${GATEWAY_ENDPOINT}/models \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}"
+----
+
+Response:
+
+[source,json]
+----
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "openai/gpt-5.2",
+      "object": "model",
+      "owned_by": "openai"
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.5",
+      "object": "model",
+      "owned_by": "anthropic"
+    },
+    {
+      "id": "openai/gpt-5.2-mini",
+      "object": "model",
+      "owned_by": "openai"
+    }
+  ]
+}
+----
+
+=== Rate limits and quotas
+
+Each gateway may have configured rate limits and monthly budgets. Check the console or contact your administrator to understand:
+
+* Requests per minute/hour/day
+* Monthly spend limits
+* Token usage quotas
+
+These limits help control costs and ensure fair resource allocation across teams.
+
+=== MCP Tools
+
+If glossterm:MCP[,Model Context Protocol (MCP)] aggregation is enabled for your gateway, you can access glossterm:MCP tool[,tools] from multiple glossterm:MCP server[,MCP servers] through a single endpoint.
+
+To discover available MCP tools:
+
+[source,bash]
+----
+curl ${GATEWAY_ENDPOINT}/mcp/tools \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}" \
+  -H "rp-aigw-mcp-deferred: true"
+----
+
+With deferred loading enabled, you'll receive search and orchestrator tools initially. You can then query for specific tools as needed.
+
+// See xref:builders/use-mcp-tools.adoc[] for more details.
+
+== Check gateway availability
+
+Before integrating your application, verify that you can successfully connect to the gateway:
+
+=== Test connectivity
+
+[source,bash]
+----
+curl ${GATEWAY_ENDPOINT}/models \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}" \
+  -v
+----
+
+Expected result: HTTP 200 response with a list of available models.
+
+=== Test a simple request
+
+Send a minimal chat completion request to verify end-to-end functionality:
+
+[source,bash]
+----
+curl ${GATEWAY_ENDPOINT}/chat/completions \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/gpt-5.2-mini",
+    "messages": [{"role": "user", "content": "Hello"}],
+    "max_tokens": 10
+  }'
+----
+
+Expected result: HTTP 200 response with a completion.
+
+=== Troubleshoot connectivity issues
+
+If you cannot connect to a gateway:
+
+. *Verify authentication*: Ensure your API token is valid and has not expired
+. *Check gateway endpoint*: Confirm the endpoint URL includes the correct gateway ID
+. *Verify endpoint URL*: Check for typos in the gateway endpoint
+. *Check permissions*: Confirm with your administrator that you have access to this gateway
+. *Review network connectivity*: Ensure your network allows outbound HTTPS connections
+
+== Choose the right gateway
+
+If you have access to multiple gateways, consider which one to use based on your needs:
+
+=== By environment
+
+Organizations often create separate gateways for different environments:
+
+* Production gateway: Higher rate limits, access to all models, monitoring enabled
+* Staging gateway: Lower rate limits, restricted models, aggressive cost controls
+* Development gateway: Minimal limits, all models for experimentation
+
+Choose the gateway that matches your deployment environment.
+
+=== By team or project
+
+Gateways may be organized by team or project for cost tracking and isolation:
+
+* team-ml-gateway: For machine learning team
+* team-product-gateway: For product team
+* customer-facing-gateway: For production customer workloads
+
+Use the gateway designated for your team to ensure proper cost attribution.
+
+=== By capability
+
+Different gateways may have different features enabled:
+
+* Gateway with MCP tools: Use if your agent needs to call tools
+* Gateway without MCP: Use for simple LLM completions
+* Gateway with specific models: Use if you need access to particular models
+
+== Example: Complete discovery workflow
+
+Here's a complete workflow to discover and validate gateway access:
+
+[source,bash]
+----
+#!/bin/bash
+
+# Set your API token
+export REDPANDA_CLOUD_TOKEN="your-token-here"
+
+# Step 1: List all accessible gateways
+echo "=== Discovering gateways ==="
+curl -s https://api.redpanda.com/v1/gateways \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}" \
+  | jq '.gateways[] | {name: .name, id: .id, endpoint: .endpoint}'
+
+# Step 2: Select a gateway (example)
+export GATEWAY_ENDPOINT="https://example/gateways/gw_abc123/v1"
+
+# Step 3: List available models
+echo -e "\n=== Available models ==="
+curl -s ${GATEWAY_ENDPOINT}/models \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}" \
+  | jq '.data[] | .id'
+
+# Step 4: Test with a simple request
+echo -e "\n=== Testing request ==="
+curl -s ${GATEWAY_ENDPOINT}/chat/completions \
+  -H "Authorization: Bearer ${REDPANDA_CLOUD_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai/gpt-5.2-mini",
+    "messages": [{"role": "user", "content": "Say hello"}],
+    "max_tokens": 10
+  }' \
+  | jq '.choices[0].message.content'
+
+echo -e "\n=== Gateway validated successfully ==="
+----
+
+// Original Next steps: gateway:connect-agent

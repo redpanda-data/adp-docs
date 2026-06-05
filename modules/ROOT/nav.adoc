@@ -71,8 +71,6 @@
 
 * xref:gateway:index.adoc[Routing & LLM Settings]
 ** xref:gateway:overview.adoc[How AI Gateway Works]
-** xref:get-started:gateway-quickstart.adoc[AI Gateway Quickstart]
-** xref:gateway:gateway-architecture.adoc[Understand AI Gateway Architecture]
 ** xref:gateway:configure-provider.adoc[Configure an LLM Provider]
 *** xref:gateway:bedrock-setup.adoc[Set Up AWS Bedrock as an LLM Provider]
 ** xref:gateway:connect-agent.adoc[Connect Your Agent]
