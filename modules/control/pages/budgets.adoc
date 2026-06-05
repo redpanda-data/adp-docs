@@ -19,7 +19,7 @@ After completing these steps, you will be able to:
 
 A *budget* caps LLM spend over a recurring period. When an agent's spend for the period reaches the budget's hard limit, AI Gateway rejects that agent's next LLM request with `HTTP 429` until the period resets. A separate warning threshold fires before the cap is reached, so you can react before an agent is cut off.
 
-Redpanda ADP enforces budgets per agent. In a budget, an _agent_ is its service-account email: the same identity that appears as `agent_id` in spend data.
+Redpanda ADP enforces budgets per agent. In a budget, an _agent_ is identified by its resource name in the form `agents/<slug>`, the same identity that appears as `agent_name` in spend data. Because a budget keys on this resource name, deleting an agent and recreating it with the same name keeps it under the same budget.
 
 === How a budget works
 
@@ -37,7 +37,7 @@ Redpanda ADP enforces budgets per agent. In a budget, an _agent_ is its service-
 |How often the spend pool resets: daily, weekly, or monthly. Periods are calendar-aligned in UTC: daily at 00:00 UTC, weekly at 00:00 UTC Monday, monthly at 00:00 UTC on the first of the month.
 
 |Target agent
-|Which agent the budget applies to. Leave it unset to create the tenant default budget. Set it to an agent's service-account email to create a per-agent override.
+|Which agent the budget applies to. Leave it unset to create the tenant default budget. Set it to an agent's resource name (`agents/<slug>`) to create a per-agent override.
 |===
 
 === Default and per-agent override budgets
@@ -45,9 +45,9 @@ Redpanda ADP enforces budgets per agent. In a budget, an _agent_ is its service-
 You can have one default budget per tenant and at most one override per agent:
 
 * The *default* budget (no target agent) gives every agent its own independent pool of the limit per period. One agent reaching its cap doesn't affect another.
-* A *per-agent override* targets a single agent by service-account email and replaces the default for that agent. Use an override to give a specific agent a higher or lower cap than the fleet default.
+* A *per-agent override* targets a single agent by resource name (`agents/<slug>`) and replaces the default for that agent. Use an override to give a specific agent a higher or lower cap than the fleet default.
 
-The target agent is immutable. To move an override to a different agent, delete it and create a new one. When you read a budget, it also reports the current period's spend, when the period started, when it resets, and (for the default budget) the agent currently closest to its cap.
+The target agent is immutable. To move an override to a different agent, delete it and create a new one. An override matches on the agent's resource name, so recreating an agent with the same name keeps the override pointed at it; the new instance counts as a continuation for budget purposes. When you read a budget, it also reports the current period's spend, when the period started, when it resets, and (for the default budget) the agent currently closest to its cap.
 
 === Set a budget in the UI
 
@@ -140,7 +140,7 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |Aggregated spend by *provider*, *model*, *user*, *agent*, or *provider type*, available through `GetSpendingBreakdown` for programmatic access. The dashboard's provider-breakdown widget covers the provider dimension.
 |===
 
-Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_email`, `agent_id`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, agent, or provider type; `organization_id` is a filter only, not a breakdown dimension.
+Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_email`, `agent_name`, `agent_uid`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, agent, or provider type; `organization_id` is a filter only, not a breakdown dimension.
 
 For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` expression that lets you combine and negate dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). The convenience fields and the `filter` expression compose; populate one or both. The server compiles the result to a single SQL `WHERE` clause, which avoids per-dimension fan-out queries.
 
@@ -182,8 +182,11 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 |`user_email`
 |Restrict to one identified user, matched on the caller's email. Anonymous traffic is excluded.
 
-|`agent_id`
-|Restrict to one agent: the service-account email recorded on the on-behalf-of path. Leave it empty to match every row, including direct user calls; set it to scope spend to a single agent.
+|`agent_name`
+|Restrict to one agent by its resource name (`agents/<slug>`), recorded on every call made by or on behalf of an agent. Leave it empty to match every row, including direct user calls; set it to scope spend to a single agent, summed across every instance that has used the name.
+
+|`agent_uid`
+|Restrict to one agent instance, identified by an opaque UUID. Only valid when `agent_name` is also set: setting `agent_uid` alone is rejected. Use it to exclude spend from a previously deleted agent that reused the same name.
 
 |`organization_id`
 |Restrict to one organization. Multi-tenant deployments only.
@@ -192,7 +195,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 |AIP-160 expression that combines and negates dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). Composes with the structured fields above; populate one or both.
 |===
 
-The `dimension` value chooses the breakdown dimension. Valid values are the `BreakdownDimension` enum: `BREAKDOWN_DIMENSION_PROVIDER`, `BREAKDOWN_DIMENSION_MODEL`, `BREAKDOWN_DIMENSION_USER`, `BREAKDOWN_DIMENSION_AGENT`, and `BREAKDOWN_DIMENSION_PROVIDER_TYPE`. A breakdown on `BREAKDOWN_DIMENSION_AGENT` keys on the agent's service-account email and excludes rows with no agent (direct user calls), the same way the other dimensions skip empty keys.
+The `dimension` value chooses the breakdown dimension. Valid values are the `BreakdownDimension` enum: `BREAKDOWN_DIMENSION_PROVIDER`, `BREAKDOWN_DIMENSION_MODEL`, `BREAKDOWN_DIMENSION_USER`, `BREAKDOWN_DIMENSION_AGENT`, and `BREAKDOWN_DIMENSION_PROVIDER_TYPE`. A breakdown on `BREAKDOWN_DIMENSION_AGENT` keys on the agent's resource name (`agents/<slug>`) and excludes rows with no agent (direct user calls), the same way the other dimensions skip empty keys. Spend is summed across every instance that has used the name, so an agent that was deleted and recreated appears as a single entry.
 
 === cURL example
 
