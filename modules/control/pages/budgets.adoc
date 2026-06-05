@@ -351,7 +351,7 @@ After saving an override, send a test request through the affected model and eit
 
 If the cost still reflects the catalog price, the override may not have propagated yet. Wait a few seconds for cost-reporting to pick it up, then re-test.
 
-// TODO: roadmap items not yet shipped: configurable caps (daily/monthly, per org/agent/user, per provider/model); halt-vs-notify behavior on cap hits; per-agent caps; alert hooks (webhook/email/chat); multi-tenant cap-setting with override semantics. Once cap-management lands, add a "Set caps" how-to and split this page into a sub-folder if content outgrows a single page. Open Q C1 in the companion plan.
+// TODO: roadmap items not yet shipped (keep in sync with the NOTE under "Manage budgets through the API"): tenant-wide shared pools; limits scoped by model, provider, or organization; and notification delivery (email, webhook, or chat) on warn or block. Document each here once it ships. Open Q C1 in the companion plan.
 
 == Next steps
 
