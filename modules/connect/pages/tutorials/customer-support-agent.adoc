@@ -36,7 +36,7 @@ The challenge: users phrase requests differently ("Where's my package?", "Track 
 
 == Prerequisites
 
-* xref:get-started:gateway-quickstart.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
+* xref:gateway:configure-provider.adoc[AI Gateway configured] with at least one LLM provider enabled (this tutorial uses OpenAI).
 
 == Design the MCP tools
 
