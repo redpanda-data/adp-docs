@@ -53,28 +53,28 @@ After completing this guide, you will be able to:
 
 The backend is the AWS region and credentials the guardrail uses to reach Bedrock.
 
-. Select a Region. The region decides which Bedrock models and guardrail features are reachable, because not every feature is available in every region. Use the same region as the Bedrock provider or model you intend to protect.
-. Choose a Credential source:
+. Select a region. The region decides which Bedrock models and guardrail features are reachable, because not every feature is available in every region. Use the same region as the Bedrock provider or model you intend to protect.
+. Choose a credential source:
 +
-* Standalone AWS credentials: supply credentials for this guardrail directly.
-* Borrow from a Bedrock provider: reuse the credentials of a Bedrock LLM provider you already configured.
-. If you chose standalone credentials, choose a Credential type:
+* Standalone AWS credentials: Supply credentials for this guardrail directly.
+* Borrow from a Bedrock provider: Reuse the credentials of a Bedrock LLM provider you already configured.
+. If you chose standalone credentials, choose a credential type:
 +
-* Default provider chain: use the credentials available in the runtime environment.
-* Static access keys: supply an access key ID and secret access key, each stored as a secret reference in the ADP secret store.
-* Assume IAM role: supply a role ARN, with an optional external ID and session name.
+* Default provider chain: Use the credentials available in the runtime environment.
+* Static access keys: Supply an access key ID and secret access key, each stored as a secret reference in the ADP secret store.
+* Assume IAM role: Supply a role ARN, with an optional external ID and session name.
 . Click *Next*.
 
 == Turn on policies
 
 All policies are optional. Turn on only the ones you need, then configure each. For the full configuration of every policy, see xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
 
-* Content filters: harmful-content categories (hate, insults, sexual, violence, misconduct, and prompt attacks).
-* Word filters: exact words and phrases from your own lists and platform-managed lists such as profanity.
-* Denied topics: topics blocked by meaning rather than exact words.
+* Content filters: Harmful-content categories (hate, insults, sexual, violence, misconduct, and prompt attacks).
+* Word filters: Exact words and phrases from your own lists and platform-managed lists such as profanity.
+* Denied topics: Topics blocked by meaning rather than exact words.
 * Sensitive information: PII detected by built-in entity types and your own regex patterns, then detected, blocked, or anonymized.
-* Contextual grounding: factual grounding and relevance checks for RAG-style output. Output only.
-* Automated reasoning: formal Bedrock Automated Reasoning policies. Detect only.
+* Contextual grounding: Factual grounding and relevance checks for RAG-style output. Output only.
+* Automated reasoning: Formal Bedrock Automated Reasoning policies. Detect only.
 
 Each policy you turn on exposes a separate Evaluate this policy toggle. Turn it off to save the policy's configuration without enforcing it, which lets you stage a policy before it takes effect.
 
@@ -86,7 +86,7 @@ A guardrail takes effect only once a provider references it. On an LLM provider,
 
 == Enable the guardrail
 
-Once the policies are configured and the guardrail is attached, set the guardrail to enabled. A disabled guardrail keeps its configuration but skips evaluation entirely, which is useful while you stage a policy or troubleshoot whether the guardrail is responsible for unexpected blocks.
+After the policies are configured and the guardrail is attached, set the guardrail to enabled. A disabled guardrail keeps its configuration but skips evaluation entirely, which is useful while you stage a policy or troubleshoot whether the guardrail is responsible for unexpected blocks.
 
 == Verify the guardrail blocks
 
