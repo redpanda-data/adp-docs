@@ -34,9 +34,9 @@ ADP configures the agent through a six-step wizard: Basics, Model, Behavior, Too
 
 == Basics
 
-On the *Basics* step, configure the identity fields that appear in the registry list, transcripts, and audit logs.
+On the *Basics* step, configure the identity fields that appear in the agent registry list, transcripts, and audit logs.
 
-. Enter a *Display name*. Required. Shown in the registry list and detail header (for example, `Customer Support Agent`).
+. Enter a *Display name*. Required. Shown in the agent registry list and detail header (for example, `Customer Support Agent`).
 . Review the *Agent ID*. ADP auto-derives it from the display name, using lowercase letters, numbers, and hyphens (up to 63 characters). The ID is used in URLs and CLI commands and can't be changed after creation.
 . Optionally, add a *Description*. Up to 1024 characters.
 . Optionally, add *Tags* as key/value pairs to organize and filter agents in the registry.

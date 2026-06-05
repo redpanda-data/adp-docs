@@ -19,7 +19,7 @@ Redpanda offers two kinds of MCP server backends:
 |===
 
 // Source: `cloudv2` `apps/aigw/internal/mcp/managed/defaults.go` on `origin/main`, verified 2026-05-10.
-The default registry contains 36 managed MCP server types. See xref:connect:managed/managed-catalog.adoc[Managed catalog] for the verified list.
+The default catalog contains 36 managed MCP server types. See xref:connect:managed/managed-catalog.adoc[Managed catalog] for the full list.
 
 == When to use each
 

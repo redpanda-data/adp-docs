@@ -175,7 +175,7 @@ NOTE: The other option, *I host it myself*, registers an agent you run on your o
 
 . On the *Basics* step, set the following, then click *Continue*:
 +
-* *Display name*: `pet-store-assistant`. This name appears in the registry list and the detail header.
+* *Display name*: `pet-store-assistant`. This name appears in the agent registry list and the detail header.
 * *Agent ID*: Leave the auto-derived value. ADP generates the ID from the display name, and you can't change it after creation.
 * *Description*: `Quickstart agent that answers questions about the PetStore inventory`.
 * *Tags*: Skip. Tags are optional metadata for filtering and grouping.
