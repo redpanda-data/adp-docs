@@ -1,5 +1,5 @@
-= Connect Your App to an LLM Provider
-:description: Point your application or AI agent at an LLM provider's proxy URL. Covers the URL shape, the local development workflow with rpk ai, the OIDC client-credentials flow for CI and application code, and SDK examples for OpenAI, Anthropic, Google AI, AWS Bedrock, and OpenAI-compatible endpoints.
+= Connect Your App to AI Gateway
+:description: Point your application or AI agent at an AI Gateway provider's proxy URL. Covers the URL shape, the local development workflow with rpk ai, the OIDC client-credentials flow for CI and application code, and SDK examples for OpenAI, Anthropic, Google AI, AWS Bedrock, and OpenAI-compatible endpoints.
 :page-topic-type: how-to
 :personas: agent_builder
 :page-aliases: cloud-data-platform:ai-agents:ai-gateway/builders/connect-your-agent.adoc
@@ -7,7 +7,7 @@
 :learning-objective-2: pass:q[Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients]
 :learning-objective-3: Send requests through the proxy URL with the SDK of your choice
 
-This guide shows how to connect your glossterm:AI agent[] or application to an LLM provider through ADP. You construct the proxy URL for a provider you have already created, authenticate (with xref:reference:rpk/rpk-cloud/rpk-cloud-login.adoc[`rpk cloud login`] for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
+This guide shows how to connect your glossterm:AI agent[] or application to the AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with xref:reference:rpk/rpk-cloud/rpk-cloud-login.adoc[`rpk cloud login`] for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
 
 After completing this guide, you will be able to:
 

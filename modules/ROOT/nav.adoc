@@ -73,7 +73,7 @@
 ** xref:gateway:overview.adoc[How AI Gateway Works]
 ** xref:gateway:configure-provider.adoc[Configure an LLM Provider]
 *** xref:gateway:bedrock-setup.adoc[Set Up AWS Bedrock as an LLM Provider]
-** xref:gateway:connect-agent.adoc[Connect Your App to an LLM Provider]
+** xref:gateway:connect-agent.adoc[Connect Your App to AI Gateway]
 
 * xref:reference:index.adoc[Reference]
 ** xref:reference:rpk-install.adoc[Install or Update rpk]
