@@ -1,16 +1,14 @@
 = Create a Guardrail
-:description: Configure a guardrail, pick an evaluator type and phase, attach it to one or more LLM providers, and verify that it fires.
+:description: Create a guardrail with the three-step wizard, configure its Bedrock backend and policies, attach it to an LLM provider, and verify that it blocks.
 :page-topic-type: how-to
 :personas: security_compliance_lead, platform_engineer
-:learning-objective-1: Create and configure a guardrail of a chosen evaluator type
-:learning-objective-2: Attach the guardrail to one or more LLM providers and enable it
-:learning-objective-3: Verify the guardrail fires and trace the violation through the transcript
+:learning-objective-1: Create a guardrail and configure its backend and policies
+:learning-objective-2: Attach the guardrail to an LLM provider and enable it
+:learning-objective-3: Verify the guardrail blocks a request and trace it through the transcript
 
-// TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the live walkthrough fills in once eng confirms the post-pivot Guardrail resource shape and `aigwctl` (or the Agentic Data Plane UI) is reachable from a sandbox cluster.
+Create a guardrail to inspect and control the requests and responses that flow through an LLM provider. You configure the guardrail in a three-step wizard (details, backend, and policies), attach it to a provider, and confirm it blocks.
 
-This page walks through configuring your first guardrail end-to-end: pick an evaluator type, choose a phase, fill in the per-type config, attach it to LLM providers, and confirm it fires.
-
-After reading this page, you will be able to:
+After completing this guide, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
@@ -18,90 +16,94 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* A Redpanda ADP environment with at least one LLM provider configured. See xref:gateway:configure-provider.adoc[Configure your LLM provider].
-* For a *Custom webhook* evaluator, a publicly reachable HTTPS endpoint that implements the gateway's webhook contract. See xref:control:guardrails/types-reference.adoc[Evaluator types reference].
-* For evaluators that need their own credentials (for example, a hosted PII service), the credential stored in the ADP secret store using `UPPER_SNAKE_CASE`.
+* An AWS region and Bedrock access. A guardrail reconciles against the AWS Bedrock control plane, so you need either AWS credentials it can use or a Bedrock LLM provider whose credentials it can borrow.
+* At least one LLM provider to attach the guardrail to. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
+* For the sensitive-information, content-filter, contextual-grounding, and automated-reasoning policies, confirm the features you need are available in your chosen Bedrock region.
 
-// TODO: standalone-ADP wording. Replace with the concrete sign-in URL, IAM role, and OIDC audience once the standalone product surface ships. Open Q D1 in the companion plan.
+== Step 1: Add the details
 
-== Open the Guardrails surface
+. In ADP, open *Guardrails*, then click *Create guardrail*.
+. On the Details step, set the following:
++
+[cols="1,3"]
+|===
+|Field |Notes
 
-// TODO: finalize this section once the Agentic Data Plane UI ships a Guardrails surface. As of 2026-04-28, `apps/adp-ui/src/routes/` has no `guardrails/` route. The walkthrough may need to lead with `aigwctl` instead of the UI and add the UI flow in a later refresh. Open Qs C4 and C5 in the companion plan.
+|Name
+|Required. Lowercase letters, numbers, and hyphens only, 1 to 63 characters. Used in the resource path and can't be changed after creation.
 
-In ADP, open *Guardrails*, then click *Create guardrail*.
+|Display Name
+|Optional. A friendlier name shown in the list and detail views.
 
-== Pick an evaluator type
+|Description
+|Optional.
 
-Choose one of the supported evaluator types:
+|Blocked Input Message
+|Required. The message returned to the caller when a policy blocks a prompt. 1 to 500 characters.
 
-* *PII*: detects personally identifiable information using regex and entity-recognition rules. No per-call LLM cost.
-* *Toxicity*: runs content through a toxicity classifier. Per-call LLM cost.
-* *Custom webhook*: delegates the decision to your HTTPS endpoint. Gateway charges nothing per call.
+|Blocked Output Message
+|Required. The message returned instead of the model's response when a policy blocks it. 1 to 500 characters.
 
-For each type's full config schema and behavior, see xref:control:guardrails/types-reference.adoc[Evaluator types reference].
+|Enabled
+|Leave off for now. Enable the guardrail after you configure its policies.
+|===
+. Click *Next*.
 
-// TODO: confirm the evaluator type set at GA. Open Q A5 in the companion plan.
+== Step 2: Configure the backend
 
-== Pick a phase
+The backend is the AWS region and credentials the guardrail uses to reach Bedrock.
 
-Pick the phase or phases at which the evaluator runs:
+. Select a Region. The region decides which Bedrock models and guardrail features are reachable, because not every feature is available in every region. Use the same region as the Bedrock provider or model you intend to protect.
+. Choose a Credential source:
++
+* Standalone AWS credentials: supply credentials for this guardrail directly.
+* Borrow from a Bedrock provider: reuse the credentials of a Bedrock LLM provider you already configured.
+. If you chose standalone credentials, choose a Credential type:
++
+* Default provider chain: use the credentials available in the runtime environment.
+* Static access keys: supply an access key ID and secret access key, each stored as a secret reference in the ADP secret store.
+* Assume IAM role: supply a role ARN, with an optional external ID and session name.
+. Click *Next*.
 
-* `INPUT`: runs against the user's prompt before the gateway forwards it upstream.
-* `OUTPUT`: runs against the model's response before the gateway returns it to the caller.
-* `BOTH`: runs at both phases.
+== Step 3: Turn on policies
 
-Decision rule:
+All six policies are optional. Turn on only the ones you need, then configure each. For the full configuration of every policy, see xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
 
-* PII guardrails typically run at `BOTH` (defend data exfiltration in both directions).
-* Toxicity guardrails typically run at `OUTPUT` only (filter what the model generates; INPUT-side toxicity filtering rarely improves outcomes).
-* Custom webhook depends on what your webhook does: start with `INPUT` for prompt-injection heuristics, `OUTPUT` for brand-safety lists, `BOTH` for either-direction checks.
+* Content filters: harmful-content categories (hate, insults, sexual, violence, misconduct, and prompt attacks).
+* Word filters: exact words and phrases from your own lists and platform-managed lists such as profanity.
+* Denied topics: topics blocked by meaning rather than exact words.
+* Sensitive information: PII detected by built-in entity types and your own regex patterns, then detected, blocked, or anonymized.
+* Contextual grounding: factual grounding and relevance checks for RAG-style output. Output only.
+* Automated reasoning: formal Bedrock Automated Reasoning policies. Detect only.
 
-== Configure the evaluator
+Each policy you turn on exposes a separate Evaluate this policy toggle. Turn it off to save the policy's configuration without enforcing it, which lets you stage a policy before it takes effect.
 
-Fill in the per-type config block. The form fields differ per evaluator type; see xref:control:guardrails/types-reference.adoc[Evaluator types reference] for the full schema of each type.
+When you finish, click *Create guardrail*.
 
-// TODO: walk through the PII form as the exemplar (most common starting case) once the post-pivot field set is confirmed. Lift exact field names and labels from the proto. Open Qs A1, A2 in the companion plan.
+== Attach the guardrail to a provider
 
-== Attach to LLM providers
-
-Select one or more LLM providers to attach the guardrail to. Multi-attach is supported: one guardrail can apply to many providers.
-
-// TODO: confirm whether guardrails also attach at other scopes (agents, MCP servers, organizations). The pre-pivot proto attached through `provider_ids[]` and `route_ids[]`; routes were removed in cloudv2 commit `7eff2ecbbf`. Open Qs A3, A4 in the companion plan.
+A guardrail takes effect only once a provider references it. On an LLM provider, set its guardrail to the one you created. A provider references one guardrail, and you can reuse the same guardrail across many providers. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
 
 == Enable the guardrail
 
-Toggle the guardrail to *Enabled*. Disabled guardrails skip evaluation entirely: useful when staging a new policy before turning it on, or when troubleshooting whether a guardrail is responsible for unexpected blocks.
+Once the policies are configured and the guardrail is attached, set the guardrail to enabled. A disabled guardrail keeps its configuration but skips evaluation entirely, which is useful while you stage a policy or troubleshoot whether the guardrail is responsible for unexpected blocks.
 
-== Verify the guardrail fires
+== Verify the guardrail blocks
 
-Send a request through one of the attached providers that should trigger the guardrail. For example, with a PII guardrail attached on `INPUT`:
+Send a request through an attached provider that should trip a policy. For example, with the sensitive-information policy set to block on input, send a prompt that contains an email address or other PII.
 
-// TODO: replace with a working `curl` one-liner against the proxy URL once the live walkthrough resolves authentication. Standalone-ADP wording until then.
+The request returns your blocked input message instead of a model response. Open the request's transcript and confirm the guardrail recorded its action. See xref:monitor:transcripts.adoc[See what your agent did] for the transcript walkthrough and xref:control:guardrails/violations.adoc[Review blocked requests] for how blocked requests surface.
 
-[source,bash]
-----
-curl -X POST https://your-adp-environment/v1/chat/completions \
-  -H "Authorization: Bearer $ADP_TOKEN" \
-  -d '{"messages":[{"role":"user","content":"My SSN is 123-45-6789"}]}'
-----
+== Edit, disable, or delete a guardrail
 
-The request should return an error. Open the request's transcript and confirm a violation entry appears for the guardrail. See xref:monitor:transcripts.adoc[Read a transcript] for the transcript walkthrough and xref:control:guardrails/violations.adoc[Read violations] for what to do when a violation surprises you.
+From the guardrails list or a guardrail's detail page:
 
-== Edit, disable, or delete
-
-* *Edit*: change the per-type config or the attached providers. Changes apply on the next request.
-* *Disable*: short-circuit the middleware without losing the config. Useful when staging or troubleshooting.
-* *Delete*: permanently remove the guardrail. If the guardrail is currently firing on production traffic, the UI requires confirmation.
-
-// TODO: confirm exact UI labels and the delete-confirmation copy once the UI ships. Open Q C4 in the companion plan.
-
-== Troubleshooting
-
-* *Evaluator returns false positives*: see xref:control:guardrails/violations.adoc[Read violations] for tuning patterns per evaluator type.
-* *Evaluator times out or is unavailable*: see xref:control:guardrails/violations.adoc[Read violations] for the evaluator-down section.
-* *Attached provider doesn't fire the guardrail*: confirm attachment (right provider, right phase), enabled state, and that requests are actually reaching the gateway (not bypassing through a direct provider URL).
+* Edit the guardrail to change its backend or policies. Changes apply on the next request.
+* Disable the guardrail to stop evaluation without losing its configuration.
+* Delete the guardrail to remove it permanently. Deletion asks you to confirm by typing the guardrail's name.
 
 == Next steps
 
-* xref:control:guardrails/types-reference.adoc[Evaluator types reference]
-* xref:control:guardrails/violations.adoc[Read violations]
+* xref:control:guardrails/types-reference.adoc[Guardrail policy reference]
+* xref:control:guardrails/violations.adoc[Review blocked requests]
+* xref:gateway:configure-provider.adoc[Configure an LLM provider]

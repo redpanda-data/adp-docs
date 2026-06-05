@@ -1,5 +1,5 @@
 = Set Up Guardrails
-:description: Understand how guardrails work, create them, review blocked requests, and look up the available evaluator types.
+:description: Understand how guardrails work, create them, review blocked requests, and look up the available policies.
 :page-layout: index
 
-Guardrails enforce safety rules on agent requests. Learn how they work, create one, review blocked requests, and look up the available evaluator types.
+Guardrails inspect and control the requests and responses that flow through your LLM providers. Learn how they work, create one, review blocked requests, and look up the available policies.

@@ -267,15 +267,13 @@ The proto-generated client (Connect-Go or grpc-python) is the long-term recommen
 * `GetSpendingTimeSeries`: Spend bucketed over the time range (hourly or daily), for chart-style consumers.
 * `GetSpendingTimeSeriesByDimension`: Time-series buckets split by a breakdown dimension (top-N keys by cost), for stacked charts. Reports `truncated_key_count` when more keys matched than were returned.
 
-== Guardrail evaluator cost
+== Guardrail cost
 
-Some guardrail evaluators call an LLM to do their work. A toxicity classifier, for example, runs the request or response through a separate model and accrues per-call cost in the process. PII detection over regex doesn't, but anything LLM-based does.
+Guardrails are evaluated by AWS Bedrock, which bills guardrail usage to the AWS account whose credentials the guardrail's backend uses. This cost is separate from ADP's LLM spend tracking: it does not appear in the spend view or `SpendingService`, which account only for LLM provider token usage through the gateway.
 
-Guardrail evaluator cost surfaces in the same spending pipeline as user-facing LLM calls. The evaluator's cost is attributed to the *evaluator's configured upstream provider* (usually a small classifier model, separate from the user-facing LLM), so per-provider breakdowns separate the two automatically.
+Bedrock charges for guardrail evaluation whether or not a request is blocked. Blocking an input avoids the downstream model-inference charge; blocking an output still incurs inference up to the point of generation. Deterministic checks such as word filters and custom regex patterns are not billed, while model-based policies such as content filters, denied topics, and contextual grounding are, so turn off the directions and policies you don't need. For current rates, see the https://aws.amazon.com/bedrock/pricing/[AWS Bedrock pricing^].
 
-For the per-evaluator cost model and how it interacts with the dashboard's spend view, see xref:control:guardrails/overview.adoc[Configure guardrails].
-
-// TODO: confirm with eng that guardrail evaluator cost flows into the same SpendingService as user-facing LLM cost (vs. a separate stream). Open Q A3 in the companion plan, also flagged on the Guardrails plan.
+For what each policy does, see xref:control:guardrails/overview.adoc[How guardrails work] and xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
 
 == Multi-tenant viewing patterns
 
@@ -359,4 +357,4 @@ If the cost still reflects the catalog price, the override may not have propagat
 
 * xref:control:dashboard/overview.adoc[Read the governance overview]
 * xref:monitor:transcripts.adoc[Read a transcript]
-* xref:control:guardrails/overview.adoc[Configure guardrails]
+* xref:control:guardrails/overview.adoc[How guardrails work]

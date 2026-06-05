@@ -1,77 +1,131 @@
-= Guardrail Evaluator Types Reference
-:description: Definitive reference for every evaluator type's config schema, supported phases, behavior on match, and gotchas.
+= Guardrail Policy Reference
+:description: Reference for the six guardrail policy types, their configuration fields, actions, directions, and limits.
 :page-topic-type: reference
 :personas: security_compliance_lead, platform_engineer
 
-// TODO: this page lands at GA. The Guardrails plan (https://redpandadata.atlassian.net/wiki/spaces/DOC/pages/1881702438) lists this page as a must-ship deliverable; the per-type config schemas are filled in once eng confirms the post-pivot Guardrail resource shape and the evaluator type set at GA. Open Qs A1, A2, A5, B3, B4 in the companion plan.
+A guardrail bundles up to six policies, each backed by AWS Bedrock Guardrails. Every policy is optional. This page documents each policy's configuration, the actions it can take, and which direction (input, output, or both) it evaluates.
 
-Use this reference to:
+Two settings recur across policies:
 
-* [ ] Look up the config schema for a given evaluator type
-* [ ] Decide which phases each evaluator type supports
-* [ ] Recognize the behavior-on-match options each evaluator type exposes
+* Action: what the policy does when it matches. `None` detects and records the match in the trace without intervening. `Block` stops the request and returns the configured blocked message. The sensitive-information policy adds `Anonymize`.
+* Direction: most policies evaluate input, output, or both, and you set the action per direction. Some policies are fixed to one direction (noted below).
 
-Each evaluator type has its own config schema, supported phase set, behavior-on-match options, and cost shape. Sections below cover the three types.
+Feature availability varies by AWS region. Choose a region that supports the policies you need, and see the https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html[AWS Bedrock Guardrails documentation^] for exhaustive behavior and regional support.
 
-== PII evaluator
+== Content filters
 
-*What it does*: Detects personally identifiable information (names, emails, phone numbers, SSNs, addresses, and other entity types) in text using regex and entity-recognition rules.
+Classify prompts and responses against harmful-content categories and block or detect them per category.
 
-*Phases supported*: `INPUT`, `OUTPUT`, `BOTH`.
+[cols="1,3"]
+|===
+|Field |Description
 
-// TODO: lift the full config schema from `apps/aigw/internal/guardrails/pii.go` once the post-pivot proto is final. Document each field's name, type, default, and example. Likely fields: entity types to detect (allowlist or denylist), locale (US-only patterns versus EU patterns), confidence threshold.
+|Categories
+|`Hate`, `Insults`, `Sexual`, `Violence`, `Misconduct`, and `Prompt attack`. Configure each category independently. Prompt-attack detection evaluates input only.
 
-*Behavior on match*: Block (default). Redact-and-pass behavior may be configurable; confirm whether the build exposes redact-mode and how it interacts with the per-type config.
+|Strength
+|Per category and direction. Sets the confidence cutoff for a match: `None` scores the category in the trace without acting, `Low` matches only high-confidence content, `Medium` matches medium-confidence and above, and `High` matches any non-negligible content. Higher strength is stricter.
 
-// TODO: confirm block-vs-redact options at GA. Open Q B3 in the companion plan.
+|Action
+|Per category and direction: `None` (detect) or `Block`.
 
-*Cost*: None beyond compute. Regex is negligible; entity-recognition can be non-trivial.
+|Modality
+|`Text` or `Image`.
+|===
 
-*Gotchas:*
+== Word filters
 
-* Regex-based detection produces false positives on uncommon PII formats (international phone numbers, non-US SSN equivalents).
-* Locale-specific patterns matter: A US-tuned config will miss EU PII patterns and vice versa.
-* PII matches in code blocks or quoted JSON payloads can produce surprising blocks; tune the entity allowlist if your traffic includes structured payloads.
+Block or detect exact words and phrases.
 
-== Toxicity evaluator
+[cols="1,3"]
+|===
+|Field |Description
 
-*What it does*: Runs the input or output through a toxicity classifier and flags content above a configurable threshold.
+|Custom words
+|Your own list of words and phrases to match.
 
-*Phases supported*: Typically `OUTPUT`; `INPUT` and `BOTH` also valid but rarely useful.
+|Managed lists
+|Platform-managed lists. `Profanity` is available today.
 
-// TODO: confirm the config schema with eng. The phase5-aigw-guardrails branch in cloudv2 ships a "keyword" evaluator that may rename to Toxicity at GA, stay as a fourth type, or be dropped entirely. Open Q A5 in the companion plan. Likely fields: classifier model identifier, threshold (0.0–1.0), category set to flag (hate, harassment, self-harm, sexual, violence, and so on).
+|Action
+|Per direction (input and output): `None` (detect) or `Block`. Set independently for custom words and for each managed list.
+|===
 
-*Behavior on match*: Block.
+== Denied topics
 
-*Cost*: Per-call LLM cost. Counts against the *evaluator's configured upstream provider* (typically a small classifier model, separate from the user-facing LLM). Token cost surfaces alongside the user-facing LLM call in the same transcript.
+Block content by meaning rather than exact words, so the policy catches paraphrases and misspellings. A policy holds up to 30 topics.
 
-*Gotchas:*
+[cols="1,3"]
+|===
+|Field |Description
 
-* Threshold tuning matters: Too aggressive blocks legitimate traffic; too permissive lets toxic content through. Start at the classifier's recommended default and tune from violation review.
-* Latency adds to overall response time. If async-OUTPUT evaluation isn't supported for your model's stream type, the user-visible latency includes the classifier call.
-* The classifier model itself can fail or be down. See xref:control:guardrails/violations.adoc[Read violations] for the evaluator-down section.
+|Name
+|Topic name, 1 to 100 characters.
 
-== Custom webhook evaluator
+|Definition
+|What the topic covers, up to 1000 characters. The definition drives the semantic match, so be specific.
 
-*What it does*: Delegates the evaluation to a user-provided HTTPS endpoint. The gateway POSTs the content to your endpoint and acts on the response.
+|Examples
+|Up to five example phrases, each up to 100 characters, that should match the topic.
 
-*Phases supported*: `INPUT`, `OUTPUT`, `BOTH`.
+|Action
+|Per direction (input and output): `None` (detect) or `Block`.
+|===
 
-*Webhook contract:*
+== Sensitive information
 
-// TODO: lift the exact request and response shape from `apps/aigw/internal/guardrails/registry.go` and the custom-webhook handler once the webhook contract lands. Open Q B4 in the companion plan.
+Detect personally identifiable information (PII) by built-in entity type or by your own regular expressions, then detect, block, or anonymize it.
 
-* *Request shape*: The gateway POSTs a JSON document containing the phase (`INPUT` or `OUTPUT`), the content payload (prompt or response text), request metadata (request ID for correlation, model identifier, attached provider), and any extra fields the contract specifies.
-* *Response shape*: Your endpoint returns a JSON document containing the decision (`pass` or `block`), an optional reason string surfaced in the violation entry, and (if redact-mode is supported) an optional redacted-content payload.
-* *Authentication*: The gateway authenticates to your webhook using a shared secret stored in the Redpanda ADP secret store. mTLS or signed-JWT alternatives may be available.
-* *Retry / timeout*: The gateway honors a default per-call timeout. On webhook unavailable, the evaluator-down behavior applies (see xref:control:guardrails/violations.adoc[Read violations]).
+[cols="1,3"]
+|===
+|Field |Description
 
-// TODO: confirm webhook authentication options at GA. Open Q B4c in the companion plan.
+|Entities
+|Built-in entity types. Each entity has a per-direction action.
 
-*Cost*: Gateway charges nothing per call. Your webhook's compute cost is your own.
+|Regexes
+|Custom patterns. Each rule has a name (1 to 100 characters), an RE2 pattern (1 to 500 characters; lookaround is not supported), an optional description, and a per-direction action.
 
-*Gotchas:*
+|Action
+|Per direction (input and output): `None` (detect), `Block`, or `Anonymize`. `Anonymize` replaces each match in place with its entity type, such as `{EMAIL}`.
+|===
 
-* Slow webhooks add to user-visible latency, especially on `INPUT` (the request is blocked until the webhook responds).
-* Webhook errors should fail closed (block) by default for safety, but make this configurable per guardrail if your use case favors availability.
-* Logging and observability of the webhook itself is your responsibility: The gateway only records the decision the webhook returned.
+The built-in entity types are: `ADDRESS`, `AGE`, `NAME`, `EMAIL`, `PHONE`, `USERNAME`, `PASSWORD`, `DRIVER_ID`, `LICENSE_PLATE`, `VEHICLE_IDENTIFICATION_NUMBER`, `CREDIT_DEBIT_CARD_CVV`, `CREDIT_DEBIT_CARD_EXPIRY`, `CREDIT_DEBIT_CARD_NUMBER`, `PIN`, `INTERNATIONAL_BANK_ACCOUNT_NUMBER`, `SWIFT_CODE`, `IP_ADDRESS`, `MAC_ADDRESS`, `URL`, `AWS_ACCESS_KEY`, `AWS_SECRET_KEY`, `US_BANK_ACCOUNT_NUMBER`, `US_BANK_ROUTING_NUMBER`, `US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER`, `US_PASSPORT_NUMBER`, `US_SOCIAL_SECURITY_NUMBER`, `CA_HEALTH_NUMBER`, `CA_SOCIAL_INSURANCE_NUMBER`, `UK_NATIONAL_HEALTH_SERVICE_NUMBER`, `UK_NATIONAL_INSURANCE_NUMBER`, and `UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER`.
+
+== Contextual grounding
+
+For RAG-style applications, check model output against a source and the user's query. This policy evaluates output only and has two independent sub-filters.
+
+[cols="1,3"]
+|===
+|Sub-filter |Description
+
+|Grounding
+|Checks that the response is factually grounded in the provided source.
+
+|Relevance
+|Checks that the response is relevant to the user's query.
+|===
+
+Each sub-filter has its own enable toggle, a threshold between `0.0` and `0.99`, and an action. The action fires when the response scores below the threshold, so higher thresholds are stricter. The action is `None` (detect) or `Block`.
+
+== Automated reasoning
+
+Mathematically verify model output against formal Bedrock Automated Reasoning policies. This policy is detect-only: it never blocks, and its findings appear in the trace.
+
+[cols="1,3"]
+|===
+|Field |Description
+
+|Policy ARNs
+|One or two Bedrock Automated Reasoning policy ARNs to attach. Each ARN must point at a specific numeric version (for example, ending in `:1` or `:2`); the `DRAFT` version is rejected. Create and publish the policies in the AWS Bedrock console first, then reference their versioned ARNs here.
+
+|Confidence threshold
+|A value between `0.0` and `1.0`. Below this confidence, a finding is reported as non-definitive.
+|===
+
+== Next steps
+
+* xref:control:guardrails/create-guardrail.adoc[Create a guardrail]
+* xref:control:guardrails/violations.adoc[Review blocked requests]
+* xref:control:guardrails/overview.adoc[How guardrails work]
