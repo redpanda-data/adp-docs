@@ -16,7 +16,7 @@ Use this reference to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-For an explanation of how permissions, roles, and role bindings fit together, see xref:control:permissions-overview.adoc[About ADP Permissions].
+For an explanation of how permissions, roles, and role bindings fit together, see xref:control:permissions-overview.adoc[Control Who Can Do What].
 
 == How to read this reference
 
@@ -464,4 +464,4 @@ The `dataplane_knowledgebase_*` permissions gate retrieval-augmented generation 
 
 == Next steps
 
-* xref:control:permissions-overview.adoc[About ADP Permissions]
+* xref:control:permissions-overview.adoc[Control Who Can Do What]

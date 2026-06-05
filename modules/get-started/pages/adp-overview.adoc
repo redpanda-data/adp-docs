@@ -28,7 +28,7 @@ The AI Gateway is a managed proxy for LLM APIs. You configure an LLM provider on
 
 Because every LLM call flows through one managed entry point, you get usage and cost visibility across providers, broken down by provider, model, and user, without locking into any single vendor's SDK. Applications authenticate with short-lived OIDC service-account tokens, and streaming responses pass through unchanged. To cap spend, set a per-agent xref:control:budgets.adoc[budget].
 
-For more information, see xref:gateway:overview.adoc[AI Gateway Overview].
+For more information, see xref:gateway:overview.adoc[How AI Gateway Works].
 
 == MCP servers
 
@@ -64,7 +64,7 @@ Redpanda ADP addresses critical enterprise requirements across all components.
 
 * *Unified authorization*: All components use OIDC-based authentication with an on-behalf-of authorization model. When a user invokes an agent, the agent inherits the intersection of its own permissions and the user's permissions. This ensures proper data access scoping.
 
-* *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) capture every agent action with 100% sampling using OpenTelemetry standards. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in ADP and replay data for agent evaluations. For more information, see xref:monitor:concepts.adoc[Transcripts Overview].
+* *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) capture every agent action with 100% sampling using OpenTelemetry standards. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in ADP and replay data for agent evaluations. For more information, see xref:monitor:concepts.adoc[How Observability Works].
 
 * *Compliance and audit*: Redpanda ADP records every agent action and the data sources used in each decision, which supports audit and compliance efforts (for example, frameworks such as ISO 42001 or the EU AI Act). Execution logs are stored in Redpanda topics and can be materialized to Iceberg tables for longer-term retention and analysis.
 

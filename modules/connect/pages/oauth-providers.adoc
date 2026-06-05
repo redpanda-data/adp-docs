@@ -258,4 +258,4 @@ Common symptoms and fixes:
 
 * xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
 * xref:connect:create-server.adoc[Create an MCP Server]
-* xref:connect:managed/managed-catalog.adoc[Managed catalog]
+* xref:connect:managed/managed-catalog.adoc[Plug in an App, Database, or Tool]

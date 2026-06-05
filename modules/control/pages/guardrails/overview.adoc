@@ -66,9 +66,9 @@ A guardrail attaches to one or more LLM providers. Each provider can carry many 
 
 // TODO: confirm whether guardrails also attach at other scopes: agents, MCP servers, organizations: once team-ai answers the post-pivot resource-shape question. The pre-pivot proto attached through `provider_ids[]` and `route_ids[]`; routes were removed in cloudv2 commit `7eff2ecbbf`. Open Qs A1, A3, A4 in the companion plan.
 
-== Where to go next
+== Next steps
 
-* xref:control:guardrails/create-guardrail.adoc[Create a guardrail]: walk through configuring and attaching your first guardrail.
-* xref:control:guardrails/types-reference.adoc[Evaluator types reference]: full config schemas for PII, Toxicity, and Custom-webhook evaluators.
-* xref:control:guardrails/violations.adoc[Read violations]: investigate why a guardrail fired and tune false-positive rates.
+* xref:control:guardrails/create-guardrail.adoc[Create a guardrail]
+* xref:control:guardrails/types-reference.adoc[Evaluator types reference]
+* xref:control:guardrails/violations.adoc[Read violations]
 
