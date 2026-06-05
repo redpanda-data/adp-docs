@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 == Prerequisites
 
 * xref:connect:create-agent.adoc[Running agent] or xref:connect:create-server.adoc[MCP server] with at least one execution
-* Access to the Transcripts view (requires appropriate permissions to read the `redpanda.otel_traces` glossterm:topic[])
+* Permission to read the `redpanda.otel_traces` glossterm:topic[] that backs the Transcripts view
 
 == Open the Transcripts view
 
