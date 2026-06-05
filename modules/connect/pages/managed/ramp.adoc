@@ -214,7 +214,7 @@ This page does not cover:
 * *Accounting system integration*: Use Ramp's accounting sync.
 * *Receipt management and approvals*: Handled in the Ramp web UI.
 
-== Related topics
+== Next steps
 
 * xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
 * xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]

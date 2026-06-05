@@ -103,7 +103,7 @@ For the field-by-field service-account-OAuth setup, see xref:connect:create-serv
 |Connections persist until manually revoked. Have the user remove and re-add the connection if upstream credentials changed.
 |===
 
-== Related topics
+== Next steps
 
 * xref:connect:oauth-providers.adoc[]
-* xref:connect:create-server.adoc#configure-authentication[Service-account OAuth setup] for the shared-identity alternative.
+* xref:connect:create-server.adoc#configure-authentication[Service-account OAuth setup]

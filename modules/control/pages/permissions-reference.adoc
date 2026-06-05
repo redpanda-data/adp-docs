@@ -462,6 +462,6 @@ The `dataplane_knowledgebase_*` permissions gate retrieval-augmented generation 
 |Clients that produce telemetry or send data into Connect pipelines without managing them.
 |===
 
-== Related topics
+== Next steps
 
 * xref:control:permissions-overview.adoc[About ADP Permissions]

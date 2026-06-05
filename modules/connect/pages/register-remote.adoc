@@ -137,7 +137,7 @@ If the tools list is empty or stale, hit the *Refresh tools* action on the Overv
 |The server returned a `tools/list` response with an invalid JSON schema for one or more tool inputs. Fix the upstream tool's schema and refresh.
 |===
 
-== Related topics
+== Next steps
 
 * xref:connect:user-delegated-oauth.adoc[]
 * xref:gateway:aggregation.adoc[]

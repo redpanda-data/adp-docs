@@ -183,7 +183,7 @@ By default the app is available to everyone in the organization. To restrict it,
 |Redpanda has not reported on the trigger yet. Confirm the messaging endpoint URL is set on the bot exactly as Redpanda displayed it, then refresh the status.
 |===
 
-== Related topics
+== Next steps
 
 * xref:connect:triggers/overview.adoc[]
 * xref:connect:create-agent.adoc[]

@@ -120,7 +120,7 @@ rpk ai mcp get <server-name>
 
 The command resolves the gateway URL from your active rpk cloud profile and reads the cached `rpk cloud login` token. See xref:gateway:connect-agent.adoc[Connect your agent] for installation and profile setup.
 
-== Related topics
+== Next steps
 
 * xref:gateway:aggregation.adoc[]
 * xref:connect:create-agent.adoc[]

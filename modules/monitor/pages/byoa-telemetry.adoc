@@ -155,9 +155,8 @@ Common symptoms and fixes:
 |Spans were evicted from `redpanda.otel_traces` retention. Reconstruction works only if your agent emitted `gen_ai.input.messages` and `gen_ai.output.messages` on later spans. See xref:monitor:concepts.adoc#history-reconstruction[Reconstructed transcript history].
 |===
 
-== Related topics
+== Next steps
 
 * xref:monitor:ingest-custom-traces.adoc[Ingest custom traces]
-* xref:monitor:concepts.adoc[Observability]
 * xref:monitor:transcripts.adoc[Read a transcript]
 * xref:connect:byoa-register.adoc[Register your own agent (BYOA)]

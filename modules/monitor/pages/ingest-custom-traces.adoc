@@ -620,6 +620,5 @@ If requests succeed but traces do not appear in `redpanda.otel_traces`:
 == Next steps
 
 * xref:monitor:transcripts.adoc[]
-* xref:monitor:monitor-agents.adoc[]
 * xref:connect:components:inputs/otlp_http.adoc[OTLP HTTP input reference]
 * xref:connect:components:inputs/otlp_grpc.adoc[OTLP gRPC input reference]

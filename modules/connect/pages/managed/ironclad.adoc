@@ -157,7 +157,7 @@ This page does not cover:
 * *Template authoring*: Define templates in the Ironclad web UI, then reference them by `schema_id`.
 * *eSignature flows*: Handled inside Ironclad; this MCP launches and reads workflow state.
 
-== Related topics
+== Next steps
 
 * xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
 * xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]

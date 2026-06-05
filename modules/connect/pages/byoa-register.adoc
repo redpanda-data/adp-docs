@@ -131,9 +131,8 @@ This page does not cover:
 * *Gateway-proxied A2A routing.* The Agentic Data Plane does not route A2A calls to self-managed agents; that is a managed-agent capability. Clients call your agent directly.
 * *Migration from a managed declarative agent to BYOA.* The two coexist; BYOA is for agents that already exist outside the managed runtime, not for re-platforming existing managed agents.
 
-== Related topics
+== Next steps
 
 * xref:connect:a2a-concepts.adoc[Agent-to-agent concepts]
 * xref:monitor:byoa-telemetry.adoc[BYOA telemetry]
-* xref:connect:concepts.adoc[Agent concepts]
 * xref:connect:create-agent.adoc[Create a declarative agent]

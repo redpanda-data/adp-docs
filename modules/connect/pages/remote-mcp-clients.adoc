@@ -283,9 +283,8 @@ This page does not cover:
 * *Agent-to-agent calls (A2A)*: See the Agents docs; remote MCP clients are end-user-facing.
 * *MCP server authoring*: See xref:connect:create-server.adoc[Create an MCP Server] for the server side.
 
-== Related topics
+== Next steps
 
 * xref:connect:create-server.adoc[Create an MCP Server]
 * xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
 * xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
-* xref:gateway:connect-agent.adoc[Connect your agent]

@@ -71,7 +71,5 @@ ADP has these top-level areas:
 == Next steps
 
 * xref:connect:create-server.adoc[]
-* xref:connect:test-tools.adoc[]
-* xref:connect:user-delegated-oauth.adoc[]
 * xref:connect:register-remote.adoc[]
 * xref:connect:managed/managed-catalog.adoc[]
