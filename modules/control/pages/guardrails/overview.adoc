@@ -18,7 +18,7 @@ After reading this page, you will be able to:
 
 == Policy types
 
-A guardrail bundles a set of optional policies. Turn on only the ones you need.
+A guardrail bundles a set of policies. Each is individually optional, but a guardrail must enforce at least one. Turn on the ones you need.
 
 [cols="1,3"]
 |===
