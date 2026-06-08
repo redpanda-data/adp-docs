@@ -29,7 +29,7 @@ Creating, updating, transitioning, and commenting on issues are not currently ex
 * Credentials for one of the following authentication modes:
 +
 ** `Basic auth`: An Atlassian account email and an API token from `id.atlassian.com`, with the token stored in the Redpanda ADP secret store.
-** `User-delegated OAuth`: An Atlassian OAuth 2.0 (3LO) app registered against `https://api.atlassian.com`, plus an OAuth Provider in Redpanda ADP configured for Atlassian's authorize/token URLs and carrying the app's client credentials. See xref:connect:user-delegated-oauth.adoc[].
+** `User-delegated OAuth`: An Atlassian OAuth 2.0 (3LO) app registered against `https://api.atlassian.com`, plus an glossterm:OAuth provider[,OAuth Provider] in Redpanda ADP configured for Atlassian's authorize/token URLs and carrying the app's client credentials. See xref:connect:user-delegated-oauth.adoc[].
 +
 // TODO: confirm whether Redpanda publishes a reference Atlassian app or whether each customer brings their own.
 

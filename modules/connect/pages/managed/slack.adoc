@@ -30,7 +30,7 @@ Before you create the server, make sure you have:
 * A Slack OAuth app registered (your own or a Redpanda-published reference app).
 +
 // TODO: confirm whether Redpanda ships a reference Slack OAuth app or whether each customer brings their own. Document the path.
-* An OAuth Provider configured in ADP under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An glossterm:OAuth provider[,OAuth Provider] configured in ADP under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:connect:user-delegated-oauth.adoc[].
 
 == Configure
