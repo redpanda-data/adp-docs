@@ -1,16 +1,22 @@
 = Redpanda ADP Quickstart
 :page-aliases: byoc-quickstart.adoc, quickstart.adoc, cloud-data-platform:ai-agents:agents/quickstart.adoc
-:description: Set up Redpanda ADP for your organization. Get an Anthropic API key, configure your first LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build a working agent that calls both.
+:description: Set up Redpanda ADP end to end. As an administrator, configure your first LLM provider for the organization. As a builder, stand up an MCP server backed by a public OpenAPI spec and build a working agent that calls both.
 :page-topic-type: quickstart
-:personas: platform_engineer
+:personas: platform_engineer, agent_builder
 :learning-objective-1: Configure your first LLM provider in ADP with an Anthropic API key
 :learning-objective-2: Create an OpenAPI-backed MCP server using a public Swagger spec
 :learning-objective-3: Build an agent that calls both the LLM provider and the MCP server
 
 // Source: drafted against `adp-production` UI flows for LLM providers, MCP servers, and Agents; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider, MCP, and agent protos on cloudv2 origin/main.
+// MCP and agent wizard labels follow the canonical wizard docs: connect:create-server.adoc, connect:managed/openapi.adoc, and connect:create-agent.adoc. Keep this page consistent with those at PR time.
 // Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 
-This quickstart shows how to set up Redpanda ADP for your organization. You'll create an Anthropic API key, configure that key as an LLM provider, stand up an MCP server backed by a public OpenAPI spec, and build an agent that uses both.
+This quickstart sets up Redpanda ADP from scratch and follows the two roles involved:
+
+* An *administrator* configures an LLM provider for your organization. This is a one-time setup task. Until a provider exists, no one can build agents against it.
+* *Builders* then create glossterm:MCP server[,MCP servers] and glossterm:AI agent[,agents] that use the configured provider.
+
+Part 1 covers the administrator setup, and Part 2 covers the builder workflow. If you have the Admin role, you can complete both parts yourself. If your administrator has already configured an LLM provider, skip to <<part-2-builders-create-an-mcp-server-and-agent,Part 2>>.
 
 After completing this quickstart, you will be able to:
 
@@ -20,20 +26,29 @@ After completing this quickstart, you will be able to:
 
 == Prerequisites
 
-* The Writer or Admin xref:control:permissions-overview.adoc[built-in role] in ADP. The Reader role can list resources but cannot create them.
-* An Anthropic account. If you don't have one, the next section walks through signup.
+* A xref:control:permissions-overview.adoc[built-in role] in ADP that matches the part you're completing:
++
+** *Part 1* (configure the LLM provider): the Admin or Writer role.
+** *Part 2* (create the MCP server and agent): the Writer role.
++
+The Reader role can list resources but cannot create them.
+* An Anthropic account, for Part 1. If you don't have one, the next section walks through signup.
 
 == What you'll build
 
 Three ADP resources, in order:
 
-. *Anthropic LLM provider*. Routes Claude API calls through ADP so credentials, usage, and glossterm:transcript[,transcripts] stay on the platform.
-. *PetStore glossterm:MCP server[]*. Exposes the public Swagger PetStore API as a set of glossterm:MCP tool[,MCP tools] the agent can call.
-. *Pet store assistant glossterm:AI agent[,agent]*. Combines the provider and the MCP server so a natural-language question becomes a real API call against PetStore.
+. *Anthropic LLM provider* (administrator, Part 1). Routes Claude API calls through ADP so credentials, usage, and glossterm:transcript[,transcripts] stay on the platform.
+. *PetStore glossterm:MCP server[]* (builder, Part 2). Exposes the public Swagger PetStore API as a set of glossterm:MCP tool[,MCP tools] the agent can call.
+. *Pet store assistant glossterm:AI agent[,agent]* (builder, Part 2). Combines the provider and the MCP server so a natural-language question becomes a real API call against PetStore.
 
 After the agent works, you can walk through one execution turn-by-turn in the Transcripts view.
 
-== Get an Anthropic API key
+== Part 1: Administrator configures the LLM provider
+
+A provider is an organization-level resource. Configure it once, and every builder can select it when they create agents. The next three sections walk through getting an Anthropic API key, storing it in the secret store, and pointing ADP at Anthropic.
+
+=== Get an Anthropic API key
 
 Anthropic requires a payment method before it issues an API key. Add billing first, then create the key.
 
@@ -56,7 +71,7 @@ Anthropic shows the API key value once. If you close the dialog without copying,
 
 . (Optional) On the *API Keys* page, confirm the new key appears with the *Active* status.
 
-== Store the key in the ADP Secrets Store
+=== Store the key in the ADP Secrets Store
 
 ADP references provider credentials by secret name, not by raw value. Create the secret first so the next step can reference it.
 
@@ -82,7 +97,7 @@ Click *Create secret* at the bottom of the form.
 
 TIP: If your ADP version offers an inline secret-creation control on the LLM provider form's *API key* field, you can skip this step and create the secret inline in the next section. Either flow stores the key in the same place.
 
-== Configure your LLM provider
+=== Configure your LLM provider
 
 Now point ADP at Anthropic.
 
@@ -119,7 +134,14 @@ If the *Status* badge stays in a failure state, see the xref:gateway:configure-p
 
 For the full provider field reference (transcript logging, Bedrock IAM, Anthropic auth passthrough, OpenAI-compatible endpoints), see xref:gateway:configure-provider.adoc[Configure an LLM provider].
 
-== Create an MCP server with a public OpenAPI spec
+[[part-2-builders-create-an-mcp-server-and-agent]]
+== Part 2: Builders create an MCP server and agent
+
+With a provider in place, a builder creates a tool server and an agent that uses it. Both use a step-by-step wizard in the UI.
+
+TIP: If your administrator has already configured an LLM provider, you can skip Part 1. Start at the next section, then select the existing provider on the agent wizard's *Model* step.
+
+=== Create an MCP server with a public OpenAPI spec
 
 The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL and generates one MCP tool per operation. You'll point it at the public Swagger PetStore, which exposes a small pet-inventory API with no authentication.
 
@@ -128,42 +150,39 @@ The OpenAPI managed MCP server type takes any OpenAPI 3 (or Swagger 2) spec URL 
 PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) after you've confirmed the rest of the flow works.
 ====
 
-. Open *MCP Servers* > *Create Server*.
+. Open *MCP Servers* and click *Create Server*.
 
-. Pick *OpenAPI* from the server type picker. The *Configure OpenAPI MCP Server* form opens.
+. Pick the *OpenAPI* card from the marketplace picker. The OpenAPI configuration form opens.
 
-. *Name*: `petstore-quickstart`. The Name accepts lowercase letters, numbers, and hyphens.
+. *Name*: `petstore-quickstart`. The name accepts lowercase letters, numbers, and hyphens.
 
 . *Description*: `Public PetStore API exposed as MCP tools for quickstart testing`. Optional, but helps you find the server later.
 
-. Leave *Code Mode* at its default. Code Mode adds search and execute tools that let agents run sandboxed code against the server's tools; the PetStore catalog is small enough that you don't need it for this quickstart.
+. Leave the *Code mode* toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools; the PetStore catalog is small enough that you don't need it for this quickstart.
 
-. *Spec*: `https://petstore3.swagger.io/api/v3/openapi.json`. Leave the *Spec Content* text area empty when you provide a URL.
+. *Spec source*: `https://petstore3.swagger.io/api/v3/openapi.json`. Provide the URL rather than pasting inline spec content.
 
-. Leave *Base URL* blank. The PetStore spec already declares the right `servers` block, so no override is needed. 
+. *Base URL override*: Leave blank. The PetStore spec already declares the right `servers` block, so no override is needed.
 
 . Skip all other optional configuration fields.
 
-. *Auth*: Select *No Auth*. PetStore is a public API.
+. For the authentication mode, select *None*. PetStore is a public API.
 
-. Click *Submit*.
+. Click *Create*.
 
-. Wait for the server status to change from *Starting* to *Running*. Redpanda fetches the spec, parses it, and generates one MCP tool per operation.
+. Redpanda fetches the spec, parses it, and generates one MCP tool per operation. When the server is ready, open its detail page.
 
-. Open the *Inspector* tab. Confirm:
+. On the *Overview* tab, copy the *API URL*. This is the MCP URL the agent connects to.
+
+. Open the *Inspector* tab. Redpanda runs a live `tools/list` against the server and lists every tool it discovered. Confirm the list includes `findpetsbystatus`, `getpetbyid`, `findpetsbytags`, and `addpet`. The OpenAPI MCP server lowercases tool names when it generates them from the spec's `operationId` values.
 +
-* *STATUS* shows *Enabled*.
-* The *Tools* card lists multiple entries, including `findpetsbystatus`, `getpetbyid`, `findpetsbytags`, and `addpet`. The OpenAPI MCP server lowercases tool names when it generates them from the spec's `operationId` values.
-+
-The exact tool count depends on the operations defined in the spec at fetch time.
-
-. (Optional) Click *Ping* in the *MCP Inspector* card to confirm the server responds. If the Ping fails, or if the *STATUS* is disconnected, see xref:connect:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
+The exact tool count depends on the operations defined in the spec at fetch time. A populated list confirms the connection works. If the list is empty or the tab shows an error, see xref:connect:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
 
 For the full OpenAPI MCP reference (auth modes, operation filters, base URL overrides), see xref:connect:managed/openapi.adoc[OpenAPI managed MCP server].
 
-== Build your agent
+=== Build your agent
 
-Combine the Anthropic provider and the PetStore MCP server into an agent. ADP walks you through a managed agent in a step-by-step wizard.
+Combine the Anthropic provider and the PetStore MCP server into an agent. ADP walks you through a managed agent in a six-step wizard: Basics, Model, Behavior, Tools, Subagents, and Review. For the full wizard reference, see xref:connect:create-agent.adoc[Create an agent].
 
 . Open *Agents* in the sidebar.
 
@@ -182,7 +201,7 @@ NOTE: The other option, *I host it myself*, registers an agent you run on your o
 
 . On the *Model* step, set the following, then click *Continue*:
 +
-* *LLM provider*: Select `anthropic-quickstart`. This provider supplies the credentials and routing for the agent.
+* *LLM provider*: Select `anthropic-quickstart`. This provider supplies the credentials and routing for the agent. The dropdown lists every provider configured for your organization in Part 1. If it's empty, no provider exists yet: complete Part 1 first, or ask your administrator to configure one.
 * *Model*: Select `claude-sonnet-4-6`. Sonnet handles multi-step tool use more reliably than Haiku.
 +
 Leave the *Advanced* options, such as *Max iterations*, at their defaults.
@@ -217,7 +236,7 @@ Rules:
 
 . Wait for the agent status to change from *Starting* to *Running*. ADP creates the agent's service account at this point; for details, see xref:connect:concepts.adoc#service-account-authorization[service account authorization].
 
-== Test the agent in the Inspector
+=== Test the agent in the Inspector
 
 The *Inspector* tab is a chat surface for the agent. Type a prompt into the input at the bottom of the page and click the paper-plane icon in the input's bottom-right corner to send. Each prompt creates a *Task* card in the conversation that walks through the agent's execution turn-by-turn: TaskStatusUpdate entries (Submitted → Working → Completed) with token counts, individual tool-call cards showing the tool name and latency, and an *Artifact* card holding the final response. *Clear context* (at the bottom of the input) resets the conversation between tests.
 
@@ -254,7 +273,7 @@ If the agent hallucinates data instead of calling a tool, tighten the system pro
 
 If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet store API being unavailable, that's the public Swagger PetStore being intermittently down. The agent is behaving correctly (the "if a tool fails, say so and stop" rule in the system prompt is what produced the apology). Retry the prompt; PetStore usually recovers within a few minutes.
 
-== Iterate on your agent
+=== Iterate on your agent
 
 Agent configuration isn't fixed after you create it. Edit the system prompt or model, save, and re-test in the Inspector to see how behavior changes.
 
@@ -278,7 +297,7 @@ For system prompt patterns and anti-patterns, see xref:connect:system-prompts.ad
 // * `env-adp-transcripts: true` for the Transcripts verify section
 // * `env-adp-governance: true` for the Governance dashboard verify section
 ifdef::env-adp-transcripts[]
-== Verify the agent in Transcripts
+=== Verify the agent in Transcripts
 
 Every agent run is recorded as a glossterm:transcript[] you can replay turn-by-turn.
 
@@ -296,7 +315,7 @@ For the full transcript field reference, see xref:monitor:transcripts.adoc[Read 
 endif::[]
 
 ifdef::env-adp-governance[]
-== Verify spend in the governance dashboard
+=== Verify spend in the governance dashboard
 
 The glossterm:governance dashboard[] rolls up every LLM call and tool invocation across your ADP deployment.
 
