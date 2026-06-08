@@ -35,7 +35,7 @@ ADP permissions live in the following families, named by the namespace prefix:
 * `dataplane_adp_mcpserver_*`: Manage and call MCP servers (CRUD plus runtime operations like `tools_call` and `resources_read`).
 * `dataplane_adp_llmprovider_*`: Manage LLM providers and proxy LLM requests through AI Gateway. The `_invoke` permission is what your applications need at runtime.
 * `dataplane_adp_agent_*` and `dataplane_adp_agent_credential_*`: Manage declarative AI agents and the OIDC credentials issued to them.
-* `dataplane_adp_transcript_*`: Read agent conversation transcripts. Granted only by the dedicated TranscriptReader role, not by Writer or Reader, because transcripts carry full conversation content.
+* `dataplane_adp_transcript_*`: Read agent conversation transcripts. Granted by the dedicated TranscriptReader role (and Admin), not by Writer or Reader, because transcripts carry full conversation content.
 * `dataplane_adp_spending_*`: Read AI spending data for governance and cost reporting.
 * `dataplane_aiagent_a2a_*`: Invoke agent-to-agent (A2A) operations on running agents.
 * `dataplane_aigateway_*`: Manage enterprise AI Gateway features (rate limits, spend limits, guardrails, model providers, audit, pricing, IAM).
