@@ -7,6 +7,7 @@
 :learning-objective-3: Identify the operation each permission gates
 
 // Source: `cloudv2` `pkg/permissions/permissions_constants.go` on origin/main, verified 2026-05-18.
+// Transcript permissions and the TranscriptReader role verified against cloudv2 commit 6dfd3b3 (PR #26829), 2026-06-08.
 
 Every Redpanda ADP API call enforces a single permission. This reference lists every ADP-namespaced permission, the operation it gates, and which built-in role grants it.
 
@@ -27,6 +28,8 @@ Each table column means the same thing across every namespace.
 * The Writer, Reader, and Invoker columns indicate whether the built-in role grants this permission, marked with a check mark. The Invoker column also names which Invoker sub-role (when applicable) grants the permission.
 
 The Admin role grants every permission and is omitted from individual rows for brevity. Permissions that only resolve on ADP-enabled clusters carry no separate mark; the gating is automatic.
+
+The transcript namespace adds a TranscriptReader column in place of the Invoker column. Those permissions are granted by a dedicated role, not by the general-purpose Writer and Reader roles.
 
 == MCP server permissions
 
@@ -231,6 +234,33 @@ The `dataplane_adp_agent_credential_*` permissions gate the OIDC client credenti
 |✓
 |
 |===
+
+[[transcript-permissions]]
+== Transcript permissions
+
+The `dataplane_adp_transcript_*` permissions gate read access to agent conversation transcripts. Because transcripts carry the full content of an agent's conversations (system prompts, user messages, tool arguments, and model output), these permissions stay out of the broad Writer and Reader defaults. Only the dedicated TranscriptReader role and Admin grant them. See xref:monitor:transcripts.adoc[] for what a transcript records.
+
+[cols="2,2,1,1,1"]
+|===
+|Permission |Operation |Writer |Reader |TranscriptReader
+
+|`dataplane_adp_transcript_get`
+|View a single agent conversation transcript
+|
+|
+|✓
+
+|`dataplane_adp_transcript_list`
+|List agent conversation transcripts
+|
+|
+|✓
+|===
+
+[NOTE]
+====
+Transcript access is no longer bundled with agent read access. A principal that can view an agent's configuration through `dataplane_adp_agent_get` cannot read that agent's transcripts unless it also holds the TranscriptReader role (or Admin). Grant TranscriptReader to the users and service accounts that need to read conversation content.
+====
 
 == Spending permissions
 
@@ -448,6 +478,9 @@ The `dataplane_knowledgebase_*` permissions gate retrieval-augmented generation 
 
 |*Reader*
 |Auditors and evaluators who need visibility without mutation rights. Grants `_get` and `_list` plus MCP runtime read methods.
+
+|*TranscriptReader*
+|Users and service accounts that read agent conversation transcripts. Grants `dataplane_adp_transcript_get` and `dataplane_adp_transcript_list`, which stay out of the Writer and Reader roles because transcripts carry full conversation content. Provisioned for organizations with an ADP cluster.
 
 |*AIAgentInvoker*
 |Service accounts that send messages to agents over A2A without managing them.

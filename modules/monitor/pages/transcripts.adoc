@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 == Prerequisites
 
 * xref:connect:create-agent.adoc[Running agent] or xref:connect:create-server.adoc[MCP server] with at least one execution
-* Permission to read the `redpanda.otel_traces` glossterm:topic[] that backs the Transcripts view
+* The xref:control:permissions-reference.adoc#transcript-permissions[TranscriptReader role] (or Admin). Transcript reads are not part of the default Reader or Writer roles.
 
 == Open the Transcripts view
 
@@ -191,8 +191,7 @@ For long-running conversations, accept some reconstruction; for short conversati
 === Transcript missing entirely
 
 * Confirm the agent or MCP server actually ran: Check its logs and the corresponding session or task topic.
-* Confirm your user has read access to `redpanda.otel_traces`.
-// TODO: Replace with the standalone-ADP permission model once available.
+* Confirm your user holds the TranscriptReader role (or Admin). Transcript reads require the `dataplane_adp_transcript_get` and `dataplane_adp_transcript_list` permissions, which are not part of the default Reader or Writer roles. See xref:control:permissions-reference.adoc#transcript-permissions[Transcript permissions].
 * Confirm the feature flag enabling Transcripts is on for your environment.
 
 == Next steps

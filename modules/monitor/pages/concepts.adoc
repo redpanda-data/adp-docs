@@ -316,7 +316,8 @@ The `redpanda.otel_traces` topic has a predefined retention policy. Configuratio
 The topic persists even after all agents and MCP servers are deleted, allowing you to retain historical trace data for analysis.
 
 Transcripts may contain sensitive information from your tool inputs and outputs. Review the data in transcripts before sharing or exporting to external systems.
-// TODO: Re-add guidance on ACL scoping for `redpanda.otel_traces` once the standalone-ADP permission model lands. Today's wording assumed users manage topic ACLs on their own Redpanda Cloud cluster, which won't apply when ADP is a separate product surface.
+
+Read access to transcript data is governed by the TranscriptReader role rather than by topic ACLs on `redpanda.otel_traces`. See xref:control:permissions-reference.adoc#transcript-permissions[Transcript permissions].
 
 == Transcripts compared to audit logs
 
