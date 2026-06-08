@@ -1,5 +1,5 @@
 = Connect Tools with MCP Servers
-:description: Learn how MCP servers expose tools and data to agents, then plug in managed connectors or build, register, and test your own.
+:description: Learn how MCP servers expose tools and data to agents, then plug in a managed type or build, register, and test your own.
 :page-layout: index
 
-MCP servers expose tools and data to your agents. Plug in a managed connector from the catalog, or build, register, and test a server of your own.
+MCP servers expose tools and data to your agents. Plug in a managed type from the catalog, or build, register, and test a server of your own.

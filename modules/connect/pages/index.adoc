@@ -2,4 +2,4 @@
 :description: Connect agents, MCP servers, and the apps and data sources behind them.
 :page-layout: index
 
-Bring your agents, tools, and data into the Agentic Data Plane. Build agents, connect MCP servers and managed connectors, set up authentication, and integrate with your existing stack.
+Bring your agents, tools, and data into the Agentic Data Plane. Build agents, connect MCP servers, set up authentication, and integrate with your existing stack.

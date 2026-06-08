@@ -34,7 +34,7 @@ For more information, see xref:gateway:overview.adoc[How AI Gateway Works].
 
 glossterm:MCP server[,MCP servers] translate agent intent into connections to databases, queues, HRIS, CRMs, and other business systems. They are the simplest way to give agents context and capabilities without writing glue code.
 
-MCP servers are lightweight, support OIDC-based authentication, and enforce deterministic policies at the tool level. You define tools in YAML, and policy enforcement programmatically prevents prompt injection, SQL injection, and other agent-based attacks.
+MCP servers are lightweight, support OIDC-based authentication, and enforce deterministic policies at the tool level. You pick a managed type from the marketplace and configure it with your credentials, or register a self-managed server. Policy enforcement programmatically prevents prompt injection, SQL injection, and other agent-based attacks.
 
 With real-time debugging capabilities, you reduce integration time while getting enterprise-grade security. You can reuse your existing infrastructure and data sources rather than building new integrations from scratch.
 
@@ -42,9 +42,9 @@ For more information, see xref:connect:mcp-overview.adoc[].
 
 == AI agents
 
-With Redpanda AI agents, you declare the agent behavior you want and Redpanda handles execution and orchestration. Instead of writing Python or JavaScript, you define behaviors in YAML. You can orchestrate multiple specialized glossterm:subagent[,sub-agents], or bring your own frameworks like LangChain or LlamaIndex.
+With Redpanda AI agents, you declare the agent behavior you want and Redpanda handles execution and orchestration. Instead of writing Python or JavaScript, you configure agents declaratively: set a system prompt, choose a model, and attach the tools the agent can use. You can orchestrate multiple specialized glossterm:subagent[,sub-agents], or bring your own frameworks like LangChain or LlamaIndex.
 
-What makes this practical at scale is a broad library of prebuilt connectors with built-in filtering, enrichment, and routing, which give declarative definitions real power.
+What makes this practical at scale is a broad library of prebuilt tools and integrations with built-in filtering, enrichment, and routing, which give declarative definitions real power.
 
 The result is faster time-to-production, lower maintenance (declarative definitions instead of imperative code), and organizational consistency across teams.
 
