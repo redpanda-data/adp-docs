@@ -67,7 +67,7 @@ The backend is the AWS region and credentials the guardrail uses to reach Bedroc
 
 == Turn on policies
 
-Each policy is individually optional, but a guardrail must enforce at least one. Turn on the policies you need, then configure each. For the full configuration of every policy, see xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
+Each policy is optional, but a guardrail must enforce at least one. Turn on the policies you need, then configure each. For the full configuration of every policy, see xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
 
 * Content filters: Harmful-content categories (hate, insults, sexual, violence, misconduct, and prompt attacks).
 * Word filters: Exact words and phrases from your own lists and platform-managed lists such as profanity.
@@ -78,7 +78,9 @@ Each policy is individually optional, but a guardrail must enforce at least one.
 
 Each policy you turn on exposes a separate Evaluate this policy toggle. Turn it off to save the policy's configuration without enforcing it, which lets you stage a policy before it takes effect.
 
-A policy you turn on needs at least one rule. ADP rejects a guardrail that configures no policy, or that turns on a policy with nothing set, such as a content-filter policy with no category configured or a contextual-grounding policy with neither grounding nor relevance enabled.
+A policy you turn on needs at least one rule. ADP rejects a guardrail that has no policy turned on, or that turns on a policy with no rules set, such as a content-filter policy with no category configured or a contextual-grounding policy with neither grounding nor relevance enabled.
+
+A staged policy does not count toward this minimum, because a policy with its Evaluate this policy toggle off is not enforced. A guardrail needs at least one policy that is both turned on and evaluated, so if you stage every policy, ADP rejects the guardrail.
 
 When you finish, click *Create guardrail*.
 

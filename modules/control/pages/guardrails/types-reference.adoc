@@ -3,7 +3,7 @@
 :page-topic-type: reference
 :personas: security_compliance_lead, platform_engineer
 
-A guardrail bundles a set of policies, each backed by AWS Bedrock Guardrails. Each policy is individually optional, but a guardrail must enforce at least one. This page documents each policy's configuration, the actions it can take, and which direction (input, output, or both) it evaluates.
+A guardrail bundles a set of policies, each backed by AWS Bedrock Guardrails. Each policy is optional, but a guardrail must enforce at least one. This page documents each policy's configuration, the actions it can take, and which direction (input, output, or both) it evaluates.
 
 Two settings recur across policies:
 
