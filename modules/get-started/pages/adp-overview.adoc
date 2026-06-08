@@ -34,7 +34,7 @@ For more information, see xref:gateway:overview.adoc[How AI Gateway Works].
 
 glossterm:MCP server[,MCP servers] translate agent intent into connections to databases, queues, HRIS, CRMs, and other business systems. They are the simplest way to give agents context and capabilities without writing glue code.
 
-MCP servers are lightweight, support OIDC-based authentication, and enforce deterministic policies at the tool level. You pick a managed type from a marketplace and configure it with your credentials, or register a server you already run, and the server's tools are discovered automatically. Policy enforcement programmatically prevents prompt injection, SQL injection, and other agent-based attacks.
+MCP servers are lightweight, support OIDC-based authentication, and enforce deterministic policies at the tool level. You pick a managed type from the marketplace and configure it with your credentials, or register a self-managed server. Policy enforcement programmatically prevents prompt injection, SQL injection, and other agent-based attacks.
 
 With real-time debugging capabilities, you reduce integration time while getting enterprise-grade security. You can reuse your existing infrastructure and data sources rather than building new integrations from scratch.
 
