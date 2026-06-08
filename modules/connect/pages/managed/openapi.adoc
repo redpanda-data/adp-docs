@@ -47,7 +47,7 @@ The OpenAPI managed type:
 
 == Authentication
 
-OpenAPI is the most flexible managed type for auth: the upstream API can need anything. All the standard auth modes apply:
+OpenAPI is the most flexible managed type for authentication: the upstream API can need anything. All the standard authentication modes apply:
 
 [cols="1,2"]
 |===

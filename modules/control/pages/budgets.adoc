@@ -6,7 +6,7 @@
 :learning-objective-2: Identify what spending data the Agentic Data Plane records automatically
 :learning-objective-3: Locate where to view spend in the dashboard, in transcripts, and through breakdown queries
 
-The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the governance dashboard, through individual transcripts, and through breakdown queries by provider, model, user, agent, or provider type.
+The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the glossterm:governance dashboard[], through individual glossterm:transcript[,transcripts], and through breakdown queries by provider, model, user, agent, or provider type.
 
 After completing these steps, you will be able to:
 
@@ -51,7 +51,7 @@ The target agent is immutable. To move an override to a different agent, delete 
 
 === Set a budget in the UI
 
-Open *LLM Providers* in the sidebar and select the *Budgets* tab. The tab lists every budget with its *Scope* (the tenant default or a target agent), *Period*, current *Usage* against the cap, *Warn at* threshold, and when it was last *Updated*.
+Open *LLM Providers* in the sidebar and select the *Budgets* tab. The tab lists every budget with its `Scope` (the tenant default or a target agent), `Period`, current `Usage` against the cap, `Warn at` threshold, and when it was last `Updated`.
 
 To create the tenant default budget:
 
@@ -94,14 +94,14 @@ Budgets currently cap spend per agent. Tenant-wide shared pools; limits scoped b
 
 == What ADP records automatically
 
-Every LLM call routed through AI Gateway becomes a *spending event*. Each event captures:
+Every LLM call routed through AI Gateway becomes a spending event. Each event captures:
 
 * Input tokens, output tokens, and cached tokens.
 * Total cost (in microcents).
 * Request count.
 * The provider, model, user, and organization context the call ran under.
 
-Events flow through a Kafka pipeline and roll up into queryable storage. No setup required: spending is captured the moment your first agent or MCP server runs through the gateway.
+Events flow through a Kafka pipeline and roll up into queryable storage. No setup required: the gateway captures spending the moment your first agent or MCP server runs through it.
 
 Streaming and non-streaming requests are tracked the same way. Cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) are attributed correctly on streaming responses so cost rollups stay accurate when an agent reuses long system prompts.
 
@@ -261,7 +261,7 @@ The proto-generated client (Connect-Go or grpc-python) is the long-term recommen
 
 === Related methods
 
-`SpendingService` exposes three more methods that follow the same `SpendingFilter` shape:
+`SpendingService` exposes additional methods that follow the same `SpendingFilter` shape:
 
 * `GetSpendingSummary`: Total spend, tokens, and requests for the range, with no breakdown. Also returns the previous comparable period so you can show a trend.
 * `GetSpendingTimeSeries`: Spend bucketed over the time range (hourly or daily), for chart-style consumers.
@@ -310,24 +310,24 @@ Open the per-model pricing editor from the governance UI:
 
 // TODO: confirm the exact UI route on `adp-production` once walked. Likely under the governance dashboard's model-detail surface or under *LLM Providers > \{provider} > \{model}*; capture the route + screenshots before merging.
 
-For each model, the editor exposes three buckets matching the cost-reporting categories:
+For each model, the editor exposes buckets that match the cost-reporting categories:
 
 [cols="1,3"]
 |===
 |Bucket |What it prices
 
-|*Input*
+|`Input`
 |Cost per 1M prompt tokens, including tool-use inputs.
 
-|*Output*
+|`Output`
 |Cost per 1M completion tokens. For models that emit reasoning tokens (Anthropic 4.x, OpenAI o-series), reasoning is included in this bucket.
 
-|*Cache write*
-|Cost per 1M tokens written to a prompt cache. Split into three TTL tiers because providers charge differently per tier:
+|`Cache write`
+|Cost per 1M tokens written to a prompt cache. Split into TTL tiers because providers charge differently per tier:
 
-* *5-minute*: Short-lived prompt caches.
-* *1-hour*: Extended-TTL caches (Anthropic v4.x, OpenAI 4.x).
-* *Unknown TTL*: Fallback bucket for usage events that don't carry a TTL tag.
+* `5-minute`: Short-lived prompt caches.
+* `1-hour`: Extended-TTL caches (Anthropic v4.x, OpenAI 4.x).
+* `Unknown TTL`: Fallback bucket for usage events that don't carry a TTL tag.
 |===
 
 The catalog default for the bucket appears alongside your override; clear the override to fall back to the catalog price.

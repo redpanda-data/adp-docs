@@ -16,10 +16,10 @@ After completing this guide, you will be able to:
 
 [IMPORTANT]
 ====
-OAuth clients and OAuth providers govern *opposite directions* of authentication and are separate resources.
+OAuth clients and OAuth providers govern _opposite directions_ of authentication and are separate resources.
 
-* An *OAuth client* (this page) governs *inbound* authentication: an external chat app (Claude Desktop, ChatGPT, Copilot Studio, Cursor) authenticating to AI Gateway so its users can invoke MCP tools.
-* An *OAuth provider* governs *outbound* authentication: AI Gateway authenticating to an upstream system (GitHub, Slack, Salesforce) on a user's behalf when an MCP server uses user-delegated OAuth.
+* An OAuth client (this page) governs _inbound_ authentication: an external chat app (Claude Desktop, ChatGPT, Copilot Studio, Cursor) authenticating to AI Gateway so its users can invoke MCP tools.
+* An OAuth provider governs _outbound_ authentication: AI Gateway authenticating to an upstream system (GitHub, Slack, Salesforce) on a user's behalf when an MCP server uses user-delegated OAuth.
 
 See xref:connect:oauth-providers.adoc[Configure an OAuth Provider] for the outbound authentication side.
 ====
@@ -37,7 +37,7 @@ Use a different approach when:
 * You need programmatic, server-side tool invocation. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for SDK-based access.
 * You need an in-house chat UI. Build against the AI Gateway's MCP endpoints directly with the SDK of your choice.
 
-== Architecture: Three resources work together
+== Architecture: How the resources work together
 
 Wiring a remote chat client to an MCP server uses three resources in AI Gateway:
 
@@ -76,7 +76,7 @@ Before you wire up the chat-client connector, make sure you have:
 
 Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
 
-. Sign in to Redpanda ADP and open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its *Name*, *Grant Types*, *Status*, and *Scopes*.
+. Sign in to Redpanda ADP and open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its `Name`, `Grant Types`, `Status`, and `Scopes`.
 . Click *Register Client*.
 . Pick a well-known client to prefill its redirect URIs and recommended scopes, or choose *Custom Client* to register one from scratch. The catalog includes *Claude.ai Custom Connectors*, *Claude Desktop*, *ChatGPT*, *Cursor*, and *Windsurf*. For any client not in the catalog (for example, Gemini apps or Microsoft Copilot Studio), use *Custom Client* and paste the redirect URIs the tool publishes.
 . Fill in the form:
@@ -85,31 +85,31 @@ Create an OAuth Client to give the chat app the credentials it needs to authenti
 |===
 |Field |Notes
 
-|*Display name*
+|`Display name`
 |Human-readable label shown in the UI and on the consent screen, for example `Claude.ai Custom Connectors`.
 
-|*Name*
+|`Name`
 |Machine identifier, and the OAuth `client_id`. Lowercase letters, numbers, and hyphens only. Immutable after creation.
 
-|*Logo URI*
+|`Logo URI`
 |Optional HTTPS URL for a logo shown on the consent screen.
 
-|*Redirect URIs*
+|`Redirect URIs`
 |The exact URIs the gateway redirects to after a user approves. Each chat client publishes its own; a well-known client prefills them. Multiple URIs are allowed. Claude.ai, for example, uses two: `\https://claude.ai/api/mcp/auth_callback` and `\https://claude.ai/api/organizations/custom-connectors/oauth/callback`; Claude Desktop uses `\http://127.0.0.1:54545/callback`.
 
-|*Allowed MCP Resources*
+|`Allowed MCP Resources`
 |Which MCP servers this client may request tokens for. Defaults to `*` (any MCP server hosted on this gateway). Click *Restrict* to limit the client to specific MCP resource URLs.
 
-|*Grant Types*
-|*Authorization Code* (RFC 6749 §4.1) and *Refresh Token* (RFC 6749 §6, rotating single-use). This is the standard combination for browser-based chat clients with long-lived tokens.
+|`Grant Types`
+|`Authorization Code` (RFC 6749 §4.1) and `Refresh Token` (RFC 6749 §6, rotating single-use). This is the standard combination for browser-based chat clients with long-lived tokens.
 
-|*Token Endpoint Auth Method*
-|How the client authenticates to the token endpoint: *Client Secret (Basic)* (default), *Client Secret (POST)*, or *None (PKCE only)* for public clients that can't store a secret.
+|`Token Endpoint Auth Method`
+|How the client authenticates to the token endpoint: `Client Secret (Basic)` (default), `Client Secret (POST)`, or `None (PKCE only)` for public clients that can't store a secret.
 
-|*Require PKCE*
+|`Require PKCE`
 |Strongly recommended and enforced by default (RFC 7636). Adds an extra layer of security to the consent flow.
 
-|*Enabled*
+|`Enabled`
 |Whether the client can start new consent flows. Disabled clients reject new flows.
 |===
 +
@@ -131,16 +131,16 @@ Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and
 |===
 |Field |Value
 
-|*Name*
+|`Name`
 |Anything that helps the user identify the connector (for example, `Redpanda GitHub`). Surfaces in Claude's tool list.
 
-|*Remote MCP server URL*
+|`Remote MCP server URL`
 |The MCP server's *API URL* from AI Gateway. Format: `\https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>`.
 
-|*OAuth client ID* (optional, under *Advanced settings*)
+|`OAuth client ID` (optional, under *Advanced settings*)
 |The Client ID from the AI Gateway OAuth Client. Required for any MCP server that requires authentication. Leave blank only for public MCP servers that don't require authentication.
 
-|*OAuth client secret* (under *Advanced settings*)
+|`OAuth client secret` (under *Advanced settings*)
 |The Client Secret from the AI Gateway OAuth Client. Required whenever Client ID is set.
 |===
 +

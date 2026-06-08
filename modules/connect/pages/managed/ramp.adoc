@@ -25,7 +25,7 @@ It is suitable for expense analysis, spend-policy enforcement, and corporate car
 Before you create the server, make sure you have:
 
 * A Ramp account with admin access to the Ramp Developer Portal.
-* An OAuth Provider configured in Redpanda ADP for Ramp. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP for Ramp. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Get Ramp credentials

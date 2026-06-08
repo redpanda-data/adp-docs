@@ -51,7 +51,7 @@ The managed server does not expose write tools, saved-search execution, or repor
 == Prerequisites
 
 * A NetSuite Integration Record that uses OAuth 2.0 Authorization Code grant.
-* A NetSuite OAuth Provider in Redpanda ADP for the same account.
+* A NetSuite glossterm:OAuth provider[,OAuth Provider] in Redpanda ADP for the same account.
 * Your NetSuite account ID. Production accounts use a numeric ID such as `1234567`. Sandbox accounts include a suffix such as `1234567_SB1`; release-preview accounts can use a suffix such as `1234567_RP1`.
 * NetSuite users with the *REST Web Services* permission on at least one role.
 
