@@ -25,7 +25,7 @@ It is *not* a replacement for the Ironclad web UI for complex workflow managemen
 Before you create the server, make sure you have:
 
 * An Ironclad tenant where you can register an OAuth app.
-* An OAuth Provider configured in Redpanda ADP for Ironclad. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP for Ironclad. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Get Ironclad credentials

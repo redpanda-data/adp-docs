@@ -19,7 +19,7 @@ After completing this guide, you will be able to:
 * For any auth mode that uses upstream credentials: the credentials in hand and a secret already created in the Redpanda ADP secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
 +
 // TODO: xref the ADP secrets-management page once confirmed.
-* For user-delegated OAuth: an OAuth Provider resource already configured. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+* For user-delegated OAuth: an glossterm:OAuth provider[,OAuth provider] resource already configured. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Open the MCP Servers page
 

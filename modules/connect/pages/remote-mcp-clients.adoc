@@ -18,8 +18,8 @@ After completing this guide, you will be able to:
 ====
 OAuth clients and OAuth providers govern _opposite directions_ of authentication and are separate resources.
 
-* An *OAuth client* (this page) governs _inbound_ authentication: an external chat app (Claude Desktop, ChatGPT, Copilot Studio, Cursor) authenticating to AI Gateway so its users can invoke MCP tools.
-* An *OAuth provider* governs _outbound_ authentication: AI Gateway authenticating to an upstream system (GitHub, Slack, Salesforce) on a user's behalf when an MCP server uses user-delegated OAuth.
+* An OAuth client (this page) governs _inbound_ authentication: an external chat app (Claude Desktop, ChatGPT, Copilot Studio, Cursor) authenticating to AI Gateway so its users can invoke MCP tools.
+* An OAuth provider governs _outbound_ authentication: AI Gateway authenticating to an upstream system (GitHub, Slack, Salesforce) on a user's behalf when an MCP server uses user-delegated OAuth.
 
 See xref:connect:oauth-providers.adoc[Configure an OAuth Provider] for the outbound authentication side.
 ====
