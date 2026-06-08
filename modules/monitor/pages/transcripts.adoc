@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 == Prerequisites
 
 * xref:connect:create-agent.adoc[Running agent] or xref:connect:create-server.adoc[MCP server] with at least one execution
-* The TranscriptReader role (or Admin) to read transcripts. Transcripts carry full conversation content, so the `dataplane_adp_transcript_get` and `dataplane_adp_transcript_list` permissions stay out of the default Reader and Writer roles. See xref:control:permissions-reference.adoc#transcript-permissions[Transcript permissions].
+* The xref:control:permissions-reference.adoc#transcript-permissions[TranscriptReader role] (or Admin). Transcript reads are not part of the default Reader or Writer roles.
 
 == Open the Transcripts view
 

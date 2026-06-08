@@ -477,7 +477,7 @@ The `dataplane_knowledgebase_*` permissions gate retrieval-augmented generation 
 |Developers who build and modify ADP resources. Grants full CRUD on every ADP-namespaced API plus pipeline and knowledge-base management.
 
 |*Reader*
-|Auditors and evaluators who need visibility without mutation rights. Grants `_get` and `_list` plus MCP runtime read methods. Does not grant transcript reads.
+|Auditors and evaluators who need visibility without mutation rights. Grants `_get` and `_list` plus MCP runtime read methods.
 
 |*TranscriptReader*
 |Users and service accounts that read agent conversation transcripts. Grants `dataplane_adp_transcript_get` and `dataplane_adp_transcript_list`, which stay out of the Writer and Reader roles because transcripts carry full conversation content. Provisioned for organizations with an ADP cluster.

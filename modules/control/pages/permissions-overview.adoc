@@ -62,7 +62,7 @@ ADP includes the following built-in roles. Admin, Writer, and Reader are general
 |Full create, read, update, and delete access across every ADP-namespaced API (LLM provider, MCP server, agent, agent credential, AI Gateway, pipeline, knowledge base). Use for developers who need to build and modify ADP resources.
 
 |*Reader*
-|Read-only access (`_get` and `_list`) across the same APIs, plus MCP runtime read operations such as `resources_list` and `prompts_get`. No create, update, delete, or invoke. Does not grant transcript reads. Use for auditors, evaluators, and stakeholders who need visibility without mutation rights.
+|Read-only access (`_get` and `_list`) across the same APIs, plus MCP runtime read operations such as `resources_list` and `prompts_get`. No create, update, delete, or invoke. Use for auditors, evaluators, and stakeholders who need visibility without mutation rights.
 
 |*TranscriptReader*
 |Transcript reads only: `dataplane_adp_transcript_get` and `dataplane_adp_transcript_list`. Transcripts carry full conversation content, so this access is granted through a dedicated role rather than bundled into Reader or Writer. Use for users and service accounts that read agent conversation transcripts. Provisioned for organizations with an ADP cluster.
