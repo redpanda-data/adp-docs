@@ -1,12 +1,12 @@
 = SQL Managed MCP Server
-:description: Query SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite) through a managed MCP server hosted by Redpanda.
+:description: Query and write to SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite, and more) through a managed MCP server hosted by Redpanda.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the SQL managed MCP server for your database
 :learning-objective-2: Run a canonical SELECT query through the Inspector
-:learning-objective-3: Pick the right authentication and connection-string pattern for your database
+:learning-objective-3: Pick the right driver and connection-string pattern for your database
 
-The *SQL* managed MCP server gives agents read access to a SQL database through MCP. Redpanda runs the server in-process; you provide a connection string and credentials.
+The *SQL* managed MCP server gives agents read and write access to a SQL database through MCP. Redpanda runs the server in-process; you provide a connection string. Guardrails can restrict it to read-only.
 
 After reading this page, you will be able to:
 
@@ -16,25 +16,30 @@ After reading this page, you will be able to:
 
 == What this MCP server does
 
-Redpanda's SQL managed type proxies queries to one of these database engines:
+Redpanda's SQL managed type proxies SQL statements to one of these database engines:
 
-* PostgreSQL
+* PostgreSQL (`postgres` or `pgx`)
 * MySQL / MariaDB
 * ClickHouse
-* Microsoft SQL Server
-* SQLite
+* Microsoft SQL Server (`mssql`)
+* SQLite (`sqlite3`)
+* Snowflake
+* Trino
+* Databricks
 
-It exposes a small set of tools for querying schemas and running parameterized queries.
+It exposes the following tools:
 
-// TODO: lift the exact tool list and per-tool descriptions from `proto/mcps/redpanda/mcps/sql/v1/` once verified against `adp-production`.
+* `query`: Run a read-only `SELECT` and return rows. Accepts positional parameters and an optional max-rows cap.
+* `execute`: Run a write statement (`INSERT`, `UPDATE`, `DELETE`, or DDL) and return the affected row count.
+
+Guardrails on the server config can restrict it: set `readonly` to disable `execute`, cap returned rows, restrict allowed schemas, block statement patterns, and set a per-query timeout.
 
 == Prerequisites
 
 * A SQL database reachable from the Agentic Data Plane.
 +
 // TODO: confirm network reachability requirements (egress / VPC peering / public endpoint) for the standalone ADP product surface.
-* A connection string or the connection components (host, port, database, user).
-* A secret in the Redpanda ADP secret store containing the database password (`UPPER_SNAKE_CASE`, for example `SQL_PASSWORD`).
+* A connection string (DSN) for the database, including the credentials. The DSN is stored as a sensitive value.
 
 == Configure
 
@@ -43,12 +48,10 @@ It exposes a small set of tools for querying schemas and running parameterized q
 . Fill in the identity fields (`name`, `description`).
 . In the SQL configuration form, provide:
 +
-// TODO: enumerate exact fields from `proto/mcps/redpanda/mcps/sql/v1/sql_config.proto`: driver, DSN/connection-string format, query timeout, read-vs-write-tool split, max rows.
-+
-* *Driver*: Postgres, MySQL, ClickHouse, MSSQL, or SQLite
-* *Connection string*: Driver-specific
-* *Password reference*: `UPPER_SNAKE_CASE` secret reference
-* *Query timeout* (optional)
+* `Driver`: One of `postgres`, `pgx`, `mysql`, `clickhouse`, `mssql`, `sqlite3`, `snowflake`, `trino`, or `databricks`.
+* `DSN`: The driver-specific connection string, including credentials. Stored as a sensitive value.
+* `Connection pool` (optional): Maximum open and idle connections, and connection lifetimes.
+* `Guardrails` (optional): `readonly` (disables `execute`), default and maximum row caps, a per-query timeout, allowed schemas, and blocked statement patterns.
 . Click *Create*.
 
 // TODO: screenshot of the SQL form filled in for a Postgres example on `adp-production`.
@@ -60,22 +63,15 @@ After create, exercise the server through the Inspector tab. See xref:connect:te
 A canonical first call:
 
 . Open the *Inspector* tab.
-. In *Tools*, select the schema-listing tool (likely `list_tables` or similar).
-+
-// TODO: confirm exact tool name from the proto's service definition.
-. Run with no arguments. Confirm a list of tables comes back.
-. Select the query tool. Run `SELECT 1` (or your driver's equivalent). Confirm a single-row response.
+. In *Tools*, select the `query` tool.
+. Run `SELECT 1` (or your driver's equivalent). Confirm a single-row response.
+. To list tables, run `query` against the catalog, for example `SELECT table_name FROM information_schema.tables` on PostgreSQL or MySQL.
 
 == Authentication
 
-The SQL managed type supports:
+The SQL managed type has no MCP-level authentication modes. Credentials are carried inside the `DSN` (connection string), which is stored as a sensitive value. Supply them the way your driver expects, for example `postgres://user:password@host:5432/dbname`.
 
-* *None*: Only useful for local SQLite without auth.
-* *Static key*: Most common; the password lives in a secret reference.
-
-User-delegated OAuth and service-account OAuth are *not* supported for SQL: there's no per-user identity model that maps to a database password.
-
-// TODO: confirm exact auth modes the SQL type registers in its `register_mcp.go` once an auth-mode list is exposed on `ManagedMCPType`.
+User-delegated OAuth and service-account OAuth are not supported for SQL: there's no per-user identity model that maps to a database connection.
 
 == Use with agents
 
@@ -106,5 +102,5 @@ Once the SQL server is created, point an agent at the *API URL* on the server's 
 
 == Limitations
 
-* *Schema migrations*: This server is read/query-focused; running DDL is not the intended use.
+* *Write access*: The `execute` tool runs writes and DDL unless `readonly` is set in the guardrails. Scope the database user's permissions accordingly.
 * *Per-user database identities*: See <<authentication>>.

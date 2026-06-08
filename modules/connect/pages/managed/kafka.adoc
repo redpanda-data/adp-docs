@@ -1,12 +1,12 @@
 = Kafka Managed MCP Server
-:description: Produce, consume, and inspect topics on Kafka or Redpanda brokers through a managed MCP server hosted in the Agentic Data Plane.
+:description: Produce messages to topics on Kafka or Redpanda brokers through a managed MCP server hosted in the Agentic Data Plane.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the Kafka managed MCP server against a Kafka or Redpanda cluster
-:learning-objective-2: Produce a test message through the Inspector and consume it back
-:learning-objective-3: Pick the right authentication mode for your broker (PLAIN / SCRAM / mTLS / OAuth)
+:learning-objective-2: Produce a test message through the Inspector
+:learning-objective-3: Pick the right SASL mechanism for your broker (PLAIN or SCRAM-SHA-256/512)
 
-The *Kafka* managed MCP server gives agents read and write access to topics on either an Apache Kafka cluster or a Redpanda cluster: the same protocol, the same tools. Despite the name, it works against any Kafka-compatible broker.
+The *Kafka* managed MCP server lets agents produce messages to topics on either an Apache Kafka cluster or a Redpanda cluster. Despite the name, it works against any Kafka-compatible broker.
 
 After reading this page, you will be able to:
 
@@ -16,14 +16,11 @@ After reading this page, you will be able to:
 
 == What this MCP server does
 
-The Kafka managed type proxies a managed Kafka client. It exposes tools for:
+The Kafka managed type proxies a managed Kafka producer. It exposes the following tool:
 
-* Listing topics, partitions, and consumer groups.
-* Producing messages to a topic.
-* Consuming a window of messages from a topic.
-* Inspecting topic and consumer-group metadata.
+* `produce`: Send a message to a Kafka topic, with an optional key, an optional partition, and optional headers.
 
-// TODO: lift the exact tool list and descriptions from `proto/mcps/redpanda/mcps/kafka/v1/` once verified against `adp-production`.
+Consuming messages, listing topics, and inspecting metadata are not currently exposed by this managed type. To read from topics, use a xref:connect:register-remote.adoc[self-managed MCP server] or Redpanda Connect.
 
 == Prerequisites
 
@@ -40,12 +37,13 @@ The Kafka managed type proxies a managed Kafka client. It exposes tools for:
 . Fill in the identity fields (`name`, `description`).
 . In the Kafka configuration form, provide:
 +
-// TODO: enumerate exact fields from `proto/mcps/redpanda/mcps/kafka/v1/kafka_config.proto`.
-+
-* *Seed brokers*: Comma-separated bootstrap addresses
-* *TLS* settings: Usually on for production, off for local dev
-* *SASL mechanism*: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512`, or `OAUTHBEARER`
-* *Username / password references*: `UPPER_SNAKE_CASE` secret references
+* `Seed brokers`: Bootstrap broker addresses for the cluster.
+* `TLS`: Enable for production. You can optionally skip certificate verification for local development only.
+* `SASL mechanism`: `PLAIN`, `SCRAM-SHA-256`, or `SCRAM-SHA-512`. Leave empty to disable SASL.
+* `Username / password`: `UPPER_SNAKE_CASE` secret references for the SASL credentials.
+* `Compression` (optional): Defaults to `lz4`.
+* `Max in-flight` (optional): Maximum number of in-flight produce requests. Defaults to `10`.
+* `Timeout` (optional): Produce request timeout. Defaults to `10s`.
 . Click *Create*.
 
 // TODO: screenshot of the Kafka form filled in for a Redpanda Cloud cluster on `adp-production`.
@@ -53,17 +51,15 @@ The Kafka managed type proxies a managed Kafka client. It exposes tools for:
 == Test
 
 . Open the *Inspector* tab on the server's detail page.
-. In *Tools*, run the topic-listing tool to confirm the broker is reachable and credentials work.
-. Produce a test message to a sandbox topic.
-. Consume from the same topic and confirm you get the message back.
-
-// TODO: confirm exact tool names for produce/consume/list-topics and capture screenshots.
+. In *Tools*, select the `produce` tool.
+. Produce a test message to a sandbox topic and confirm a successful response.
+. Verify the message landed by consuming the topic with `rpk topic consume` or another Kafka client.
 
 See xref:connect:test-tools.adoc[] for general Inspector usage.
 
 == Authentication
 
-The Kafka managed type's authentication is part of its config, not the generic MCP auth oneof: it speaks Kafka protocol auth (SASL/SSL), not MCP auth.
+The Kafka managed type's authentication is part of its config, not the generic MCP auth oneof: it speaks Kafka protocol auth (SASL over TLS), not MCP auth.
 
 [cols="1,2"]
 |===
@@ -74,19 +70,13 @@ The Kafka managed type's authentication is part of its config, not the generic M
 
 |`SCRAM-SHA-256` / `SCRAM-SHA-512`
 |Salted challenge-response. Default for Redpanda.
-
-|`OAUTHBEARER`
-|Token-based; useful when fronting Kafka with an OAuth proxy.
-
-|mTLS
-|Client certificate. Higher operational overhead, but no shared password.
 |===
 
-// TODO: confirm whether mTLS and `OAUTHBEARER` are supported in the current registration; lift exact field names from the config proto.
+TLS controls transport encryption: enable it, and optionally skip certificate verification for development. Client-certificate (mTLS) and `OAUTHBEARER` authentication are not currently supported by this managed type.
 
 == Use with agents
 
-Once the Kafka server is created, point an agent at the *API URL* on the server's detail page. The agent can then list topics and produce/consume messages through the exposed tools.
+Once the Kafka server is created, point an agent at the *API URL* on the server's detail page. The agent can then produce messages to topics through the exposed `produce` tool.
 
 == Troubleshooting
 
@@ -103,14 +93,14 @@ Once the Kafka server is created, point an agent at the *API URL* on the server'
 |TLS handshake error
 |Certificate chain isn't trusted, or you've enabled TLS against a plaintext broker. Confirm broker config.
 
-|Consume returns nothing
-|Check topic existence, consumer-group offset behavior, and that messages exist in the time window the tool consumes.
+|`unknown topic or partition`
+|The target topic doesn't exist on the broker. Create it first, or confirm the topic name.
 |===
 
 // TODO: gather more Kafka failure modes from `adp-production` walkthroughs.
 
 == Limitations
 
-* *Kafka administration* (creating topics, managing ACLs): This server is read/produce/consume-focused. For administration, use rpk or your broker's admin API.
+* *Reading and administration*: This server only produces messages. Consuming, listing topics, and managing topics or ACLs aren't exposed. Use rpk, a Kafka client, or Redpanda Connect.
 * *Schema registry*: Not exposed by this MCP server.
 * *Streaming joins or processing*: For stream processing, use Redpanda Connect.

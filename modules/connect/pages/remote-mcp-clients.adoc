@@ -244,7 +244,7 @@ Already-issued *short-lived access tokens* may continue to work until their natu
 
 When AI Gateway auto-revokes tokens (on Client deletion or on lifecycle events that imply a hard cut), the same flow runs server-side without the explicit CLI or button click.
 
-// TODO: confirm whether deletion of an upstream OAuth *Provider* (versus an OAuth *Client*) also triggers token revocation, or only Client deletion does. Verify against `apps/aigw/internal/oauthclient/` lifecycle handlers on cloudv2 main.
+Deletion revokes tokens at both levels. Deleting an OAuth client revokes that client's refresh tokens. Deleting an upstream OAuth provider revokes every active token issued for that provider across all users before it removes the provider config.
 
 == Troubleshooting
 
