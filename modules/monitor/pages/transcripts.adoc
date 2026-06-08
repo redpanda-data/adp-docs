@@ -171,7 +171,7 @@ A transcript stays in `RUNNING` until the root span closes. Common causes:
 If cost is `0` for a transcript that clearly used tokens, check:
 
 * The model is in the pricing table. To use a custom rate (negotiated contract, internal chargeback), see xref:control:budgets.adoc#override-per-model-pricing[Override per-model pricing].
-* The cost-reporting pipeline is enabled on your ADP environment.
+* The cost-reporting pipeline is enabled on your environment.
 * The LLM-call spans carry the `gen_ai.usage.*` attributes the pipeline reads: Either the token-count inputs (`gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`) or the explicit USD-cost fields listed on the concepts page.
 
 [NOTE]
