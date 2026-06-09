@@ -27,7 +27,7 @@ Use this guide to:
 
 == Open the dashboard
 
-Sign in to Redpanda ADP. The dashboard includes these sections:
+The dashboard includes these sections:
 
 * KPI tabs for *Total Spend*, *Requests*, and *Tokens*
 * A metric chart panel

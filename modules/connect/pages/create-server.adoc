@@ -23,7 +23,7 @@ After completing this guide, you will be able to:
 
 == Open the MCP Servers page
 
-. Sign in to ADP and open *MCP Servers*.
+. Open *MCP Servers*.
 +
 // TODO: screenshot of the MCP Servers list page on `adp-production`.
 . Click *Create Server*.
