@@ -35,15 +35,15 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |===
 |Display name |Description |Setup guide
 
-|*AWS Bedrock* badge:beta[label=beta]
+|*AWS Bedrock* badge:beta[label=beta,size=large]
 |Invoke foundation models (Claude, Llama, Titan) on AWS Bedrock.
 |
 
-|*Cohere* badge:beta[label=beta]
+|*Cohere* badge:beta[label=beta,size=large]
 |Generate embeddings and chat completions with the Cohere API.
 |
 
-|*OpenAI* badge:beta[label=beta]
+|*OpenAI* badge:beta[label=beta,size=large]
 |Chat completions, embeddings, and tools with the OpenAI API.
 |
 |===
@@ -54,11 +54,11 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |===
 |Display name |Description |Setup guide
 
-|*AWS SNS* badge:beta[label=beta]
+|*AWS SNS* badge:beta[label=beta,size=large]
 |Publish and manage topics on AWS Simple Notification Service.
 |
 
-|*AWS SQS* badge:beta[label=beta]
+|*AWS SQS* badge:beta[label=beta,size=large]
 |Send, receive, and manage messages on AWS Simple Queue Service.
 |
 |===
@@ -69,11 +69,11 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |===
 |Display name |Description |Setup guide
 
-|*Discord* badge:beta[label=beta]
+|*Discord* badge:beta[label=beta,size=large]
 |Post messages, read channels, and manage servers on Discord.
 |
 
-|*Freshservice* badge:beta[label=beta]
+|*Freshservice* badge:beta[label=beta,size=large]
 |Manage ITSM tickets, assets, and change requests in Freshworks Freshservice.
 |xref:connect:managed/freshservice.adoc[Setup guide]
 
@@ -81,19 +81,19 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |Read-only access to GitHub repositories, pull requests, commits, and code.
 |
 
-|*Jira* badge:beta[label=beta]
+|*Jira* badge:beta[label=beta,size=large]
 |Manage Jira issues, projects, and workflows.
 |xref:connect:managed/jira.adoc[Setup guide]
 
-|*ServiceNow* badge:beta[label=beta]
+|*ServiceNow* badge:beta[label=beta,size=large]
 |Create and manage ServiceNow incidents, knowledge articles, and records.
 |xref:connect:managed/servicenow.adoc[Setup guide]
 
-|*Slack* badge:beta[label=beta]
+|*Slack* badge:beta[label=beta,size=large]
 |Post messages and read channels on Slack.
 |xref:connect:managed/slack.adoc[Setup guide]
 
-|*Zendesk* badge:beta[label=beta]
+|*Zendesk* badge:beta[label=beta,size=large]
 |Search and manage Zendesk Support tickets, users, and Help Center articles.
 |xref:connect:managed/zendesk.adoc[Setup guide]
 |===
@@ -104,27 +104,27 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |===
 |Display name |Description |Setup guide
 
-|*Elasticsearch* badge:beta[label=beta]
+|*Elasticsearch* badge:beta[label=beta,size=large]
 |Query and index documents in an Elasticsearch cluster.
 |
 
-|*Metabase* badge:beta[label=beta]
+|*Metabase* badge:beta[label=beta,size=large]
 |Search tables and metrics, run queries, and inspect saved questions in Metabase.
 |xref:connect:managed/metabase.adoc[Setup guide]
 
-|*MongoDB* badge:beta[label=beta]
+|*MongoDB* badge:beta[label=beta,size=large]
 |Query collections and documents in MongoDB.
 |
 
-|*Qdrant* badge:beta[label=beta]
+|*Qdrant* badge:beta[label=beta,size=large]
 |Vector search over a Qdrant collection.
 |
 
-|*Redis* badge:beta[label=beta]
+|*Redis* badge:beta[label=beta,size=large]
 |Read, write, and query keys in Redis.
 |
 
-|*SQL* badge:beta[label=beta]
+|*SQL* badge:beta[label=beta,size=large]
 |Query SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite) with MCP.
 |xref:connect:managed/sql.adoc[Setup guide]
 |===
@@ -135,7 +135,7 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |===
 |Display name |Description |Setup guide
 
-|*GCP Pub/Sub* badge:beta[label=beta]
+|*GCP Pub/Sub* badge:beta[label=beta,size=large]
 |Publish and subscribe to topics on Google Cloud Pub/Sub.
 |
 
@@ -154,11 +154,11 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |===
 |Display name |Description |Setup guide
 
-|*Kafka* badge:beta[label=beta]
+|*Kafka* badge:beta[label=beta,size=large]
 |Produce, consume, and inspect topics on Kafka or Redpanda brokers.
 |xref:connect:managed/kafka.adoc[Setup guide]
 
-|*NATS* badge:beta[label=beta]
+|*NATS* badge:beta[label=beta,size=large]
 |Publish and subscribe on NATS and NATS JetStream.
 |
 |===
@@ -169,7 +169,7 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |===
 |Display name |Description |Setup guide
 
-|*Azure AD* badge:beta[label=beta]
+|*Azure AD* badge:beta[label=beta,size=large]
 |Manage Azure Active Directory users and groups with Microsoft Graph API.
 |
 
@@ -177,47 +177,47 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |Access employee directory, time-off, and performance data from BambooHR.
 |xref:connect:managed/bamboohr.adoc[Setup guide]
 
-|*BILL (bill.com)* badge:beta[label=beta]
+|*BILL (bill.com)* badge:beta[label=beta,size=large]
 |Manage accounts-payable bills, vendors, AR invoices, payments, and customers in BILL.
 |
 
-|*DocuSign* badge:beta[label=beta]
+|*DocuSign* badge:beta[label=beta,size=large]
 |Send, track, and manage DocuSign signing envelopes.
 |
 
-|*Grafana* badge:beta[label=beta]
+|*Grafana* badge:beta[label=beta,size=large]
 |Query Grafana dashboards, datasources, Prometheus metrics and Loki logs, and create or update dashboards.
 |xref:connect:managed/grafana.adoc[Setup guide]
 
-|*Greenhouse* badge:beta[label=beta]
+|*Greenhouse* badge:beta[label=beta,size=large]
 |Manage jobs, candidates, and applications in Greenhouse ATS.
 |
 
-|*Ironclad* badge:beta[label=beta]
+|*Ironclad* badge:beta[label=beta,size=large]
 |Read and manage contracts in Ironclad CLM.
 |xref:connect:managed/ironclad.adoc[Setup guide]
 
-|*Morningstar Portfolio Analytics* badge:beta[label=beta]
+|*Morningstar Portfolio Analytics* badge:beta[label=beta,size=large]
 |Run X-Ray, performance, risk-score, hypothetical, and ESG analytics on caller-supplied portfolios with Morningstar Direct Web Services.
 |
 
-|*Morningstar Securities* badge:beta[label=beta]
+|*Morningstar Securities* badge:beta[label=beta,size=large]
 |Search, retrieve, screen, and pull research on funds and equities with the Morningstar Direct Web Services Investment Analysis API.
 |
 
-|*NetSuite* badge:beta[label=beta]
+|*NetSuite* badge:beta[label=beta,size=large]
 |Query Oracle NetSuite records and run SuiteQL with the SuiteTalk REST API.
 |xref:connect:managed/netsuite.adoc[Setup guide]
 
-|*Okta* badge:beta[label=beta]
+|*Okta* badge:beta[label=beta,size=large]
 |Manage Okta users and groups.
 |
 
-|*OpenAPI* badge:beta[label=beta]
+|*OpenAPI* badge:beta[label=beta,size=large]
 |Expose any OpenAPI/Swagger HTTP API as MCP tools.
 |xref:connect:managed/openapi.adoc[Setup guide]
 
-|*Ramp* badge:beta[label=beta]
+|*Ramp* badge:beta[label=beta,size=large]
 |Manage Ramp corporate cards, transactions, spend limits, and reimbursements.
 |xref:connect:managed/ramp.adoc[Setup guide]
 
@@ -225,15 +225,15 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |Query, create, update, and delete Salesforce CRM records using SOQL and the REST API, and run and inspect saved Salesforce reports.
 |
 
-|*SharePoint* badge:beta[label=beta]
+|*SharePoint* badge:beta[label=beta,size=large]
 |Read and write SharePoint sites, document libraries, lists, and files through the Microsoft Graph API.
 |xref:connect:managed/sharepoint.adoc[Setup guide]
 
-|*Text Chunker* badge:beta[label=beta]
+|*Text Chunker* badge:beta[label=beta,size=large]
 |Split and chunk text for RAG and LLM ingestion pipelines.
 |
 
-|*Workday* badge:beta[label=beta]
+|*Workday* badge:beta[label=beta,size=large]
 |Drive Workday Human Resources business processes with SOAP.
 |xref:connect:managed/workday.adoc[Setup guide]
 |===
