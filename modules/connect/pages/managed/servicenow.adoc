@@ -1,0 +1,275 @@
+= ServiceNow Managed MCP Server
+:description: Read and write a ServiceNow instance from an agent: incidents, knowledge articles, and allow-listed records, with service-account or per-user authentication.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Configure the ServiceNow managed MCP server with Basic auth, OAuth client credentials, or User OAuth
+:learning-objective-2: Use projections and hierarchies to shape responses and gate table reads
+:learning-objective-3: Search, create, and update incidents and read allow-listed records from the Inspector or an agent
+
+The *ServiceNow* managed MCP server lets agents work with a ServiceNow instance through the REST Table API: search, create, and update incidents, append work notes, search the knowledge base, look up users and assignment groups, discover table schema and field choices, and read allow-listed tables.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+Wraps the ServiceNow REST Table API. The MCP is vendor-generic: ServiceNow records are returned as opaque JSON objects (their field set varies by instance), and the agent learns each table's shape and valid field values at runtime through the discovery tools (`get_table_schema`, `get_field_choices`).
+
+Customer-specific structure is supplied as configuration, not code:
+
+* *Projections* set the default field list returned per table (a ServiceNow incident carries about 100 fields, so projections keep responses small) and gate which tables the generic `query_records` tool may read.
+* *Hierarchies* declare dependent-field chains (for example, service area, then category, then subcategory). The agent reads the chain order with `describe_field_hierarchies` and resolves each field's valid values at runtime with `get_field_choices`. No field values are stored in the configuration.
+
+It is *not* a general SQL interface, and it does not delete records: writes are limited to the typed incident tools plus generic record reads.
+
+== Prerequisites
+
+Before you create the server, make sure you have:
+
+* A ServiceNow instance and its URL (for example, `https://acme.service-now.com`).
+* A ServiceNow service account, or an OAuth client, with the roles your workflows need (typically `itil` for incidents, `knowledge` for the knowledge base, and read access to `sys_dictionary` and `sys_choice` for schema discovery).
+* For *User OAuth* mode: an glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+
+== Choose an authentication method
+
+The MCP authenticates to ServiceNow as a single principal; it does not impersonate end-users. When creating an incident, the agent passes the requesting user's `sys_id` in `caller_id`. Pick one of three methods:
+
+* *Basic auth (simplest)*: A dedicated ServiceNow user (for example, `svc_redpanda`) and its password. The username is plaintext; the password lives in the ADP secret store.
+* *OAuth client credentials (service account)*: An OAuth API client registered under *System OAuth > Application Registry*. ServiceNow's token endpoint is `https://<instance>.service-now.com/oauth_token.do`.
+* *User OAuth*: Per-user delegation through an OAuth Provider. ServiceNow's recommended integration model is the service account, so prefer Basic auth or OAuth client credentials unless you specifically need per-user attribution.
+
+== Configure
+
+Create a new ServiceNow MCP server in ADP:
+
+. Open *MCP Servers > Create Server*.
+. Pick *ServiceNow* from the marketplace picker.
+. Fill in identity fields (`name`, `description`).
+. In the ServiceNow configuration form:
++
+[cols="1,3"]
+|===
+|Field |Notes
+
+|*Instance URL*
+|Base URL of your ServiceNow instance (for example, `https://acme.service-now.com`). Must be an `https://` URL.
+
+|*Auth method*
+|*Basic auth*, *OAuth*, or *User-delegated OAuth*.
+
+|*Username* (Basic auth only)
+|ServiceNow service-account username (for example, `svc_redpanda`).
+
+|*Password ref* (Basic auth only)
+|Secret-store reference holding the service-account password. `UPPER_SNAKE_CASE`.
+
+|*Client ID*, *Client secret ref*, *Token URL* (OAuth only)
+|OAuth client ID, secret-store reference for the client secret, and the token endpoint (`https://<instance>.service-now.com/oauth_token.do`).
+
+|*OAuth Provider* (User OAuth only)
+|Pick the ServiceNow OAuth Provider you configured.
+
+|*Projections*
+|Per-table default field lists and the read allow-list for `query_records`.
+
+|*Hierarchies*
+|Dependent-field chains the agent resolves at runtime.
+|===
++
+. Click *Create*.
+
+=== Configure from the CLI
+
+[tabs]
+======
+Basic auth::
++
+[source,bash]
+----
+rpk ai mcp create --name acme-servicenow --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.servicenow.v1.ServiceNowMCPConfig",
+  "instance_url": "https://acme.service-now.com",
+  "basic_auth": {
+    "username": "svc_redpanda",
+    "password_secret_ref": "SERVICENOW_PASSWORD"
+  },
+  "projections": [
+    {
+      "table": "incident",
+      "default_fields": ["number", "short_description", "state", "priority", "assignment_group", "caller_id"],
+      "queryable": true
+    },
+    { "table": "change_request", "queryable": true }
+  ],
+  "hierarchies": [
+    {
+      "table": "incident",
+      "name": "service",
+      "fields": ["u_service_area", "u_service_category", "u_service_subcategory"]
+    }
+  ]
+}'
+----
+
+OAuth client credentials::
++
+[source,bash]
+----
+rpk ai mcp create --name acme-servicenow-oauth --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.servicenow.v1.ServiceNowMCPConfig",
+  "instance_url": "https://acme.service-now.com",
+  "oauth": {
+    "client_id": "<oauth-client-id>",
+    "client_secret_ref": "SERVICENOW_CLIENT_SECRET",
+    "token_url": "https://acme.service-now.com/oauth_token.do"
+  }
+}'
+----
+
+User OAuth::
++
+[source,bash]
+----
+rpk ai mcp create --name acme-servicenow-user \
+  --managed-config '{
+    "@type": "type.googleapis.com/redpanda.mcps.servicenow.v1.ServiceNowMCPConfig",
+    "instance_url": "https://acme.service-now.com"
+  }' \
+  --user-oauth-provider servicenow-prod
+----
+======
+
+Replace `<oauth-client-id>` with the client ID from your ServiceNow OAuth application registry.
+
+== Tools
+
+The ServiceNow MCP exposes 13 tools across incidents, knowledge, schema discovery, lookups, and generic reads:
+
+[cols="1,2"]
+|===
+|Tool |Description
+
+|`search_incidents`
+|Search incidents with a ServiceNow encoded query.
+
+|`get_incident`
+|Fetch one incident by `sys_id`.
+
+|`create_incident`
+|Create an incident (typed fields plus an `additional_fields` map for custom fields).
+
+|`update_incident`
+|Update state, assignment, notes, urgency, or impact, or resolve or close an incident.
+
+|`add_work_note`
+|Append a work note (internal) or comment (customer-visible) to an incident.
+
+|`search_knowledge`
+|Full-text search over published knowledge articles.
+
+|`get_article`
+|Fetch one knowledge article by `sys_id` or `number`.
+
+|`get_table_schema`
+|Field metadata (name, type, mandatory, reference) for a table, from `sys_dictionary`.
+
+|`get_field_choices`
+|Valid choice values for a field from `sys_choice`, optionally scoped to a parent value.
+
+|`describe_field_hierarchies`
+|Declared dependent-field chains for a table, from the server configuration.
+
+|`lookup_user`
+|Find users by name, email, or username; returns their `sys_id`.
+
+|`lookup_group`
+|Find assignment groups by name; returns their `sys_id`.
+
+|`query_records`
+|Read any allow-listed table with an encoded query.
+|===
+
+=== Example: Search open incidents
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-servicenow \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+      "name": "search_incidents",
+      "arguments": {
+        "query": "active=true^priority=1"
+      }
+    }
+  }'
+----
+
+Replace `<cluster-id>` with your cluster ID and `$TOKEN` with a gateway access token.
+
+=== Example: Create an incident
+
+The agent typically calls `lookup_user` and `get_field_choices` first to resolve `caller_id` and a valid `category` value.
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-servicenow \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/call",
+    "params": {
+      "name": "create_incident",
+      "arguments": {
+        "short_description": "VPN drops every few minutes in Dresden",
+        "caller_id": "a1b2c3d4e5f6...",
+        "urgency": 2,
+        "impact": 2,
+        "category": "network"
+      }
+    }
+  }'
+----
+
+== Troubleshooting
+
+Common symptoms and fixes:
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`401 Unauthorized`
+|Confirm the service-account credentials. For Basic auth, check the username and `SERVICENOW_PASSWORD`; for OAuth, check the client ID, `SERVICENOW_CLIENT_SECRET`, and token URL.
+
+|`403 Forbidden`
+|The service account lacks the role for the operation (for example, `itil` for incidents or read access to `sys_dictionary` for `get_table_schema`). Grant the role in ServiceNow.
+
+|`query_records` rejects a table
+|The table is not listed in `projections` with `queryable: true`. Add a projection entry for it.
+
+|`OAuthConnectionRequired` (User-OAuth mode)
+|First call from a user with no stored token. The user completes the ServiceNow OAuth consent flow, the token lands in the vault, and later calls reuse it. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+|===
+
+== Limitations
+
+This MCP server does not cover:
+
+* *Record deletion*: Writes are limited to the typed incident tools; the MCP never deletes records.
+* *Arbitrary SQL*: Reads go through the REST Table API and encoded queries, not a SQL interface. Use `query_records` against allow-listed tables instead.
+
+== Next steps
+
+* xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:connect:create-server.adoc[Create an MCP Server]

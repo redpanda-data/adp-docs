@@ -1,0 +1,182 @@
+= Grafana Managed MCP Server
+:description: Query Grafana dashboards, datasources, Prometheus metrics, and Loki logs from an agent, and create or update dashboards, using a service-account token.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Configure the Grafana managed MCP server with a service-account token
+:learning-objective-2: Pick the right service-account role for read versus write workflows
+:learning-objective-3: Search dashboards, query Prometheus and Loki, and upsert dashboards from the Inspector or an agent
+
+The *Grafana* managed MCP server lets agents work with a Grafana instance: search dashboards and folders, list datasources, run PromQL queries against Prometheus datasources, run LogQL queries against Loki datasources, and create or update dashboards.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+Wraps Grafana's HTTP API and proxies Prometheus and Loki queries through Grafana's datasource proxy (`/api/datasources/proxy/uid/{uid}/...`). A single base URL plus one service-account token covers both the core API and datasource queries, so the gateway makes no separate network connection to the metric or log backends.
+
+The tool surface is read-heavy. The one write tool is `create_or_update_dashboard`; there are no tools to mutate alerts or annotations. Authentication is a single shared service-account token, so every caller of this MCP server acts as that service account, and there is no per-user audit trail. Grafana exposes no OAuth client-registration flow for per-user delegation against an arbitrary instance, so the Grafana MCP server does not offer a User-OAuth mode.
+
+== Prerequisites
+
+Before you create the server, make sure you have:
+
+* A Grafana instance and its base URL (for example, `https://myorg.grafana.net`).
+* Permission to create a service account and a service-account token in Grafana.
+
+== Get Grafana credentials
+
+. In Grafana, go to *Administration > Users and access > Service accounts*.
+. Create a service account. Assign the *Viewer* role to use every read tool. To use `create_or_update_dashboard`, assign *Editor* (or a custom role with dashboard write permission) instead.
+. On the service account, select *Add service account token*, then copy the generated token (`glsa_...`). It is shown only once.
+. Store the token in the ADP secret store under a name like `GRAFANA_SERVICE_ACCOUNT_TOKEN`.
+
+Note your instance base URL and, if your instance is multi-org, the numeric org ID.
+
+== Configure
+
+Create a new Grafana MCP server in ADP:
+
+. Open *MCP Servers > Create Server*.
+. Pick *Grafana* from the marketplace picker.
+. Fill in identity fields (`name`, `description`).
+. In the Grafana configuration form:
++
+[cols="1,3"]
+|===
+|Field |Notes
+
+|*Base URL*
+|Base URL of your Grafana instance (for example, `https://myorg.grafana.net`).
+
+|*Org ID*
+|Optional. The numeric organization ID for a multi-org instance. Omit it to use the token's default organization.
+
+|*Service-account token*
+|Secret-store reference holding the service-account token (for example, `GRAFANA_SERVICE_ACCOUNT_TOKEN`). `UPPER_SNAKE_CASE`.
+|===
++
+. Click *Create*.
+
+=== Configure from the CLI
+
+[source,bash]
+----
+rpk ai mcp create --name acme-grafana --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.grafana.v1.GrafanaMCPConfig",
+  "base_url": "https://myorg.grafana.net",
+  "org_id": "1",
+  "service_account_token": {
+    "key_secret_ref": "GRAFANA_SERVICE_ACCOUNT_TOKEN"
+  }
+}'
+----
+
+== Tools
+
+The Grafana MCP exposes 11 tools across dashboards, datasources, Prometheus, and Loki:
+
+[cols="1,2"]
+|===
+|Tool |Description
+
+|`search_dashboards`
+|Search dashboards and folders by `query` (title substring), `tags`, and `type` (`dash-db` or `dash-folder`). Returns curated hits (uid, title, type, tags, url, folder).
+
+|`get_dashboard_summary`
+|Fetch a curated summary of one dashboard by `uid` (title, tags, folder, and a compact per-panel list with each panel's id, title, type, and datasource).
+
+|`list_datasources`
+|List configured datasources (uid, name, type, is_default). Use the `uid` with the query tools.
+
+|`query_prometheus`
+|Run an instant or range PromQL query against a Prometheus datasource (`datasource_uid`, `expr`, `query_type`, and time arguments). Returns the raw Prometheus result JSON.
+
+|`list_prometheus_metric_names`
+|List metric names in a Prometheus datasource (`datasource_uid`, optional `limit`).
+
+|`list_prometheus_label_names`
+|List label names in a Prometheus datasource (`datasource_uid`).
+
+|`list_prometheus_label_values`
+|List the values of one label in a Prometheus datasource (`datasource_uid`, `label`).
+
+|`query_loki_logs`
+|Run a LogQL query against a Loki datasource over a time range (`datasource_uid`, `query`, `start`, `end`, `limit`, `direction`). Returns the raw Loki result JSON.
+
+|`list_loki_label_names`
+|List label names in a Loki datasource (`datasource_uid`, optional `start` and `end`).
+
+|`list_loki_label_values`
+|List the values of one label in a Loki datasource (`datasource_uid`, `label`, optional `start` and `end`).
+
+|`create_or_update_dashboard`
+|Create a dashboard or update an existing one (upsert on the model's `uid`). Arguments: `dashboard_json`, `folder_uid`, `overwrite`, `message`. Requires an Editor service account.
+|===
+
+=== Example: List datasources
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-grafana \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": { "name": "list_datasources", "arguments": {} }
+  }'
+----
+
+Replace `<cluster-id>` with your cluster ID and `$TOKEN` with a gateway access token.
+
+=== Example: Run an instant PromQL query
+
+Find the Prometheus datasource `uid` with `list_datasources` first, then query it:
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-grafana \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/call",
+    "params": {
+      "name": "query_prometheus",
+      "arguments": {
+        "datasource_uid": "PBFA97CFB590B2093",
+        "expr": "up",
+        "query_type": "PROM_QUERY_TYPE_INSTANT"
+      }
+    }
+  }'
+----
+
+== Troubleshooting
+
+Common symptoms and fixes:
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`401 Unauthorized`
+|Confirm `GRAFANA_SERVICE_ACCOUNT_TOKEN` matches the token Grafana showed at creation, and that the service account is enabled.
+
+|`403 Forbidden` on `create_or_update_dashboard`
+|The service account has the Viewer role. Assign Editor (or a role with dashboard write permission).
+
+|Wrong organization's data
+|The token resolves to its default organization. Set the *Org ID* field to target a specific organization on a multi-org instance.
+|===
+
+== Next steps
+
+* xref:connect:create-server.adoc[Create an MCP Server]
+* xref:connect:test-tools.adoc[Test an MCP Server's Tools with the Inspector]
