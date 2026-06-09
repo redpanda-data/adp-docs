@@ -104,7 +104,7 @@ For the agent-card schema and the A2A message-endpoint shapes, see xref:connect:
 
 == Verify the registration
 
-After registering, confirm two things end-to-end:
+After registering, confirm the following end-to-end:
 
 . *Registry*: The agent appears in `AgentRegistryService.ListAgents` and in the governance dashboard's *Agents* list.
 . *Telemetry*: Open the transcripts list, filter by your agent's `service.name`, and confirm a recent execution shows up with non-zero token counts and a non-empty conversation ID. If it doesn't, see xref:monitor:byoa-telemetry.adoc[BYOA telemetry] troubleshooting.

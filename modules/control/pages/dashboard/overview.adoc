@@ -12,6 +12,8 @@
 
 The Governance dashboard answers two questions at a glance: how much your organization spends on AI, and what agents run in your environment. It brings AI Gateway usage and agent inventory into one view for platform and finance teams.
 
+The ADP Home page gives a lighter snapshot of recent activity, spend, and resource counts with quick actions to get started; the Governance dashboard is the detailed spend and usage view.
+
 Use it to compare spend, request volume, and token volume over a selected time range, then narrow the chart by provider, model, cost type, token type, or user.
 
 Use this guide to:
@@ -27,7 +29,7 @@ Use this guide to:
 
 == Open the dashboard
 
-Sign in to Redpanda ADP. The dashboard includes these sections:
+The dashboard includes these sections:
 
 * KPI tabs for *Total Spend*, *Requests*, and *Tokens*
 * A metric chart panel

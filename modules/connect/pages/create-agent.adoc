@@ -25,12 +25,12 @@ After reading this page, you will be able to:
 
 == Open the create wizard
 
-. Sign in to ADP and open the *Agents* page.
+. Open *Agents* in the sidebar.
 . Click *Create Agent*.
 . Choose how the agent runs. Select the managed option, *Redpanda manages it*, so Redpanda deploys, runs, and observes the agent for you. (To register an agent you build and run yourself, see xref:connect:byoa-register.adoc[].)
 . Click *Continue*.
 
-ADP configures the agent through a six-step wizard: Basics, Model, Behavior, Tools, Subagents, and Review. Required fields are marked with a red asterisk. Click *Continue* to advance to the next step, or *Back* to revisit an earlier one.
+ADP configures the agent through a wizard: Basics, Model, Behavior, Tools, Subagents, and Review. Required fields are marked with a red asterisk. Click *Continue* to advance to the next step, or *Back* to revisit an earlier one.
 
 == Basics
 

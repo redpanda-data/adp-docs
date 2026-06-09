@@ -140,7 +140,7 @@ For implementation details on external A2A integration, see xref:connect:integra
 
 == Common anti-patterns
 
-Avoid these architecture mistakes that lead to unmaintainable agent systems. For examples of well-structured agents, see the xref:tutorials/customer-support-agent.adoc[multi-tool orchestration tutorial] and xref:tutorials/transaction-dispute-resolution.adoc[multi-agent architecture tutorial].
+Avoid these architecture mistakes that lead to unmaintainable agent systems.
 
 === The monolithic prompt
 

@@ -19,6 +19,8 @@ This quickstart sets up Redpanda ADP from scratch and follows the two roles invo
 
 The first section is for administrators, and the second is for builders. If you have the Admin role, you can complete both yourself. If your administrator has already configured an LLM provider, skip to <<builders-create-an-mcp-server-and-agent,Builders: Create an MCP server and agent>>.
 
+When you sign in to ADP, you land on the Home page: a snapshot of recent activity and spend, counts of your LLM providers, MCP servers, agents, and guardrails, and a Quickstarts checklist that links to each setup task. You can start any task in this guide from its card on the Home page or from the sidebar.
+
 After completing this quickstart, you will be able to:
 
 * [ ] {learning-objective-1}
@@ -159,7 +161,7 @@ The OpenAPI managed MCP server type takes any OpenAPI 3.x spec URL and generates
 PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) after you've confirmed the rest of the flow works.
 ====
 
-. Open *MCP Servers* and click *Create server*.
+. Open *MCP Servers* in the sidebar and click *Create server*.
 
 . Search for and select the `OpenAPI` card from the marketplace picker. The OpenAPI configuration form opens.
 

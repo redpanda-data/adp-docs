@@ -36,7 +36,7 @@ If you don't already run a server, prefer a managed type. See xref:managed/manag
 
 == Create the server
 
-. Open *MCP Servers* and click *Create Server*.
+. Open *MCP Servers* in the sidebar and click *Create Server*.
 . In the marketplace picker, choose *Remote (Proxied)*.
 +
 // TODO: screenshot of the marketplace picker with Remote (Proxied) highlighted.
@@ -73,7 +73,7 @@ curl -X POST -H "Content-Type: application/json" \
 [[authentication]]
 == Authentication
 
-The five auth modes from xref:connect:create-server.adoc#configure-authentication[create-server.adoc] all apply. Three patterns are particularly common for self-managed servers:
+The auth modes from xref:connect:create-server.adoc#configure-authentication[create-server.adoc] all apply. Several patterns are particularly common for self-managed servers:
 
 [cols="1,2"]
 |===

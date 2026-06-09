@@ -79,7 +79,7 @@ The *Inspector* tab provides real-time conversation testing. Use it to test agen
 
 === Access Inspector
 
-. In Redpanda ADP, navigate to *Agents*.
+. Open *Agents* in the sidebar.
 . Click your agent name.
 . Open the *Inspector* tab.
 . Enter test queries and review responses.

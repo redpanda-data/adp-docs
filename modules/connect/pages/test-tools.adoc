@@ -22,7 +22,7 @@ After completing this guide, you will be able to:
 
 == Open the Inspector
 
-. Open *MCP Servers* and click into your server.
+. Open *MCP Servers* in the sidebar and click into your server.
 . Switch to the *Inspector* tab.
 +
 // TODO: screenshot of the Inspector tab with all four panels visible.

@@ -33,7 +33,7 @@ This guide does not cover building agents that *call* Claude Code. For that, see
 
 == Get the proxy URL
 
-. Sign in to ADP and open *LLM Providers*.
+. Open *LLM Providers* in the sidebar.
 . Click into your Anthropic provider.
 . On the *Connection* card, copy the Proxy URL. It looks like:
 +

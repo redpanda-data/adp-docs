@@ -74,7 +74,7 @@ Create a new Ramp MCP server in ADP:
 |The Ramp OAuth Provider you configured.
 
 |Required scopes
-|All nine scopes listed above. Drop write scopes (`cards:write`, `limits:write`) if the MCP only needs to read.
+|All the scopes listed above. Drop write scopes (`cards:write`, `limits:write`) if the MCP only needs to read.
 |===
 +
 . Click *Create*.

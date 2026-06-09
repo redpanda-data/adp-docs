@@ -1,10 +1,10 @@
 = Connect Remote MCP Clients
-:description: Connect external MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps) to MCP servers hosted in AI Gateway. Covers the three-piece architecture (MCP server, OAuth Provider, OAuth Client) and the two-step OAuth flow that runs end-to-end.
+:description: Connect external MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps) to MCP servers hosted in AI Gateway. Covers the architecture (MCP server, OAuth Provider, OAuth Client) and the OAuth flow that runs end-to-end.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer, security_compliance_lead
 :learning-objective-1: Register an OAuth Client in AI Gateway so an external chat app can authenticate users
 :learning-objective-2: Wire a custom connector in Claude Desktop (or another chat client) to your MCP server
-:learning-objective-3: Walk a user through the two-step OAuth flow that runs end-to-end
+:learning-objective-3: Walk a user through the OAuth flow that runs end-to-end
 
 External MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps, Cursor) connect to MCP servers hosted in AI Gateway by registering as OAuth clients. End-users get the MCP tools inside their preferred chat app, with Redpanda mediating both client-app authentication and upstream-system authentication.
 
@@ -76,7 +76,7 @@ Before you wire up the chat-client connector, make sure you have:
 
 Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
 
-. Sign in to Redpanda ADP and open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its `Name`, `Grant Types`, `Status`, and `Scopes`.
+. Open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its `Name`, `Grant Types`, `Status`, and `Scopes`.
 . Click *Register Client*.
 . Pick a well-known client to prefill its redirect URIs and recommended scopes, or choose *Custom Client* to register one from scratch. The catalog includes *Claude.ai Custom Connectors*, *Claude Desktop*, *ChatGPT*, *Cursor*, and *Windsurf*. For any client not in the catalog (for example, Gemini apps or Microsoft Copilot Studio), use *Custom Client* and paste the redirect URIs the tool publishes.
 . Fill in the form:
@@ -165,7 +165,7 @@ The required inputs are the same as Claude Desktop: connector name, MCP URL, Cli
 
 // TODO: confirm and document the ChatGPT, Gemini, Cursor, and Microsoft Copilot Studio menu paths once each integration is exercised end-to-end against adp-production. For Copilot Studio specifically: capture the Power Platform / agent designer route to "Add custom connector", the redirect URIs Microsoft publishes for the MCP connector flow, and any tenant-admin consent requirements. Briefing 2026-05-22 names Copilot Studio as a supported client but does not confirm a passing end-to-end test; verify before promising the integration in customer-facing copy.
 
-== The two-step OAuth flow
+== The OAuth flow
 
 When a user calls a tool that needs upstream access, two OAuth handshakes run end-to-end. Most users only see the second one (and only on the very first tool call).
 
@@ -209,7 +209,7 @@ NOTE: If the MCP server uses a service-account authentication mode instead of us
 
 Maintain registered OAuth Clients without re-creating them:
 
-* *List registered clients*: Open *OAuth Clients*. Each row shows the Name, Grant Types, Status, and Scopes.
+* *List registered clients*: Open *OAuth Clients* in the sidebar. Each row shows the Name, Grant Types, Status, and Scopes.
 * *Edit a client*: Change the display name, logo URI, redirect URIs, allowed MCP resources, grant types, or token endpoint authentication method. The `client_id` is immutable; delete and recreate the client if you need a new one.
 * *Reissue the secret*: The Client Secret is shown only once at creation and can't be regenerated in place. To issue a new secret, delete and recreate the client, then update every chat client that used it.
 * *Revoke all tokens*: Invalidate every refresh token AI Gateway has issued under this client without deleting the client itself (see <<revoke-all-tokens>>).
@@ -224,7 +224,7 @@ Revoking all tokens invalidates every refresh token AI Gateway has issued under 
 
 Revoke from the UI:
 
-. Open *OAuth Clients* and click the client whose tokens you want to revoke.
+. Open *OAuth Clients* in the sidebar and click the client whose tokens you want to revoke.
 . On the client detail page, click *Revoke all tokens*.
 . Confirm the action.
 

@@ -1,12 +1,12 @@
 = Create a Guardrail
-:description: Create a guardrail with the three-step wizard, configure its Bedrock backend and policies, attach it to an LLM provider, and verify that it blocks.
+:description: Create a guardrail with the wizard, configure its Bedrock backend and policies, attach it to an LLM provider, and verify that it blocks.
 :page-topic-type: how-to
 :personas: security_compliance_lead, platform_engineer
 :learning-objective-1: Create a guardrail and configure its backend and policies
 :learning-objective-2: Attach the guardrail to an LLM provider and enable it
 :learning-objective-3: Verify the guardrail blocks a request and trace it through the transcript
 
-Create a guardrail to inspect and control the requests and responses that flow through an LLM provider. You configure the guardrail in a three-step wizard (details, backend, and policies), attach it to a provider, and confirm it blocks.
+Create a guardrail to inspect and control the requests and responses that flow through an LLM provider. You configure the guardrail in a wizard (details, backend, and policies), attach it to a provider, and confirm it blocks.
 
 After completing this guide, you will be able to:
 

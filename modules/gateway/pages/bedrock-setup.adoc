@@ -115,7 +115,6 @@ A successful model response confirms the IAM policy, region, and credentials are
 
 == Register Bedrock as an LLM provider
 
-. Sign in to Redpanda and open ADP.
 . Open *LLM Providers* in the sidebar and click *Create provider*.
 . Select *AWS Bedrock* as the provider type.
 . Enter a Name such as `my-bedrock`. Use lowercase letters, digits, and hyphens. The name is immutable and appears in the proxy URL.

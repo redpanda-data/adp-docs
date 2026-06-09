@@ -23,9 +23,7 @@ After reading this page, you will be able to:
 
 == Open the Transcripts view
 
-. Sign in to Redpanda ADP.
-// TODO: Replace with the standalone ADP URL + sign-in flow once available.
-. Open *Transcripts* from the primary navigation.
+. Open *Transcripts* in the sidebar.
 
 The transcripts list shows every recent execution across the agents and MCP servers you can read.
 

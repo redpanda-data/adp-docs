@@ -78,7 +78,7 @@ rpk ai mcp create --name acme-grafana --managed-config '{
 
 == Tools
 
-The Grafana MCP exposes 11 tools across dashboards, datasources, Prometheus, and Loki:
+The Grafana MCP exposes tools across dashboards, datasources, Prometheus, and Loki:
 
 [cols="1,2"]
 |===

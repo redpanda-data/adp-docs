@@ -88,7 +88,6 @@ A *Filter* button narrows the list. The *Create provider* button opens the creat
 
 Walk through the create form to register the upstream:
 
-. Sign in to ADP.
 . Open *OAuth Providers* in the sidebar.
 . Click *Create provider*.
 . Pick a preset from the catalog, or choose *Custom Provider* to enter the endpoints yourself. Picking a preset pre-fills the standard authorization and token endpoints and recommended scopes.
