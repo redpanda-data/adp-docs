@@ -12,9 +12,11 @@
 
 Enterprises spent decades building governance for their human workforce: identity, access control, audit trails, and accountability. They never built the same controls for glossterm:AI agent[,AI agents]. Most agents run with broad credentials, no identity of their own, and no record of what they did, which is why enterprise AI so often stalls before it reaches production.
 
-Redpanda Agentic Data Plane (ADP) closes that gap. ADP sits between your agents and your data as a governed layer. It gives every agent an identity, mediates every tool call and data access, and records every action so you can replay and audit it. With ADP, you connect agents to all your enterprise data, from real-time event streams to databases and business systems, and run them safely at scale.
+Redpanda Agentic Data Plane (ADP) closes that gap. ADP is governance infrastructure for enterprise agents: it sits between your agents and your data, gives every agent an identity, mediates every tool call and data access, and records every action so you can replay and audit it. With ADP, you connect agents to all your enterprise data, from real-time event streams to databases and business systems, and run them safely at scale without losing control.
 
 ADP builds on open standards, including MCP, OAuth, OpenTelemetry, and the Kafka protocol, so governance sits above your choice of LLM, cloud, or agent framework. You stay free to adopt new models and frameworks as they emerge, without re-platforming or locking into a single vendor.
+
+ADP is its own product surface. It runs on Redpanda, so there's no separate cluster to stand up first, and at launch it deploys in your own AWS account.
 
 After reading this page, you will be able to:
 
@@ -26,7 +28,7 @@ After reading this page, you will be able to:
 
 The AI Gateway is a managed proxy for LLM APIs. You configure an LLM provider once, and applications point at a Redpanda-hosted proxy URL while continuing to use the provider's native SDK. Redpanda holds the upstream credentials, so application code never carries a provider API key and rotation happens in one place.
 
-Because every LLM call flows through one managed entry point, you get usage and cost visibility across providers, broken down by provider, model, and user, without locking into any single vendor's SDK. Applications authenticate with short-lived OIDC service-account tokens, and streaming responses pass through unchanged. To cap spend, set a per-agent xref:control:budgets.adoc[budget].
+Because every LLM call flows through one managed entry point, you get usage and cost visibility broken down by provider, model, and user, across any agent framework or platform, including Redpanda's own, without locking into any single vendor's SDK. Applications authenticate with short-lived OIDC service-account tokens, and streaming responses pass through unchanged. To control spend, set caps and per-agent xref:control:budgets.adoc[budgets] in one place.
 
 For more information, see xref:gateway:overview.adoc[How AI Gateway Works].
 
@@ -52,7 +54,7 @@ For more information, see xref:connect:agents-overview.adoc[].
 
 == Governance
 
-The glossterm:governance dashboard[] gives platform administrators and finance partners one cross-tenant view of agent activity, spending, MCP server inventory, and authorization events. From a single overview, you can answer how much your organization spends on AI and what agents run in your environment, down to per-provider spending, agent state, and the authorization decisions that gate every tool invocation.
+The glossterm:governance dashboard[] gives platform administrators and finance partners one cross-tenant view of agent activity, spending, MCP server inventory, and authorization events, whether the agents and servers are Redpanda-hosted or your own. From a single overview, you can answer how much your organization spends on AI and what agents run in your environment, down to per-provider spending, agent state, and the authorization decisions that gate every tool invocation.
 
 For more information, see xref:control:dashboard/overview.adoc[Governance Dashboard Overview].
 
@@ -62,9 +64,9 @@ Redpanda ADP addresses critical enterprise requirements across all components.
 
 * *Security by design*: MCP servers enforce policies at the tool level, programmatically preventing prompt injection, SQL injection, and other agent-based attacks. Policy enforcement is deterministic and controlled. Agents cannot bypass security constraints even through creative prompting.
 
-* *Unified authorization*: All components use OIDC-based authentication with an on-behalf-of authorization model. When a user invokes an agent, the agent inherits the intersection of its own permissions and the user's permissions. This ensures proper data access scoping.
+* *Unified authorization*: All components use OIDC-based authentication with an on-behalf-of authorization model. When a user invokes an agent, the agent inherits the intersection of its own permissions and the user's permissions, so an agent can only do what the user behind it is allowed to do. This ensures proper data access scoping. An embedded identity provider lets any standards-compliant MCP client, such as Claude Desktop, Claude Code, or Microsoft Copilot Studio, connect over OAuth without custom header handling.
 
-* *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) capture every agent action with 100% sampling using OpenTelemetry standards. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in ADP and replay data for agent evaluations. For more information, see xref:monitor:concepts.adoc[How Observability Works].
+* *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) give a read-only view of every agent run, capturing each prompt, response, and tool call with token and USD cost per conversation, plus status, duration, and an interactive timeline. Traces are emitted as OpenTelemetry data into an immutable Redpanda topic with 100% sampling. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in ADP and replay data for agent evaluations. For more information, see xref:monitor:concepts.adoc[How Observability Works].
 
 * *Compliance and audit*: Redpanda ADP records every agent action and the data sources used in each decision, which supports audit and compliance efforts (for example, frameworks such as ISO 42001 or the EU AI Act). Execution logs are stored in Redpanda topics and can be materialized to Iceberg tables for longer-term retention and analysis.
 
