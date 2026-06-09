@@ -43,11 +43,18 @@
 }
 
 .adp-path-card {
+  display: block;
   background: var(--panel-background, #fff);
   border: 1px solid var(--panel-border-color, #e5e7eb);
   border-radius: 12px;
   padding: 28px;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.adp-path-card:hover {
+  transform: translateY(-2px);
 }
 
 [data-theme="dark"] .adp-path-card {
@@ -263,7 +270,7 @@
 <section class="adp-pathways">
   <h2 class="adp-pathways-title">Pick where to start</h2>
   <div class="adp-pathways-grid">
-    <div class="adp-path-card">
+    <a href="../get-started/adp-quickstart/" class="adp-path-card">
       <div class="adp-path-header">
         <div class="adp-path-icon">
           <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></svg>
@@ -271,14 +278,9 @@
         <h3 class="adp-path-title">Build a new agent</h3>
       </div>
       <p class="adp-path-desc">Start from scratch inside ADP. Set up an agent, plug in your data, and run it in about 30 minutes.</p>
-++++
-
-xref:get-started:adp-quickstart.adoc[Get started,role=adp-path-cta]
-
-++++
-    </div>
-
-    <div class="adp-path-card">
+      <span class="adp-path-cta">Get started <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="../connect/byoa-register/" class="adp-path-card">
       <div class="adp-path-header">
         <div class="adp-path-icon">
           <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
@@ -286,12 +288,8 @@ xref:get-started:adp-quickstart.adoc[Get started,role=adp-path-cta]
         <h3 class="adp-path-title">Bring an agent you already built</h3>
       </div>
       <p class="adp-path-desc">Connect an agent you built elsewhere so it shows up alongside the rest — same dashboard, same rules, same tools.</p>
-++++
-
-xref:connect:byoa-register.adoc[Register your agent,role=adp-path-cta]
-
-++++
-    </div>
+      <span class="adp-path-cta">Register your agent <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
   </div>
 </section>
 
