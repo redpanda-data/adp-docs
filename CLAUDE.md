@@ -2,6 +2,22 @@
 
 Guidance for any Claude Code session — scheduled routine or interactive — that edits this repository. The scheduled ADP docs routines clone this repo, so they read this file too.
 
+## About this repo
+
+adp-docs is the Antora source for the Agentic Data Plane docs (component `agentic-data-plane`, single version). It is its own Antora component, separate from the docs.redpanda.com multi-repo system. Managed MCP server pages live under `modules/connect/pages/managed/`. Follow the redpanda-data/docs-team-standards style guide, terminology, and structure.
+
+## Build and test
+
+- `npm run build` — Antora build (output to `docs/`)
+- `npm run serve` — serve the built site on port 5002
+- `npm run start` — build + livereload dev server
+- `npm run test-docs` — Doc Detective tests over `modules/`
+
+## AsciiDoc and Antora conventions
+
+- Use full Antora resource IDs with module prefixes in xrefs (for example `xref:connect:managed/servicenow.adoc[]`), not relative paths.
+- Do NOT use inline ifdef syntax — it renders as raw markup. Use block-level `ifdef::[]` / `endif::[]` directives instead.
+
 ## Maturity status policy for managed MCP servers (HARD RULE)
 
 A managed MCP server's maturity in the docs MUST be grounded in the cloudv2 registration source. Never infer it from a reviewer comment, a hunch, or "we haven't tested it internally yet."
