@@ -59,7 +59,7 @@ See xref:connect:test-tools.adoc[] for general Inspector usage.
 
 == Authentication
 
-The Kafka managed type's authentication is part of its config, not the generic MCP auth oneof: it speaks Kafka protocol auth (SASL over TLS), not MCP auth.
+The Kafka managed type's authentication is part of its config, not the generic MCP authentication modes: it uses Kafka protocol authentication (SASL over TLS), not MCP authentication.
 
 [cols="1,2"]
 |===

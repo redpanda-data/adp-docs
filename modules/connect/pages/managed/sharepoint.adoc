@@ -78,7 +78,7 @@ https://aigw.<dataplane-id>.clusters.rdpa.co/oauth/v1/callback
 ----
 +
 Replace `<dataplane-id>` with your dataplane identifier. The callback path is `/oauth/v1/callback`.
-. After registering, note the *Application (client) ID* and *Directory (tenant) ID* from the app's Overview page. You need both when you configure the OAuth Provider.
+. After registering, note the *Application (client) ID* and *Directory (tenant) ID* from the app's Overview page. You need both when you configure the glossterm:OAuth provider[,OAuth Provider].
 
 [TIP]
 ====

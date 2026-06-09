@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 Wraps the Zendesk REST API. Two auth modes are supported:
 
 * *API token (Basic auth)*: A long-lived agent token paired with the agent's email. Best for service-account-style use.
-* *User OAuth*: Per-user Zendesk OAuth tokens resolved from the gateway's token vault. Best when you want each agent action attributed to the calling end-user.
+* *User OAuth*: Per-user Zendesk OAuth tokens resolved from the gateway's glossterm:token vault[]. Best when you want each agent action attributed to the calling end-user.
 
 Responses are curated for token efficiency: HATEOAS URLs, transport metadata, and rarely-used fields are dropped before reaching the LLM. Related users, groups, and organizations are resolved into nested ref objects through Zendesk side-loading (single round trip), and Help Center article HTML is converted to GitHub-flavored markdown. Typical responses are 3–7× smaller than raw Zendesk JSON.
 
@@ -31,7 +31,7 @@ Before you create the server, make sure you have:
 
 * A Zendesk Support instance.
 * For *API token* mode: ability to create an API token under *Apps and integrations > APIs > Zendesk API*.
-* For *User OAuth* mode: a Zendesk OAuth client and an OAuth Provider configured in Redpanda ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* For *User OAuth* mode: a Zendesk OAuth client and an glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 
 == Get Zendesk credentials
 
