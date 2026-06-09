@@ -46,7 +46,7 @@ NOTE: If the agent encounters an unrecoverable error on the first iteration, it 
 
 === Why iterations matter
 
-Each iteration includes three phases:
+Each iteration includes these phases:
 
 . **LLM reasoning**: The model processes the growing context to decide the next action.
 . **Tool invocation**: If the agent decides to call a tool, execution happens and waits for results.

@@ -66,7 +66,7 @@ LLM Providers is where you'll spend most of your time. The others are covered by
 
 == Supported providers
 
-AI Gateway supports five provider types. The UI labels and short descriptions match the picker on the *Create LLM provider* page.
+AI Gateway supports the following provider types. The UI labels and short descriptions match the picker on the *Create LLM provider* page.
 
 [cols="1,3"]
 |===

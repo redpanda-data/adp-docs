@@ -22,7 +22,7 @@ The SharePoint managed MCP server is in early access and is gated behind the `al
 
 == What this MCP server does
 
-The SharePoint managed type wraps the Microsoft Graph API (`https://graph.microsoft.com/v1.0`) and authenticates per-user through the gateway's OAuth token vault. It exposes eight tools across sites, document libraries, lists, and files:
+The SharePoint managed type wraps the Microsoft Graph API (`https://graph.microsoft.com/v1.0`) and authenticates per-user through the gateway's OAuth token vault. It exposes tools across sites, document libraries, lists, and files:
 
 [cols="1,2"]
 |===

@@ -105,7 +105,7 @@ The `api_key` field wraps the shared `StaticKeyAuth`; `key_secret_ref` is the ba
 
 == Tools
 
-The Metabase MCP exposes 11 tools. The agent's preferred path is the semantic-layer surface; the SQL-first surface is an escape hatch.
+The Metabase MCP exposes tools across a semantic-layer surface and a SQL-first surface. The agent's preferred path is the semantic-layer surface; the SQL-first surface is an escape hatch.
 
 === Semantic-layer tools
 

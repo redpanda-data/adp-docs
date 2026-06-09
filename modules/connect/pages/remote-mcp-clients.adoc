@@ -1,10 +1,10 @@
 = Connect Remote MCP Clients
-:description: Connect external MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps) to MCP servers hosted in AI Gateway. Covers the three-piece architecture (MCP server, OAuth Provider, OAuth Client) and the two-step OAuth flow that runs end-to-end.
+:description: Connect external MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps) to MCP servers hosted in AI Gateway. Covers the architecture (MCP server, OAuth Provider, OAuth Client) and the OAuth flow that runs end-to-end.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer, security_compliance_lead
 :learning-objective-1: Register an OAuth Client in AI Gateway so an external chat app can authenticate users
 :learning-objective-2: Wire a custom connector in Claude Desktop (or another chat client) to your MCP server
-:learning-objective-3: Walk a user through the two-step OAuth flow that runs end-to-end
+:learning-objective-3: Walk a user through the OAuth flow that runs end-to-end
 
 External MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps, Cursor) connect to MCP servers hosted in AI Gateway by registering as OAuth clients. End-users get the MCP tools inside their preferred chat app, with Redpanda mediating both client-app authentication and upstream-system authentication.
 
@@ -165,7 +165,7 @@ The required inputs are the same as Claude Desktop: connector name, MCP URL, Cli
 
 // TODO: confirm and document the ChatGPT, Gemini, Cursor, and Microsoft Copilot Studio menu paths once each integration is exercised end-to-end against adp-production. For Copilot Studio specifically: capture the Power Platform / agent designer route to "Add custom connector", the redirect URIs Microsoft publishes for the MCP connector flow, and any tenant-admin consent requirements. Briefing 2026-05-22 names Copilot Studio as a supported client but does not confirm a passing end-to-end test; verify before promising the integration in customer-facing copy.
 
-== The two-step OAuth flow
+== The OAuth flow
 
 When a user calls a tool that needs upstream access, two OAuth handshakes run end-to-end. Most users only see the second one (and only on the very first tool call).
 

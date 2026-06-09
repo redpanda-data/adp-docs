@@ -17,7 +17,7 @@ After reading this page, you will be able to:
 
 == What this MCP server does
 
-Wraps the Freshservice REST API v2. Two auth modes are supported:
+Wraps the Freshservice REST API v2. The following auth modes are supported:
 
 * API key (Basic auth): A long-lived Freshservice API key sent as the HTTP Basic auth username, with the literal string `X` as the password. Best for service-account-style use.
 * User OAuth: Per-user Freshservice OAuth tokens resolved from the gateway's glossterm:token vault[]. Best when you want each agent action attributed to the calling end-user.
@@ -118,7 +118,7 @@ Replace `freshservice-prod` with the name of the OAuth Provider you configured.
 
 == Tools
 
-The Freshservice MCP exposes eight tools across tickets, assets, changes, and agents:
+The Freshservice MCP exposes tools across tickets, assets, changes, and agents:
 
 [cols="1,2"]
 |===

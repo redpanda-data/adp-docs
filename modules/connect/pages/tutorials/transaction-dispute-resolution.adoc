@@ -206,11 +206,11 @@ include::ROOT:example$mcp-tools/processors/check_regulatory_requirements.yaml[]
 
 . Click *Create*.
 
-Wait for the server status to show *Running*. You now have four MCP servers with nine total tools, organized by domain.
+Wait for the server status to show *Running*. You now have an MCP server for each tool domain.
 
 == Create the root agent with subagents
 
-The root agent orchestrates sub-agents and makes final recommendations. You'll configure the root agent first, then add four specialized sub-agents within the same form.
+The root agent orchestrates sub-agents and makes final recommendations. You'll configure the root agent first, then add specialized sub-agents within the same form.
 
 [IMPORTANT]
 ====
@@ -308,7 +308,7 @@ include::ROOT:example$agents/compliance-agent-prompt.txt[]
 
 . In the subagent's *MCP tools* section, select `compliance-tools`.
 
-. Click *Continue*, then on the *Review* step click *Create agent* to create the root agent with all four subagents.
+. Click *Continue*, then on the *Review* step click *Create agent* to create the root agent with all its subagents.
 
 Wait for the agent status to show *Running*.
 

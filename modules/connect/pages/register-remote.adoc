@@ -73,7 +73,7 @@ curl -X POST -H "Content-Type: application/json" \
 [[authentication]]
 == Authentication
 
-The five auth modes from xref:connect:create-server.adoc#configure-authentication[create-server.adoc] all apply. Three patterns are particularly common for self-managed servers:
+The auth modes from xref:connect:create-server.adoc#configure-authentication[create-server.adoc] all apply. Several patterns are particularly common for self-managed servers:
 
 [cols="1,2"]
 |===

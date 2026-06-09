@@ -148,7 +148,7 @@ Conversation scope:
 
 == Error handling
 
-Guide agents to handle failures gracefully through clear prompt instructions. Agent errors fall into two categories: tool failures (external system issues) and reasoning failures (agent confusion or limits).
+Guide agents to handle failures gracefully through clear prompt instructions. Agent errors fall into these categories: tool failures (external system issues) and reasoning failures (agent confusion or limits).
 
 === Tool failure types
 

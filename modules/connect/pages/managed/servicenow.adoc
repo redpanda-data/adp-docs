@@ -147,7 +147,7 @@ Replace `<oauth-client-id>` with the client ID from your ServiceNow OAuth applic
 
 == Tools
 
-The ServiceNow MCP exposes 13 tools across incidents, knowledge, schema discovery, lookups, and generic reads:
+The ServiceNow MCP exposes tools across incidents, knowledge, schema discovery, lookups, and generic reads:
 
 [cols="1,2"]
 |===
