@@ -1,4 +1,5 @@
 = Grafana Managed MCP Server
+:page-beta: true
 :description: Query Grafana dashboards, datasources, Prometheus metrics, and Loki logs from an agent, and create or update dashboards, using a service-account token.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
@@ -13,11 +14,6 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
-
-[NOTE]
-====
-The Grafana managed MCP server is in alpha. It has not yet been tested internally, so its behavior and configuration may change, and it is not recommended for production use.
-====
 
 == What this MCP server does
 

@@ -1,4 +1,5 @@
 = Ramp Managed MCP Server
+:page-beta: true
 :description: Manage Ramp corporate cards, transactions, spend limits, and reimbursements from an LLM agent. Per-user OAuth so each agent action runs as the calling end-user.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

@@ -1,4 +1,5 @@
 = ServiceNow Managed MCP Server
+:page-beta: true
 :description: Read and write a ServiceNow instance from an agent: incidents, knowledge articles, and allow-listed records, with service-account or per-user authentication.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
@@ -13,11 +14,6 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
-
-[NOTE]
-====
-The ServiceNow managed MCP server is in alpha. It has not yet been tested internally, so its behavior and configuration may change, and it is not recommended for production use.
-====
 
 == What this MCP server does
 

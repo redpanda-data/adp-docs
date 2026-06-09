@@ -1,4 +1,5 @@
 = Jira Managed MCP Server
+:page-beta: true
 :description: Let agents search and read Jira issues using either a shared API token or each end-user's own Atlassian identity through user-delegated OAuth.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

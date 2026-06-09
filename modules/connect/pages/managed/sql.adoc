@@ -1,4 +1,5 @@
 = SQL Managed MCP Server
+:page-beta: true
 :description: Query and write to SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite, and more) through a managed MCP server hosted by Redpanda.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
