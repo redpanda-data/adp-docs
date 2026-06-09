@@ -55,7 +55,7 @@ After the agent works, you can walk through one execution turn-by-turn in the *T
 
 == Admins: Configure an LLM provider
 
-A provider is an organization-level resource. Configure it once, and every builder can select it when they create agents. This part walks through getting an Anthropic API key, storing it in the secret store, and pointing ADP at Anthropic.
+A provider is an organization-level resource. Configure it once, and every builder can select it when they create agents. The following sections walk through getting an Anthropic API key, storing it in the secret store, and pointing ADP at Anthropic.
 
 === Get an Anthropic API key
 
