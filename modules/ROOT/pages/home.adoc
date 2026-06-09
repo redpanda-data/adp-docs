@@ -3,9 +3,6 @@
 :page-hero-description: An AI Gateway, MCP servers, declarative agents, and built-in governance — one platform so your team can move from prototype to production without rebuilding the foundations every time.
 :page-stats: 300+|connectors, ready to use;;100%|execution-log sampling;;4|built-in governance controls;;GA|latest release
 :page-hero-ask-placeholder: Ask about agents, MCP servers, governance...
-:page-hero-suggestion-1: How do I build my first agent?
-:page-hero-suggestion-2: What is an MCP server?
-:page-hero-suggestion-3: How does governance work?
 
 ++++
 <style>
