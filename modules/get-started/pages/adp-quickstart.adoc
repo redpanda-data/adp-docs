@@ -159,9 +159,9 @@ The OpenAPI managed MCP server type takes any OpenAPI 3.x spec URL and generates
 PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) after you've confirmed the rest of the flow works.
 ====
 
-. Open *MCP Servers* and click *Create Server*.
+. Open *MCP Servers* and click *Create server*.
 
-. Pick the `OpenAPI` card from the marketplace picker. The OpenAPI configuration form opens.
+. Search for and select the `OpenAPI` card from the marketplace picker. The OpenAPI configuration form opens.
 
 . `Name`: Enter `petstore-quickstart`. The name accepts lowercase letters, numbers, and hyphens.
 
@@ -252,15 +252,6 @@ The *Inspector* tab is a chat surface for the agent. Type a prompt into the inpu
 . On the agent detail page, open the *Inspector* tab.
 
 . Send the first prompt:
-+
-[,text]
-----
-Tell me about pet ID 1.
-----
-+
-The agent calls `getpetbyid` with `petId=1` and returns the pet's details in an Artifact card. This endpoint is the most reliable on the public PetStore demo and works as the first smoke test.
-
-. Send the second prompt:
 +
 [,text]
 ----
