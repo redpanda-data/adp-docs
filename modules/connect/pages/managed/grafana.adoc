@@ -14,6 +14,11 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
+[NOTE]
+====
+The Grafana managed MCP server is in alpha. It has not yet been tested internally, so its behavior and configuration may change, and it is not recommended for production use.
+====
+
 == What this MCP server does
 
 Wraps Grafana's HTTP API and proxies Prometheus and Loki queries through Grafana's datasource proxy (`/api/datasources/proxy/uid/{uid}/...`). A single base URL plus one service-account token covers both the core API and datasource queries, so the gateway makes no separate network connection to the metric or log backends.
