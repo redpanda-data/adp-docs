@@ -1,353 +1,38 @@
 = Ship governed AI agents on top of your real data.
 :page-layout: component-home-v3
-:page-hero-description: An AI Gateway, MCP servers, declarative agents, and built-in governance — one platform so your team can move from prototype to production without rebuilding the foundations every time.
-:page-stats: 300+|connectors, ready to use;;100%|execution-log sampling;;4|built-in governance controls;;GA|latest release
-:page-hero-ask-placeholder: Ask about agents, MCP servers, governance...
+:page-hero-description: An AI Gateway, MCP servers, declarative agents, and built-in governance: one platform so your team can move from prototype to production without rebuilding the foundations every time.
+:page-stats: Managed MCP servers, ready to use;;100%|execution-log sampling;;4|built-in governance controls;;GA|latest release
 
-++++
-<style>
-/* =============================================================================
-   ADP PATHWAY CARDS — "Pick where to start" section
-   ============================================================================= */
+:page-pathways-title: Pick where to start
+:page-pathway-1-title: Build a new agent
+:page-pathway-1-desc: Start from scratch inside ADP. Set up an agent, plug in your data, and run it in about 30 minutes.
+:page-pathway-1-link: get-started:adp-quickstart.adoc
+:page-pathway-1-cta: Get started
+:page-pathway-1-icon: sparkles
+:page-pathway-2-title: Bring an agent you already built
+:page-pathway-2-desc: Connect an agent you built elsewhere so it shows up alongside the rest — same dashboard, same rules, same tools.
+:page-pathway-2-link: connect:byoa-register.adoc
+:page-pathway-2-cta: Register your agent
+:page-pathway-2-icon: connect
 
-.adp-pathways {
-  max-width: var(--ch3-max-width, 1180px);
-  margin: 0 auto;
-  padding: 48px var(--ch3-gutter, 40px) 32px;
-}
+:page-concepts-title: Get your bearings
+:page-concept-1-title: Agents, tools, and data — how they fit
+:page-concept-1-desc: The three building blocks of ADP and how they connect.
+:page-concept-1-link: connect:concepts.adoc
+:page-concept-2-title: What sits between your agents and LLMs
+:page-concept-2-desc: How routing, token counting, and provider setup work.
+:page-concept-2-link: gateway:overview.adoc
+:page-concept-3-title: Build in ADP vs. bring your own
+:page-concept-3-desc: When to use each approach, and how they differ.
+:page-concept-3-link: connect:agents-overview.adoc
+:page-concept-4-title: How access control works
+:page-concept-4-desc: Who can see and do what, and how the rules are enforced.
+:page-concept-4-link: control:permissions-overview.adoc
+:page-concept-5-title: What agent tools actually are
+:page-concept-5-desc: Read vs. action tools, versions, and how they're exposed.
+:page-concept-5-link: connect:mcp-overview.adoc
+:page-concept-6-title: How activity records work
+:page-concept-6-desc: What gets recorded, who can see it, and why it matters.
+:page-concept-6-link: monitor:transcripts.adoc
 
-.adp-pathways-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--body-font-color, #1a1a1a);
-  margin: 0 0 24px;
-}
-
-[data-theme="dark"] .adp-pathways-title {
-  color: #fff;
-}
-
-.adp-pathways-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-}
-
-@media (min-width: 768px) {
-  .adp-pathways-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.adp-path-card {
-  display: block;
-  background: var(--panel-background, #fff);
-  border: 1px solid var(--panel-border-color, #e5e7eb);
-  border-radius: 12px;
-  padding: 28px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-
-.adp-path-card:hover {
-  transform: translateY(-2px);
-}
-
-[data-theme="dark"] .adp-path-card {
-  background: #1e2432;
-  border-color: #2d3548;
-}
-
-.adp-path-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  border-color: var(--component-color, #C1331A);
-}
-
-[data-theme="dark"] .adp-path-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-}
-
-.adp-path-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.adp-path-icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  background: var(--component-color, #C1331A);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.adp-path-icon svg {
-  width: 20px;
-  height: 20px;
-  stroke: #fff;
-  fill: none;
-  stroke-width: 2;
-}
-
-.adp-path-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--body-font-color, #1a1a1a);
-  margin: 0;
-  line-height: 1.3;
-}
-
-[data-theme="dark"] .adp-path-title {
-  color: #fff;
-}
-
-.adp-path-desc {
-  font-size: 0.9375rem;
-  color: var(--body-font-color, #4b5563);
-  margin: 0 0 20px;
-  line-height: 1.5;
-}
-
-[data-theme="dark"] .adp-path-desc {
-  color: #9ca3af;
-}
-
-.adp-path-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-  padding: 10px 18px;
-  background: var(--component-color, #C1331A);
-  color: #fff;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: background 0.15s ease, transform 0.15s ease;
-}
-
-.adp-path-cta:hover {
-  background: color-mix(in srgb, var(--component-color, #C1331A) 85%, black);
-  transform: translateY(-1px);
-  color: #fff;
-}
-
-.adp-path-cta svg {
-  width: 14px;
-  height: 14px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-}
-
-/* =============================================================================
-   CONCEPTS GRID — "Get your bearings" section
-   ============================================================================= */
-
-.adp-concepts {
-  max-width: var(--ch3-max-width, 1180px);
-  margin: 0 auto;
-  padding: 32px var(--ch3-gutter, 40px) 48px;
-}
-
-.adp-concepts-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--body-font-color, #1a1a1a);
-  margin: 0 0 24px;
-}
-
-[data-theme="dark"] .adp-concepts-title {
-  color: #fff;
-}
-
-.adp-concepts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.adp-concept-card {
-  display: block;
-  background: var(--panel-background, #fff);
-  border: 1px solid var(--panel-border-color, #e5e7eb);
-  border-radius: 10px;
-  padding: 20px;
-  text-decoration: none;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-
-[data-theme="dark"] .adp-concept-card {
-  background: #1e2432;
-  border-color: #2d3548;
-}
-
-.adp-concept-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  border-color: var(--component-color, #C1331A);
-  transform: translateY(-2px);
-}
-
-[data-theme="dark"] .adp-concept-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-}
-
-.adp-concept-card h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--body-font-color, #1a1a1a);
-  margin: 0 0 6px;
-}
-
-[data-theme="dark"] .adp-concept-card h3 {
-  color: #fff;
-}
-
-.adp-concept-card h3 a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.adp-concept-card h3 a:hover {
-  color: var(--component-color, #C1331A);
-}
-
-.adp-concept-card p {
-  font-size: 0.875rem;
-  color: var(--body-font-color, #6b7280);
-  margin: 0;
-  line-height: 1.5;
-}
-
-[data-theme="dark"] .adp-concept-card p {
-  color: #9ca3af;
-}
-
-/* =============================================================================
-   FOOTER NOTE
-   ============================================================================= */
-
-.adp-footer-note {
-  max-width: var(--ch3-max-width, 1180px);
-  margin: 0 auto;
-  padding: 0 var(--ch3-gutter, 40px) 48px;
-}
-
-.adp-footer-note p {
-  font-size: 0.9375rem;
-  color: var(--body-font-color, #6b7280);
-  background: var(--note-background, #f3f4f6);
-  border-left: 3px solid var(--component-color, #C1331A);
-  padding: 16px 20px;
-  border-radius: 0 8px 8px 0;
-  margin: 0;
-}
-
-[data-theme="dark"] .adp-footer-note p {
-  background: #1e2432;
-  color: #9ca3af;
-}
-
-.adp-footer-note a {
-  color: var(--component-color, #C1331A);
-  text-decoration: none;
-}
-
-.adp-footer-note a:hover {
-  text-decoration: underline;
-}
-</style>
-
-<section class="adp-pathways">
-  <h2 class="adp-pathways-title">Pick where to start</h2>
-  <div class="adp-pathways-grid">
-    <a href="../get-started/adp-quickstart/" class="adp-path-card">
-      <div class="adp-path-header">
-        <div class="adp-path-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></svg>
-        </div>
-        <h3 class="adp-path-title">Build a new agent</h3>
-      </div>
-      <p class="adp-path-desc">Start from scratch inside ADP. Set up an agent, plug in your data, and run it in about 30 minutes.</p>
-      <span class="adp-path-cta">Get started <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-    <a href="../connect/byoa-register/" class="adp-path-card">
-      <div class="adp-path-header">
-        <div class="adp-path-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-        </div>
-        <h3 class="adp-path-title">Bring an agent you already built</h3>
-      </div>
-      <p class="adp-path-desc">Connect an agent you built elsewhere so it shows up alongside the rest — same dashboard, same rules, same tools.</p>
-      <span class="adp-path-cta">Register your agent <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-  </div>
-</section>
-
-<section class="adp-concepts">
-  <h2 class="adp-concepts-title">Get your bearings</h2>
-  <div class="adp-concepts-grid">
-++++
-
-[.adp-concept-card]
---
-[discrete]
-=== xref:connect:concepts.adoc[Agents, tools, and data — how they fit]
-
-The three building blocks of ADP and how they connect.
---
-
-[.adp-concept-card]
---
-[discrete]
-=== xref:gateway:overview.adoc[What sits between your agents and LLMs]
-
-How routing, token counting, and provider setup work.
---
-
-[.adp-concept-card]
---
-[discrete]
-=== xref:connect:agents-overview.adoc[Build in ADP vs. bring your own]
-
-When to use each approach, and how they differ.
---
-
-[.adp-concept-card]
---
-[discrete]
-=== xref:control:permissions-overview.adoc[How access control works]
-
-Who can see and do what, and how the rules are enforced.
---
-
-[.adp-concept-card]
---
-[discrete]
-=== xref:connect:mcp-overview.adoc[What agent tools actually are]
-
-Read vs. action tools, versions, and how they're exposed.
---
-
-[.adp-concept-card]
---
-[discrete]
-=== xref:monitor:transcripts.adoc[How activity records work]
-
-What gets recorded, who can see it, and why it matters.
---
-
-++++
-  </div>
-</section>
-
-<div class="adp-footer-note">
-  <p><strong>New to ADP?</strong> Read <a href="../get-started/adp-overview/">What is ADP?</a> for a quick tour of the platform, then pick a path above.</p>
-</div>
-++++
+:page-footer-note: <strong>New to ADP?</strong> Read <a href="../get-started/adp-overview/">What is ADP?</a> for a quick tour of the platform, then pick a path above.
