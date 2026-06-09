@@ -59,7 +59,7 @@ Set up the OAuth app on Ramp and the matching OAuth Provider in ADP:
 Create a new Ramp MCP server in ADP:
 
 . Open *MCP Servers > Create Server*.
-. Pick *Ramp* from the marketplace picker.
+. Pick `Ramp` from the marketplace picker.
 . Fill in identity fields (`name`, `description`).
 . In the Ramp configuration form:
 +
@@ -67,13 +67,13 @@ Create a new Ramp MCP server in ADP:
 |===
 |Field |Notes
 
-|*Environment*
+|`environment`
 |`production` for the live Ramp API. `demo` for https://docs.ramp.com/developer-api/v1/testing/sandbox-setup[Ramp's sandbox environment]. Omit (or leave empty) for production.
 
-|*OAuth Provider*
+|OAuth Provider
 |The Ramp OAuth Provider you configured.
 
-|*Required scopes*
+|Required scopes
 |All nine scopes listed above. Drop write scopes (`cards:write`, `limits:write`) if the MCP only needs to read.
 |===
 +
@@ -83,15 +83,16 @@ Create a new Ramp MCP server in ADP:
 
 === Configure from the CLI
 
+Ramp authenticates per-user through the Ramp OAuth Provider you configured. The managed config carries only the environment; the `--user-oauth-provider` and `--user-oauth-scopes` flags apply to remote (`--url`) servers only.
+
+// TODO: confirm how rpk associates the OAuth Provider with a managed Ramp server at create time. auth_config.user_oauth is a server-level field on the MCPServer that `rpk ai mcp create` does not currently set for managed backends.
+
 [source,bash]
 ----
-rpk ai mcp create --name my-ramp \
-  --managed-config '{
-    "@type": "type.googleapis.com/redpanda.mcps.ramp.v1.RampMCPConfig",
-    "environment": "production"
-  }' \
-  --user-oauth-provider ramp \
-  --user-oauth-scopes transactions:read,cards:read,cards:write,users:read,departments:read,vendors:read,reimbursements:read,limits:read,limits:write
+rpk ai mcp create --name my-ramp --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.ramp.v1.RampMCPConfig",
+  "environment": "production"
+}'
 ----
 
 Set `environment` to `"demo"` to target Ramp's sandbox.

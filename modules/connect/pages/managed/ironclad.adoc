@@ -53,7 +53,7 @@ Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
 Create a new Ironclad MCP server in ADP:
 
 . Open *MCP Servers > Create Server*.
-. Pick *Ironclad* from the marketplace picker.
+. Pick `Ironclad` from the marketplace picker.
 . Fill in identity fields (`name`, `description`).
 . In the Ironclad configuration form:
 +
@@ -61,13 +61,13 @@ Create a new Ironclad MCP server in ADP:
 |===
 |Field |Notes
 
-|*Region*
+|`region`
 |`IRONCLAD_REGION_NA` (default), `IRONCLAD_REGION_EU` for EU-hosted accounts, or `IRONCLAD_REGION_DEMO` for sandbox testing.
 
-|*OAuth Provider*
+|OAuth Provider
 |The Ironclad OAuth Provider you configured.
 
-|*Required scopes*
+|Required scopes
 |`public.workflows.readWorkflows`, `public.workflows.readSchemas`, `public.workflows.createWorkflows`, `public.workflows.readDocuments`.
 |===
 +
@@ -77,15 +77,16 @@ Create a new Ironclad MCP server in ADP:
 
 === Configure from the CLI
 
+Ironclad authenticates per-user through the Ironclad OAuth Provider you configured. The managed config carries only the region; the `--user-oauth-provider` and `--user-oauth-scopes` flags apply to remote (`--url`) servers only.
+
+// TODO: confirm how rpk associates the OAuth Provider with a managed Ironclad server at create time. auth_config.user_oauth is a server-level field on the MCPServer that `rpk ai mcp create` does not currently set for managed backends.
+
 [source,bash]
 ----
-rpk ai mcp create --name my-ironclad \
-  --managed-config '{
-    "@type": "type.googleapis.com/redpanda.mcps.ironclad.v1.IroncladMCPConfig",
-    "region": "IRONCLAD_REGION_NA"
-  }' \
-  --user-oauth-provider ironclad-prod \
-  --user-oauth-scopes public.workflows.readWorkflows,public.workflows.readSchemas,public.workflows.createWorkflows,public.workflows.readDocuments
+rpk ai mcp create --name my-ironclad --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.ironclad.v1.IroncladMCPConfig",
+  "region": "IRONCLAD_REGION_NA"
+}'
 ----
 
 For EU-hosted accounts, use `"IRONCLAD_REGION_EU"`. For sandbox testing, use `"IRONCLAD_REGION_DEMO"`.

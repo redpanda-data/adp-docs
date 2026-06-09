@@ -77,16 +77,16 @@ Store the NetSuite client secret in the ADP secret store, then reference that se
 
 == Create the managed MCP server
 
-Create a managed MCP server with the NetSuite type. NetSuite authentication is part of the managed config, so include `userOauth` inside the JSON.
+Create a managed MCP server with the NetSuite type. NetSuite authentication is part of the managed config, so include `user_oauth` inside the JSON.
 
 [source,json]
 ----
 {
   "@type": "type.googleapis.com/redpanda.mcps.netsuite.v1.NetSuiteMCPConfig",
-  "accountId": "1234567_SB1",
-  "userOauth": {
-    "providerName": "netsuite",
-    "requiredScopes": ["rest_webservices"]
+  "account_id": "1234567_SB1",
+  "user_oauth": {
+    "provider_name": "netsuite",
+    "required_scopes": ["rest_webservices"]
   }
 }
 ----
@@ -99,10 +99,10 @@ rpk ai mcp create --name netsuite \
   --description "NetSuite ERP with user OAuth" \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.netsuite.v1.NetSuiteMCPConfig",
-    "accountId": "1234567_SB1",
-    "userOauth": {
-      "providerName": "netsuite",
-      "requiredScopes": ["rest_webservices"]
+    "account_id": "1234567_SB1",
+    "user_oauth": {
+      "provider_name": "netsuite",
+      "required_scopes": ["rest_webservices"]
     }
   }'
 ----
@@ -132,7 +132,7 @@ NetSuite record filters use NetSuite-specific forms:
 |Confirm the authorizing NetSuite user has the *REST Web Services* permission.
 
 |OAuth succeeds, but tool calls fail
-|Confirm the OAuth Provider endpoints and the MCP server `accountId` refer to the same NetSuite account.
+|Confirm the OAuth Provider endpoints and the MCP server `account_id` refer to the same NetSuite account.
 
 |A sales-order status filter returns no rows
 |Use the NetSuite internal status ID, such as `_pendingFulfillment`, instead of the display label.
