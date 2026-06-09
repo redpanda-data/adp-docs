@@ -62,7 +62,7 @@ To create the tenant default budget:
 
 To give one agent a different cap, click *Add override*, pick the agent (each agent can have at most one override; agents that already have one are greyed out), then set the *Budget* and *Warn at* controls the same way. The *Resource name* is auto-derived from the picked agent and is immutable; the *Display name* is editable.
 
-// TODO: The create/override forms describe the warn threshold as emitting "a webhook and a Console banner." Per budget.proto, warn notification delivery is a future milestone (today the threshold produces a log entry and a metric, as documented below). Confirm with eng whether webhook + banner delivery is live before describing it here. The Budgets UI tab is also still feature-flag-gated (`adp-agent-budgets`); confirm GA timing before publishing this walkthrough.
+// TODO: The Budgets UI tab is still feature-flag-gated (`adp-agent-budgets`); confirm GA timing before publishing this walkthrough.
 
 === Manage budgets through the API
 
@@ -109,8 +109,6 @@ Streaming and non-streaming requests are tracked the same way. Cache-write token
 ====
 Cost is reported in *microcents*. 1 cent = 1,000,000 microcents, so $1 = 100,000,000 microcents. Divide `total_cost_microcents` by 100,000,000 to convert to dollars.
 ====
-
-// TODO: confirm whether spending events are captured by default for every deployment, or whether some deployments require an opt-in flag. Open Q A1 in the companion plan.
 
 === Per-request pricing variations
 
@@ -284,8 +282,6 @@ The `SpendingFilter` exposes `organization_id` and `user_email`, so every dashbo
 * Identify which organization or user is driving the highest cost on a specific provider.
 
 To cap spend (not just view it), see <<set-a-spend-limit,Set a spend limit>>. Budgets are enforced per agent today; per-tenant and per-user caps are not yet available.
-
-// TODO: confirm whether `organization_id` is multi-tenant-aware in the public ADP API, or whether it's an internal-only field. The proto exposes the filter; runtime population is the open item. Open Q B1 in the companion plan.
 
 [[override-per-model-pricing]]
 == Override per-model pricing

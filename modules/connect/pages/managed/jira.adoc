@@ -1,12 +1,12 @@
 = Jira Managed MCP Server
-:description: Let agents read and manage Jira issues, projects, and workflows using each end-user's own Atlassian identity through user-delegated OAuth.
+:description: Let agents search and read Jira issues using either a shared API token or each end-user's own Atlassian identity through user-delegated OAuth.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Configure the Jira managed MCP server with Atlassian's OAuth flow
-:learning-objective-2: Pick the right scopes for read-only vs. read-write workflows
+:learning-objective-1: Configure the Jira managed MCP server with Basic auth or Atlassian's OAuth flow
+:learning-objective-2: Pick the right scopes for the read tools
 :learning-objective-3: Walk a user through the consent flow and verify the connection
 
-The *Jira* managed MCP server gives agents access to Jira issues, projects, and workflows on behalf of the calling user. It's the enterprise counterpart to xref:managed/slack.adoc[the Slack setup guide]: both use user-delegated OAuth, but Atlassian's flow has its own scope model and quirks worth calling out.
+The *Jira* managed MCP server lets agents search and read Jira issues. It authenticates with either a shared API token (Basic auth) or, for per-user identity, user-delegated OAuth. With OAuth it's the enterprise counterpart to xref:managed/slack.adoc[the Slack setup guide], and Atlassian's flow has its own scope model and quirks worth calling out.
 
 After reading this page, you will be able to:
 
@@ -16,27 +16,26 @@ After reading this page, you will be able to:
 
 == What this MCP server does
 
-The Jira managed type exposes tools for:
+The Jira managed type exposes the following read tools:
 
-* Searching issues with JQL.
-* Reading individual issues, projects, and users.
-* Creating, updating, and transitioning issues.
-* Adding comments and worklog entries.
+* `query`: Search for issues using a JQL query. Returns the matching issues as JSON.
+* `get_issue`: Retrieve a single issue by its key, for example `PROJ-123`.
 
-// TODO: lift exact tool list and per-tool scope requirements from the Jira server's tool registration.
+Creating, updating, transitioning, and commenting on issues are not currently exposed: this managed type is read-only.
 
 == Prerequisites
 
-* A Jira (Atlassian Cloud) site where you can install or authorize an OAuth app.
-* An Atlassian OAuth 2.0 (3LO) app registered against `https://api.atlassian.com`.
+* A Jira (Atlassian Cloud) site and its base URL, for example `https://mycompany.atlassian.net`.
+* Credentials for one of the following authentication modes:
++
+** `Basic auth`: An Atlassian account email and an API token from `id.atlassian.com`, with the token stored in the Redpanda ADP secret store.
+** `User-delegated OAuth`: An Atlassian OAuth 2.0 (3LO) app registered against `https://api.atlassian.com`, plus an glossterm:OAuth provider[,OAuth Provider] in Redpanda ADP configured for Atlassian's authorize/token URLs and carrying the app's client credentials. See xref:connect:user-delegated-oauth.adoc[].
 +
 // TODO: confirm whether Redpanda publishes a reference Atlassian app or whether each customer brings their own.
-* An OAuth Provider in Redpanda ADP configured for Atlassian's authorize/token URLs and carrying the app's client credentials.
-* Familiarity with xref:connect:user-delegated-oauth.adoc[].
 
-== Atlassian's scope model
+== Atlassian's scope model (user-delegated OAuth)
 
-Atlassian uses a granular, prefixed scope namespace. Common scopes:
+When you use user-delegated OAuth, Atlassian uses a granular, prefixed scope namespace. The read tools need:
 
 [cols="1,2"]
 |===
@@ -46,16 +45,11 @@ Atlassian uses a granular, prefixed scope namespace. Common scopes:
 |Read user profile.
 
 |`read:jira-work`
-|Read issues, projects, sprints, and so on (read-only operation).
-
-|`write:jira-work`
-|Create, update, transition issues, add comments.
+|Read issues, projects, sprints, and so on.
 
 |`offline_access`
 |Issue a refresh token so Redpanda can refresh expired access tokens. *Required* for any long-lived MCP server: without it, tokens expire after one hour and users re-consent every time.
 |===
-
-// TODO: confirm minimum required scopes per tool from the Jira server's tool registration.
 
 NOTE: Always include `offline_access` in `required_scopes`. Without it, `OAuthTokenExpired` will hit users every hour.
 
@@ -66,9 +60,11 @@ NOTE: Always include `offline_access` in `required_scopes`. Without it, `OAuthTo
 . Fill in identity fields (`name`, `description`).
 . In the Jira configuration form:
 +
-* *Auth*: Choose *User-delegated OAuth*.
-* *OAuth Provider*: Pick the Atlassian provider you configured.
-* *Required scopes*: At minimum `read:jira-user`, `read:jira-work`, `offline_access`. Add `write:jira-work` if your agents will create or update issues.
+* `Base URL`: Your Jira instance URL, for example `https://mycompany.atlassian.net`.
+* `Max results per page` (optional): Page size for paginated queries. Defaults to `50`.
+* `Auth`: Choose `Basic auth` or `User-delegated OAuth`.
+** For `Basic auth`: Provide the account email and the API-token secret reference.
+** For `User-delegated OAuth`: Pick the Atlassian OAuth Provider you configured, and set `Required scopes` to at least `read:jira-user`, `read:jira-work`, and `offline_access`.
 . Click *Create*.
 
 // TODO: capture screenshots of the Jira form on `adp-production`.
@@ -86,7 +82,7 @@ NOTE: Always include `offline_access` in `required_scopes`. Without it, `OAuthTo
 
 Point an agent at the *API URL* on the server's detail page. Each user calling the agent will trigger their own consent flow on first call.
 
-For agents that need both read and write capabilities, define the server's `required_scopes` to include all the scopes any tool might need: Atlassian doesn't allow per-tool scope upgrades, so the user consents once with the full set.
+With user-delegated OAuth, define the server's `required_scopes` to include every scope the read tools need: Atlassian doesn't allow per-tool scope upgrades, so the user consents once with the full set.
 
 == Troubleshooting
 
@@ -100,8 +96,8 @@ For agents that need both read and write capabilities, define the server's `requ
 |"Resource not found" for a project the user has access to
 |Atlassian's OAuth grants are *site-scoped*. The user authorized for one Cloud instance; the project lives on another. They need to re-consent with the second site.
 
-|`scope_upgrade_required` after adding write capability
-|You added `write:jira-work` to `required_scopes` after users had already consented to read-only. Users re-consent with the higher scope.
+|`scope_upgrade_required` after widening scopes
+|You added a scope to `required_scopes` after users had already consented. Users re-consent with the higher scope.
 
 |`invalid_grant` during refresh
 |Refresh tokens expire if unused for ~90 days. The user re-consents.

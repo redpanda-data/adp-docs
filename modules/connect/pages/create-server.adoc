@@ -60,7 +60,7 @@ Every server has the same identity fields.
 |Disabled servers reject every tool call.
 |===
 
-// TODO: confirm whether the proto's `name` immutability is enforced server-side at edit time, and if not, what the UI does.
+The `name` is the server's identifier and is immutable. The update API preserves it: you can't rename a server after create. To use a different name, delete the server and create a new one.
 
 == Configure the managed flow (managed types only)
 
