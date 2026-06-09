@@ -859,4 +859,4 @@ A/B testing
 
 == Next steps
 
-* xref:gateway:aggregation.adoc[]
+* xref:gateway:code-mode.adoc[]

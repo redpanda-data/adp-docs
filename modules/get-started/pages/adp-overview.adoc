@@ -16,7 +16,7 @@ Redpanda Agentic Data Plane (ADP) closes that gap. ADP is governance infrastruct
 
 ADP builds on open standards, including MCP, OAuth, OpenTelemetry, and the Kafka protocol, so governance sits above your choice of LLM, cloud, or agent framework. You stay free to adopt new models and frameworks as they emerge, without re-platforming or locking into a single vendor.
 
-ADP is its own product surface. It runs on Redpanda, so there's no separate cluster to stand up first, and at launch it deploys in your own AWS account.
+ADP is its own product surface. It runs on Redpanda, so there's no separate cluster to stand up first: Redpanda provisions the underlying environment when you add ADP.
 
 After reading this page, you will be able to:
 

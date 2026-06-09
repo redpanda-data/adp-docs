@@ -8,6 +8,7 @@
 
 // Source: `cloudv2` `pkg/permissions/permissions_constants.go` on origin/main, verified 2026-05-18.
 // Transcript permissions and the TranscriptReader role verified against cloudv2 commit 6dfd3b3 (PR #26829), 2026-06-08.
+// Guardrail, agent-trigger, and dataplane_adp_a2a_invoke permissions added after verifying against origin/main, 2026-06-09.
 
 Every Redpanda ADP API call enforces a single permission. This reference lists every ADP-namespaced permission, the operation it gates, and which built-in role grants it.
 
@@ -235,6 +236,42 @@ The `dataplane_adp_agent_credential_*` permissions gate the OIDC client credenti
 |
 |===
 
+== Agent trigger permissions
+
+The `dataplane_adp_agent_trigger_*` permissions gate triggers that start an agent in response to an external event, such as an incoming message or a schedule. See xref:connect:triggers/overview.adoc[].
+
+[cols="2,2,1,1"]
+|===
+|Permission |Operation |Writer |Reader
+
+|`dataplane_adp_agent_trigger_create`
+|Create a trigger on an agent
+|✓
+|
+
+|`dataplane_adp_agent_trigger_get`
+|View a trigger on an agent
+|✓
+|✓
+
+|`dataplane_adp_agent_trigger_list`
+|List triggers on agents
+|✓
+|✓
+
+|`dataplane_adp_agent_trigger_update`
+|Modify a trigger on an agent
+|✓
+|
+
+|`dataplane_adp_agent_trigger_delete`
+|Delete a trigger on an agent
+|✓
+|
+|===
+
+A further `dataplane_adp_agent_trigger_report_health` permission lets internal trigger observers report trigger health. No tenant-facing role grants it.
+
 [[transcript-permissions]]
 == Transcript permissions
 
@@ -310,13 +347,53 @@ The `dataplane_adp_budget_*` permissions gate per-agent LLM spend budgets. See x
 |
 |===
 
+== Guardrail permissions
+
+The `dataplane_adp_guardrail_*` permissions gate guardrail policies that screen LLM requests and responses. See xref:control:guardrails/overview.adoc[].
+
+[cols="2,2,1,1"]
+|===
+|Permission |Operation |Writer |Reader
+
+|`dataplane_adp_guardrail_create`
+|Create a guardrail policy
+|✓
+|
+
+|`dataplane_adp_guardrail_get`
+|View one guardrail policy's configuration
+|✓
+|✓
+
+|`dataplane_adp_guardrail_list`
+|List guardrail policies
+|✓
+|✓
+
+|`dataplane_adp_guardrail_update`
+|Modify a guardrail policy
+|✓
+|
+
+|`dataplane_adp_guardrail_delete`
+|Delete a guardrail policy
+|✓
+|
+|===
+
 == A2A runtime permissions
 
-The `dataplane_aiagent_a2a_*` permissions gate agent-to-agent (A2A) runtime traffic. The AIAgentInvoker built-in role grants every permission in this namespace.
+The `dataplane_aiagent_a2a_*` permissions, along with `dataplane_adp_a2a_invoke`, gate agent-to-agent (A2A) runtime traffic. The AIAgentInvoker built-in role grants every A2A permission.
 
 [cols="2,2,1,1,1"]
 |===
 |Permission |Operation |Writer |Reader |Invoker
+
+|`dataplane_adp_a2a_invoke`
+|Invoke an A2A agent
+|✓
+|
+|AIAgentInvoker
 
 |`dataplane_aiagent_a2a_message_send`
 |Send a message to an agent

@@ -140,4 +140,4 @@ If the tools list is empty or stale, hit the *Refresh tools* action on the Overv
 == Next steps
 
 * xref:connect:user-delegated-oauth.adoc[]
-* xref:gateway:aggregation.adoc[]
+* xref:gateway:code-mode.adoc[]

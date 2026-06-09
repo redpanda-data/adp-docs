@@ -257,7 +257,7 @@ AI Gateway solves this through deferred tool loading:
 * Agent queries for specific tools only when needed
 * 80-90% token reduction, depending on configuration
 
-See xref:gateway:aggregation.adoc[] for details on configuring deferred tool loading.
+See xref:gateway:code-mode.adoc[] for details on configuring deferred tool loading.
 
 === Add MCP server connection
 
@@ -680,7 +680,7 @@ Verify you're using fast models for autocomplete:
 
 . **MCP tool aggregation overhead**
 +
-Aggregating tools from multiple MCP servers adds processing time. Use deferred tool loading to reduce this overhead (see xref:gateway:aggregation.adoc[]).
+Aggregating tools from multiple MCP servers adds processing time. Use deferred tool loading to reduce this overhead (see xref:gateway:code-mode.adoc[]).
 
 === Configuration changes not taking effect
 
@@ -801,7 +801,7 @@ This sends only search + orchestrator tools initially, reducing token usage sign
 
 == Next steps
 
-* xref:gateway:aggregation.adoc[]
+* xref:gateway:code-mode.adoc[]
 
 == Related pages
 

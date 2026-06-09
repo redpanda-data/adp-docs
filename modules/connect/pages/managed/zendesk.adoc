@@ -7,7 +7,7 @@
 :learning-objective-2: Pick the right scopes and Zendesk role for your workflows
 :learning-objective-3: Search, read, create, and update tickets from the Inspector or an agent
 
-The *Zendesk* managed MCP server lets agents search, read, create, and update tickets in your Zendesk Support instance, look up users and organizations, and search Help Center articles.
+The *Zendesk* managed MCP server lets agents search, read, create, and update tickets in your Zendesk Support instance, look up users and organizations, and search, read, create, and update Help Center articles.
 
 After reading this page, you will be able to:
 
@@ -54,7 +54,7 @@ For per-user authentication, register an OAuth client on Zendesk and a matching 
 . Register a matching OAuth Provider in ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. Use Zendesk's authorize and token endpoints.
 . Each end-user authenticates once through the OAuth flow; tokens are stored in the gateway's token vault.
 
-*Required scopes*: `read tickets:write hc:read` covers all tools. Drop `tickets:write` if the MCP only needs to read.
+*Required scopes*: `read tickets:write hc:read hc:write` covers all tools. Drop `tickets:write` (ticket writes) and `hc:write` (article create/update) if the MCP only needs to read.
 
 == Configure
 
@@ -79,7 +79,7 @@ Create a new Zendesk MCP server in ADP:
 |`username` (agent email used with the API token, for example `agent@acme.com`) and `password_secret_ref` (secret-store reference for the API token, `UPPER_SNAKE_CASE`).
 
 |`user_oauth` (User-OAuth mode)
-|`provider_name` (the Zendesk OAuth Provider you configured) and the minimum required scopes (`read`, `tickets:write`, `hc:read` covers all tools).
+|`provider_name` (the Zendesk OAuth Provider you configured) and the minimum required scopes (`read`, `tickets:write`, `hc:read`, `hc:write` covers all tools).
 |===
 +
 . Click *Create*.
@@ -123,7 +123,7 @@ rpk ai mcp create --name acme-zendesk-oauth --managed-config '{
 
 == Tools
 
-The Zendesk MCP exposes tools across tickets, users, organizations, and Help Center articles:
+The Zendesk MCP exposes tools across tickets, users, organizations, and Help Center articles. Article writes (`create_article`, `update_article`) require the `hc:write` scope (User-OAuth mode) or a Help Center manager role (API-token mode):
 
 [cols="1,2"]
 |===
@@ -164,6 +164,12 @@ The Zendesk MCP exposes tools across tickets, users, organizations, and Help Cen
 
 |`get_article`
 |Fetch a single Help Center article by ID.
+
+|`create_article`
+|Create a new Help Center article from markdown (converted to HTML on upload), with an optional list of labels. The article is always created as a draft, so a human must publish it in Zendesk.
+
+|`update_article`
+|Update an existing Help Center article. Only the fields you send change; omitted fields are left as-is. Markdown is converted to HTML on upload, and you can toggle draft status or clear all labels by sending an empty label list.
 |===
 
 === Example: Triage open tickets

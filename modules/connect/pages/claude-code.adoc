@@ -116,7 +116,7 @@ claude mcp add <server-name> https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<
 
 For OAuth-protected MCP servers (most managed types), Claude Code prompts the developer to complete the consent flow on first use. ADP stores the resulting token in the per-user xref:connect:user-delegated-oauth.adoc[token vault], so subsequent invocations reuse it.
 
-To front many MCP servers behind a single Claude Code endpoint, use xref:gateway:aggregation.adoc[MCP aggregation] and point Claude Code at the aggregated URL.
+If a server exposes a large tool catalog, turn on xref:gateway:code-mode.adoc[code mode] and point Claude Code at the server's code-mode endpoint to cut the token cost of loading every tool definition.
 
 == Verify the connection
 

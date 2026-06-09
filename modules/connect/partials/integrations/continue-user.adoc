@@ -678,7 +678,7 @@ Reduce `maxTokens` in `completionOptions` to limit response length:
 
 . **MCP overhead**
 +
-If not using deferred tool loading, all tools load with every request. Enable deferred tool loading in your AI Gateway configuration (see xref:gateway:aggregation.adoc[]).
+If not using deferred tool loading, all tools load with every request. Enable deferred tool loading in your AI Gateway configuration (see xref:gateway:code-mode.adoc[]).
 
 === Configuration changes not taking effect
 
@@ -834,7 +834,7 @@ Autocomplete rarely needs more than 256 tokens, while chat responses can vary.
 
 == Next steps
 
-* xref:gateway:aggregation.adoc[]
+* xref:gateway:code-mode.adoc[]
 
 == Related pages
 
