@@ -61,8 +61,8 @@ This granularity enables the agent to chain tools (check order status, see it's 
 Create a Remote MCP server with the three tools.
 
 . Sign in to Redpanda ADP.
-. Open *Remote MCP* in the sidebar.
-. Click *Create MCP Server*.
+. Open *MCP Servers* in the sidebar.
+. Click *Create Server*.
 . Configure the server:
 +
 * *Name*: `customer-support-tools`
@@ -100,7 +100,7 @@ include::ROOT:example$mcp-tools/processors/get_customer_history.yaml[]
 ----
 ====
 
-. Click *Create MCP Server*.
+. Click *Create*.
 
 Wait for the server status to show *Running*. You now have three focused tools the agent can orchestrate.
 

@@ -45,8 +45,8 @@ Before creating agents, create the tools they'll use. You'll organize tools by d
 Account tools retrieve customer and transaction data with PII protection.
 
 . Sign in to Redpanda ADP.
-. Open *Remote MCP* in the sidebar.
-. Click *Create MCP Server*.
+. Open *MCP Servers* in the sidebar.
+. Click *Create Server*.
 . Configure the server:
 +
 * *Name*: `account-tools`
@@ -85,7 +85,7 @@ include::ROOT:example$mcp-tools/processors/get_transaction_history.yaml[]
 ----
 ====
 
-. Click *Create MCP Server*.
+. Click *Create*.
 
 Wait for the server status to show *Running*.
 
@@ -98,7 +98,7 @@ This tutorial uses XSmall resource tier for all MCP servers because the mock too
 
 Fraud tools calculate risk scores and identify fraud indicators.
 
-. Click *Create MCP Server*.
+. Click *Create Server*.
 . Configure the server:
 +
 * *Name*: `fraud-tools`
@@ -128,7 +128,7 @@ include::ROOT:example$mcp-tools/processors/get_risk_indicators.yaml[]
 ----
 ====
 
-. Click *Create MCP Server*.
+. Click *Create*.
 
 Wait for the server status to show *Running*.
 
@@ -136,7 +136,7 @@ Wait for the server status to show *Running*.
 
 Merchant tools verify business legitimacy and analyze merchant categories.
 
-. Click *Create MCP Server*.
+. Click *Create Server*.
 . Configure the server:
 +
 * *Name*: `merchant-tools`
@@ -166,7 +166,7 @@ include::ROOT:example$mcp-tools/processors/get_merchant_category.yaml[]
 ----
 ====
 
-. Click *Create MCP Server*.
+. Click *Create*.
 
 Wait for the server status to show *Running*.
 
@@ -174,7 +174,7 @@ Wait for the server status to show *Running*.
 
 Compliance tools handle audit logging and regulatory requirements.
 
-. Click *Create MCP Server*.
+. Click *Create Server*.
 . Configure the server:
 +
 * *Name*: `compliance-tools`
@@ -204,7 +204,7 @@ include::ROOT:example$mcp-tools/processors/check_regulatory_requirements.yaml[]
 ----
 ====
 
-. Click *Create MCP Server*.
+. Click *Create*.
 
 Wait for the server status to show *Running*. You now have four MCP servers with nine total tools, organized by domain.
 
