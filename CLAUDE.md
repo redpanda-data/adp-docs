@@ -20,13 +20,13 @@ adp-docs is the Antora source for the Agentic Data Plane docs (component `agenti
 
 ## Maturity status policy for managed MCP servers (HARD RULE)
 
-A managed MCP server's maturity in the docs MUST be grounded in the cloudv2 registration source. Never infer it from a reviewer comment, a hunch, or "we haven't tested it internally yet."
+**The docs never use "alpha" as a maturity label.** The only maturity tiers we publish are GA and Beta. A server's maturity is grounded in — but not dictated by — the cloudv2 registration source; never infer it from a reviewer comment, a hunch, or "we haven't tested it internally yet."
 
-- **Alpha:** ONLY when the server's `apps/aigw/.../<server>/register_mcp.go` sets `FeatureGate: "alpha"` in cloudv2. Such a server is early-access gated and creatable only on deployments where early-access features are enabled. Today only **SharePoint** qualifies. If `FeatureGate` is absent, the server is **not** alpha.
+- **Alpha-gated in source = human decision, not a docs label.** If a server's `apps/aigw/.../<server>/register_mcp.go` sets `FeatureGate: "alpha"` in cloudv2 (SharePoint does today), the server is early-access only and not GA-ready. Do NOT add, update, or label its page on your own, and do NOT write "alpha" anywhere as its maturity. Flag it for Michele, who decides whether to ship it documented as **Beta** or leave it out of the docs entirely.
 - **GA (no badge):** GitHub (Read), BambooHR, Aha, Google Calendar, Google Drive, Salesforce. This GA set is a product/policy decision confirmed with the team (adp-docs PR #74); treat the managed catalog (`modules/connect/pages/managed/managed-catalog.adoc`) as the rendered source of truth, and confirm with Michele before moving any server between tiers.
-- **Beta (default for everything else):** `:page-beta: true` in the page header, and `badge:beta[label=beta]` on the server's row in the managed catalog.
+- **Beta (default for everything we do ship):** `:page-beta: true` in the page header, and `badge:beta[label=beta]` on the server's row in the managed catalog.
 
-Redpanda does NOT ship managed MCP servers as alpha as a maturity signal. If a reviewer asks to "mark as alpha" because something is untested, that is a product decision, not a docs edit — see the next rule.
+Redpanda does NOT publish managed MCP servers labeled alpha. If a reviewer asks to "mark as alpha" because something is untested, that is a product decision, not a docs edit — see the next rule.
 
 ## Never auto-incorporate reviewer suggestions (HARD RULE)
 
