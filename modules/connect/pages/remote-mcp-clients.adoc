@@ -209,7 +209,7 @@ NOTE: If the MCP server uses a service-account authentication mode instead of us
 
 Maintain registered OAuth Clients without re-creating them:
 
-* *List registered clients*: Open *OAuth Clients*. Each row shows the Name, Grant Types, Status, and Scopes.
+* *List registered clients*: Open *OAuth Clients* in the sidebar. Each row shows the Name, Grant Types, Status, and Scopes.
 * *Edit a client*: Change the display name, logo URI, redirect URIs, allowed MCP resources, grant types, or token endpoint authentication method. The `client_id` is immutable; delete and recreate the client if you need a new one.
 * *Reissue the secret*: The Client Secret is shown only once at creation and can't be regenerated in place. To issue a new secret, delete and recreate the client, then update every chat client that used it.
 * *Revoke all tokens*: Invalidate every refresh token AI Gateway has issued under this client without deleting the client itself (see <<revoke-all-tokens>>).
@@ -224,7 +224,7 @@ Revoking all tokens invalidates every refresh token AI Gateway has issued under 
 
 Revoke from the UI:
 
-. Open *OAuth Clients* and click the client whose tokens you want to revoke.
+. Open *OAuth Clients* in the sidebar and click the client whose tokens you want to revoke.
 . On the client detail page, click *Revoke all tokens*.
 . Confirm the action.
 

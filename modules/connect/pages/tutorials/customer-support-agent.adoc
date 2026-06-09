@@ -61,7 +61,7 @@ This granularity enables the agent to chain tools (check order status, see it's 
 Create a Remote MCP server with the three tools.
 
 . Sign in to Redpanda ADP.
-. Go to *Remote MCP*.
+. Open *Remote MCP* in the sidebar.
 . Click *Create MCP Server*.
 . Configure the server:
 +
@@ -112,7 +112,7 @@ The system prompt teaches the agent how to orchestrate tools. Without explicit g
 
 Create the customer support agent with the system prompt.
 
-. Go to *Agents*.
+. Open *Agents* in the sidebar.
 . Click *Create Agent*.
 . Choose the managed option, *Redpanda manages it*, then click *Continue*.
 . On the *Basics* step, enter a *Display name* of `customer-support-agent` and a *Description* of `Helps customers track orders and shipping`. Click *Continue*.

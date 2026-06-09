@@ -71,7 +71,7 @@ Throughout this tutorial, fields marked with * are required.
 
 Register GitHub as an OAuth provider in ADP.
 
-. In ADP, navigate to **OAuth Providers** in the sidebar.
+. Open *OAuth Providers* in the sidebar.
 . Click **Create provider** and select **GitHub** from the catalog.
 . Fill in the provider details:
 
@@ -182,7 +182,7 @@ The provider appears in the **OAuth Providers** list with status "Enabled".
 
 Before creating an MCP server, proactively test the OAuth flow to verify your provider configuration is correct.
 
-. Navigate to **Connections** in the sidebar.
+. Open *Connections* in the sidebar.
 . Find the **GitHub** provider card.
 +
 . Click **Connect**.
@@ -206,7 +206,7 @@ See <<Troubleshooting>> for more debugging tips.
 
 Now create an MCP server that uses the GitHub OAuth provider for user-delegated authentication.
 
-. Navigate to **MCP Servers** in the sidebar (under ADP → MCP Servers).
+. Open *MCP Servers* in the sidebar.
 . Click **Create server**.
 . The catalog shows managed MCP servers organized by category (AI, Databases, Streaming, Collaboration, AWS, Google, Utilities).
 . Use the search bar or browse to find and select **GitHub**.
