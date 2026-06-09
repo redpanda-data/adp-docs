@@ -1,4 +1,5 @@
 = Kafka Managed MCP Server
+:page-beta: true
 :description: Produce messages to topics on Kafka or Redpanda brokers through a managed MCP server hosted in the Agentic Data Plane.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

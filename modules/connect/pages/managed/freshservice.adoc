@@ -1,0 +1,225 @@
+= Freshservice Managed MCP Server
+:page-beta: true
+:description: Manage Freshworks Freshservice ITSM tickets, assets, change requests, and agents from an agent, with API-key or per-user OAuth authentication.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Configure the Freshservice managed MCP server in API-key or User-OAuth mode
+:learning-objective-2: Find the Freshservice credentials each mode needs
+:learning-objective-3: List, create, and update tickets, assets, and changes from the Inspector or an agent
+
+The Freshservice managed MCP server lets agents work with your Freshworks Freshservice ITSM instance: list and search tickets, read full ticket detail, create and update tickets, browse CMDB assets, open change requests, and look up support agents.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+Wraps the Freshservice REST API v2. Two auth modes are supported:
+
+* API key (Basic auth): A long-lived Freshservice API key sent as the HTTP Basic auth username, with the literal string `X` as the password. Best for service-account-style use.
+* User OAuth: Per-user Freshservice OAuth tokens resolved from the gateway's glossterm:token vault[]. Best when you want each agent action attributed to the calling end-user.
+
+Responses are curated for token efficiency: high-volume fields (routing headers, internal SLA sub-deadlines, spam and email-config flags, agent scoreboards) are dropped before reaching the LLM, and ticket and change descriptions are returned as plain text rather than HTML. Freshservice error response bodies are never forwarded to the caller; only the HTTP status code is surfaced, so API keys and internal request IDs cannot leak into tool error text.
+
+== Prerequisites
+
+Before you create the server, make sure you have:
+
+* A Freshservice instance and its domain (for example, `mycompany.freshservice.com`).
+* For API-key mode: the API key from your Freshservice profile (see <<Get Freshservice credentials>>).
+* For User-OAuth mode: a Freshservice OAuth app and an glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+
+== Get Freshservice credentials
+
+=== Option 1: API key (recommended for service accounts)
+
+. In Freshservice, open *Profile Settings*.
+. Copy the value from the *API Key* section.
+. Store the key in the ADP secret store under a name like `FRESHSERVICE_API_KEY`.
+
+The MCP sends the key as the HTTP Basic auth username with `X` as the password (`base64(<api-key>:X)`), which is the Freshservice convention. The API key inherits the permissions of the Freshservice user it belongs to, so use an account with the roles your workflows need (agent, asset, and change permissions).
+
+=== Option 2: User OAuth
+
+For per-user authentication, register an OAuth app on Freshservice and a matching OAuth Provider in ADP:
+
+. Register a Freshservice OAuth app at the Freshworks developer portal to obtain a client ID and client secret.
+. Register a matching OAuth Provider in ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The `freshservice` preset pre-fills the authorization and token endpoints; ADP substitutes your Freshservice subdomain into the `{domain}` placeholders.
+. Each end-user authenticates once through the OAuth flow; tokens are stored in the gateway's token vault.
+
+The OAuth scopes are `read` and `write`. Drop `write` if the MCP only needs to read.
+
+== Configure
+
+Create a new Freshservice MCP server in ADP:
+
+. Open *MCP Servers > Create Server*.
+. Pick `Freshservice` from the marketplace picker.
+. Fill in identity fields (`name`, `description`).
+. In the Freshservice configuration form:
++
+[cols="1,3"]
+|===
+|Field |Notes
+
+|`domain`
+|Your Freshservice host, without the `https://` scheme or a trailing slash (for example, `mycompany.freshservice.com`).
+
+|`auth`
+|`api_key` for service-account mode, or `user_oauth` for per-user mode.
+
+|`api_key` (API-key mode)
+|Secret-store reference holding the API key (for example, `FRESHSERVICE_API_KEY`). `UPPER_SNAKE_CASE`.
+
+|`user_oauth` (User-OAuth mode)
+|The OAuth Provider you configured, and the minimum scopes a user's connection must have.
+|===
++
+. Click *Create*.
+
+=== Configure from the CLI
+
+For a managed server, set the auth method inside the `--managed-config` JSON. The `auth` field is required.
+
+[tabs]
+======
+API-key mode::
++
+[source,bash]
+----
+rpk ai mcp create --name acme-freshservice --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.freshservice.v1.FreshServiceMCPConfig",
+  "domain": "mycompany.freshservice.com",
+  "api_key": {
+    "key_secret_ref": "FRESHSERVICE_API_KEY"
+  }
+}'
+----
+
+User-OAuth mode::
++
+[source,bash]
+----
+rpk ai mcp create --name acme-freshservice-oauth --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.freshservice.v1.FreshServiceMCPConfig",
+  "domain": "mycompany.freshservice.com",
+  "user_oauth": {
+    "provider_name": "freshservice-prod",
+    "required_scopes": ["read", "write"]
+  }
+}'
+----
+======
+
+Replace `freshservice-prod` with the name of the OAuth Provider you configured.
+
+== Tools
+
+The Freshservice MCP exposes eight tools across tickets, assets, changes, and agents:
+
+[cols="1,2"]
+|===
+|Tool |Description
+
+|`list_tickets`
+|List tickets, with optional status, priority, and page filters.
+
+|`get_ticket`
+|Fetch one ticket with its full description text and attachments.
+
+|`create_ticket`
+|Open a new incident or service-request ticket.
+
+|`update_ticket`
+|Update ticket fields such as status, priority, and assignee.
+
+|`list_assets`
+|List CMDB assets, with optional type and page filters.
+
+|`get_asset`
+|Fetch one asset with its dynamic `type_fields`.
+
+|`create_change`
+|Open a new change request with planning fields.
+
+|`list_agents`
+|List support agents, with optional active and email filters.
+|===
+
+=== Example: List open tickets
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-freshservice \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+      "name": "list_tickets",
+      "arguments": {
+        "status": "open",
+        "priority": "urgent"
+      }
+    }
+  }'
+----
+
+Replace `<cluster-id>` with your cluster ID and `$TOKEN` with a gateway access token.
+
+=== Example: Create a ticket
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-freshservice \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/call",
+    "params": {
+      "name": "create_ticket",
+      "arguments": {
+        "subject": "Laptop will not boot",
+        "description": "Reported by the Dresden office; powers on but no display.",
+        "priority": 2,
+        "status": 2
+      }
+    }
+  }'
+----
+
+== Troubleshooting
+
+Common symptoms and fixes:
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`freshservice API error (status 401)`
+|Confirm `FRESHSERVICE_API_KEY` matches the value from *Profile Settings*, and that the key's Freshservice user has the roles the operation needs.
+
+|`freshservice API error (status 403)`
+|The API key's Freshservice user lacks permission for the resource (for example, assets or changes). Grant the role or use an account that has it.
+
+|`OAuthConnectionRequired` (User-OAuth mode)
+|First call from a user with no stored token. The user completes the Freshservice OAuth consent flow, the token lands in the vault, and later calls reuse it. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+
+|`scope_upgrade_required` (User-OAuth mode)
+|The server's required scopes were extended after users consented. Users re-consent with the higher scope.
+|===
+
+NOTE: Freshservice error bodies are not forwarded to the caller, so tool errors carry only the HTTP status code. Reproduce the call against the Freshservice API directly to see the full error detail.
+
+== Next steps
+
+* xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:connect:create-server.adoc[Create an MCP Server]

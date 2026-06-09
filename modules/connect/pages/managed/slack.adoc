@@ -1,4 +1,5 @@
 = Slack Managed MCP Server
+:page-beta: true
 :description: Let agents read threads, post messages, and add reactions in your Slack workspace using a shared bot token or each end-user's own Slack identity through user-delegated OAuth.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

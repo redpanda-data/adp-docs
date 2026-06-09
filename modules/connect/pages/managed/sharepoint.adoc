@@ -1,4 +1,5 @@
 = SharePoint Managed MCP Server
+:page-beta: true
 :description: Let agents read and write SharePoint sites, document libraries, lists, and files through the Microsoft Graph API, using each end-user's own Microsoft identity through user-delegated OAuth.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
