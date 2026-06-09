@@ -17,7 +17,7 @@ After reading this page, you will be able to:
 
 [NOTE]
 ====
-The SharePoint managed MCP server is in early access and is gated behind the `alpha` feature gate. It appears in the marketplace picker and is creatable only on deployments where early-access features are enabled. Contact Redpanda support if you don't see SharePoint in the picker.
+The SharePoint managed MCP server is in beta. Contact Redpanda support if you don't see SharePoint in the picker.
 ====
 
 == What this MCP server does
