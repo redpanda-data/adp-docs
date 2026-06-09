@@ -8,7 +8,7 @@
 
 A guardrail is a set of safety and policy filters that inspect and control how agents and gateways use models. A guardrail can block prompt injection, deny off-topic content, redact or block personally identifiable information (PII), and check responses for factual grounding. You attach a guardrail to an LLM provider, and ADP applies it to every request and response that flows through that provider.
 
-ADP guardrails run on AWS Bedrock Guardrails. Each guardrail reconciles against the Bedrock control plane, so it needs an AWS region and Bedrock credentials, even when it protects a non-Bedrock provider such as OpenAI, Anthropic, or Google. For those providers, ADP runs the guardrail by calling Bedrock's evaluation API around each request.
+ADP guardrails run on AWS Bedrock Guardrails. Each guardrail syncs its policy configuration to the Bedrock control plane, so it needs an AWS region and Bedrock credentials, even when it protects a non-Bedrock provider such as OpenAI, Anthropic, or Google. For those providers, ADP runs the guardrail by calling Bedrock's evaluation API around each request.
 
 After reading this page, you will be able to:
 

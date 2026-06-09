@@ -8,7 +8,7 @@
 
 When a guardrail acts on a request, the caller sees a blocked message and ADP records the action on the request's trace. This release does not include a dedicated violations dashboard, so you review blocked requests through glossterm:transcript[,transcripts].
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
@@ -28,7 +28,11 @@ ADP records guardrail activity as attributes on the request's OpenTelemetry trac
 
 For streaming responses, ADP skips output evaluation and marks the skip on the trace. Input evaluation still applies to streaming requests.
 
-== A guardrail blocks too much
+== Troubleshoot guardrail behavior
+
+When a guardrail blocks legitimate traffic or fails to act when you expect it to, work through the checks in this section to find the cause.
+
+=== A guardrail blocks too much
 
 If a guardrail blocks legitimate traffic:
 
@@ -39,7 +43,7 @@ If a guardrail blocks legitimate traffic:
 
 To stage a change without enforcing it, turn off a policy's *Evaluate this policy* toggle, or set the policy's action to detect, and review the results on the trace before you block.
 
-== A guardrail doesn't fire
+=== A guardrail doesn't fire
 
 If you expect a guardrail to act and it doesn't:
 
