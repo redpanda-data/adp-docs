@@ -8,7 +8,7 @@
 
 Create a guardrail to inspect and control the requests and responses that flow through an LLM provider. You configure the guardrail in a three-step wizard (details, backend, and policies), attach it to a provider, and confirm it blocks.
 
-After completing this guide, you will be able to:
+After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
@@ -18,9 +18,11 @@ After completing this guide, you will be able to:
 
 * An AWS region and Bedrock access. A guardrail reconciles against the AWS Bedrock control plane, so you need either AWS credentials it can use or a Bedrock LLM provider whose credentials it can borrow.
 * At least one LLM provider to attach the guardrail to. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
-* For the sensitive-information, content-filter, contextual-grounding, and automated-reasoning policies, confirm the features you need are available in your chosen Bedrock region.
+* For the Sensitive information, Content filters, Contextual grounding, and Automated reasoning policies, confirm the features you need are available in your chosen Bedrock region.
 
 == Add the details
+
+Open the wizard and give the guardrail its name and the messages that callers see when a policy blocks a request.
 
 . In ADP, open *Guardrails*, then click *Create guardrail*.
 . On the Details step, set the following:
@@ -53,7 +55,7 @@ After completing this guide, you will be able to:
 
 The backend is the AWS region and credentials the guardrail uses to reach Bedrock.
 
-. Select a region. The region decides which Bedrock models and guardrail features are reachable, because not every feature is available in every region. Use the same region as the Bedrock provider or model you intend to protect.
+. Select a region. The region decides which Bedrock models and guardrail features you can reach, because not every feature is available in every region. Use the same region as the Bedrock provider or model you intend to protect.
 . Choose a credential source:
 +
 * Standalone AWS credentials: Supply credentials for this guardrail directly.
@@ -76,25 +78,35 @@ Each policy is optional, but a guardrail must enforce at least one. Turn on the 
 * Contextual grounding: Factual grounding and relevance checks for RAG-style output. Output only.
 * Automated reasoning: Formal Bedrock Automated Reasoning policies. Detect only.
 
-Each policy you turn on exposes a separate Evaluate this policy toggle. Turn it off to save the policy's configuration without enforcing it, which lets you stage a policy before it takes effect.
+Each policy you turn on exposes a separate *Evaluate this policy* toggle. Turn it off to save the policy's configuration without enforcing it, which lets you stage a policy before it takes effect.
+
+[NOTE]
+====
+Two separate toggles control evaluation:
+
+* The guardrail-level *Enabled* toggle, on the Details step, turns the whole guardrail on or off. A disabled guardrail keeps its configuration but evaluates no traffic.
+* The policy-level *Evaluate this policy* toggle controls a single policy within the guardrail. A policy with this toggle off is saved but not evaluated.
+
+A policy acts on traffic only when its guardrail is enabled and its own *Evaluate this policy* toggle is on.
+====
 
 A policy you turn on needs at least one rule. ADP rejects a guardrail that has no policy turned on, or that turns on a policy with no rules set, such as a content-filter policy with no category configured or a contextual-grounding policy with neither grounding nor relevance enabled.
 
-A staged policy does not count toward this minimum, because a policy with its Evaluate this policy toggle off is not enforced. A guardrail needs at least one policy that is both turned on and evaluated, so if you stage every policy, ADP rejects the guardrail.
+A staged policy does not count toward this minimum, because a policy with its *Evaluate this policy* toggle off is not enforced. A guardrail needs at least one policy that is both turned on and evaluated, so if you stage every policy, ADP rejects the guardrail.
 
 When you finish, click *Create guardrail*.
 
 == Attach the guardrail to a provider
 
-A guardrail takes effect only once a provider references it. On an LLM provider, set its guardrail to the one you created. A provider references one guardrail, and you can reuse the same guardrail across many providers. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
+A guardrail takes effect only after a provider references it. On an LLM provider, set its guardrail to the one you created. A provider references one guardrail, and you can reuse the same guardrail across many providers. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
 
 == Enable the guardrail
 
-After the policies are configured and the guardrail is attached, set the guardrail to enabled. A disabled guardrail keeps its configuration but skips evaluation entirely, which is useful while you stage a policy or troubleshoot whether the guardrail is responsible for unexpected blocks.
+After you configure the policies and attach the guardrail, set the guardrail to enabled. A disabled guardrail keeps its configuration but skips evaluation entirely, which is useful while you stage a policy or troubleshoot whether the guardrail is responsible for unexpected blocks.
 
 == Verify the guardrail blocks
 
-Send a request through an attached provider that trips a policy. For example, with the sensitive-information policy set to block on input, send a prompt that contains an email address or other PII.
+Send a request through an attached provider that violates a policy. For example, with the sensitive-information policy set to block on input, send a prompt that contains an email address or other PII.
 
 The request returns your blocked input message instead of a model response. Open the request's glossterm:transcript[] and confirm the guardrail recorded its action. See xref:monitor:transcripts.adoc[See what your agent did] for the transcript walkthrough and xref:control:guardrails/violations.adoc[Review blocked requests] for how blocked requests surface.
 
