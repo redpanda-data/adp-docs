@@ -343,7 +343,7 @@ If your gateway is configured with fallback providers, check the logs to see if 
 
 . **MCP tool aggregation overhead**
 +
-Aggregating tools from multiple MCP servers adds processing time. Use deferred tool loading to reduce this overhead (see xref:gateway:aggregation.adoc[]).
+Aggregating tools from multiple MCP servers adds processing time. Use deferred tool loading to reduce this overhead (see xref:gateway:code-mode.adoc[]).
 
 . **Rate limiting**
 +
@@ -395,7 +395,7 @@ chmod 600 ~/.claude.json
 
 == Next steps
 
-* xref:gateway:aggregation.adoc[]
+* xref:gateway:code-mode.adoc[]
 
 == Related pages
 

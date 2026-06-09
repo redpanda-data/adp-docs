@@ -558,7 +558,7 @@ You may be using a premium model for simple tasks. Solutions:
 +
 If not using deferred tool loading, all tools load with every request. Solution:
 +
-* Enable deferred tool loading in your AI Gateway configuration (see xref:gateway:aggregation.adoc[])
+* Enable deferred tool loading in your AI Gateway configuration (see xref:gateway:code-mode.adoc[])
 
 === Cline hangs or times out
 
@@ -681,7 +681,7 @@ After (low token cost):
 * Cline queries the tool for specific information as needed
 * Only relevant sections included in context
 
-See xref:gateway:aggregation.adoc[] for MCP tool configuration.
+See xref:gateway:code-mode.adoc[] for MCP tool configuration.
 
 === Enable deferred tool loading
 
@@ -701,7 +701,7 @@ The gateway automatically blocks requests that would exceed the limit.
 
 == Next steps
 
-* xref:gateway:aggregation.adoc[]
+* xref:gateway:code-mode.adoc[]
 
 == Related pages
 

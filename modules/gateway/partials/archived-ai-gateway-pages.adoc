@@ -19,8 +19,8 @@ Original locations:
   - gateway/admin/setup-guide            -> modules/gateway/pages/admin/setup-guide.adoc
   - gateway/builders/discover-gateways   -> modules/gateway/pages/builders/discover-gateways.adoc
 
-Note: gateway/aggregation.adoc (now "MCP Aggregation") is a CURRENT page and was
-intentionally kept. It is not part of this archive.
+Note: gateway/aggregation.adoc was reframed and renamed to gateway/code-mode.adoc
+("Code Mode"), a CURRENT page (old URL redirects via :page-aliases:). It is not part of this archive.
 ////
 
 // ===========================================================================
@@ -796,7 +796,7 @@ Rate limits for MCP work the same way as LLM rate limits.
 
 Repeat for each MCP server you want to aggregate.
 
-// Original xref: gateway:aggregation.adoc (MCP Aggregation) — current page, kept.
+// Original xref: gateway:aggregation.adoc, reframed/renamed to gateway:code-mode.adoc (Code Mode); current page, kept.
 
 === Configure the MCP orchestrator
 

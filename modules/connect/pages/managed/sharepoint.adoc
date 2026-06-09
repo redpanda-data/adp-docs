@@ -180,9 +180,6 @@ The SharePoint server uses per-user OAuth, so the first call from a user who has
 |===
 |Symptom |What to check
 
-|SharePoint isn't in the marketplace picker
-|The server is gated behind the `alpha` feature gate. Confirm that early-access features are enabled on your deployment, or contact Redpanda support.
-
 |`OAuthConnectionRequired`
 |First call from a user with no stored token. The user completes Microsoft's OAuth consent flow, the token lands in the vault, and subsequent calls reuse it. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 

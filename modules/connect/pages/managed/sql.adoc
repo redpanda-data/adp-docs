@@ -1,6 +1,6 @@
 = SQL Managed MCP Server
 :page-beta: true
-:description: Query and write to SQL databases (Postgres, MySQL, ClickHouse, MSSQL, SQLite, and more) through a managed MCP server hosted by Redpanda.
+:description: Query and write to SQL databases (PostgreSQL, MySQL, ClickHouse, SQL Server, and SQLite) through a managed MCP server hosted by Redpanda.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Configure the SQL managed MCP server for your database
@@ -24,9 +24,6 @@ Redpanda's SQL managed type proxies SQL statements to one of these database engi
 * ClickHouse
 * Microsoft SQL Server (`mssql`)
 * SQLite (`sqlite3`)
-* Snowflake
-* Trino
-* Databricks
 
 It exposes the following tools:
 
@@ -49,7 +46,7 @@ Guardrails on the server config can restrict it: set `readonly` to disable `exec
 . Fill in the identity fields (`name`, `description`).
 . In the SQL configuration form, provide:
 +
-* `Driver`: One of `postgres`, `pgx`, `mysql`, `clickhouse`, `mssql`, `sqlite3`, `snowflake`, `trino`, or `databricks`.
+* `Driver`: One of `postgres`, `pgx`, `mysql`, `clickhouse`, `mssql`, or `sqlite3`.
 * `DSN`: The driver-specific connection string, including credentials. Stored as a sensitive value.
 * `Connection pool` (optional): Maximum open and idle connections, and connection lifetimes.
 * `Guardrails` (optional): `readonly` (disables `execute`), default and maximum row caps, a per-query timeout, allowed schemas, and blocked statement patterns.

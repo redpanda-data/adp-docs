@@ -865,7 +865,7 @@ Generate project-specific cost reports from the gateway dashboard.
 
 == Next steps
 
-* xref:gateway:aggregation.adoc[]
+* xref:gateway:code-mode.adoc[]
 
 == Related pages
 

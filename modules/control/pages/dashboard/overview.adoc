@@ -40,7 +40,6 @@ The dashboard includes these sections:
 
 The date-range control supports these windows:
 
-* Last 24 hours
 * Last 7 days (default)
 * Last 14 days
 * Last 30 days
@@ -49,7 +48,7 @@ The date-range control supports these windows:
 * Quarter to date
 * Year to date
 
-The app rounds the end of each range up to the next hour. Ranges of 24 hours or less use hourly buckets; longer ranges use daily buckets.
+The app rounds the end of each range up to the next hour. Shorter ranges use hourly buckets; longer ranges use daily buckets.
 
 == Read the KPI tabs
 

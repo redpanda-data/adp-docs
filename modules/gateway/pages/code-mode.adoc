@@ -1,0 +1,108 @@
+= Code Mode
+:page-aliases: aggregation.adoc
+:description: Turn on code mode for an MCP server to replace a large tool catalog with two tools, search and execute, and cut the token cost of tool-heavy servers.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Explain how code mode reduces tool-token usage for an MCP server
+:learning-objective-2: Enable code mode on an MCP server and find its code-mode endpoint
+:learning-objective-3: Use the search and execute tools to find and call tools through code mode
+
+When an glossterm:MCP server[] exposes a large catalog of glossterm:MCP tool[,tools], a connecting glossterm:AI agent[] normally loads the full schema of every tool into its context window before it can call anything. For a server with dozens or hundreds of tools, that is a large, recurring token cost on every request, and it crowds the model's context with definitions it may never use.
+
+*Code mode* addresses this for a single MCP server. When you turn it on, the server exposes a second, virtual endpoint that presents just two tools, `search` and `execute`, in place of its full catalog. The agent searches for the tools it needs, reads only those schemas, and runs the calls inside a JavaScript sandbox, so it loads two tool definitions instead of the whole catalog and can chain several calls in a single round trip.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+[NOTE]
+====
+Code mode applies to one MCP server at a time. It is a token-reduction technique for a server with many tools, not a way to combine multiple servers behind one endpoint.
+====
+
+== How code mode works
+
+When code mode is enabled on an MCP server, the AI Gateway serves a virtual sibling endpoint alongside the server's normal one. If the server is reachable at `+https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>+`, its code-mode endpoint is the same path with a `-code` suffix:
+
+[source]
+----
+https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>-code
+----
+
+That endpoint exposes exactly two tools instead of the server's full catalog:
+
+`search`:: Find tools in the underlying server's catalog. Takes an optional `query`, a regular expression (Go RE2 syntax) matched against each tool's name and description. It returns the full schema (name, description, and input schema) of every match, or null when nothing matches. Omit the query to list the entire catalog, which is large, so prefer a narrow regex.
+
+`execute`:: Run JavaScript in a sandbox that is connected to the same MCP server. The value of the last expression in your code is returned as the tool result. Inside the sandbox, two synchronous host functions are available:
++
+* `call_tool({name, arguments})`: Invoke a tool on the server and return its output directly. It throws if the tool returns an error. JSON output is parsed into the matching JavaScript value; anything else is returned as a string.
+* `search_tools(query)`: Search the catalog by regex, the same as the `search` tool.
+
+A typical interaction is: call `search` with a narrow regex to find candidate tools, read the returned input schema, then call `execute` with code that invokes one or more of those tools.
+
+=== Sandbox constraints
+
+The `execute` sandbox is isolated and intentionally limited:
+
+* Code is capped at 64 KiB.
+* A single `execute` call can make at most 50 tool calls.
+* Each sandbox has a memory limit and a runtime limit.
+* The `call_tool` and `search_tools` host functions are synchronous, so do not use `await` on them. Top-level `await` and top-level `return` are syntax errors, promises are not awaited (returning one yields an empty result), and `console.log` output is discarded.
+
+Calls that code mode makes to the underlying server run with the same identity and authentication as the server itself, including any per-user glossterm:token vault[] credentials. Code mode does not widen what the server can reach.
+
+== When to use code mode
+
+Turn on code mode when:
+
+* A server exposes a large tool catalog, so loading every tool definition on each request is expensive or pushes out other context.
+* An agent frequently performs multi-step tool sequences that you would rather run in one round trip instead of several model turns.
+
+Leave it off for servers with only a handful of tools, where the overhead of searching and writing code outweighs the token savings of a small catalog.
+
+== Enable code mode
+
+Enable code mode on the MCP server, then point your agent or client at the code-mode endpoint.
+
+. Open *MCP Servers* in the sidebar.
+. Create a server, or open an existing one to edit it. See xref:connect:create-server.adoc[Create an MCP Server].
+. Turn on the *Code mode* toggle.
+. Save the server. The server's detail page shows the code-mode endpoint URL (the primary URL with a `-code` suffix).
+. Configure your agent or MCP client to connect to the code-mode URL instead of the primary URL.
+
+== Test from the CLI
+
+The `--code-mode` flag on `rpk ai mcp tools` targets the virtual `-code` endpoint instead of the server's primary endpoint, so you can exercise `search` and `execute` directly.
+
+List the code-mode tools:
+
+[source,bash]
+----
+rpk ai mcp tools list <server-name> --code-mode
+----
+
+Search the underlying catalog:
+
+[source,bash]
+----
+rpk ai mcp tools call <server-name> search --code-mode \
+  --args '{"query":"(?i)pull.*create"}'
+----
+
+Run code through the `execute` tool:
+
+[source,bash]
+----
+rpk ai mcp tools call <server-name> execute --code-mode \
+  --args '{"code":"var pulls = call_tool({ name: \"github_pulls_list\", arguments: { owner: \"redpanda-data\", repo: \"redpanda\", state: \"open\" } }); JSON.stringify(pulls.map(function (p) { return { number: p.number, title: p.title }; }));"}'
+----
+
+The code calls a tool, shapes the result, and returns the value of its last expression. Because `call_tool` is synchronous, a single `execute` call can search, call several tools, and combine the results without extra model round trips.
+
+== Next steps
+
+* xref:connect:create-server.adoc[Create an MCP Server]
+* xref:connect:mcp-overview.adoc[How MCP Servers Work]
+* xref:connect:test-tools.adoc[Test MCP Tools]

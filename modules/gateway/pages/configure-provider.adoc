@@ -2,7 +2,7 @@
 :description: Create an LLM provider in AI Gateway to proxy requests to OpenAI, Anthropic, Google AI, AWS Bedrock, or any OpenAI-compatible endpoint through a managed Redpanda URL.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder
-// Legacy gateway-object-model pages (gateway-quickstart.adoc, gateway-architecture.adoc, admin/setup-guide.adoc, builders/discover-gateways.adoc) were archived to gateway/partials/archived-ai-gateway-pages.adoc and removed from the nav. aggregation.adoc (now "MCP Aggregation") is a current page and was kept. Old cloud URLs redirect via :page-aliases: on gateway/overview.adoc.
+// Legacy gateway-object-model pages (gateway-quickstart.adoc, gateway-architecture.adoc, admin/setup-guide.adoc, builders/discover-gateways.adoc) were archived to gateway/partials/archived-ai-gateway-pages.adoc and removed from the nav. aggregation.adoc was reframed and renamed to code-mode.adoc ("Code Mode"), a current page that was kept (old URL redirects via :page-aliases: on code-mode.adoc). Old cloud URLs redirect via :page-aliases: on gateway/overview.adoc.
 :learning-objective-1: Create an LLM provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint
 :learning-objective-2: Select the models you want to expose through the provider
 :learning-objective-3: Verify the provider is reachable using the built-in Test Connection control

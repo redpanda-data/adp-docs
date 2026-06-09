@@ -51,9 +51,9 @@ Open the wizard and give the guardrail its name and the messages that callers se
 |===
 . Click *Next*.
 
-== Configure the backend
+== Configure authentication
 
-The backend is the AWS region and credentials the guardrail uses to reach Bedrock.
+This step, labeled *Authentication* in the wizard, sets the AWS region and credentials the guardrail uses to reach Bedrock.
 
 . Select a region. The region decides which Bedrock models and guardrail features you can reach, because not every feature is available in every region. Use the same region as the Bedrock provider or model you intend to protect.
 . Choose a credential source:
