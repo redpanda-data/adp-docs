@@ -21,7 +21,7 @@
 *** xref:connect:mcp-overview.adoc[How MCP Servers Work]
 *** xref:connect:managed/managed-catalog.adoc[Plug in an App, Database, or Tool]
 **** xref:connect:managed/bamboohr.adoc[BambooHR]
-**** xref:connect:managed/freshservice.adoc[FreshService]
+**** xref:connect:managed/freshservice.adoc[Freshservice]
 **** xref:connect:managed/grafana.adoc[Grafana]
 **** xref:connect:managed/ironclad.adoc[Ironclad]
 **** xref:connect:managed/jira.adoc[Jira]

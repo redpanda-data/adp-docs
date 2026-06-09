@@ -6,7 +6,7 @@
 :learning-objective-2: Pick the right service-account role for read versus write workflows
 :learning-objective-3: Search dashboards, query Prometheus and Loki, and upsert dashboards from the Inspector or an agent
 
-The *Grafana* managed MCP server lets agents work with a Grafana instance: search dashboards and folders, list datasources, run PromQL queries against Prometheus datasources, run LogQL queries against Loki datasources, and create or update dashboards.
+The Grafana managed MCP server lets agents work with a Grafana instance: search dashboards and folders, list datasources, run PromQL queries against Prometheus datasources, run LogQL queries against Loki datasources, and create or update dashboards.
 
 After reading this page, you will be able to:
 
@@ -30,7 +30,7 @@ Before you create the server, make sure you have:
 == Get Grafana credentials
 
 . In Grafana, go to *Administration > Users and access > Service accounts*.
-. Create a service account. Assign the *Viewer* role to use every read tool. To use `create_or_update_dashboard`, assign *Editor* (or a custom role with dashboard write permission) instead.
+. Create a service account. Assign the Viewer role to use every read tool. To use `create_or_update_dashboard`, assign Editor (or a custom role with dashboard write permission) instead.
 . On the service account, select *Add service account token*, then copy the generated token (`glsa_...`). It is shown only once.
 . Store the token in the ADP secret store under a name like `GRAFANA_SERVICE_ACCOUNT_TOKEN`.
 
@@ -41,7 +41,7 @@ Note your instance base URL and, if your instance is multi-org, the numeric org 
 Create a new Grafana MCP server in ADP:
 
 . Open *MCP Servers > Create Server*.
-. Pick *Grafana* from the marketplace picker.
+. Pick `Grafana` from the marketplace picker.
 . Fill in identity fields (`name`, `description`).
 . In the Grafana configuration form:
 +
@@ -49,13 +49,13 @@ Create a new Grafana MCP server in ADP:
 |===
 |Field |Notes
 
-|*Base URL*
+|`base_url`
 |Base URL of your Grafana instance (for example, `https://myorg.grafana.net`).
 
-|*Org ID*
+|`org_id`
 |Optional. The numeric organization ID for a multi-org instance. Omit it to use the token's default organization.
 
-|*Service-account token*
+|`service_account_token`
 |Secret-store reference holding the service-account token (for example, `GRAFANA_SERVICE_ACCOUNT_TOKEN`). `UPPER_SNAKE_CASE`.
 |===
 +
@@ -173,7 +173,7 @@ Common symptoms and fixes:
 |The service account has the Viewer role. Assign Editor (or a role with dashboard write permission).
 
 |Wrong organization's data
-|The token resolves to its default organization. Set the *Org ID* field to target a specific organization on a multi-org instance.
+|The token resolves to its default organization. Set the `org_id` field to target a specific organization on a multi-org instance.
 |===
 
 == Next steps
