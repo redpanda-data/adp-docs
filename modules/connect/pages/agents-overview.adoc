@@ -28,7 +28,7 @@ When you create an agent, you configure the components through ADP rather than w
 * *Tools*: External capabilities exposed through the xref:connect:mcp-overview.adoc[Model Context Protocol (MCP)]
 * *Context*: Conversation history, tool results, and real-time events from Redpanda topics
 
-Agents can invoke Redpanda Connect components as tools on-demand. Redpanda Connect pipelines can also invoke agents for event-driven processing. This bidirectional integration supports both interactive workflows and automated streaming.
+Agents reach these tools through MCP servers. Redpanda Connect pipelines can also invoke agents for event-driven processing, so agents support both interactive workflows and automated streaming.
 
 When a user makes a request, the LLM receives the system prompt and context, decides which tools to invoke, and processes the results. This cycle repeats until the task completes.
 
