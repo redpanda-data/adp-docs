@@ -16,7 +16,7 @@ adp-docs is the Antora source for the Agentic Data Plane docs (component `agenti
 ## AsciiDoc and Antora conventions
 
 - Use full Antora resource IDs with module prefixes in xrefs (for example `xref:connect:managed/servicenow.adoc[]`), not relative paths.
-- Prefer block-level `ifdef::[]` / `endif::[]` directives over the single-line inline form, for readability and consistency.
+- `ifdef` is a preprocessor directive and must start its own line. Prefer the block form (`ifdef::[]` / `endif::[]`); the single-line form `ifdef::attr[text]` also works at line start. Do NOT use `ifdef` mid-sentence (truly inline in prose) — there it renders as raw markup.
 
 ## Maturity status policy for managed MCP servers (HARD RULE)
 
