@@ -24,6 +24,13 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
+== Architecture
+
+Agents and clients connect through ADP rather than reaching your systems directly. ADP gives every agent an identity and applies guardrails and spend caps, mediates tool and data access through MCP servers to your systems of record, and routes every LLM call through the AI Gateway. All activity streams to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.
+
+.Redpanda ADP sits between your agents and clients and your external systems and LLM providers
+image::adp-architecture.png[Architecture diagram: Redpanda-managed agents, bring-your-own agents over A2A, and Microsoft Teams connect to the Agentic Data Plane. Inside ADP, out-of-band policy applies identity, guardrails, and spend caps; an MCP gateway provides governed tool and data access to systems of record and MCP servers; and an LLM provider gateway gives one entry point per provider to Anthropic, OpenAI, Gemini, Bedrock, and OpenAI-compatible models. Transcripts stream to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.]
+
 == AI Gateway
 
 The AI Gateway is a managed proxy for LLM APIs. You configure an LLM provider once, and applications point at a Redpanda-hosted proxy URL while continuing to use the provider's native SDK. Redpanda holds the upstream credentials, so application code never carries a provider API key and rotation happens in one place.
