@@ -73,7 +73,7 @@ OpenAPI is the most flexible managed type for authentication: the upstream API c
 == Test
 
 . Open the *Inspector* tab.
-. The Tools panel lists every operation from your spec, named per the `operationId` (or per the path if `operationId` is missing).
+. The Tools panel lists every operation from your spec, named per the `operationId` (or per the path if `operationId` is missing). Tool names longer than 64 characters are truncated and given a short hash suffix to keep them unique, because LLM providers cap tool-name length. Parameter names that start with `$` (common in OData APIs, such as `$top` and `$filter`) appear without the `$` prefix in the tool schema; the server still sends the original parameter name to the API.
 . Pick one and run it. The Inspector renders a form from the operation's parameter and request-body schemas.
 
 // TODO: capture screenshots of a non-trivial OpenAPI spec rendered in the Inspector once we walk a real example on `adp-production`.
@@ -96,7 +96,7 @@ Every generated tool also accepts an optional `headers` input, which lets the ag
 |Confirm the spec URL is reachable from Redpanda ADP and serves valid JSON or YAML. CORS doesn't matter (Redpanda fetches server-side).
 
 |Tools list doesn't include an expected operation
-|The operation may be missing an `operationId`, or the operation include/exclude filters might be excluding it.
+|The operation may be missing an `operationId`, or the operation include/exclude filters might be excluding it. If two operations resolve to the same tool name, the server keeps one, drops the other, and logs a warning naming both.
 
 |Tool input schema looks wrong
 |`oneOf`, `anyOf`, and `discriminator` are supported, but `callbacks` are not, and schemas deeper than `max_schema_depth` (default 5) are truncated. Adjust the spec or raise the depth.
