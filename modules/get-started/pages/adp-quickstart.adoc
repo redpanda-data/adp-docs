@@ -77,7 +77,7 @@ Anthropic requires a payment method before it issues an API key. Add billing fir
 +
 [IMPORTANT]
 ====
-Anthropic shows the API key value once. If you close the dialog without copying, you can't recover it. Paste the key into a secure note before continuing. The Store the key in the ADP Secrets Store section moves the key into ADP's secret store so you don't have to keep it on your local machine.
+Anthropic shows the API key value once. If you close the dialog without copying, you can't recover it. Paste the key into a secure note before continuing. The next section creates the secret in ADP's secret store as part of the provider form, so you don't have to keep the key on your local machine.
 ====
 
 . (Optional) On the API Keys page, confirm the new key appears with the `Active` status.
