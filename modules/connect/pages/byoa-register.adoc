@@ -27,7 +27,7 @@ After completing this guide, you will be able to:
 
 == When to use BYOA versus a managed agent
 
-The two models differ in who runs the agent, who owns scaling, and how the agent is defined. The following table compares the trade-offs across the most common decision points.
+The two models differ in who runs the agent, who owns scaling, and how the agent is defined.
 
 [cols="1,2,2"]
 |===
@@ -68,7 +68,7 @@ Before you register a self-managed agent, make sure you have:
 * An agent running in your own infrastructure.
 * The agent instrumented with OpenTelemetry, emitting the minimum required spans contract with its registered name as the `service.name`. See xref:monitor:byoa-telemetry.adoc[BYOA telemetry].
 * The `dataplane_adp_agent_create` permission, granted by the Writer built-in role. See xref:control:permissions-reference.adoc#agent-management-permissions[Agent management permissions].
-* A name for the agent that follows DNS-1123 conventions (1 to 63 characters, lowercase letters, numbers, and hyphens, starting with a letter). The name is immutable once the agent is registered.
+* A name for the agent that follows DNS-1123 conventions (1 to 63 characters, lowercase letters, numbers, and hyphens, starting with a letter). The name is immutable after registration.
 
 == Register the agent
 
