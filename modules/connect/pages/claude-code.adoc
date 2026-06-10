@@ -1,5 +1,5 @@
 = Use Claude Code with Redpanda ADP
-:description: Point Claude Code at an ADP-managed Anthropic provider so your team's LLM calls flow through AI Gateway with centralized credentials, usage tracking, and per-provider transcript logging. Optionally attach MCP servers hosted in ADP.
+:description: Route Claude Code through an ADP Anthropic provider for centralized credentials, usage tracking, and transcript logging. Optionally attach ADP-hosted MCP servers.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Configure Claude Code to call an Anthropic provider hosted in ADP instead of the public Anthropic API
@@ -84,7 +84,7 @@ The token has a short TTL: re-mint when it expires. AI Gateway does not refresh 
 Anthropic Authorization passthrough::
 +
 --
-Use when developers should authenticate to Anthropic with their own subscription (Max plan, Team plan, enterprise) and ADP should only observe the call.
+Use when developers authenticate to Anthropic with their own subscription (Max plan, Team plan, enterprise) and ADP only observes the call.
 
 . Confirm the provider has Authorization passthrough enabled. The Connection card on the provider detail page shows the current setting as `Auth passthrough`. If it is off, an admin needs to flip it. See xref:gateway:configure-provider.adoc#anthropic-authorization-passthrough[Anthropic: Authorization passthrough].
 
