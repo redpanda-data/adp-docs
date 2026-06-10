@@ -4,9 +4,9 @@
 :personas: platform_engineer, pilot_lead
 :learning-objective-1: Set a per-agent budget that caps LLM spend and warns before the cap
 :learning-objective-2: Identify what spending data the Agentic Data Plane records automatically
-:learning-objective-3: Locate where to view spend in the dashboard, in transcripts, and through breakdown queries
+:learning-objective-3: Locate where to view spend in the Cost & Usage tab, in transcripts, and through breakdown queries
 
-The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the glossterm:governance dashboard[], through individual glossterm:transcript[,transcripts], and through breakdown queries by provider, model, user, agent, or provider type.
+The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the *Cost & Usage* tab on *LLM Providers*, through individual glossterm:transcript[,transcripts], and through breakdown queries by provider, model, user, agent, or provider type.
 
 After completing these steps, you will be able to:
 
@@ -119,7 +119,7 @@ A few request- or response-time signals change the rate ADP applies to a single 
 
 == Where to view your spend
 
-You don't view spend on this page. The *LLM Providers* page, dashboard, transcripts, and breakdown queries are the read surfaces:
+You don't view spend on this page. The *LLM Providers* page, transcripts, and breakdown queries are the read surfaces:
 
 [cols="1,3"]
 |===
@@ -128,14 +128,11 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |*Cost & Usage* tab (*LLM Providers* page)
 |Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, user, or agent. See xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
 
-|Governance dashboard
-|Summary cards (total spend, agent count, request count, trend), provider breakdown chart, events timeline, agents and MCP servers tables. The single-pane-of-glass view across your whole deployment. See xref:control:dashboard/overview.adoc[Read the governance overview].
-
 |Transcripts
 |Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:monitor:transcripts.adoc[Read a transcript].
 
 |Breakdown queries
-|Aggregated spend by provider, model, user, agent, or provider type, available through `GetSpendingBreakdown` for programmatic access. The dashboard's provider-breakdown widget covers the provider dimension.
+|Aggregated spend by provider, model, user, agent, or provider type, available through `GetSpendingBreakdown` for programmatic access.
 |===
 
 Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_email`, `agent_name`, `agent_uid`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, agent, or provider type; `organization_id` is a filter only, not a breakdown dimension.
@@ -152,7 +149,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 [[query-spend-programmatically]]
 == Query spend programmatically
 
-`SpendingService.GetSpendingBreakdown` is the canonical RPC for pulling spend out of ADP. Use it for chargeback reporting, scheduled emails, internal cost dashboards, or any workflow the built-in UI doesn't cover. Every spend number the dashboard shows comes from this RPC, so query results match the UI to the cent.
+`SpendingService.GetSpendingBreakdown` is the canonical RPC for pulling spend out of ADP. Use it for chargeback reporting, scheduled emails, internal cost dashboards, or any workflow the built-in UI doesn't cover. Every spend number the UI shows comes from this RPC, so query results match the UI to the cent.
 
 === Authenticate
 
@@ -275,9 +272,9 @@ For what each policy does, see xref:control:guardrails/overview.adoc[How guardra
 
 == Multi-tenant viewing patterns
 
-The `SpendingFilter` exposes `organization_id` and `user_email`, so every dashboard query and every API call can scope to a single tenant or user. Use this to:
+The `SpendingFilter` exposes `organization_id` and `user_email`, so every cost and usage query and every API call can scope to a single tenant or user. Use this to:
 
-* See per-tenant spend in the dashboard's provider-breakdown view.
+* See per-tenant spend in the *Cost & Usage* tab's provider breakdown.
 * Pull per-user cost reports through `GetSpendingBreakdown`.
 * Identify which organization or user is driving the highest cost on a specific provider.
 
@@ -286,7 +283,7 @@ To cap spend (not just view it), see <<set-a-spend-limit,Set a spend limit>>. Bu
 [[override-per-model-pricing]]
 == Override per-model pricing
 
-The Agentic Data Plane ships with a default rate card per provider, covering input, output, and cache-read prices for every model in the built-in catalog. The cost-reporting pipeline reads from this rate card when it computes per-call spend, which is why every dollar value on the dashboard, in transcripts, and in `SpendingService` queries works without any setup.
+The Agentic Data Plane ships with a default rate card per provider, covering input, output, and cache-read prices for every model in the built-in catalog. The cost-reporting pipeline reads from this rate card when it computes per-call spend, which is why every dollar value in the *Cost & Usage* tab, in transcripts, and in `SpendingService` queries works without any setup.
 
 If your organization negotiates non-standard pricing, or you want to track spend against an internal chargeback rate, override the rate card on a per-model basis. Per-model overrides apply to every spending event for that model from the moment they're saved.
 
@@ -304,7 +301,7 @@ Leave the rate card at its defaults if you're paying list price and don't need c
 
 Open the per-model pricing editor from the governance UI:
 
-// TODO: confirm the exact UI route on `adp-production` once walked. Likely under the governance dashboard's model-detail surface or under *LLM Providers > \{provider} > \{model}*; capture the route + screenshots before merging.
+// TODO: confirm the exact UI route on `adp-production` once walked. Likely under *LLM Providers > \{provider} > \{model}*; capture the route + screenshots before merging.
 
 For each model, the editor exposes buckets that match the cost-reporting categories:
 
@@ -332,9 +329,9 @@ The catalog default for the bucket appears alongside your override; clear the ov
 
 Three rules govern how the cost-reporting pipeline applies overrides:
 
-* Overrides apply to *new spending events* from the moment they're saved. Historical events keep the rate card that was in effect when the event was recorded. The dashboard's _Compare to previous period_ overlay reflects that.
+* Overrides apply to *new spending events* from the moment they're saved. Historical events keep the rate card that was in effect when the event was recorded. Comparisons against a previous period reflect that.
 * Overrides are scoped to one model at a time. To roll out a new contract across an entire provider's catalog, edit each model in turn.
-* Cache-read pricing follows the catalog default. Only cache-write tiers are overridable. Cache-read tokens still surface in the `CACHED` bucket on the dashboard and in `SpendingService` responses.
+* Cache-read pricing follows the catalog default. Only cache-write tiers are overridable. Cache-read tokens still surface in the `CACHED` bucket in the *Cost & Usage* tab and in `SpendingService` responses.
 * Overrides are applied invisibly: `SpendingService` responses carry the resulting dollar values with no marker for which line items used an overridden rate.
 
 // Verified 2026-06-09 against spending_service.proto and spending_rollup.proto on cloudv2 origin/main: no override flag or indicator field exists on breakdown or time-series responses.
@@ -352,6 +349,5 @@ If the cost still reflects the catalog price, the override may not have propagat
 
 == Next steps
 
-* xref:control:dashboard/overview.adoc[Read the governance overview]
 * xref:monitor:transcripts.adoc[Read a transcript]
 * xref:control:guardrails/overview.adoc[How guardrails work]

@@ -1,9 +1,9 @@
 = Register Your Own Agent (BYOA)
-:description: Register a self-managed agent so it appears in the ADP registry and governance dashboard, with its telemetry and cost attributed alongside managed agents.
+:description: Register a self-managed agent so it appears in the ADP agent registry, with its telemetry and cost attributed alongside managed agents.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Distinguish a self-managed (BYOA) agent from a Redpanda-managed agent and decide when each fits
-:learning-objective-2: Register a self-managed agent so it appears in the agent registry and governance dashboard
+:learning-objective-2: Register a self-managed agent so it appears in the agent registry
 :learning-objective-3: Identify the telemetry and service-account model that attributes a self-managed agent's activity in ADP
 
 A *BYOA* (bring-your-own-agent) agent is an agent you build and run yourself, in your own runtime. You register it with the Agentic Data Plane so it appears alongside Redpanda-managed agents for governance and observability.
@@ -12,7 +12,7 @@ Registration creates a *metadata record*. The Agentic Data Plane tracks the agen
 
 A self-managed agent participates in Redpanda ADP through two integration points:
 
-* *Registration*: The agent has an entry in the agent registry, so it appears on the governance dashboard alongside managed agents and in cost-attribution queries.
+* *Registration*: The agent has an entry in the agent registry, so it appears alongside managed agents and in cost-attribution queries.
 * *Telemetry*: The agent emits OpenTelemetry traces, with its registered name as the `service.name`, into the same pipeline as managed agents, so transcripts and cost rollups attribute its calls.
 
 To authenticate its calls to AI Gateway (the LLM proxy and any MCP servers) and its telemetry ingestion, the agent uses service-account credentials issued at registration.
@@ -56,7 +56,7 @@ If you have a Redpanda-managed agent today and you're considering BYOA, you don'
 
 When a self-managed agent is registered:
 
-* It appears in the agent registry (`AgentRegistryService.ListAgents`), which means it shows up on the governance dashboard's *Agents* list and in cost-attribution queries.
+* It appears in the agent registry (`AgentRegistryService.ListAgents`), which means it shows up alongside managed agents and in cost-attribution queries.
 * A service-account identity is created for the agent at registration. Mint credentials for it to authenticate the agent's calls to AI Gateway and its telemetry ingestion. Credential issuance follows the same pattern as managed agents. See xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
 
 Registration does not make the Agentic Data Plane run your agent or route requests to it. The agent runs in your infrastructure, and any clients (including other agents) call it directly.
@@ -88,13 +88,13 @@ You can register a self-managed agent from the *Agents* page in the console, wit
 |Free-text description of what the agent does. Editable later.
 
 |`tags`
-|Optional key/value labels (up to 50 pairs). Useful for filtering on the governance dashboard.
+|Optional key/value labels (up to 50 pairs). Useful for filtering agents in cost-attribution queries.
 
 |`agent_type`
 |Leave unset. Populating the `managed` arm creates a Redpanda-managed agent instead; leaving the whole field unset registers a self-managed (BYOA) metadata record.
 |===
 
-Once registered, your agent appears in the dashboard's *Agents* list. The first time it serves a request and emits telemetry, transcripts begin populating.
+Once registered, your agent appears in the agent registry (`AgentRegistryService.ListAgents`). The first time it serves a request and emits telemetry, transcripts begin populating.
 
 == Make your agent callable by other agents (optional)
 
@@ -106,7 +106,7 @@ For the agent-card schema and the A2A message-endpoint shapes, see xref:connect:
 
 After registering, confirm the following end-to-end:
 
-. *Registry*: The agent appears in `AgentRegistryService.ListAgents` and in the governance dashboard's *Agents* list.
+. *Registry*: The agent appears in `AgentRegistryService.ListAgents` and in cost-attribution queries.
 . *Telemetry*: Open the transcripts list, filter by your agent's `service.name`, and confirm a recent execution shows up with non-zero token counts and a non-empty conversation ID. If it doesn't, see xref:monitor:byoa-telemetry.adoc[BYOA telemetry] troubleshooting.
 
 == Troubleshooting
@@ -115,8 +115,8 @@ After registering, confirm the following end-to-end:
 |===
 |Symptom |What to check
 
-|Agent registered but doesn't appear in the dashboard's *Agents* list
-|Confirm `ListAgents` returns the agent (the dashboard reads from `AgentRegistryService.ListAgents`). If `ListAgents` is empty, the registration didn't persist; retry. If it's there but the dashboard is empty, refresh the dashboard or check that a column filter isn't excluding it.
+|Agent registered but doesn't appear in `AgentRegistryService.ListAgents`
+|Confirm `ListAgents` returns the agent. If `ListAgents` is empty, the registration didn't persist; retry.
 
 |Transcripts list shows the agent column blank for your agent's runs
 |Your agent's OpenTelemetry `service.name` resource attribute doesn't match the registered name, or isn't being emitted at all. See xref:monitor:byoa-telemetry.adoc[BYOA telemetry].

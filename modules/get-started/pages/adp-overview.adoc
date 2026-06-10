@@ -59,12 +59,6 @@ The result is faster time-to-production, lower maintenance (declarative definiti
 
 For more information, see xref:connect:agents-overview.adoc[].
 
-== Governance
-
-The glossterm:governance dashboard[] gives platform administrators and finance partners one cross-tenant view of agent activity, spending, MCP server inventory, and authorization events, whether the agents and servers are Redpanda-hosted or your own. From a single overview, you can answer how much your organization spends on AI and what agents run in your environment, down to per-provider spending, agent state, and the authorization decisions that gate every tool invocation.
-
-For more information, see xref:control:dashboard/overview.adoc[Governance Dashboard Overview].
-
 == Built-in governance controls
 
 Redpanda ADP addresses critical enterprise requirements across all components.

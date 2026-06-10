@@ -211,7 +211,7 @@ Because both toggles default to off, AI Gateway does not retain message bodies f
 
 These are per-provider settings, not per-request: applications cannot opt in or out at call time. To split sensitive from non-sensitive traffic, create one provider with recording on and another with it off, and route each application to whichever proxy URL matches its data class.
 
-Recording settings do not affect cost and usage telemetry. Token counts, latency, and provider/model attribution are always recorded, so the *Cost & Usage* tab and the xref:control:dashboard/overview.adoc[Governance dashboard] report spend for traffic on the provider regardless of these toggles; only the message bodies are withheld when the toggles are off.
+Recording settings do not affect cost and usage telemetry. Token counts, latency, and provider/model attribution are always recorded, so the *Cost & Usage* tab reports spend for traffic on the provider regardless of these toggles; only the message bodies are withheld when the toggles are off.
 
 NOTE: Changing a toggle takes effect for new requests. Transcripts already captured under the previous setting are not retroactively redacted; delete or rotate the provider if you need to purge historical content.
 
@@ -271,7 +271,7 @@ Older 4.5 and earlier Claude models still accept bare IDs.
 
 Pricing varies by profile. The bare foundation-model ID and the `global.` profile share AWS's headline rate; geo profiles (`us.`, `eu.`, `apac.`, `au.`, `jp.`) carry approximately a 10% cross-region inference premium. Use `global.` when you want the headline rate and don't need a specific geography. Use `us.` / `eu.` / `apac.` when data residency matters.
 
-AI Gateway preserves the regional prefix end to end when it records spend, so the xref:control:dashboard/overview.adoc[governance dashboard] and the *Cost & Usage* tab attribute usage to the correct regional rate. A call to `eu.anthropic.claude-haiku-4-5` is billed at the EU Haiku rate, not the headline foundation-model rate.
+AI Gateway preserves the regional prefix end to end when it records spend, so the *Cost & Usage* tab attributes usage to the correct regional rate. A call to `eu.anthropic.claude-haiku-4-5` is billed at the EU Haiku rate, not the headline foundation-model rate.
 
 === IAM policy patterns
 
@@ -339,7 +339,7 @@ The *LLM Providers* list page is the at-a-glance home for every provider in your
 |First two model identifiers exposed by the provider, plus a `+N` overflow chip when more are configured.
 
 |`Spend (7d)`
-|Spend over the last 7 days with a small sparkline and a "vs previous period" delta. The window is fixed at 7 days on this view. Longer-range analysis runs through the xref:control:dashboard/overview.adoc[governance dashboard].
+|Spend over the last 7 days with a small sparkline and a "vs previous period" delta. The window is fixed at 7 days on this view. Longer-range analysis runs through the *Cost & Usage* tab (see <<view-cost-and-usage>>).
 
 |`Updated`
 |Relative timestamp of the last edit.

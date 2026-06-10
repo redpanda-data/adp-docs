@@ -293,11 +293,9 @@ Agent configuration isn't fixed after you create it. Edit the system prompt or m
 
 For system prompt patterns and anti-patterns, see xref:connect:system-prompts.adoc[Write effective system prompts].
 
-// The Transcripts and Governance verify sections below are conditionalized out until those admin UIs are stable in adp-production.
-// Each section is gated by its own attribute so they can be flipped on independently when ready. To surface a section,
-// define the corresponding attribute in `antora.yml` (under `asciidoc.attributes`) or as a page attribute:
+// The Transcripts verify section below is conditionalized out until that admin UI is stable in adp-production.
+// To surface it, define the attribute in `antora.yml` (under `asciidoc.attributes`) or as a page attribute:
 // * `env-adp-transcripts: true` for the Transcripts verify section
-// * `env-adp-governance: true` for the Governance dashboard verify section
 ifdef::env-adp-transcripts[]
 === Verify the agent in Transcripts
 
@@ -314,22 +312,6 @@ Every agent run is recorded as a glossterm:transcript[] you can replay turn-by-t
 * The agent's final response to the user.
 
 For the full transcript field reference, see xref:monitor:transcripts.adoc[Read a transcript].
-endif::[]
-
-ifdef::env-adp-governance[]
-=== Verify spend in the governance dashboard
-
-The glossterm:governance dashboard[] rolls up every LLM call and tool invocation across your ADP deployment.
-
-. Open the dashboard in Redpanda ADP.
-
-. In the `Last 24 hours` view, check these KPIs:
-+
-* `Total spend`: A small but non-zero value.
-* `Requests`: Reflects the LLM calls from your agent runs (one per turn).
-* `Tokens`: Input plus output tokens across the same calls.
-
-For the full governance dashboard tour, see xref:control:dashboard/overview.adoc[Read the governance overview].
 endif::[]
 
 == Clean up
@@ -352,6 +334,4 @@ If you want to keep the provider but rotate the key, edit the provider and chang
 
 * Add more LLM providers (OpenAI, Google AI, AWS Bedrock, OpenAI-compatible): xref:gateway:configure-provider.adoc[Configure an LLM provider]
 * Swap the PetStore demo for a real upstream (Slack, Jira, SQL, Kafka, and more): xref:connect:managed/managed-catalog.adoc[]
-ifdef::env-adp-governance[]
 * Track spend across teams: xref:control:budgets.adoc[]
-endif::[]
