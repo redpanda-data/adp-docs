@@ -9,7 +9,7 @@
 :page-pathway-1-cta: Get started
 :page-pathway-1-icon: sparkles
 :page-pathway-2-title: Bring an agent you already built
-:page-pathway-2-desc: Get visibility and control over agents built elsewhere. Same gateway, same dashboard, same per-user identity — without rebuilding.
+:page-pathway-2-desc: Get visibility and control over agents built elsewhere. Same gateway, same dashboard, same per-user identity, without rebuilding.
 :page-pathway-2-link: connect:byoa-register.adoc
 :page-pathway-2-cta: Register your agent
 :page-pathway-2-icon: connect
