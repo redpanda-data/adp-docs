@@ -207,10 +207,10 @@ In the model picker, each selected model carries a pencil icon (Override pricing
 |Cached input
 |Per 1M tokens read from prompt cache.
 
-|Cache write (5 minute TTL)
+|Cache write (5-minute TTL)
 |Per 1M tokens written to a 5-minute prompt cache.
 
-|Cache write (1 hour TTL)
+|Cache write (1-hour TTL)
 |Per 1M tokens written to a 1-hour prompt cache.
 |===
 
@@ -224,10 +224,9 @@ Cache writes with an unknown TTL always bill at the catalog rate; they have no o
 
 Use the reset control on a field to clear a single override, or clear every field to drop all overrides for the model. Overrides are scoped to this provider and model, and they change what ADP's cost reporting computes, not what the upstream provider actually charges you.
 
-After you create the provider, the detail page renders each model as a row with capability badges (Vision, Reasoning, Streaming, and others lifted from the catalog), the model's 7-day spend, and a link to the per-model detail page. The model list supports search and filtering.
+After you create the provider, its detail page has two tabs. The *Overview* tab carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `TOKENS`) with sparklines and a *View more* link on each card, the Connection card (provider type, status, authentication passthrough state, proxy URL, upstream base URL, and the API key secret reference), and the model list, where each model shows its input and output prices per million tokens and its spend from requests routed through this provider over the last 7 days. For analysis across providers, use the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
 
-// TODO: confirm against the latest UI (demo recording/screenshots): the detail-page KPI strip and where its cards link now that Cost & Usage lives under Governance.
-The detail page also carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `TOKENS`) with sparklines and _vs previous period_ deltas, and a usage chart scoped to this provider. For analysis across providers, use the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
+The *Connect* tab generates ready-made client configuration for this provider: a gateway-token step, setup instructions for popular clients such as Claude Code, and code examples in several languages, all with the provider's proxy URL prefilled. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for the underlying flow.
 
 [[transcript-logging]]
 == Configure transcript logging

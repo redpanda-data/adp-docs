@@ -62,8 +62,7 @@ To create the tenant default budget:
 
 Open the default budget from the *Budgets* page to see its detail view: the per-agent spending limit (each agent gets its own limit, not one shared pool), the reset schedule, the warn threshold, and how much each agent has spent so far toward its limit.
 
-To give one agent a different cap, click *Add override*, pick the agent (each agent can have at most one override; agents that already have one are greyed out), then set the `Budget` and `Warn at` controls the same way. The `Resource name` is auto-derived from the picked agent and is immutable; the `Display name` is editable.
-
+To give one agent a different cap, click *Add override*, pick the agent (each agent can have at most one override; agents that already have one are grayed out), then set the `Budget` and `Warn at` controls the same way. The `Resource name` is auto-derived from the picked agent and is immutable; the `Display name` is editable.
 
 === Manage budgets through the API
 

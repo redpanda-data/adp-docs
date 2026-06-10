@@ -122,10 +122,10 @@ A successful model response confirms the IAM policy, region, and credentials are
 . Configure the credentials:
 +
 .. In the Access key ID ref dropdown, type a secret name such as `AWS_ACCESS_KEY_ID`.
-.. Paste the `AccessKeyId` value from the IAM user setup and click *Create*. The secret is stored in the cloud secret store, scoped to AI Gateway.
+.. Paste the `AccessKeyId` value from the IAM user setup and click *Create*. The secret is stored in the ADP secret store, scoped to AI Gateway.
 .. Repeat for Secret access key ref. Use a name such as `AWS_SECRET_ACCESS_KEY` and paste the `SecretAccessKey` value.
 +
-Secret names are normalized to `UPPER_SNAKE_CASE` automatically and are scoped to AI Gateway so only LLM providers can reference them.
+Secret names are normalized to `UPPER_SNAKE_CASE` automatically and get the AI Gateway scope, which makes them usable across the platform: LLM providers, MCP servers, and agents.
 
 . Select the models you want to expose through this provider, for example:
 +
