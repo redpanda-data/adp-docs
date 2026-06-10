@@ -6,7 +6,7 @@
 :learning-objective-2: Attach ADP-hosted MCP servers to Claude Code so its tools resolve against your managed tool catalog
 :learning-objective-3: Verify the connection and read usage
 
-Claude Code is Anthropic's command-line coding agent. When you point it at an AI Gateway proxy URL instead of the public Anthropic API, your team's LLM calls flow through ADP: API keys stay in the dataplane secret store, usage rolls up in the *Cost & Usage* tab, and the calls land in xref:monitor:transcripts.adoc[the Transcripts view] for investigation.
+Claude Code is Anthropic's command-line coding agent. When you point it at an AI Gateway proxy URL instead of the public Anthropic API, your team's LLM calls flow through ADP: API keys stay in the dataplane secret store, usage rolls up on the *Cost & Usage* page, and the calls land in xref:monitor:transcripts.adoc[the Transcripts view] for investigation.
 
 After completing this guide, you will be able to:
 
@@ -96,7 +96,7 @@ export ANTHROPIC_BASE_URL="https://aigw.<cluster-id>.clusters.rdpa.co/llm/v1/pro
 export ANTHROPIC_AUTH_TOKEN="<your-anthropic-api-key-or-subscription-token>"
 ----
 
-AI Gateway forwards the `Authorization` header to Anthropic unchanged. Usage is still recorded against the provider in the *Cost & Usage* tab; the upstream subscription bears the cost.
+AI Gateway forwards the `Authorization` header to Anthropic unchanged. Usage is still recorded against the provider on the *Cost & Usage* page; the upstream subscription bears the cost.
 --
 ======
 
@@ -127,7 +127,7 @@ If a server exposes a large tool catalog, turn on xref:gateway:code-mode.adoc[co
 claude "say hello"
 ----
 
-. Open *LLM Providers > <your provider> > Cost & Usage* in ADP. Within a few seconds the request appears in the *Requests over time* chart.
+. Open *Cost & Usage* under *Governance* in the sidebar, then filter by your provider. Within a few seconds the request appears in the *Requests over time* chart.
 . Open xref:monitor:transcripts.adoc[Transcripts] to read the full turn (if transcript logging is enabled on this provider).
 
 == Troubleshooting

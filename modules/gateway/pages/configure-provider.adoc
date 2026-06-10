@@ -184,12 +184,50 @@ For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs
 
 [NOTE]
 ====
-Redpanda stores models as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). Each model can carry custom pricing overrides that replace the catalog rates for that model in cost reporting; you set them in the provider form when you configure the model list. The legacy flat `models` field still works on writes for backward compatibility.
+Redpanda stores models as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). Each model can carry custom pricing overrides that replace the catalog rates for that model in cost reporting; see <<pricing-overrides>>. The legacy flat `models` field still works on writes for backward compatibility.
 ====
+
+[[pricing-overrides]]
+=== Override per-model pricing
+
+Cost reporting prices each call at the catalog rates for the model. If your organization negotiates non-standard rates, or you track spend against an internal chargeback rate, override the rates per model on this provider.
+
+In the model picker, each selected model carries a pencil icon (Override pricing). Click it to open the pricing dialog for that model. The dialog lists one field per billing bucket, in the same order as the provider's published rate card:
+
+[cols="1,2"]
+|===
+|Bucket |What it bills
+
+|Input
+|Per 1M input tokens. Tool-use input also bills at this rate.
+
+|Output
+|Per 1M output tokens. Reasoning tokens also bill at this rate.
+
+|Cached input
+|Per 1M tokens read from prompt cache.
+
+|Cache write (5 minute TTL)
+|Per 1M tokens written to a 5-minute prompt cache.
+
+|Cache write (1 hour TTL)
+|Per 1M tokens written to a 1-hour prompt cache.
+|===
+
+Enter rates in dollars per million tokens. Each field is independent:
+
+* Leave a field blank to keep the catalog rate for that bucket. The catalog rate shows as the field's placeholder.
+* Enter a positive value to replace the catalog rate for that bucket only.
+* Enter `0` to make that bucket explicitly free, which is different from leaving it blank.
+
+Cache writes with an unknown TTL always bill at the catalog rate; they have no override field.
+
+Use the reset control on a field to clear a single override, or clear every field to drop all overrides for the model. Overrides are scoped to this provider and model, and they change what ADP's cost reporting computes, not what the upstream provider actually charges you.
 
 After you create the provider, the detail page renders each model as a row with capability badges (Vision, Reasoning, Streaming, and others lifted from the catalog), the model's 7-day spend, and a link to the per-model detail page. The model list supports search and filtering.
 
-The detail page also carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `TOKENS`) with sparklines and _vs previous period_ deltas. *View all* on each card opens the *Cost & Usage* tab with this provider pre-filtered so you can drill into spend, request, or token trends.
+// TODO: confirm against the latest UI (demo recording/screenshots): the detail-page KPI strip and where its cards link now that Cost & Usage lives under Governance.
+The detail page also carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `TOKENS`) with sparklines and _vs previous period_ deltas, and a usage chart scoped to this provider. For analysis across providers, use the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
 
 [[transcript-logging]]
 == Configure transcript logging
@@ -211,7 +249,7 @@ Because both toggles default to off, AI Gateway does not retain message bodies f
 
 These are per-provider settings, not per-request: applications cannot opt in or out at call time. To split sensitive from non-sensitive traffic, create one provider with recording on and another with it off, and route each application to whichever proxy URL matches its data class.
 
-Recording settings do not affect cost and usage telemetry. Token counts, latency, and provider/model attribution are always recorded, so the *Cost & Usage* tab reports spend for traffic on the provider regardless of these toggles; only the message bodies are withheld when the toggles are off.
+Recording settings do not affect cost and usage telemetry. Token counts, latency, and provider/model attribution are always recorded, so the *Cost & Usage* page reports spend for traffic on the provider regardless of these toggles; only the message bodies are withheld when the toggles are off.
 
 NOTE: Changing a toggle takes effect for new requests. Transcripts already captured under the previous setting are not retroactively redacted; delete or rotate the provider if you need to purge historical content.
 
@@ -271,7 +309,7 @@ Older 4.5 and earlier Claude models still accept bare IDs.
 
 Pricing varies by profile. The bare foundation-model ID and the `global.` profile share AWS's headline rate; geo profiles (`us.`, `eu.`, `apac.`, `au.`, `jp.`) carry approximately a 10% cross-region inference premium. Use `global.` when you want the headline rate and don't need a specific geography. Use `us.` / `eu.` / `apac.` when data residency matters.
 
-AI Gateway preserves the regional prefix end to end when it records spend, so the *Cost & Usage* tab attributes usage to the correct regional rate. A call to `eu.anthropic.claude-haiku-4-5` is billed at the EU Haiku rate, not the headline foundation-model rate.
+AI Gateway preserves the regional prefix end to end when it records spend, so the *Cost & Usage* page attributes usage to the correct regional rate. A call to `eu.anthropic.claude-haiku-4-5` is billed at the EU Haiku rate, not the headline foundation-model rate.
 
 === IAM policy patterns
 
@@ -339,18 +377,18 @@ The *LLM Providers* list page is the at-a-glance home for every provider in your
 |First two model identifiers exposed by the provider, plus a `+N` overflow chip when more are configured.
 
 |`Spend (7d)`
-|Spend over the last 7 days with a small sparkline and a "vs previous period" delta. The window is fixed at 7 days on this view. Longer-range analysis runs through the *Cost & Usage* tab (see <<view-cost-and-usage>>).
+|Spend over the last 7 days with a small sparkline. The window is fixed at 7 days on this view. Longer-range analysis runs through the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
 
 |`Updated`
 |Relative timestamp of the last edit.
 |===
 
-A list/grid view toggle in the top-right switches between table and card layouts. The *Filter* button narrows the list by provider type, status, or name. The *Create provider* button opens the create flow described in <<open-the-create-llm-provider-page,Open the Create LLM provider page>>.
+The *Filter* button narrows the list by provider type, status, or name. The *Create provider* button opens the create flow described in <<open-the-create-llm-provider-page,Open the Create LLM provider page>>. The list paginates, with a rows-per-page selector in the footer.
 
 [[view-cost-and-usage]]
 == View cost and usage
 
-The *Cost & Usage* tab on the *LLM Providers* page tracks spend, request volume, and token volume over time across providers and models. Use it when you want to understand which provider or model generated usage during a selected time window.
+The *Cost & Usage* page tracks spend, request volume, and token volume over time across providers and models. Open *Cost & Usage* under *Governance* in the sidebar. Use it when you want to understand which provider or model generated usage during a selected time window.
 
 The page includes these charts:
 
@@ -419,4 +457,4 @@ AI Gateway does not provide these capabilities. For current status, consult the 
 == Next steps
 
 * xref:gateway:connect-agent.adoc[Connect your app to AI Gateway]
-* xref:control:budgets.adoc[Set spend limits with budgets]
+* xref:control:budgets.adoc[Set up budgets]
