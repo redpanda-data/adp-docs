@@ -1,12 +1,12 @@
 = Create a Guardrail
-:description: Create a guardrail with the wizard, configure its Bedrock backend and policies, attach it to an LLM provider, and verify that it blocks.
+:description: Create a guardrail with the wizard, configure its Bedrock authentication and policies, attach it to a Bedrock LLM provider, and verify that it blocks.
 :page-topic-type: how-to
 :personas: security_compliance_lead, platform_engineer
 :learning-objective-1: Create a guardrail and configure its backend and policies
 :learning-objective-2: Attach the guardrail to an LLM provider and enable it
 :learning-objective-3: Verify the guardrail blocks a request and trace it through the transcript
 
-Create a guardrail to inspect and control the requests and responses that flow through an LLM provider. You configure the guardrail in a wizard (details, backend, and policies), attach it to a provider, and confirm it blocks.
+Create a guardrail to inspect and control the requests and responses that flow through an AWS Bedrock LLM provider. You configure the guardrail in a wizard (details, authentication, and policies), attach it to a Bedrock provider, and confirm it blocks.
 
 After reading this page, you will be able to:
 
@@ -17,7 +17,7 @@ After reading this page, you will be able to:
 == Prerequisites
 
 * An AWS region and Bedrock access. A guardrail reconciles against the AWS Bedrock control plane, so you need either AWS credentials it can use or a Bedrock LLM provider whose credentials it can borrow.
-* At least one LLM provider to attach the guardrail to. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
+* At least one AWS Bedrock LLM provider to attach the guardrail to. Guardrails attach to Bedrock providers only. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
 * For the Sensitive information, Content filters, Contextual grounding, and Automated reasoning policies, confirm the features you need are available in your chosen Bedrock region.
 
 == Add the details
@@ -98,7 +98,7 @@ When you finish, click *Create guardrail*.
 
 == Attach the guardrail to a provider
 
-A guardrail takes effect only after a provider references it. On an LLM provider, set its guardrail to the one you created. A provider references one guardrail, and you can reuse the same guardrail across many providers. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
+A guardrail takes effect only after a provider references it. On an AWS Bedrock LLM provider, set the guardrail field in the provider's Bedrock settings to the one you created. Only Bedrock providers expose this setting. A provider references one guardrail, and you can reuse the same guardrail across many providers. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
 
 == Enable the guardrail
 

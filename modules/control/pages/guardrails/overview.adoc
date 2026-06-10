@@ -2,13 +2,13 @@
 :description: Learn how ADP guardrails use AWS Bedrock policies to inspect and control LLM requests and responses, and how a blocked request surfaces.
 :page-topic-type: overview
 :personas: security_compliance_lead, platform_engineer, agent_builder
-:learning-objective-1: Describe what a guardrail does and how you attach one to an LLM provider
+:learning-objective-1: Describe what a guardrail does and how you attach one to an AWS Bedrock LLM provider
 :learning-objective-2: Identify the available policy types and the situations each fits
 :learning-objective-3: Recognize how a blocked request surfaces and which page to read next
 
-A guardrail is a set of safety and policy filters that inspect and control how agents and gateways use models. A guardrail can block prompt injection, deny off-topic content, redact or block personally identifiable information (PII), and check responses for factual grounding. You attach a guardrail to an LLM provider, and ADP applies it to every request and response that flows through that provider.
+A guardrail is a set of safety and policy filters that inspect and control how agents and gateways use models. A guardrail can block prompt injection, deny off-topic content, redact or block personally identifiable information (PII), and check responses for factual grounding. You attach a guardrail to an AWS Bedrock LLM provider, and ADP applies it to every request and response that flows through that provider.
 
-ADP guardrails run on AWS Bedrock Guardrails. Each guardrail syncs its policy configuration to the Bedrock control plane, so it needs an AWS region and Bedrock credentials, even when it protects a non-Bedrock provider such as OpenAI, Anthropic, or Google. For those providers, ADP runs the guardrail by calling Bedrock's evaluation API around each request.
+ADP guardrails run on AWS Bedrock Guardrails. Each guardrail syncs its policy configuration to the Bedrock control plane, so it needs an AWS region and Bedrock credentials. Guardrails attach to AWS Bedrock providers only; other provider types don't expose a guardrail setting.
 
 After reading this page, you will be able to:
 
@@ -58,7 +58,7 @@ For streaming responses, ADP skips output evaluation in this release. Input eval
 
 == Where you attach a guardrail
 
-You attach a guardrail by setting an LLM provider's guardrail. Each provider references at most one guardrail, and a single guardrail can be reused across many providers. The guardrail's detail page lists the providers that use it. You create and configure the guardrail first, then attach it from the provider. See xref:control:guardrails/create-guardrail.adoc[Create a guardrail].
+You attach a guardrail by setting an AWS Bedrock LLM provider's guardrail. The guardrail setting appears in the provider's Bedrock settings, and only Bedrock providers can reference a guardrail. Each provider references at most one guardrail, and a single guardrail can be reused across many providers. The guardrail's detail page lists the providers that use it. You create and configure the guardrail first, then attach it from the provider. See xref:control:guardrails/create-guardrail.adoc[Create a guardrail].
 
 == What happens when a guardrail blocks
 

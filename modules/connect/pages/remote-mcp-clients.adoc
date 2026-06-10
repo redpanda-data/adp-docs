@@ -215,7 +215,7 @@ Maintain registered OAuth Clients without re-creating them:
 * *Revoke all tokens*: Invalidate every refresh token AI Gateway has issued under this client without deleting the client itself (see <<revoke-all-tokens>>).
 * *Delete a client*: Invalidates every active token issued under it. Token revocation runs automatically as part of delete, so users connected through this client are signed out immediately. Every chat-client connector that depends on this OAuth Client breaks until reconfigured against a replacement.
 
-// TODO: confirm there is no in-place secret-rotation control (the edit page copy implies delete-and-recreate is the only path to a new secret). Verify against the OAuth client edit flow on adp-production.
+// Verified 2026-06-09 against adp-ui oauth-clients routes on origin/main: no in-place rotate/regenerate control exists; the create page's own fallback comment says "rotate-and-recreate". Delete-and-recreate is the only path to a new secret.
 
 [[revoke-all-tokens]]
 === Revoke all tokens
