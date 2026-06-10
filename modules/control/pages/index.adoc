@@ -1,5 +1,6 @@
 = Control & Govern
-:description: Govern agent activity with the dashboard, guardrails, spend limits, and permissions.
+:description: Govern agent activity with guardrails, spend limits, and permissions.
 :page-layout: index
+:page-aliases: control:dashboard/overview.adoc
 
-Govern agent activity across your deployment. Use the dashboard for a single-pane view, set guardrails and spend limits, and control who can do what with roles and permissions.
+Govern agent activity across your deployment. Set guardrails and spend limits, and control who can do what with roles and permissions.

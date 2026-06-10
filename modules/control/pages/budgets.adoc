@@ -4,9 +4,9 @@
 :personas: platform_engineer, pilot_lead
 :learning-objective-1: Set a per-agent budget that caps LLM spend and warns before the cap
 :learning-objective-2: Identify what spending data the Agentic Data Plane records automatically
-:learning-objective-3: Locate where to view spend in the dashboard, in transcripts, and through breakdown queries
+:learning-objective-3: Locate where to view spend in the Cost & Usage tab, in transcripts, and through breakdown queries
 
-The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the glossterm:governance dashboard[], through individual glossterm:transcript[,transcripts], and through breakdown queries by provider, model, user, agent, or provider type.
+The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the *Cost & Usage* tab on *LLM Providers*, through individual glossterm:transcript[,transcripts], and through breakdown queries by provider, model, user, agent, or provider type.
 
 After completing these steps, you will be able to:
 
@@ -19,7 +19,7 @@ After completing these steps, you will be able to:
 
 A *budget* caps LLM spend over a recurring period. When an agent's spend for the period reaches the budget's hard limit, AI Gateway rejects that agent's next LLM request with `HTTP 429` until the period resets. A separate warning threshold fires before the cap, so you can react before AI Gateway cuts the agent off.
 
-Redpanda ADP enforces budgets per agent. A budget identifies an _agent_ by its resource name in the form `agents/<slug>`, the same identity that appears as `agent_name` in spend data. Because a budget keys on this resource name, deleting an agent and recreating it with the same name keeps it under the same budget.
+Redpanda ADP enforces budgets per agent. A budget identifies an _agent_ by its resource name in the form `agents/<slug>`, the same identity that appears as `agent_name` in spend data.
 
 === How a budget works
 
@@ -87,11 +87,6 @@ To give one agent a different cap, click *Add override*, pick the agent (each ag
 
 A service account needs the matching `dataplane_adp_budget_*` permission for each operation (`create`, `get`, `list`, `update`, or `delete`). See xref:control:permissions-reference.adoc#budget-permissions[Budget permissions].
 
-[NOTE]
-====
-Budgets currently cap spend per agent. Tenant-wide shared pools; limits scoped by model, provider, or organization; and notification delivery (email, webhook, or chat) when a budget warns or blocks are planned but not yet available. Today a warning threshold produces a log entry and a metric.
-====
-
 == What ADP records automatically
 
 Every LLM call routed through AI Gateway becomes a spending event. Each event captures:
@@ -101,7 +96,7 @@ Every LLM call routed through AI Gateway becomes a spending event. Each event ca
 * Request count.
 * The provider, model, user, and organization context the call ran under.
 
-Events flow through a Kafka pipeline and roll up into queryable storage. No setup required: the gateway captures spending the moment your first agent or MCP server runs through it.
+No setup required: the gateway captures spending the moment your first agent runs through it.
 
 ADP tracks streaming and non-streaming requests the same way, and attributes cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) correctly on streaming responses, so cost rollups stay accurate when an agent reuses long system prompts.
 
@@ -114,12 +109,12 @@ ADP reports cost in *microcents*. 1 cent = 1,000,000 microcents, so $1 = 100,000
 
 A few request- or response-time signals change the rate ADP applies to a single call. You don't configure these; the spending pipeline picks them up from the upstream response or request and bills accordingly.
 
-* *Anthropic fast mode*: Anthropic exposes a fast-mode option on some models (for example, Opus 4.6 fast) that carries a per-token premium over the default rate. ADP reads the `speed` field on each Anthropic response and bills fast-mode calls at the model's fast-mode rate. Requests without a `speed` field fall back to the default rate card.
-* *Context-tier pricing*: A few models charge a different rate once a request crosses a context-length threshold. Gemini Pro, for example, prices requests above a 128K-token context at a higher tier than shorter requests. ADP passes the call's context-token count to the rate card so requests at or above the threshold bill at the tiered rate automatically.
+* *Anthropic fast mode*: Anthropic exposes a fast-mode option on some models (for example, Opus 4.6 fast) that carries a per-token premium over the default rate. ADP reads the `speed` field on each Anthropic response and bills fast-mode calls at the model's fast-mode rate. Requests without a `speed` field fall back to the default rate.
+* *Context-tier pricing*: A few models charge a different rate once a request crosses a context-length threshold. Gemini Pro, for example, prices requests above a 128K-token context at a higher tier than shorter requests. ADP uses the call's context-token count so requests at or above the threshold bill at the tiered rate automatically.
 
 == Where to view your spend
 
-You don't view spend on this page. The *LLM Providers* page, dashboard, transcripts, and breakdown queries are the read surfaces:
+You don't view spend on this page. The *LLM Providers* page, transcripts, and breakdown queries are the read surfaces:
 
 [cols="1,3"]
 |===
@@ -128,31 +123,23 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |*Cost & Usage* tab (*LLM Providers* page)
 |Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, user, or agent. See xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
 
-|Governance dashboard
-|Summary cards (total spend, agent count, request count, trend), provider breakdown chart, events timeline, agents and MCP servers tables. The single-pane-of-glass view across your whole deployment. See xref:control:dashboard/overview.adoc[Read the governance overview].
-
 |Transcripts
 |Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:monitor:transcripts.adoc[Read a transcript].
 
 |Breakdown queries
-|Aggregated spend by provider, model, user, agent, or provider type, available through `GetSpendingBreakdown` for programmatic access. The dashboard's provider-breakdown widget covers the provider dimension.
+|Aggregated spend by provider, model, user, agent, or provider type, available through `GetSpendingBreakdown` for programmatic access.
 |===
 
 Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_email`, `agent_name`, `agent_uid`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, agent, or provider type; `organization_id` is a filter only, not a breakdown dimension.
 
-For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` expression that lets you combine and negate dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). The convenience fields and the `filter` expression compose; populate one or both. The server compiles the result to a single SQL `WHERE` clause, which avoids per-dimension fan-out queries.
-
-[NOTE]
-====
-`total_tokens` is derived server-side from input + output + cache tokens. You don't need to compute it client-side, and the value is consistent across all four `SpendingService` methods.
-====
+For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` expression that lets you combine and negate dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). The convenience fields and the `filter` expression compose; populate one or both.
 
 `user_email` and `organization_id` are populated automatically from the request's authenticated identity (the caller's email and organization), so spend is attributed without any setup on your part.
 
 [[query-spend-programmatically]]
 == Query spend programmatically
 
-`SpendingService.GetSpendingBreakdown` is the canonical RPC for pulling spend out of ADP. Use it for chargeback reporting, scheduled emails, internal cost dashboards, or any workflow the built-in UI doesn't cover. Every spend number the dashboard shows comes from this RPC, so query results match the UI to the cent.
+`SpendingService.GetSpendingBreakdown` is the canonical RPC for pulling spend out of ADP. Use it for chargeback reporting, scheduled emails, internal cost dashboards, or any workflow the built-in UI doesn't cover.
 
 === Authenticate
 
@@ -267,91 +254,20 @@ The proto-generated client (Connect-Go or grpc-python) is the long-term recommen
 
 == Guardrail cost
 
-AWS Bedrock evaluates guardrails and bills guardrail usage to the AWS account whose credentials the guardrail's backend uses. This cost is separate from ADP's LLM spend tracking: it does not appear in the spend view or `SpendingService`, which account only for LLM provider token usage through the gateway.
-
-Bedrock charges for guardrail evaluation whether or not it blocks a request. Blocking an input avoids the downstream model-inference charge; blocking an output still incurs inference up to the point of generation. Bedrock doesn't charge for deterministic checks such as word filters and custom regex patterns, but it does charge for model-based policies such as content filters, denied topics, and contextual grounding, so turn off the directions and policies you don't need. For current rates, see the https://aws.amazon.com/bedrock/pricing/[AWS Bedrock pricing^].
+AWS bills guardrail evaluation directly to the AWS account whose credentials the guardrail's backend uses. This cost does not appear in ADP cost reporting and is not counted against budgets. For current rates, see https://aws.amazon.com/bedrock/pricing/[AWS Bedrock pricing^].
 
 For what each policy does, see xref:control:guardrails/overview.adoc[How guardrails work] and xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
-
-== Multi-tenant viewing patterns
-
-The `SpendingFilter` exposes `organization_id` and `user_email`, so every dashboard query and every API call can scope to a single tenant or user. Use this to:
-
-* See per-tenant spend in the dashboard's provider-breakdown view.
-* Pull per-user cost reports through `GetSpendingBreakdown`.
-* Identify which organization or user is driving the highest cost on a specific provider.
-
-To cap spend (not just view it), see <<set-a-spend-limit,Set a spend limit>>. Budgets are enforced per agent today; per-tenant and per-user caps are not yet available.
 
 [[override-per-model-pricing]]
 == Override per-model pricing
 
-The Agentic Data Plane ships with a default rate card per provider, covering input, output, and cache-read prices for every model in the built-in catalog. The cost-reporting pipeline reads from this rate card when it computes per-call spend, which is why every dollar value on the dashboard, in transcripts, and in `SpendingService` queries works without any setup.
+The Agentic Data Plane ships with default per-model pricing per provider, covering input, output, and cache-read prices for every model in the built-in catalog. Cost reporting uses these prices when it computes per-call spend, which is why every dollar value in the *Cost & Usage* tab, in transcripts, and in `SpendingService` queries works without any setup.
 
-If your organization negotiates non-standard pricing, or you want to track spend against an internal chargeback rate, override the rate card on a per-model basis. Per-model overrides apply to every spending event for that model from the moment they're saved.
+If your organization negotiates non-standard pricing, or you want to track spend against an internal chargeback rate, override the rates as part of configuring an LLM provider. Overrides are scoped to a single provider, where you edit the rate per model. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
 
-=== When to override
-
-Override the rate card when:
-
-* You have a custom contract with a provider that prices a model below or above the published list price.
-* You want internal chargeback reporting against a different rate than the provider charges.
-* You want to attach pricing to a self-hosted or OpenAI-compatible model the catalog doesn't price by default.
-
-Leave the rate card at its defaults if you're paying list price and don't need chargeback adjustments.
-
-=== Edit the rate card
-
-Open the per-model pricing editor from the governance UI:
-
-// TODO: confirm the exact UI route on `adp-production` once walked. Likely under the governance dashboard's model-detail surface or under *LLM Providers > \{provider} > \{model}*; capture the route + screenshots before merging.
-
-For each model, the editor exposes buckets that match the cost-reporting categories:
-
-[cols="1,3"]
-|===
-|Bucket |What it prices
-
-|`Input`
-|Cost per 1M prompt tokens, including tool-use inputs.
-
-|`Output`
-|Cost per 1M completion tokens. For models that emit reasoning tokens (Anthropic 4.x, OpenAI o-series), reasoning is included in this bucket.
-
-|`Cache write`
-|Cost per 1M tokens written to a prompt cache. Split into TTL tiers because providers charge differently per tier:
-
-* `5-minute`: Short-lived prompt caches.
-* `1-hour`: Extended-TTL caches (Anthropic v4.x, OpenAI 4.x).
-* `Unknown TTL`: Fallback bucket for usage events that don't carry a TTL tag.
-|===
-
-The catalog default for the bucket appears alongside your override; clear the override to fall back to the catalog price.
-
-=== How overrides apply
-
-Three rules govern how the cost-reporting pipeline applies overrides:
-
-* Overrides apply to *new spending events* from the moment they're saved. Historical events keep the rate card that was in effect when the event was recorded. The dashboard's _Compare to previous period_ overlay reflects that.
-* Overrides are scoped to one model at a time. To roll out a new contract across an entire provider's catalog, edit each model in turn.
-* Cache-read pricing follows the catalog default. Only cache-write tiers are overridable. Cache-read tokens still surface in the `CACHED` bucket on the dashboard and in `SpendingService` responses.
-* Overrides are applied invisibly: `SpendingService` responses carry the resulting dollar values with no marker for which line items used an overridden rate.
-
-// Verified 2026-06-09 against spending_service.proto and spending_rollup.proto on cloudv2 origin/main: no override flag or indicator field exists on breakdown or time-series responses.
-
-=== Verify what's billed
-
-After saving an override, send a test request through the affected model and either:
-
-* Open the resulting transcript and check the per-turn USD cost matches your override math (input + output + any cache write you triggered).
-* Run `GetSpendingBreakdown` with the model filtered in and confirm the dollar value lands on the expected figure.
-
-If the cost still reflects the catalog price, the override may not have propagated yet. Wait a few seconds for cost-reporting to pick it up, then re-test.
-
-// TODO: roadmap items not yet shipped (keep in sync with the NOTE under "Manage budgets through the API"): tenant-wide shared pools; limits scoped by model, provider, or organization; and notification delivery (email, webhook, or chat) on warn or block. Document each here once it ships. Open Q C1 in the companion plan.
+// TODO: roadmap items not yet shipped: tenant-wide shared pools; limits scoped by model, provider, or organization. Document each here once it ships. Open Q C1 in the companion plan.
 
 == Next steps
 
-* xref:control:dashboard/overview.adoc[Read the governance overview]
 * xref:monitor:transcripts.adoc[Read a transcript]
 * xref:control:guardrails/overview.adoc[How guardrails work]

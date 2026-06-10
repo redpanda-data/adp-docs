@@ -2,11 +2,11 @@
 :description: Emit OpenTelemetry traces from your BYOA (Bring Your Own Agent) so the Agentic Data Plane can attribute calls, costs, and tool invocations to your agent. Covers the minimum required span contract, common optional attributes, and how it differs from a Redpanda-managed agent.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Identify the resource attributes and span attributes a BYOA agent must emit so transcripts and the governance dashboard can attribute calls correctly
-:learning-objective-2: Choose between optional enrichment attributes that improve dashboard fidelity (model, tool, agent name, conversation, cache tokens)
+:learning-objective-1: Identify the resource attributes and span attributes a BYOA agent must emit so transcripts and cost rollups can attribute calls correctly
+:learning-objective-2: Choose between optional enrichment attributes that improve cost and usage reporting fidelity (model, tool, agent name, conversation, cache tokens)
 :learning-objective-3: Validate a BYOA agent's telemetry by reading the resulting transcript and confirming non-zero metric values
 
-A *BYOA* (Bring Your Own Agent) is an agent you operate yourself, outside Redpanda's managed runtime. To make it visible across transcripts, the governance dashboard, cost rollups, and the agents list, your agent must emit OpenTelemetry traces with a specific minimum set of resource attributes and span attributes. This page documents that contract.
+A *BYOA* (Bring Your Own Agent) is an agent you operate yourself, outside Redpanda's managed runtime. To make it visible across transcripts, cost rollups, and the agent registry, your agent must emit OpenTelemetry traces with a specific minimum set of resource attributes and span attributes. This page documents that contract.
 
 For the full OTLP ingestion flow (deploying the Connect pipeline, authenticating, sending traces over HTTP or gRPC), see xref:monitor:ingest-custom-traces.adoc[Ingest custom traces]. This page focuses on _what_ to emit; that page covers _how_ to send it.
 
@@ -18,13 +18,13 @@ After reading this page, you will be able to:
 
 == Why this matters
 
-When an agent runs, the Agentic Data Plane reconstructs a turn-by-turn transcript from the spans the agent (and its LLM, MCP server, sub-agent calls) emit. The transcripts UI groups, labels, and totals fields read directly from span attributes. If your agent omits a required attribute, the corresponding column on the dashboard or in transcripts shows as empty, zero, or unattributed.
+When an agent runs, the Agentic Data Plane reconstructs a turn-by-turn transcript from the spans the agent (and its LLM, MCP server, sub-agent calls) emit. The transcripts UI groups, labels, and totals fields read directly from span attributes. If your agent omits a required attribute, the corresponding column in cost and usage reporting or in transcripts shows as empty, zero, or unattributed.
 
 Redpanda-managed agents emit the contract automatically through the runtime. BYOA agents must emit it themselves.
 
 == Minimum required contract
 
-These attributes _must_ appear on your agent's spans for transcripts and the governance dashboard to surface non-empty values.
+These attributes _must_ appear on your agent's spans for transcripts and cost rollups to surface non-empty values.
 
 === Resource attributes
 
@@ -55,24 +55,24 @@ Set on every relevant span:
 |One of `invoke_agent`, `chat`, or `execute_tool`. Drives turn-role inference (`SYSTEM` / `USER` / `ASSISTANT` / `TOOL`). A span with no `gen_ai.operation.name` cannot be classified into a transcript role.
 
 |`gen_ai.request.model`
-|The LLM model identifier the agent calls. Surfaces in the transcript turn header and on the `Model` column in the governance dashboard. Required on `chat`-operation spans; optional on `invoke_agent` and `execute_tool` spans.
+|The LLM model identifier the agent calls. Surfaces in the transcript turn header and in the *Cost & Usage* model breakdown. Required on `chat`-operation spans; optional on `invoke_agent` and `execute_tool` spans.
 
 |`gen_ai.usage.input_tokens` and `gen_ai.usage.output_tokens`
-|Token counts on LLM-call spans. Drive the Tokens card on the dashboard and the per-turn USD-cost calculation in transcripts. Without them the cost column reads `0`.
+|Token counts on LLM-call spans. Drive the token totals in cost and usage reporting and the per-turn USD-cost calculation in transcripts. Without them the cost column reads `0`.
 |===
 
-If your agent emits these five attributes plus the resource `service.name`, every dashboard widget and every transcript field has a non-empty value to render.
+If your agent emits these five attributes plus the resource `service.name`, every cost and usage report and every transcript field has a non-empty value to render.
 
 == Recommended enrichment
 
-The dashboard degrades gracefully without these, but their presence lets the UI build richer views.
+Cost and usage reporting degrades gracefully without these, but their presence lets the UI build richer views.
 
 [cols="1,3"]
 |===
 |Attribute |Why it helps
 
 |`gen_ai.provider.name`
-|Labels the LLM provider (`openai`, `anthropic`, `gemini`, `bedrock`). Drives the `Provider` filter on the governance dashboard and the per-provider color scheme on the Spending chart. Without it, the UI groups everything under an unknown-provider bucket.
+|Labels the LLM provider (`openai`, `anthropic`, `gemini`, `bedrock`). Drives the provider filter and per-provider grouping in cost and usage reporting. Without it, spend groups everything under an unknown-provider bucket.
 
 |`gen_ai.agent.name`
 |A human-readable agent label distinct from `service.name`. Use when the same service runs multiple logical agents (for example, `support-bot/refunds`, `support-bot/onboarding`).
@@ -81,7 +81,7 @@ The dashboard degrades gracefully without these, but their presence lets the UI 
 |On `execute_tool` spans, identifies which tool was invoked. Drives the `Tool name` attribute filter and the per-tool latency view in transcripts.
 
 |`gen_ai.usage.cache_read_input_tokens`
-|Cache-hit token count on LLM-call spans. Surfaces in the `CACHED` bucket on the dashboard and in per-turn cost. Without it, the `CACHED` bucket reads `0` even when your agent reuses a system prompt that the upstream cached.
+|Cache-hit token count on LLM-call spans. Surfaces in the `CACHED` bucket in cost and usage reporting and in per-turn cost. Without it, the `CACHED` bucket reads `0` even when your agent reuses a system prompt that the upstream cached.
 
 |`gen_ai.input.messages` and `gen_ai.output.messages`
 |Conversation content. Used to reconstruct turn content, and required for transcript history reconstruction when older spans are evicted from `redpanda.otel_traces` (see xref:monitor:concepts.adoc#history-reconstruction[Reconstructed transcript history]). Without them, evicted spans render as empty turns rather than reconstructed turns.
@@ -148,8 +148,8 @@ Common symptoms and fixes:
 |Tool calls not visible in the transcript
 |`gen_ai.operation.name = "execute_tool"` is missing on the tool span. Also confirm the tool span is parented to an assistant span, not the root.
 
-|Agent shows up in transcripts but not in the governance dashboard's Agents list
-|Transcripts attribute by `service.name` resource attribute; the dashboard attributes by registered agent resource. BYOA agent registration ships separately. See xref:connect:byoa-register.adoc[Register your own agent (BYOA)].
+|Agent shows up in transcripts but not in the agent registry (`AgentRegistryService.ListAgents`)
+|Transcripts attribute by `service.name` resource attribute; cost attribution and the agent registry attribute by registered agent resource. BYOA agent registration ships separately. See xref:connect:byoa-register.adoc[Register your own agent (BYOA)].
 
 |Older turns in a long conversation render as `is_reconstructed`
 |Spans were evicted from `redpanda.otel_traces` retention. Reconstruction works only if your agent emitted `gen_ai.input.messages` and `gen_ai.output.messages` on later spans. See xref:monitor:concepts.adoc#history-reconstruction[Reconstructed transcript history].

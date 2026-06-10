@@ -18,5 +18,4 @@
 * glossterm:token vault[]
 * glossterm:transcript[]
 * glossterm:spending event[]
-* glossterm:governance dashboard[]
 * glossterm:subagent[]

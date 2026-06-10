@@ -57,7 +57,6 @@
 *** xref:monitor:ingest-custom-traces.adoc[Ingest OpenTelemetry Traces from Custom Agents]
 
 * xref:control:index.adoc[Control & Govern]
-** xref:control:dashboard/overview.adoc[See All Your Agents in One Place]
 ** xref:control:guardrails/index.adoc[Set Up Guardrails]
 *** xref:control:guardrails/overview.adoc[How Guardrails Work]
 *** xref:control:guardrails/create-guardrail.adoc[Create a Guardrail]
