@@ -111,3 +111,9 @@ With user-delegated OAuth, define the server's `required_scopes` to include ever
 * *Atlassian app management*: The OAuth app and its callback URLs are managed in `developer.atlassian.com`, not in ADP.
 * *Jira Server / Data Center* (self-hosted): This MCP type targets Atlassian Cloud. Self-hosted Jira may need a self-managed MCP server instead. See xref:connect:register-remote.adoc[Register a self-managed MCP server].
 * *Confluence access*: Separate scope namespace; not exposed by this MCP server.
+
+== Next steps
+
+* xref:connect:user-delegated-oauth.adoc[]
+* xref:connect:test-tools.adoc[]
+* xref:connect:create-agent.adoc[]

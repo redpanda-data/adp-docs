@@ -4,7 +4,7 @@
 :personas: agent_builder
 :learning-objective-1: Create an ADP agent through the create form
 :learning-objective-2: Configure an LLM provider, model, and execution settings
-:learning-objective-3: Connect MCP servers, add subagents, and set discovery metadata
+:learning-objective-3: Configure tools, subagents, and discovery metadata for an agent
 
 // Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (AgentCreate, ManagedAgentSpec) cross-referenced against `apps/adp-ui/src/routes/_authenticated/agents/create.page.tsx` on origin/main and a live adp-production screenshot, verified 2026-06-10.
 // This page follows the single-page create form with five sections (Details, Model, Behavior, Tools, Subagents) and a scroll-synced stepper. The old six-step Continue/Back wizard (Basics ... Review) is gone.

@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 
 An AI agent is a system built around a glossterm:large language model (LLM)[] that interprets user intent, selects the right tools, and chains multiple steps into a workflow. In ADP, agents are declarative: you configure the agent's role, constraints, and available tools rather than writing imperative agent code. Agents reach tools through MCP servers, and Redpanda Connect provides the real-time streaming and data-processing capabilities the framework orchestrates for you.
 
-== How agents work
+== Declarative agent components
 
 When you create an agent, you configure the components through ADP rather than writing code:
 

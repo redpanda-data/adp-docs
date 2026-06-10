@@ -4,7 +4,7 @@
 :personas: platform_engineer, pilot_lead
 :learning-objective-1: Set a per-agent budget that caps LLM spend and warns before the cap
 :learning-objective-2: Identify what spending data the Agentic Data Plane records automatically
-:learning-objective-3: Locate where to view spend on the Cost & Usage page, in transcripts, and through breakdown queries
+:learning-objective-3: View spend breakdowns by agent, model, and provider
 
 The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend on the *Cost & Usage* page under *Governance*, through individual glossterm:transcript[,transcripts], and through breakdown queries by provider, model, user, agent, or provider type.
 

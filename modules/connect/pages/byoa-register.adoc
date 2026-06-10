@@ -2,7 +2,7 @@
 :description: Register a self-managed agent so it appears in the ADP agent registry, with its telemetry and cost attributed alongside managed agents.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Distinguish a self-managed (BYOA) agent from a Redpanda-managed agent and decide when each fits
+:learning-objective-1: Choose between a self-managed (BYOA) and a Redpanda-managed agent for your use case
 :learning-objective-2: Register a self-managed agent so it appears in the agent registry
 :learning-objective-3: Identify the telemetry and service-account model that attributes a self-managed agent's activity in ADP
 

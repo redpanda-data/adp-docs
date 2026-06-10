@@ -2,7 +2,7 @@
 :description: Understand how a blocked request surfaces, where guardrail activity is recorded, and what to check when a guardrail blocks too much or too little.
 :page-topic-type: how-to
 :personas: security_compliance_lead, platform_engineer, agent_builder
-:learning-objective-1: Recognize what a caller sees when a guardrail blocks a request
+:learning-objective-1: Review what a caller sees when a guardrail blocks a request
 :learning-objective-2: Find guardrail activity in a request's transcript
 :learning-objective-3: Diagnose a guardrail that blocks too much or doesn't fire
 
