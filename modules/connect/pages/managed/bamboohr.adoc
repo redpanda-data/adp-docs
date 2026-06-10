@@ -8,7 +8,7 @@
 
 // Source: `cloudv2` `apps/aigw/docs/bamboohr-mcp.md`, `proto/mcps/redpanda/mcps/bamboohr/v1/*`, and `apps/aigw/internal/mcp/managed/mcps/bamboohr/register_mcp.go` on `origin/main`, verified 2026-05-10.
 
-The *BambooHR* managed MCP server lets agents read BambooHR employee directory, time-off, and performance data with the calling user's OAuth identity. The BambooHR configuration stores only the company subdomain. OAuth credentials and user tokens come from the glossterm:OAuth provider[,OAuth Provider] and glossterm:token vault[].
+The *BambooHR* managed MCP server lets agents read BambooHR employee directory, time-off, and performance data with the calling user's OAuth identity. The BambooHR configuration stores the company subdomain and the name of the BambooHR glossterm:OAuth provider[,OAuth Provider] to authenticate against. OAuth credentials and user tokens come from that provider and the glossterm:token vault[].
 
 After reading this page, you will be able to:
 
@@ -48,7 +48,6 @@ Use BambooHR when an agent needs HR context from BambooHR without sharing one up
 * BambooHR users with the permissions required to read the employee, time-off, or performance data your agent needs.
 
 // TODO: Confirm the exact Agentic Data Plane UI field labels for attaching user-delegated OAuth to managed BambooHR after an authenticated UI walkthrough.
-// TODO: Add a CLI example only after confirming how `rpk ai` sets MCPServer `auth_config.user_oauth` for managed types that do not carry auth inside the managed config.
 
 == Configure BambooHR OAuth
 
@@ -66,17 +65,22 @@ Store the BambooHR client secret in the ADP secret store, then reference that se
 
 == Create the managed MCP server
 
-Create a managed MCP server with the BambooHR type. Set the `subdomain` field and attach the BambooHR OAuth Provider as user-delegated OAuth on the MCP server.
+Create a managed MCP server with the BambooHR type. Set the `subdomain` field and reference the BambooHR OAuth Provider under the `userOauth` auth variant. BambooHR supports per-user OAuth only, so the `userOauth` block is required.
 
-The BambooHR managed config contains only the company subdomain:
+The BambooHR managed config holds the company subdomain and the OAuth provider to authenticate against:
 
 [source,json]
 ----
 {
   "@type": "type.googleapis.com/redpanda.mcps.bamboohr.v1.BambooHRMCPConfig",
-  "subdomain": "mycompany"
+  "subdomain": "mycompany",
+  "userOauth": {
+    "providerName": "bamboohr"
+  }
 }
 ----
+
+`userOauth.providerName` is the resource name of the BambooHR OAuth Provider you registered. The provider's stored per-user token is injected on each tool call.
 
 == Authorize and test
 

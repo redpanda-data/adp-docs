@@ -77,19 +77,20 @@ Create a new Ironclad MCP server in ADP:
 
 === Configure from the CLI
 
-Ironclad authenticates per-user through the Ironclad OAuth Provider you configured. The managed config carries only the region; the `--user-oauth-provider` and `--user-oauth-scopes` flags apply to remote (`--url`) servers only.
-
-// TODO: confirm how rpk associates the OAuth Provider with a managed Ironclad server at create time. auth_config.user_oauth is a server-level field on the MCPServer that `rpk ai mcp create` does not currently set for managed backends.
+Ironclad authenticates per-user through the Ironclad OAuth Provider you configured. Reference that provider in the managed config's `userOauth.providerName` field. Ironclad supports per-user OAuth only, so the `userOauth` block is required. The `--user-oauth-provider` and `--user-oauth-scopes` flags apply to remote (`--url`) servers only.
 
 [source,bash]
 ----
 rpk ai mcp create --name my-ironclad --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.ironclad.v1.IroncladMCPConfig",
-  "region": "IRONCLAD_REGION_NA"
+  "region": "IRONCLAD_REGION_NA",
+  "userOauth": {
+    "providerName": "ironclad"
+  }
 }'
 ----
 
-For EU-hosted accounts, use `"IRONCLAD_REGION_EU"`. For sandbox testing, use `"IRONCLAD_REGION_DEMO"`.
+For EU-hosted accounts, use `"IRONCLAD_REGION_EU"`. For sandbox testing, use `"IRONCLAD_REGION_DEMO"`. `userOauth.providerName` is the resource name of the Ironclad OAuth Provider you registered.
 
 == Tools
 
