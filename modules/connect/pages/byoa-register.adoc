@@ -6,18 +6,7 @@
 :learning-objective-2: Register a self-managed agent so it appears in the agent registry
 :learning-objective-3: Identify the telemetry and service-account model that attributes a self-managed agent's activity in ADP
 
-A *BYOA* (bring-your-own-agent) agent is an agent you build and run yourself, in your own runtime. You register it with the Agentic Data Plane so it appears alongside Redpanda-managed agents for governance and observability.
-
-Registration creates a *metadata record*. The Agentic Data Plane tracks the agent and attributes its telemetry and cost, but it does not host or run the agent, and it does not proxy calls to it. Your agent runs entirely in your own infrastructure.
-
-A self-managed agent participates in Redpanda ADP through two integration points:
-
-* *Registration*: The agent has an entry in the agent registry, so it appears alongside managed agents and in cost-attribution queries.
-* *Telemetry*: The agent emits OpenTelemetry traces, with its registered name as the `service.name`, into the same pipeline as managed agents, so transcripts and cost rollups attribute its calls.
-
-To authenticate its calls to AI Gateway (the LLM proxy and any MCP servers) and its telemetry ingestion, the agent uses service-account credentials issued at registration.
-
-BYOA is the right fit when you have an existing agent (Python LangGraph, Go runtime, in-house framework) you don't want to rewrite, but you want the observability and governance benefits of the Agentic Data Plane.
+Register a self-managed agent with Redpanda ADP to bring it under the same observability and governance as managed agents. Your agent gains registry visibility, transcript capture, and cost attribution without moving off your own infrastructure.
 
 After completing this guide, you will be able to:
 

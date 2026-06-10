@@ -6,7 +6,7 @@
 :learning-objective-2: Grant the right permissions so principals can attach the provider to MCP servers
 :learning-objective-3: Edit, rotate credentials on, or delete an OAuth provider
 
-An OAuth provider defines an upstream system (Slack, Jira, GitHub, Salesforce, Workday, and so on) that AI Gateway can authenticate against on behalf of users (user-delegated OAuth) or service accounts. After you register a provider, any MCP server that talks to that upstream can attach to it instead of carrying its own credentials.
+Register an OAuth provider so AI Gateway can authenticate against an upstream system on behalf of users or service accounts. Any MCP server for that upstream attaches to the provider instead of managing its own credentials.
 
 After completing this guide, you will be able to:
 

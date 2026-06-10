@@ -6,7 +6,7 @@
 :learning-objective-2: Choose between optional enrichment attributes that improve cost and usage reporting fidelity (model, tool, agent name, conversation, cache tokens)
 :learning-objective-3: Validate a BYOA agent's telemetry by reading the resulting transcript and confirming non-zero metric values
 
-A *BYOA* (Bring Your Own Agent) is an agent you operate yourself, outside Redpanda's managed runtime. To make it visible across transcripts, cost rollups, and the agent registry, your agent must emit OpenTelemetry traces with a specific minimum set of resource attributes and span attributes. This page documents that contract.
+A *BYOA* (Bring Your Own Agent) is an agent you operate yourself, outside Redpanda's managed runtime. To make it visible across transcripts, cost rollups, and the agent registry, your agent must emit OpenTelemetry traces with a specific minimum set of resource attributes and span attributes. Emit the right attributes from the start to avoid missing traces and misattributed cost data.
 
 For the full OTLP ingestion flow (deploying the Connect pipeline, authenticating, sending traces over HTTP or gRPC), see xref:monitor:ingest-custom-traces.adoc[Ingest custom traces]. This page focuses on _what_ to emit; that page covers _how_ to send it.
 
