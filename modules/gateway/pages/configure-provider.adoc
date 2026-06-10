@@ -184,7 +184,7 @@ For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs
 
 [NOTE]
 ====
-Redpanda stores models as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). A future Phase 2 release will add per-model metadata such as custom pricing overrides. The legacy flat `models` field still works on writes for backward compatibility.
+Redpanda stores models as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). Each model can carry custom pricing overrides that replace the catalog rates for that model in cost reporting; you set them in the provider form when you configure the model list. The legacy flat `models` field still works on writes for backward compatibility.
 ====
 
 After you create the provider, the detail page renders each model as a row with capability badges (Vision, Reasoning, Streaming, and others lifted from the catalog), the model's 7-day spend, and a link to the per-model detail page. The model list supports search and filtering.

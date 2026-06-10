@@ -254,7 +254,7 @@ The proto-generated client (Connect-Go or grpc-python) is the long-term recommen
 
 == Guardrail cost
 
-Guardrail usage cost is not tracked. ADP does not account for it in cost reporting, and it is not reflected in budgets.
+AWS bills guardrail evaluation directly to the AWS account whose credentials the guardrail's backend uses. This cost does not appear in ADP cost reporting and is not counted against budgets. For current rates, see https://aws.amazon.com/bedrock/pricing/[AWS Bedrock pricing^].
 
 For what each policy does, see xref:control:guardrails/overview.adoc[How guardrails work] and xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
 
