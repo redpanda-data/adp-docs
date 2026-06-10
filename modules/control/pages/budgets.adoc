@@ -89,7 +89,7 @@ A service account needs the matching `dataplane_adp_budget_*` permission for eac
 
 [NOTE]
 ====
-Budgets currently cap spend per agent. Tenant-wide shared pools; limits scoped by model, provider, or organization; and notification delivery (email, webhook, or chat) when a budget warns or blocks are planned but not yet available. Today a warning threshold produces a log entry and a metric.
+Budgets currently cap spend per agent. Tenant-wide shared pools and limits scoped by model, provider, or organization are planned but not yet available.
 ====
 
 == What ADP records automatically
@@ -348,7 +348,7 @@ After saving an override, send a test request through the affected model and eit
 
 If the cost still reflects the catalog price, the override may not have propagated yet. Wait a few seconds for cost-reporting to pick it up, then re-test.
 
-// TODO: roadmap items not yet shipped (keep in sync with the NOTE under "Manage budgets through the API"): tenant-wide shared pools; limits scoped by model, provider, or organization; and notification delivery (email, webhook, or chat) on warn or block. Document each here once it ships. Open Q C1 in the companion plan.
+// TODO: roadmap items not yet shipped (keep in sync with the NOTE under "Manage budgets through the API"): tenant-wide shared pools; limits scoped by model, provider, or organization. Document each here once it ships. Open Q C1 in the companion plan.
 
 == Next steps
 
