@@ -1,7 +1,7 @@
 = Run agents on all your data, safely.
 :page-layout: component-home-v3
 :page-hero-description: An AI Gateway, MCP servers, declarative agents, and built-in governance: one platform so your team can move from prototype to production without rebuilding the foundations every time.
-:page-stats: 1|gateway for all LLM providers;;1|dashboard for spend and activity;;Per-user|OAuth identity on every call;;MCP servers|managed out of the box
+:page-stats: Single|gateway for all LLM providers;;Unified|dashboard for spend and activity;;Per-user|OAuth identity on every call;;Managed|MCP servers out of the box
 :page-pathways-title: Pick where to start
 :page-pathway-1-title: Build a new agent
 :page-pathway-1-desc: Start from scratch with governance built in. Set up an agent, connect your data, and deploy with identity, routing, and logging from day one.
