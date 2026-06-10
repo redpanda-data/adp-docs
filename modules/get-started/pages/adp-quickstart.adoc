@@ -57,7 +57,7 @@ After the agent works, you can walk through one execution turn-by-turn in the *T
 
 == Admins: Configure an LLM provider
 
-A provider is an organization-level resource. Configure it once, and every builder can select it when they create agents. The following sections walk through getting an Anthropic API key, storing it in the secret store, and pointing ADP at Anthropic.
+A provider is an organization-level resource. Configure it once, and every builder can select it when they create agents. The following sections walk through getting an Anthropic API key and pointing ADP at Anthropic; the key lands in the ADP secret store along the way.
 
 === Get an Anthropic API key
 
@@ -69,7 +69,7 @@ Anthropic requires a payment method before it issues an API key. Add billing fir
 
 . In the sidebar, select a workspace other than `Claude Code`. The `Claude Code` workspace uses a separate key-creation flow that doesn't fit this quickstart.
 
-. Click *Manage* > *API keys* in the sidebar.
+. Click *API keys* in the sidebar.
 
 . Click *+ Create key* in the top right. In the Create API key dialog, name the key `adp-quickstart` and click *Add*.
 
@@ -80,40 +80,13 @@ Anthropic requires a payment method before it issues an API key. Add billing fir
 Anthropic shows the API key value once. If you close the dialog without copying, you can't recover it. Paste the key into a secure note before continuing. The next section moves the key into ADP's secret store so you don't have to keep it on your local machine.
 ====
 
-. (Optional) On the API Keys page, confirm the new key appears with the `Active` status.
-
-=== Store the key in the ADP Secrets Store
-
-ADP references provider credentials by secret name, not by raw value. Create the secret first so the next step can reference it.
-
-. Sign in to ADP at https://ai.redpanda.com[ai.redpanda.com^].
-
-. Open *Secrets Store* in the sidebar.
-
-. Click *Create secret*.
-+
-* `ID`: Enter `ANTHROPIC_API_KEY`. The ID accepts letters, numbers, slashes, underscores, and hyphens only. ADP automatically uppercases the ID, and you can't change it after you save.
-* `Value`: Paste the `sk-ant-` key you copied from Anthropic.
-* `Labels`: Skip. Labels are optional key/value metadata for organizing secrets.
-+
-New secrets get the AI Gateway scope automatically; there is nothing to select. That one scope makes the secret usable across the platform: LLM providers, MCP servers, and agents.
-+
-image::create-secret-form.png[The Create secret form, with a required ID and write-only Value, optional labels, and no scope selector]
-+
-[IMPORTANT]
-====
-The secret value is encrypted and cannot be retrieved after you save the form. If you mistype the key, delete the secret and create a new one.
-====
-+
-Click *Create secret* at the bottom of the form.
-
-. Confirm the secret appears in the list with the ID `ANTHROPIC_API_KEY`.
-
-TIP: You can skip this step and create the secret inline in the next section: the provider form's `API key` field has an *Existing*/*New* toggle. Either flow stores the key in the same place.
+. (Optional) On the *API keys* page, confirm the new key appears in the list.
 
 === Configure your LLM provider
 
-Now point ADP at Anthropic.
+Now point ADP at Anthropic. ADP references provider credentials by secret name, not by raw value, and you create the secret inline as part of this form.
+
+. Sign in to ADP at https://ai.redpanda.com[ai.redpanda.com^].
 
 . Open *LLM Providers* in the sidebar.
 
@@ -125,9 +98,13 @@ Now point ADP at Anthropic.
 
 . `Provider type`: Select `Anthropic`.
 
-. `API key reference`: On the *Existing* tab, pick `ANTHROPIC_API_KEY` from the dropdown.
+. `API key reference`: Switch to the *New* tab and create the secret inline:
 +
-TIP: If you skipped the *Secrets Store* step earlier, switch to the *New* tab to create the secret inline from this form. Either flow stores the key in the same place.
+* Name the secret `ANTHROPIC_API_KEY`. ADP uppercases the name automatically, and you can't change it after creation.
+* Under `Secret value`, leave the *Text* tab selected and paste the `sk-ant-` key you copied from Anthropic.
+* Click *Create secret*.
++
+The secret value is write-only: ADP can't show it again after creation, so if you mistype the key, create a new secret. New secrets get the AI Gateway scope automatically, which makes them usable across the platform: LLM providers, MCP servers, and agents. To create secrets ahead of time or manage them later, open *Secrets Store* in the sidebar.
 
 . Leave `Authorization passthrough` off. This quickstart uses one shared key, not per-user OAuth.
 
@@ -142,7 +119,7 @@ The catalog of available models is maintained by Redpanda. Models you select her
 
 . Click *Create provider*.
 
-. On the provider detail page, confirm the Status badge in the Connection card shows `Active`. The agent you build in this quickstart exercises the provider end to end.
+. On the provider detail page, confirm the badge next to the provider name shows `Enabled` and the `Status` in the Connection card shows `Active`. The agent you build in this quickstart exercises the provider end to end.
 
 If the Status badge stays in a failure state, see the xref:gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace ADP can read.
 
@@ -187,6 +164,8 @@ image::create-mcp-server-picker.png[The Create MCP Server marketplace picker fil
 . Click *Create*.
 
 . Redpanda fetches the spec, parses it, and generates one MCP tool per operation. When the server is ready, open its detail page.
++
+image::mcp-server-detail-tabs.png[The petstore-quickstart MCP server detail page with a Managed badge, an Enabled badge, and the Overview, Connection, and Inspector tabs]
 
 . On the *Overview* tab, copy the `API URL`. This is the MCP URL the agent connects to.
 

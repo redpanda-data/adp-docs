@@ -9,6 +9,8 @@
 
 This guide shows how to connect your glossterm:AI agent[] or application to the AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with xref:reference:rpk/rpk-cloud/rpk-cloud-login.adoc[`rpk cloud login`] for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
 
+TIP: The provider's *Connect* tab in ADP generates this configuration for you: a gateway-token step, setup instructions for popular clients, and code examples with the provider's proxy URL prefilled. Copy from the tab for a quick start, or follow this page for the full flow.
+
 After completing this guide, you will be able to:
 
 * [ ] {learning-objective-1}

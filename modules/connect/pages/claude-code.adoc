@@ -46,6 +46,8 @@ The *Connect your app* section of the detail page also exposes a ready-to-paste 
 
 == Configure Claude Code
 
+TIP: The provider's *Connect* tab in ADP generates this Claude Code configuration (environment variables or a settings-file snippet) with your provider's proxy URL prefilled. Pick *Claude Code* under *Connect to your client*.
+
 Claude Code reads the Anthropic base URL and an authentication token from environment variables. Set both to point at the ADP proxy URL.
 
 [tabs]
