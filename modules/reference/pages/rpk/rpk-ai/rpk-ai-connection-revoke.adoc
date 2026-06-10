@@ -2,13 +2,13 @@
 :description: rpk ai connection revoke
 :page-beta: true
 
-Revoke an OAuth connection — coming soon
+Revoke an OAuth connection.
 
 == Usage
 
 [,bash]
 ----
-rpai connection revoke [name] [flags]
+rpk ai connection revoke [name] [flags]
 ----
 
 == Flags

@@ -8,7 +8,7 @@ List available models in the catalog
 
 [,bash]
 ----
-rpai model list [flags]
+rpk ai model list [flags]
 ----
 
 == Flags

@@ -8,7 +8,7 @@ Delete an OAuth provider
 
 [,bash]
 ----
-rpai oauth delete <name> [flags]
+rpk ai oauth delete <name> [flags]
 ----
 
 == Flags

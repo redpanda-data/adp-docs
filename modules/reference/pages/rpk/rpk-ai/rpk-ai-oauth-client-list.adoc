@@ -8,7 +8,7 @@ List OAuth clients
 
 [,bash]
 ----
-rpai oauth-client list [flags]
+rpk ai oauth-client list [flags]
 ----
 
 == Flags

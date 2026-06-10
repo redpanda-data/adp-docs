@@ -8,7 +8,7 @@ Delete an OAuth client
 
 [,bash]
 ----
-rpai oauth-client delete <name> [flags]
+rpk ai oauth-client delete <name> [flags]
 ----
 
 == Flags

@@ -8,7 +8,7 @@ List available managed MCP types
 
 [,bash]
 ----
-rpai mcp types [flags]
+rpk ai mcp types [flags]
 ----
 
 == Flags

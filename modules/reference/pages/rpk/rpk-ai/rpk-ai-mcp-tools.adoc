@@ -8,7 +8,7 @@ Interact with tools on an MCP server
 
 [,bash]
 ----
-rpai mcp tools [command]
+rpk ai mcp tools [command]
 ----
 
 == Flags

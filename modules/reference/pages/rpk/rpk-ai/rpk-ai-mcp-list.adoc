@@ -8,7 +8,7 @@ List MCP servers
 
 [,bash]
 ----
-rpai mcp list [flags]
+rpk ai mcp list [flags]
 ----
 
 == Flags

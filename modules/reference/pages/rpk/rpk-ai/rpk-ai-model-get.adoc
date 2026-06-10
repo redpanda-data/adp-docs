@@ -8,7 +8,7 @@ Get model details from the catalog
 
 [,bash]
 ----
-rpai model get <name> [flags]
+rpk ai model get <name> [flags]
 ----
 
 == Flags

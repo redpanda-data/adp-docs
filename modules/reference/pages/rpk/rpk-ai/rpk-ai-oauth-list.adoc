@@ -8,7 +8,7 @@ List OAuth providers
 
 [,bash]
 ----
-rpai oauth list [flags]
+rpk ai oauth list [flags]
 ----
 
 == Flags

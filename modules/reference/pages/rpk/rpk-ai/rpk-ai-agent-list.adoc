@@ -2,13 +2,13 @@
 :description: rpk ai agent list
 :page-beta: true
 
-List agents — coming soon
+List agents.
 
 == Usage
 
 [,bash]
 ----
-rpai agent list [flags]
+rpk ai agent list [flags]
 ----
 
 == Flags

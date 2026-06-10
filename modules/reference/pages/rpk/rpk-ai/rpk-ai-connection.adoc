@@ -2,14 +2,14 @@
 :description: rpk ai connection
 :page-beta: true
 
-Manage OAuth connections — coming soon
+Manage OAuth connections.
 
 == Usage
 
 [,bash]
 ----
-rpai connection [flags]
-  rpai connection [command]
+rpk ai connection [flags]
+  rpk ai connection [command]
 ----
 
 == Aliases

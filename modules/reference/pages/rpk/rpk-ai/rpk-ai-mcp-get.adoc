@@ -8,7 +8,7 @@ Get an MCP server
 
 [,bash]
 ----
-rpai mcp get <name> [flags]
+rpk ai mcp get <name> [flags]
 ----
 
 == Flags

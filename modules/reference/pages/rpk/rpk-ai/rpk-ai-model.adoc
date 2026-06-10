@@ -14,7 +14,7 @@ Aliases: `models`, `m`.
 
 [,bash]
 ----
-rpai model [command]
+rpk ai model [command]
 ----
 
 == Aliases

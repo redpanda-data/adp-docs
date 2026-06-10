@@ -8,7 +8,7 @@ Update an OAuth provider
 
 [,bash]
 ----
-rpai oauth update <name> [flags]
+rpk ai oauth update <name> [flags]
 ----
 
 == Flags

@@ -8,7 +8,7 @@ List LLM providers
 
 [,bash]
 ----
-rpai llm list [flags]
+rpk ai llm list [flags]
 ----
 
 == Flags

@@ -8,7 +8,7 @@ Update an LLM provider
 
 [,bash]
 ----
-rpai llm update <name> [flags]
+rpk ai llm update <name> [flags]
 ----
 
 == Flags

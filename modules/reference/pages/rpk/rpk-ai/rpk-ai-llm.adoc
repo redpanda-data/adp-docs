@@ -12,7 +12,7 @@ Aliases: `llm-provider` (compat with aigwctl), `provider`, `lp`.
 
 [,bash]
 ----
-rpai llm [command]
+rpk ai llm [command]
 ----
 
 == Aliases
