@@ -43,7 +43,7 @@ By default the generator walks schemas up to a depth of 5 (`max_schema_depth`); 
 * `Operation filter` (optional): Include or exclude operations by tag, `operationId` glob, path glob, or HTTP method.
 * `Max schema depth` (optional): Maximum depth for schema conversion. Defaults to 5.
 * `Extract headers` (optional): Response header names to surface to the agent, such as `X-CSRF-Token` or `Set-Cookie`. Listed headers are appended to the tool result; all other response headers are dropped. Matching is case-insensitive.
-. Configure auth (see <<authentication>>).
+. Configure authentication (see <<authentication>>).
 . Click *Create*.
 
 == Authentication
@@ -102,7 +102,7 @@ Every generated tool also accepts an optional `headers` input, which lets the ag
 |`oneOf`, `anyOf`, and `discriminator` are supported, but `callbacks` are not, and schemas deeper than `max_schema_depth` (default 5) are truncated. Adjust the spec or raise the depth.
 
 |Calls return 401
-|Auth mode or credentials are wrong. Confirm secret content and the API's expected auth header.
+|Authentication mode or credentials are wrong. Confirm secret content and the API's expected authentication header.
 
 |Calls return 404 with the right operation
 |`servers` block in the spec doesn't match your real API endpoint. Use the *Base URL override*.

@@ -42,7 +42,7 @@ Before you create the server, make sure you have:
 
 * A Metabase instance on v0.49 or later (API keys are not available on older versions).
 * Admin access to the Metabase instance to mint an API key.
-* A Metabase *group* with the right permissions for the data you want the agent to access (typically *Native query editing* on the relevant databases plus *View* on the relevant collections).
+* A Metabase *group* with the right permissions for the data you want the agent to access (typically `Native query editing` on the relevant databases plus `View` on the relevant collections).
 * One Redpanda ADP secret-store entry for the API key. Secret references must be `UPPER_SNAKE_CASE`, for example `METABASE_API_KEY`.
 
 == Get a Metabase API key
@@ -53,7 +53,7 @@ Mint the key in the Metabase admin UI:
 . Open *Settings > Authentication > API keys*.
 . Click *Create API key*.
 . Give the key a descriptive name, for example `redpanda-mcp`.
-. Bind the key to a group whose permissions match the access you want the agent to have. For an analytics agent, an *Analytics* group with *Native query editing* on the relevant databases and *View* on the relevant collections is typical.
+. Bind the key to a group whose permissions match the access you want the agent to have. For an analytics agent, an `Analytics` group with `Native query editing` on the relevant databases and `View` on the relevant collections is typical.
 . Copy the key. Metabase shows it only once.
 . Save the key in your ADP secret store under a name like `METABASE_API_KEY`.
 
@@ -75,10 +75,10 @@ Create a new Metabase MCP server in ADP:
 |===
 |Field |Notes
 
-|*Base URL*
+|`Base URL`
 |Your Metabase instance URL, for example `\https://metabase.mycompany.com`. No trailing slash.
 
-|*API key ref*
+|`API key ref`
 |Secret-store reference for the Metabase API key (`UPPER_SNAKE_CASE`). Example: `METABASE_API_KEY`.
 |===
 +
@@ -246,7 +246,7 @@ curl -sS -X POST https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/metabase \
   }' | jq
 ----
 
-The bound group's permissions on the target database determine whether the call succeeds. A key bound to a group without *Native query editing* on the database returns a 403.
+The bound group's permissions on the target database determine whether the call succeeds. A key bound to a group without `Native query editing` on the database returns a 403.
 
 == Notes and limits
 

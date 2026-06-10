@@ -35,7 +35,7 @@ Set on the OTel `Resource` so every span the agent emits inherits them:
 |Attribute |Required value
 
 |`service.name`
-|A stable identifier for your agent. Surfaces as the *Agent* / *Service* column in the transcripts list, the *Name* column in the governance Agents list, and the `service.name` filter chip. Use a slug-style name like `support-bot-prod` or `pricing-agent-eu`.
+|A stable identifier for your agent. Surfaces as the agent identity on transcripts and as the `Name` column in the governance Agents list, and the `service.name` filter chip. Use a slug-style name like `support-bot-prod` or `pricing-agent-eu`.
 
 // TODO: confirm whether `service.name` should match an `AgentRegistryService` resource name once BYOA registration ships, or whether the two stay decoupled (transcripts attribute by `service.name`, governance attributes by registered resource name). Open Q with team-ai.
 |===
@@ -49,16 +49,16 @@ Set on every relevant span:
 |Attribute |Required value
 
 |`gen_ai.conversation.id`
-|A stable identifier shared across every span in the same conversation (system prompt, user turn, assistant turn, tool call, sub-agent call). Drives the *Conversation ID* in the transcript header and the cross-service-trace filter. Use a UUID per conversation.
+|A stable identifier shared across every span in the same conversation (system prompt, user turn, assistant turn, tool call, sub-agent call). Drives the `Conversation ID` in the transcript header and the cross-service-trace filter. Use a UUID per conversation.
 
 |`gen_ai.operation.name`
 |One of `invoke_agent`, `chat`, or `execute_tool`. Drives turn-role inference (`SYSTEM` / `USER` / `ASSISTANT` / `TOOL`). A span with no `gen_ai.operation.name` cannot be classified into a transcript role.
 
 |`gen_ai.request.model`
-|The LLM model identifier the agent calls. Surfaces in the transcript turn header and on the *Model* column in the governance dashboard. Required on `chat`-operation spans; optional on `invoke_agent` and `execute_tool` spans.
+|The LLM model identifier the agent calls. Surfaces in the transcript turn header and on the `Model` column in the governance dashboard. Required on `chat`-operation spans; optional on `invoke_agent` and `execute_tool` spans.
 
 |`gen_ai.usage.input_tokens` and `gen_ai.usage.output_tokens`
-|Token counts on LLM-call spans. Drive the *Tokens* card on the dashboard and the per-turn USD-cost calculation in transcripts. Without them the cost column reads `0`.
+|Token counts on LLM-call spans. Drive the Tokens card on the dashboard and the per-turn USD-cost calculation in transcripts. Without them the cost column reads `0`.
 |===
 
 If your agent emits these five attributes plus the resource `service.name`, every dashboard widget and every transcript field has a non-empty value to render.
@@ -72,16 +72,16 @@ The dashboard degrades gracefully without these, but their presence lets the UI 
 |Attribute |Why it helps
 
 |`gen_ai.provider.name`
-|Labels the LLM provider (`openai`, `anthropic`, `gemini`, `bedrock`). Drives the *Provider* filter on the governance dashboard and the per-provider color scheme on the Spending chart. Without it, the UI groups everything under an unknown-provider bucket.
+|Labels the LLM provider (`openai`, `anthropic`, `gemini`, `bedrock`). Drives the `Provider` filter on the governance dashboard and the per-provider color scheme on the Spending chart. Without it, the UI groups everything under an unknown-provider bucket.
 
 |`gen_ai.agent.name`
 |A human-readable agent label distinct from `service.name`. Use when the same service runs multiple logical agents (for example, `support-bot/refunds`, `support-bot/onboarding`).
 
 |`gen_ai.tool.name`
-|On `execute_tool` spans, identifies which tool was invoked. Drives the *Tool name* attribute filter and the per-tool latency view in transcripts.
+|On `execute_tool` spans, identifies which tool was invoked. Drives the `Tool name` attribute filter and the per-tool latency view in transcripts.
 
 |`gen_ai.usage.cache_read_input_tokens`
-|Cache-hit token count on LLM-call spans. Surfaces in the *CACHED* bucket on the dashboard and in per-turn cost. Without it, the *CACHED* bucket reads `0` even when your agent reuses a system prompt that the upstream cached.
+|Cache-hit token count on LLM-call spans. Surfaces in the `CACHED` bucket on the dashboard and in per-turn cost. Without it, the `CACHED` bucket reads `0` even when your agent reuses a system prompt that the upstream cached.
 
 |`gen_ai.input.messages` and `gen_ai.output.messages`
 |Conversation content. Used to reconstruct turn content, and required for transcript history reconstruction when older spans are evicted from `redpanda.otel_traces` (see xref:monitor:concepts.adoc#history-reconstruction[Reconstructed transcript history]). Without them, evicted spans render as empty turns rather than reconstructed turns.
@@ -105,16 +105,16 @@ Parent-child relationships are expressed through OTel's standard `parent_span_id
 
 == Validate with a transcript
 
-After your agent emits a few traces, open the transcripts list and pick one of its rows:
+After your agent emits a few traces, confirm they surface in ADP:
 
-. Confirm the *Agent* column shows your `service.name` value. If it shows blank or `unknown`, the resource attribute didn't make it through.
-. Open the transcript and confirm the *Conversation ID* in the summary header matches the UUID your agent emitted.
-. Look at the assistant turn for *Model*, *Tokens*, and *USD cost*. Non-zero values mean the LLM-call span attributes are correctly emitted.
-. If you sent a tool call, expand the TOOL turn and confirm the *Tool name* renders.
+. Confirm the `Name` column in the governance Agents list shows your `service.name` value. If it shows blank or `unknown`, the resource attribute didn't make it through.
+. Open one of the agent's transcripts and confirm the `Conversation ID` in the summary header matches the UUID your agent emitted.
+. Look at the assistant turn in the *Detailed* view for token counts and latency. Non-zero values mean the LLM-call span attributes are correctly emitted.
+. If you sent a tool call, expand the TOOL turn and confirm the `Tool name` renders.
 
 If any field shows blank or zero unexpectedly, the corresponding attribute is missing or misnamed in your agent's instrumentation.
 
-== Auth
+== Authentication
 
 BYOA agents authenticate against the OTLP ingest endpoint with a service-account access token from your organization. Send the token in `Authorization: Bearer <token>` (HTTP) or `authorization: Bearer <token>` (gRPC).
 
@@ -124,7 +124,7 @@ For the token-acquisition flow and endpoint URL format, see xref:monitor:ingest-
 
 == Where to find code examples
 
-The xref:monitor:ingest-custom-traces.adoc[Ingest custom traces] page has full HTTP and gRPC examples in *Python*, *Node.js*, and *Go*, each instrumenting an LLM call with the GenAI semantic-convention attributes. Adapt the examples to your agent's framework. The attribute set is the same; only the OTel SDK ergonomics differ.
+The xref:monitor:ingest-custom-traces.adoc[Ingest custom traces] page has full HTTP and gRPC examples in Python, Node.js, and Go, each instrumenting an LLM call with the GenAI semantic-convention attributes. Adapt the examples to your agent's framework. The attribute set is the same; only the OTel SDK ergonomics differ.
 
 // TODO: once the BYOA tutorials track ships at GA, link a worked end-to-end BYOA agent example here (from the Examples folder or a tutorials page).
 
@@ -136,10 +136,10 @@ Common symptoms and fixes:
 |===
 |Symptom |What to check
 
-|*Agent* column blank in transcripts list
+|Agent missing from the governance Agents list
 |Resource `service.name` is missing or set after the SDK was initialized. Set it at SDK construction.
 
-|*Conversation ID* missing in transcript header
+|`Conversation ID` missing in transcript header
 |`gen_ai.conversation.id` not on the top-level invoke_agent span. Add it on the agent's outer span; child spans inherit it through the trace.
 
 |Token / USD cost columns show `0` for assistant turns

@@ -11,11 +11,11 @@ Redpanda offers two kinds of MCP server backends:
 |===
 |Backend |When to use
 
-|*Managed*
+|Managed
 |Redpanda hosts the server in-process. You pick a type from the marketplace (SQL, Kafka, Slack, Jira, OpenAPI, and many more) and configure it with your credentials. No infrastructure to run.
 
-|*Self-managed*
-|You already run an MCP server somewhere and want Redpanda to proxy it for authentication, observability, aggregation, and agent access. Redpanda fronts your server with a managed URL and resolves auth at the gateway.
+|Self-managed
+|You already run an MCP server somewhere and want Redpanda to proxy it for authentication, observability, aggregation, and agent access. Redpanda fronts your server with a managed URL and resolves authentication at the gateway.
 |===
 
 // Source: `cloudv2` `apps/aigw/internal/mcp/managed/defaults.go` on `origin/main`, verified 2026-05-10.
@@ -33,7 +33,7 @@ The default catalog covers databases, cloud and productivity services, streaming
 
 |Upstream credentials
 |Redpanda secret store; per-type schema
-|Redpanda secret store or token vault; you control the upstream auth
+|Redpanda secret store or token vault; you control the upstream authentication
 
 |Custom tool logic
 |Limited to what the type exposes
@@ -63,7 +63,7 @@ ADP has these top-level areas:
 == Key capabilities
 
 * *Tool discovery*: After you create or register a server, Redpanda performs a live `tools/list` against it and populates the server's detail page so you can see which tools are visible to agents.
-* *Service-account and user-delegated auth*: Pick a single shared upstream identity for all callers, or have each end-user authenticate against the upstream system with their own credentials.
+* *Service-account and user-delegated authentication*: Pick a single shared upstream identity for all callers, or have each end-user authenticate against the upstream system with their own credentials.
 * *Code mode*: For a server with a large tool catalog, turn on code mode to expose just two tools, `search` and `execute`, so an agent can find tools by regex and run them through a JavaScript sandbox instead of loading every tool definition into its context. See xref:gateway:code-mode.adoc[Code Mode].
 * *Inspector*: Test each tool, resource, and prompt directly from ADP before pointing an agent at the server. See xref:connect:test-tools.adoc[Test a server's tools].
 

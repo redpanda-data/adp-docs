@@ -21,7 +21,7 @@ After reading this page, you will be able to:
 Teams adopting LLMs can quickly hit operational problems:
 
 * *Credential sprawl:* Every team that touches an LLM gets its own API key. Rotation is manual, offboarding is manual, and it's hard to know who's using what.
-* *SDK lock-in and switching cost:* Each provider has its own SDK, auth scheme, and model catalog. Swapping OpenAI for Anthropic means a code change, not a configuration change.
+* *SDK lock-in and switching cost:* Each provider has its own SDK, authentication scheme, and model catalog. Swapping OpenAI for Anthropic means a code change, not a configuration change.
 * *No shared view of usage:* Provider dashboards tell you what a single API key spent. They don't tell you what your organization spent, broken down by team or application.
 
 == What AI Gateway gives you
@@ -38,7 +38,7 @@ The upstream API key (or AWS credentials for Bedrock) lives in the Redpanda secr
 
 === A managed proxy URL per provider
 
-Every provider you create has its own URL of the form `<gateway-base>/llm/v1/providers/<provider-name>/<upstream-path>`. Your application points its SDK at this URL instead of the upstream, continues to use the provider's native API, and authenticates to Redpanda with a short-lived OIDC access token. The gateway base is a cluster-specific subdomain (for example, `aigw.<cluster-id>.clusters.rdpa.co`). Copy the exact value from the *Proxy URL* field on any provider's detail page.
+Every provider you create has its own URL of the form `<gateway-base>/llm/v1/providers/<provider-name>/<upstream-path>`. Your application points its SDK at this URL instead of the upstream, continues to use the provider's native API, and authenticates to Redpanda with a short-lived OIDC access token. The gateway base is a cluster-specific subdomain (for example, `aigw.<cluster-id>.clusters.rdpa.co`). Copy the exact value from the `Proxy URL` field on any provider's detail page.
 
 === Native SDK compatibility
 

@@ -17,9 +17,9 @@ After reading this page, you will be able to:
 
 == What this MCP server does
 
-Wraps the Zendesk REST API. The following auth modes are supported:
+Wraps the Zendesk REST API. The following authentication modes are supported:
 
-* *API token (Basic auth)*: A long-lived agent token paired with the agent's email. Best for service-account-style use.
+* *API token (Basic authentication)*: A long-lived agent token paired with the agent's email. Best for service-account-style use.
 * *User OAuth*: Per-user Zendesk OAuth tokens resolved from the gateway's glossterm:token vault[]. Best when you want each agent action attributed to the calling end-user.
 
 Responses are curated for token efficiency: HATEOAS URLs, transport metadata, and rarely-used fields are dropped before reaching the LLM. Related users, groups, and organizations are resolved into nested ref objects through Zendesk side-loading (single round trip), and Help Center article HTML is converted to GitHub-flavored markdown. Typical responses are 3–7× smaller than raw Zendesk JSON.
@@ -41,10 +41,10 @@ Before you create the server, make sure you have:
 . In the Zendesk Admin Center, go to *Apps and integrations > APIs > Zendesk API*.
 . On the *Settings* tab, enable *Token access*.
 . Click *Add API token*, give it a descriptive label (for example, `redpanda-ai-gateway`), and copy the token value. It is shown only once.
-. Note the *agent email* the token will act as (the email of the user who created the token). The HTTP Basic auth string the MCP builds is `base64(<email>/token:<api_token>)`. The `/token` literal is Zendesk's API-token quirk.
+. Note the *agent email* the token will act as (the email of the user who created the token). The HTTP Basic authentication string the MCP builds is `base64(<email>/token:<api_token>)`. The `/token` literal is Zendesk's API-token quirk.
 . Store the token in the ADP secret store under a name like `ZENDESK_API_TOKEN`.
 
-*Required role*: Agents and Admins can use the API. Most ticket operations work for the *Agent* role; reading users with `search_users` requires *Light Agent* or higher; Help Center search works for any authenticated user.
+*Required role*: Agents and Admins can use the API. Most ticket operations work for the Agent role; reading users with `search_users` requires Light Agent or higher; Help Center search works for any authenticated user.
 
 === Option 2: User OAuth
 
@@ -253,10 +253,10 @@ Common symptoms and fixes:
 |Symptom |What to check
 
 |`401 Unauthorized` (API-token mode)
-|Confirm `ZENDESK_API_TOKEN` content matches the value Zendesk showed at token creation, and the *Username* field is the agent email of the user who created the token.
+|Confirm `ZENDESK_API_TOKEN` content matches the value Zendesk showed at token creation, and the `Username` field is the agent email of the user who created the token.
 
 |`403 Forbidden` on `search_users`
-|The agent role on Zendesk's side is below *Light Agent*. Upgrade the role or use API-token mode with a Light Agent or Admin email.
+|The agent role on Zendesk's side is below Light Agent. Upgrade the role or use API-token mode with a Light Agent or Admin email.
 
 |`OAuthConnectionRequired` (User-OAuth mode)
 |First call from a user with no stored token. The user completes Zendesk's OAuth consent flow, the token lands in the vault, and subsequent calls reuse it. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].

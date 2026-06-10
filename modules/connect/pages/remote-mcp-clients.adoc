@@ -45,13 +45,13 @@ Wiring a remote chat client to an MCP server uses three resources in AI Gateway:
 |===
 |Resource |Role
 
-|*MCP server*
+|MCP server
 |The tool surface itself. Managed (Redpanda hosts it) or self-managed (you host it). See xref:connect:create-server.adoc[Create an MCP Server].
 
-|*OAuth Provider*
+|OAuth Provider
 |Defines how AI Gateway authenticates against the upstream system on behalf of users (for example, GitHub) when the MCP server uses user-delegated OAuth. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. Optional: only needed if the MCP server requires per-user upstream identity.
 
-|*OAuth Client*
+|OAuth Client
 |Defines how an external chat app (Claude Desktop, ChatGPT, Gemini, Cursor) authenticates *against AI Gateway* on behalf of users. The chat client gets a `client_id` + `client_secret` it uses to negotiate access tokens. *This is what makes the chat-client integration possible.*
 |===
 
@@ -68,7 +68,7 @@ When a user invokes a tool, AI Gateway runs both authentication handshakes: Clau
 Before you wire up the chat-client connector, make sure you have:
 
 * An MCP server already created in AI Gateway. See xref:connect:create-server.adoc[Create an MCP Server].
-* The MCP server's *API URL*. Copy it from the server's *Overview* tab.
+* The MCP server's `API URL`. Copy it from the server's *Overview* tab.
 * For user-delegated MCP servers: An OAuth Provider configured for the upstream system. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * End-users have accounts with the chat client (Claude, ChatGPT, Gemini, Cursor) and the upstream system the MCP server connects to.
 
@@ -115,7 +115,7 @@ Create an OAuth Client to give the chat app the credentials it needs to authenti
 +
 . Click *Register Client*.
 
-On submit, AI Gateway mints the `client_id`. Confidential clients (those using a Client Secret authentication method) also receive a `client_secret`, *shown only once*. Copy it immediately. The *OAuth Server Endpoints* panel shows the *Authorization Endpoint* and *Token/Refresh Endpoint* (under `/oauth/idp/`) and the `mcp` scope; paste these into the external app's OAuth configuration.
+On submit, AI Gateway mints the `client_id`. Confidential clients (those using a Client Secret authentication method) also receive a `client_secret`, *shown only once*. Copy it immediately. The OAuth Server Endpoints panel shows the `Authorization Endpoint` and `Token/Refresh Endpoint` (under `/oauth/idp/`) and the `mcp` scope; paste these into the external app's OAuth configuration.
 
 // TODO: capture screenshots of the Register Client catalog, the custom form, and the post-create detail page.
 
@@ -135,7 +135,7 @@ Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and
 |Anything that helps the user identify the connector (for example, `Redpanda GitHub`). Surfaces in Claude's tool list.
 
 |`Remote MCP server URL`
-|The MCP server's *API URL* from AI Gateway. Format: `\https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>`.
+|The MCP server's `API URL` from AI Gateway. Format: `\https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>`.
 
 |`OAuth client ID` (optional, under *Advanced settings*)
 |The Client ID from the AI Gateway OAuth Client. Required for any MCP server that requires authentication. Leave blank only for public MCP servers that don't require authentication.
@@ -175,7 +175,7 @@ This handshake runs *once per user* when the connector is first added.
 
 . The user clicks *Connect* in the chat client.
 . The chat client opens a browser tab at the AI Gateway authorization endpoint, parameterized with the OAuth Client's `client_id` and one of the registered redirect URIs.
-. AI Gateway authenticates the user against the configured IdP (Auth0 today, Zitadel later) and presents an *Authorize access* consent screen. The screen shows:
+. AI Gateway authenticates the user against the configured IdP (Auth0 today, Zitadel later) and presents an Authorize access consent screen. The screen shows:
 +
 * The OAuth Client's name (for example, _Claude (GitHub Read demo) wants to access your data_).
 * The *Resource* being authorized: The MCP server name and URL.
@@ -183,7 +183,7 @@ This handshake runs *once per user* when the connector is first added.
 * A footer reminding the user that they can revoke access from their *Connections* page in ADP.
 +
 . The user clicks *Allow*. AI Gateway redirects the chat client back to the redirect URI with an authorization code.
-. The chat client exchanges the code for an access token and a refresh token. Tokens are stored locally in the chat client's credential store.
+. The chat client exchanges the code for an access token and a refresh token, and stores them locally in its credential store.
 . Subsequent calls to AI Gateway send the access token in `Authorization: Bearer ...`. The chat client refreshes the token automatically when it expires.
 
 === AI Gateway connects to the upstream system

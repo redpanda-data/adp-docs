@@ -49,9 +49,9 @@ Set up authentication on the Workday side before configuring the MCP:
 . *Create an Integration System User (ISU)* under *Workday > Create Integration System User*. Note the username; it usually ends up as `<isu_name>@<tenant>`.
 . *Register an API Client for Integrations* under *Workday > Register API Client for Integrations*:
 +
-* *Grant types*: Include both *Refresh Token* (required) and *Authorization Code*. Workday's UX requires both to be checked even when only the refresh-token grant is used at runtime.
+* *Grant types*: Include both `Refresh Token` (required) and `Authorization Code`. Workday's UX requires both to be checked even when only the refresh-token grant is used at runtime.
 * *Non-Expiring Refresh Tokens*: Tick this option. Required for static-credential MCP usage; if Workday rotates the refresh token on every exchange, the cached value goes stale and authentication breaks.
-* *Scope*: Include *Human Resources* (and any other functional areas your business processes touch).
+* *Scope*: Include `Human Resources` (and any other functional areas your business processes touch).
 . *Issue a refresh token to the ISU* by completing the one-time authorization-code flow Workday walks you through, or by using *View API Clients > Manage Refresh Tokens for Integrations* to mint one directly.
 . Save four values: the `tenant`, the `host` (the Workday data-center hostname, for example `wd2-impl-services1.workday.com`), the ISU `username`, and the ISU `password`. Save the `refresh_token` separately.
 
@@ -68,22 +68,22 @@ Create a new Workday MCP server in ADP:
 |===
 |Field |Notes
 
-|*Tenant*
+|`Tenant`
 |Your Workday tenant identifier, for example `acme`.
 
-|*Host*
+|`Host`
 |The Workday data-center hostname, for example `wd2-impl-services1.workday.com`. The MCP exchanges credentials at `\https://<host>/ccx/oauth2/<tenant>/token`.
 
-|*WSDL version*
+|`WSDL version`
 |Optional; defaults to `v46.0`. Older tenants on `v44.x` or `v45.x` must set this explicitly to match the WSDL surface their tenant has enabled.
 
-|*Username*
+|`Username`
 |The ISU username (typically `<isu_name>@<tenant>`).
 
-|*Password ref*
+|`Password ref`
 |Secret-store reference for the ISU password (`UPPER_SNAKE_CASE`). Example: `WORKDAY_PASSWORD`.
 
-|*Refresh token ref*
+|`Refresh token ref`
 |Secret-store reference for the non-expiring refresh token (`UPPER_SNAKE_CASE`). Example: `WORKDAY_REFRESH_TOKEN`.
 |===
 +
@@ -117,7 +117,7 @@ The Workday MCP exposes the following tools:
 |Tool |Description
 
 |`change_personal_information`
-|Kicks off the *Change_Personal_Information* business process for a worker. All fields except `worker_id` are optional. Only fields you set are sent to Workday, leaving the rest of the worker's personal data unchanged.
+|Kicks off the `Change_Personal_Information` business process for a worker. All fields except `worker_id` are optional. Only fields you set are sent to Workday, leaving the rest of the worker's personal data unchanged.
 |===
 
 // TODO: refresh this list when additional Workday business processes ship.
@@ -176,7 +176,7 @@ Common symptoms and fixes:
 |ISU credentials wrong, or the refresh token has been rotated. Confirm `WORKDAY_PASSWORD` and `WORKDAY_REFRESH_TOKEN` in the secret store are correct, and re-mint the refresh token in *View API Clients > Manage Refresh Tokens for Integrations* if needed.
 
 |`invalid_grant` on every refresh
-|*Non-Expiring Refresh Tokens* was not checked when you registered the API client. Edit the client, tick the option, and re-mint the refresh token.
+|`Non-Expiring Refresh Tokens` was not checked when you registered the API client. Edit the client, tick the option, and re-mint the refresh token.
 
 |SOAP fault: `Invalid_Field_Value`
 |A tenant-specific field ID (marital status, citizenship status, ethnicity) doesn't match what your tenant accepts. Check the corresponding "Maintain ..." report in Workday for the exact IDs.
@@ -192,7 +192,7 @@ Common symptoms and fixes:
 
 This page does not cover:
 
-* *Per-user-delegated access*: Workday auth is one shared ISU per MCP. For per-user identities, mount multiple MCP instances (one per ISU/scope).
+* *Per-user-delegated access*: Workday authentication is one shared ISU per MCP. For per-user identities, mount multiple MCP instances (one per ISU/scope).
 * *Custom report execution*: This MCP wraps SOAP business processes, not reports. Use Workday RaaS or the report API for custom reports.
 * *Read-side data exploration*: There is no general _search Workday_ tool. Add specific business-process tools as needed.
 

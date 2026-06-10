@@ -21,7 +21,7 @@ Use this integration when you want to:
 * Pull Anthropic API keys out of every developer's shell and manage them centrally.
 * Track Claude Code spend per provider, model, and user without parsing each developer's individual Anthropic invoice.
 * Apply per-provider transcript logging. For example, route a regulated team to a "no-logging" provider while keeping the default provider's full conversation history available for review.
-* Forward each developer's own Anthropic subscription token through ADP (Anthropic *Auth passthrough*), so the existing Max- or Team-plan entitlement still applies but the call is observed by ADP.
+* Forward each developer's own Anthropic subscription token through ADP (Anthropic *Authorization passthrough*), so the existing Max- or Team-plan entitlement still applies but the call is observed by ADP.
 
 This guide does not cover building agents that *call* Claude Code. For that, see xref:connect:integration-overview.adoc[Integration patterns overview].
 
@@ -81,12 +81,12 @@ export ANTHROPIC_BASE_URL="https://aigw.<cluster-id>.clusters.rdpa.co/llm/v1/pro
 The token has a short TTL: re-mint when it expires. AI Gateway does not refresh OIDC tokens for you. For day-to-day work, wrap the mint-and-export in a shell function or sub-shell so you don't have to remember the steps.
 --
 
-Anthropic Auth passthrough::
+Anthropic Authorization passthrough::
 +
 --
 Use when developers should authenticate to Anthropic with their own subscription (Max plan, Team plan, enterprise) and ADP should only observe the call.
 
-. Confirm the provider has *Auth passthrough* enabled. The *Connection* card on the provider detail page shows the current setting. If it is off, an admin needs to flip it. See xref:gateway:configure-provider.adoc#anthropic-authorization-passthrough[Anthropic: Authorization passthrough].
+. Confirm the provider has Authorization passthrough enabled. The Connection card on the provider detail page shows the current setting as `Auth passthrough`. If it is off, an admin needs to flip it. See xref:gateway:configure-provider.adoc#anthropic-authorization-passthrough[Anthropic: Authorization passthrough].
 
 . Set the base URL but pass the developer's own Anthropic key as the token:
 +
@@ -137,7 +137,7 @@ claude "say hello"
 |Symptom |What to check
 
 |`401 Unauthorized`
-|Token is missing, malformed, or expired. Re-mint the OIDC access token (it has a short TTL) and re-export `ANTHROPIC_AUTH_TOKEN`. Confirm the audience is `cloudv2-production.redpanda.cloud` and that Claude Code is sending the token as `Authorization: Bearer <token>`. For Auth passthrough, confirm the upstream Anthropic key is valid.
+|Token is missing, malformed, or expired. Re-mint the OIDC access token (it has a short TTL) and re-export `ANTHROPIC_AUTH_TOKEN`. Confirm the audience is `cloudv2-production.redpanda.cloud` and that Claude Code is sending the token as `Authorization: Bearer <token>`. For Authorization passthrough, confirm the upstream Anthropic key is valid.
 
 |`403 Forbidden`
 |The service account or user lacks `dataplane_adp_llmprovider_invoke` on the provider. See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions] or have an admin assign the `LLMProviderInvoker` built-in role.

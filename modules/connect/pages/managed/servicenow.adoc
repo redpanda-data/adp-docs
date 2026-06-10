@@ -3,7 +3,7 @@
 :description: Read and write a ServiceNow instance from an agent: incidents, knowledge articles, and allow-listed records, with service-account or per-user authentication.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Configure the ServiceNow managed MCP server with Basic auth, OAuth client credentials, or User OAuth
+:learning-objective-1: Configure the ServiceNow managed MCP server with Basic authentication, OAuth client credentials, or User OAuth
 :learning-objective-2: Use projections and hierarchies to shape responses and gate table reads
 :learning-objective-3: Search, create, and update incidents and read allow-listed records from the Inspector or an agent
 
@@ -38,9 +38,9 @@ Before you create the server, make sure you have:
 
 The MCP authenticates to ServiceNow as a single principal; it does not impersonate end-users. When creating an incident, the agent passes the requesting user's `sys_id` in `caller_id`. Pick one of three methods:
 
-* Basic auth (simplest): A dedicated ServiceNow user (for example, `svc_redpanda`) and its password. The username is plaintext; the password lives in the ADP secret store.
+* Basic authentication (simplest): A dedicated ServiceNow user (for example, `svc_redpanda`) and its password. The username is plaintext; the password lives in the ADP secret store.
 * OAuth client credentials (service account): An OAuth API client registered under *System OAuth > Application Registry*. ServiceNow's token endpoint is `https://<instance>.service-now.com/oauth_token.do`.
-* User OAuth: Per-user delegation through an OAuth Provider. ServiceNow's recommended integration model is the service account, so prefer Basic auth or OAuth client credentials unless you specifically need per-user attribution.
+* User OAuth: Per-user delegation through an OAuth Provider. ServiceNow's recommended integration model is the service account, so prefer Basic authentication or OAuth client credentials unless you specifically need per-user attribution.
 
 == Configure
 
@@ -85,7 +85,7 @@ For a managed server, set the auth method inside the `--managed-config` JSON. Th
 
 [tabs]
 ======
-Basic auth::
+Basic authentication::
 +
 [source,bash]
 ----
@@ -250,7 +250,7 @@ Common symptoms and fixes:
 |Symptom |What to check
 
 |`401 Unauthorized`
-|Confirm the service-account credentials. For Basic auth, check the username and `SERVICENOW_PASSWORD`; for OAuth, check the client ID, `SERVICENOW_CLIENT_SECRET`, and token URL.
+|Confirm the service-account credentials. For Basic authentication, check the username and `SERVICENOW_PASSWORD`; for OAuth, check the client ID, `SERVICENOW_CLIENT_SECRET`, and token URL.
 
 |`403 Forbidden`
 |The service account lacks the role for the operation (for example, `itil` for incidents or read access to `sys_dictionary` for `get_table_schema`). Grant the role in ServiceNow.

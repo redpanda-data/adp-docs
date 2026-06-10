@@ -30,26 +30,26 @@ After completing this guide, you will be able to:
 
 == Fill in the Provider card
 
-The first card on the page collects identity fields. Enter a *Display name*; the form auto-derives the *Resource ID* from it as you type.
+The first card on the page collects identity fields. Enter a `Display name`; the form auto-derives the `Resource ID` from it as you type.
 
 [cols="1,1,3"]
 |===
 |Field |Required |Notes
 
-|*Display name*
+|`Display name`
 |Yes
-|Human-readable label shown in dashboards and model selectors. Up to 253 characters. The form auto-derives the *Resource ID* from this value.
+|Human-readable label shown in dashboards and model selectors. Up to 253 characters. The form auto-derives the `Resource ID` from this value.
 
-|*Resource ID*
+|`Resource ID`
 |Yes
-|Machine identifier used in API calls and CLI commands. Lowercase letters, numbers, and hyphens only (`^[a-z][a-z0-9-]*$`), up to 63 characters. Immutable after creation. Appears in the proxy URL (`/llm/v1/providers/<resource-id>/...`). Auto-derived from the *Display name*; edit it if you want something different.
+|Machine identifier used in API calls and CLI commands. Lowercase letters, numbers, and hyphens only (`^[a-z][a-z0-9-]*$`), up to 63 characters. Immutable after creation. Appears in the proxy URL (`/llm/v1/providers/<resource-id>/...`). Auto-derived from the `Display name`; edit it if you want something different.
 |===
 
-The *Summary* panel labels the *Resource ID* as *Name*.
+The Summary panel labels the `Resource ID` as `Name`.
 
 == Choose a provider type
 
-The *Provider type* card shows five cards. Pick the one that matches your upstream.
+The Provider type card shows five cards. Pick the one that matches your upstream.
 
 [cols="1,3"]
 |===
@@ -68,14 +68,14 @@ The *Provider type* card shows five cards. Pick the one that matches your upstre
 |Invoke foundation models (Claude, Llama, Titan, Nova, Mistral, AI21 Jamba) hosted inside your AWS account. Requires an AWS region and credentials (static, STS-assumed role, or the default credential chain). Supports the native Bedrock APIs (`InvokeModel`, `Converse`) and an OpenAI-compatible Chat Completions endpoint for `gpt-oss` models. See <<bedrock-inference-profiles>> for picking the right model identifier, and xref:gateway:bedrock-setup.adoc[Set up AWS Bedrock as an LLM provider] for a step-by-step IAM and access-key walkthrough.
 
 |*OpenAI-compatible*
-|Point at any OpenAI-compatible endpoint that ships `/v1/chat/completions` (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways. Requires a *Base URL*. Authentication is optional.
+|Point at any OpenAI-compatible endpoint that ships `/v1/chat/completions` (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways. Requires a `Base URL`. Authentication is optional.
 |===
 
 Selecting a type reveals the type-specific configuration block below the picker.
 
 == Fill in the type-specific configuration
 
-Each *API key reference* and credential field points at a secret-store entry, not the secret value itself. Use the *Existing* tab to pick a secret already in your dataplane's secret store, or the *New* tab to create one inline.
+Each `API key reference` and credential field points at a secret-store entry, not the secret value itself. Use the *Existing* tab to pick a secret already in your dataplane's secret store, or the *New* tab to create one inline.
 
 [tabs]
 ======
@@ -85,10 +85,10 @@ OpenAI::
 |===
 |Field |Notes
 
-|*Base URL*
+|`Base URL`
 |Optional. Leave empty for the standard OpenAI API (`https://api.openai.com/v1`). Override for Azure OpenAI or other OpenAI-hosted endpoints.
 
-|*API key reference*
+|`API key reference`
 |Required. Secret-store reference for the OpenAI API key. Must be `UPPER_SNAKE_CASE`, for example `OPENAI_API_KEY`.
 |===
 
@@ -98,14 +98,14 @@ Anthropic::
 |===
 |Field |Notes
 
-|*Base URL*
+|`Base URL`
 |Optional. Leave empty for the standard Anthropic API (`https://api.anthropic.com`).
 
-|*API key reference*
-|Required unless *Authorization passthrough* is on. `UPPER_SNAKE_CASE`, for example `ANTHROPIC_API_KEY`.
+|`API key reference`
+|Required unless `Authorization passthrough` is on. `UPPER_SNAKE_CASE`, for example `ANTHROPIC_API_KEY`.
 
-|*Authorization passthrough*
-|Optional toggle. When on, the client's `Authorization` header is forwarded to Anthropic instead of using a server-side API key. Used for enterprise and Max-plan OAuth passthrough: each client authenticates with its own Anthropic subscription. Leave the API key reference empty when using passthrough.
+|`Authorization passthrough`
+|Optional toggle. When on, AI Gateway forwards the client's `Authorization` header to Anthropic instead of using a server-side API key. Used for enterprise and Max-plan OAuth passthrough: each client authenticates with its own Anthropic subscription. Leave the API key reference empty when using passthrough.
 |===
 
 Google AI::
@@ -114,10 +114,10 @@ Google AI::
 |===
 |Field |Notes
 
-|*Base URL*
+|`Base URL`
 |Optional. Leave empty for the standard Google AI API (`https://generativelanguage.googleapis.com`).
 
-|*API key reference*
+|`API key reference`
 |Required. Secret-store reference for the Google AI API key. `UPPER_SNAKE_CASE`, for example `GOOGLE_AI_API_KEY`.
 |===
 +
@@ -132,19 +132,19 @@ AWS Bedrock::
 |===
 |Field |Notes
 
-|*Region*
+|`Region`
 |Required. AWS region where the Bedrock endpoint is deployed, for example `us-east-1`.
 
-|*Base URL*
+|`Base URL`
 |Optional. Override the default regional Bedrock endpoint.
 
-|*Access key ID reference*
+|`Access key ID reference`
 |Secret-store reference for the AWS access key ID, `UPPER_SNAKE_CASE` (typically `AWS_ACCESS_KEY_ID`). Leave both credential references empty to fall back to the default credential chain (environment variables, IRSA, EKS Pod Identity, or instance profile).
 
-|*Secret access key reference*
+|`Secret access key reference`
 |Secret-store reference for the AWS secret access key, `UPPER_SNAKE_CASE` (typically `AWS_SECRET_ACCESS_KEY`).
 
-|*Guardrail*
+|`Guardrail`
 |Optional. Name of a xref:control:guardrails/overview.adoc[guardrail] to attach to this provider, or empty for none. Only the Bedrock provider type exposes this setting. See xref:control:guardrails/create-guardrail.adoc[Create a guardrail].
 |===
 +
@@ -156,11 +156,11 @@ OpenAI-compatible::
 |===
 |Field |Notes
 
-|*Base URL*
+|`Base URL`
 |Required. URL of your OpenAI-compatible endpoint, for example `http://vllm.internal:8000/v1`, `http://ollama.local:11434/v1`, or an aggregator like Together / Groq / OpenRouter.
 
-|*API key reference*
-|Optional. Leave empty for no-auth endpoints (common for local runtimes). `UPPER_SNAKE_CASE` if set.
+|`API key reference`
+|Optional. Leave empty for endpoints with no authentication (common for local runtimes). `UPPER_SNAKE_CASE` if set.
 |===
 +
 TIP: OpenAI-compatible endpoints can serve any model. Enter the exact model identifiers your upstream server exposes (for example, `meta-llama/Llama-3.3-70B-Instruct` or `qwen3:8b`).
@@ -168,7 +168,7 @@ TIP: OpenAI-compatible endpoints can serve any model. Enter the exact model iden
 
 [NOTE]
 ====
-For the OpenAI, Google AI, and AWS Bedrock provider types, AI Gateway validates that the credential references resolve before it accepts the create or update. A missing or empty secret reference is rejected at save time instead of failing at first call. The OpenAI-compatible type does not require a credential reference, so it can be created with no authentication for local runtimes such as Ollama or vLLM.
+For the OpenAI, Google AI, and AWS Bedrock provider types, AI Gateway validates that the credential references resolve before it accepts the create or update. AI Gateway rejects a missing or empty secret reference at save time instead of failing at first call. The OpenAI-compatible type does not require a credential reference, so it can be created with no authentication for local runtimes such as Ollama or vLLM.
 ====
 
 [[select-models]]
@@ -178,7 +178,7 @@ Models you select on this form become the catalog the provider exposes. Leave th
 
 For *OpenAI*, *Anthropic*, *Google AI*, and *AWS Bedrock*, the form shows a picker backed by the provider's catalog. Each model in the picker shows its input and output price per million tokens. Pick from the list, or type a model identifier the catalog doesn't show. For *OpenAI-compatible*, the form takes a freeform list: type the exact identifiers your upstream serves.
 
-The catalog of available models in the picker is maintained by Redpanda. When an upstream provider publishes a new model, it usually appears in the picker within a day or two; admins don't have to wait for a Redpanda release. New models aren't enabled automatically: an admin still selects the model in the catalog to make it callable through this provider.
+Redpanda maintains the catalog of available models in the picker. When an upstream provider publishes a new model, it usually appears in the picker within a day or two; admins don't have to wait for a Redpanda release. New models aren't enabled automatically: an admin still selects the model in the catalog to make it callable through this provider.
 
 For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs. See <<bedrock-inference-profiles>>.
 
@@ -187,23 +187,23 @@ For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs
 Redpanda stores models as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). A future Phase 2 release will add per-model metadata such as custom pricing overrides. The legacy flat `models` field still works on writes for backward compatibility.
 ====
 
-After you create the provider, the detail page renders each model as a row with capability badges (*Vision*, *Reasoning*, *Streaming*, and others lifted from the catalog), the model's 7-day spend, and a link to the per-model detail page. The model list supports search and filtering.
+After you create the provider, the detail page renders each model as a row with capability badges (Vision, Reasoning, Streaming, and others lifted from the catalog), the model's 7-day spend, and a link to the per-model detail page. The model list supports search and filtering.
 
-The detail page also carries a *Last 7 days* KPI strip (*TOTAL SPEND*, *REQUESTS*, *TOKENS*) with sparklines and _vs previous period_ deltas. *View all* on each card opens the *Cost & Usage* tab with this provider pre-filtered so you can drill into spend, request, or token trends.
+The detail page also carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `TOKENS`) with sparklines and _vs previous period_ deltas. *View all* on each card opens the *Cost & Usage* tab with this provider pre-filtered so you can drill into spend, request, or token trends.
 
 [[transcript-logging]]
 == Configure transcript logging
 
-The *Transcripts* card controls whether AI Gateway records the message bodies this provider proxies. It has two independent toggles, *both off by default*:
+The Transcripts card controls whether AI Gateway records the message bodies this provider proxies. It has two independent toggles, *both off by default*:
 
 [cols="1,3"]
 |===
 |Toggle |What it captures
 
-|*Record inputs*
+|`Record inputs`
 |Captures the full request body (prompt content and tool-call arguments) on observability traces.
 
-|*Record outputs*
+|`Record outputs`
 |Captures the full response body (completion content and tool-call results) on observability traces.
 |===
 
@@ -217,9 +217,9 @@ NOTE: Changing a toggle takes effect for new requests. Transcripts already captu
 
 == Save and verify
 
-. Click *Create provider*. The button activates after *Name* and *Type* are both set. The *Summary* panel checks them off as you fill them in.
-. On the provider's detail page, the *Connection* card shows your *Proxy URL*, *Discovery* URL, *Base URL*, and *API key ref*. Copy the *Proxy URL*: this is where your applications point.
-. Scroll to the *Verify connection* section. Pick a model from the dropdown and click *Test Connection*. The status updates from _Not tested yet_ to a pass/fail indicator. Use the *Show commands* disclosure if you want to see the equivalent curl or SDK call.
+. Click *Create provider*. The button activates after `Name` and `Type` are both set. The Summary panel checks them off as you fill them in.
+. On the provider's detail page, the Connection card shows your `Proxy URL`, `Discovery` URL, `Base URL`, and `API key ref`. Copy the `Proxy URL`: this is where your applications point.
+. Scroll to the Verify connection section. Pick a model from the dropdown and click *Test Connection*. The status updates from _Not tested yet_ to a pass/fail indicator. Use the *Show commands* disclosure if you want to see the equivalent curl or SDK call.
 . To wire up an application, open *Connect your app* further down the page or follow xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].
 
 A successful Test Connection result confirms that the provider's credentials, region (Bedrock), and network path are all correct. If the call fails, see <<troubleshooting>>.
@@ -271,7 +271,7 @@ Older 4.5 and earlier Claude models still accept bare IDs.
 
 Pricing varies by profile. The bare foundation-model ID and the `global.` profile share AWS's headline rate; geo profiles (`us.`, `eu.`, `apac.`, `au.`, `jp.`) carry approximately a 10% cross-region inference premium. Use `global.` when you want the headline rate and don't need a specific geography. Use `us.` / `eu.` / `apac.` when data residency matters.
 
-AI Gateway preserves the regional prefix end to end when it records spend, so usage in the xref:control:dashboard/overview.adoc[governance dashboard] and the *Cost & Usage* tab is attributed to the correct regional rate. A call to `eu.anthropic.claude-haiku-4-5` is billed at the EU Haiku rate, not the headline foundation-model rate.
+AI Gateway preserves the regional prefix end to end when it records spend, so the xref:control:dashboard/overview.adoc[governance dashboard] and the *Cost & Usage* tab attribute usage to the correct regional rate. A call to `eu.anthropic.claude-haiku-4-5` is billed at the EU Haiku rate, not the headline foundation-model rate.
 
 === IAM policy patterns
 
@@ -313,13 +313,13 @@ For production, scope to specific models and regions instead of using wildcards.
 [[anthropic-authorization-passthrough]]
 == Anthropic: Authorization passthrough
 
-If you want each client to authenticate against Anthropic with its own subscription (Claude Pro, Max, Team, or enterprise), enable *Authorization passthrough* instead of configuring a server-side API key. In this mode:
+If you want each client to authenticate against Anthropic with its own subscription (Claude Pro, Max, Team, or enterprise), enable `Authorization passthrough` instead of configuring a server-side API key. In this mode:
 
-* Leave the *API key* field empty.
+* Leave the `API key` field empty.
 * Clients must send their own Anthropic `Authorization` header with every request. AI Gateway forwards it unchanged.
 * Use this when you want to aggregate individual client subscriptions rather than share a single API account.
 
-The provider detail page shows whether Authorization passthrough is enabled in the *Connection* card.
+The provider detail page shows whether Authorization passthrough is enabled in the Connection card.
 
 == Browse providers in the list view
 
@@ -329,19 +329,19 @@ The *LLM Providers* list page is the at-a-glance home for every provider in your
 |===
 |Column |What it shows
 
-|*Provider*
+|`Provider`
 |User-given name plus the provider-type icon (OpenAI, Anthropic, Google, AWS Bedrock, OpenAI-compatible) and a copyable preview of the proxy base URL.
 
-|*Status*
-|Shows *Active* for an enabled provider. A disabled provider rejects requests to its proxy URL until you enable it again.
+|`Status`
+|Shows `Active` for an enabled provider. A disabled provider rejects requests to its proxy URL until you enable it again.
 
-|*Models*
+|`Models`
 |First two model identifiers exposed by the provider, plus a `+N` overflow chip when more are configured.
 
-|*Spend (7d)*
+|`Spend (7d)`
 |Spend over the last 7 days with a small sparkline and a "vs previous period" delta. The window is fixed at 7 days on this view. Longer-range analysis runs through the xref:control:dashboard/overview.adoc[governance dashboard].
 
-|*Updated*
+|`Updated`
 |Relative timestamp of the last edit.
 |===
 
@@ -378,7 +378,7 @@ The spend chart footer summarizes the selected view by cost bucket, including to
 
 * *Edit*: Click *Edit* on the detail page. You can change any field *except* `Name` and `Type`, which are immutable. Model lists, credential references, and the enabled state can all change.
 * *Disable*: Click *Disable* on the detail page. The provider remains in the list, but requests to its proxy URL are rejected until you enable it again. Use this when you want to pause traffic without losing configuration.
-* *Delete*: Scroll to the *Delete this provider* section at the bottom of the detail page and click *Delete*. The action is permanent. In-flight requests fail and downstream clients receive errors until reconfigured.
+* *Delete*: Scroll to the Delete this provider section at the bottom of the detail page and click *Delete*. The action is permanent. In-flight requests fail and downstream clients receive errors until reconfigured.
 
 [[troubleshooting]]
 == Troubleshooting
@@ -397,7 +397,7 @@ The spend chart footer summarizes the selected view by cost bucket, including to
 |You called a Claude 4.6+ model with a bare foundation-model ID. Switch to an inference profile (for example, `us.anthropic.claude-sonnet-4-6` instead of `anthropic.claude-sonnet-4-6`). See <<bedrock-inference-profiles>>.
 
 |Anthropic returns 401 when passthrough is enabled
-|Confirm the client is sending its own `Authorization` header and the *API key* field on the provider is empty.
+|Confirm the client is sending its own `Authorization` header and the `API key` field on the provider is empty.
 
 |Gemini returns 401
 |Gemini uses the `x-goog-api-key` header, not `Authorization`. If you're seeing 401s on Gemini, check that the client is sending the correct header. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].

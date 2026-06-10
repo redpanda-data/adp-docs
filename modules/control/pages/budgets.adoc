@@ -17,9 +17,9 @@ After completing these steps, you will be able to:
 [[set-a-spend-limit]]
 == Set a spend limit
 
-A *budget* caps LLM spend over a recurring period. When an agent's spend for the period reaches the budget's hard limit, AI Gateway rejects that agent's next LLM request with `HTTP 429` until the period resets. A separate warning threshold fires before the cap is reached, so you can react before an agent is cut off.
+A *budget* caps LLM spend over a recurring period. When an agent's spend for the period reaches the budget's hard limit, AI Gateway rejects that agent's next LLM request with `HTTP 429` until the period resets. A separate warning threshold fires before the cap, so you can react before AI Gateway cuts the agent off.
 
-Redpanda ADP enforces budgets per agent. In a budget, an _agent_ is identified by its resource name in the form `agents/<slug>`, the same identity that appears as `agent_name` in spend data. Because a budget keys on this resource name, deleting an agent and recreating it with the same name keeps it under the same budget.
+Redpanda ADP enforces budgets per agent. A budget identifies an _agent_ by its resource name in the form `agents/<slug>`, the same identity that appears as `agent_name` in spend data. Because a budget keys on this resource name, deleting an agent and recreating it with the same name keeps it under the same budget.
 
 === How a budget works
 
@@ -56,11 +56,11 @@ Open *LLM Providers* in the sidebar and select the *Budgets* tab. The tab lists 
 To create the tenant default budget:
 
 . Click *Create default budget*.
-. Under *Budget*, set *Cap usage at* to a dollar amount and choose a period (day, week, or month). Use the quick-set chips ($25, $100, $500, $1,000) for common values.
-. Drag the *Warn at* slider to set the warning threshold as a percentage of the cap (80% by default).
-. Review the *Configuration preview* panel, which summarizes the budget, period, and the warn and block thresholds in dollars, then click *Create default budget*.
+. Under `Budget`, set `Cap usage at` to a dollar amount and choose a period (day, week, or month). Use the quick-set chips ($25, $100, $500, $1,000) for common values.
+. Drag the `Warn at` slider to set the warning threshold as a percentage of the cap (80% by default).
+. Review the Configuration preview panel, which summarizes the budget, period, and the warn and block thresholds in dollars, then click *Create default budget*.
 
-To give one agent a different cap, click *Add override*, pick the agent (each agent can have at most one override; agents that already have one are greyed out), then set the *Budget* and *Warn at* controls the same way. The *Resource name* is auto-derived from the picked agent and is immutable; the *Display name* is editable.
+To give one agent a different cap, click *Add override*, pick the agent (each agent can have at most one override; agents that already have one are greyed out), then set the `Budget` and `Warn at` controls the same way. The `Resource name` is auto-derived from the picked agent and is immutable; the `Display name` is editable.
 
 // TODO: The Budgets UI tab is still feature-flag-gated (`adp-agent-budgets`); confirm GA timing before publishing this walkthrough.
 
@@ -103,11 +103,11 @@ Every LLM call routed through AI Gateway becomes a spending event. Each event ca
 
 Events flow through a Kafka pipeline and roll up into queryable storage. No setup required: the gateway captures spending the moment your first agent or MCP server runs through it.
 
-Streaming and non-streaming requests are tracked the same way. Cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) are attributed correctly on streaming responses so cost rollups stay accurate when an agent reuses long system prompts.
+ADP tracks streaming and non-streaming requests the same way, and attributes cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) correctly on streaming responses, so cost rollups stay accurate when an agent reuses long system prompts.
 
 [NOTE]
 ====
-Cost is reported in *microcents*. 1 cent = 1,000,000 microcents, so $1 = 100,000,000 microcents. Divide `total_cost_microcents` by 100,000,000 to convert to dollars.
+ADP reports cost in *microcents*. 1 cent = 1,000,000 microcents, so $1 = 100,000,000 microcents. Divide `total_cost_microcents` by 100,000,000 to convert to dollars.
 ====
 
 === Per-request pricing variations
@@ -128,14 +128,14 @@ You don't view spend on this page. The *LLM Providers* page, dashboard, transcri
 |*Cost & Usage* tab (*LLM Providers* page)
 |Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, user, or agent. See xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
 
-|*Governance dashboard*
+|Governance dashboard
 |Summary cards (total spend, agent count, request count, trend), provider breakdown chart, events timeline, agents and MCP servers tables. The single-pane-of-glass view across your whole deployment. See xref:control:dashboard/overview.adoc[Read the governance overview].
 
-|*Transcripts*
+|Transcripts
 |Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:monitor:transcripts.adoc[Read a transcript].
 
-|*Breakdown queries*
-|Aggregated spend by *provider*, *model*, *user*, *agent*, or *provider type*, available through `GetSpendingBreakdown` for programmatic access. The dashboard's provider-breakdown widget covers the provider dimension.
+|Breakdown queries
+|Aggregated spend by provider, model, user, agent, or provider type, available through `GetSpendingBreakdown` for programmatic access. The dashboard's provider-breakdown widget covers the provider dimension.
 |===
 
 Every breakdown and time-series query reads from the same `SpendingFilter` shape: a time range plus optional `provider_name`, `model_id`, `user_email`, `agent_name`, `agent_uid`, or `organization_id` filters. Combine filters to scope a query (for example, "all spend on Anthropic for user `alice` in April"). You can break results down by provider, model, user, agent, or provider type; `organization_id` is a filter only, not a breakdown dimension.
@@ -172,7 +172,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 |RFC 3339 timestamps bracketing the window. Required.
 
 |`provider_name`
-|Restrict to one LLM provider (matches the *Name* field on the provider's detail page).
+|Restrict to one LLM provider (matches the `Name` field on the provider's detail page).
 
 |`model_id`
 |Restrict to one model identifier (`claude-sonnet-4-6`, `gpt-5.2`, and so on).
@@ -334,7 +334,7 @@ Three rules govern how the cost-reporting pipeline applies overrides:
 
 * Overrides apply to *new spending events* from the moment they're saved. Historical events keep the rate card that was in effect when the event was recorded. The dashboard's _Compare to previous period_ overlay reflects that.
 * Overrides are scoped to one model at a time. To roll out a new contract across an entire provider's catalog, edit each model in turn.
-* Cache-read pricing follows the catalog default. Only cache-write tiers are overridable. Cache-read tokens still surface in the *CACHED* bucket on the dashboard and in `SpendingService` responses.
+* Cache-read pricing follows the catalog default. Only cache-write tiers are overridable. Cache-read tokens still surface in the `CACHED` bucket on the dashboard and in `SpendingService` responses.
 * Overrides are applied invisibly: `SpendingService` responses carry the resulting dollar values with no marker for which line items used an overridden rate.
 
 // Verified 2026-06-09 against spending_service.proto and spending_rollup.proto on cloudv2 origin/main: no override flag or indicator field exists on breakdown or time-series responses.

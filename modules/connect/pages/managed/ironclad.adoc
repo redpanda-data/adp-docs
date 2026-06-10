@@ -41,7 +41,7 @@ Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
 * `public.workflows.readSchemas`
 * `public.workflows.createWorkflows`
 * `public.workflows.readDocuments`
-. Copy the *Client ID* and *Client Secret*.
+. Copy the `Client ID` and `Client Secret`.
 . In ADP, register an OAuth Provider with:
 +
 * *Authorization endpoint*: `\https://na1.ironcladapp.com/oauth/authorize` (use `eu1` for EU-hosted accounts; `demo` for sandbox)
@@ -146,7 +146,7 @@ Common symptoms and fixes:
 |Server's `required_scopes` was extended after users had already consented. Users re-consent with the higher scope.
 
 |Wrong region results
-|Confirm the *Region* field matches your Ironclad tenant. EU-hosted accounts use `IRONCLAD_REGION_EU`; sandbox tenants use `IRONCLAD_REGION_DEMO`.
+|Confirm the `Region` field matches your Ironclad tenant. EU-hosted accounts use `IRONCLAD_REGION_EU`; sandbox tenants use `IRONCLAD_REGION_DEMO`.
 
 |`schema_id` not found in `create_workflow`
 |Run `list_workflow_schemas` first to get valid IDs for your tenant.

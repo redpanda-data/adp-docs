@@ -33,13 +33,13 @@ Every provider you create in AI Gateway gets its own proxy URL:
 <gateway-base>/llm/v1/providers/<provider-name>/<upstream-path>
 ----
 
-* `<gateway-base>`: The AI Gateway base URL for your dataplane. Cluster-specific subdomain on `clusters.rdpa.co` (for example, `https://aigw.<cluster-id>.clusters.rdpa.co`). Copy the exact value from the *Proxy URL* field on any provider's *Connection* card.
+* `<gateway-base>`: The AI Gateway base URL for your dataplane. Cluster-specific subdomain on `clusters.rdpa.co` (for example, `https://aigw.<cluster-id>.clusters.rdpa.co`). Copy the exact value from the `Proxy URL` field on any provider's Connection card.
 * `<provider-name>`: The name you gave the provider when you created it, for example `my-openai` or `prod-anthropic`.
 * `<upstream-path>`: The upstream provider's native API path (for example, `v1/chat/completions` for OpenAI, `v1/messages` for Anthropic).
 
 AI Gateway forwards the request to the upstream provider, attaches the configured credentials, and records the request for observability. Your application never sees the upstream API key.
 
-TIP: The provider detail page generates ready-to-run snippets pre-filled with the correct proxy URL and paths. When in doubt, copy from the *Connect your app* section there.
+TIP: The provider detail page generates ready-to-run snippets pre-filled with the correct proxy URL and paths. When in doubt, copy from the Connect your app section there.
 
 // Updated for PRs #30273 / #30327 / #30360 (rpk ai managed plugin).
 [[authenticate-with-rpk-ai]]
@@ -126,14 +126,14 @@ The `rpk ai` command honors the following environment variables:
 [[authenticate-with-oidc-client-credentials]]
 == Authenticate with OIDC client credentials (CI and programmatic)
 
-For application code, CI runners, server-side processes, and headless agents, use the OIDC `client_credentials` grant directly. This is the canonical authentication path for SDK-style usage; `rpk ai` is for command-line workflows, not for embedding in application code. Values are surfaced on the provider's *Connection* card; defaults at the time of writing are below.
+For application code, CI runners, server-side processes, and headless agents, use the OIDC `client_credentials` grant directly. This is the canonical authentication path for SDK-style usage; `rpk ai` is for command-line workflows, not for embedding in application code. Values are surfaced on the provider's Connection card; defaults at the time of writing are below.
 
 [cols="1,2", options="header"]
 |===
 |Parameter |Value (today)
 
 |Discovery URL
-|`\https://auth.prd.cloud.redpanda.com/.well-known/openid-configuration`. Also surfaced as the *Discovery* field on the provider's Connection card.
+|`\https://auth.prd.cloud.redpanda.com/.well-known/openid-configuration`. Also surfaced as the `Discovery` field on the provider's Connection card.
 
 |Token endpoint
 |`\https://auth.prd.cloud.redpanda.com/oauth/token`
@@ -286,7 +286,7 @@ message = client.messages.create(
 print(message.content[0].text)
 ----
 
-The Anthropic SDK hits `v1/messages` on the proxy, which AI Gateway forwards to Anthropic. If the provider is configured with *Auth passthrough*, send your own Anthropic `Authorization` header instead of an `auth_token`. AI Gateway forwards it unchanged.
+The Anthropic SDK hits `v1/messages` on the proxy, which AI Gateway forwards to Anthropic. If the provider is configured with `Auth passthrough`, send your own Anthropic `Authorization` header instead of an `auth_token`. AI Gateway forwards it unchanged.
 --
 
 Google Gemini SDK::
@@ -441,11 +441,11 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 === 403 Forbidden
 
 * The service account may lack the required roles. Ask an admin to grant `dataplane_adp_llmprovider_get` at minimum to read provider config, and `dataplane_adp_llmprovider_invoke` to proxy LLM requests through AI Gateway. See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions] or assign the LLMProviderInvoker built-in role for runtime-only access.
-* The provider may be disabled. Check the *Status* field on its *Connection* card.
+* The provider may be disabled. Check the `Status` field on its Connection card.
 
 === Connection timeout or reset
 
-* Verify the proxy URL is correct (copy directly from the provider's *Connection* card).
+* Verify the proxy URL is correct (copy directly from the provider's Connection card).
 * Check that the provider isn't pointing at a private base URL your client can't reach (OpenAI-compatible providers only).
 * Confirm the upstream provider's status page.
 

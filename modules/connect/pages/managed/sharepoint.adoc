@@ -70,8 +70,8 @@ Before you create the server, make sure you have:
 In the Microsoft Entra admin center, go to *App registrations > New registration* and create an app:
 
 . Give the app a descriptive name, for example `Redpanda AI Gateway - SharePoint MCP`.
-. Set *Supported account types* to single tenant.
-. Set the *Redirect URI* to platform *Web* with the gateway's OAuth callback for your dataplane:
+. Set `Supported account types` to single tenant.
+. Set the `Redirect URI` to platform *Web* with the gateway's OAuth callback for your dataplane:
 +
 [source,no-highlight]
 ----
@@ -79,7 +79,7 @@ https://aigw.<dataplane-id>.clusters.rdpa.co/oauth/v1/callback
 ----
 +
 Replace `<dataplane-id>` with your dataplane identifier. The callback path is `/oauth/v1/callback`.
-. After registering, note the *Application (client) ID* and *Directory (tenant) ID* from the app's Overview page. You need both when you configure the glossterm:OAuth provider[,OAuth Provider].
+. After registering, note the `Application (client) ID` and `Directory (tenant) ID` from the app's Overview page. You need both when you configure the glossterm:OAuth provider[,OAuth Provider].
 
 [TIP]
 ====
@@ -127,12 +127,12 @@ Admin consent does not escalate access: delegated scopes always stay bounded by 
 
 Register an OAuth Provider in ADP that points at Microsoft's tenant-specific endpoints and references the client secret. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. Use these values:
 
-* *Authorization endpoint*: `https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/authorize`
-* *Token endpoint*: `https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/token`
-* *Client ID*: the Application (client) ID from the Entra app.
-* *Client secret reference*: the secret-store key, for example `SHAREPOINT_CLIENT_SECRET`.
-* *Token auth method*: client secret in the POST body, with PKCE enabled (matches the Microsoft preset).
-* *Scopes*: `openid`, `email`, `profile`, `User.Read`, `Sites.ReadWrite.All`, `offline_access`.
+* `Authorization endpoint`: `https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/authorize`
+* `Token endpoint`: `https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/token`
+* `Client ID`: The Application (client) ID from the Entra app.
+* `Client secret reference`: The secret-store key, for example `SHAREPOINT_CLIENT_SECRET`.
+* `Token auth method`: Client secret in the POST body, with PKCE enabled (matches the Microsoft preset).
+* `Scopes`: `openid`, `email`, `profile`, `User.Read`, `Sites.ReadWrite.All`, `offline_access`.
 
 == Create the server
 
@@ -142,7 +142,7 @@ Create a new SharePoint MCP server in ADP:
 . Pick *SharePoint* from the marketplace picker.
 . Fill in the identity fields (`name`, `description`).
 . Under *Auth*, select *User-delegated OAuth* and pick the SharePoint OAuth Provider you configured.
-. Set *Required scopes* to `Sites.ReadWrite.All` (or `Sites.Read.All` for a read-only server).
+. Set `Required scopes` to `Sites.ReadWrite.All` (or `Sites.Read.All` for a read-only server).
 . Click *Create*.
 
 The `required_scopes` value is enforced against each user's connection. A connection with insufficient scopes returns `scope_upgrade_required`, and the user re-consents with the higher scope.
