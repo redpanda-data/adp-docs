@@ -3,7 +3,7 @@
 :page-topic-type: reference
 :personas: security_compliance_lead, platform_engineer
 
-Reference for each guardrail policy type: configuration fields, available actions, direction settings, and regional availability.
+A guardrail bundles a set of policies, each backed by AWS Bedrock Guardrails. Each policy is optional, but a guardrail must enforce at least one. This page documents each policy type's configuration fields, available actions, direction settings, and regional availability.
 
 == Common settings
 

@@ -1,5 +1,5 @@
 = How MCP Servers Work
-:description: Connect AI agents to your databases, APIs, and business systems through managed or self-managed MCP servers hosted in Redpanda ADP.
+:description: Connect AI agents to your databases, APIs, and business systems through managed MCP servers Redpanda hosts for you, or self-managed servers you register with ADP.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Explain how AI agents connect to tools through MCP servers in ADP

@@ -81,7 +81,7 @@ A2A enables dynamic discovery without hardcoded configuration:
 
 This discovery model allows:
 
-* New agents become available immediately after deployment
+* New agents to become available immediately after deployment
 * Existing agents to update their capabilities while callers adapt dynamically
 * Callers to understand exactly what agents do through self-describing agent cards
 

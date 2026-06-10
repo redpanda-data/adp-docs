@@ -38,11 +38,11 @@ For a deeper understanding of how agents execute, manage context, and maintain s
 
 ADP agents are designed to reduce the infrastructure and integration work of building production AI systems.
 
-* Declarative configuration: configure agent behavior instead of coding it, with access to a broad library of prebuilt tools and integrations for data sources, APIs, and services.
-* Real-time streaming data: agents access live events instead of batch snapshots.
-* xref:connect:mcp-overview.adoc[Remote MCP] support: standardized tool access across any MCP-compatible server.
-* Managed infrastructure: deployment, scaling, and security handled for you.
-* Low-latency execution: tools run close to your data.
+* Declarative configuration: Configure agent behavior instead of coding it, with access to a broad library of prebuilt tools and integrations for data sources, APIs, and services.
+* Real-time streaming data: Agents access live events instead of batch snapshots.
+* xref:connect:mcp-overview.adoc[Remote MCP] support: Standardized tool access across any MCP-compatible server.
+* Managed infrastructure: Deployment, scaling, and security handled for you.
+* Low-latency execution: Tools run close to your data.
 * Integrated secrets management: API keys and credentials stored securely.
 
 == Use cases

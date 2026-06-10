@@ -6,7 +6,7 @@
 :learning-objective-2: Register a self-managed agent so it appears in the agent registry
 :learning-objective-3: Identify the telemetry and service-account model that attributes a self-managed agent's activity in ADP
 
-Register a self-managed agent with Redpanda ADP to bring it under the same observability and governance as managed agents. Your agent gains registry visibility, transcript capture, and cost attribution without moving off your own infrastructure.
+Register a self-managed agent with Redpanda ADP to bring it under the same observability and governance as managed agents. Your agent gains registry visibility, transcript capture, and cost attribution without moving off your own infrastructure. Registration creates a metadata record: ADP does not host, run, or proxy calls to your agent.
 
 After completing this guide, you will be able to:
 
