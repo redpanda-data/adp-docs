@@ -37,8 +37,8 @@ ADP configures the agent on a single page with five sections: Details, Model, Be
 
 In the *Details* section, configure the identity fields that appear in the agent registry list, transcripts, and audit logs.
 
+. Review the *Agent ID*. ADP pre-fills a generated ID and re-derives it from the display name as you type, using lowercase letters, numbers, and hyphens (up to 63 characters). Editing the ID directly stops the auto-derive. The ID is used in URLs and CLI commands and can't be changed after creation.
 . Enter a *Display name*. Required. Shown in the agent registry list and detail header (for example, `Customer Support Agent`).
-. Review the *Agent ID*. ADP auto-derives it from the display name, using lowercase letters, numbers, and hyphens (up to 63 characters). The ID is used in URLs and CLI commands and can't be changed after creation.
 . Optionally, add a *Description*. Up to 1024 characters.
 . Optionally, add *Tags* as key/value pairs to organize and filter agents in the registry.
 
@@ -68,7 +68,7 @@ For external model specifications and pricing:
 
 == Behavior
 
-In the *Behavior* section, write the *System prompt* that defines the agent's role, responsibilities, constraints, and output format. The system prompt is required and is sent on every invocation as the first message.
+In the *Behavior* section, write the *System prompt* that defines the agent's role, responsibilities, constraints, and output format. The system prompt is optional but strongly recommended; when set, it's sent on every invocation as the first message. The prompt field is a Markdown editor: format the prompt visually, or switch to the *Raw* tab to edit the Markdown source directly.
 
 A typical prompt defines:
 
@@ -117,7 +117,7 @@ In the *Subagents* section, optionally add internal specialists within the same 
 
 . To add a specialist, click *Add subagent* and configure it:
 +
-* *Name*: Required. Up to 63 characters. Must start with a lowercase letter and contain only lowercase letters, digits, and hyphens (for example, `order-agent`). The name is also a DNS-1123 / AIP-122 compliant identifier.
+* *Name*: Required. Up to 63 characters. Must start with a lowercase letter, contain only lowercase letters, digits, and hyphens, and end with a letter or digit (for example, `order-agent`). The name is also a DNS-1123 / AIP-122 compliant identifier.
 * *Description*: Optional. Up to 1024 characters.
 * *System prompt*: Up to 16,384 characters. Domain-specific instructions for what the subagent does.
 * *MCP tools*: Select the tools this subagent can access.
@@ -136,7 +136,7 @@ For multi-agent design patterns, see xref:connect:architecture-patterns.adoc[Age
 
 ADP creates the agent's service account automatically when you create the agent. The default name uses the pattern `cluster-<cluster-id>-agent-<agent-name>-sa`, and ADP applies default permissions. For details and how to manage service accounts, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
 
-When the agent is running, ADP shows its HTTP endpoint URL on the *Configuration* tab. Copy the value from the endpoint field.
+When the agent is running, ADP shows its A2A endpoint URL on the *Connect* tab, along with authentication guidance and ready-to-paste code examples for calling the agent with the official A2A client SDKs.
 
 You can use this URL to call the agent programmatically or integrate it with external systems. See xref:connect:integration-overview.adoc[].
 
@@ -144,7 +144,7 @@ You can use this URL to call the agent programmatically or integrate it with ext
 
 Every agent has a hidden service account in ADP that scopes the calls the agent makes to MCP servers and the Redpanda broker. To call the agent from an external system as that service account, issue an OAuth 2.0 client credential on the agent's *Credentials* tab.
 
-The *Setup* tab on the agent detail page shows the equivalent OAuth client configuration (token endpoint, scopes, sample request) after a credential exists.
+The *Setup* tab on the agent detail page shows the equivalent OAuth client configuration (token endpoint, scopes, sample request) after a credential exists. The sample requests target a specific LLM provider's gateway endpoint: pick a provider on the tab and the examples fill in its endpoint URL.
 
 [IMPORTANT]
 ====
