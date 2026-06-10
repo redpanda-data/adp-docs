@@ -62,7 +62,7 @@
 *** xref:control:guardrails/create-guardrail.adoc[Create a Guardrail]
 *** xref:control:guardrails/violations.adoc[Review Blocked Requests]
 *** xref:control:guardrails/types-reference.adoc[Guardrail Policy Reference]
-** xref:control:budgets.adoc[Set Spend Limits]
+** xref:control:budgets.adoc[Set Up Budgets]
 ** xref:control:access.adoc[Manage Access]
 *** xref:control:permissions-overview.adoc[Control Who Can Do What]
 *** xref:control:permissions-reference.adoc[Roles and Permissions Reference]

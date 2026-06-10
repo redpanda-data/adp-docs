@@ -19,7 +19,7 @@ This quickstart sets up Redpanda ADP from scratch and follows the two roles invo
 
 The first section is for administrators, and the second is for builders. If you have the Admin role, you can complete both yourself. If your administrator has already configured an LLM provider, skip to <<builders-create-an-mcp-server-and-agent,Builders: Create an MCP server and agent>>.
 
-When you sign in to ADP, you land on the Home page: a snapshot of items that need your attention, recent request and spend activity, budget status, and counts of your ADP resources. Start the tasks in this guide from the sidebar.
+When you sign in to ADP at https://ai.redpanda.com[ai.redpanda.com^], you land on the Home page: a snapshot of items that need your attention, recent request and spend activity, budget status, and counts of your ADP resources. Start the tasks in this guide from the sidebar.
 
 After completing this quickstart, you will be able to:
 
@@ -86,7 +86,7 @@ Anthropic shows the API key value once. If you close the dialog without copying,
 
 ADP references provider credentials by secret name, not by raw value. Create the secret first so the next step can reference it.
 
-. Sign in to ADP.
+. Sign in to ADP at https://ai.redpanda.com[ai.redpanda.com^].
 
 . Open *Secrets Store* in the sidebar.
 

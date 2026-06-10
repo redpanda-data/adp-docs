@@ -315,7 +315,7 @@ The `dataplane_adp_spending_*` permissions gate the governance APIs that surface
 
 == Budget permissions
 
-The `dataplane_adp_budget_*` permissions gate per-agent LLM spend budgets. See xref:control:budgets.adoc#set-a-spend-limit[Set a spend limit].
+The `dataplane_adp_budget_*` permissions gate per-agent LLM spend budgets. See xref:control:budgets.adoc#set-a-spend-limit[Set a budget].
 
 [cols="2,2,1,1"]
 |===

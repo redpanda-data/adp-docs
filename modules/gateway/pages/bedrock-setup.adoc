@@ -140,7 +140,7 @@ For Anthropic Claude 4.6 and later, pick the inference profile (for example, `us
 
 == Cross-region inference profile billing
 
-When you call a cross-region inference profile (any model identifier with a `us.`, `eu.`, `apac.`, `au.`, `jp.`, or `global.` prefix), AI Gateway bills at the regional rate for that profile. The regional prefix is preserved end to end so usage in the *Cost & Usage* tab on *LLM Providers* reflects the correct per-region price.
+When you call a cross-region inference profile (any model identifier with a `us.`, `eu.`, `apac.`, `au.`, `jp.`, or `global.` prefix), AI Gateway bills at the regional rate for that profile. The regional prefix is preserved end to end so usage on the *Cost & Usage* page under *Governance* reflects the correct per-region price.
 
 For example, requests to `eu.anthropic.claude-haiku-4-5` bill at the EU Haiku rate, not the headline foundation-model rate. The `global.` profile shares the headline rate; the geography-specific profiles (`us.`, `eu.`, `apac.`, `au.`, `jp.`) carry approximately a 10% cross-region inference premium.
 

@@ -107,7 +107,7 @@ Open a transcript in the *Detailed* view to read each tool call: arguments in, r
 
 === Monitor LLM interactions and cost
 
-The transcript shows token usage per turn. For spend analysis across agents, models, and users, use the *Cost & Usage* tab on *LLM Providers* (see xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage]) or breakdown queries through `SpendingService`; per-transcript `estimated_cost_usd` is also available through the Transcripts API.
+The transcript shows token usage per turn. For spend analysis across agents, models, and users, open *Cost & Usage* under *Governance* in the sidebar (see xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage]), or use breakdown queries through `SpendingService`; per-transcript `estimated_cost_usd` is also available through the Transcripts API.
 
 == Limitations
 

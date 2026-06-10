@@ -1,12 +1,12 @@
-= Set Spend Limits
+= Set Up Budgets
 :description: Cap LLM spend with per-agent budgets, and see what the Agentic Data Plane records automatically and where to view it.
 :page-topic-type: how-to
 :personas: platform_engineer, pilot_lead
 :learning-objective-1: Set a per-agent budget that caps LLM spend and warns before the cap
 :learning-objective-2: Identify what spending data the Agentic Data Plane records automatically
-:learning-objective-3: Locate where to view spend in the Cost & Usage tab, in transcripts, and through breakdown queries
+:learning-objective-3: Locate where to view spend on the Cost & Usage page, in transcripts, and through breakdown queries
 
-The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend through the *Cost & Usage* tab on *LLM Providers*, through individual glossterm:transcript[,transcripts], and through breakdown queries by provider, model, user, agent, or provider type.
+The Agentic Data Plane caps LLM spend with budgets and records every LLM call as a spending event. Set a budget to enforce a hard spending cap per agent, then read what you actually spend on the *Cost & Usage* page under *Governance*, through individual glossterm:transcript[,transcripts], and through breakdown queries by provider, model, user, agent, or provider type.
 
 After completing these steps, you will be able to:
 
@@ -15,7 +15,7 @@ After completing these steps, you will be able to:
 * [ ] {learning-objective-3}
 
 [[set-a-spend-limit]]
-== Set a spend limit
+== Set a budget
 
 A *budget* caps LLM spend over a recurring period. When an agent's spend for the period reaches the budget's hard limit, AI Gateway rejects that agent's next LLM request with `HTTP 429` until the period resets. A separate warning threshold fires before the cap, so you can react before AI Gateway cuts the agent off.
 
@@ -28,7 +28,7 @@ Redpanda ADP enforces budgets per agent. A budget identifies an _agent_ by its r
 |Setting |What it does
 
 |Limit
-|The hard cap on per-period spend, in USD microcents (1 cent = 1,000,000 microcents). When a matching agent's accrued spend for the period reaches this value, the agent's next LLM request through the gateway gets `HTTP 429`. Spend resets to zero at the start of each period.
+|The hard cap on per-period spend. You set it in dollars in the UI; the API stores it in USD microcents (1 cent = 1,000,000 microcents). When a matching agent's accrued spend for the period reaches this value, the agent's next LLM request through the gateway gets `HTTP 429`. Spend resets to zero at the start of each period.
 
 |Warning threshold
 |A spend level, lower than the limit, at which ADP warns: gateway responses carry a `SpendLimit-Warning` header and ADP records a warning metric. Requests still pass. Must be greater than zero and less than the limit.
@@ -51,7 +51,7 @@ The target agent is immutable. To move an override to a different agent, delete 
 
 === Set a budget in the UI
 
-Open *LLM Providers* in the sidebar and select the *Budgets* tab. The tab lists every budget with its `Scope` (the tenant default or a target agent), `Period`, current `Usage` against the cap, `Warn at` threshold, and when it was last `Updated`.
+Open *Budgets* under *Governance* in the sidebar. The page shows the tenant default budget as a card: its cap and period, the warn threshold, and how many agents are doing fine, getting close, or over the limit. Per-agent overrides appear in a table below the card, with each override's `Agent override` target, `Period`, current `Usage` against the cap, `Warn at` threshold, and when it was last `Updated`.
 
 To create the tenant default budget:
 
@@ -60,9 +60,10 @@ To create the tenant default budget:
 . Drag the `Warn at` slider to set the warning threshold as a percentage of the cap (80% by default).
 . Review the Configuration preview panel, which summarizes the budget, period, and the warn and block thresholds in dollars, then click *Create default budget*.
 
+Open the default budget from the *Budgets* page to see its detail view: the per-agent spending limit (each agent gets its own limit, not one shared pool), the reset schedule, the warn threshold, and how much each agent has spent so far toward its limit.
+
 To give one agent a different cap, click *Add override*, pick the agent (each agent can have at most one override; agents that already have one are greyed out), then set the `Budget` and `Warn at` controls the same way. The `Resource name` is auto-derived from the picked agent and is immutable; the `Display name` is editable.
 
-// TODO: The Budgets UI tab is still feature-flag-gated (`adp-agent-budgets`); confirm GA timing before publishing this walkthrough.
 
 === Manage budgets through the API
 
@@ -114,13 +115,13 @@ A few request- or response-time signals change the rate ADP applies to a single 
 
 == Where to view your spend
 
-You don't view spend on this page. The *LLM Providers* page, transcripts, and breakdown queries are the read surfaces:
+You don't view spend on the *Budgets* page. The *Cost & Usage* page, transcripts, and breakdown queries are the read surfaces:
 
 [cols="1,3"]
 |===
 |Surface |Use it for
 
-|*Cost & Usage* tab (*LLM Providers* page)
+|*Cost & Usage* page (*Governance* sidebar group)
 |Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, user, or agent. See xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
 
 |Transcripts
@@ -261,9 +262,9 @@ For what each policy does, see xref:control:guardrails/overview.adoc[How guardra
 [[override-per-model-pricing]]
 == Override per-model pricing
 
-The Agentic Data Plane ships with default per-model pricing per provider, covering input, output, and cache-read prices for every model in the built-in catalog. Cost reporting uses these prices when it computes per-call spend, which is why every dollar value in the *Cost & Usage* tab, in transcripts, and in `SpendingService` queries works without any setup.
+The Agentic Data Plane ships with default per-model pricing per provider, covering input, output, and cache-read prices for every model in the built-in catalog. Cost reporting uses these prices when it computes per-call spend, which is why every dollar value on the *Cost & Usage* page, in transcripts, and in `SpendingService` queries works without any setup.
 
-If your organization negotiates non-standard pricing, or you want to track spend against an internal chargeback rate, override the rates as part of configuring an LLM provider. Overrides are scoped to a single provider, where you edit the rate per model. See xref:gateway:configure-provider.adoc[Configure an LLM provider].
+If your organization negotiates non-standard pricing, or you want to track spend against an internal chargeback rate, override the rates as part of configuring an LLM provider. Overrides are scoped to a single provider, where you edit the rate per model. See xref:gateway:configure-provider.adoc#pricing-overrides[Override per-model pricing].
 
 // TODO: roadmap items not yet shipped: tenant-wide shared pools; limits scoped by model, provider, or organization. Document each here once it ships. Open Q C1 in the companion plan.
 
