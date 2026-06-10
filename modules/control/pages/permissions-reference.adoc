@@ -547,28 +547,28 @@ The `dataplane_knowledgebase_*` permissions gate retrieval-augmented generation 
 |===
 |Role |Use case
 
-|*Admin*
+|Admin
 |Cluster operators who configure providers, agents, MCP servers, pricing, and IAM. Grants every permission.
 
-|*Writer*
+|Writer
 |Developers who build and modify ADP resources. Grants full CRUD on every ADP-namespaced API plus pipeline and knowledge-base management.
 
-|*Reader*
+|Reader
 |Auditors and evaluators who need visibility without mutation rights. Grants `_get` and `_list` plus MCP runtime read methods.
 
-|*TranscriptReader*
+|TranscriptReader
 |Users and service accounts that read agent conversation transcripts. Grants `dataplane_adp_transcript_get` and `dataplane_adp_transcript_list`, which stay out of the Writer and Reader roles because transcripts carry full conversation content. Provisioned for organizations with an ADP cluster.
 
-|*AIAgentInvoker*
+|AIAgentInvoker
 |Service accounts that send messages to agents over A2A without managing them.
 
-|*MCPInvoker*
+|MCPInvoker
 |Service accounts that call MCP tools and read MCP resources without managing the servers.
 
-|*LLMProviderInvoker*
+|LLMProviderInvoker
 |Applications that proxy LLM requests through AI Gateway. Grants only `dataplane_adp_llmprovider_invoke`.
 
-|*PipelineInvoker*
+|PipelineInvoker
 |Clients that produce telemetry or send data into Connect pipelines without managing them.
 |===
 

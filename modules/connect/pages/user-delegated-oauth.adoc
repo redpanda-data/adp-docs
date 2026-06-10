@@ -19,7 +19,7 @@ After completing this guide, you will be able to:
 * An OAuth provider resource configured in Redpanda ADP under *OAuth providers*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * The required scopes for the upstream API you plan to call.
 * For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
-* For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:managed/managed-catalog.adoc[Managed catalog] before configuring.
+* For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:connect:managed/managed-catalog.adoc[Managed catalog] before configuring.
 
 == Configure the server
 
@@ -78,8 +78,8 @@ For the field-by-field service-account-OAuth setup, see xref:connect:create-serv
 
 == Worked examples
 
-* xref:managed/slack.adoc[Slack]: consumer-facing user-delegated OAuth example. Shows the consent flow against a real Slack workspace.
-* xref:managed/jira.adoc[Jira]: enterprise user-delegated OAuth example. Atlassian's OAuth flow differs from Slack's; this page calls out scope-management gotchas.
+* xref:connect:managed/slack.adoc[Slack]: consumer-facing user-delegated OAuth example. Shows the consent flow against a real Slack workspace.
+* xref:connect:managed/jira.adoc[Jira]: enterprise user-delegated OAuth example. Atlassian's OAuth flow differs from Slack's; this page calls out scope-management gotchas.
 
 == Troubleshooting
 

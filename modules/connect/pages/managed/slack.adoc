@@ -53,7 +53,7 @@ There's no workspace field: the bot token or the user's OAuth grant determines t
 
 == Test the consent flow
 
-After creating the server, run a tool that requires Slack auth to verify the consent flow end-to-end:
+After creating the server, run a tool that requires Slack authentication to verify the consent flow end-to-end:
 
 . Open the *Inspector* tab.
 . Run a tool that requires the user's identity, for example `post`.

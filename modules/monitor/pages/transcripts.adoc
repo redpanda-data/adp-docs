@@ -18,7 +18,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* xref:connect:create-agent.adoc[Running agent] or xref:connect:create-server.adoc[MCP server] with at least one execution
+* A xref:connect:create-agent.adoc[running agent] with at least one execution.
 * The xref:control:permissions-reference.adoc#transcript-permissions[TranscriptReader role] (or Admin). Transcript reads are not part of the default Reader or Writer roles.
 
 == Open an agent's transcripts

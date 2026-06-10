@@ -3,11 +3,11 @@
 :description: Let agents search and read Jira issues using either a shared API token or each end-user's own Atlassian identity through user-delegated OAuth.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Configure the Jira managed MCP server with Basic auth or Atlassian's OAuth flow
+:learning-objective-1: Configure the Jira managed MCP server with Basic authentication or Atlassian's OAuth flow
 :learning-objective-2: Pick the right scopes for the read tools
 :learning-objective-3: Walk a user through the consent flow and verify the connection
 
-The *Jira* managed MCP server lets agents search and read Jira issues. It authenticates with either a shared API token (Basic auth) or, for per-user identity, user-delegated OAuth. With OAuth it's the enterprise counterpart to xref:managed/slack.adoc[the Slack setup guide], and Atlassian's flow has its own scope model and quirks worth calling out.
+The *Jira* managed MCP server lets agents search and read Jira issues. It authenticates with either a shared API token (Basic authentication) or, for per-user identity, user-delegated OAuth. With OAuth it's the enterprise counterpart to xref:connect:managed/slack.adoc[the Slack setup guide], and Atlassian's flow has its own scope model and quirks worth calling out.
 
 After reading this page, you will be able to:
 

@@ -22,7 +22,7 @@ Choose self-managed registration when:
 * You need custom tool logic that no managed type provides.
 * You want a unified MCP URL (and Inspector / observability / agent access) across servers without standing up your own gateway.
 
-If you don't already run a server, prefer a managed type. See xref:managed/managed-catalog.adoc[Managed catalog] for the catalog.
+If you don't already run a server, prefer a managed type. See xref:connect:managed/managed-catalog.adoc[Managed catalog] for the catalog.
 
 == Prerequisites
 
@@ -41,7 +41,7 @@ If you don't already run a server, prefer a managed type. See xref:managed/manag
 +
 // TODO: screenshot of the marketplace picker with Remote (Proxied) highlighted.
 . Fill in the identity fields (`name`, `description`, `enabled`); same constraints as in xref:connect:create-server.adoc[Create an MCP Server].
-. Provide the *URL* and *Transport*.
+. Provide the `URL` and `Transport`.
 . Configure authentication (see <<authentication>>).
 . Click *Create*.
 
@@ -52,8 +52,8 @@ If you don't already run a server, prefer a managed type. See xref:managed/manag
 
 Two transports are available on the proto enum `MCPTransport`:
 
-* *SSE*: server-sent events. The traditional MCP transport.
-* *Streamable HTTP*: newer bidirectional protocol.
+* *SSE*: Server-sent events. The traditional MCP transport.
+* *Streamable HTTP*: Newer bidirectional protocol.
 
 Pick whichever your server actually speaks. To probe a server quickly:
 
@@ -73,19 +73,19 @@ curl -X POST -H "Content-Type: application/json" \
 [[authentication]]
 == Authentication
 
-The auth modes from xref:connect:create-server.adoc#configure-authentication[create-server.adoc] all apply. Several patterns are particularly common for self-managed servers:
+The authentication modes from xref:connect:create-server.adoc#configure-authentication[create-server.adoc] all apply. Several patterns are particularly common for self-managed servers:
 
 [cols="1,2"]
 |===
 |Pattern |Use when
 
-|*Static key with a custom header*
+|Static key with a custom header
 |First-party servers that authenticate with a non-`Authorization` header. Provide a `header_name` (for example, `X-Api-Key`) and a `key_ref` pointing at a `UPPER_SNAKE_CASE` secret.
 
-|*Service-account OAuth*
+|Service-account OAuth
 |The upstream system supports OAuth client credentials and you want one shared identity for all callers. Provide `client_id`, `client_secret_ref`, `token_url`, and any required `scopes`.
 
-|*Token passthrough*
+|Token passthrough
 |The upstream server already validates client tokens; Redpanda just forwards the caller's `Authorization` header.
 |===
 
@@ -124,7 +124,7 @@ If the tools list is empty or stale, hit the *Refresh tools* action on the Overv
 |Symptom |What to check
 
 |"Transport mismatch" or empty stream
-|Your server speaks the other transport. Re-probe with curl per <<test-transport>> and update the *Transport* field on the server's edit page.
+|Your server speaks the other transport. Re-probe with curl per <<test-transport>> and update the `Transport` field on the server's edit page.
 
 |TLS errors when registering an `https://` URL
 |Confirm the server's certificate chains to a public CA (or the CA Redpanda's egress trusts). Self-signed certs aren't supported.
