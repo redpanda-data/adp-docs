@@ -36,7 +36,7 @@ The xref:control:permissions-overview.adoc[built-in role] you need depends on wh
 This quickstart configures an Anthropic provider, but ADP also supports OpenAI, Google AI, AWS Bedrock, and OpenAI-compatible endpoints. To set up the Anthropic provider, you need:
 
 * The xref:control:permissions-overview.adoc[Admin or Writer role] in ADP.
-* An Anthropic account. If you don't have one, the next section walks through signup.
+* An Anthropic account. If you don't have one, the Get an Anthropic API key section walks through signup.
 
 === For builders
 
