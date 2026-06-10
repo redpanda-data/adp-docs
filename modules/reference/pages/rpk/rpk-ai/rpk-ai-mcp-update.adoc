@@ -8,7 +8,7 @@ Update an MCP server
 
 [,bash]
 ----
-rpai mcp update <name> [flags]
+rpk ai mcp update <name> [flags]
 ----
 
 == Flags

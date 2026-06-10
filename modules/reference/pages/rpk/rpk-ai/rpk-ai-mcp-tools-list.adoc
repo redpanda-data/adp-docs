@@ -14,13 +14,13 @@ With --code-mode the session targets the virtual code-mode sibling endpoint
 execute). To see the parent's tool catalog from the sandbox, invoke the
 search tool explicitly:
 
-  rpai mcp tools call <server> search --code-mode
+  rpk ai mcp tools call <server> search --code-mode
 
 == Usage
 
 [,bash]
 ----
-rpai mcp tools list <server> [flags]
+rpk ai mcp tools list <server> [flags]
 ----
 
 == Flags

@@ -8,7 +8,7 @@ Print rpai version and commit
 
 [,bash]
 ----
-rpai version [flags]
+rpk ai version [flags]
 ----
 
 == Flags

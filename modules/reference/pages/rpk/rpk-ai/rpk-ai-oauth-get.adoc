@@ -8,7 +8,7 @@ Get an OAuth provider
 
 [,bash]
 ----
-rpai oauth get <name> [flags]
+rpk ai oauth get <name> [flags]
 ----
 
 == Flags

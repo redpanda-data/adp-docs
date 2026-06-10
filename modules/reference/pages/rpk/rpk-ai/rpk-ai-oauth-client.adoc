@@ -17,7 +17,7 @@ Aliases: `oauth-clients`, `oc`.
 
 [,bash]
 ----
-rpai oauth-client [command]
+rpk ai oauth-client [command]
 ----
 
 == Aliases

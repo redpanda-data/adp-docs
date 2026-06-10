@@ -2,13 +2,13 @@
 :description: rpk ai connection list
 :page-beta: true
 
-List OAuth connections — coming soon
+List OAuth connections.
 
 == Usage
 
 [,bash]
 ----
-rpai connection list [flags]
+rpk ai connection list [flags]
 ----
 
 == Flags

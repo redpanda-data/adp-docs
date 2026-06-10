@@ -8,7 +8,7 @@ Manage MCP servers (create, get, list, update, delete, types)
 
 [,bash]
 ----
-rpai mcp [command]
+rpk ai mcp [command]
 ----
 
 == Aliases

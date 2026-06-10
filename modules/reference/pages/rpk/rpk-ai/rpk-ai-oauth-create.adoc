@@ -8,7 +8,7 @@ Create an OAuth provider
 
 [,bash]
 ----
-rpai oauth create [flags]
+rpk ai oauth create [flags]
 ----
 
 == Flags

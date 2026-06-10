@@ -2,14 +2,14 @@
 :description: rpk ai agent
 :page-beta: true
 
-Manage agents — coming soon
+Manage agents.
 
 == Usage
 
 [,bash]
 ----
-rpai agent [flags]
-  rpai agent [command]
+rpk ai agent [flags]
+  rpk ai agent [command]
 ----
 
 == Aliases

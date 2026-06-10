@@ -8,7 +8,7 @@ Delete an MCP server
 
 [,bash]
 ----
-rpai mcp delete <name> [flags]
+rpk ai mcp delete <name> [flags]
 ----
 
 == Flags

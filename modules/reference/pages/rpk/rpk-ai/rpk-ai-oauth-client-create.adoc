@@ -10,7 +10,7 @@ afterward. Store it in whatever secret manager the external tool uses.
 
 [,bash]
 ----
-rpai oauth-client create [flags]
+rpk ai oauth-client create [flags]
 ----
 
 == Flags

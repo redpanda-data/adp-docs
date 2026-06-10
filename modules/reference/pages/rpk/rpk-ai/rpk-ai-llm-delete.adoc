@@ -8,7 +8,7 @@ Delete an LLM provider
 
 [,bash]
 ----
-rpai llm delete <name> [flags]
+rpk ai llm delete <name> [flags]
 ----
 
 == Flags

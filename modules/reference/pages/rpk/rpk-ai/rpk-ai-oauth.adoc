@@ -13,7 +13,7 @@ Aliases: `oauth-provider` (compat with aigwctl), `op`.
 
 [,bash]
 ----
-rpai oauth [command]
+rpk ai oauth [command]
 ----
 
 == Aliases
