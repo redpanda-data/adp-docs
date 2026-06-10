@@ -1,9 +1,18 @@
 = How MCP Servers Work
-:description: Connect AI agents to your databases, queues, CRMs, and other business systems through MCP servers, including fully managed types Redpanda hosts for you and self-managed servers proxied through the Agentic Data Plane.
+:description: Connect AI agents to your databases, APIs, and business systems through managed or self-managed MCP servers hosted in Redpanda ADP.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer
+:learning-objective-1: Explain how AI agents connect to tools through MCP servers in ADP
+:learning-objective-2: Distinguish managed from self-managed MCP server backends and choose the right type for your use case
+:learning-objective-3: Identify key MCP capabilities including tool discovery, authentication, and code mode
 
 The Model Context Protocol (MCP) is how AI agents talk to tools. In the Agentic Data Plane, you create *MCP Servers* that agents can connect to. Each MCP server exposes a set of glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] that an agent can discover at runtime through `tools/list` and invoke through structured JSON-RPC calls. Redpanda handles upstream credentials, authentication flows, observability, and aggregation, so you can focus on what your agents do, not on the plumbing.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
 
 Redpanda offers two kinds of MCP server backends:
 
