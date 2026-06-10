@@ -7,9 +7,7 @@
 :learning-objective-2: Enable code mode on an MCP server and find its code-mode endpoint
 :learning-objective-3: Use the search and execute tools to find and call tools through code mode
 
-When an glossterm:MCP server[] exposes a large catalog of glossterm:MCP tool[,tools], a connecting glossterm:AI agent[] normally loads the full schema of every tool into its context window before it can call anything. For a server with dozens or hundreds of tools, that is a large, recurring token cost on every request, and it crowds the model's context with definitions it may never use.
-
-*Code mode* addresses this for a single MCP server. When you turn it on, the server exposes a second, virtual endpoint that presents just two tools, `search` and `execute`, in place of its full catalog. The agent searches for the tools it needs, reads only those schemas, and runs the calls inside a JavaScript sandbox, so it loads two tool definitions instead of the whole catalog and can chain several calls in a single round trip.
+Enable code mode on an MCP server to cut the token cost of serving a large tool catalog. Instead of loading every tool definition into context, agents search for the tools they need and run them through a lightweight JavaScript sandbox.
 
 After reading this page, you will be able to:
 

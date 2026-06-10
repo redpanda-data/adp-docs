@@ -6,7 +6,7 @@
 :learning-objective-2: Apply appropriate authentication for internal versus external integration
 :learning-objective-3: Select the right communication protocol for your integration scenario
 
-Redpanda ADP supports multiple integration patterns for agents, pipelines, and external applications. Choose the pattern that matches your integration scenario.
+Choose the right integration pattern for how your agents, pipelines, and external applications communicate. The pattern you pick determines who initiates the call, how data flows, and whether the interaction is synchronous or event-driven.
 
 After reading this page, you will be able to:
 

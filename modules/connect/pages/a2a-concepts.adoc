@@ -1,12 +1,14 @@
 = Connect Agents with A2A
-:description: Learn how the A2A protocol enables agent discovery and communication.
+:description: The A2A protocol enables agents to discover and call each other across platforms. Learn how agent cards, authentication, and protocol versioning work in ADP.
 :page-topic-type: concepts
 :personas: agent_builder
 :learning-objective-1: Describe the A2A protocol and its role in agent communication
 :learning-objective-2: Explain how agent cards enable discovery
 :learning-objective-3: Identify how authentication secures agent communication
 
-The Agent-to-Agent (A2A) protocol is an open standard for agent communication and discovery. Redpanda ADP uses A2A for both external integration and internal pipeline-to-agent communication.
+The Agent-to-Agent (A2A) protocol is an open standard that defines how agents discover, communicate with, and call each other across platforms. Each A2A-compliant agent exposes a machine-readable agent card at a well-known URL, describing its capabilities and how to authenticate with it. Callers fetch the card at runtime, so they reach any A2A agent without prior knowledge of its implementation, and agents can update their capabilities without breaking existing callers.
+
+In Redpanda ADP, A2A enables two integration paths: external applications and agents calling ADP agents over HTTP, and Redpanda Connect pipelines invoking agents for each event in a stream.
 
 After reading this page, you will be able to:
 
@@ -79,7 +81,7 @@ A2A enables dynamic discovery without hardcoded configuration:
 
 This discovery model allows:
 
-* New agents to become available immediately once deployed
+* New agents to become available immediately after deployment
 * Existing agents to update their capabilities while callers adapt dynamically
 * Callers to understand exactly what agents do through self-describing agent cards
 

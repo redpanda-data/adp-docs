@@ -10,7 +10,9 @@
 // Transcript permissions and the TranscriptReader role verified against cloudv2 commit 6dfd3b3 (PR #26829), 2026-06-08.
 // TODO: confirm screenshots of the role-binding flow in the Cloud UI once UX-790 (Console-side fine-grained authZ) ships.
 
-The Agentic Data Plane uses Redpanda's role-based access control (RBAC) to gate every API call. Each LLM provider, MCP server, agent, pipeline, knowledge base, and governance endpoint enforces a specific permission, and you assign permissions to users and service accounts by binding them to a role. This page explains the three-layer model so you can pick the right built-in role for a workload, or compose your own.
+Redpanda ADP uses role-based access control (RBAC) to gate every API call, so you can apply least-privilege access across your deployment and keep developers, operators, and service accounts to exactly what they need. RBAC in ADP composes permissions, roles, and role bindings, with scopes that range from the entire organization down to a single dataplane.
+
+ADP ships built-in roles for common patterns (Admin, Writer, Reader, and task-specific Invoker roles) and supports custom roles for more granular control. This page explains the three-layer model, the ADP permission families, and how to pick the right role for each workload.
 
 After reading this page, you will be able to:
 

@@ -4,7 +4,7 @@
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Create a GitHub OAuth app and register it as an OAuth provider in ADP
 :learning-objective-2: Test the OAuth connection proactively on the Connections page
-:learning-objective-3: Create and configure a GitHub managed MCP server with user-delegated OAuth
+:learning-objective-3: Configure a GitHub managed MCP server with user-delegated OAuth
 
 This tutorial shows how to connect Redpanda ADP to GitHub using OAuth, so users can authenticate with their own GitHub credentials when calling GitHub MCP tools.
 

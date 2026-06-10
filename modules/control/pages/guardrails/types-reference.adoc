@@ -3,14 +3,16 @@
 :page-topic-type: reference
 :personas: security_compliance_lead, platform_engineer
 
-A guardrail bundles a set of policies, each backed by AWS Bedrock Guardrails. Each policy is optional, but a guardrail must enforce at least one. This page documents each policy's configuration, the actions it can take, and which direction (input, output, or both) it evaluates.
+A guardrail bundles a set of policies, each backed by AWS Bedrock Guardrails. Each policy is optional, but a guardrail must enforce at least one. This page documents each policy type's configuration fields, available actions, direction settings, and regional availability.
+
+== Common settings
 
 Two settings recur across policies:
 
 * Action: what the policy does when it matches. `None` detects and records the match in the trace without intervening. `Block` stops the request and returns the configured blocked message. The sensitive-information policy adds `Anonymize`.
 * Direction: most policies evaluate input, output, or both, and you set the action per direction. Some policies are fixed to one direction (noted below).
 
-Feature availability varies by AWS region. Choose a region that supports the policies you need, and see the https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html[AWS Bedrock Guardrails documentation^] for exhaustive behavior and regional support.
+NOTE: Feature availability varies by AWS region. Choose a region that supports the policies you need, and see the https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html[AWS Bedrock Guardrails documentation^] for exhaustive behavior and regional support.
 
 == Content filters
 

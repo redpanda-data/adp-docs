@@ -42,6 +42,8 @@ Use the `a2a_message` processor in pipelines for these common patterns.
 
 === Event-driven agent invocation
 
+Use this pattern for real-time fraud detection on every transaction.
+
 Invoke agents automatically for each event:
 
 [source,yaml]
@@ -51,9 +53,9 @@ include::ROOT:example$pipelines/event-driven-invocation.yaml[]
 
 Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:connect:a2a-concepts.adoc#agent-card-location[Agent card location].
 
-**Use case:** Real-time fraud detection on every transaction.
-
 === Streaming data enrichment
+
+Use this pattern to add sentiment scores to every customer review in real time.
 
 Add AI-generated metadata to events:
 
@@ -64,9 +66,9 @@ include::ROOT:example$pipelines/streaming-enrichment.yaml[tag=processors,indent=
 
 Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:connect:a2a-concepts.adoc#agent-card-location[Agent card location].
 
-**Use case:** Add sentiment scores to every customer review in real-time.
-
 === Asynchronous workflows
+
+Use this pattern for nightly batch summarization of reports where latency is acceptable.
 
 Process events in the background:
 
@@ -77,9 +79,9 @@ include::ROOT:example$pipelines/async-workflows.yaml[tag=pipeline,indent=0]
 
 Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:connect:a2a-concepts.adoc#agent-card-location[Agent card location].
 
-**Use case:** Nightly batch summarization of reports where latency is acceptable.
-
 === Multi-agent pipeline orchestration
+
+Use this pattern to translate feedback, analyze sentiment, and route it to the appropriate team.
 
 Chain multiple agents in sequence:
 
@@ -90,9 +92,9 @@ include::ROOT:example$pipelines/multi-agent-orchestration.yaml[tag=processors,in
 
 Replace the agent URL variables with your actual agent card URLs. See xref:connect:a2a-concepts.adoc#agent-card-location[Agent card location].
 
-**Use case:** Translate feedback, analyze sentiment, then route to appropriate team.
-
 === Agent as transformation node
+
+Use this pattern to convert natural language queries to SQL for downstream processing.
 
 Use agent reasoning for complex transformations:
 
@@ -102,8 +104,6 @@ include::ROOT:example$pipelines/agent-transformation.yaml[tag=processors,indent=
 ----
 
 Replace `AGENT_CARD_URL` with your actual agent card URL. See xref:connect:a2a-concepts.adoc#agent-card-location[Agent card location].
-
-**Use case:** Convert natural language queries to SQL for downstream processing.
 
 == When not to use this pattern
 
@@ -133,7 +133,7 @@ This pipeline:
 * Consumes every transaction from the `transactions` topic.
 * Sends each transaction to the fraud detection agent using `a2a_message`.
 * Routes transactions to different topics based on fraud score.
-* Runs continuously, analyzing every transaction in real-time.
+* Runs continuously, analyzing every transaction in real time.
 
 == Next steps
 
