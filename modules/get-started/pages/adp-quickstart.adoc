@@ -19,7 +19,7 @@ This quickstart sets up Redpanda ADP from scratch and follows the two roles invo
 
 The first section is for administrators, and the second is for builders. If you have the Admin role, you can complete both yourself. If your administrator has already configured an LLM provider, skip to <<builders-create-an-mcp-server-and-agent,Builders: Create an MCP server and agent>>.
 
-When you sign in to ADP, you land on the Home page: a snapshot of recent activity and spend, counts of your LLM providers, MCP servers, agents, and guardrails, and a Quickstarts checklist that links to each setup task. You can start any task in this guide from its card on the Home page or from the sidebar.
+When you sign in to ADP, you land on the Home page: a snapshot of items that need your attention, recent request and spend activity, budget status, and counts of your ADP resources. Start the tasks in this guide from the sidebar.
 
 After completing this quickstart, you will be able to:
 
@@ -303,7 +303,7 @@ ifdef::env-adp-transcripts[]
 
 Every agent run is recorded as a glossterm:transcript[] you can replay turn-by-turn.
 
-. Open the agent's *Transcripts* tab on the agent detail page (or *Transcripts* in the sidebar for the cross-agent view). Find the most recent agent run.
+. Open the agent's *Transcripts* tab on the agent detail page. Find the most recent agent run.
 
 . Walk through the transcript turn-by-turn. You should see:
 +

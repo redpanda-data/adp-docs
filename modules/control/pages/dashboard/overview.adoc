@@ -9,10 +9,11 @@
 // Source: `cloudv2` `apps/adp-ui/src/routes/governance/index.tsx`, governance components, and `apps/adp-ui/docs/design/0003-governance-v0.md` on `origin/main`, re-verified 2026-05-29.
 // TODO: Capture screenshots and exact empty-state copy after an authenticated walkthrough of the protected Agentic Data Plane UI.
 // Verified 2026-05-29 against origin/main: the per-user chart filter, Top users panel + heatmap, Agents table with detail drill-down, and the Cost & Usage per-user filter are all live. Per-agent spend keys on the agent resource name (`agents/<slug>`); `GetSpendingBreakdown` exposes a dedicated `BREAKDOWN_DIMENSION_AGENT`. Updated 2026-06-05 per the cloudv2 agent_id->agent_name identity change (PR #61).
+// Re-verified 2026-06-09 against origin/main: Home description updated for the reworked home dashboard (cloudv2 e08927069a — attention panel, stat strip, tenant default budget card, 7-day usage charts, resource grid; Quickstarts/Gateway activity/Updates sections removed).
 
 The Governance dashboard answers two questions at a glance: how much your organization spends on AI, and what agents run in your environment. It brings AI Gateway usage and agent inventory into one view for platform and finance teams.
 
-The ADP Home page gives a lighter snapshot of recent activity, spend, and resource counts with quick actions to get started; the Governance dashboard is the detailed spend and usage view.
+The ADP Home page gives a lighter snapshot: items that need your attention, request and spend stats, the tenant default budget, short-range usage charts, and resource counts. The Governance dashboard is the detailed spend and usage view.
 
 Use it to compare spend, request volume, and token volume over a selected time range, then narrow the chart by provider, model, cost type, token type, or user.
 

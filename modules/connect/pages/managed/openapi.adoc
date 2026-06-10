@@ -42,6 +42,7 @@ By default the generator walks schemas up to a depth of 5 (`max_schema_depth`); 
 * `Base URL override` (optional): Useful when the spec's `servers` block doesn't match your environment.
 * `Operation filter` (optional): Include or exclude operations by tag, `operationId` glob, path glob, or HTTP method.
 * `Max schema depth` (optional): Maximum depth for schema conversion. Defaults to 5.
+* `Extract headers` (optional): Response header names to surface to the agent, such as `X-CSRF-Token` or `Set-Cookie`. Listed headers are appended to the tool result; all other response headers are dropped. Matching is case-insensitive.
 . Configure auth (see <<authentication>>).
 . Click *Create*.
 
@@ -82,6 +83,8 @@ See xref:connect:test-tools.adoc[] for general Inspector usage.
 == Use with agents
 
 Once tools generate cleanly, point an agent at the *API URL* on the server's detail page. The agent sees one tool per OpenAPI operation, named accordingly.
+
+Every generated tool also accepts an optional `headers` input, which lets the agent set request headers the spec doesn't declare. Agent-supplied headers can't override the configured authentication headers or the spec's own header parameters. Combined with `Extract headers`, this supports APIs that round-trip headers, such as a CSRF token fetched from one response and echoed on the next request.
 
 == Troubleshooting
 

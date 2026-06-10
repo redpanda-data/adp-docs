@@ -31,7 +31,7 @@ Redpanda ADP enforces budgets per agent. In a budget, an _agent_ is identified b
 |The hard cap on per-period spend, in USD microcents (1 cent = 1,000,000 microcents). When a matching agent's accrued spend for the period reaches this value, the agent's next LLM request through the gateway gets `HTTP 429`. Spend resets to zero at the start of each period.
 
 |Warning threshold
-|A spend level, lower than the limit, at which ADP fires a warning (a log entry and a metric). Requests still pass. Must be greater than zero and less than the limit.
+|A spend level, lower than the limit, at which ADP warns: gateway responses carry a `SpendLimit-Warning` header and ADP records a warning metric. Requests still pass. Must be greater than zero and less than the limit.
 
 |Period
 |How often the spend pool resets: daily, weekly, or monthly. Periods are calendar-aligned in UTC: daily at 00:00 UTC, weekly at 00:00 UTC Monday, monthly at 00:00 UTC on the first of the month.
@@ -335,8 +335,9 @@ Three rules govern how the cost-reporting pipeline applies overrides:
 * Overrides apply to *new spending events* from the moment they're saved. Historical events keep the rate card that was in effect when the event was recorded. The dashboard's _Compare to previous period_ overlay reflects that.
 * Overrides are scoped to one model at a time. To roll out a new contract across an entire provider's catalog, edit each model in turn.
 * Cache-read pricing follows the catalog default. Only cache-write tiers are overridable. Cache-read tokens still surface in the *CACHED* bucket on the dashboard and in `SpendingService` responses.
+* Overrides are applied invisibly: `SpendingService` responses carry the resulting dollar values with no marker for which line items used an overridden rate.
 
-// TODO: confirm whether overrides surface in `SpendingService.GetSpendingBreakdown` responses (for example, as a flag indicating which line items used overrides) or are applied invisibly. Walk against `adp-production` once the override editor is live there.
+// Verified 2026-06-09 against spending_service.proto and spending_rollup.proto on cloudv2 origin/main: no override flag or indicator field exists on breakdown or time-series responses.
 
 === Verify what's billed
 

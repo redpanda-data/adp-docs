@@ -27,9 +27,9 @@ After completing this guide, you will be able to:
 . In the authentication section, choose *User-delegated OAuth*.
 . Pick the configured *OAuth provider* (`UserOAuthAuth.provider_name`).
 . List the *required scopes* (`UserOAuthAuth.required_scopes`). Redpanda enforces these at consent time.
-. (Optional) Override token injection. By default Redpanda sends `Authorization: Bearer <token>`. To use a different header, set `TokenInjection.header_name`. To omit the prefix entirely (for example, an upstream that expects a bare API key as the token), set `TokenInjection.header_prefix` to the empty string.
+. (Optional) Override token injection through the API or CLI. By default Redpanda sends `Authorization: Bearer <token>`. To use a different header, set `TokenInjection.header_name`. To omit the prefix entirely (for example, an upstream that expects a bare API key as the token), set `TokenInjection.header_prefix` to the empty string. The create form doesn't expose these fields; the UI's user-delegated authentication section takes only the OAuth provider and required scopes.
 +
-// TODO: confirm exact UI labels for `TokenInjection.header_name` and `header_prefix`.
+// Verified 2026-06-09 against adp-ui remote-auth-fields.tsx on origin/main: UserOAuthFields renders only "OAuth Provider" + "Required Scopes (optional)"; TokenInjection header_name/header_prefix are API/CLI-level only.
 . Save.
 
 NOTE: Choosing user-delegated OAuth instead of service-account OAuth *is* the credential-mode decision: there's no separate field. User-delegated gives each caller a per-user upstream identity; service-account gives every caller one shared identity. Switching between them later requires re-consent for every active user.

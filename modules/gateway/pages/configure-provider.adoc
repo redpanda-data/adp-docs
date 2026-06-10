@@ -143,6 +143,9 @@ AWS Bedrock::
 
 |*Secret access key reference*
 |Secret-store reference for the AWS secret access key, `UPPER_SNAKE_CASE` (typically `AWS_SECRET_ACCESS_KEY`).
+
+|*Guardrail*
+|Optional. Name of a xref:control:guardrails/overview.adoc[guardrail] to attach to this provider, or empty for none. Only the Bedrock provider type exposes this setting. See xref:control:guardrails/create-guardrail.adoc[Create a guardrail].
 |===
 +
 The create form exposes static credentials (and the default-chain fallback when you leave both references empty). To configure an assume-role credential (`role_arn`, optional `external_id` when the role's trust policy mandates it, and optional `session_name` that surfaces in CloudTrail), use the API or the `rpk ai llm` CLI instead of the form.
