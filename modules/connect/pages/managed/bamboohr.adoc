@@ -6,7 +6,7 @@
 :learning-objective-2: Identify the BambooHR tools available to agents
 :learning-objective-3: Test BambooHR tool calls with an authorized user's connection
 
-// Source: `cloudv2` `apps/aigw/docs/bamboohr-mcp.md`, `proto/mcps/redpanda/mcps/bamboohr/v1/*`, and `apps/aigw/internal/mcp/managed/mcps/bamboohr/register_mcp.go` on `origin/main`, verified 2026-05-10.
+// Source: `cloudv2` `apps/aigw/docs/bamboohr-mcp.md`, `proto/mcps/redpanda/mcps/bamboohr/v1/*`, and `apps/aigw/internal/mcp/managed/mcps/bamboohr/register_mcp.go` on `origin/main`, verified 2026-06-10.
 
 The *BambooHR* managed MCP server lets agents read BambooHR employee directory, time-off, and performance data with the calling user's OAuth identity. The BambooHR configuration stores the company subdomain and the name of the BambooHR glossterm:OAuth provider[,OAuth Provider] to authenticate against. OAuth credentials and user tokens come from that provider and the glossterm:token vault[].
 

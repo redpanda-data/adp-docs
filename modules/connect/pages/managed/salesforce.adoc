@@ -8,7 +8,7 @@
 
 // Source: `cloudv2` `apps/aigw/docs/salesforce-mcp.md`, `proto/mcps/redpanda/mcps/salesforce/v1/salesforce_config.proto`, `proto/mcps/redpanda/mcps/v1/auth.proto`, and `apps/aigw/internal/mcp/managed/mcps/salesforce/register_mcp.go` on `origin/main`, verified 2026-06-10.
 
-The *Salesforce* managed MCP server lets an LLM work with https://www.salesforce.com/[Salesforce] CRM data: running SOQL queries and SOSL searches, reading and writing records, inspecting object metadata, and running saved Salesforce reports through the REST and Analytics APIs.
+The *Salesforce* managed MCP server lets agents work with https://www.salesforce.com/[Salesforce] CRM data: running SOQL queries and SOSL searches, reading and writing records, inspecting object metadata, and running saved Salesforce reports through the REST and Analytics APIs.
 
 After reading this page, you will be able to:
 
@@ -22,7 +22,7 @@ The Salesforce MCP exposes the following tools:
 
 [cols="1,2"]
 |===
-|Tool |Description
+|Tool |What it does
 
 |`query`
 |Execute a SOQL query.
@@ -91,16 +91,16 @@ Skip this section if you are using per-user OAuth.
 The client-credentials flow is a service-to-service flow: `client_id` + `client_secret` exchange for an `access_token`, with no browser interaction.
 
 . In Salesforce *Setup*, search for *App Manager* and click *New Connected App*.
-. Enter a *Connected App Name* and *Contact Email*.
+. Enter a Connected App Name and Contact Email.
 . Under *API (Enable OAuth Settings)*:
 +
 * Check *Enable OAuth Settings*.
-* Set a *Callback URL* (required by the form, unused for client credentials).
-* Add the *Manage user data via APIs (api)* and *Perform requests at any time (refresh_token, offline_access)* OAuth scopes.
+* Set a Callback URL (required by the form, unused for client credentials).
+* Add the Manage user data via APIs (api) and Perform requests at any time (refresh_token, offline_access) OAuth scopes.
 * Check *Enable Client Credentials Flow*.
 . Click *Save*, then *Continue*.
-. Open the app from *App Manager*, click *Manage Consumer Details*, and copy the *Consumer Key* (your `client_id`) and *Consumer Secret* (your `client_secret`).
-. Set a *Run As* user: in *App Manager*, open the app, click *Manage > Edit Policies*, and under *Client Credentials Flow* set *Run As* to a Salesforce user with API access. Click *Save*.
+. Open the app from *App Manager*, click *Manage Consumer Details*, and copy the Consumer Key (your `client_id`) and Consumer Secret (your `client_secret`).
+. Set a Run As user: in *App Manager*, open the app, click *Manage > Edit Policies*, and under Client Credentials Flow set Run As to a Salesforce user with API access. Click *Save*.
 
 Store the consumer secret in the Redpanda ADP secret store under an `UPPER_SNAKE_CASE` key, such as `SALESFORCE_CLIENT_SECRET`.
 
@@ -111,7 +111,7 @@ Create a new Salesforce MCP server in ADP:
 . Open *MCP Servers > Create Server*.
 . Pick `Salesforce` from the marketplace picker.
 . Fill in identity fields (`name`, `description`).
-. In the Salesforce configuration form, set the *Salesforce instance URL* (`orgUrl`) and pick an *Auth Method*: service-account OAuth or per-user OAuth. For per-user OAuth, select the Salesforce OAuth Provider.
+. In the Salesforce configuration form, set the Salesforce instance URL (`orgUrl`) and pick an Auth Method: service-account OAuth or per-user OAuth. For per-user OAuth, select the Salesforce OAuth Provider.
 . Optionally pin a Salesforce REST API version. The default is `v65.0`.
 . Click *Create*.
 
@@ -121,7 +121,7 @@ Create a new Salesforce MCP server in ADP:
 
 Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] to create the server with a managed config. Set exactly one auth variant.
 
-Service-account OAuth — supply the Connected App's `clientId`, a secret-store reference for the consumer secret (`clientSecretRef`), and the token URL:
+For service-account OAuth, supply the Connected App's `clientId`, a secret-store reference for the consumer secret (`clientSecretRef`), and the token URL:
 
 [source,bash]
 ----
@@ -136,7 +136,7 @@ rpk ai mcp create --name my-salesforce --managed-config '{
 }'
 ----
 
-Per-user OAuth — reference the Salesforce OAuth Provider by name. The per-user token is resolved from the token vault on each call:
+For per-user OAuth, reference the Salesforce OAuth Provider by name. The per-user token is resolved from the token vault on each call:
 
 [source,bash]
 ----
@@ -202,13 +202,13 @@ curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/my-salesforce \
 |Symptom |What to check
 
 |`invalid_client_credentials` from OAuth (service-account mode)
-|Confirm the Connected App has a *Run As* user set and the `api` scope, and that you are using the Consumer Key (not the app name) as `clientId`.
+|Confirm the Connected App has a Run As user set and the `api` scope, and that you are using the Consumer Key (not the app name) as `clientId`.
 
 |`OAuthConnectionRequired` (per-user mode)
 |First call from a user with no stored token. The user completes Salesforce's OAuth consent flow, the token lands in the vault, and subsequent calls reuse it.
 
 |`INSUFFICIENT_ACCESS` errors
-|The acting identity (the *Run As* user for service-account mode, or the calling user for per-user mode) lacks permission on that object or record. Grant the appropriate profile or permission set.
+|The acting identity (the Run As user for service-account mode, or the calling user for per-user mode) lacks permission on that object or record. Grant the appropriate profile or permission set.
 
 |`INVALID_FIELD` in a SOQL query
 |The field does not exist or field-level security hides it from the acting identity. Use `describe_object` to see which fields are visible.
