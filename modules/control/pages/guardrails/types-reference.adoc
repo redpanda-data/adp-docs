@@ -63,7 +63,7 @@ Block content by meaning rather than exact words, so the policy catches paraphra
 |Topic name, 1 to 100 characters.
 
 |Definition
-|What the topic covers, up to 1000 characters. The definition drives the semantic match, so be specific.
+|What the topic covers, up to 1000 characters. The definition drives the semantic match, so write it as a clear, self-contained statement of what the topic covers. Keep example phrases and negations out of the definition; put concrete examples in the Examples field instead, which improves accuracy.
 
 |Examples
 |Up to five example phrases, each up to 100 characters, that match the topic.
@@ -87,7 +87,7 @@ Detect personally identifiable information (PII) by built-in entity type or by y
 |Custom patterns. Each rule has a name (1 to 100 characters), an RE2 pattern (1 to 500 characters; lookaround is not supported), an optional description, and a per-direction action.
 
 |Action
-|Per direction (input and output): `None` (detect), `Block`, or `Anonymize`. `Anonymize` replaces each match in place with its entity type, such as `{EMAIL}`.
+|Per direction (input and output): `None` (detect), `Block`, or `Anonymize`. `Anonymize` replaces each match in place with its entity type, such as `{EMAIL}`, and keeps the request flowing; it applies to text only. `Block` replaces the whole payload with the blocked message.
 |===
 
 The built-in entity types are: `ADDRESS`, `AGE`, `NAME`, `EMAIL`, `PHONE`, `USERNAME`, `PASSWORD`, `DRIVER_ID`, `LICENSE_PLATE`, `VEHICLE_IDENTIFICATION_NUMBER`, `CREDIT_DEBIT_CARD_CVV`, `CREDIT_DEBIT_CARD_EXPIRY`, `CREDIT_DEBIT_CARD_NUMBER`, `PIN`, `INTERNATIONAL_BANK_ACCOUNT_NUMBER`, `SWIFT_CODE`, `IP_ADDRESS`, `MAC_ADDRESS`, `URL`, `AWS_ACCESS_KEY`, `AWS_SECRET_KEY`, `US_BANK_ACCOUNT_NUMBER`, `US_BANK_ROUTING_NUMBER`, `US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER`, `US_PASSPORT_NUMBER`, `US_SOCIAL_SECURITY_NUMBER`, `CA_HEALTH_NUMBER`, `CA_SOCIAL_INSURANCE_NUMBER`, `UK_NATIONAL_HEALTH_SERVICE_NUMBER`, `UK_NATIONAL_INSURANCE_NUMBER`, and `UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER`.

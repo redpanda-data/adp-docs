@@ -207,10 +207,10 @@ In the model picker, each selected model carries a pencil icon (Override pricing
 |Cached input
 |Per 1M tokens read from prompt cache.
 
-|Cache write (5 minute TTL)
+|Cache write (5-minute TTL)
 |Per 1M tokens written to a 5-minute prompt cache.
 
-|Cache write (1 hour TTL)
+|Cache write (1-hour TTL)
 |Per 1M tokens written to a 1-hour prompt cache.
 |===
 

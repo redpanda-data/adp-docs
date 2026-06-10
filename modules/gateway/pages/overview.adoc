@@ -56,11 +56,15 @@ The provider's detail page in ADP records spend, request counts, and token count
 
 In ADP (https://ai.redpanda.com[ai.redpanda.com^]) you'll find these areas:
 
+* *Home*: The landing page after sign-in. A snapshot of items that need attention (such as a budget over its cap or a disabled resource, with quick actions to resolve them), recent request and spend activity, budget status, and counts of your ADP resources with quick links into each area.
+* *Agents*: Create and manage Redpanda-hosted agents and registered self-managed agents.
+* *Guardrails*: Define content policies, word filters, and PII rules that apply to traffic on a Bedrock provider.
 * *LLM Providers*: Create, edit, enable, and delete providers. This is the home of AI Gateway configuration.
 * *MCP Servers*: Register glossterm:MCP[] tool servers for agents. Separate from the AI Gateway proxy URL.
 * *OAuth Providers*: Register upstream identity providers for user-delegated MCP authentication (for example, GitHub or Google).
 * *OAuth Clients*: Register external tools (Claude.ai, ChatGPT, Cursor) that request access tokens from the gateway.
 * *Connections*: Per-user OAuth connections to the configured providers.
+* *Secrets Store*: Create and manage the secrets that providers, MCP servers, and agents reference by name.
 * *Governance*: Cost & Usage charts across providers, models, and agents, and per-agent spend budgets.
 
 LLM Providers is where you'll spend most of your time. The others are covered by their own docs.

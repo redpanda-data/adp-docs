@@ -86,7 +86,7 @@ Pick the narrowest role that covers a workload. For example, an application that
 
 ADP API calls authenticate as one of two identity types:
 
-* *User identity (OIDC)*: A human user signed in through Redpanda's OIDC provider. The Cloud UI uses this identity when an admin manages ADP resources interactively.
+* *User identity (OIDC)*: A human user signed in through Redpanda's OIDC provider. The ADP UI uses this identity when an admin manages ADP resources interactively.
 * *Service account*: A non-human identity backed by OIDC client credentials. Applications, CI jobs, and `rpk ai` use service accounts.
 
 Account impersonation, which lets Redpanda Console reuse a user's identity for Kafka API and Schema Registry calls, applies to those two subsystems only. ADP endpoints continue to authenticate clients directly through their OIDC tokens, regardless of how account impersonation is configured at the cluster level.

@@ -24,7 +24,7 @@ After reading this page, you will be able to:
 
 Open the wizard and give the guardrail its name and the messages that callers see when a policy blocks a request.
 
-. In ADP, open *Guardrails*, then click *Create guardrail*.
+. Open *Guardrails* in the sidebar and click *Create guardrail*.
 . On the Details step, set the following:
 +
 [cols="1,3"]
@@ -71,6 +71,18 @@ This step, labeled *Authentication* in the wizard, sets the AWS region and crede
 
 Each policy is optional, but a guardrail must enforce at least one. Turn on the policies you need, then configure each. For the full configuration of every policy, see xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
 
+=== Start from a preset
+
+The Quick start row at the top of the Policies step applies a preset, a bundle of policy settings for a common goal:
+
+* *Content safety*: Blocks hate speech, insults, sexual content, violence, and misconduct at high strength.
+* *PII protection*: Masks emails, phone numbers, names, addresses, card numbers, and US social security numbers.
+* *Prompt attack defense*: Blocks jailbreak and prompt-injection attempts before they reach the model.
+
+Presets are additive: applying one never removes rules you already configured. Apply a preset, then adjust the individual policies it turned on.
+
+=== Choose individual policies
+
 * Content filters: Harmful-content categories (hate, insults, sexual, violence, misconduct, and prompt attacks).
 * Word filters: Exact words and phrases from your own lists and platform-managed lists such as profanity.
 * Denied topics: Topics blocked by meaning rather than exact words.
@@ -104,6 +116,8 @@ A guardrail takes effect only after a provider references it. On an AWS Bedrock 
 
 After you configure the policies and attach the guardrail, set the guardrail to enabled. A disabled guardrail keeps its configuration but skips evaluation entirely, which is useful while you stage a policy or troubleshoot whether the guardrail is responsible for unexpected blocks.
 
+Enabling or disabling a guardrail takes effect within about 30 seconds, because the gateway briefly caches guardrail settings.
+
 == Verify the guardrail blocks
 
 Send a request through an attached provider that violates a policy. For example, with the sensitive-information policy set to block on input, send a prompt that contains an email address or other PII.
@@ -114,7 +128,7 @@ The request returns your blocked input message instead of a model response. Open
 
 From the guardrails list or a guardrail's detail page:
 
-* Edit the guardrail to change its backend or policies. Changes apply on the next request.
+* Edit the guardrail to change its backend or policies. Changes take effect within about 30 seconds, because the gateway briefly caches guardrail settings.
 * Disable the guardrail to stop evaluation without losing its configuration.
 * Delete the guardrail to remove it permanently. Deletion asks you to confirm by typing the guardrail's name.
 

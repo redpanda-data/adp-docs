@@ -90,12 +90,15 @@ ADP references provider credentials by secret name, not by raw value. Create the
 
 . Open *Secrets Store* in the sidebar.
 
-. Click *Create Secret*.
+. Click *Create secret*.
 +
 * `ID`: Enter `ANTHROPIC_API_KEY`. The ID accepts letters, numbers, slashes, underscores, and hyphens only. ADP automatically uppercases the ID, and you can't change it after you save.
 * `Value`: Paste the `sk-ant-` key you copied from Anthropic.
-* `Scopes`: Make sure `AI Gateway` is selected. The LLM provider you create in the next section reads the secret through this scope. Leave any other default scopes in place.
 * `Labels`: Skip. Labels are optional key/value metadata for organizing secrets.
++
+New secrets get the AI Gateway scope automatically; there is nothing to select. That one scope makes the secret usable across the platform: LLM providers, MCP servers, and agents.
++
+image::create-secret-form.png[The Create secret form, with a required ID and write-only Value, optional labels, and no scope selector]
 +
 [IMPORTANT]
 ====
@@ -106,7 +109,7 @@ Click *Create secret* at the bottom of the form.
 
 . Confirm the secret appears in the list with the ID `ANTHROPIC_API_KEY`.
 
-TIP: If your ADP version offers an inline secret-creation control on the LLM provider form's `API key` field, you can skip this step and create the secret inline in the next section. Either flow stores the key in the same place.
+TIP: You can skip this step and create the secret inline in the next section: the provider form's `API key` field has an *Existing*/*New* toggle. Either flow stores the key in the same place.
 
 === Configure your LLM provider
 
@@ -150,7 +153,7 @@ For the full provider field reference (transcript logging, Bedrock IAM, Anthropi
 
 With a provider in place, a builder creates a tool server and an agent that uses it. Both use a step-by-step wizard in the UI.
 
-TIP: If your administrator has already configured an LLM provider, you can skip the provider setup and start here. Select the existing provider on the agent wizard's *Model* step.
+TIP: If your administrator has already configured an LLM provider, you can skip the provider setup and start here. Select the existing provider in the agent form's *Model* section.
 
 === Create an MCP server with a public OpenAPI spec
 
@@ -163,7 +166,9 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 
 . Open *MCP Servers* in the sidebar and click *Create server*.
 
-. Search for and select the `OpenAPI` card from the marketplace picker. The OpenAPI configuration form opens.
+. Search for and select the `OpenAPI` card from the marketplace picker.
++
+image::create-mcp-server-picker.png[The Create MCP Server marketplace picker filtered by a search for openAPI, showing the Remote (Proxied) card and the OpenAPI card]
 
 . `Name`: Enter `petstore-quickstart`. The name accepts lowercase letters, numbers, and hyphens.
 
@@ -193,31 +198,33 @@ For the full OpenAPI MCP reference (authentication modes, operation filters, bas
 
 === Build your agent
 
-Combine the Anthropic provider and the PetStore MCP server into an agent. ADP walks you through a managed agent in a wizard with these steps: *Basics*, *Model*, *Behavior*, *Tools*, *Subagents*, and *Review*. For the full wizard reference, see xref:connect:create-agent.adoc[Create an agent].
+Combine the Anthropic provider and the PetStore MCP server into an agent. ADP configures a managed agent on a single page with five sections: *Details*, *Model*, *Behavior*, *Tools*, and *Subagents*. A stepper on the left tracks the sections and summarizes what you've set in each; click a step to jump to its section. For the full reference, see xref:connect:create-agent.adoc[Create an agent].
 
 . Open *Agents* in the sidebar.
 
-. Click *Create Agent*.
+. Click *Create agent*.
 
-. Choose how the agent runs. Select the managed option, `Redpanda manages it`, so Redpanda deploys, runs, and observes the agent for you. Click *Continue*.
+. Choose how the agent runs. Click `Redpanda manages it`, so Redpanda deploys, runs, and observes the agent for you.
++
+image::shared:create-agent-runtime-choice.png[The runtime choice in the agent wizard, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
 +
 NOTE: The other option, `I host it myself`, registers an agent you run on your own infrastructure. This quickstart uses the managed runtime.
 
-. On the *Basics* step, set the following, then click *Continue*:
+. In the *Details* section, set the following:
 +
 * `Display name`: Enter `pet-store-assistant`. This name appears in the agent registry list and the detail header.
 * `Agent ID`: Leave the auto-derived value. ADP generates the ID from the display name, and you can't change it after creation.
 * `Description`: Enter `Quickstart agent that answers questions about the PetStore inventory`.
 * `Tags`: Skip. Tags are optional metadata for filtering and grouping.
 
-. On the *Model* step, set the following, then click *Continue*:
+. In the *Model* section, set the following:
 +
 * `LLM provider`: Select `anthropic-quickstart`. This provider supplies the credentials and routing for the agent. The dropdown lists every provider configured for your organization. If it's empty, no provider exists yet: ask your administrator to configure one, or complete the admin steps first.
 * `Model`: Select `claude-sonnet-4-6`. Sonnet handles multi-step tool use more reliably than Haiku.
 +
 Leave the `Advanced` options, such as `Max iterations`, at their defaults.
 
-. On the *Behavior* step, paste the following into the `System prompt` editor, then click *Continue*:
+. In the *Behavior* section, paste the following into the `System prompt` editor:
 +
 [,text]
 ----
@@ -239,11 +246,11 @@ Rules:
   delete pets.
 ----
 
-. On the *Tools* step, select `petstore-quickstart` under `MCP servers`, then click *Continue*. The agent discovers the server's tools at runtime; you don't pre-select individual tools. The system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
+. In the *Tools* section, select `petstore-quickstart` under `MCP servers`. The agent discovers the server's tools at runtime; you don't pre-select individual tools. The system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
 
-. On the *Subagents* step, leave the list empty to keep the agent flat, then click *Continue*. The quickstart uses a single agent.
+. In the *Subagents* section, leave the list empty to keep the agent flat. The quickstart uses a single agent.
 
-. On the *Review* step, confirm the summary, then click *Create agent*.
+. Confirm the stepper summaries on the left, then click *Create agent*. If a required field is missing, a "Cannot create agent" error lists what to fix.
 
 . Wait for the agent status to change from `Starting` to `Running`. ADP creates the agent's service account at this point; for details, see xref:connect:concepts.adoc#service-account-authorization[service account authorization].
 
