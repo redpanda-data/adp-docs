@@ -1,4 +1,4 @@
-* xref:ROOT:home.adoc[Home]
+* xref:ROOT:home.adoc[Overview]
 
 * xref:get-started:index.adoc[Get Started]
 ** xref:get-started:adp-overview.adoc[Redpanda ADP Overview]

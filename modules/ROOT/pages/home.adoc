@@ -1,38 +1,39 @@
-= Ship governed AI agents on top of your real data.
+= Run agents on all your data, safely.
 :page-layout: component-home-v3
 :page-hero-description: An AI Gateway, MCP servers, declarative agents, and built-in governance: one platform so your team can move from prototype to production without rebuilding the foundations every time.
-:page-stats: Managed MCP servers, ready to use;;100%|execution-log sampling;;4|built-in governance controls;;GA|latest release
-
+:page-stats: 1|gateway for all LLM providers;;1|dashboard for spend and activity;;Per-user|OAuth identity on every call;;MCP servers|managed out of the box
 :page-pathways-title: Pick where to start
 :page-pathway-1-title: Build a new agent
-:page-pathway-1-desc: Start from scratch inside ADP. Set up an agent, plug in your data, and run it in about 30 minutes.
+:page-pathway-1-desc: Start from scratch with governance built in. Set up an agent, connect your data, and deploy with identity, routing, and logging from day one.
 :page-pathway-1-link: get-started:adp-quickstart.adoc
 :page-pathway-1-cta: Get started
 :page-pathway-1-icon: sparkles
 :page-pathway-2-title: Bring an agent you already built
-:page-pathway-2-desc: Connect an agent you built elsewhere so it shows up alongside the rest — same dashboard, same rules, same tools.
+:page-pathway-2-desc: Get visibility and control over agents built elsewhere. Same gateway, same dashboard, same per-user identity — without rebuilding.
 :page-pathway-2-link: connect:byoa-register.adoc
 :page-pathway-2-cta: Register your agent
 :page-pathway-2-icon: connect
-
-:page-concepts-title: Get your bearings
-:page-concept-1-title: Agents, tools, and data — how they fit
-:page-concept-1-desc: The three building blocks of ADP and how they connect.
-:page-concept-1-link: connect:concepts.adoc
-:page-concept-2-title: What sits between your agents and LLMs
-:page-concept-2-desc: How routing, token counting, and provider setup work.
-:page-concept-2-link: gateway:overview.adoc
-:page-concept-3-title: Build in ADP vs. bring your own
-:page-concept-3-desc: When to use each approach, and how they differ.
-:page-concept-3-link: connect:agents-overview.adoc
-:page-concept-4-title: How access control works
-:page-concept-4-desc: Who can see and do what, and how the rules are enforced.
+:page-concepts-title: Popular across ADP
+:page-concept-1-title: One gateway for every LLM call
+:page-concept-1-desc: Route all agent traffic through a single point. Set budgets, switch providers, and enforce policies without changing agent code.
+:page-concept-1-link: gateway:overview.adoc
+:page-concept-2-title: Governed MCP servers for your data
+:page-concept-2-desc: Expose databases, APIs, and files as tools your agents can use with access control and audit logging built in.
+:page-concept-2-link: connect:mcp-overview.adoc
+:page-concept-3-title: One dashboard for all activity
+:page-concept-3-desc: See every agent call, token spent, and tool invocation. Debug issues, track costs, and prove compliance from a single view.
+:page-concept-3-link: monitor:transcripts.adoc
+:page-concept-4-title: Per-user identity on every call
+:page-concept-4-desc: OAuth identity flows through the gateway to your tools. Know who did what, and enforce permissions at the data layer.
 :page-concept-4-link: control:permissions-overview.adoc
-:page-concept-5-title: What agent tools actually are
-:page-concept-5-desc: Read vs. action tools, versions, and how they're exposed.
-:page-concept-5-link: connect:mcp-overview.adoc
-:page-concept-6-title: How activity records work
-:page-concept-6-desc: What gets recorded, who can see it, and why it matters.
-:page-concept-6-link: monitor:transcripts.adoc
-
-:page-footer-note: <strong>New to ADP?</strong> Read <a href="../get-started/adp-overview/">What is ADP?</a> for a quick tour of the platform, then pick a path above.
+:page-concept-5-title: Build in ADP versus bring your own
+:page-concept-5-desc: When to use declarative agents versus registering agents you built elsewhere.
+:page-concept-5-link: connect:agents-overview.adoc
+:page-concept-6-title: How agents, tools, and data fit
+:page-concept-6-desc: The three building blocks of ADP and how they connect.
+:page-concept-6-link: connect:concepts.adoc
+:page-footer-note-intro: New to ADP?
+:page-footer-note-text: Read
+:page-footer-note-link: get-started:adp-overview.adoc
+:page-footer-note-link-text: What is ADP?
+:page-footer-note-suffix: for a quick tour of the platform.
