@@ -63,7 +63,7 @@ Block content by meaning rather than exact words, so the policy catches paraphra
 |Topic name, 1 to 100 characters.
 
 |Definition
-|What the topic covers, up to 1000 characters. The definition drives the semantic match, so write it as a clear, self-contained statement of what the topic covers. Keep example phrases and negations out of the definition; put concrete examples in the Examples field instead, which improves accuracy.
+|What the topic covers, up to 1000 characters. The definition drives the semantic match, so write it as a clear, self-contained statement. Keep example phrases and negations out of the definition; put concrete examples in the Examples field instead, which improves accuracy.
 
 |Examples
 |Up to five example phrases, each up to 100 characters, that match the topic.

@@ -42,11 +42,9 @@ This guide does not cover building agents that *call* Claude Code. For that, see
 https://aigw.<cluster-id>.clusters.rdpa.co/llm/v1/providers/<provider-name>
 ----
 +
-The *Connect your app* section of the detail page also exposes a ready-to-paste Claude Code snippet pre-filled with this URL. Use it instead of hand-editing if you want to skip the next section.
+The provider's *Connect* tab also generates a ready-to-paste Claude Code configuration (environment variables or a settings-file snippet) pre-filled with this URL: pick `Claude Code` from the client dropdown. Use it instead of hand-editing if you want to skip the next section.
 
 == Configure Claude Code
-
-TIP: The provider's *Connect* tab in ADP generates this Claude Code configuration (environment variables or a settings-file snippet) with your provider's proxy URL prefilled. Pick *Claude Code* under *Connect to your client*.
 
 Claude Code reads the Anthropic base URL and an authentication token from environment variables. Set both to point at the ADP proxy URL.
 

@@ -128,7 +128,7 @@ For the full provider field reference (transcript logging, Bedrock IAM, Anthropi
 [[builders-create-an-mcp-server-and-agent]]
 == Builders: Create an MCP server and agent
 
-With a provider in place, a builder creates a tool server and an agent that uses it. Both use a step-by-step wizard in the UI.
+With a provider in place, a builder creates a tool server and an agent that uses it. Both are configured in the UI: the server from a marketplace picker, the agent on a single configuration page.
 
 TIP: If your administrator has already configured an LLM provider, you can skip the provider setup and start here. Select the existing provider in the agent form's *Model* section.
 
@@ -164,8 +164,6 @@ image::create-mcp-server-picker.png[The Create MCP Server marketplace picker fil
 . Click *Create*.
 
 . Redpanda fetches the spec, parses it, and generates one MCP tool per operation. When the server is ready, open its detail page.
-+
-image::mcp-server-detail-tabs.png[The petstore-quickstart MCP server detail page with a Managed badge, an Enabled badge, and the Overview, Connection, and Inspector tabs]
 
 . On the *Overview* tab, copy the `API URL`. This is the MCP URL the agent connects to.
 
@@ -185,7 +183,7 @@ Combine the Anthropic provider and the PetStore MCP server into an agent. ADP co
 
 . Choose how the agent runs. Click `Redpanda manages it`, so Redpanda deploys, runs, and observes the agent for you.
 +
-image::shared:create-agent-runtime-choice.png[The runtime choice in the agent wizard, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
+image::shared:create-agent-runtime-choice.png[The runtime choice in the create-agent flow, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
 +
 NOTE: The other option, `I host it myself`, registers an agent you run on your own infrastructure. This quickstart uses the managed runtime.
 

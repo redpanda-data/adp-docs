@@ -9,7 +9,7 @@
 // Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (AgentCreate, ManagedAgentSpec) cross-referenced against `apps/adp-ui/src/routes/_authenticated/agents/create.page.tsx` on origin/main and a live adp-production screenshot, verified 2026-06-10.
 // This page follows the single-page create form with five sections (Details, Model, Behavior, Tools, Subagents) and a scroll-synced stepper. The old six-step Continue/Back wizard (Basics ... Review) is gone.
 
-Create a new glossterm:AI agent[] declaratively through Redpanda ADP. No Python or JavaScript code required. This guide walks through the create wizard step by step, then covers the post-create steps for discovery metadata and testing.
+Create a new glossterm:AI agent[] declaratively through Redpanda ADP. No Python or JavaScript code required. This guide walks through the create form section by section, then covers the post-create steps for discovery metadata and testing.
 
 After reading this page, you will be able to:
 
@@ -29,7 +29,7 @@ After reading this page, you will be able to:
 . Click *Create agent*.
 . Choose how the agent runs. Click *Redpanda manages it*, so Redpanda deploys, runs, and observes the agent for you. (To register an agent you build and run yourself, see xref:connect:byoa-register.adoc[].)
 +
-image::shared:create-agent-runtime-choice.png[The runtime choice in the agent wizard, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
+image::shared:create-agent-runtime-choice.png[The runtime choice in the create-agent flow, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
 
 ADP configures the agent on a single page with five sections: Details, Model, Behavior, Tools, and Subagents. A stepper on the left tracks the sections and summarizes what you've set in each; click a step to jump to its section. Required fields are marked with a red asterisk.
 

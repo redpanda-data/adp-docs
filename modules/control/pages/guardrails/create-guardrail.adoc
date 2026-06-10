@@ -76,12 +76,14 @@ Each policy is optional, but a guardrail must enforce at least one. Turn on the 
 The Quick start row at the top of the Policies step applies a preset, a bundle of policy settings for a common goal:
 
 * *Content safety*: Blocks hate speech, insults, sexual content, violence, and misconduct at high strength.
-* *PII protection*: Masks emails, phone numbers, names, addresses, card numbers, and US social security numbers.
+* *PII protection*: Masks emails, phone numbers, names, addresses, card numbers, and US Social Security numbers.
 * *Prompt attack defense*: Blocks jailbreak and prompt-injection attempts before they reach the model.
 
 Presets are additive: applying one never removes rules you already configured. Apply a preset, then adjust the individual policies it turned on.
 
 === Choose individual policies
+
+Turn on each policy you need and configure its rules:
 
 * Content filters: Harmful-content categories (hate, insults, sexual, violence, misconduct, and prompt attacks).
 * Word filters: Exact words and phrases from your own lists and platform-managed lists such as profanity.
