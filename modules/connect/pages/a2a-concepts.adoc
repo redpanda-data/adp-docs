@@ -1,5 +1,5 @@
 = Connect Agents with A2A
-:description: Learn how the A2A protocol enables agent discovery and communication.
+:description: The A2A protocol enables agents to discover and call each other across platforms. Learn how agent cards, authentication, and protocol versioning work in ADP.
 :page-topic-type: concepts
 :personas: agent_builder
 :learning-objective-1: Describe the A2A protocol and its role in agent communication
@@ -79,7 +79,7 @@ A2A enables dynamic discovery without hardcoded configuration:
 
 This discovery model allows:
 
-* New agents to become available immediately once deployed
+* New agents become available immediately after deployment
 * Existing agents to update their capabilities while callers adapt dynamically
 * Callers to understand exactly what agents do through self-describing agent cards
 
