@@ -3,7 +3,7 @@
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Describe what an agent trigger is and how a trigger invokes an agent
-:learning-objective-2: Add, edit, and disconnect a trigger on an agent
+:learning-objective-2: Describe how triggers are added, edited, and disconnected on an agent
 :learning-objective-3: Interpret the status that an agent's Triggers tab reports for each trigger
 
 // Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, TeamsTrigger) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` on origin/main, verified against adp-production on 2026-06-11. Only Microsoft Teams is selectable in the production trigger picker; do not list other kinds here.
