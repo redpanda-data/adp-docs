@@ -153,7 +153,7 @@ image::create-mcp-server-picker.png[The Create MCP Server marketplace picker fil
 
 . Leave the `Code mode` toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools; the PetStore catalog is small enough that you don't need it for this quickstart.
 
-. `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`. Provide a URL rather than pasting inline spec content; inline specs are capped at 1 MiB.
+. `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`. Provide a URL rather than pasting inline spec content; inline specs are capped at 3 MiB.
 
 . `Base URL override`: Leave blank. The PetStore spec already declares the right `servers` block, so no override is needed.
 
