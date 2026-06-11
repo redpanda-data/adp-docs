@@ -62,7 +62,7 @@ You attach a guardrail by setting an AWS Bedrock LLM provider's guardrail. The g
 
 == What happens when a guardrail blocks
 
-When a policy blocks an input, ADP stops the request and returns your configured blocked input message to the caller. When a policy blocks an output, ADP returns your configured blocked output message instead of the model's response. The sensitive-information policy can also anonymize matched PII in place rather than block, replacing each match with its entity type, such as `{EMAIL}`.
+When a policy blocks an input, ADP stops the request and returns your configured blocked input message to the caller. When a policy blocks an output, ADP returns your configured blocked output message instead of the model's response. The sensitive-information policy can also anonymize matched PII in place rather than block, replacing each match with its entity type, such as `{EMAIL}`. On output, ADP delivers the redacted response. On input, this release does not forward the redacted prompt to the model: ADP short-circuits the request like a block and returns your configured blocked input message.
 
 ADP records guardrail activity as attributes on the request's OpenTelemetry trace, which you read in glossterm:transcript[,transcripts]. This release does not include a separate violations dashboard. See xref:control:guardrails/violations.adoc[Review blocked requests] for how a blocked request surfaces.
 

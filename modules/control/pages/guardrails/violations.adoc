@@ -18,7 +18,7 @@ After reading this page, you will be able to:
 
 * Blocked input: ADP stops the request before it reaches the model and returns your configured blocked input message.
 * Blocked output: ADP returns your configured blocked output message instead of the model's response.
-* Anonymized PII: When the sensitive-information policy is set to anonymize, the request continues with each match replaced in place by its entity type, such as `{EMAIL}`.
+* Anonymized PII: When the sensitive-information policy anonymizes a match on output, ADP delivers the response with each match replaced in place by its entity type, such as `{EMAIL}`. On input, this release does not forward the redacted prompt to the model: ADP short-circuits the request like a block and returns your configured blocked input message, not the redacted prompt.
 
 Automated reasoning never blocks. It records findings on the trace for your application to act on.
 
