@@ -196,7 +196,7 @@ NOTE: The other option, `I host it myself`, registers an agent you run on your o
 
 . In the *Model* section, set the following:
 +
-* `LLM provider`: Select `anthropic-quickstart`. This provider supplies the credentials and routing for the agent. The dropdown lists every provider configured for your organization. If it's empty, no provider exists yet: ask your administrator to configure one, or complete the admin steps first.
+* `LLM provider`: Select `anthropic-quickstart`. This provider supplies the credentials and routing for the agent. The dropdown lists every provider configured for your organization. If it's empty, no provider exists yet. Ask your administrator to configure one, or complete the admin steps first.
 * `Model`: Select `claude-sonnet-4-6`. Sonnet handles multi-step tool use more reliably than Haiku.
 +
 Leave the `Advanced` options, such as `Max iterations`, at their defaults.
