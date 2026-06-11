@@ -38,7 +38,7 @@ By default the generator walks schemas up to a depth of 5 (`max_schema_depth`); 
 . Fill in identity fields (`name`, `description`).
 . In the OpenAPI configuration form:
 +
-* `Spec`: A URL to the OpenAPI 3.x spec (JSON or YAML), or paste the spec inline. Set exactly one. Inline specs are capped at 1 MiB; host larger specs and use the URL instead.
+* `Spec`: A URL to the OpenAPI 3.x spec (JSON or YAML), or paste the spec inline. Set exactly one. Inline specs are capped at 3 MiB; host larger specs and use the URL instead.
 * `Base URL override` (optional): Useful when the spec's `servers` block doesn't match your environment.
 * `Operation filter` (optional): Include or exclude operations by tag, `operationId` glob, path glob, or HTTP method.
 * `Max schema depth` (optional): Maximum depth for schema conversion. Defaults to 5.

@@ -36,7 +36,7 @@ The xref:control:permissions-overview.adoc[built-in role] you need depends on wh
 This quickstart configures an Anthropic provider, but ADP also supports OpenAI, Google AI, AWS Bedrock, and OpenAI-compatible endpoints. To set up the Anthropic provider, you need:
 
 * The xref:control:permissions-overview.adoc[Admin or Writer role] in ADP.
-* An Anthropic account. If you don't have one, the Get an Anthropic API key section walks through signup.
+* An Anthropic account. If you don't have one, the <<get-an-anthropic-api-key,Get an Anthropic API key>> section walks through signup.
 
 === For builders
 
@@ -57,7 +57,7 @@ After the agent works, you can walk through one execution turn-by-turn in the *T
 
 == Admins: Configure an LLM provider
 
-A provider is an organization-level resource. Configure it once, and every builder can select it when they create agents. The following sections walk through getting an Anthropic API key and pointing ADP at Anthropic; the key lands in the ADP secret store along the way.
+A provider is an organization-level resource. Configure it once, and every builder can select it when they create agents. The following sections walk through getting an Anthropic API key and pointing ADP at Anthropic.
 
 === Get an Anthropic API key
 
@@ -119,7 +119,7 @@ The catalog of available models is maintained by Redpanda. Models you select her
 
 . Click *Create provider*.
 
-. On the provider detail page, confirm the badge next to the provider name shows `Enabled` and the `Status` in the Connection card shows `Active`. The agent you build in this quickstart exercises the provider end to end.
+. On the provider detail page, confirm the badge next to the provider name shows `Enabled` and the `Status` in the Connection card shows `Active`.
 
 If the Status badge stays in a failure state, see the xref:gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace ADP can read.
 
@@ -147,13 +147,13 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 +
 image::create-mcp-server-picker.png[The Create MCP Server marketplace picker filtered by a search for openAPI, showing the Remote (Proxied) card and the OpenAPI card]
 
-. `Name`: Enter `petstore-quickstart`. The name accepts lowercase letters, numbers, and hyphens.
+. `Name`: Enter `petstore-quickstart`.
 
 . `Description`: Enter `Public PetStore API exposed as MCP tools for quickstart testing`. Optional, but helps you find the server later.
 
-. Leave the `Code mode` toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools; the PetStore catalog is small enough that you don't need it for this quickstart.
+. Leave the `Code mode` toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools. The PetStore catalog is small enough that you don't need it for this quickstart.
 
-. `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`. Provide a URL rather than pasting inline spec content; inline specs are capped at 1 MiB.
+. `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`.
 
 . `Base URL override`: Leave blank. The PetStore spec already declares the right `servers` block, so no override is needed.
 
@@ -196,7 +196,7 @@ NOTE: The other option, `I host it myself`, registers an agent you run on your o
 
 . In the *Model* section, set the following:
 +
-* `LLM provider`: Select `anthropic-quickstart`. This provider supplies the credentials and routing for the agent. The dropdown lists every provider configured for your organization. If it's empty, no provider exists yet: ask your administrator to configure one, or complete the admin steps first.
+* `LLM provider`: Select `anthropic-quickstart`. This provider supplies the credentials and routing for the agent. The dropdown lists every provider configured for your organization. If it's empty, no provider exists yet. Ask your administrator to configure one, or complete the admin steps first.
 * `Model`: Select `claude-sonnet-4-6`. Sonnet handles multi-step tool use more reliably than Haiku.
 +
 Leave the `Advanced` options, such as `Max iterations`, at their defaults.
