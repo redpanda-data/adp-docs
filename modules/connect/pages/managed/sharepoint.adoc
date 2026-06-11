@@ -157,12 +157,12 @@ Create a new SharePoint MCP server in ADP:
 . Open *MCP Servers > Create server*.
 . Pick *SharePoint* from the marketplace picker.
 +
-image::sharepoint-marketplace-picker.png["The Create MCP Server marketplace picker filtered to sharepoint, showing the SharePoint managed type card next to the Remote (Proxied) option"]
+image::sharepoint-marketplace-picker.png["The Create MCP Server marketplace picker filtered to SharePoint, showing the SharePoint managed type card next to the Remote (Proxied) option"]
 . Fill in the identity fields (`name`, `description`).
 . Under *Auth*, select *User OAuth* (the only option for this type), then set *Provider Name* to the SharePoint OAuth provider you configured.
 . Under *Required Scopes*, add `Sites.ReadWrite.All` (or `Sites.Read.All` for a read-only server).
 +
-image::sharepoint-create-form.png["The Configure SharePoint MCP Server form with User OAuth selected, the sharepoint provider chosen, Sites.ReadWrite.All as a required scope, and the request preview panel showing the resulting userOauth JSON payload"]
+image::sharepoint-create-form.png["The Configure SharePoint MCP Server form with User OAuth selected, the SharePoint provider chosen, Sites.ReadWrite.All as a required scope, and the request preview panel showing the resulting userOauth JSON payload"]
 . Click *Submit*.
 
 The required scopes are enforced against each user's connection. A connection with insufficient scopes returns `scope_upgrade_required`, and the user re-consents with the higher scope.
@@ -192,7 +192,7 @@ The SharePoint server uses per-user OAuth, so each user connects their Microsoft
 +
 If you call a tool before connecting, the call returns an `OAuthConnectionRequired` error carrying an `authorize_url` that points at the gateway's `/oauth/v1/authorize` endpoint. Opening that URL in a browser starts the same Microsoft consent flow.
 +
-image::sharepoint-connect-banner.png["The sharepoint server page after creation, showing the OAuth connection banner with a Connect button above the Overview, Connection, and Inspector tabs, the MCP server URL, and the Tools section showing a count of eight"]
+image::sharepoint-connect-banner.png["The SharePoint server page after creation, showing the OAuth connection banner with a Connect button above the Overview, Connection, and Inspector tabs, the MCP server URL, and the Tools section showing a count of eight"]
 . Open the server's *Inspector* tab and run `list_sites` with the argument `{"search": "*"}`. It returns the sites you can see. See xref:connect:test-tools.adoc[Test an MCP Server's Tools with the Inspector].
 +
 image::sharepoint-inspector-list-sites.png["The Inspector tab running list_sites with the search argument set to an asterisk, with the response panel showing a JSON sites array of the SharePoint sites the signed-in user can access"]
