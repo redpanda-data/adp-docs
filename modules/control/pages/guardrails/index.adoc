@@ -2,4 +2,4 @@
 :description: Understand how guardrails work, create them, review blocked requests, and look up the available policies.
 :page-layout: index
 
-Guardrails inspect and control the requests and responses that flow through your LLM providers. Learn how they work, create one, review blocked requests, and look up the available policies.
+Guardrails inspect and control the requests and responses that flow through your AWS Bedrock LLM providers. Learn how they work, create one, review blocked requests, and look up the available policies.

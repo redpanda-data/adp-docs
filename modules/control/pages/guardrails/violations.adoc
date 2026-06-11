@@ -49,9 +49,9 @@ If you expect a guardrail to act and it doesn't:
 
 * Confirm the guardrail is enabled. A disabled guardrail keeps its configuration but skips evaluation.
 * Confirm the specific policy's *Evaluate this policy* toggle is on. A saved-but-not-evaluated policy takes no action.
-* Confirm the provider the request used references this guardrail. A guardrail acts only on providers that reference it.
+* Confirm the Bedrock provider the request used references this guardrail. A guardrail acts only on providers that reference it.
 * Confirm the direction. An output-only policy such as contextual grounding never acts on input, and output policies are skipped for streaming responses.
-* Confirm the request actually went through the provider. Direct-to-provider requests that bypass ADP are not evaluated.
+* Confirm the request actually went through the Bedrock provider. Direct-to-provider requests that bypass ADP are not evaluated.
 
 == Next steps
 
