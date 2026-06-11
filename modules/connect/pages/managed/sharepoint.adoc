@@ -83,7 +83,11 @@ https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback
 ----
 +
 Replace `<cluster-id>` with your cluster identifier. The callback path is `/oauth/v1/callback`.
++
+image::sharepoint-entra-register.png[The Entra Register an application form with the app name filled in, Supported account types set to single tenant only, and the Redirect URI row set to platform Web with the gateway's OAuth callback URL]
 . After registering, note the *Application (client) ID* and *Directory (tenant) ID* from the app's Overview page. You need both when you configure the glossterm:OAuth provider[].
++
+image::sharepoint-entra-app-overview.png[The Entra app's Overview page with the Essentials pane showing where the Application (client) ID and Directory (tenant) ID values appear]
 
 [TIP]
 ====
@@ -107,6 +111,8 @@ In the Microsoft Entra admin center, open the app's *API permissions*, select *A
 
 The `openid`, `profile`, `email`, and `User.Read` scopes come from the OAuth provider's standard scopes.
 
+image::sharepoint-entra-permissions.png[The Entra app's API permissions page listing the delegated Microsoft Graph permissions Sites.ReadWrite.All, Sites.Read.All, offline_access, and User.Read, each with admin consent granted]
+
 [IMPORTANT]
 ====
 Use the *Microsoft Graph* permissions, not the legacy *Office 365 SharePoint Online* API in the picker. The server calls Microsoft Graph only.
@@ -117,6 +123,8 @@ Use the `Sites.*` scopes, not `Files.*`. The server's file and list endpoints al
 == Create a client secret
 
 In the Microsoft Entra admin center, open the app's *Certificates & secrets* and select *New client secret*. Give it a description, choose an expiry, and select *Add*. Copy the secret value immediately; Microsoft never shows it again.
+
+image::sharepoint-entra-client-secret.png[The Entra Certificates & secrets page with the Add a client secret panel open, a description entered, and the recommended 180-day expiry selected]
 
 Store the secret in the ADP secret store under an `UPPER_SNAKE_CASE` key, for example, `SHAREPOINT_CLIENT_SECRET`. The OAuth provider references the secret by name, so the plaintext never enters the MCP server configuration.
 
@@ -138,15 +146,23 @@ Register an OAuth provider in ADP that points at Microsoft's tenant-specific end
 * *Token auth method*: Client secret in the POST body, with PKCE enabled (matches the Microsoft preset).
 * *Scopes*: `openid`, `email`, `profile`, `User.Read`, `Sites.ReadWrite.All`, `offline_access`.
 
+The provider page also shows the *Authorization Callback URL* to register as the Entra app's redirect URI.
+
+image::sharepoint-oauth-provider.png[The SharePoint OAuth provider detail page showing the authorization callback URL, the tenant-specific Microsoft endpoints, the client ID, the SHAREPOINT_CLIENT_SECRET reference, the Client Secret POST auth method with PKCE required, and the six default scopes]
+
 == Create the server
 
 Create a new SharePoint MCP server in ADP:
 
 . Open *MCP Servers > Create server*.
 . Pick *SharePoint* from the marketplace picker.
++
+image::sharepoint-marketplace-picker.png[The Create MCP Server marketplace picker filtered to "sharepoint", showing the SharePoint managed type card next to the Remote (Proxied) option]
 . Fill in the identity fields (`name`, `description`).
 . Under *Auth*, select *User OAuth* (the only option for this type), then set *Provider Name* to the SharePoint OAuth provider you configured.
 . Under *Required Scopes*, add `Sites.ReadWrite.All` (or `Sites.Read.All` for a read-only server).
++
+image::sharepoint-create-form.png[The Configure SharePoint MCP Server form with User OAuth selected, the sharepoint provider chosen, Sites.ReadWrite.All as a required scope, and the request preview panel showing the resulting userOauth JSON payload]
 . Click *Submit*.
 
 The required scopes are enforced against each user's connection. A connection with insufficient scopes returns `scope_upgrade_required`, and the user re-consents with the higher scope.
@@ -175,7 +191,11 @@ The SharePoint server uses per-user OAuth, so each user connects their Microsoft
 . Open the server in ADP. If you haven't connected to the SharePoint OAuth provider yet, a connection banner with a *Connect* button appears above the server's tabs. Click *Connect*, sign in to Microsoft, and approve the consent screen. The token lands in the vault keyed to your identity.
 +
 If you call a tool before connecting, the call returns an `OAuthConnectionRequired` error carrying an `authorize_url` that points at the gateway's `/oauth/v1/authorize` endpoint. Opening that URL in a browser starts the same Microsoft consent flow.
++
+image::sharepoint-connect-banner.png[The sharepoint server page after creation, showing the OAuth connection banner with a Connect button above the Overview, Connection, and Inspector tabs, the MCP server URL, and the list of eight tools]
 . Open the server's *Inspector* tab and run `list_sites` with the argument `{"search": "*"}`. It returns the sites you can see. See xref:connect:test-tools.adoc[Test an MCP Server's Tools with the Inspector].
++
+image::sharepoint-inspector-list-sites.png[The Inspector tab running list_sites with the search argument set to an asterisk, with the response panel showing a JSON sites array of the SharePoint sites the signed-in user can access]
 
 [TIP]
 ====
