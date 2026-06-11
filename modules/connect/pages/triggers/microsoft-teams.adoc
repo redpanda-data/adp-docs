@@ -35,6 +35,9 @@ The Microsoft steps refer to a third-party product. Specific UI elements may not
 
 . Go to the https://dev.teams.microsoft.com/tools[Teams Developer Portal^] and open *Tools* > *Bot management*.
 . Click *New bot*, enter a name, and create it.
++
+image::connect:teams-devportal-bots.png[The Bot management page in the Teams Developer Portal, with a New bot button and a list showing each bot's name and bot ID]
+
 . Leave the endpoint address blank for now. You get the URL from Redpanda later.
 
 == Generate a client secret
@@ -44,6 +47,8 @@ In the bot's settings:
 . Click *Client secrets*.
 . Click *New client secret*.
 . Copy the generated secret value and store it securely. The value is shown only when you create it.
++
+image::connect:teams-devportal-secret.png[The Client secret created dialog in the Teams Developer Portal, showing a masked secret value with copy and reveal buttons]
 
 You now have two values from the Teams side: the bot ID, shown in the bot list, and the client secret you just generated. The bot ID and the application (client) ID of the bot's app registration are the same value.
 
@@ -61,6 +66,8 @@ Creating a bot in the Teams Developer Portal also creates a matching app registr
 . In the https://portal.azure.com[Azure portal^], search for *App registrations*.
 . Open the *Owned applications* tab and select your bot's app registration.
 . On the *Overview* page, note the application (client) ID and the directory (tenant) ID. You need both when you add the trigger.
++
+image::connect:azure-app-overview.png[The Essentials pane of an app registration in the Azure portal, listing the display name, application client ID, and directory tenant ID]
 
 === Set the account type to single-tenant
 
@@ -71,6 +78,9 @@ The app registration must be single-tenant. A multi-tenant configuration causes 
 
 . In the app registration, open *Authentication*.
 . On the *Supported accounts* tab, select the single-tenant option for the supported account types. Depending on the portal experience, it is labeled *Single tenant only* or *Accounts in this organizational directory only*.
++
+image::connect:azure-supported-accounts.png[The Supported accounts tab of the app registration's Authentication page in the Azure portal, with the supported account types set to single tenant only]
+
 . Save.
 
 === Add Microsoft Graph permissions
@@ -97,6 +107,8 @@ The trigger uses the bot's own credentials to look up the message sender's email
 |===
 
 . Click *Grant admin consent*. The button includes your organization's name. The status of each permission changes from *Not granted* to *Granted*.
++
+image::connect:azure-api-permissions.png[The Configured permissions table on the app registration's API permissions page, showing the three Microsoft Graph application permissions with a granted status]
 +
 [NOTE]
 ====
@@ -157,6 +169,9 @@ If the status changes to *Error* instead, the message on the card explains the r
 . Go back to the https://dev.teams.microsoft.com/tools[Teams Developer Portal^].
 . Open *Tools* > *Bot management* and select your bot.
 . Paste the messaging endpoint URL into the endpoint address field.
++
+image::connect:teams-devportal-endpoint.png[The bot's Configure page in the Teams Developer Portal, with the messaging endpoint URL pasted into the endpoint address field]
+
 . Save.
 
 If you manage the bot as an Azure Bot resource instead, paste the URL into the *Messaging endpoint* field on the bot's *Configuration* page in the Azure portal.
