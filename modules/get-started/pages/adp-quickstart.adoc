@@ -147,13 +147,13 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 +
 image::create-mcp-server-picker.png[The Create MCP Server marketplace picker filtered by a search for openAPI, showing the Remote (Proxied) card and the OpenAPI card]
 
-. `Name`: Enter `petstore-quickstart`. The name accepts lowercase letters, numbers, and hyphens.
+. `Name`: Enter `petstore-quickstart`.
 
 . `Description`: Enter `Public PetStore API exposed as MCP tools for quickstart testing`. Optional, but helps you find the server later.
 
 . Leave the `Code mode` toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools; the PetStore catalog is small enough that you don't need it for this quickstart.
 
-. `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`. Provide a URL rather than pasting inline spec content; inline specs are capped at 3 MiB.
+. `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`.
 
 . `Base URL override`: Leave blank. The PetStore spec already declares the right `servers` block, so no override is needed.
 
