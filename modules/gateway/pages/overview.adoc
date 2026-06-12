@@ -50,7 +50,7 @@ Applications authenticate to ADP with OIDC service accounts instead of long-live
 
 === Per-provider observability
 
-The provider's detail page in ADP records spend, request counts, and token counts for the last 7 days. The *Cost & Usage* page under *Governance* expands that view with time-series charts, provider and model grouping, date ranges, and filters for provider, model, cost type, token type, and user.
+The provider's detail page in ADP records spend, request counts, and token counts for the last 7 days. The *Cost & Usage* page under *Governance* expands that view with time-series charts, provider and model grouping, date ranges, and filters for provider, model, cost type, token type, user, and agent.
 
 == What's in the UI
 
@@ -65,9 +65,9 @@ In ADP (https://ai.redpanda.com[ai.redpanda.com^]) you'll find these areas:
 * *OAuth Clients*: Register external tools (Claude.ai, ChatGPT, Cursor) that request access tokens from the gateway.
 * *Connections*: Per-user OAuth connections to the configured providers.
 * *Secrets Store*: Create and manage the secrets that providers, MCP servers, and agents reference by name.
-* *Governance*: Cost & Usage charts across providers, models, and agents, and per-agent spend budgets.
+* *Governance*: The *Cost & Usage* page for spend, request, and token analysis across providers, models, and agents, and the *Budgets* page for per-agent spend caps.
 
-LLM Providers is where you'll spend most of your time. The others are covered by their own docs.
+LLM Providers is where you configure provider settings. The others are covered by their own docs.
 
 == Supported providers
 
