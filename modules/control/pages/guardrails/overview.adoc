@@ -60,6 +60,8 @@ For streaming responses, ADP skips output evaluation in this release. Input eval
 
 You attach a guardrail by setting an AWS Bedrock LLM provider's guardrail. The guardrail setting appears in the provider's Bedrock settings, and only Bedrock providers can reference a guardrail. Each provider references at most one guardrail, and a single guardrail can be reused across many providers. The guardrail's detail page lists the providers that use it. You create and configure the guardrail first, then attach it from the provider. See xref:control:guardrails/create-guardrail.adoc[Create a guardrail].
 
+This reference is enforced in both directions. A provider can only point at a guardrail that exists, and you cannot delete a guardrail while a provider still references it. To remove a guardrail that is in use, detach it from each provider first.
+
 == What happens when a guardrail blocks
 
 When a policy blocks an input, ADP stops the request and returns your configured blocked input message to the caller. When a policy blocks an output, ADP returns your configured blocked output message instead of the model's response.
