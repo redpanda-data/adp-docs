@@ -78,7 +78,7 @@ Create an OAuth Client to give the chat app the credentials it needs to authenti
 
 . Open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its `Name`, `Grant Types`, `Status`, and `Scopes`.
 . Click *Register Client*.
-. Pick a well-known client to prefill its redirect URIs and recommended scopes, or choose *Custom Client* to register one from scratch. The catalog includes *Claude.ai Custom Connectors*, *Claude Desktop*, *ChatGPT*, *Cursor*, and *Windsurf*. For any client not in the catalog (for example, Gemini apps or Microsoft Copilot Studio), use *Custom Client* and paste the redirect URIs the tool publishes.
+. Pick a well-known client to prefill its redirect URIs and recommended scopes, or choose *Custom Client* to register one from scratch. The catalog includes *Claude.ai Custom Connectors*, *Claude Desktop*, *ChatGPT*, *Cursor*, *Windsurf*, *Visual Studio Code* (which also covers GitHub Copilot in VS Code), *Zed*, *Gemini CLI*, and *mcp-remote bridge* (a stdio-to-HTTP bridge for clients without native remote OAuth). For any client not in the catalog (for example, the Gemini consumer apps or Microsoft Copilot Studio), use *Custom Client* and paste the redirect URIs the tool publishes.
 . Fill in the form:
 +
 [cols="1,3"]
@@ -153,11 +153,15 @@ NOTE: Anthropic's modal warns that connectors are user-trust-based; Anthropic do
 
 == Wire up other chat clients
 
-The flow mirrors Claude Desktop. *ChatGPT*, *Cursor*, and *Windsurf* have catalog presets in the *Register Client* flow that prefill their redirect URIs; the others use a *Custom Client*. The exact menu paths and field labels differ by client:
+The flow mirrors Claude Desktop. *ChatGPT*, *Cursor*, *Windsurf*, *Visual Studio Code*, *Zed*, *Gemini CLI*, and *mcp-remote bridge* have catalog presets in the *Register Client* flow that prefill their redirect URIs; the others use a *Custom Client*. The exact menu paths and field labels differ by client:
 
 * *ChatGPT desktop*: Recent builds support remote MCP custom connectors. Confirm the latest menu path; OpenAI iterates on this surface.
 * *Cursor*: Supports remote MCP servers in recent builds.
 * *Windsurf*: Supports remote MCP servers in recent builds.
+* *Visual Studio Code*: Built-in MCP support, shared with GitHub Copilot in VS Code. Has a catalog preset.
+* *Zed*: Supports remote MCP server OAuth. Has a catalog preset.
+* *Gemini CLI*: Supports MCP server OAuth. Has a catalog preset. This is the command-line tool, distinct from the consumer Gemini apps, which use a *Custom Client*.
+* *mcp-remote bridge*: For stdio-only MCP clients bridged through `npx mcp-remote <url>`. Has a catalog preset.
 * *Gemini apps*: Recent builds support remote MCP custom connectors. Register through *Custom Client*.
 * *Microsoft Copilot Studio*: Recent builds support remote MCP custom connectors registered against an external OAuth 2.0 authorization server. Register through *Custom Client*, and add Copilot Studio's published redirect URIs to the AI Gateway OAuth Client before connecting.
 
