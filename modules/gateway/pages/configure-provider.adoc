@@ -138,17 +138,33 @@ AWS Bedrock::
 |`Base URL`
 |Optional. Override the default regional Bedrock endpoint.
 
+|`Credential type`
+|How AI Gateway authenticates to Bedrock: *Default chain*, *Static keys*, or *Assume IAM role*. The fields below depend on the mode you pick.
+
 |`Access key ID reference`
-|Secret-store reference for the AWS access key ID, `UPPER_SNAKE_CASE` (typically `AWS_ACCESS_KEY_ID`). Leave both credential references empty to fall back to the default credential chain (environment variables, IRSA, EKS Pod Identity, or instance profile).
+|*Static keys only.* Secret-store reference for the AWS access key ID, `UPPER_SNAKE_CASE` (typically `AWS_ACCESS_KEY_ID`).
 
 |`Secret access key reference`
-|Secret-store reference for the AWS secret access key, `UPPER_SNAKE_CASE` (typically `AWS_SECRET_ACCESS_KEY`).
+|*Static keys only.* Secret-store reference for the AWS secret access key, `UPPER_SNAKE_CASE` (typically `AWS_SECRET_ACCESS_KEY`).
+
+|`Role ARN`
+|*Assume IAM role only.* Required. ARN of the IAM role AI Gateway assumes through AWS STS, for example `arn:aws:iam::123456789012:role/BedrockRole`.
+
+|`External ID`
+|*Assume IAM role only.* Optional. External ID for cross-account role assumption. Set it only when the role's trust policy mandates an external ID.
+
+|`Session name`
+|*Assume IAM role only.* Optional. Session name that appears in AWS CloudTrail audit logs, for example `redpanda-adp`.
 
 |`Guardrail`
 |Optional. Name of a xref:control:guardrails/overview.adoc[guardrail] to attach to this provider, or empty for none. Only the Bedrock provider type exposes this setting. AI Gateway validates the name when you save: it rejects a guardrail that doesn't exist or is being deleted, so set the field to an existing guardrail or leave it empty. See xref:control:guardrails/create-guardrail.adoc[Create a guardrail].
 |===
 +
-The create form exposes static credentials (and the default-chain fallback when you leave both references empty). To configure an assume-role credential (`role_arn`, optional `external_id` when the role's trust policy mandates it, and optional `session_name` that surfaces in CloudTrail), use the API or the `rpk ai llm` CLI instead of the form.
+Pick a *Credential type* to control how AI Gateway authenticates to Bedrock:
++
+* *Default chain* (default): Leave the credentials unset to use the AWS SDK's default provider chain (environment variables, shared config, EKS Pod Identity, IRSA, or instance profile). Use this when the gateway already runs with an AWS identity.
+* *Static keys*: An access key pair stored in the secret store. Use this when no ambient AWS identity is available. This is the path the xref:gateway:bedrock-setup.adoc[Bedrock setup guide] walks through.
+* *Assume IAM role*: AI Gateway assumes an IAM role through AWS STS. Use this for cross-account access or when your security policy requires short-lived credentials.
 
 OpenAI-compatible::
 +
