@@ -139,7 +139,7 @@ AWS Bedrock::
 |Optional. Override the default regional Bedrock endpoint.
 
 |`Credential type`
-|How AI Gateway authenticates to Bedrock: *Default chain*, *Static keys*, or *Assume IAM role*. Defaults to *Default chain*. The fields below depend on the mode you pick.
+|How AI Gateway authenticates to Bedrock: *Default chain*, *Static keys*, or *Assume IAM role*. The fields below depend on the mode you pick.
 
 |`Access key ID reference`
 |*Static keys only.* Secret-store reference for the AWS access key ID, `UPPER_SNAKE_CASE` (typically `AWS_ACCESS_KEY_ID`).

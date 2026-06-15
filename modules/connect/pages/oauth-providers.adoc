@@ -92,7 +92,7 @@ Walk through the create form to register the upstream:
 . Click *Create provider*.
 . Pick a preset from the catalog, or choose *Custom Provider* to enter the endpoints yourself. Picking a preset pre-fills the standard authorization and token endpoints and recommended scopes.
 +
-The catalog groups presets into categories you can filter with the category chips: *Identity & SSO*, *Code & Dev*, *Productivity*, *Files & Storage*, *Communication*, *CRM & Support*, *Data Platform*, *Observability*, *Infrastructure*, and *HR & Legal*. It covers common providers across these categories, such as GitHub, Google, Okta, Microsoft, Slack, GitLab, Atlassian (Jira and Confluence), Bitbucket, Linear, Discord, Dropbox, and HubSpot, with more added over time. For any upstream without a preset, use *Custom Provider* and enter its endpoints manually.
+The catalog groups presets into categories you can filter with the category chips: *Identity & SSO*, *Code & Dev*, *Productivity*, *Files & Storage*, *Communication*, *CRM & Support*, *Data Platform*, *Observability*, *Infrastructure*, and *HR & Legal*. It covers common providers across these categories, such as GitHub, Google, Okta, Microsoft, and Slack, with more added over time. For any upstream without a preset, use *Custom Provider* and enter its endpoints manually.
 +
 // TODO: capture screenshots of the catalog picker. The preset allowlist is apps/adp-ui/src/lib/oauth-provider-presets.ts.
 +
