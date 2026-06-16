@@ -27,7 +27,7 @@ After reading this page, you will be able to:
 
 . Open *Agents* in the sidebar.
 . Click *Create agent*.
-. Choose how the agent runs. Click *Redpanda manages it*, so Redpanda deploys, runs, and observes the agent for you. (To register an agent you build and run yourself, see xref:connect:byoa-register.adoc[].)
+. Choose how the agent runs. Click *Redpanda manages it*, so Redpanda deploys, runs, and observes the agent for you. (To run an agent you host yourself, see xref:connect:self-managed-agents.adoc[].)
 +
 image::shared:create-agent-runtime-choice.png[The runtime choice in the create-agent flow, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
 

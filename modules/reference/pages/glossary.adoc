@@ -7,7 +7,6 @@
 * glossterm:AI agent[]
 * glossterm:AI Gateway[]
 * glossterm:declarative agent[]
-* glossterm:BYOA (bring your own agent)[]
 * glossterm:MCP server[]
 * glossterm:MCP tool[]
 * glossterm:tool[]

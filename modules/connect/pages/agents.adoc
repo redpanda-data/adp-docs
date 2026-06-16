@@ -2,4 +2,4 @@
 :description: Understand how AI agents work in the Agentic Data Plane, then create, register, and design them.
 :page-layout: index
 
-Agents are the workloads that call LLMs and tools through the Agentic Data Plane. Start with how agents work, then create a declarative agent, register one you run yourself, and apply architecture and system-prompt best practices.
+Agents are the workloads that call LLMs and tools through the Agentic Data Plane. Start with how agents work, then create a declarative agent, set up an agent you host yourself, and apply architecture and system-prompt best practices.
