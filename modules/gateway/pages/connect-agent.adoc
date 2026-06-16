@@ -373,6 +373,29 @@ response = client.chat.completions.create(
 The provider detail page also has client guides for *Claude Code*, *Codex*, and *Gemini* (the desktop client). Open *Connect your app* on the provider's page to see the per-client setup instructions.
 ====
 
+[[group-requests-into-transcripts]]
+== Group requests into transcripts
+
+AI Gateway groups a session's LLM calls and MCP tool calls into a single transcript using the `X-Redpanda-Genai-Conversation` request header. Stamp this header with your framework's session or thread ID, using the same value on every request in the session, and the gateway maps it to the `gen_ai.conversation.id` attribute on each span so the spans group into one conversation.
+
+This header is required for the agent's *Transcripts* tab to populate. Without it, the gateway drops the spans and the tab stays empty. The header doesn't affect authentication or whether requests succeed.
+
+Set it through your SDK's default-headers mechanism so it rides along with both the LLM call and each MCP tool call:
+
+[source,python]
+----
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    base_url=os.environ["PROXY_URL"],
+    api_key=os.environ["AUTH_TOKEN"],
+    default_headers={"X-Redpanda-Genai-Conversation": session_id},
+)
+----
+
+Replace `session_id` with the session or thread identifier your framework already tracks, and stamp the same value on the session's MCP tool calls so the whole turn groups into one transcript. For how transcripts read this attribute, see xref:monitor:transcripts.adoc[View agent transcripts].
+
 == Streaming responses
 
 Streaming passes through unchanged. Use the SDK's native streaming API; the proxy forwards the stream byte-for-byte.
