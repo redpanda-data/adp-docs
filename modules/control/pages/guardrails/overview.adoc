@@ -60,9 +60,13 @@ For streaming responses, ADP skips output evaluation in this release. Input eval
 
 You attach a guardrail by setting an AWS Bedrock LLM provider's guardrail. The guardrail setting appears in the provider's Bedrock settings, and only Bedrock providers can reference a guardrail. Each provider references at most one guardrail, and a single guardrail can be reused across many providers. The guardrail's detail page lists the providers that use it. You create and configure the guardrail first, then attach it from the provider. See xref:control:guardrails/create-guardrail.adoc[Create a guardrail].
 
+ADP enforces this reference in both directions. A provider can only point at a guardrail that exists, and you cannot delete a guardrail while a provider still references it. To remove a guardrail that is in use, detach it from each provider first.
+
 == What happens when a guardrail blocks
 
-When a policy blocks an input, ADP stops the request and returns your configured blocked input message to the caller. When a policy blocks an output, ADP returns your configured blocked output message instead of the model's response. The sensitive-information policy can also anonymize matched PII in place rather than block, replacing each match with its entity type, such as `{EMAIL}`.
+When a policy blocks an input, ADP stops the request and returns your configured blocked input message to the caller. When a policy blocks an output, ADP returns your configured blocked output message instead of the model's response.
+
+The sensitive-information policy can also anonymize matched PII in place rather than block, replacing each match with its entity type, such as `{EMAIL}`. The two directions differ: on output, ADP delivers the redacted response to the caller. On input, ADP does not forward the redacted prompt to the model. ADP short-circuits the request like a block and returns your configured blocked input message.
 
 ADP records guardrail activity as attributes on the request's OpenTelemetry trace, which you read in glossterm:transcript[,transcripts]. This release does not include a separate violations dashboard. See xref:control:guardrails/violations.adoc[Review blocked requests] for how a blocked request surfaces.
 

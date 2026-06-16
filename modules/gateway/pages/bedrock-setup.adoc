@@ -119,6 +119,7 @@ A successful model response confirms the IAM policy, region, and credentials are
 . Select *AWS Bedrock* as the provider type.
 . Enter a Name such as `my-bedrock`. Use lowercase letters, digits, and hyphens. The name is immutable and appears in the proxy URL.
 . Select the Region where you want to invoke Bedrock, such as `us-east-1`.
+. For Credential type, select *Static keys*. (This guide uses the access keys you created above. For the default-chain and assume-role options, see xref:gateway:configure-provider.adoc[Configure an LLM provider].)
 . Configure the credentials:
 +
 .. In the Access key ID ref dropdown, type a secret name such as `AWS_ACCESS_KEY_ID`.

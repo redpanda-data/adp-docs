@@ -134,6 +134,11 @@ From the guardrails list or a guardrail's detail page:
 * Disable the guardrail to stop evaluation without losing its configuration.
 * Delete the guardrail to remove it permanently. Deletion asks you to confirm by typing the guardrail's name.
 
+[IMPORTANT]
+====
+You cannot delete a guardrail while an LLM provider still references it. ADP blocks the delete and names the providers you must detach first. Open each listed provider, clear its `Guardrail` field, then delete the guardrail. This protects in-flight traffic: if the guardrail were removed while a provider still pointed at it, every request through that provider would fail.
+====
+
 == Next steps
 
 * xref:control:guardrails/types-reference.adoc[Guardrail policy reference]
