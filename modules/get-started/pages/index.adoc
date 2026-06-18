@@ -1,4 +1,5 @@
 = Get Started
+:page-aliases: cloud-data-platform:ai-agents:agents/get-started-index.adoc
 :description: Stand up Redpanda ADP and ship your first agent.
 :page-layout: index
 

@@ -1,4 +1,5 @@
 = Integrate with Redpanda Pipelines
+:page-aliases: cloud-data-platform:ai-agents:agents/pipeline-integration-patterns.adoc, cloud-data-platform:ai-agents:mcp/remote/pipeline-patterns.adoc
 :description: Build Redpanda Connect pipelines that invoke agents for event-driven processing and streaming enrichment.
 :page-topic-type: best-practices
 :personas: agent_builder, platform_engineer

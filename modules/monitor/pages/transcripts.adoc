@@ -1,4 +1,5 @@
 = See What Your Agent Did
+:page-aliases: cloud-data-platform:ai-agents:observability/transcripts.adoc, cloud-data-platform:ai-agents:observability/view-transcripts.adoc
 :description: Open a transcript in ADP, read the conversation turn by turn, and investigate errors, costs, and performance.
 :page-topic-type: how-to
 :personas: agent_builder, domain_evaluator, platform_engineer, security_compliance_lead

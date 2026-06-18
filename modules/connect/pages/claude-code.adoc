@@ -1,4 +1,5 @@
 = Use Claude Code with Redpanda ADP
+:page-aliases: cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-admin.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-user.adoc
 :description: Route Claude Code through an ADP Anthropic provider for centralized credentials, usage tracking, and transcript logging. Optionally attach ADP-hosted MCP servers.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

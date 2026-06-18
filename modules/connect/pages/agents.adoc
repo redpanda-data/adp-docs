@@ -1,4 +1,5 @@
 = Build Agents
+:page-aliases: cloud-data-platform:ai-agents:agents/index.adoc, cloud-data-platform:ai-agents:agents/build-index.adoc
 :description: Understand how AI agents work in the Agentic Data Plane, then create, register, and design them.
 :page-layout: index
 

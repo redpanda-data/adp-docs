@@ -1,4 +1,5 @@
 = Choose an Integration Pattern
+:page-aliases: cloud-data-platform:ai-agents:agents/integration-overview.adoc, cloud-data-platform:ai-agents:agents/integration-index.adoc, cloud-data-platform:ai-agents:agents/external-app-integration.adoc, cloud-data-platform:ai-agents:agents/external-integration.adoc
 :description: Choose the right integration pattern for connecting agents, pipelines, and external applications.
 :page-topic-type: best-practices
 :personas: agent_builder, platform_engineer

@@ -1,4 +1,5 @@
 = Monitor Agent Activity
+:page-aliases: cloud-data-platform:ai-agents:observability/monitor-agents.adoc, cloud-data-platform:ai-agents:agents/monitor-agents.adoc
 :description: Monitor agent execution, analyze conversation history, track token usage, and debug issues using Inspector, Transcripts, and agent data topics.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer, domain_evaluator

@@ -1,5 +1,5 @@
 = How Agents Work
-:page-aliases: cloud-data-platform:ai-agents:agents/overview.adoc, connect:tutorials/index.adoc, connect:tutorials/customer-support-agent.adoc, connect:tutorials/transaction-dispute-resolution.adoc
+:page-aliases: cloud-data-platform:ai-agents:agents/overview.adoc, connect:tutorials/index.adoc, connect:tutorials/customer-support-agent.adoc, connect:tutorials/transaction-dispute-resolution.adoc, cloud-data-platform:ai-agents:agents/tutorials/customer-support-agent.adoc, cloud-data-platform:ai-agents:agents/tutorials/transaction-dispute-resolution.adoc
 :description: Learn how ADP agents use a declarative approach backed by a broad library of prebuilt tools and integrations to replace custom agent code.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer

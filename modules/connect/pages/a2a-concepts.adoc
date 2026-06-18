@@ -1,4 +1,5 @@
 = Connect Agents with A2A
+:page-aliases: cloud-data-platform:ai-agents:agents/a2a-concepts.adoc, cloud-data-platform:ai-agents:agents/agent-to-agent-integration.adoc
 :description: The A2A protocol enables agents to discover and call each other across platforms. Learn how agent cards, authentication, and protocol versioning work in ADP.
 :page-topic-type: concepts
 :personas: agent_builder
