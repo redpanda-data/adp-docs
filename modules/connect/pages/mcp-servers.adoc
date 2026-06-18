@@ -1,4 +1,5 @@
 = Connect Tools with MCP Servers
+:page-aliases: cloud-data-platform:ai-agents:mcp/configuration.adoc, cloud-data-platform:ai-agents:mcp/remote/manage-servers.adoc, cloud-data-platform:ai-agents:mcp/remote/developer-guide.adoc, cloud-data-platform:ai-agents:mcp/remote/admin-guide.adoc, cloud-data-platform:ai-agents:mcp/remote/best-practices.adoc, cloud-data-platform:ai-agents:mcp/remote/scale-resources.adoc
 :description: Learn how MCP servers expose tools and data to agents, then plug in a managed type or build, register, and test your own.
 :page-layout: index
 

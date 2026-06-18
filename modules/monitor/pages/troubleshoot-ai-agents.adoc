@@ -1,4 +1,5 @@
 = Troubleshoot Agents
+:page-aliases: cloud-data-platform:ai-agents:agents/troubleshooting.adoc, cloud-data-platform:ai-agents:mcp/remote/troubleshooting.adoc
 :description: Diagnose and fix common issues with AI agents including deployment failures, runtime behavior problems, and tool execution errors.
 :page-topic-type: troubleshooting
 :personas: agent_builder, platform_engineer

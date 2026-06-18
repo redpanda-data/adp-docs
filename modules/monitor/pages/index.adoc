@@ -1,4 +1,5 @@
 = Monitor & Debug
+:page-aliases: cloud-data-platform:ai-agents:observability/index.adoc, cloud-data-platform:ai-agents:observability/monitor-mcp-servers.adoc, cloud-data-platform:ai-agents:observability/ingest-custom-traces.adoc, cloud-data-platform:ai-agents:mcp/remote/monitor-activity.adoc, cloud-data-platform:ai-agents:mcp/remote/monitor-mcp-servers.adoc
 :description: See what your agents did, investigate runs, and check speed, cost, and errors.
 :page-layout: index
 

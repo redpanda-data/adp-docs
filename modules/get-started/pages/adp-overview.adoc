@@ -7,8 +7,7 @@
 :learning-objective-1: Identify the key components of Redpanda ADP and their purposes
 :learning-objective-2: Describe how each component addresses enterprise governance and reliability requirements
 :learning-objective-3: Determine whether Redpanda ADP fits your organization's requirements for AI agent deployment
-// TODO: Add 'cloud-data-platform:ai-agents:index.adoc' to page-aliases after ai-agents is removed from cloud-docs
-:page-aliases: develop:agents/about.adoc, develop:ai-agents/about.adoc
+:page-aliases: develop:agents/about.adoc, develop:ai-agents/about.adoc, cloud-data-platform:ai-agents:index.adoc, cloud-data-platform:ai-agents:overview.adoc, cloud-data-platform:ai-agents:adp-overview.adoc
 
 Enterprises spent decades building governance for their human workforce: identity, access control, audit trails, and accountability. They never built the same controls for glossterm:AI agent[,AI agents]. Most agents run with broad credentials, no identity of their own, and no record of what they did, which is why enterprise AI so often stalls before it reaches production.
 

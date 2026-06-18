@@ -1,4 +1,5 @@
 = Understand Agent Concepts
+:page-aliases: cloud-data-platform:ai-agents:agents/concepts.adoc, cloud-data-platform:ai-agents:agents/fundamentals.adoc
 :description: Understand how declaratively configured agents execute reasoning loops, manage context, invoke tools, and handle errors.
 :page-topic-type: concepts
 :personas: agent_builder

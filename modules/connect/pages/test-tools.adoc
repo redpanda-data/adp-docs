@@ -1,4 +1,5 @@
 = Test an MCP Server's Tools with the Inspector
+:page-aliases: cloud-data-platform:ai-agents:mcp/remote/create-tool.adoc, cloud-data-platform:ai-agents:mcp/remote/tool-patterns.adoc
 :description: Use the Inspector tab to call tools, inspect resources and prompts, and verify your MCP server works without standing up an agent.
 :page-topic-type: how-to
 :personas: agent_builder

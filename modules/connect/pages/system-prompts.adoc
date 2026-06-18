@@ -1,4 +1,5 @@
 = Write Effective System Prompts
+:page-aliases: cloud-data-platform:ai-agents:agents/prompt-best-practices.adoc
 :description: Write system prompts that produce reliable, predictable agent behavior through clear constraints and tool guidance.
 :page-topic-type: best-practices
 :personas: agent_builder
