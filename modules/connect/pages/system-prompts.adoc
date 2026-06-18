@@ -214,6 +214,60 @@ Output format:
 - Include units (dollars, kilograms) in all numeric values
 ----
 
+== Template variables
+
+The system prompt is a Go template that Redpanda renders on every invocation. Use `{{.Variable}}` expressions to inject the current date and the calling user into the prompt at request time. A prompt with no template expressions renders unchanged, so existing prompts keep working without edits. The same variables are available in agent and subagent system prompts.
+
+=== Available variables
+
+[cols="1,2,1"]
+|===
+| Expression | Description | Example output
+
+| `{{.Now.Date}}`
+| Current date, in `YYYY-MM-DD` form
+| `2026-06-18`
+
+| `{{.Now.Weekday}}`
+| Current day of the week
+| `Thursday`
+
+| `{{.Now.Month}}`
+| Current month name
+| `June`
+
+| `{{.Now.Year}}`
+| Current year
+| `2026`
+
+| `{{.Now.Time}}`
+| Raw current timestamp. Apply a Go time layout for full control, for example, `{{.Now.Time.Format "15:04 MST"}}`.
+| `15:04 UTC`
+
+| `{{.User.Email}}`
+| Email of the user the agent acts for. Empty when no user is tied to the request, such as a service-account call.
+| `user@example.com`
+|===
+
+All times are UTC.
+
+=== Example prompt
+
+[,text]
+----
+You are a support agent. Today is {{.Now.Weekday}}, {{.Now.Month}} {{.Now.Year}}.
+
+You are assisting {{.User.Email}}. Scope every answer to that user's account, and do not reference other users' data.
+----
+
+=== Keep prompts cache-friendly
+
+Model providers can cache an identical prompt prefix between requests to reduce cost and latency. The date fields, `{{.Now.Date}}`, `{{.Now.Weekday}}`, `{{.Now.Month}}`, and `{{.Now.Year}}`, hold the same value all day, so the prompt stays identical and the cache keeps hitting. Formatting a sub-day value from `{{.Now.Time}}`, such as the minute or second, changes the prompt on every request and defeats the cache. Use `{{.Now.Time}}` only when the agent needs the time of day.
+
+=== Validate template changes
+
+The agent parses the system prompt when it starts. A broken template stops the agent from starting rather than failing on each request, so the mistake surfaces at deploy time. Common mistakes are an unclosed `{{ }}` expression, a reference to a variable that does not exist, and a time call that returns more than one value, such as `{{.Now.Time.Clock}}`. Test the agent after editing the prompt.
+
 [[evaluation-and-testing]]
 == Evaluation and testing
 
