@@ -10,8 +10,8 @@
 :page-pathway-1-icon: sparkles
 :page-pathway-2-title: Bring an agent you already built
 :page-pathway-2-desc: Get visibility and control over agents built elsewhere. Same gateway, same dashboard, same per-user identity, without rebuilding.
-:page-pathway-2-link: connect:byoa-register.adoc
-:page-pathway-2-cta: Register your agent
+:page-pathway-2-link: connect:self-managed-agents.adoc
+:page-pathway-2-cta: Set up your agent
 :page-pathway-2-icon: connect
 :page-concepts-title: Popular across ADP
 :page-concept-1-title: One gateway for every LLM call
