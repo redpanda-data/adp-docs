@@ -39,7 +39,7 @@ rpk ai llm create [flags]
 
 |--type |string |provider type: openai, anthropic, google, bedrock.
 
-|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
 
 |--no-color |- |disable colored output (env: NO_COLOR).
 

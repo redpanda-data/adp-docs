@@ -21,7 +21,7 @@ rpk ai model get <name> [flags]
 
 |--provider-type |string |provider type (for disambiguation when a model is exposed by multiple providers).
 
-|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
 
 |--no-color |- |disable colored output (env: NO_COLOR).
 

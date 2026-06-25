@@ -39,7 +39,7 @@ rpk ai oauth-client create [flags]
 
 |--token-endpoint-auth-method |string |token endpoint auth: client_secret_basic, client_secret_post, none (default "client_secret_basic").
 
-|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
 
 |--no-color |- |disable colored output (env: NO_COLOR).
 
