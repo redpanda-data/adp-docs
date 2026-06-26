@@ -1,0 +1,146 @@
+= Use the ADP CLI
+:page-beta: true
+:description: Manage Agentic Data Plane resources from the terminal with rpk ai. Install the CLI, connect it to an AI Gateway, and script LLM providers, MCP servers, OAuth, and agents.
+:page-topic-type: overview
+:personas: platform_engineer, agent_builder
+:learning-objective-1: Install the ADP CLI and connect it to an AI Gateway
+:learning-objective-2: Manage ADP resources from the terminal: LLM providers, MCP servers, OAuth providers and clients, and agents
+:learning-objective-3: Format command output for scripts and pipelines
+
+// Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface), and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Verified against origin/main 2026-06-26.
+
+The ADP command-line interface, `rpk ai`, manages glossterm:Agentic Data Plane (ADP)[] resources from your terminal. It drives the same control surface as the ADP UI: glossterm:large language model (LLM)[] providers, glossterm:Model Context Protocol (MCP)[] servers, OAuth providers and clients, and agents. Because every action is a command, you can script it and run it in continuous integration.
+
+The ADP CLI, also called the Redpanda AI CLI, runs as an xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk`] plugin, so you install and run it through your existing `rpk` setup.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Install the CLI
+
+The ADP CLI is an `rpk` managed plugin. Install `rpk` first (see xref:reference:rpk-install.adoc[Install or Update rpk]), then install the plugin:
+
+[,bash]
+----
+rpk ai install
+----
+
+Update the plugin later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk ai upgrade`], and remove it with xref:reference:rpk/rpk-ai/rpk-ai-uninstall.adoc[`rpk ai uninstall`].
+
+== Connect to an AI Gateway
+
+The `rpk ai` command reuses your `rpk cloud` session. It reads the cached `rpk cloud login` token and resolves the AI Gateway URL from your active `rpk` profile, so there is no separate CLI login.
+
+. Log in to Redpanda Cloud:
++
+[,bash]
+----
+rpk cloud login
+----
+
+. Select a profile that points at a cluster with AI Gateway attached:
++
+[,bash]
+----
+rpk profile use <profile-name>
+----
++
+In this command, `<profile-name>` is the name of an `rpk` profile created for your target cluster. To switch the cluster the active profile points at, see xref:reference:rpk/rpk-cloud/rpk-cloud-cluster.adoc[`rpk cloud cluster`].
+
+. Verify the connection:
++
+[,bash]
+----
+rpk ai llm list
+----
+
+For the full setup walkthrough, including token expiry behavior and the supported environment variables, see xref:gateway:connect-agent.adoc#authenticate-with-rpk-ai[Use `rpk ai` for local development].
+
+To target a different gateway for a single command without switching profiles, pass `--rpai-endpoint`:
+
+[,bash]
+----
+rpk ai --rpai-endpoint https://aigw.<cluster-id>.clusters.cloud.redpanda.com llm list
+----
+
+In this URL, `<cluster-id>` is the ID of the cluster whose gateway you want to reach.
+
+== Manage resources
+
+Each ADP resource has its own command group, and each group supports the standard `create`, `get`, `list`, `update`, and `delete` actions. The model catalog is read-only.
+
+[cols="1m,2,1a"]
+|===
+|Command |Manages |Reference
+
+|rpk ai llm
+|LLM providers (OpenAI, Anthropic, Google, AWS Bedrock, and OpenAI-compatible endpoints)
+|xref:reference:rpk/rpk-ai/rpk-ai-llm.adoc[`rpk ai llm`]
+
+|rpk ai mcp
+|MCP servers and their tools
+|xref:reference:rpk/rpk-ai/rpk-ai-mcp.adoc[`rpk ai mcp`]
+
+|rpk ai oauth
+|OAuth providers for user-delegated MCP connections
+|xref:reference:rpk/rpk-ai/rpk-ai-oauth.adoc[`rpk ai oauth`]
+
+|rpk ai oauth-client
+|OAuth clients that external tools use to reach an MCP server
+|xref:reference:rpk/rpk-ai/rpk-ai-oauth-client.adoc[`rpk ai oauth-client`]
+
+|rpk ai agent
+|Agents in the agent registry
+|xref:reference:rpk/rpk-ai/rpk-ai-agent.adoc[`rpk ai agent`]
+
+|rpk ai model
+|The model catalog (read-only discovery)
+|xref:reference:rpk/rpk-ai/rpk-ai-model.adoc[`rpk ai model`]
+|===
+
+For example, to create and inspect an LLM provider:
+
+[,bash]
+----
+rpk ai llm create --name openai --type openai --api-key-ref OPENAI_API_KEY
+rpk ai llm get openai
+----
+
+In this command, `--api-key-ref` names a secret already stored in ADP. The CLI never takes a raw API key, so secrets stay out of your shell history and out of any file you commit.
+
+To create, update, and delete resources declaratively from YAML manifests instead of imperative flags, see xref:cli:gitops.adoc[Manage Resources with GitOps].
+
+== Format command output
+
+Every `list` and `get` command honors `-o` (`--format`):
+
+[cols="1m,3"]
+|===
+|Format |Use
+
+|table
+|Default. Human-readable columns.
+
+|wide
+|Table with extra columns.
+
+|json
+|Machine-readable JSON for scripts and `jq`.
+
+|yaml
+|YAML. A `get -o yaml` dump is a complete manifest you can edit and reapply.
+
+|markdown
+|Pipe-friendly tables for documents.
+|===
+
+Set a default for the session with the `RPAI_FORMAT` environment variable. The `-o` flag always wins when both are set.
+
+== Next steps
+
+* xref:cli:gitops.adoc[]
+* xref:gateway:configure-provider.adoc[]
+* xref:reference:rpk/rpk-ai/rpk-ai.adoc[]

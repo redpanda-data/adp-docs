@@ -1,0 +1,220 @@
+= Manage Resources with GitOps
+:page-beta: true
+:description: Keep ADP resources in Git and reconcile them with rpk ai apply and diff. Declarative create-or-update, dry-run drift detection, and continuous-integration gating for LLM providers, MCP servers, OAuth, and agents.
+:page-topic-type: how-to
+:personas: platform_engineer, agent_builder
+:learning-objective-1: Export an ADP resource to a YAML manifest you can commit to Git
+:learning-objective-2: Reconcile resources with apply, and preview changes with diff
+:learning-objective-3: Gate continuous integration on configuration drift
+
+// Source: cloudv2 `apps/rpai/internal/gitops/` (engine.go, command.go, manifest.go, doc.go), the per-resource policies in `apps/rpai/internal/cmd/{llm,mcp,oauth,oauthclient,agent}/gitops.go`, `proto/public/cloud/redpanda/api/adp/v1alpha1/llm_provider.proto`, and `rpk ai <resource> apply|diff --help`. Console output verified against the engine and `apps/rpai/internal/gitops/engine_test.go`. Verified against origin/main 2026-06-26.
+
+GitOps keeps the definition of your glossterm:Agentic Data Plane (ADP)[] resources in Git and reconciles the live cluster toward those files, instead of running imperative `create`, `update`, and `delete` commands by hand. With the xref:cli:index.adoc[ADP CLI], `rpk ai <resource> apply -f` creates what is missing and updates what has drifted, and `rpk ai <resource> diff -f` is a read-only dry-run that reports what `apply` would change. In these commands, `<resource>` is one of the resource command groups that support GitOps:
+
+* LLM providers (`rpk ai llm`)
+* MCP servers (`rpk ai mcp`)
+* OAuth providers (`rpk ai oauth`)
+* OAuth clients (`rpk ai oauth-client`)
+* Agents (`rpk ai agent`)
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* The xref:cli:index.adoc[ADP CLI installed and connected] to your cluster.
+* Permission to create and update the resources you manage. The reconcile commands call the same APIs as `create` and `update`. See xref:control:permissions-reference.adoc[Roles and Permissions Reference].
+* Any secrets your manifests reference already created in ADP. Manifests name secrets by reference, for example, `OPENAI_API_KEY`; the CLI does not create secrets.
+
+== How apply and diff reconcile
+
+A manifest is plain resource YAML: the same shape a `get -o yaml` dump produces. The CLI compares each manifest against the live resource of the same name and resolves one of three outcomes:
+
+* *Create*: no resource of that name exists, so `apply` creates it.
+* *Update*: the resource exists and a field in the manifest differs from the live value, so `apply` updates the differing fields.
+* *Unchanged*: the resource exists and every field the manifest names already matches.
+
+The reconcile rules are deliberate, and they are not the same as a full-object replace:
+
+Presence drives updates::
+A field that is present in the manifest and differs from the live resource is updated. A field you omit is left untouched. To clear a field, write it explicitly with an empty or zero value.
+
+Collections replace wholesale::
+Lists, maps, and provider or backend variants are replaced as a unit, not merged element by element.
+
+Create-only fields are immutable::
+A field that can be set only at creation time, such as an LLM provider's `type`, an MCP server's backend kind, an OAuth provider's `client_id`, or an agent's managed-or-self-managed kind, cannot change on an existing resource. Changing one is an error that tells you to delete and recreate the resource.
+
+Secrets stay by reference::
+Manifests reference secrets by name, for example, `api_key_ref` and `client_secret_ref`, and never contain secret values, so a manifest is safe to commit to Git.
+
+The `apply` command does not delete resources that are absent from your manifests; there is no prune. The `diff` command checks only the fields a manifest names, so it does not detect a resource that exists on the cluster but is missing from your manifests, nor drift in a field a manifest omits.
+
+== Export a resource to a manifest
+
+Start from a live resource so the manifest is complete. Dump it to YAML and redirect it to a file:
+
+[,bash]
+----
+rpk ai llm get openai -o yaml > openai.yaml
+----
+
+A dumped OpenAI provider looks like this, ready to commit:
+
+[,yaml]
+----
+'@type': type.googleapis.com/redpanda.api.adp.v1alpha1.LLMProvider
+created_at: "2026-06-20T10:15:30Z"
+display_name: OpenAI
+enabled: true
+name: openai
+openai_config:
+  api_key_ref: OPENAI_API_KEY
+provider_models:
+- name: gpt-4o
+- name: gpt-4o-mini
+type: LLM_PROVIDER_TYPE_OPENAI
+updated_at: "2026-06-20T10:15:30Z"
+url: https://openai.aigw.d0example1cluster234.clusters.cloud.redpanda.com/openai/v1
+----
+
+The `@type` line records the resource kind. It is optional when you apply with a resource command, because `rpk ai llm apply` already implies the kind, but keeping it lets a reader and any validator know what the file describes.
+
+[NOTE]
+====
+The `created_at`, `updated_at`, and `url` fields are server-managed and read-only. The `apply` command ignores them, so you can leave them in the file or strip them. The `api_key_ref` value is a reference to a secret, not the key itself.
+====
+
+== Preview changes with diff
+
+Edit the manifest, then preview the effect before you touch the cluster. For example, change the display name:
+
+[,yaml]
+----
+display_name: OpenAI (production)
+----
+
+Run `diff` to see the plan:
+
+[,bash]
+----
+rpk ai llm diff -f openai.yaml
+----
+
+[,text]
+----
+~ openai (update: display_name)
+----
+
+The `diff` command marks each manifest with one of three symbols and changes nothing:
+
+[cols="1m,3"]
+|===
+|Symbol |Meaning
+
+|+
+|The `apply` command would create the resource.
+
+|~
+|The `apply` command would update the resource. The changed fields follow in parentheses.
+
+|=
+|The resource already matches; `apply` would leave it unchanged.
+|===
+
+The `diff` command exits with a non-zero status when any change is pending, and zero when the cluster already matches every manifest. That exit code is what lets continuous integration gate on drift.
+
+== Apply changes
+
+Reconcile the cluster toward the manifest:
+
+[,bash]
+----
+rpk ai llm apply -f openai.yaml
+----
+
+The `apply` command prints one line per manifest as it works:
+
+[,text]
+----
+updated openai (display_name)
+----
+
+A first-time apply of a resource that does not yet exist prints `created openai` instead, and a manifest that already matches the cluster prints `unchanged openai`. The CLI plans every manifest before it changes anything, so a malformed manifest aborts the run before any write. If a later write fails, the lines already printed tell you exactly what was applied.
+
+== Apply many manifests at once
+
+The `-f` flag is repeatable and accepts a file, a directory, or a stream:
+
+[,bash]
+----
+# A directory of manifests; the CLI reads every .yaml and .yml file, sorted by name.
+rpk ai mcp apply -f ./manifests/
+
+# Several paths in one run.
+rpk ai llm apply -f openai.yaml -f anthropic.yaml
+
+# Standard input, for piping a manifest from another tool.
+rpk ai oauth apply -f -
+----
+
+A single file can hold more than one manifest. Separate documents with a line containing only `---`.
+
+== Gate continuous integration on drift
+
+Because `diff` exits non-zero when the cluster differs from your manifests, a continuous-integration job can fail the build whenever the live cluster has drifted from Git:
+
+[,bash]
+----
+# Fails the job if an apply would change anything.
+rpk ai llm diff -f ./llm/
+rpk ai mcp diff -f ./mcp/
+----
+
+A common pipeline runs `diff` on a pull request to preview changes, then runs `apply` after the merge to roll them out:
+
+[,bash]
+----
+# Deploy step, after merge to the main branch.
+rpk ai llm apply -f ./llm/
+rpk ai mcp apply -f ./mcp/
+----
+
+== Manifests are declarative
+
+A manifest describes the full intended state, so an omitted field means zero, not the convenience default that `create` fills in. A manifest that omits `enabled` creates a disabled resource, and `diff` then reports no drift, because the disabled state matches the manifest.
+
+To avoid surprises:
+
+* Start from a `get -o yaml` dump, which is already complete, rather than hand-writing a manifest from scratch.
+* Set `enabled: true` explicitly when you want an active resource.
+
+One subtlety follows from this: a dump of an already-disabled resource omits `enabled`, because `false` is the field's zero value and the dump omits zero values. Reapplying that dump elsewhere also produces a disabled resource.
+
+== Troubleshooting
+
+[cols="2,3"]
+|===
+|Symptom |Resolution
+
+|The `apply` or `diff` command reports that a field is immutable and tells you to delete and recreate the resource.
+|You changed a create-only field, such as an LLM provider's `type` or an OAuth provider's `client_id`. Restore the original value, or delete the resource and recreate it from the new manifest.
+
+|The `apply` or `diff` command fails to decode the manifest and mentions unknown or misspelled fields.
+|A key in the manifest is not a field of the resource. The CLI rejects unknown keys rather than dropping them silently. Fix the key. Start from a `get -o yaml` dump to get the exact field names.
+
+|The `diff` command reports no drift, but you know the cluster has extra resources.
+|The `diff` and `apply` commands never prune. They act only on the resources your manifests name. Delete unwanted resources with `rpk ai <resource> delete`.
+
+|A field you changed on the cluster keeps coming back after `apply`.
+|The `apply` command overwrites a field only when the manifest names it and the value differs. If the change is not in your manifest, add it, then reapply.
+|===
+
+== Next steps
+
+* xref:cli:index.adoc[]
+* xref:gateway:configure-provider.adoc[]
+* xref:connect:create-server.adoc[]
