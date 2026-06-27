@@ -145,11 +145,11 @@ The provider appears in the *OAuth Providers* list.
 
 Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] to script provider registration:
 
-// TODO(rpk-ai): aliases (oauth-provider, mcp-server, llm-provider) are kept for one release per cloudv2/apps/rpai/CLAUDE.md. Verified canonical command is `rpk ai oauth create` on 2026-05-05; flip examples cleanly to canonical names if the alias gets dropped.
+// TODO(rpk-ai): canonical command is now `rpk ai oauth-provider` (cloudv2 renamed `oauth` -> `oauth-provider` on 2026-06-26; it pairs with `oauth-client`). The short `oauth` and `op` forms stay as aliases, so older scripts keep working; examples use the canonical name.
 
 [source,bash]
 ----
-rpk ai oauth create \
+rpk ai oauth-provider create \
   --name ramp \
   --display-name "Ramp" \
   --auth-endpoint "https://app.ramp.com/v1/authorize" \
