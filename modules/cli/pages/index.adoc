@@ -1,13 +1,13 @@
 = Use the ADP CLI
 :page-beta: true
 :description: Manage Agentic Data Plane resources from the terminal with rpk ai. Install the CLI, connect it to an AI Gateway, and script LLM providers, MCP servers, OAuth, and agents.
-:page-topic-type: overview
+:page-topic-type: how-to
 :personas: platform_engineer, agent_builder
 :learning-objective-1: Install the ADP CLI and connect it to an AI Gateway
 :learning-objective-2: Manage ADP resources from the terminal: LLM providers, MCP servers, OAuth providers and clients, and agents
 :learning-objective-3: Format command output for scripts and pipelines
 
-// Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface + persistent flags), `apps/rpai/internal/cmd/env/cmd.go`, and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Connect/auth model reflects cloudv2 PR #27510: rpk ai is self-contained (its own `auth login` device flow + ADP environment selection), not tied to the rpk cloud session. Verified against branch `jb/rpai-adp-environments` 2026-06-29.
+// Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface + persistent flags), `apps/rpai/internal/cmd/env/cmd.go`, and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Connect/auth model reflects cloudv2 PR #27510: rpk ai is self-contained (its own `auth login` device flow + ADP environment selection), not tied to the rpk cloud session. Verified against origin/main 2026-06-29 (cloudv2 PR #27510 merged).
 
 The ADP command-line interface, `rpk ai`, manages glossterm:Agentic Data Plane (ADP)[] resources from your terminal. It drives the same control surface as the ADP UI: glossterm:large language model (LLM)[] providers, glossterm:Model Context Protocol (MCP)[] servers, OAuth providers and clients, and agents. Because every action is a command, you can script it and run it in continuous integration.
 
@@ -32,7 +32,7 @@ Update the plugin later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk 
 
 == Connect to an AI Gateway
 
-The `rpk ai` command is self-contained: it has its own login and its own environment selection, independent of your `rpk cloud` session. You sign in once, choose an ADP environment, and `rpk ai` targets that environment's AI Gateway for every command.
+The `rpk ai` command is self-contained: it has its own login and its own environment selection, independent of any `rpk cloud` session. You sign in once, choose an ADP environment, and `rpk ai` targets that environment's AI Gateway for every command.
 
 . Sign in to Redpanda Cloud. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the ADP environments in your organization so you can pick one:
 +

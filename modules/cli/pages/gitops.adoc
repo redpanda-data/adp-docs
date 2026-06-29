@@ -1,6 +1,6 @@
 = Manage Resources with GitOps
 :page-beta: true
-:description: Keep ADP resources in Git and reconcile them with rpk ai apply and diff. Declarative create-or-update, dry-run drift detection, and continuous-integration gating for LLM providers, MCP servers, OAuth, and agents.
+:description: Keep ADP resources in Git and reconcile them with rpk ai apply and diff: declarative create-or-update, drift detection, and CI gating.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder
 :learning-objective-1: Export an ADP resource to a YAML manifest you can commit to Git
@@ -33,9 +33,14 @@ After reading this page, you will be able to:
 
 A manifest is plain resource YAML: the same shape a `get -o yaml` dump produces. The CLI compares each manifest against the live resource of the same name and resolves one of three outcomes:
 
-* *Create*: no resource of that name exists, so `apply` creates it.
-* *Update*: the resource exists and a field in the manifest differs from the live value, so `apply` updates the differing fields.
-* *Unchanged*: the resource exists and every field the manifest names already matches.
+Create::
+No resource of that name exists, so `apply` creates it.
+
+Update::
+The resource exists and a field in the manifest differs from the live value, so `apply` updates the differing fields.
+
+Unchanged::
+The resource exists and every field the manifest names already matches.
 
 The reconcile rules are deliberate, and they are not the same as a full-object replace:
 

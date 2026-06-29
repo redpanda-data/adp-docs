@@ -48,7 +48,7 @@ TIP: The provider detail page generates ready-to-run snippets pre-filled with th
 [[authenticate-with-rpai]]
 == Use `rpk ai` for local development
 
-The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. `rpk ai` is self-contained: it has its own login and its own ADP environment selection, independent of your `rpk cloud` session.
+The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. `rpk ai` is self-contained: it has its own login and its own ADP environment selection, independent of any `rpk cloud` session.
 
 . xref:reference:rpk/rpk-ai/rpk-ai-install.adoc[Install `rpk ai`]:
 +
