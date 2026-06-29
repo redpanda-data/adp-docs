@@ -74,6 +74,9 @@
 *** xref:gateway:bedrock-setup.adoc[Set Up AWS Bedrock as an LLM Provider]
 ** xref:gateway:connect-agent.adoc[Connect Your App to AI Gateway]
 
+* xref:cli:index.adoc[Use the ADP CLI]
+** xref:cli:gitops.adoc[Manage Resources with GitOps]
+
 * xref:reference:index.adoc[Reference]
 ** xref:reference:rpk-install.adoc[Install or Update rpk]
 ** xref:reference:rpk/index.adoc[rpk Command Reference]
