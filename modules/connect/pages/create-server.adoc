@@ -206,6 +206,46 @@ rpk ai mcp update github-proxy \
 
 The command targets the AI Gateway of your selected ADP environment, using credentials from `rpk ai auth login`.
 
+// Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/mcp_server.proto (MCPServerService.ListMCPServers, ListMCPServersRequest.Filter.filter + order_by), added in commit 96e2387 (merge #27489). The proto comment lists `display_name` as a filterable column, but the MCPServer resource has no display_name field, so it's omitted here. Orderable columns and the default order come from the storage table options (orderable: name, created_at; default_order_by: created_at desc). Request shapes are proto-accurate but were not exercised against a live cluster.
+== List and filter servers with the API
+
+To enumerate MCP servers programmatically, call `MCPServerService.ListMCPServers`. Beyond the `name_contains` substring match, the request accepts an AIP-160 `filter` expression and an AIP-132 `order_by`, so you can scope and sort the list on the server (for example, to page through only the managed servers, newest first) instead of filtering the loaded page.
+
+The list endpoint uses the same OIDC client-credentials authentication as the rest of AI Gateway. Mint a service-account access token using the flow in xref:gateway:connect-agent.adoc#authenticate-with-oidc-client-credentials[Authenticate with OIDC client credentials], then pass it as a bearer token. The service account needs `dataplane_adp_mcpserver_list`.
+
+The request's `filter` object carries two independent fields:
+
+[cols="1,3"]
+|===
+|Field |Meaning
+
+|`name_contains`
+|Case-insensitive substring match on the server name.
+
+|`filter`
+|AIP-160 expression (maximum 1024 characters) that the server ANDs with `name_contains` and the tenant scope. Filterable columns: `name`, `type`, `enabled`, `description`, `created_at`, and `updated_at`. Use it for multi-value `OR` semantics, for example `type = "MCP_SERVER_TYPE_REMOTE" OR type = "MCP_SERVER_TYPE_MANAGED"`. The `type` column accepts the `MCPServerType` enum values `MCP_SERVER_TYPE_REMOTE` and `MCP_SERVER_TYPE_MANAGED`; `enabled` accepts `true` or `false`.
+|===
+
+Set `order_by` (maximum 256 characters) to a comma-separated list of fields, each optionally suffixed with ` desc` (ascending by default), for example `created_at desc`. Orderable fields are the keyset columns `name` and `created_at`. An unsupported field returns `InvalidArgument`. Leave `order_by` empty to use the server default (`created_at desc`). The order is encoded into the page token, so keep it stable across a paged walk.
+
+[source,bash]
+----
+ACCESS_TOKEN="<oidc-access-token>"   # from the client_credentials flow
+DATAPLANE_BASE="https://aigw.<cluster-id>.clusters.rdpa.co"
+
+curl -s --request POST \
+  --url "${DATAPLANE_BASE}/redpanda.api.adp.v1alpha1.MCPServerService/ListMCPServers" \
+  --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "filter": { "filter": "type = \"MCP_SERVER_TYPE_MANAGED\"" },
+    "order_by": "created_at desc",
+    "page_size": 50
+  }' | jq
+----
+
+The response carries the matching `mcp_servers`, a `next_page_token` for the next page, and an estimated `total_size` (AIP-158) of all servers matching the filter, ignoring pagination.
+
 == Edit, disable, and delete a server
 
 * *Edit:* most fields can change. The `name` and `type` are immutable after create.
