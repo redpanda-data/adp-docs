@@ -9,7 +9,7 @@
 
 // Source: cloudv2 `apps/rpai/internal/gitops/` (engine.go, command.go, manifest.go, doc.go), the per-resource policies in `apps/rpai/internal/cmd/{llm,mcp,oauth,oauthclient,agent}/gitops.go`, `proto/public/cloud/redpanda/api/adp/v1alpha1/llm_provider.proto`, and `rpk ai <resource> apply|diff --help`. Console output verified against the engine and `apps/rpai/internal/gitops/engine_test.go`. Verified against origin/main 2026-06-26.
 
-GitOps keeps the definition of your glossterm:Agentic Data Plane (ADP)[] resources in Git and reconciles the live cluster toward those files, instead of running imperative `create`, `update`, and `delete` commands by hand. With the xref:cli:index.adoc[ADP CLI], `rpk ai <resource> apply -f` creates what is missing and updates what has drifted, and `rpk ai <resource> diff -f` is a read-only dry-run that reports what `apply` would change. In these commands, `<resource>` is one of the resource command groups that support GitOps:
+GitOps keeps the definition of your glossterm:Agentic Data Plane (ADP)[] resources in Git and reconciles the live environment toward those files, instead of running imperative `create`, `update`, and `delete` commands by hand. With the xref:cli:index.adoc[ADP CLI], `rpk ai <resource> apply -f` creates what is missing and updates what has drifted, and `rpk ai <resource> diff -f` is a read-only dry-run that reports what `apply` would change. In these commands, `<resource>` is one of the resource command groups that support GitOps:
 
 * LLM providers (`rpk ai llm`)
 * MCP servers (`rpk ai mcp`)
@@ -25,7 +25,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* The xref:cli:index.adoc[ADP CLI installed and connected] to your cluster.
+* The xref:cli:index.adoc[ADP CLI installed and connected] to an ADP environment.
 * Permission to create and update the resources you manage. The reconcile commands call the same APIs as `create` and `update`. See xref:control:permissions-reference.adoc[Roles and Permissions Reference].
 * Any secrets your manifests reference already created in ADP. Manifests name secrets by reference, for example, `OPENAI_API_KEY`; the CLI does not create secrets.
 
@@ -51,7 +51,7 @@ A field that can be set only at creation time, such as an LLM provider's `type`,
 Secrets stay by reference::
 Manifests reference secrets by name, for example, `api_key_ref` and `client_secret_ref`, and never contain secret values, so a manifest is safe to commit to Git.
 
-The `apply` command does not delete resources that are absent from your manifests; there is no prune. The `diff` command checks only the fields a manifest names, so it does not detect a resource that exists on the cluster but is missing from your manifests, nor drift in a field a manifest omits.
+The `apply` command does not delete resources that are absent from your manifests; there is no prune. The `diff` command checks only the fields a manifest names, so it does not detect a resource that exists in the environment but is missing from your manifests, nor drift in a field a manifest omits.
 
 == Export a resource to a manifest
 
@@ -90,7 +90,7 @@ The `created_at`, `updated_at`, and `url` fields are server-managed and read-onl
 
 == Preview changes with diff
 
-Edit the manifest, then preview the effect before you touch the cluster. For example, change the display name:
+Edit the manifest, then preview the effect before you touch the environment. For example, change the display name:
 
 [,yaml]
 ----
@@ -125,11 +125,11 @@ The `diff` command marks each manifest with one of three symbols and changes not
 |The resource already matches; `apply` would leave it unchanged.
 |===
 
-The `diff` command exits with a non-zero status when any change is pending, and zero when the cluster already matches every manifest. That exit code is what lets continuous integration gate on drift.
+The `diff` command exits with a non-zero status when any change is pending, and zero when the environment already matches every manifest. That exit code is what lets continuous integration gate on drift.
 
 == Apply changes
 
-Reconcile the cluster toward the manifest:
+Reconcile the environment toward the manifest:
 
 [,bash]
 ----
@@ -143,7 +143,7 @@ The `apply` command prints one line per manifest as it works:
 updated openai (display_name)
 ----
 
-A first-time apply of a resource that does not yet exist prints `created openai` instead, and a manifest that already matches the cluster prints `unchanged openai`. The CLI plans every manifest before it changes anything, so a malformed manifest aborts the run before any write. If a later write fails, the lines already printed tell you exactly what was applied.
+A first-time apply of a resource that does not yet exist prints `created openai` instead, and a manifest that already matches the environment prints `unchanged openai`. The CLI plans every manifest before it changes anything, so a malformed manifest aborts the run before any write. If a later write fails, the lines already printed tell you exactly what was applied.
 
 == Apply many manifests at once
 
@@ -165,7 +165,7 @@ A single file can hold more than one manifest. Separate documents with a line co
 
 == Gate continuous integration on drift
 
-Because `diff` exits non-zero when the cluster differs from your manifests, a continuous-integration job can fail the build whenever the live cluster has drifted from Git:
+Because `diff` exits non-zero when the environment differs from your manifests, a continuous-integration job can fail the build whenever the live environment has drifted from Git:
 
 [,bash]
 ----
@@ -206,10 +206,10 @@ One subtlety follows from this: a dump of an already-disabled resource omits `en
 |The `apply` or `diff` command fails to decode the manifest and mentions unknown or misspelled fields.
 |A key in the manifest is not a field of the resource. The CLI rejects unknown keys rather than dropping them silently. Fix the key. Start from a `get -o yaml` dump to get the exact field names.
 
-|The `diff` command reports no drift, but you know the cluster has extra resources.
+|The `diff` command reports no drift, but you know the environment has extra resources.
 |The `diff` and `apply` commands never prune. They act only on the resources your manifests name. Delete unwanted resources with `rpk ai <resource> delete`.
 
-|A field you changed on the cluster keeps coming back after `apply`.
+|A field you changed in the environment keeps coming back after `apply`.
 |The `apply` command overwrites a field only when the manifest names it and the value differs. If the change is not in your manifest, add it, then reapply.
 |===
 

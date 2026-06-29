@@ -119,7 +119,7 @@ rpk ai mcp tools call <server-name> <tool-name> --input '{"arg1":"value"}'
 rpk ai mcp get <server-name>
 ----
 
-The command resolves the gateway URL from your active rpk cloud profile and reads the cached `rpk cloud login` token. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for installation and profile setup.
+The command targets the AI Gateway of your selected ADP environment, using credentials from `rpk ai auth login`. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for installation and sign-in.
 
 == Next steps
 

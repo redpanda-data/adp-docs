@@ -7,7 +7,7 @@
 :learning-objective-2: Manage ADP resources from the terminal: LLM providers, MCP servers, OAuth providers and clients, and agents
 :learning-objective-3: Format command output for scripts and pipelines
 
-// Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface), and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Verified against origin/main 2026-06-26.
+// Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface + persistent flags), `apps/rpai/internal/cmd/env/cmd.go`, and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Connect/auth model reflects cloudv2 PR #27510: rpk ai is self-contained (its own `auth login` device flow + ADP environment selection), not tied to the rpk cloud session. Verified against branch `jb/rpai-adp-environments` 2026-06-29.
 
 The ADP command-line interface, `rpk ai`, manages glossterm:Agentic Data Plane (ADP)[] resources from your terminal. It drives the same control surface as the ADP UI: glossterm:large language model (LLM)[] providers, glossterm:Model Context Protocol (MCP)[] servers, OAuth providers and clients, and agents. Because every action is a command, you can script it and run it in continuous integration.
 
@@ -32,23 +32,24 @@ Update the plugin later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk 
 
 == Connect to an AI Gateway
 
-The `rpk ai` command reuses your `rpk cloud` session. It reads the cached `rpk cloud login` token and resolves the AI Gateway URL from your active `rpk` profile, so there is no separate CLI login.
+The `rpk ai` command is self-contained: it has its own login and its own environment selection, independent of your `rpk cloud` session. You sign in once, choose an ADP environment, and `rpk ai` targets that environment's AI Gateway for every command.
 
-. Log in to Redpanda Cloud:
+. Sign in to Redpanda Cloud. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the ADP environments in your organization so you can pick one:
 +
 [,bash]
 ----
-rpk cloud login
+rpk ai auth login
 ----
 
-. Select a profile that points at a cluster with AI Gateway attached:
+. List the environments available to you, and switch the active one by name or ID:
 +
 [,bash]
 ----
-rpk profile use <profile-name>
+rpk ai env list
+rpk ai env use <environment>
 ----
 +
-In this command, `<profile-name>` is the name of an `rpk` profile created for your target cluster. To switch the cluster the active profile points at, see xref:reference:rpk/rpk-cloud/rpk-cloud-cluster.adoc[`rpk cloud cluster`].
+In these commands, `<environment>` is the name or ID of an ADP environment. `rpk ai env use` repoints the active profile at that environment's AI Gateway in place. Inspect the resolved environment and token state at any time with `rpk ai env show` and `rpk ai auth status`.
 
 . Verify the connection:
 +
@@ -59,14 +60,20 @@ rpk ai llm list
 
 For the full setup walkthrough, including token expiry behavior and the supported environment variables, see xref:gateway:connect-agent.adoc#authenticate-with-rpk-ai[Use `rpk ai` for local development].
 
-To target a different gateway for a single command without switching profiles, pass `--rpai-endpoint`:
+To target a different AI Gateway URL for a single command without switching environments, pass `--rpai-endpoint`:
 
 [,bash]
 ----
 rpk ai --rpai-endpoint https://aigw.<cluster-id>.clusters.cloud.redpanda.com llm list
 ----
 
-In this URL, `<cluster-id>` is the ID of the cluster whose gateway you want to reach.
+This overrides the selected environment's AI Gateway URL for that one command; the flag is not bound to an environment variable. For a local or manual gateway you use repeatedly, define it once as an environment with `rpk ai env add`:
+
+[,bash]
+----
+rpk ai env add local --ai-gateway-url http://localhost:8090 --auth-mode none
+rpk ai env use local
+----
 
 == Manage resources
 

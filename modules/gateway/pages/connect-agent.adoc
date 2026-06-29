@@ -4,10 +4,10 @@
 :personas: agent_builder
 :page-aliases: cloud-data-platform:ai-agents:ai-gateway/builders/connect-your-agent.adoc, cloud-data-platform:ai-agents:ai-gateway/connect-agent.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/index.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/cline-admin.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/cline-user.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/continue-admin.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/continue-user.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/cursor-admin.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/cursor-user.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/github-copilot-admin.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/github-copilot-user.adoc
 :learning-objective-1: Construct the proxy URL for an LLM provider you have configured
-:learning-objective-2: pass:q[Authenticate to AI Gateway with `rpk` for local development or with OIDC client credentials for CI and programmatic clients]
+:learning-objective-2: pass:q[Authenticate to AI Gateway with the `rpk ai` CLI for local development or with OIDC client credentials for CI and programmatic clients]
 :learning-objective-3: Send requests through the proxy URL with the SDK of your choice
 
-This guide shows how to connect your glossterm:AI agent[] or application to the AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with xref:reference:rpk/rpk-cloud/rpk-cloud-login.adoc[`rpk cloud login`] for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
+This guide shows how to connect your glossterm:AI agent[] or application to the AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with the xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] CLI for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
 
 TIP: The provider's *Connect* tab in ADP generates this configuration for you: a gateway-token step, setup instructions for popular clients, and code examples with the provider's proxy URL prefilled. Copy from the tab for a quick start, or follow this page for the full flow.
 
@@ -43,12 +43,12 @@ AI Gateway forwards the request to the upstream provider, attaches the configure
 
 TIP: The provider detail page generates ready-to-run snippets pre-filled with the correct proxy URL and paths. When in doubt, copy from the Connect your app section there.
 
-// Updated for PRs #30273 / #30327 / #30360 (rpk ai managed plugin).
+// Updated for cloudv2 PR #27510: rpk ai is self-contained (its own auth login + ADP environment selection), no longer tied to the rpk cloud session.
 [[authenticate-with-rpk-ai]]
 [[authenticate-with-rpai]]
 == Use `rpk ai` for local development
 
-The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. Authentication for `rpk ai` is owned by `rpk cloud login`. The active AI Gateway URL comes from your active rpk cloud profile.
+The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. `rpk ai` is self-contained: it has its own login and its own ADP environment selection, independent of your `rpk cloud` session.
 
 . xref:reference:rpk/rpk-ai/rpk-ai-install.adoc[Install `rpk ai`]:
 +
@@ -59,25 +59,22 @@ rpk ai install
 +
 Update later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk ai upgrade`]; remove with xref:reference:rpk/rpk-ai/rpk-ai-uninstall.adoc[`rpk ai uninstall`].
 
-. Log in to Redpanda:
+. Sign in. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the ADP environments in your organization so you can select one:
 +
 [source,bash]
 ----
-rpk cloud login
+rpk ai auth login
 ----
-+
-This caches a cloud token in `~/.config/rpk/rpk.yaml`. On every invocation, `rpk ai` reads the cached token automatically.
 
-. Select a xref:reference:rpk/rpk-profile/rpk-profile.adoc[profile] that points at a cluster with AI Gateway v2 attached. The AI Gateway URL is cached on the profile when you create it.
+. Select the ADP environment whose AI Gateway you want to target. The `rpk ai env use` command accepts an environment name or ID and repoints the active profile in place:
 +
 [source,bash]
 ----
-rpk profile use <profile-name>
-# or, to switch the cluster the active profile points at:
-rpk cloud cluster use <cluster-id>
+rpk ai env list
+rpk ai env use <environment>
 ----
 +
-See xref:reference:rpk/rpk-cloud/rpk-cloud-cluster.adoc[`rpk cloud cluster`] for switching the active cluster.
+Inspect the resolved environment and token state at any time with `rpk ai env show` and `rpk ai auth status`.
 
 . Verify the connection:
 +
@@ -86,7 +83,7 @@ See xref:reference:rpk/rpk-cloud/rpk-cloud-cluster.adoc[`rpk cloud cluster`] for
 rpk ai llm list
 ----
 
-If the cached cloud token has expired, `rpk ai` returns a 401 with a hint to rerun `rpk cloud login`.
+If the cached token has expired, `rpk ai` returns a 401; rerun `rpk ai auth login` to refresh it.
 
 [NOTE]
 ====
@@ -95,17 +92,21 @@ If the cached cloud token has expired, `rpk ai` returns a 401 with a hint to rer
 
 [TIP]
 ====
-To target a specific gateway URL for a single invocation (for example, when running against a staging gateway without switching profiles), pass `--rpai-endpoint`:
+To target a specific AI Gateway URL for a single invocation (for example, a local gateway, or a staging environment the environments list does not include), pass `--rpai-endpoint`:
 
 [source,bash]
 ----
-rpk ai --rpai-endpoint https://aigw.<cluster-id>.clusters.rdpa.co llm list
+rpk ai --rpai-endpoint http://localhost:8090 llm list
 ----
 
-You can also export `RPAI_ENDPOINT` to override for the shell session.
-====
+This overrides the selected environment's AI Gateway URL for that one command, and the flag is not bound to an environment variable. For a manual or local gateway you use repeatedly, define it once as an environment instead:
 
-// TODO(rpk-ai): rpai suppresses auth/profile subtrees in plugin mode today (cloudv2 apps/rpai/internal/cmd/root.go:127-135). If that changes, document `rpk ai auth` and `rpk ai profile` here.
+[source,bash]
+----
+rpk ai env add local --ai-gateway-url http://localhost:8090 --auth-mode none
+rpk ai env use local
+----
+====
 
 === Environment variables
 
@@ -116,13 +117,10 @@ The `rpk ai` command honors the following environment variables:
 |Variable |Purpose
 
 |`RPAI_TOKEN`
-|Bearer token for the gateway. Normally injected automatically from your cached `rpk cloud login` token; set explicitly to override.
-
-|`RPAI_ENDPOINT`
-|AI Gateway URL. Normally resolved from your active rpk cloud profile; set explicitly to override.
+|Static bearer token for the gateway. `rpk ai` normally manages its own token through `rpk ai auth login`; set this (or pass `--token`) to override, for example in a headless or CI shell.
 
 |`RPAI_PROFILE`, `RPAI_CONFIG`, `RPAI_VERBOSE`, `RPAI_FORMAT`
-|Map to `--rpai-profile`, `--rpai-config`, `--rpai-verbose`, `--format`. Long flag names are renamed under `rpk ai` to avoid collision with `rpk`'s globals; short flags (`-p`, `-c`, `-v`, `-o`) are unchanged.
+|Map to `--rpai-profile`, `--rpai-config`, `--rpai-verbose`, `--format`. Long flag names are renamed under `rpk ai` to avoid collision with `rpk`'s globals; short flags (`-p`, `-c`, `-v`, `-o`) are unchanged. There is no environment variable for the AI Gateway URL override; use the `--rpai-endpoint` flag.
 |===
 
 [[authenticate-with-oidc-client-credentials]]
@@ -453,7 +451,7 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 
 === 401 Unauthorized
 
-* If you're using `rpk ai`: Rerun `rpk cloud login` to refresh the cached cloud token. Token expiry surfaces as a 401 with this hint in the error.
+* If you're using `rpk ai`: Rerun `rpk ai auth login` to refresh the credentials. Token expiry surfaces as a 401.
 * If you're using OIDC client credentials: Check the token hasn't expired and refresh it. Verify the audience is `cloudv2-production.redpanda.cloud` and the `Authorization` header is formatted `Bearer <token>`.
 * For Gemini: Ensure the token is sent as `x-goog-api-key`, not `Authorization`.
 * For Anthropic with passthrough: Ensure the client is sending a valid Anthropic `Authorization` header.
