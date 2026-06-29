@@ -1,20 +1,2 @@
 = Glossary
 :description: Definitions of key terms used in Redpanda Agentic Data Plane documentation.
-
-== Agentic Data Plane terms
-
-* glossterm:Agentic Data Plane (ADP)[]
-* glossterm:AI agent[]
-* glossterm:AI Gateway[]
-* glossterm:declarative agent[]
-* glossterm:MCP server[]
-* glossterm:MCP tool[]
-* glossterm:tool[]
-* glossterm:resource[]
-* glossterm:OAuth provider[]
-* glossterm:OAuth client[]
-* glossterm:OAuth connection[]
-* glossterm:token vault[]
-* glossterm:transcript[]
-* glossterm:spending event[]
-* glossterm:subagent[]

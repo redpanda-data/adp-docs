@@ -21,7 +21,7 @@ rpk ai mcp get <name> [flags]
 
 |--no-tools |- |skip live tool discovery (avoids a second RPC + upstream call).
 
-|-o, --format |string |output format: table|wide|json|yaml|markdown (env: RPAI_FORMAT) (default "table").
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
 
 |--no-color |- |disable colored output (env: NO_COLOR).
 
