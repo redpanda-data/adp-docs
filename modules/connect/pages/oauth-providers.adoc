@@ -222,7 +222,7 @@ The request's `filter` object carries two independent fields:
 
 Set `order_by` (maximum 256 characters) to a comma-separated list of fields, each optionally suffixed with ` desc` (ascending by default), for example `display_name` or `created_at desc`. Orderable fields are the keyset columns `name`, `display_name`, and `created_at`. An unsupported field returns `InvalidArgument`. Leave `order_by` empty to use the server default (`created_at desc`). The order is encoded into the page token, so keep it stable across a paged walk.
 
-[,bash]
+[source,bash]
 ----
 ACCESS_TOKEN="<oidc-access-token>"   # from the client_credentials flow
 DATAPLANE_BASE="https://aigw.<cluster-id>.clusters.rdpa.co"
@@ -238,7 +238,7 @@ curl -s --request POST \
   }' | jq
 ----
 
-The response carries the matching `oauth_providers`, a `next_page_token` for the next page, and an estimated `total_size` (AIP-158) of all providers matching the filter, ignoring pagination.
+The response carries the matching `oauth_providers`, a `next_page_token` for the next page, an estimated `total_size` (AIP-158) of all providers matching the filter (ignoring pagination), and the gateway-wide `callback_url` (the OAuth redirect URI to register with your identity provider).
 
 == Attach to an MCP server
 

@@ -228,7 +228,7 @@ The request's `filter` object carries two independent fields:
 
 Set `order_by` (maximum 256 characters) to a comma-separated list of fields, each optionally suffixed with ` desc` (ascending by default), for example `created_at desc`. Orderable fields are the keyset columns `name` and `created_at`. An unsupported field returns `InvalidArgument`. Leave `order_by` empty to use the server default (`created_at desc`). The order is encoded into the page token, so keep it stable across a paged walk.
 
-[,bash]
+[source,bash]
 ----
 ACCESS_TOKEN="<oidc-access-token>"   # from the client_credentials flow
 DATAPLANE_BASE="https://aigw.<cluster-id>.clusters.rdpa.co"
@@ -238,7 +238,7 @@ curl -s --request POST \
   --header "Authorization: Bearer ${ACCESS_TOKEN}" \
   --header 'Content-Type: application/json' \
   --data '{
-    "filter": { "filter": "type = \"MCP_SERVER_TYPE_REMOTE\" AND enabled = true" },
+    "filter": { "filter": "type = \"MCP_SERVER_TYPE_MANAGED\"" },
     "order_by": "created_at desc",
     "page_size": 50
   }' | jq
