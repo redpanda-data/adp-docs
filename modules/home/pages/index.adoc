@@ -32,7 +32,7 @@
 :page-concept-6-title: How agents, tools, and data fit
 :page-concept-6-desc: The three building blocks of Agentic Data Plane and how they connect.
 :page-concept-6-link: connect:concepts.adoc
-:page-footer-note-intro: New to Agentic Data Plane?
+:page-footer-note-intro: New here?
 :page-footer-note-text: Read
 :page-footer-note-link: get-started:adp-overview.adoc
 :page-footer-note-link-text: What is Agentic Data Plane?
