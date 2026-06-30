@@ -36,7 +36,7 @@ Guardrails on the server config can restrict it: set `readonly` to disable `exec
 
 * A SQL database reachable from the Agentic Data Plane.
 +
-// TODO: confirm network reachability requirements (egress / VPC peering / public endpoint) for the standalone ADP product surface.
+// TODO: confirm network reachability requirements (egress / VPC peering / public endpoint) for the standalone Agentic Data Plane product surface.
 * A connection string (DSN) for the database, including the credentials. The DSN is stored as a sensitive value.
 
 == Configure
@@ -84,7 +84,7 @@ Once the SQL server is created, point an agent at the *API URL* on the server's 
 |Symptom |What to check
 
 |`connection refused` from create
-|Database isn't reachable from ADP. Confirm host, port, and any egress / firewall rules.
+|Database isn't reachable from Agentic Data Plane. Confirm host, port, and any egress / firewall rules.
 
 |`authentication failed for user`
 |Password reference points at the wrong secret, or the secret content is wrong. Re-create the secret with `UPPER_SNAKE_CASE` and verify it.

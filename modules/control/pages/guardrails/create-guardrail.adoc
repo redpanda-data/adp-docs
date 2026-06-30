@@ -63,7 +63,7 @@ This step, labeled *Authentication* in the wizard, sets the AWS region and crede
 . If you chose standalone credentials, choose a credential type:
 +
 * Default provider chain: Use the credentials available in the runtime environment.
-* Static access keys: Supply an access key ID and secret access key, each stored as a secret reference in the ADP secret store.
+* Static access keys: Supply an access key ID and secret access key, each stored as a secret reference in the Agentic Data Plane secret store.
 * Assume IAM role: Supply a role ARN, with an optional external ID and session name.
 . Click *Next*.
 
@@ -104,9 +104,9 @@ Two separate toggles control evaluation:
 A policy acts on traffic only when its guardrail is enabled and its own *Evaluate this policy* toggle is on.
 ====
 
-A policy you turn on needs at least one rule. ADP rejects a guardrail that has no policy turned on, or that turns on a policy with no rules set, such as a content-filter policy with no category configured or a contextual-grounding policy with neither grounding nor relevance enabled.
+A policy you turn on needs at least one rule. Agentic Data Plane rejects a guardrail that has no policy turned on, or that turns on a policy with no rules set, such as a content-filter policy with no category configured or a contextual-grounding policy with neither grounding nor relevance enabled.
 
-A staged policy does not count toward this minimum, because a policy with its *Evaluate this policy* toggle off is not enforced. A guardrail needs at least one policy that is both turned on and evaluated, so if you stage every policy, ADP rejects the guardrail.
+A staged policy does not count toward this minimum, because a policy with its *Evaluate this policy* toggle off is not enforced. A guardrail needs at least one policy that is both turned on and evaluated, so if you stage every policy, Agentic Data Plane rejects the guardrail.
 
 When you finish, click *Create guardrail*.
 
@@ -136,7 +136,7 @@ From the guardrails list or a guardrail's detail page:
 
 [IMPORTANT]
 ====
-You cannot delete a guardrail while an LLM provider still references it. ADP blocks the delete and names the providers you must detach first. Open each listed provider, clear its `Guardrail` field, then delete the guardrail. This protects in-flight traffic: if the guardrail were removed while a provider still pointed at it, every request through that provider would fail.
+You cannot delete a guardrail while an LLM provider still references it. Agentic Data Plane blocks the delete and names the providers you must detach first. Open each listed provider, clear its `Guardrail` field, then delete the guardrail. This protects in-flight traffic: if the guardrail were removed while a provider still pointed at it, every request through that provider would fail.
 ====
 
 == Next steps

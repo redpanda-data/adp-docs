@@ -12,7 +12,7 @@ A trigger is a configured way for the outside world to invoke an agent. Without 
 
 Each trigger is its own resource on the agent, created, edited, and disconnected on its own, so you can attach several to the same agent. For example, one agent can serve a production Teams bot and a test Teams bot side by side, each through its own trigger.
 
-NOTE: Triggers are available for Redpanda-managed agents only. A self-managed agent runs on your own infrastructure and is invoked through it, so it has no *Triggers* tab. To bring a self-managed agent into ADP for observability and governance, see xref:connect:self-managed-agents.adoc[Set up a self-managed agent].
+NOTE: Triggers are available for Redpanda-managed agents only. A self-managed agent runs on your own infrastructure and is invoked through it, so it has no *Triggers* tab. To bring a self-managed agent into Agentic Data Plane for observability and governance, see xref:connect:self-managed-agents.adoc[Set up a self-managed agent].
 
 After reading this page, you will be able to:
 

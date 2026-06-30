@@ -1,21 +1,21 @@
-= Redpanda ADP Overview
+= Redpanda Agentic Data Plane Overview
 :description: Enterprise-grade infrastructure for building, deploying, and governing AI agents at scale with compliance-grade audit trails.
 :page-layout: index
 :page-topic-type: overview
 :page-categories: Agentic Data Plane
 :personas: agent_builder, platform_engineer, security_compliance_lead, pilot_lead, domain_evaluator
-:learning-objective-1: Identify the key components of Redpanda ADP and their purposes
+:learning-objective-1: Identify the key components of Redpanda Agentic Data Plane and their purposes
 :learning-objective-2: Describe how each component addresses enterprise governance and reliability requirements
-:learning-objective-3: Determine whether Redpanda ADP fits your organization's requirements for AI agent deployment
+:learning-objective-3: Determine whether Redpanda Agentic Data Plane fits your organization's requirements for AI agent deployment
 :page-aliases: develop:agents/about.adoc, develop:ai-agents/about.adoc, cloud-data-platform:ai-agents:index.adoc, cloud-data-platform:ai-agents:overview.adoc, cloud-data-platform:ai-agents:adp-overview.adoc
 
 Enterprises spent decades building governance for their human workforce: identity, access control, audit trails, and accountability. They never built the same controls for glossterm:AI agent[,AI agents]. Most agents run with broad credentials, no identity of their own, and no record of what they did, which is why enterprise AI so often stalls before it reaches production.
 
-Redpanda Agentic Data Plane (ADP) closes that gap. ADP is governance infrastructure for enterprise agents: it sits between your agents and your data, gives every agent an identity, mediates every tool call and data access, and records every action so you can replay and audit it. With ADP, you connect agents to all your enterprise data, from real-time event streams to databases and business systems, and run them safely at scale without losing control.
+Redpanda Agentic Data Plane closes that gap. Agentic Data Plane is governance infrastructure for enterprise agents: it sits between your agents and your data, gives every agent an identity, mediates every tool call and data access, and records every action so you can replay and audit it. With Agentic Data Plane, you connect agents to all your enterprise data, from real-time event streams to databases and business systems, and run them safely at scale without losing control.
 
-ADP builds on open standards, including MCP, OAuth, OpenTelemetry, and the Kafka protocol, so governance sits above your choice of LLM, cloud, or agent framework. You stay free to adopt new models and frameworks as they emerge, without re-platforming or locking into a single vendor.
+Agentic Data Plane builds on open standards, including MCP, OAuth, OpenTelemetry, and the Kafka protocol, so governance sits above your choice of LLM, cloud, or agent framework. You stay free to adopt new models and frameworks as they emerge, without re-platforming or locking into a single vendor.
 
-ADP is its own product surface. It runs on Redpanda, so there's no separate cluster to stand up first: Redpanda provisions the underlying environment when you add ADP.
+Agentic Data Plane is its own product surface. It runs on Redpanda, so there's no separate cluster to stand up first: Redpanda provisions the underlying environment when you add Agentic Data Plane.
 
 After reading this page, you will be able to:
 
@@ -25,10 +25,10 @@ After reading this page, you will be able to:
 
 == Architecture
 
-Agents and clients connect through ADP rather than reaching your systems directly. ADP gives every agent an identity and applies guardrails and spend caps, mediates tool and data access through MCP servers to your systems of record, and routes every LLM call through the AI Gateway. All activity streams to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.
+Agents and clients connect through Agentic Data Plane rather than reaching your systems directly. Agentic Data Plane gives every agent an identity and applies guardrails and spend caps, mediates tool and data access through MCP servers to your systems of record, and routes every LLM call through the AI Gateway. All activity streams to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.
 
-.Redpanda ADP sits between your agents and clients and your external systems and LLM providers
-image::adp-architecture.png[Architecture diagram: Redpanda-managed agents, bring-your-own agents over A2A, and Microsoft Teams connect to the Agentic Data Plane. Inside ADP, out-of-band policy applies identity, guardrails, and spend caps; an MCP gateway provides governed tool and data access to systems of record and MCP servers; and an LLM provider gateway gives one entry point per provider to Anthropic, OpenAI, Gemini, Bedrock, and OpenAI-compatible models. Transcripts stream to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.]
+.Redpanda Agentic Data Plane sits between your agents and clients and your external systems and LLM providers
+image::adp-architecture.png[Architecture diagram: Redpanda-managed agents, bring-your-own agents over A2A, and Microsoft Teams connect to the Agentic Data Plane. Inside Agentic Data Plane, out-of-band policy applies identity, guardrails, and spend caps; an MCP gateway provides governed tool and data access to systems of record and MCP servers; and an LLM provider gateway gives one entry point per provider to Anthropic, OpenAI, Gemini, Bedrock, and OpenAI-compatible models. Transcripts stream to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.]
 
 == AI Gateway
 
@@ -60,19 +60,19 @@ For more information, see xref:connect:agents-overview.adoc[].
 
 == Built-in governance controls
 
-Redpanda ADP addresses critical enterprise requirements across all components.
+Redpanda Agentic Data Plane addresses critical enterprise requirements across all components.
 
 * *Security by design*: MCP servers enforce policies at the tool level, programmatically preventing prompt injection, SQL injection, and other agent-based attacks. Policy enforcement is deterministic and controlled. Agents cannot bypass security constraints even through creative prompting.
 
 * *Unified authorization*: All components use OIDC-based authentication with an on-behalf-of authorization model. When a user invokes an agent, the agent inherits the intersection of its own permissions and the user's permissions, so an agent can only do what the user behind it is allowed to do. This ensures proper data access scoping. An embedded identity provider lets any standards-compliant MCP client, such as Claude Desktop, Claude Code, or Microsoft Copilot Studio, connect over OAuth without custom header handling.
 
-* *Complete observability*: Redpanda ADP provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) give a read-only view of every agent run, capturing each prompt, response, and tool call with token and USD cost per conversation, plus status, duration, and an interactive timeline. Traces are emitted as OpenTelemetry data into an immutable Redpanda topic with 100% sampling. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in ADP and replay data for agent evaluations. For more information, see xref:monitor:concepts.adoc[How Observability Works].
+* *Complete observability*: Redpanda Agentic Data Plane provides two levels of inspection. Execution logs (glossterm:transcript[,transcripts]) give a read-only view of every agent run, capturing each prompt, response, and tool call with token and USD cost per conversation, plus status, duration, and an interactive timeline. Traces are emitted as OpenTelemetry data into an immutable Redpanda topic with 100% sampling. Real-time debugging tools let you inspect individual MCP server calls down to individual tool invocations with full timing data. You can view detailed agent actions in Agentic Data Plane and replay data for agent evaluations. For more information, see xref:monitor:concepts.adoc[How Observability Works].
 
-* *Compliance and audit*: Redpanda ADP records every agent action and the data sources used in each decision, which supports audit and compliance efforts (for example, frameworks such as ISO 42001 or the EU AI Act). Execution logs are stored in Redpanda topics and can be materialized to Iceberg tables for longer-term retention and analysis.
+* *Compliance and audit*: Redpanda Agentic Data Plane records every agent action and the data sources used in each decision, which supports audit and compliance efforts (for example, frameworks such as ISO 42001 or the EU AI Act). Execution logs are stored in Redpanda topics and can be materialized to Iceberg tables for longer-term retention and analysis.
 
 == Use cases
 
-Common Redpanda ADP use cases include:
+Common Redpanda Agentic Data Plane use cases include:
 
 * *Automate financial operations*: Build agents that reconcile invoices across vendors and ERP systems, monitor real-time spending against budget, or review contracts against approved templates and flag out-of-policy clauses for legal review.
 * *Streamline HR and people operations*: Answer employee questions against benefits, payroll, and HRIS systems; automate onboarding and offboarding workflows; or triage internal support tickets to the right team.
@@ -82,5 +82,5 @@ Common Redpanda ADP use cases include:
 
 == Next steps
 
-* xref:get-started:adp-quickstart.adoc[ADP Quickstart]
+* xref:get-started:adp-quickstart.adoc[Agentic Data Plane Quickstart]
 * xref:gateway:configure-provider.adoc[Configure an LLM provider]

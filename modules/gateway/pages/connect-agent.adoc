@@ -9,7 +9,7 @@
 
 This guide shows how to connect your glossterm:AI agent[] or application to the AI Gateway. You construct the proxy URL for a provider you have already created, authenticate (with the xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] CLI for local development or with OIDC client credentials for CI and application code), and send your first request with the SDK of your choice.
 
-TIP: The provider's *Connect* tab in ADP generates this configuration for you: a gateway-token step, setup instructions for popular clients, and code examples with the provider's proxy URL prefilled. Copy from the tab for a quick start, or follow this page for the full flow.
+TIP: The provider's *Connect* tab in Agentic Data Plane generates this configuration for you: a gateway-token step, setup instructions for popular clients, and code examples with the provider's proxy URL prefilled. Copy from the tab for a quick start, or follow this page for the full flow.
 
 After completing this guide, you will be able to:
 
@@ -23,7 +23,7 @@ After completing this guide, you will be able to:
 * For local development, nothing else. You'll install `rpk ai` in the next section.
 * For CI or programmatic clients: A Redpanda service account with OIDC client credentials. See xref:cloud-data-platform:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
 +
-// TODO: confirm whether ADP hosts its own service-account IAM post-standalone, or continues to share Redpanda Cloud Organization IAM.
+// TODO: confirm whether Agentic Data Plane hosts its own service-account IAM post-standalone, or continues to share Redpanda Cloud Organization IAM.
 * A development environment with your chosen programming language.
 
 == Proxy URL anatomy
@@ -43,12 +43,12 @@ AI Gateway forwards the request to the upstream provider, attaches the configure
 
 TIP: The provider detail page generates ready-to-run snippets pre-filled with the correct proxy URL and paths. When in doubt, copy from the Connect your app section there.
 
-// Updated for cloudv2 PR #27510: rpk ai is self-contained (its own auth login + ADP environment selection), no longer tied to the rpk cloud session.
+// Updated for cloudv2 PR #27510: rpk ai is self-contained (its own auth login + Agentic Data Plane environment selection), no longer tied to the rpk cloud session.
 [[authenticate-with-rpk-ai]]
 [[authenticate-with-rpai]]
 == Use `rpk ai` for local development
 
-The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. `rpk ai` is self-contained: it has its own login and its own ADP environment selection, independent of any `rpk cloud` session.
+The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command is the Redpanda AI CLI. Use it to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools from the command line. `rpk ai` is self-contained: it has its own login and its own Agentic Data Plane environment selection, independent of any `rpk cloud` session.
 
 . xref:reference:rpk/rpk-ai/rpk-ai-install.adoc[Install `rpk ai`]:
 +
@@ -59,14 +59,14 @@ rpk ai install
 +
 Update later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk ai upgrade`]; remove with xref:reference:rpk/rpk-ai/rpk-ai-uninstall.adoc[`rpk ai uninstall`].
 
-. Sign in. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the ADP environments in your organization so you can select one:
+. Sign in. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the Agentic Data Plane environments in your organization so you can select one:
 +
 [source,bash]
 ----
 rpk ai auth login
 ----
 
-. Select the ADP environment whose AI Gateway you want to target. The `rpk ai env use` command accepts an environment name or ID and repoints the active profile in place:
+. Select the Agentic Data Plane environment whose AI Gateway you want to target. The `rpk ai env use` command accepts an environment name or ID and repoints the active profile in place:
 +
 [source,bash]
 ----
@@ -445,7 +445,7 @@ AI Gateway returns standard HTTP status codes. The upstream provider's error bod
 * Implement retry with exponential backoff for 5xx and timeout conditions.
 * Respect `Retry-After` on 429 responses.
 * Rotate service account credentials on a schedule your organization accepts.
-* Observe usage in Redpanda ADP on each provider's detail page.
+* Observe usage in Redpanda Agentic Data Plane on each provider's detail page.
 
 == Troubleshooting
 

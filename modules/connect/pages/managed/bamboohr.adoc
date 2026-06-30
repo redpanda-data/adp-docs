@@ -43,7 +43,7 @@ Use BambooHR when an agent needs HR context from BambooHR without sharing one up
 == Prerequisites
 
 * A BambooHR workspace where you can create an OAuth 2.0 application.
-* A BambooHR OAuth Provider in Redpanda ADP. BambooHR OAuth authorize and token endpoints include your company subdomain.
+* A BambooHR OAuth Provider in Redpanda Agentic Data Plane. BambooHR OAuth authorize and token endpoints include your company subdomain.
 * A BambooHR company subdomain, such as `mycompany` for `mycompany.bamboohr.com`. The managed config accepts letters, numbers, and hyphens.
 * BambooHR users with the permissions required to read the employee, time-off, or performance data your agent needs.
 
@@ -53,7 +53,7 @@ Use BambooHR when an agent needs HR context from BambooHR without sharing one up
 
 In BambooHR, create an OAuth 2.0 application in the BambooHR developer settings. Use the OAuth callback URL for your AI Gateway deployment.
 
-Register a BambooHR OAuth Provider in ADP with tenant-specific endpoints:
+Register a BambooHR OAuth Provider in Agentic Data Plane with tenant-specific endpoints:
 
 [source,text]
 ----
@@ -61,7 +61,7 @@ Authorization endpoint: https://api.bamboohr.com/api/gateway.php/<subdomain>/v1/
 Token endpoint:         https://api.bamboohr.com/api/gateway.php/<subdomain>/v1/oauth2/token
 ----
 
-Store the BambooHR client secret in the ADP secret store, then reference that secret from the OAuth Provider.
+Store the BambooHR client secret in the Agentic Data Plane secret store, then reference that secret from the OAuth Provider.
 
 == Create the managed MCP server
 

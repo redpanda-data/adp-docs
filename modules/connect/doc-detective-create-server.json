@@ -5,11 +5,11 @@
       "description": "Create a managed MCP server following the documented procedure",
       "steps": [
         {
-          "description": "Navigate to ADP UI",
+          "description": "Navigate to Agentic Data Plane UI",
           "goTo": "https://adp.redpanda.com"
         },
         {
-          "description": "Verify user is on the ADP UI home page",
+          "description": "Verify user is on the Agentic Data Plane UI home page",
           "find": "MCP Servers"
         },
         {

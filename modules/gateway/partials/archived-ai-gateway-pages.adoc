@@ -36,7 +36,7 @@ Note: gateway/aggregation.adoc was reframed and renamed to gateway/code-mode.ado
 :learning-objective-2: Route your first request through AI Gateway and verify it works
 :learning-objective-3: Verify request routing and token usage in the gateway overview
 
-Redpanda AI Gateway, part of the Agentic Data Plane (ADP), is the managed proxy for LLM APIs. This quickstart walks you through configuring your first gateway and routing requests through it.
+Redpanda AI Gateway, part of the Agentic Data Plane, is the managed proxy for LLM APIs. This quickstart walks you through configuring your first gateway and routing requests through it.
 
 == Prerequisites
 
@@ -439,7 +439,7 @@ const openai = new OpenAI({
 });
 ----
 
-// Original Next steps: ADP Quickstart, gateway:aggregation, gateway:gateway-architecture, gateway:overview
+// Original Next steps: Agentic Data Plane Quickstart, gateway:aggregation, gateway:gateway-architecture, gateway:overview
 
 
 // ===========================================================================
@@ -565,7 +565,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* Access to Redpanda ADP with administrator privileges
+* Access to Redpanda Agentic Data Plane with administrator privileges
 * API keys for at least one LLM provider (OpenAI, Anthropic, Google AI)
 * (Optional) MCP server endpoints if you plan to use tool aggregation
 
@@ -573,7 +573,7 @@ After completing this guide, you will be able to:
 
 Providers represent upstream services (Anthropic, OpenAI, Google AI) and associated credentials. Providers default to disabled; an administrator must explicitly enable each one.
 
-. In ADP, navigate to *Agentic* > *AI Gateway* > *Providers*.
+. In Agentic Data Plane, navigate to *Agentic* > *AI Gateway* > *Providers*.
 . Select a provider (for example, Anthropic).
 . On the Configuration tab for the provider, click *Add configuration*.
 . Enter your API Key for the provider.
@@ -869,7 +869,7 @@ Expected result: Successful completion response.
 Now that your gateway is configured, share access with users (builders):
 
 . Provide the *Gateway Endpoint* (for example, `https://example/gateways/gw_abc123/v1`)
-. Share API credentials (ADP tokens with appropriate permissions)
+. Share API credentials (Agentic Data Plane tokens with appropriate permissions)
 . (Optional) Document available models and provider pools
 . (Optional) Share rate limits and budget information
 
@@ -900,8 +900,8 @@ After reading this page, you will be able to:
 
 == Before you begin
 
-* You have a Redpanda ADP account with access to at least one AI Gateway
-* You have access to ADP or API credentials
+* You have a Redpanda Agentic Data Plane account with access to at least one AI Gateway
+* You have access to Agentic Data Plane or API credentials
 
 == List your accessible gateways
 
@@ -909,7 +909,7 @@ After reading this page, you will be able to:
 ====
 Using the UI::
 +
-. In ADP, navigate to *AI Gateway* > *Gateways*.
+. In Agentic Data Plane, navigate to *AI Gateway* > *Gateways*.
 . Review the list of gateways you can access. For each gateway, you'll see the gateway name, ID, endpoint URL, status, available models, and provider performance.
 +
 Click the Configuration, API, MCP Tools, and Changelog tabs for additional information.

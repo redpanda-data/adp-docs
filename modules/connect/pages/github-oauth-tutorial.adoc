@@ -2,11 +2,11 @@
 :description: Complete walkthrough for configuring GitHub as an OAuth provider and creating a user-delegated GitHub MCP server.
 :page-topic-type: tutorial
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Create a GitHub OAuth app and register it as an OAuth provider in ADP
+:learning-objective-1: Create a GitHub OAuth app and register it as an OAuth provider in Agentic Data Plane
 :learning-objective-2: Test the OAuth connection proactively on the Connections page
 :learning-objective-3: Configure a GitHub managed MCP server with user-delegated OAuth
 
-This tutorial shows how to connect Redpanda ADP to GitHub using OAuth, so users can authenticate with their own GitHub credentials when calling GitHub MCP tools.
+This tutorial shows how to connect Redpanda Agentic Data Plane to GitHub using OAuth, so users can authenticate with their own GitHub credentials when calling GitHub MCP tools.
 
 After completing this tutorial, you will be able to:
 
@@ -17,12 +17,12 @@ After completing this tutorial, you will be able to:
 == Before you begin
 
 * You need a GitHub account with permission to create OAuth apps (personal account or organization with appropriate role).
-* You need ADP administrator permissions to create OAuth providers and MCP servers.
+* You need Agentic Data Plane administrator permissions to create OAuth providers and MCP servers.
 * You should understand the difference between user-delegated OAuth (each user authenticates as themselves) and service-account OAuth (all users share one identity). This tutorial covers user-delegated OAuth.
 
 [TIP]
 ====
-GitHub recommends considering GitHub Apps instead of OAuth Apps for production use, as they offer fine-grained permissions and short-lived tokens. However, OAuth Apps work well for getting started with Redpanda ADP's AI Gateway integration.
+GitHub recommends considering GitHub Apps instead of OAuth Apps for production use, as they offer fine-grained permissions and short-lived tokens. However, OAuth Apps work well for getting started with Redpanda Agentic Data Plane's AI Gateway integration.
 ====
 
 == Create a GitHub OAuth app
@@ -43,7 +43,7 @@ Throughout this tutorial, fields marked with * are required.
 |Field |Value
 
 |**Application name**
-|`ADP AI Gateway` (or your preferred name)
+|`Agentic Data Plane AI Gateway` (or your preferred name)
 
 |**Homepage URL**
 |`\https://aigw.<cluster-id>.clusters.rdpa.co`+
@@ -67,9 +67,9 @@ Throughout this tutorial, fields marked with * are required.
 * Store your client secret securely. GitHub will not show it again after you navigate away.
 ====
 
-== Create the GitHub OAuth provider in ADP
+== Create the GitHub OAuth provider in Agentic Data Plane
 
-Register GitHub as an OAuth provider in ADP.
+Register GitHub as an OAuth provider in Agentic Data Plane.
 
 . Open *OAuth Providers* in the sidebar.
 . Click **Create provider** and select **GitHub** from the catalog.
@@ -91,7 +91,7 @@ Register GitHub as an OAuth provider in ADP.
 
 |**Display name** *
 |`GitHub`
-|Human-readable name shown in ADP.
+|Human-readable name shown in Agentic Data Plane.
 
 |**Authorization endpoint** *
 |`\https://github.com/login/oauth/authorize`
@@ -103,11 +103,11 @@ Register GitHub as an OAuth provider in ADP.
 
 |**Revocation Endpoint**
 |Leave empty
-|GitHub doesn't provide a standard RFC 7009 token revocation endpoint. ADP will handle token lifecycle without this.
+|GitHub doesn't provide a standard RFC 7009 token revocation endpoint. Agentic Data Plane will handle token lifecycle without this.
 
 |**Client secret ref** *
 |`GITHUB_CLIENT_SECRET`
-|Click **New**. Enter `GITHUB_CLIENT_SECRET` as the key name, paste in your client secret from GitHub, and then click *Create secret*. This creates the secret in the Secrets Store and links it to this provider in ADP. If you already have a secret in Secrets Store, click **Existing** instead.
+|Click **New**. Enter `GITHUB_CLIENT_SECRET` as the key name, paste in your client secret from GitHub, and then click *Create secret*. This creates the secret in the Secrets Store and links it to this provider in Agentic Data Plane. If you already have a secret in Secrets Store, click **Existing** instead.
 |===
 
 === Scopes
@@ -188,7 +188,7 @@ Before creating an MCP server, proactively test the OAuth flow to verify your pr
 . Click **Connect**.
 . You'll be redirected to GitHub's authorization page.
 . Review the requested permissions (scopes) and click **Authorize [Your App Name]**.
-. GitHub redirects you back to ADP.
+. GitHub redirects you back to Agentic Data Plane.
 . The GitHub provider card now shows status "Connected".
 
 [TIP]
@@ -196,7 +196,7 @@ Before creating an MCP server, proactively test the OAuth flow to verify your pr
 If the connection fails:
 
 * Check that the **Homepage URL** and **Authorization callback URL** in your GitHub OAuth app exactly match the expected URLs with your cluster ID.
-* Verify the **Client ID** and **Client secret ref** in the ADP OAuth provider are correct.
+* Verify the **Client ID** and **Client secret ref** in the Agentic Data Plane OAuth provider are correct.
 * Check that the secret `GITHUB_CLIENT_SECRET` exists and contains the correct value.
 
 See <<Troubleshooting>> for more debugging tips.
@@ -310,7 +310,7 @@ For most scenarios where users need to access their own repositories or respect 
 
 Test that the MCP server is correctly configured and can authenticate users.
 
-. In ADP, find your GitHub MCP server in the **MCP Servers** list.
+. In Agentic Data Plane, find your GitHub MCP server in the **MCP Servers** list.
 . Click it to view details.
 . If you tested the connection in Connections, you're already connected and can test immediately.
 . If you skipped the Connections test, the first time you call a tool from this server, you'll be prompted to authorize GitHub.
@@ -318,7 +318,7 @@ Test that the MCP server is correctly configured and can authenticate users.
 The flow is:
 +
 .. Call a tool (for example, through a Claude Desktop integration pointing to this MCP server).
-.. ADP returns `OAuthConnectionRequired` with an authorization URL.
+.. Agentic Data Plane returns `OAuthConnectionRequired` with an authorization URL.
 .. The UI prompts you to connect to GitHub.
 .. You authorize in GitHub.
 .. The tool call automatically retries and succeeds.
@@ -330,12 +330,12 @@ The flow is:
 You have now:
 
 * Created a GitHub OAuth app with the correct callback URL
-* Registered GitHub as an OAuth provider in ADP
+* Registered GitHub as an OAuth provider in Agentic Data Plane
 * Tested the OAuth connection proactively
 * Created a GitHub managed MCP server with user-delegated OAuth
 * Verified that users can authenticate and call GitHub tools
 
-You could next create an agent using this GitHub MCP server. Each user who calls tools from this MCP server will authenticate with their own GitHub account. User tokens are stored securely in ADP's token vault and automatically refreshed before expiry.
+You could next create an agent using this GitHub MCP server. Each user who calls tools from this MCP server will authenticate with their own GitHub account. User tokens are stored securely in Agentic Data Plane's token vault and automatically refreshed before expiry.
 
 == Troubleshooting
 
@@ -344,7 +344,7 @@ You could next create an agent using this GitHub MCP server. Each user who calls
 |Symptom |Solution
 
 |`redirect_uri_mismatch` error during authorization
-|The callback URL in your GitHub OAuth app doesn't match ADP's callback. Go to GitHub Settings → Developer settings → OAuth Apps → [Your App] and verify the **Authorization callback URL** is exactly `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`.
+|The callback URL in your GitHub OAuth app doesn't match Agentic Data Plane's callback. Go to GitHub Settings → Developer settings → OAuth Apps → [Your App] and verify the **Authorization callback URL** is exactly `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`.
 
 |`invalid_client` error during token exchange
 |The Client ID or Client secret is incorrect, or the authentication method doesn't match. Verify the Client ID in the OAuth provider matches GitHub, and that `GITHUB_CLIENT_SECRET` contains the correct client secret. Ensure **Token Endpoint Auth Method** is set to "Client Secret (Basic)".
@@ -362,7 +362,7 @@ You could next create an agent using this GitHub MCP server. Each user who calls
 |GitHub tokens eventually expire or can be revoked. The user needs to re-authorize in Connections or by triggering the consent flow again on the next tool call.
 
 |Permission denied when attaching provider to MCP server
-|You need the `dataplane_aigateway_oauthprovider_attach` permission on the GitHub provider. Contact your ADP administrator to grant this permission.
+|You need the `dataplane_aigateway_oauthprovider_attach` permission on the GitHub provider. Contact your Agentic Data Plane administrator to grant this permission.
 |===
 
 == Next steps

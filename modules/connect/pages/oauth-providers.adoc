@@ -1,5 +1,5 @@
 = Configure an OAuth Provider
-:description: Register an OAuth provider in ADP so MCP servers can authenticate users (or service accounts) against an upstream system like Slack, Jira, GitHub, or Salesforce.
+:description: Register an OAuth provider in Agentic Data Plane so MCP servers can authenticate users (or service accounts) against an upstream system like Slack, Jira, GitHub, or Salesforce.
 :page-topic-type: how-to
 :personas: platform_engineer, security_compliance_lead
 :learning-objective-1: Register an OAuth provider for an upstream system you want MCP servers to authenticate against
@@ -30,9 +30,9 @@ Before you register the provider, make sure you have:
 
 * An OAuth 2.0 application registered with the upstream provider, with the gateway's redirect URI configured. The redirect URI is the AI Gateway's OAuth callback (typically `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`).
 * The OAuth app's *client ID* and *client secret*.
-* A secret already created in the Redpanda ADP secret store for the client secret. Secret references must be `UPPER_SNAKE_CASE`, for example `SLACK_CLIENT_SECRET`.
+* A secret already created in the Redpanda Agentic Data Plane secret store for the client secret. Secret references must be `UPPER_SNAKE_CASE`, for example `SLACK_CLIENT_SECRET`.
 +
-// TODO: xref the ADP secrets-management page once confirmed.
+// TODO: xref the Agentic Data Plane secrets-management page once confirmed.
 * The list of *scopes* the upstream API needs. Include every scope any MCP server attached to this provider may need; users re-consent when scopes are added later.
 
 == Required permissions

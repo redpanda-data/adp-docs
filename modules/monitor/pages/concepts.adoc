@@ -7,7 +7,7 @@
 :learning-objective-2: Interpret transcript structure for debugging and monitoring
 :learning-objective-3: Distinguish between transcripts and audit logs
 
-Redpanda provides complete observability and governance for AI agents through automated glossterm:transcript[] capture. Every agent execution, from simple tool calls to complex multi-agent, multi-turn workflows, generates a permanent, write-once record stored on Redpanda's glossterm:log[distributed log]. The structure of every execution (its reasoning steps, tool invocations, model interactions, and data flows) is captured with 100% sampling and no gaps. ADP records the full message content of each step (the prompts sent to the model and the responses it returns) only when you turn on input and output capture for the LLM provider, because that content can contain sensitive data. See xref:gateway:configure-provider.adoc[].
+Redpanda provides complete observability and governance for AI agents through automated glossterm:transcript[] capture. Every agent execution, from simple tool calls to complex multi-agent, multi-turn workflows, generates a permanent, write-once record stored on Redpanda's glossterm:log[distributed log]. The structure of every execution (its reasoning steps, tool invocations, model interactions, and data flows) is captured with 100% sampling and no gaps. Agentic Data Plane records the full message content of each step (the prompts sent to the model and the responses it returns) only when you turn on input and output capture for the LLM provider, because that content can contain sensitive data. See xref:gateway:configure-provider.adoc[].
 
 With transcripts, organizations gain the ability to debug agent behavior, identify performance bottlenecks, meet regulatory compliance requirements, and maintain accountability for AI-driven decisions. Transcripts use OpenTelemetry standards and glossterm:Raft[]-based consensus for correctness, establishing a trustworthy foundation for agent governance.
 
@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 
 == What are transcripts
 
-A transcript records the complete execution of an agentic behavior from start to finish. It captures every step (across multiple agents, tools, models, and services) in a single, traceable record. The AI Gateway and every glossterm:AI agent[,agent] and glossterm:MCP server[] in your Agentic Data Plane (ADP) automatically emit OpenTelemetry traces to a glossterm:topic[] called `redpanda.otel_traces`. Redpanda's immutable distributed log stores these traces.
+A transcript records the complete execution of an agentic behavior from start to finish. It captures every step (across multiple agents, tools, models, and services) in a single, traceable record. The AI Gateway and every glossterm:AI agent[,agent] and glossterm:MCP server[] in your Agentic Data Plane automatically emit OpenTelemetry traces to a glossterm:topic[] called `redpanda.otel_traces`. Redpanda's immutable distributed log stores these traces.
 
 Transcripts capture:
 
@@ -30,7 +30,7 @@ Transcripts capture:
 * Error conditions
 * Performance metrics
 
-With 100% sampling, every operation is captured with no gaps. ADP records message content (the prompts and model responses behind each step) only when you enable input and output capture on the LLM provider. Until then, transcripts hold the execution structure and metadata but not the raw prompt and response bodies. The underlying storage uses a distributed log built on Raft consensus (with TLA+ proven correctness), giving transcripts a trustworthy, immutable record for governance, debugging, and performance analysis.
+With 100% sampling, every operation is captured with no gaps. Agentic Data Plane records message content (the prompts and model responses behind each step) only when you enable input and output capture on the LLM provider. Until then, transcripts hold the execution structure and metadata but not the raw prompt and response bodies. The underlying storage uses a distributed log built on Raft consensus (with TLA+ proven correctness), giving transcripts a trustworthy, immutable record for governance, debugging, and performance analysis.
 
 == Traces and spans
 

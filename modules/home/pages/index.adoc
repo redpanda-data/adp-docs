@@ -13,7 +13,7 @@
 :page-pathway-2-link: connect:self-managed-agents.adoc
 :page-pathway-2-cta: Set up your agent
 :page-pathway-2-icon: connect
-:page-concepts-title: Popular across ADP
+:page-concepts-title: Popular across Agentic Data Plane
 :page-concept-1-title: One gateway for every LLM call
 :page-concept-1-desc: Route all agent traffic through a single point. Set budgets, switch providers, and enforce policies without changing agent code.
 :page-concept-1-link: gateway:overview.adoc
@@ -26,14 +26,14 @@
 :page-concept-4-title: Per-user identity on every call
 :page-concept-4-desc: OAuth identity flows through the gateway to your tools. Know who did what, and enforce permissions at the data layer.
 :page-concept-4-link: control:permissions-overview.adoc
-:page-concept-5-title: Build in ADP versus bring your own
+:page-concept-5-title: Build in Agentic Data Plane versus bring your own
 :page-concept-5-desc: When to use declarative agents versus registering agents you built elsewhere.
 :page-concept-5-link: connect:agents-overview.adoc
 :page-concept-6-title: How agents, tools, and data fit
-:page-concept-6-desc: The three building blocks of ADP and how they connect.
+:page-concept-6-desc: The three building blocks of Agentic Data Plane and how they connect.
 :page-concept-6-link: connect:concepts.adoc
-:page-footer-note-intro: New to ADP?
+:page-footer-note-intro: New to Agentic Data Plane?
 :page-footer-note-text: Read
 :page-footer-note-link: get-started:adp-overview.adoc
-:page-footer-note-link-text: What is ADP?
+:page-footer-note-link-text: What is Agentic Data Plane?
 :page-footer-note-suffix: for a quick tour of the platform.

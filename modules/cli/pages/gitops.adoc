@@ -1,15 +1,15 @@
 = Manage Resources with GitOps
 :page-beta: true
-:description: Keep ADP resources in Git and reconcile them with rpk ai apply and diff: declarative create-or-update, drift detection, and CI gating.
+:description: Keep Agentic Data Plane resources in Git and reconcile them with rpk ai apply and diff: declarative create-or-update, drift detection, and CI gating.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder
-:learning-objective-1: Export an ADP resource to a YAML manifest you can commit to Git
+:learning-objective-1: Export an Agentic Data Plane resource to a YAML manifest you can commit to Git
 :learning-objective-2: Reconcile resources with apply, and preview changes with diff
 :learning-objective-3: Gate continuous integration on configuration drift
 
 // Source: cloudv2 `apps/rpai/internal/gitops/` (engine.go, command.go, manifest.go, doc.go), the per-resource policies in `apps/rpai/internal/cmd/{llm,mcp,oauth,oauthclient,agent}/gitops.go`, `proto/public/cloud/redpanda/api/adp/v1alpha1/llm_provider.proto`, and `rpk ai <resource> apply|diff --help`. Console output verified against the engine and `apps/rpai/internal/gitops/engine_test.go`. Verified against origin/main 2026-06-26.
 
-GitOps keeps the definition of your glossterm:Agentic Data Plane (ADP)[] resources in Git and reconciles the live environment toward those files, instead of running imperative `create`, `update`, and `delete` commands by hand. With the xref:cli:index.adoc[ADP CLI], `rpk ai <resource> apply -f` creates what is missing and updates what has drifted, and `rpk ai <resource> diff -f` is a read-only dry-run that reports what `apply` would change. In these commands, `<resource>` is one of the resource command groups that support GitOps:
+GitOps keeps the definition of your glossterm:Agentic Data Plane (ADP)[] resources in Git and reconciles the live environment toward those files, instead of running imperative `create`, `update`, and `delete` commands by hand. With the xref:cli:index.adoc[Agentic Data Plane CLI], `rpk ai <resource> apply -f` creates what is missing and updates what has drifted, and `rpk ai <resource> diff -f` is a read-only dry-run that reports what `apply` would change. In these commands, `<resource>` is one of the resource command groups that support GitOps:
 
 * LLM providers (`rpk ai llm`)
 * MCP servers (`rpk ai mcp`)
@@ -25,9 +25,9 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* The xref:cli:index.adoc[ADP CLI installed and connected] to an ADP environment.
+* The xref:cli:index.adoc[Agentic Data Plane CLI installed and connected] to an Agentic Data Plane environment.
 * Permission to create and update the resources you manage. The reconcile commands call the same APIs as `create` and `update`. See xref:control:permissions-reference.adoc[Roles and Permissions Reference].
-* Any secrets your manifests reference already created in ADP. Manifests name secrets by reference, for example, `OPENAI_API_KEY`; the CLI does not create secrets.
+* Any secrets your manifests reference already created in Agentic Data Plane. Manifests name secrets by reference, for example, `OPENAI_API_KEY`; the CLI does not create secrets.
 
 == How apply and diff reconcile
 

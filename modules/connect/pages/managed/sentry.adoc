@@ -35,22 +35,22 @@ This MCP server connects to `sentry.io` only. Self-hosted Sentry is not supporte
 Before you create the server, make sure you have:
 
 * A Sentry account on `sentry.io` with access to the organizations and projects you want the agent to read.
-* A Sentry OAuth application and a matching glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* A Sentry OAuth application and a matching glossterm:OAuth provider[,OAuth Provider] configured in Redpanda Agentic Data Plane. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 
 == Get Sentry credentials
 
-Sentry MCP uses per-user OAuth, so you register an OAuth application on Sentry and a matching OAuth Provider in ADP:
+Sentry MCP uses per-user OAuth, so you register an OAuth application on Sentry and a matching OAuth Provider in Agentic Data Plane:
 
-. In Sentry, go to *Settings > Account > API > Applications* and create a new application. Set the authorized redirect URI to your ADP gateway's OAuth callback.
-. Copy the Client ID and Client Secret, and store the client secret in the ADP secret store.
-. Register a matching OAuth Provider in ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. Use Sentry's authorize endpoint (`https://sentry.io/oauth/authorize/`) and token endpoint (`https://sentry.io/oauth/token/`).
+. In Sentry, go to *Settings > Account > API > Applications* and create a new application. Set the authorized redirect URI to your Agentic Data Plane gateway's OAuth callback.
+. Copy the Client ID and Client Secret, and store the client secret in the Agentic Data Plane secret store.
+. Register a matching OAuth Provider in Agentic Data Plane. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. Use Sentry's authorize endpoint (`https://sentry.io/oauth/authorize/`) and token endpoint (`https://sentry.io/oauth/token/`).
 . Each end-user authenticates once through the OAuth flow; tokens are stored in the gateway's token vault.
 
 Required scopes: `org:read`, `project:read`, `event:read`, and `project:releases` cover all tools. `org:read` lists organizations and projects and resolves event IDs; `project:read` lists issues and reads project events and suspect commits; `event:read` reads issue events, tags, and hashes (the stack trace); and `project:releases` reads releases and their commits. All scopes are read-only.
 
 == Configure
 
-Create a new Sentry MCP server in ADP:
+Create a new Sentry MCP server in Agentic Data Plane:
 
 . Open *MCP Servers > Create Server*.
 . Pick `Sentry` from the marketplace picker.

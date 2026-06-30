@@ -82,7 +82,7 @@ Before you create the server, make sure you have:
 * A Salesforce org where you can create a Connected App. A free Developer Edition org or a Sandbox works.
 * Your Salesforce instance URL (your *My Domain* URL), such as `\https://mycompany.my.salesforce.com`. Use the full `https://` base domain with no path.
 * For *service-account OAuth*: a Connected App configured for the client-credentials flow, and its consumer key and consumer secret.
-* For *per-user OAuth*: a Salesforce glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider] and xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+* For *per-user OAuth*: a Salesforce glossterm:OAuth provider[,OAuth Provider] configured in Redpanda Agentic Data Plane. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider] and xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Create a Connected App for service-account OAuth
 
@@ -102,11 +102,11 @@ The client-credentials flow is a service-to-service flow: `client_id` + `client_
 . Open the app from *App Manager*, click *Manage Consumer Details*, and copy the Consumer Key (your `client_id`) and Consumer Secret (your `client_secret`).
 . Set a Run As user: in *App Manager*, open the app, click *Manage > Edit Policies*, and under Client Credentials Flow set Run As to a Salesforce user with API access. Click *Save*.
 
-Store the consumer secret in the Redpanda ADP secret store under an `UPPER_SNAKE_CASE` key, such as `SALESFORCE_CLIENT_SECRET`.
+Store the consumer secret in the Redpanda Agentic Data Plane secret store under an `UPPER_SNAKE_CASE` key, such as `SALESFORCE_CLIENT_SECRET`.
 
 == Configure
 
-Create a new Salesforce MCP server in ADP:
+Create a new Salesforce MCP server in Agentic Data Plane:
 
 . Open *MCP Servers > Create Server*.
 . Pick `Salesforce` from the marketplace picker.
