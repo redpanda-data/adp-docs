@@ -124,7 +124,7 @@ On submit, AI Gateway mints the `client_id`. Confidential clients (those using a
 [[self-register-with-dcr]]
 == Let clients self-register with Dynamic Client Registration
 
-Instead of registering every client by hand, you can let spec-conformant MCP clients register themselves. AI Gateway supports OAuth 2.0 Dynamic Client Registration (DCR, RFC 7591), but self-registration is off for each organization by default. Once you enable it, the gateway advertises a `registration_endpoint` in its authorization-server metadata at `/.well-known/oauth-authorization-server`. Clients that read this metadata (Claude Code, Cursor, ChatGPT, and other spec-conformant MCP clients) register on their first connection attempt, run the authorization-code flow with PKCE, and obtain tokens without an admin provisioning a `client_id` or `client_secret` first.
+Instead of registering every client by hand, you can let spec-conformant MCP clients register themselves. AI Gateway supports OAuth 2.0 Dynamic Client Registration (DCR, RFC 7591), but self-registration is off for each organization by default. After you enable it, the gateway advertises a `registration_endpoint` in its authorization-server metadata at `/.well-known/oauth-authorization-server`. Clients that read this metadata (Claude Code, Cursor, ChatGPT, and other spec-conformant MCP clients) register on their first connection attempt, run the authorization-code flow with PKCE, and obtain tokens without an admin provisioning a `client_id` or `client_secret` first.
 
 Enable self-registration before conformant clients can register.
 
@@ -148,7 +148,7 @@ The command reports whether DCR is enabled, the admission mode, and the resource
 
 === Admission modes
 
-The admission mode controls who may register once DCR is enabled:
+The admission mode controls who may register after DCR is enabled:
 
 [cols="1,3"]
 |===
