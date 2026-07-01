@@ -126,7 +126,7 @@ The transcript shows token usage per turn. For spend analysis across agents, mod
 A transcript stays in `RUNNING` until the root span closes. Common causes:
 
 * The agent or MCP server is still executing (this is normal: Wait, or open a newer transcript).
-* The root span never flushed because the process was killed mid-execution. Expect this to resolve once the OTLP ingestion lag clears; if it doesn't after several minutes, the trace is likely orphaned.
+* The root span never flushed because the process was killed mid-execution. Expect this to resolve after the OTLP ingestion lag clears; if it doesn't after several minutes, the trace is likely orphaned.
 
 === USD cost shows 0
 

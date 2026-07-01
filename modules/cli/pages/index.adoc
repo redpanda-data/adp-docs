@@ -9,7 +9,7 @@
 
 // Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface + persistent flags), `apps/rpai/internal/cmd/env/cmd.go`, and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Connect/auth model reflects cloudv2 PR #27510: rpk ai is self-contained (its own `auth login` device flow + Agentic Data Plane environment selection), not tied to the rpk cloud session. Verified against origin/main 2026-06-29 (cloudv2 PR #27510 merged).
 
-The Agentic Data Plane command-line interface, `rpk ai`, manages glossterm:Agentic Data Plane (ADP)[] resources from your terminal. It drives the same control surface as the Agentic Data Plane UI: glossterm:large language model (LLM)[] providers, glossterm:Model Context Protocol (MCP)[] servers, OAuth providers and clients, and agents. Because every action is a command, you can script it and run it in continuous integration.
+The Agentic Data Plane command-line interface, `rpk ai`, manages glossterm:Agentic Data Plane[] resources from your terminal. It drives the same control surface as the Agentic Data Plane UI: glossterm:large language model (LLM)[] providers, glossterm:Model Context Protocol (MCP)[] servers, OAuth providers and clients, and agents. Because every action is a command, you can script it and run it in continuous integration.
 
 The Agentic Data Plane CLI, also called the Redpanda AI CLI, runs as an xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk`] plugin, so you install and run it through your existing `rpk` setup.
 

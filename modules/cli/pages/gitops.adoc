@@ -9,7 +9,7 @@
 
 // Source: cloudv2 `apps/rpai/internal/gitops/` (engine.go, command.go, manifest.go, doc.go), the per-resource policies in `apps/rpai/internal/cmd/{llm,mcp,oauth,oauthclient,agent}/gitops.go`, `proto/public/cloud/redpanda/api/adp/v1alpha1/llm_provider.proto`, and `rpk ai <resource> apply|diff --help`. Console output verified against the engine and `apps/rpai/internal/gitops/engine_test.go`. Verified against origin/main 2026-06-26.
 
-GitOps keeps the definition of your glossterm:Agentic Data Plane (ADP)[] resources in Git and reconciles the live environment toward those files, instead of running imperative `create`, `update`, and `delete` commands by hand. With the xref:cli:index.adoc[Agentic Data Plane CLI], `rpk ai <resource> apply -f` creates what is missing and updates what has drifted, and `rpk ai <resource> diff -f` is a read-only dry-run that reports what `apply` would change. In these commands, `<resource>` is one of the resource command groups that support GitOps:
+GitOps keeps the definition of your glossterm:Agentic Data Plane[] resources in Git and reconciles the live environment toward those files, instead of running imperative `create`, `update`, and `delete` commands by hand. With the xref:cli:index.adoc[Agentic Data Plane CLI], `rpk ai <resource> apply -f` creates what is missing and updates what has drifted, and `rpk ai <resource> diff -f` is a read-only dry-run that reports what `apply` would change. In these commands, `<resource>` is one of the resource command groups that support GitOps:
 
 * LLM providers (`rpk ai llm`)
 * MCP servers (`rpk ai mcp`)
