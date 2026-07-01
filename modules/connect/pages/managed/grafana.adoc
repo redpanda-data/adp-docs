@@ -33,13 +33,13 @@ Before you create the server, make sure you have:
 . In Grafana, go to *Administration > Users and access > Service accounts*.
 . Create a service account. Assign the Viewer role to use every read tool. To use `create_or_update_dashboard`, assign Editor (or a custom role with dashboard write permission) instead.
 . On the service account, select *Add service account token*, then copy the generated token (`glsa_...`). It is shown only once.
-. Store the token in the ADP secret store under a name like `GRAFANA_SERVICE_ACCOUNT_TOKEN`.
+. Store the token in the Agentic Data Plane secret store under a name like `GRAFANA_SERVICE_ACCOUNT_TOKEN`.
 
 Note your instance base URL and, if your instance is multi-org, the numeric org ID.
 
 == Configure
 
-Create a new Grafana MCP server in ADP:
+Create a new Grafana MCP server in Agentic Data Plane:
 
 . Open *MCP Servers > Create Server*.
 . Pick `Grafana` from the marketplace picker.

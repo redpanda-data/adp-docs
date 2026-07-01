@@ -1,13 +1,13 @@
-= Use Claude Code with Redpanda ADP
+= Use Claude Code with Redpanda Agentic Data Plane
 :page-aliases: cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-admin.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-user.adoc
-:description: Route Claude Code through an ADP Anthropic provider for centralized credentials, usage tracking, and transcript logging. Optionally attach ADP-hosted MCP servers.
+:description: Route Claude Code through an Agentic Data Plane Anthropic provider for centralized credentials, usage tracking, and transcript logging. Optionally attach Agentic Data Plane-hosted MCP servers.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Configure Claude Code to call an Anthropic provider hosted in ADP instead of the public Anthropic API
-:learning-objective-2: Attach ADP-hosted MCP servers to Claude Code so its tools resolve against your managed tool catalog
+:learning-objective-1: Configure Claude Code to call an Anthropic provider hosted in Agentic Data Plane instead of the public Anthropic API
+:learning-objective-2: Attach Agentic Data Plane-hosted MCP servers to Claude Code so its tools resolve against your managed tool catalog
 :learning-objective-3: Verify the connection and read usage
 
-Claude Code is Anthropic's command-line coding agent. When you point it at an AI Gateway proxy URL instead of the public Anthropic API, your team's LLM calls flow through ADP: API keys stay in the dataplane secret store, usage rolls up on the *Cost & Usage* page, and the calls land in xref:monitor:transcripts.adoc[the Transcripts view] for investigation.
+Claude Code is Anthropic's command-line coding agent. When you point it at an AI Gateway proxy URL instead of the public Anthropic API, your team's LLM calls flow through Agentic Data Plane: API keys stay in the dataplane secret store, usage rolls up on the *Cost & Usage* page, and the calls land in xref:monitor:transcripts.adoc[the Transcripts view] for investigation.
 
 After completing this guide, you will be able to:
 
@@ -15,20 +15,20 @@ After completing this guide, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-== When to use ADP with Claude Code
+== When to use Agentic Data Plane with Claude Code
 
 Use this integration when you want to:
 
 * Pull Anthropic API keys out of every developer's shell and manage them centrally.
 * Track Claude Code spend per provider, model, and user without parsing each developer's individual Anthropic invoice.
 * Apply per-provider transcript logging. For example, route a regulated team to a "no-logging" provider while keeping the default provider's full conversation history available for review.
-* Forward each developer's own Anthropic subscription token through ADP (Anthropic *Authorization passthrough*), so the existing Max- or Team-plan entitlement still applies but the call is observed by ADP.
+* Forward each developer's own Anthropic subscription token through Agentic Data Plane (Anthropic *Authorization passthrough*), so the existing Max- or Team-plan entitlement still applies but the call is observed by Agentic Data Plane.
 
 This guide does not cover building agents that *call* Claude Code. For that, see xref:connect:integration-overview.adoc[Integration patterns overview].
 
 == Prerequisites
 
-* An Anthropic LLM provider configured in ADP. If you haven't created one, follow xref:gateway:configure-provider.adoc[Configure an LLM provider] and pick *Anthropic* as the type. Enable at least one Claude model (for example, `claude-sonnet-4-6` or `claude-opus-4-7`) in the model picker.
+* An Anthropic LLM provider configured in Agentic Data Plane. If you haven't created one, follow xref:gateway:configure-provider.adoc[Configure an LLM provider] and pick *Anthropic* as the type. Enable at least one Claude model (for example, `claude-sonnet-4-6` or `claude-opus-4-7`) in the model picker.
 * Claude Code installed on the developer's workstation. See https://docs.anthropic.com/claude-code[Anthropic's Claude Code documentation].
 * A Redpanda service account with permission to invoke the provider (`dataplane_adp_llmprovider_invoke`). See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions]. Both shared-developer-tooling and per-developer setups use the same OIDC client-credentials grant; the differences are operational.
 
@@ -47,7 +47,7 @@ The provider's *Connect* tab also generates a ready-to-paste Claude Code configu
 
 == Configure Claude Code
 
-Claude Code reads the Anthropic base URL and an authentication token from environment variables. Set both to point at the ADP proxy URL.
+Claude Code reads the Anthropic base URL and an authentication token from environment variables. Set both to point at the Agentic Data Plane proxy URL.
 
 [tabs]
 ======
@@ -77,7 +77,7 @@ export ANTHROPIC_AUTH_TOKEN
 export ANTHROPIC_BASE_URL="https://aigw.<cluster-id>.clusters.rdpa.co/llm/v1/providers/<provider-name>"
 ----
 
-. Launch Claude Code as you normally would. Calls flow through ADP.
+. Launch Claude Code as you normally would. Calls flow through Agentic Data Plane.
 
 The token has a short TTL: re-mint when it expires. AI Gateway does not refresh OIDC tokens for you. For day-to-day work, wrap the mint-and-export in a shell function or sub-shell so you don't have to remember the steps.
 --
@@ -85,7 +85,7 @@ The token has a short TTL: re-mint when it expires. AI Gateway does not refresh 
 Anthropic Authorization passthrough::
 +
 --
-Use when developers authenticate to Anthropic with their own subscription (Max plan, Team plan, enterprise) and ADP only observes the call.
+Use when developers authenticate to Anthropic with their own subscription (Max plan, Team plan, enterprise) and Agentic Data Plane only observes the call.
 
 . Confirm the provider has Authorization passthrough enabled. The Connection card on the provider detail page shows the current setting as `Auth passthrough`. If it is off, an admin needs to flip it. See xref:gateway:configure-provider.adoc#anthropic-authorization-passthrough[Anthropic: Authorization passthrough].
 
@@ -106,16 +106,16 @@ AI Gateway forwards the `Authorization` header to Anthropic unchanged. Usage is 
 The model identifier Claude Code sends (for example, `claude-sonnet-4-6`) must be one your Anthropic provider exposes. If you see a "model not found" error, open the provider detail page, confirm the model is ticked in the catalog, and pass the exact identifier shown there.
 ====
 
-== Attach ADP-hosted MCP servers (optional)
+== Attach Agentic Data Plane-hosted MCP servers (optional)
 
-Claude Code can call MCP servers for tool access. To use the MCP servers you already host in ADP (managed catalog types, self-managed proxied servers, or both), register each one with Claude Code's MCP configuration:
+Claude Code can call MCP servers for tool access. To use the MCP servers you already host in Agentic Data Plane (managed catalog types, self-managed proxied servers, or both), register each one with Claude Code's MCP configuration:
 
 [source,bash]
 ----
 claude mcp add <server-name> https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>
 ----
 
-For OAuth-protected MCP servers (most managed types), Claude Code prompts the developer to complete the consent flow on first use. ADP stores the resulting token in the per-user xref:connect:user-delegated-oauth.adoc[token vault], so subsequent invocations reuse it.
+For OAuth-protected MCP servers (most managed types), Claude Code prompts the developer to complete the consent flow on first use. Agentic Data Plane stores the resulting token in the per-user xref:connect:user-delegated-oauth.adoc[token vault], so subsequent invocations reuse it.
 
 If a server exposes a large tool catalog, turn on xref:gateway:code-mode.adoc[code mode] and point Claude Code at the server's code-mode endpoint to cut the token cost of loading every tool definition.
 

@@ -7,7 +7,7 @@
 :learning-objective-2: Describe how agents manage context and state across interactions
 :learning-objective-3: Identify error handling strategies for agent failures
 
-When you configure an agent's LLM, system prompt, and tools, Redpanda ADP manages execution through a reasoning loop: analyze context, invoke a tool, process the result, and repeat until the task completes. Each iteration adds tokens to the context window and runs against your iteration budget, so execution decisions directly shape cost, latency, and reliability. Understanding this model gives you the foundation to set effective iteration limits, design lean tool sets, and diagnose failures before they affect your users.
+When you configure an agent's LLM, system prompt, and tools, Redpanda Agentic Data Plane manages execution through a reasoning loop: analyze context, invoke a tool, process the result, and repeat until the task completes. Each iteration adds tokens to the context window and runs against your iteration budget, so execution decisions directly shape cost, latency, and reliability. Understanding this model gives you the foundation to set effective iteration limits, design lean tool sets, and diagnose failures before they affect your users.
 
 After reading this page, you will be able to:
 
@@ -111,7 +111,7 @@ MCP tools extend agent capabilities beyond text generation. Understanding when a
 
 === Synchronous tool execution
 
-In Redpanda ADP, tool calls block the agent. When the agent decides to invoke a tool, it pauses and waits while the tool executes (querying a database, calling an API, or processing data). When the tool returns its result, the agent resumes reasoning.
+In Redpanda Agentic Data Plane, tool calls block the agent. When the agent decides to invoke a tool, it pauses and waits while the tool executes (querying a database, calling an API, or processing data). When the tool returns its result, the agent resumes reasoning.
 
 This synchronous model means latency adds up across multiple tool calls, the agent sees tool results sequentially rather than in parallel, and long-running tools can delay or fail agent requests due to timeouts.
 

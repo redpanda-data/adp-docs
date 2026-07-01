@@ -1,14 +1,14 @@
 = Set Up AWS Bedrock as an LLM Provider
-:description: Create the IAM user, policy, and access keys required for AI Gateway to invoke Amazon Bedrock models, then register the provider in ADP.
+:description: Create the IAM user, policy, and access keys required for AI Gateway to invoke Amazon Bedrock models, then register the provider in Agentic Data Plane.
 :page-topic-type: how-to
 :personas: platform_engineer
 :learning-objective-1: Create an IAM policy that grants AI Gateway permission to invoke Bedrock foundation models and cross-region inference profiles
 :learning-objective-2: Create a dedicated IAM user, attach the policy, and generate access keys for AI Gateway
-:learning-objective-3: Register Bedrock as an LLM provider in ADP and select the models you want to expose
+:learning-objective-3: Register Bedrock as an LLM provider in Agentic Data Plane and select the models you want to expose
 
 // Source: cloudv2 `apps/aigw/docs/customer/bedrock-setup-guide.md` on origin/main, verified 2026-05-19.
 
-This guide walks you through the AWS-side setup AI Gateway needs to invoke Amazon Bedrock, then through the Redpanda ADP flow that registers Bedrock as an LLM provider. For background on how Bedrock foundation models, cross-region inference profiles, and IAM patterns map to the provider form, see xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] on the main provider configuration page.
+This guide walks you through the AWS-side setup AI Gateway needs to invoke Amazon Bedrock, then through the Redpanda Agentic Data Plane flow that registers Bedrock as an LLM provider. For background on how Bedrock foundation models, cross-region inference profiles, and IAM patterns map to the provider form, see xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM] on the main provider configuration page.
 
 After completing this guide, you will be able to:
 
@@ -123,7 +123,7 @@ A successful model response confirms the IAM policy, region, and credentials are
 . Configure the credentials:
 +
 .. In the Access key ID ref dropdown, type a secret name such as `AWS_ACCESS_KEY_ID`.
-.. Paste the `AccessKeyId` value from the IAM user setup and click *Create*. The secret is stored in the ADP secret store, scoped to AI Gateway.
+.. Paste the `AccessKeyId` value from the IAM user setup and click *Create*. The secret is stored in the Agentic Data Plane secret store, scoped to AI Gateway.
 .. Repeat for Secret access key ref. Use a name such as `AWS_SECRET_ACCESS_KEY` and paste the `SecretAccessKey` value.
 +
 Secret names are normalized to `UPPER_SNAKE_CASE` automatically and get the AI Gateway scope, which makes them usable across the platform: LLM providers, MCP servers, and agents.

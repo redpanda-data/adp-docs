@@ -17,7 +17,7 @@ After reading this page, you will be able to:
 
 == Integration scenarios
 
-ADP supports three primary integration scenarios based on who initiates the call and where the caller is located:
+Agentic Data Plane supports three primary integration scenarios based on who initiates the call and where the caller is located:
 
 [cols="1,2,2,1"]
 |===
@@ -34,7 +34,7 @@ ADP supports three primary integration scenarios based on who initiates the call
 | xref:connect:pipeline-integration-patterns.adoc[]
 
 | External system calls agent
-| Your application or agent (hosted outside ADP) calls ADP agents using the A2A protocol
+| Your application or agent (hosted outside Agentic Data Plane) calls Agentic Data Plane agents using the A2A protocol
 | Backend services, CLI tools, custom UIs, multi-platform agent workflows
 | xref:connect:a2a-concepts.adoc[]
 |===
@@ -69,7 +69,7 @@ For implementation details, see xref:connect:pipeline-integration-patterns.adoc[
 
 === External system calls agent
 
-Use external integration when your applications, services, or agents hosted outside ADP need to call ADP agents.
+Use external integration when your applications, services, or agents hosted outside Agentic Data Plane need to call Agentic Data Plane agents.
 
 External systems send requests using the A2A protocol and receive responses synchronously. This works for backend services, CLI tools, custom UIs, and agents hosted on other platforms.
 
@@ -112,7 +112,7 @@ The following table compares the two primary internal integration patterns:
 
 == Security considerations for external integration
 
-When integrating external applications with ADP agents, protect credentials and tokens.
+When integrating external applications with Agentic Data Plane agents, protect credentials and tokens.
 
 === Protect service account credentials
 

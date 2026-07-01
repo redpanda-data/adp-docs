@@ -1,17 +1,17 @@
-= Use the ADP CLI
+= Use the Agentic Data Plane CLI
 :page-beta: true
 :description: Manage Agentic Data Plane resources from the terminal with rpk ai. Install the CLI, connect it to an AI Gateway, and script LLM providers, MCP servers, OAuth, and agents.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder
-:learning-objective-1: Install the ADP CLI and connect it to an AI Gateway
-:learning-objective-2: Manage ADP resources from the terminal: LLM providers, MCP servers, OAuth providers and clients, and agents
+:learning-objective-1: Install the Agentic Data Plane CLI and connect it to an AI Gateway
+:learning-objective-2: Manage Agentic Data Plane resources from the terminal: LLM providers, MCP servers, OAuth providers and clients, and agents
 :learning-objective-3: Format command output for scripts and pipelines
 
-// Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface + persistent flags), `apps/rpai/internal/cmd/env/cmd.go`, and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Connect/auth model reflects cloudv2 PR #27510: rpk ai is self-contained (its own `auth login` device flow + ADP environment selection), not tied to the rpk cloud session. Verified against origin/main 2026-06-29 (cloudv2 PR #27510 merged).
+// Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface + persistent flags), `apps/rpai/internal/cmd/env/cmd.go`, and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Connect/auth model reflects cloudv2 PR #27510: rpk ai is self-contained (its own `auth login` device flow + Agentic Data Plane environment selection), not tied to the rpk cloud session. Verified against origin/main 2026-06-29 (cloudv2 PR #27510 merged).
 
-The ADP command-line interface, `rpk ai`, manages glossterm:Agentic Data Plane (ADP)[] resources from your terminal. It drives the same control surface as the ADP UI: glossterm:large language model (LLM)[] providers, glossterm:Model Context Protocol (MCP)[] servers, OAuth providers and clients, and agents. Because every action is a command, you can script it and run it in continuous integration.
+The Agentic Data Plane command-line interface, `rpk ai`, manages glossterm:Agentic Data Plane (ADP)[] resources from your terminal. It drives the same control surface as the Agentic Data Plane UI: glossterm:large language model (LLM)[] providers, glossterm:Model Context Protocol (MCP)[] servers, OAuth providers and clients, and agents. Because every action is a command, you can script it and run it in continuous integration.
 
-The ADP CLI, also called the Redpanda AI CLI, runs as an xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk`] plugin, so you install and run it through your existing `rpk` setup.
+The Agentic Data Plane CLI, also called the Redpanda AI CLI, runs as an xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk`] plugin, so you install and run it through your existing `rpk` setup.
 
 After reading this page, you will be able to:
 
@@ -21,7 +21,7 @@ After reading this page, you will be able to:
 
 == Install the CLI
 
-The ADP CLI is an `rpk` managed plugin. Install `rpk` first (see xref:reference:rpk-install.adoc[Install or Update rpk]), then install the plugin:
+The Agentic Data Plane CLI is an `rpk` managed plugin. Install `rpk` first (see xref:reference:rpk-install.adoc[Install or Update rpk]), then install the plugin:
 
 [,bash]
 ----
@@ -32,9 +32,9 @@ Update the plugin later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk 
 
 == Connect to an AI Gateway
 
-The `rpk ai` command is self-contained: it has its own login and its own environment selection, independent of any `rpk cloud` session. You sign in once, choose an ADP environment, and `rpk ai` targets that environment's AI Gateway for every command.
+The `rpk ai` command is self-contained: it has its own login and its own environment selection, independent of any `rpk cloud` session. You sign in once, choose an Agentic Data Plane environment, and `rpk ai` targets that environment's AI Gateway for every command.
 
-. Sign in to Redpanda Cloud. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the ADP environments in your organization so you can pick one:
+. Sign in to Redpanda Cloud. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the Agentic Data Plane environments in your organization so you can pick one:
 +
 [,bash]
 ----
@@ -49,7 +49,7 @@ rpk ai env list
 rpk ai env use <environment>
 ----
 +
-In these commands, `<environment>` is the name or ID of an ADP environment. `rpk ai env use` repoints the active profile at that environment's AI Gateway in place. Inspect the resolved environment and token state at any time with `rpk ai env show` and `rpk ai auth status`.
+In these commands, `<environment>` is the name or ID of an Agentic Data Plane environment. `rpk ai env use` repoints the active profile at that environment's AI Gateway in place. Inspect the resolved environment and token state at any time with `rpk ai env show` and `rpk ai auth status`.
 
 . Verify the connection:
 +
@@ -77,7 +77,7 @@ rpk ai env use local
 
 == Manage resources
 
-Each ADP resource has its own command group, and each group supports the standard `create`, `get`, `list`, `update`, and `delete` actions. The model catalog is read-only.
+Each Agentic Data Plane resource has its own command group, and each group supports the standard `create`, `get`, `list`, `update`, and `delete` actions. The model catalog is read-only.
 
 [cols="1m,2,1a"]
 |===
@@ -116,7 +116,7 @@ rpk ai llm create --name openai --type openai --api-key-ref OPENAI_API_KEY
 rpk ai llm get openai
 ----
 
-In this command, `--api-key-ref` names a secret already stored in ADP. The CLI never takes a raw API key, so secrets stay out of your shell history and out of any file you commit.
+In this command, `--api-key-ref` names a secret already stored in Agentic Data Plane. The CLI never takes a raw API key, so secrets stay out of your shell history and out of any file you commit.
 
 To create, update, and delete resources declaratively from YAML manifests instead of imperative flags, see xref:cli:gitops.adoc[Manage Resources with GitOps].
 

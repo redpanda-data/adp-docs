@@ -16,7 +16,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* An OAuth provider resource configured in Redpanda ADP under *OAuth providers*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An OAuth provider resource configured in Redpanda Agentic Data Plane under *OAuth providers*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * The required scopes for the upstream API you plan to call.
 * For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
 * For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:connect:managed/managed-catalog.adoc[Managed catalog] before configuring.
@@ -41,12 +41,12 @@ TIP: To configure user-delegated OAuth from the CLI, use `--user-oauth-provider`
 The first time a user calls a tool that needs this server's authentication, Redpanda doesn't have a stored token for them. The behavior is:
 
 . The MCP RPC returns `FAILED_PRECONDITION` with an `OAuthConnectionRequired` error detail. The detail carries an `authorize_url`.
-. ADP surfaces a consent prompt to the user, pointing at the `authorize_url`.
+. Agentic Data Plane surfaces a consent prompt to the user, pointing at the `authorize_url`.
 . The user completes the device-authorization flow with the upstream provider.
 . The upstream provider redirects back to Redpanda with a token. Redpanda stores it in the token vault under that user's identity.
 . The original tool call retries automatically. Subsequent calls reuse the stored token.
 
-After consent, the user can see and revoke their connection under *Connections* in ADP.
+After consent, the user can see and revoke their connection under *Connections* in Agentic Data Plane.
 
 // TODO: screenshot of the consent prompt and the resulting *Connections* entry.
 
@@ -72,7 +72,7 @@ When refresh fails (revoked token, idle too long, upstream error), the next tool
 
 == Service-account OAuth contrast
 
-If you want one shared upstream identity for every caller (instead of per-user identities), choose *Service-account OAuth* on the server instead of *User-delegated OAuth*. With service-account OAuth, every caller of every tool sees the same upstream identity; the upstream system has no idea which ADP user invoked the tool. With user-delegated OAuth, the upstream system sees each end-user as themselves and applies their own permissions.
+If you want one shared upstream identity for every caller (instead of per-user identities), choose *Service-account OAuth* on the server instead of *User-delegated OAuth*. With service-account OAuth, every caller of every tool sees the same upstream identity; the upstream system has no idea which Agentic Data Plane user invoked the tool. With user-delegated OAuth, the upstream system sees each end-user as themselves and applies their own permissions.
 
 For the field-by-field service-account-OAuth setup, see xref:connect:create-server.adoc#configure-authentication[create-server.adoc].
 
@@ -88,7 +88,7 @@ For the field-by-field service-account-OAuth setup, see xref:connect:create-serv
 |Symptom |What to check
 
 |"OAuth provider not found"
-|The provider name on the server doesn't match an OAuth provider in ADP. Check spelling and that the provider exists.
+|The provider name on the server doesn't match an OAuth provider in Agentic Data Plane. Check spelling and that the provider exists.
 
 |"HTTPS required" on save (self-managed only)
 |User-delegated OAuth requires `https://` URLs on the MCP server (proto rule `remote_mcp.user_oauth_requires_https`). Switch the server's URL to HTTPS.

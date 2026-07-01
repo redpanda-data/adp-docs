@@ -282,7 +282,7 @@ This handshake runs *once per user* when the connector is first added.
 * The OAuth Client's name (for example, _Claude (GitHub Read demo) wants to access your data_).
 * The *Resource* being authorized: The MCP server name and URL.
 * The *Requested permissions*: The gateway's internal scopes for this handshake (`mcp` and `offline_access`). These are *not* the upstream system's scopes; the upstream's scopes appear during the next handshake.
-* A footer reminding the user that they can revoke access from their *Connections* page in ADP.
+* A footer reminding the user that they can revoke access from their *Connections* page in Agentic Data Plane.
 +
 . The user clicks *Allow*. AI Gateway redirects the chat client back to the redirect URI with an authorization code.
 . The chat client exchanges the code for an access token and a refresh token, and stores them locally in its credential store.

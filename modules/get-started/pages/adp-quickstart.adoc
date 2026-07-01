@@ -1,9 +1,9 @@
-= Redpanda ADP Quickstart
+= Redpanda Agentic Data Plane Quickstart
 :page-aliases: byoc-quickstart.adoc, quickstart.adoc, cloud-data-platform:ai-agents:agents/quickstart.adoc
-:description: Set up Redpanda ADP end to end: configure an LLM provider, create an MCP server from a public OpenAPI spec, and build an agent that calls both.
+:description: Set up Redpanda Agentic Data Plane end to end: configure an LLM provider, create an MCP server from a public OpenAPI spec, and build an agent that calls both.
 :page-topic-type: quickstart
 :personas: platform_engineer, agent_builder
-:learning-objective-1: Configure your first LLM provider in ADP with an Anthropic API key
+:learning-objective-1: Configure your first LLM provider in Agentic Data Plane with an Anthropic API key
 :learning-objective-2: Create an MCP server from a public OpenAPI spec
 :learning-objective-3: Build an agent that calls both the LLM provider and the MCP server
 
@@ -12,14 +12,14 @@
 // Markup convention: bold for click targets (buttons, tabs, sidebar/nav, wizard steps); monospace for field labels, option values, toggles, and status values; plain text for UI regions (cards, badges, panes).
 // Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 
-This quickstart sets up Redpanda ADP from scratch and follows the two roles involved:
+This quickstart sets up Redpanda Agentic Data Plane from scratch and follows the two roles involved:
 
 * An *administrator* configures a glossterm:large language model (LLM)[] provider for your organization. This is a one-time setup task. Until a provider exists, no one can build agents against it.
 * *Builders* then create glossterm:MCP server[,MCP servers] and glossterm:AI agent[,agents] that use the configured provider.
 
 Administrators complete the Admins: Configure an LLM provider section, and builders complete the Builders: Create an MCP server and agent section. If you have the Admin role, you can complete both yourself. If your administrator has already configured an LLM provider, skip to <<builders-create-an-mcp-server-and-agent,Builders: Create an MCP server and agent>>.
 
-When you sign in to ADP at https://ai.redpanda.com[ai.redpanda.com^], you land on the Home page: a snapshot of items that need your attention, recent request and spend activity, budget status, and counts of your ADP resources. Start the tasks in this guide from the sidebar.
+When you sign in to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^], you land on the Home page: a snapshot of items that need your attention, recent request and spend activity, budget status, and counts of your Agentic Data Plane resources. Start the tasks in this guide from the sidebar.
 
 After reading this page, you will be able to:
 
@@ -33,23 +33,23 @@ The xref:control:permissions-overview.adoc[built-in role] you need depends on wh
 
 === For admins
 
-This quickstart configures an Anthropic provider, but ADP also supports OpenAI, Google AI, AWS Bedrock, and OpenAI-compatible endpoints. To set up the Anthropic provider, you need:
+This quickstart configures an Anthropic provider, but Agentic Data Plane also supports OpenAI, Google AI, AWS Bedrock, and OpenAI-compatible endpoints. To set up the Anthropic provider, you need:
 
-* The xref:control:permissions-overview.adoc[Admin or Writer role] in ADP.
+* The xref:control:permissions-overview.adoc[Admin or Writer role] in Agentic Data Plane.
 * An Anthropic account. If you don't have one, the <<get-an-anthropic-api-key,Get an Anthropic API key>> section walks through signup.
 
 === For builders
 
 To create an MCP server and agent:
 
-* The xref:control:permissions-overview.adoc[Writer role] in ADP.
+* The xref:control:permissions-overview.adoc[Writer role] in Agentic Data Plane.
 * At least one LLM provider configured in your organization. If none exists, complete the admin steps first, or ask your administrator.
 
 == What you build
 
-You create the following ADP resources, in order:
+You create the following Agentic Data Plane resources, in order:
 
-. *Anthropic LLM provider* (administrator). Routes Claude API calls through ADP so credentials, usage, and glossterm:transcript[,transcripts] stay on the platform.
+. *Anthropic LLM provider* (administrator). Routes Claude API calls through Agentic Data Plane so credentials, usage, and glossterm:transcript[,transcripts] stay on the platform.
 . *PetStore glossterm:MCP server[]* (builder). Exposes the public Swagger PetStore API as a set of glossterm:MCP tool[,MCP tools] the agent can call.
 . *Pet store assistant glossterm:AI agent[,agent]* (builder). Combines the provider and the MCP server so a natural-language question becomes a real API call against PetStore.
 
@@ -57,7 +57,7 @@ After the agent works, you can walk through one execution turn-by-turn in the *T
 
 == Admins: Configure an LLM provider
 
-A provider is an organization-level resource. Configure it once, and every builder can select it when they create agents. The following sections walk through getting an Anthropic API key and pointing ADP at Anthropic.
+A provider is an organization-level resource. Configure it once, and every builder can select it when they create agents. The following sections walk through getting an Anthropic API key and pointing Agentic Data Plane at Anthropic.
 
 === Get an Anthropic API key
 
@@ -77,16 +77,16 @@ Anthropic requires a payment method before it issues an API key. Add billing fir
 +
 [IMPORTANT]
 ====
-Anthropic shows the API key value once. If you close the dialog without copying, you can't recover it. Paste the key into a secure note before continuing. The next section creates the secret in ADP's secret store as part of the provider form, so you don't have to keep the key on your local machine.
+Anthropic shows the API key value once. If you close the dialog without copying, you can't recover it. Paste the key into a secure note before continuing. The next section creates the secret in Agentic Data Plane's secret store as part of the provider form, so you don't have to keep the key on your local machine.
 ====
 
 . (Optional) On the *API keys* page, confirm the new key appears in the list.
 
 === Configure your LLM provider
 
-Now point ADP at Anthropic. ADP references provider credentials by secret name, not by raw value, and you create the secret inline as part of this form.
+Now point Agentic Data Plane at Anthropic. Agentic Data Plane references provider credentials by secret name, not by raw value, and you create the secret inline as part of this form.
 
-. Sign in to ADP at https://ai.redpanda.com[ai.redpanda.com^].
+. Sign in to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^].
 
 . Open *LLM Providers* in the sidebar.
 
@@ -94,17 +94,17 @@ Now point ADP at Anthropic. ADP references provider credentials by secret name, 
 
 . `Display name`: Enter `anthropic-quickstart`. This label appears in dashboards and model selectors.
 
-. Leave the auto-derived `Resource ID`. ADP generates it from the display name, using lowercase letters, numbers, and hyphens. The ID is used in API calls and CLI commands and can't be changed after creation.
+. Leave the auto-derived `Resource ID`. Agentic Data Plane generates it from the display name, using lowercase letters, numbers, and hyphens. The ID is used in API calls and CLI commands and can't be changed after creation.
 
 . `Provider type`: Select `Anthropic`.
 
 . `API key reference`: Switch to the *New* tab and create the secret inline:
 +
-* Name the secret `ANTHROPIC_API_KEY`. ADP uppercases the name automatically, and you can't change it after creation.
+* Name the secret `ANTHROPIC_API_KEY`. Agentic Data Plane uppercases the name automatically, and you can't change it after creation.
 * Under `Secret value`, leave the *Text* tab selected and paste the `sk-ant-` key you copied from Anthropic.
 * Click *Create secret*.
 +
-The secret value is write-only: ADP can't show it again after creation, so if you mistype the key, create a new secret. New secrets get the AI Gateway scope automatically, which makes them usable across the platform: LLM providers, MCP servers, and agents. To create secrets ahead of time or manage them later, open *Secrets Store* in the sidebar.
+The secret value is write-only: Agentic Data Plane can't show it again after creation, so if you mistype the key, create a new secret. New secrets get the AI Gateway scope automatically, which makes them usable across the platform: LLM providers, MCP servers, and agents. To create secrets ahead of time or manage them later, open *Secrets Store* in the sidebar.
 
 . Leave `Authorization passthrough` off. This quickstart uses one shared key, not per-user OAuth.
 
@@ -121,7 +121,7 @@ The catalog of available models is maintained by Redpanda. Models you select her
 
 . On the provider detail page, confirm the badge next to the provider name shows `Enabled` and the `Status` in the Connection card shows `Active`.
 
-If the Status badge stays in a failure state, see the xref:gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace ADP can read.
+If the Status badge stays in a failure state, see the xref:gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace Agentic Data Plane can read.
 
 For the full provider field reference (transcript logging, Bedrock IAM, Anthropic authentication passthrough, OpenAI-compatible endpoints), see xref:gateway:configure-provider.adoc[Configure an LLM provider].
 
@@ -138,7 +138,7 @@ The OpenAPI managed MCP server type takes any OpenAPI 3.x spec URL and generates
 
 [NOTE]
 ====
-PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not ADP. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) after you've confirmed the rest of the flow works.
+PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. If your agent later returns an HTTP 500 from PetStore, that's the upstream, not Agentic Data Plane. Retry the prompt, or move on to a real MCP server (xref:connect:managed/managed-catalog.adoc[Managed MCP catalog]) after you've confirmed the rest of the flow works.
 ====
 
 . Open *MCP Servers* in the sidebar and click *Create server*.
@@ -175,7 +175,7 @@ For the full OpenAPI MCP reference (authentication modes, operation filters, bas
 
 === Build your agent
 
-Combine the Anthropic provider and the PetStore MCP server into an agent. ADP configures a managed agent on a single page with five sections: *Details*, *Model*, *Behavior*, *Tools*, and *Subagents*. A stepper on the left tracks the sections and summarizes what you've set in each; click a step to jump to its section. For the full reference, see xref:connect:create-agent.adoc[Create an agent].
+Combine the Anthropic provider and the PetStore MCP server into an agent. Agentic Data Plane configures a managed agent on a single page with five sections: *Details*, *Model*, *Behavior*, *Tools*, and *Subagents*. A stepper on the left tracks the sections and summarizes what you've set in each; click a step to jump to its section. For the full reference, see xref:connect:create-agent.adoc[Create an agent].
 
 . Open *Agents* in the sidebar.
 
@@ -189,7 +189,7 @@ NOTE: The other option, `I host it myself`, registers an agent you run on your o
 
 . In the *Details* section, set the following:
 +
-* `Agent ID`: Skip for now. ADP pre-fills a generated ID and re-derives it from the display name you enter next. You can't change the ID after creation.
+* `Agent ID`: Skip for now. Agentic Data Plane pre-fills a generated ID and re-derives it from the display name you enter next. You can't change the ID after creation.
 * `Display name`: Enter `pet-store-assistant`. This name appears in the agent registry list and the detail header, and the Agent ID updates to match.
 * `Description`: Enter `Quickstart agent that answers questions about the PetStore inventory`.
 * `Tags`: Skip. Tags are optional metadata for filtering and grouping.
@@ -229,7 +229,7 @@ Rules:
 
 . Confirm the stepper summaries on the left, then click *Create agent*. If a required field is missing, a "Cannot create agent" error lists what to fix.
 
-. Wait for the agent status to change from `Starting` to `Running`. ADP creates the agent's service account at this point; for details, see xref:connect:concepts.adoc#service-account-authorization[service account authorization].
+. Wait for the agent status to change from `Starting` to `Running`. Agentic Data Plane creates the agent's service account at this point; for details, see xref:connect:concepts.adoc#service-account-authorization[service account authorization].
 
 === Test the agent in the Inspector
 

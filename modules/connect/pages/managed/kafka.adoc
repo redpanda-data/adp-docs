@@ -27,9 +27,9 @@ Consuming messages, listing topics, and inspecting metadata are not currently ex
 
 * A Kafka or Redpanda cluster reachable from the Agentic Data Plane.
 +
-// TODO: confirm reachability requirements (public bootstrap, peering, and so on) once the standalone ADP product surface ships.
+// TODO: confirm reachability requirements (public bootstrap, peering, and so on) once the standalone Agentic Data Plane product surface ships.
 * The cluster's bootstrap servers and SASL/TLS settings.
-* For SCRAM or PLAIN: Secrets in the Redpanda ADP secret store for the username and password (`UPPER_SNAKE_CASE`, for example `KAFKA_SASL_USER` and `KAFKA_SASL_PASSWORD`).
+* For SCRAM or PLAIN: Secrets in the Redpanda Agentic Data Plane secret store for the username and password (`UPPER_SNAKE_CASE`, for example `KAFKA_SASL_USER` and `KAFKA_SASL_PASSWORD`).
 
 == Configure
 
@@ -86,7 +86,7 @@ Once the Kafka server is created, point an agent at the *API URL* on the server'
 |Symptom |What to check
 
 |`connection refused` or `dial timeout`
-|Brokers aren't reachable from ADP egress. Confirm bootstrap addresses and any private-network requirements.
+|Brokers aren't reachable from Agentic Data Plane egress. Confirm bootstrap addresses and any private-network requirements.
 
 |`SASL authentication failed`
 |Check username/password reference content and the SASL mechanism.

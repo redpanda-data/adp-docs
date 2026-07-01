@@ -55,7 +55,7 @@ LLM Providers:: The Bedrock provider rejected valid model IDs whose version cont
 
 MCP Servers:: Connect to Sentry through a new managed MCP server.
 LLM Providers:: Set your own per-model pricing on a provider, so usage and cost reflect the rates you actually pay.
-rpk ai `[CLI]`:: Apply or diff your LLM providers, MCP servers, and OAuth providers from config files, now against an ADP environment.
+rpk ai `[CLI]`:: Apply or diff your LLM providers, MCP servers, and OAuth providers from config files, now against an Agentic Data Plane environment.
 
 === Improvements
 

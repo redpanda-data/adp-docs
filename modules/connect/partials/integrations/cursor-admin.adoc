@@ -57,7 +57,7 @@ Cursor IDE works with multiple providers through OpenAI-compatible transforms. E
 
 Cursor sends OpenAI-formatted requests but can route to Anthropic models. Configure the gateway to transform these requests:
 
-. Navigate to *AI Gateway* > *Providers* in ADP
+. Navigate to *AI Gateway* > *Providers* in Agentic Data Plane
 . Select *Anthropic* from the provider list
 . Click *Add configuration*
 . Enter your Anthropic API key
@@ -300,7 +300,7 @@ Cursor clients authenticate using bearer tokens in the `Authorization` header.
 
 === Generate API tokens
 
-. Navigate to *Security* > *API Tokens* in ADP
+. Navigate to *Security* > *API Tokens* in Agentic Data Plane
 . Click *Create Token*
 . Enter token details:
 +
@@ -340,7 +340,7 @@ For organizations with multiple teams, use one of these multi-tenant strategies.
 
 Create a separate gateway for each tenant or team. Each gateway has its own rate limits, spend limits, and API tokens.
 
-. In ADP, create one gateway per team (for example, `team-alpha-cursor-gateway`, `team-beta-cursor-gateway`).
+. In Agentic Data Plane, create one gateway per team (for example, `team-alpha-cursor-gateway`, `team-beta-cursor-gateway`).
 . Distribute each team's gateway endpoint and API token to its users.
 . Each team configures Cursor with their team's gateway URL.
 

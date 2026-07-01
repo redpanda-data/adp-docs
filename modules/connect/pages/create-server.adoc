@@ -3,7 +3,7 @@
 :description: Create an MCP server in the Agentic Data Plane by picking a managed type from the marketplace or registering a self-managed server you host yourself, then configure authentication, code mode, and access.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Create a managed or self-managed MCP server in ADP
+:learning-objective-1: Create a managed or self-managed MCP server in Agentic Data Plane
 :learning-objective-2: Configure each authentication mode and pick the right one for your use case
 :learning-objective-3: Save the server, verify the API URL, and confirm tools were discovered
 
@@ -17,9 +17,9 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* For any authentication mode that uses upstream credentials: the credentials in hand and a secret already created in the Redpanda ADP secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
+* For any authentication mode that uses upstream credentials: the credentials in hand and a secret already created in the Redpanda Agentic Data Plane secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
 +
-// TODO: xref the ADP secrets-management page once confirmed.
+// TODO: xref the Agentic Data Plane secrets-management page once confirmed.
 * For user-delegated OAuth: an glossterm:OAuth provider[,OAuth provider] resource already configured. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Open the MCP Servers page
@@ -73,7 +73,7 @@ For per-type fields, see the xref:connect:managed/managed-catalog.adoc[Managed c
 
 [NOTE]
 ====
-MCP enforces a 64-character limit on tool names. For managed MCP types whose generated names exceed that limit, ADP truncates the prefix and replaces it with a hash, so the long-form name becomes something like `64ghux5adn_github_read_v1_GitHubReadService_GetAuthenticatedUser`. ADP always preserves the version, service, and method suffix, so the short tool name an agent sees (for example, `get_authenticated_user`) stays stable across truncations.
+MCP enforces a 64-character limit on tool names. For managed MCP types whose generated names exceed that limit, Agentic Data Plane truncates the prefix and replaces it with a hash, so the long-form name becomes something like `64ghux5adn_github_read_v1_GitHubReadService_GetAuthenticatedUser`. Agentic Data Plane always preserves the version, service, and method suffix, so the short tool name an agent sees (for example, `get_authenticated_user`) stays stable across truncations.
 
 You don't configure the truncation. This detail matters only when you correlate tool calls in logs or transcripts against the generated proto names.
 ====
@@ -204,7 +204,7 @@ rpk ai mcp update github-proxy \
 
 // TODO(rpk-ai): --auth-config does not exist on `rpk ai mcp create` today (verified against cloudv2/apps/rpai/internal/cmd/mcp/cmd.go on 2026-05-05). For non-convenience auth shapes, encode them inside `--managed-config` JSON. Re-add this row if a flag lands later.
 
-The command targets the AI Gateway of your selected ADP environment, using credentials from `rpk ai auth login`.
+The command targets the AI Gateway of your selected Agentic Data Plane environment, using credentials from `rpk ai auth login`.
 
 // Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/mcp_server.proto (MCPServerService.ListMCPServers, ListMCPServersRequest.Filter.filter + order_by), added in commit 96e2387 (merge #27489). The proto comment lists `display_name` as a filterable column, but the MCPServer resource has no display_name field, so it's omitted here. Orderable columns and the default order come from the storage table options (orderable: name, created_at; default_order_by: created_at desc). Request shapes are proto-accurate but were not exercised against a live cluster.
 == List and filter servers with the API
@@ -262,7 +262,7 @@ The response carries the matching `mcp_servers`, a `next_page_token` for the nex
 |Symptom |What to check
 
 |`Secret <NAME> not found`
-|The secret reference is case-sensitive and must be `UPPER_SNAKE_CASE` matching the proto regex `^[A-Z][A-Z0-9_]*$`. Confirm the secret exists in the ADP secret store and is spelled identically.
+|The secret reference is case-sensitive and must be `UPPER_SNAKE_CASE` matching the proto regex `^[A-Z][A-Z0-9_]*$`. Confirm the secret exists in the Agentic Data Plane secret store and is spelled identically.
 
 |"HTTPS required" error on save (self-managed)
 |You picked user-delegated OAuth on a server with an `http://` URL. Switch to `https://` (proto rule `remote_mcp.user_oauth_requires_https`).

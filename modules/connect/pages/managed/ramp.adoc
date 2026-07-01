@@ -26,12 +26,12 @@ It is suitable for expense analysis, spend-policy enforcement, and corporate car
 Before you create the server, make sure you have:
 
 * A Ramp account with admin access to the Ramp Developer Portal.
-* An glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP for Ramp. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An glossterm:OAuth provider[,OAuth Provider] configured in Redpanda Agentic Data Plane for Ramp. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Get Ramp credentials
 
-Set up the OAuth app on Ramp and the matching OAuth Provider in ADP:
+Set up the OAuth app on Ramp and the matching OAuth Provider in Agentic Data Plane:
 
 . Sign in to the https://app.ramp.com/developer[Ramp Developer Portal].
 . Go to *Developer Settings > Applications* and click *Create Application*.
@@ -48,7 +48,7 @@ Set up the OAuth app on Ramp and the matching OAuth Provider in ADP:
 * `reimbursements:read`
 * `limits:read`
 * `limits:write`
-. In ADP, register an OAuth Provider with:
+. In Agentic Data Plane, register an OAuth Provider with:
 +
 * *Authorization endpoint*: `\https://app.ramp.com/v1/authorize`
 * *Token endpoint*: `\https://api.ramp.com/developer/v1/token`
@@ -56,7 +56,7 @@ Set up the OAuth app on Ramp and the matching OAuth Provider in ADP:
 
 == Configure
 
-Create a new Ramp MCP server in ADP:
+Create a new Ramp MCP server in Agentic Data Plane:
 
 . Open *MCP Servers > Create Server*.
 . Pick `Ramp` from the marketplace picker.

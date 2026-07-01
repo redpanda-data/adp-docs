@@ -65,7 +65,7 @@ Before you create the server, make sure you have:
 
 * Access to a Microsoft SharePoint tenant.
 * Permission to register an app in the https://entra.microsoft.com[Microsoft Entra admin center^] (or an Entra admin who can register one for you).
-* A way to write the OAuth client secret into the Redpanda ADP secret store.
+* A way to write the OAuth client secret into the Redpanda Agentic Data Plane secret store.
 * For most tenants, a tenant admin who can grant admin consent for the Microsoft Graph scopes. See <<grant-admin-consent,Grant admin consent>>.
 * Familiarity with xref:connect:user-delegated-oauth.adoc[user-delegated OAuth].
 
@@ -126,7 +126,7 @@ In the Microsoft Entra admin center, open the app's *Certificates & secrets* and
 
 image::sharepoint-entra-client-secret.png["The Entra Certificates & secrets page with the Add a client secret panel open, a description entered, and the recommended 180-day expiry selected"]
 
-Store the secret in the ADP secret store under an `UPPER_SNAKE_CASE` key, for example, `SHAREPOINT_CLIENT_SECRET`. The OAuth provider references the secret by name, so the plaintext never enters the MCP server configuration.
+Store the secret in the Agentic Data Plane secret store under an `UPPER_SNAKE_CASE` key, for example, `SHAREPOINT_CLIENT_SECRET`. The OAuth provider references the secret by name, so the plaintext never enters the MCP server configuration.
 
 [[grant-admin-consent]]
 == Grant admin consent
@@ -137,7 +137,7 @@ Admin consent does not escalate access: delegated scopes always stay bounded by 
 
 == Configure the OAuth provider
 
-Register an OAuth provider in ADP that points at Microsoft's tenant-specific endpoints and references the client secret. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The *Microsoft / Azure AD* preset in the provider catalog pre-fills the endpoints, standard scopes, PKCE, and token auth method; for a single-tenant app, replace its `/common/` endpoints with the tenant-specific ones. Use these values:
+Register an OAuth provider in Agentic Data Plane that points at Microsoft's tenant-specific endpoints and references the client secret. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The *Microsoft / Azure AD* preset in the provider catalog pre-fills the endpoints, standard scopes, PKCE, and token auth method; for a single-tenant app, replace its `/common/` endpoints with the tenant-specific ones. Use these values:
 
 * *Authorization endpoint*: `https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/authorize`
 * *Token endpoint*: `https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/token`
@@ -152,7 +152,7 @@ image::sharepoint-oauth-provider.png["The SharePoint OAuth provider detail page 
 
 == Create the server
 
-Create a new SharePoint MCP server in ADP:
+Create a new SharePoint MCP server in Agentic Data Plane:
 
 . Open *MCP Servers > Create server*.
 . Pick *SharePoint* from the marketplace picker.
@@ -188,7 +188,7 @@ rpk ai mcp create --name sharepoint \
 
 The SharePoint server uses per-user OAuth, so each user connects their Microsoft identity before tools work for them:
 
-. Open the server in ADP. If you haven't connected to the SharePoint OAuth provider yet, a connection banner with a *Connect* button appears above the server's tabs. Click *Connect*, sign in to Microsoft, and approve the consent screen. The token lands in the vault keyed to your identity.
+. Open the server in Agentic Data Plane. If you haven't connected to the SharePoint OAuth provider yet, a connection banner with a *Connect* button appears above the server's tabs. Click *Connect*, sign in to Microsoft, and approve the consent screen. The token lands in the vault keyed to your identity.
 +
 If you call a tool before connecting, the call returns an `OAuthConnectionRequired` error carrying an `authorize_url` that points at the gateway's `/oauth/v1/authorize` endpoint. Opening that URL in a browser starts the same Microsoft consent flow.
 +
