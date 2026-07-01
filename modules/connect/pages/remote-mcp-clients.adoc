@@ -341,7 +341,7 @@ The command prints the number of tokens it revoked, for example `Revoked 12 toke
 
 [NOTE]
 ====
-Already-issued *short-lived access tokens* may continue to work until their natural expiry, typically a few minutes. The revocation invalidates *refresh tokens*, so once the access token expires, the chat client cannot mint a new one and the user is forced to re-authenticate.
+Already-issued *short-lived access tokens* may continue to work until their natural expiry, typically a few minutes. The revocation invalidates *refresh tokens*, so after the access token expires, the chat client cannot mint a new one and the user is forced to re-authenticate.
 ====
 
 When AI Gateway auto-revokes tokens (on Client deletion or on lifecycle events that imply a hard cut), the same flow runs server-side without the explicit CLI or button click.

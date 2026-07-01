@@ -110,7 +110,7 @@ Agentic Data Plane reports cost in *microcents*. 1 cent = 1,000,000 microcents, 
 A few request- or response-time signals change the rate Agentic Data Plane applies to a single call. You don't configure these; the spending pipeline picks them up from the upstream response or request and bills accordingly.
 
 * *Anthropic fast mode*: Anthropic exposes a fast-mode option on some models (for example, Opus 4.6 fast) that carries a per-token premium over the default rate. Agentic Data Plane reads the `speed` field on each Anthropic response and bills fast-mode calls at the model's fast-mode rate. Requests without a `speed` field fall back to the default rate.
-* *Context-tier pricing*: A few models charge a different rate once a request crosses a context-length threshold. Gemini Pro, for example, prices requests above a 128K-token context at a higher tier than shorter requests. Agentic Data Plane uses the call's context-token count so requests at or above the threshold bill at the tiered rate automatically.
+* *Context-tier pricing*: A few models charge a different rate after a request crosses a context-length threshold. Gemini Pro, for example, prices requests above a 128K-token context at a higher tier than shorter requests. Agentic Data Plane uses the call's context-token count so requests at or above the threshold bill at the tiered rate automatically.
 
 == Where to view your spend
 
