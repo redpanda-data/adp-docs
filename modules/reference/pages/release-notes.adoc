@@ -6,6 +6,17 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.16 (2026-07-01)
+
+=== Features
+
+OAuth Clients:: MCP clients such as Claude Code, Cursor, and ChatGPT can now register themselves through OAuth Dynamic Client Registration (DCR), instead of needing an OAuth client created by hand.
+
+=== Improvements
+
+Agents `[UI]`:: Creating policies is now faster, since resource options load as you need them instead of all at once.
+MCP Servers `[UI]`:: Claude Code users can now set up managed MCP servers with a single command, or use manual configuration from a separate tab.
+
 == v0.2.12 (2026-07-01)
 
 === Features
