@@ -74,6 +74,8 @@ Before you wire up the chat-client connector, make sure you have:
 
 == Register an OAuth Client in AI Gateway
 
+Register a client by hand when it can't self-register, when it needs a confidential `client_secret`, or when you want to pre-provision it before the first connection. For spec-conformant clients that support Dynamic Client Registration, you can skip this manual flow and let them register themselves. See <<self-register-with-dcr,Let clients self-register with Dynamic Client Registration>>.
+
 Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
 
 . Open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its `Name`, `Grant Types`, `Status`, and `Scopes`.
@@ -98,7 +100,7 @@ Create an OAuth Client to give the chat app the credentials it needs to authenti
 |The exact URIs the gateway redirects to after a user approves. Each chat client publishes its own; a well-known client prefills them. Multiple URIs are allowed. Claude.ai, for example, uses two: `\https://claude.ai/api/mcp/auth_callback` and `\https://claude.ai/api/organizations/custom-connectors/oauth/callback`; Claude Desktop uses `\http://127.0.0.1:54545/callback`.
 
 |`Allowed MCP Resources`
-|Which MCP servers this client may request tokens for. Defaults to `*` (any MCP server hosted on this gateway). Click *Restrict* to limit the client to specific MCP resource URLs.
+|Which MCP servers this client may request tokens for. Defaults to `{asterisk}` (any MCP server hosted on this gateway). Click *Restrict* to limit the client to specific MCP resource URLs.
 
 |`Grant Types`
 |`Authorization Code` (RFC 6749 §4.1) and `Refresh Token` (RFC 6749 §6, rotating single-use). This is the standard combination for browser-based chat clients with long-lived tokens.
@@ -118,6 +120,102 @@ Create an OAuth Client to give the chat app the credentials it needs to authenti
 On submit, AI Gateway mints the `client_id`. Confidential clients (those using a Client Secret authentication method) also receive a `client_secret`, *shown only once*. Copy it immediately. The OAuth Server Endpoints panel shows the `Authorization Endpoint` and `Token/Refresh Endpoint` (under `/oauth/idp/`) and the `mcp` scope; paste these into the external app's OAuth configuration.
 
 // TODO: capture screenshots of the Register Client catalog, the custom form, and the post-create detail page.
+
+[[self-register-with-dcr]]
+== Let clients self-register with Dynamic Client Registration
+
+Instead of registering every client by hand, you can let spec-conformant MCP clients register themselves. AI Gateway supports OAuth 2.0 Dynamic Client Registration (DCR, RFC 7591), but self-registration is off for each organization by default. After you enable it, the gateway advertises a `registration_endpoint` in its authorization-server metadata at `/.well-known/oauth-authorization-server`. Clients that read this metadata (Claude Code, Cursor, ChatGPT, and other spec-conformant MCP clients) register on their first connection attempt, run the authorization-code flow with PKCE, and obtain tokens without an admin provisioning a `client_id` or `client_secret` first.
+
+Enable self-registration before conformant clients can register.
+
+=== Enable self-registration
+
+Run the `rpk ai oauth-client dcr update` command to enable DCR and choose how callers are admitted:
+
+[source,bash]
+----
+rpk ai oauth-client dcr update --enabled --admission-mode open
+----
+
+Inspect the current policy at any time:
+
+[source,bash]
+----
+rpk ai oauth-client dcr get
+----
+
+The command reports whether DCR is enabled, the admission mode, and the resource and rate caps, for example `ENABLED: true`, `ADMISSION_MODE: OPEN`, `ALLOWED_RESOURCES: ["*"]`.
+
+=== Admission modes
+
+The admission mode controls who may register after DCR is enabled:
+
+[cols="1,3"]
+|===
+|Mode |Behavior
+
+|`open`
+|Any spec-conformant client registers without credentials. Use this for clients that register anonymously, such as Claude Code. The registration rate limit and client cap still apply.
+
+|`initial-access-token`
+|Callers must present an admin-minted, one-shot bearer token (an Initial Access Token) on the registration request. Use this to keep self-registration open only to holders of a token you hand out.
+|===
+
+The `software-statement` admission mode is reserved and not yet supported.
+
+=== Restrict and rate-limit self-registration
+
+Pass caps to the same `rpk ai oauth-client dcr update` command to bound what self-registered clients can do:
+
+[cols="1,3"]
+|===
+|Flag |Purpose
+
+|`--allowed-resource`
+|MCP server URL that every DCR-issued client may request tokens for. Repeatable. `*` allows any MCP server on the gateway.
+
+|`--client-cap`
+|Maximum number of concurrent DCR-issued clients.
+
+|`--rate-per-hour`
+|Maximum registrations accepted per hour.
+
+|`--inactive-ttl-days`
+|Days of inactivity before AI Gateway removes a DCR-issued client. `0` keeps clients indefinitely.
+|===
+
+AI Gateway disables and then removes inactive self-registered clients according to this policy, so abandoned registrations don't accumulate.
+
+=== Mint initial access tokens
+
+In `initial-access-token` mode, mint a one-shot token and give it to the client operator, who presents it on the registration request:
+
+[source,bash]
+----
+rpk ai oauth-client dcr iat mint --label "Claude handoff" --ttl 24h
+----
+
+The token's plaintext appears only once, on mint, and is consumed on the first successful registration. List and revoke tokens with:
+
+[source,bash]
+----
+rpk ai oauth-client dcr iat list
+rpk ai oauth-client dcr iat revoke <token-id>
+----
+
+Replace `<token-id>` with the ID from the IAT list.
+
+=== Review self-registered clients
+
+Self-registered clients appear alongside manually registered ones in the `rpk ai oauth-client list` output and on the *OAuth Clients* page, marked with a DCR badge and a name of the form `dcr-<id>`. They authenticate with PKCE and no client secret. Audit them like any other client, and delete one to revoke its tokens:
+
+[source,bash]
+----
+rpk ai oauth-client list
+rpk ai oauth-client delete <client-name>
+----
+
+Replace `<client-name>` with the `dcr-<id>` name from the list.
 
 == Wire up Claude
 
@@ -278,8 +376,6 @@ Common symptoms and fixes:
 |===
 
 == Limitations
-
-* *No Dynamic Client Registration (RFC 7591)*: AI Gateway does not support OAuth 2.0 Dynamic Client Registration today. Every external MCP client must be registered manually through the *OAuth Clients* page or the `rpk ai oauth-client` CLI before its first connection attempt. MCP clients that *only* support DCR (some experimental connector builds) cannot connect to AI Gateway until a corresponding OAuth Client is registered by an admin. See <<register-an-oauth-client-in-ai-gateway,Register an OAuth Client>> for the manual flow.
 
 This page does not cover:
 

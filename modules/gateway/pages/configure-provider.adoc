@@ -464,7 +464,7 @@ The spend chart footer summarizes the selected view by cost bucket, including to
 
 == Limitations
 
-AI Gateway does not provide these capabilities. For current status, consult the Agentic Data Plane release notes.
+AI Gateway does not provide these capabilities. For current status, see the xref:reference:release-notes.adoc[Agentic Data Plane release notes].
 
 * *Multi-provider routing, failover, and retries across providers.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
 * *Rate limits.* Requests-per-second, per-minute, or per-day limits are not available. To cap spend rather than request rate, use xref:control:budgets.adoc[budgets], which enforce a per-agent hard cap.

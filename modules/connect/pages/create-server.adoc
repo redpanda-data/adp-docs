@@ -50,7 +50,7 @@ Every server has the same identity fields.
 
 |Name
 |Yes
-|Lowercase letters, numbers, and hyphens only (proto regex `^[a-z][a-z0-9-]*$`); 1–63 characters; must start with a letter. *Immutable after create.* Used as the URL path segment.
+|Lowercase letters, numbers, and hyphens only (proto regex `+^[a-z][a-z0-9-]*$+`); 1–63 characters; must start with a letter. *Immutable after create.* Used as the URL path segment.
 
 |Description
 |No
