@@ -203,7 +203,7 @@ Common symptoms and fixes:
 |Server's `required_scopes` was extended after users had already consented. Users re-consent with the higher scope.
 
 |`create_card` / `create_limit` returns a task ID with no card / limit details
-|These operations are asynchronous on Ramp's side. The MCP returns a task ID that you can poll against Ramp's API; the actual card or limit appears once the task completes.
+|These operations are asynchronous on Ramp's side. The MCP returns a task ID that you can poll against Ramp's API; the actual card or limit appears after the task completes.
 
 |`403 Forbidden` reading or writing
 |The calling user's Ramp role doesn't grant the action. Ramp's role-based access control runs end-to-end: per-user OAuth means each user only sees what their Ramp account permits.
