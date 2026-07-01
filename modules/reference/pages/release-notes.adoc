@@ -1,5 +1,5 @@
 = Release Notes
-:description: What's new in the Agentic Data Plane — new features, improvements, and bug fixes, by release.
+:description: What's new in the Agentic Data Plane: new features, improvements, and bug fixes, by release.
 :page-topic-type: reference
 
 // @generated from adp/RELEASE_NOTES.md by adp/cmd/releasenotes — do not edit by hand.
