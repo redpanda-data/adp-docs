@@ -128,3 +128,4 @@
 *** xref:reference:rpk/rpk-profile/rpk-profile.adoc[rpk profile]
 *** xref:reference:rpk/rpk-x-options.adoc[rpk -X]
 ** xref:reference:glossary.adoc[Glossary]
+** xref:reference:release-notes.adoc[Release Notes]

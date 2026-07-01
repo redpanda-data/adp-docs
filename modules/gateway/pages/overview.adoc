@@ -112,7 +112,7 @@ It is not the right fit when you:
 [[out-of-scope]]
 == Limitations
 
-AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
+AI Gateway does not provide these capabilities. For current status, consult the xref:reference:release-notes.adoc[ADP release notes].
 
 * *Multi-provider routing, failover, and retries.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
 * *Rate limits.* Requests-per-second, per-minute, or per-day caps are not available. To cap spend rather than request rate, use xref:control:budgets.adoc[budgets], which enforce a per-agent hard cap.
