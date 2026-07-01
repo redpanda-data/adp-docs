@@ -100,7 +100,7 @@ Create an OAuth Client to give the chat app the credentials it needs to authenti
 |The exact URIs the gateway redirects to after a user approves. Each chat client publishes its own; a well-known client prefills them. Multiple URIs are allowed. Claude.ai, for example, uses two: `\https://claude.ai/api/mcp/auth_callback` and `\https://claude.ai/api/organizations/custom-connectors/oauth/callback`; Claude Desktop uses `\http://127.0.0.1:54545/callback`.
 
 |`Allowed MCP Resources`
-|Which MCP servers this client may request tokens for. Defaults to `*` (any MCP server hosted on this gateway). Click *Restrict* to limit the client to specific MCP resource URLs.
+|Which MCP servers this client may request tokens for. Defaults to `{asterisk}` (any MCP server hosted on this gateway). Click *Restrict* to limit the client to specific MCP resource URLs.
 
 |`Grant Types`
 |`Authorization Code` (RFC 6749 §4.1) and `Refresh Token` (RFC 6749 §6, rotating single-use). This is the standard combination for browser-based chat clients with long-lived tokens.
