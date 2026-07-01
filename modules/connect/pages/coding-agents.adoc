@@ -1,0 +1,202 @@
+= Run Claude Code and Codex through AI Gateway
+:page-aliases: claude-code.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-admin.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-user.adoc
+:description: Launch Claude Code or Codex with rpk ai run, routing their model traffic through a managed or enterprise-passthrough Agentic Data Plane provider.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Launch Claude Code through an Agentic Data Plane Anthropic provider with rpk ai run claude
+:learning-objective-2: Launch Codex through an Agentic Data Plane OpenAI provider with rpk ai run codex
+:learning-objective-3: Choose between a managed (API-key) provider and an enterprise passthrough (subscription-seat) provider for Claude Code
+
+// Source: proto/public/cloud/redpanda/api/adp/v1alpha1/llm_provider.proto (anthropic_config.authorization_passthrough, api_key_ref); cloudv2 apps/rpai/internal/cmd/run/ and `rpk ai run <tool> --help`; apps/adp-ui/src/components/llm-providers. Verified against origin/main and adp-production on 2026-07-01.
+
+Claude Code and Codex are command-line coding agents. The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command launches either one with its model traffic routed through an AI Gateway provider, reusing your `rpk ai` sign-in so you don't set base URLs or mint tokens by hand. Your team's coding-agent calls then flow through Agentic Data Plane: provider credentials stay in the dataplane secret store, usage rolls up on the *Cost & Usage* page, and no token is written to disk.
+
+After completing this guide, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* The `rpk ai` CLI, installed and signed in to the Agentic Data Plane environment whose gateway you want to target. See xref:cli:index.adoc[Use the Agentic Data Plane CLI]. The `rpk ai run` command uses the credentials from `rpk ai auth login`, not a `rpk cloud` session.
+* An enabled glossterm:large language model (LLM)[] provider of the matching type. Claude Code needs an Anthropic provider; Codex needs an OpenAI or OpenAI-compatible provider. To create one, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
+* The coding agent installed on your workstation:
++
+** Claude Code. See https://code.claude.com/docs[Anthropic's Claude Code documentation].
+** Codex. See https://github.com/openai/codex[OpenAI's Codex documentation]. The `rpk ai run codex` command needs a recent Codex version and tells you when yours is too old.
+* A Redpanda service account or user with permission to invoke the provider (`dataplane_adp_llmprovider_invoke`). See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions]. To let `rpk ai run claude` read the provider and auto-detect its Anthropic auth mode, also grant `dataplane_adp_llmprovider_get`; without read access, pass `--passthrough` for a passthrough provider.
+
+[NOTE]
+====
+The `rpk` CLI starts the `rpk ai` plugin only after you have signed in to Redpanda Cloud. Before your first `rpk ai` command, run `rpk cloud login --no-profile` to sign in without selecting a cluster. This sign-in only unlocks the plugin. The `rpk ai run` command still authenticates with your separate `rpk ai auth login` credentials and its own Agentic Data Plane environment.
+====
+
+== Run Claude Code
+
+Launch Claude Code with its traffic routed through an Anthropic provider:
+
+[source,bash]
+----
+rpk ai run claude -L <anthropic-provider> -m <model>
+----
+
+In this command, `<anthropic-provider>` is the name of your Anthropic provider (the segment after `/providers/` in its *Proxy URL*), and `<model>` is a model the provider allows. The flags work as follows:
+
+* `-L`, `--llmprovider`: The provider to route through. Required, and it must be an Anthropic provider.
+* `-m`, `--model`: The model to use. Omit it to let Claude Code pick its default.
+
+Flags before a literal `--` configure `rpk ai run` itself. Everything after `--` is passed straight through to Claude Code, so you can set any of its own flags. For example, to start Claude Code in plan mode:
+
+[source,bash]
+----
+rpk ai run claude -L <anthropic-provider> -m claude-sonnet-4-6 -- --permission-mode plan
+----
+
+Claude Code starts in your real configuration home, so your workspace trust, onboarding, theme, and glossterm:Model Context Protocol (MCP)[] servers all apply, and nothing is written into `~/.claude`.
+
+=== Choose managed or enterprise passthrough
+
+The `rpk ai run claude` command reads the provider's *Auth passthrough* setting and picks one of two auth modes. The choice determines who pays for the tokens.
+
+Managed (API key)::
+The provider stores an Anthropic API key in the dataplane secret store, shown as *API key reference* on its *Connection* card. The gateway authenticates each request with your Redpanda token, injects the stored key, and forwards the call to Anthropic. Tokens are billed as API usage against the account that owns that key, and per-model spend appears on the provider's *Overview* tab. You need no Anthropic credential of your own.
+
+Enterprise passthrough (subscription)::
+The provider has *Auth passthrough* enabled and stores no API key. Claude Code signs in with your own Claude subscription (Max, Team, or Enterprise), and `rpk ai run claude` forwards that subscription login to Anthropic unchanged. Tokens are billed against your subscription seat, not as per-token API usage. Agentic Data Plane authenticates your organization with a separate gateway credential that `rpk ai run` sets for you, so the call is still observed on the *Cost & Usage* page while the subscription bears the cost.
+
+[NOTE]
+====
+When `rpk ai run claude` cannot read the provider (invoke-only access), it cannot detect the auth mode and defaults to managed. Pass `--passthrough` to force passthrough for a subscription provider. When the provider is readable, its own setting wins, and a contradicting `--passthrough` is ignored with a warning.
+====
+
+== Run Codex
+
+Launch Codex with its traffic routed through an OpenAI or OpenAI-compatible provider:
+
+[source,bash]
+----
+rpk ai run codex -L <openai-provider> -m <model>
+----
+
+In this command, `<openai-provider>` is the name of your OpenAI or OpenAI-compatible provider, and `<model>` is a model the provider allows. Only OpenAI and OpenAI-compatible providers work, because Codex speaks the OpenAI Responses API. Codex also takes a reasoning-effort flag, `-e` (`--effort`), which accepts `minimal`, `low`, `medium`, or `high`. Omit it to let Codex use its default.
+
+As with Claude Code, everything after a literal `--` is passed straight through to Codex. For example, to skip Codex's approval prompts:
+
+[source,bash]
+----
+rpk ai run codex -L <openai-provider> -m gpt-5.3-codex -e high -- --ask-for-approval never
+----
+
+Codex runs against a throwaway configuration home, so your own `~/.codex` is never read or modified. The launch directory is auto-trusted under a `workspace-write` sandbox, so Codex does not prompt for trust on every run. Pass `--no-auto-trust` to keep Codex's normal first-run trust prompt, for example, when you launch inside a freshly cloned repository.
+
+Codex has no passthrough mode. Every Codex session authenticates to the gateway with your Redpanda token, and the gateway injects the provider's stored API key when one is configured.
+
+== Make it a shortcut
+
+If you launch the same agent and provider often, define a shell alias so the launch becomes a short command. Anything after `--` is passed to the agent, so you can pin your own agent flags in the alias too. For example, to launch Claude Code through your provider with its approval prompts disabled every time:
+
+[tabs]
+======
+Bash or Zsh::
++
+--
+Add the alias to `~/.bashrc` or `~/.zshrc`:
+
+[source,bash]
+----
+alias claude-gw='rpk ai run claude -L <anthropic-provider> -- --dangerously-skip-permissions'
+----
+--
+
+fish::
++
+--
+Define a saved alias (fish persists it as a function):
+
+[source,fish]
+----
+alias --save claude-gw 'rpk ai run claude -L <anthropic-provider> -- --dangerously-skip-permissions'
+----
+--
+======
+
+[CAUTION]
+====
+The `--dangerously-skip-permissions` flag belongs to Claude Code: it disables the approval prompts Claude Code normally shows before it runs commands or edits files. Pin it only for work in repositories you trust, or drop it from the alias to keep the prompts.
+====
+
+== Attach Agentic Data Plane-hosted MCP servers (optional)
+
+Claude Code can call MCP servers for tool access. To use the MCP servers you host in Agentic Data Plane (managed catalog types, self-managed proxied servers, or both), register each one with Claude Code:
+
+[source,bash]
+----
+claude mcp add <server-name> https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>
+----
+
+In this URL, `<cluster-id>` is your dataplane's cluster identifier, and `<server-name>` is the MCP server's name in Agentic Data Plane. For OAuth-protected MCP servers (most managed types), Claude Code prompts you to complete the consent flow on first use. Agentic Data Plane stores the resulting token in the per-user xref:connect:user-delegated-oauth.adoc[token vault], so later invocations reuse it.
+
+If a server exposes a large tool catalog, turn on xref:gateway:code-mode.adoc[code mode] and point Claude Code at the server's code-mode endpoint to cut the token cost of loading every tool definition.
+
+== Observe usage
+
+From the navigation menu, select *Governance* > *Cost & Usage*, then filter by your provider. Within a few seconds, the requests from your coding-agent session appear, and the provider's *Overview* tab breaks spend down per model.
+
+Ad-hoc `rpk ai run` sessions are not registered agents, so they do not appear in the per-agent xref:monitor:transcripts.adoc[Transcripts view]. Transcripts cover agents you create in Agentic Data Plane.
+
+== Configure the agent by hand
+
+The `rpk ai run` command is for interactive command-line work. For CI runners, headless jobs, and application code, authenticate with the OIDC `client_credentials` grant and set the agent's base URL and token yourself. For the full flow, with the Proxy URL anatomy, the token mint, and SDK examples, see xref:gateway:connect-agent.adoc[Connect your app to AI Gateway]. For a managed Anthropic provider, set the variables and launch the agent directly:
+
+[source,bash]
+----
+export ANTHROPIC_BASE_URL="https://aigw.<cluster-id>.clusters.rdpa.co/llm/v1/providers/<anthropic-provider>"
+export ANTHROPIC_AUTH_TOKEN="<oidc-access-token>"
+claude
+----
+
+In this example, `<oidc-access-token>` is an access token minted with the `client_credentials` grant. It has a short lifetime, and AI Gateway does not refresh it for you, so re-mint it when it expires. The `rpk ai run` command avoids this by refreshing the token for the whole session.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`--llmprovider is required`
+|The `rpk ai run` command needs the provider to route through. Pass `-L <provider-name>`, using the provider's exact name.
+
+|Provider is the wrong type for the agent
+|Claude Code needs an Anthropic provider, and Codex needs an OpenAI or OpenAI-compatible provider. Confirm the *Type* on the provider's *Connection* card, and pass a provider of the matching type to `-L`.
+
+|Provider is disabled
+|The provider's *Status* is not *Active*. Enable it with `rpk ai llm update <provider-name> --enabled`, or from the provider detail page.
+
+|`no usable gateway token`
+|The cached `rpk ai` credentials are missing or expired. Run `rpk ai auth login` to refresh them, then relaunch. The error's `rpai auth login` hint refers to the same sign-in.
+
+|The agent reports that the model is not allowed for the provider (HTTP 403)
+|The model you passed to `-m` is not in the provider's allowlist. Open the provider detail page, confirm the model row appears, and pass that exact identifier.
+
+|Missing `claude` or `codex` binary on the `PATH`
+|The agent binary is not installed or not on your `PATH`. Install it (see Prerequisites), then relaunch.
+
+|Sign-in required before `rpk ai` starts
+|Sign in to Redpanda Cloud first with `rpk cloud login --no-profile`, then run `rpk ai auth login`. See the note under Prerequisites.
+
+|Unknown command error from `rpk ai run`
+|Your `rpk ai` plugin predates `rpk ai run`. Update it with `rpk ai upgrade`, then relaunch.
+
+|Passthrough session ends with an auth error partway through
+|A passthrough gateway token cannot refresh mid-session. When `rpk ai run claude` warns that the token expires soon, run `rpk ai auth login` for a full-length session before relaunching.
+
+|MCP tool calls return `OAuthConnectionRequired`
+|You have not completed the consent flow for that MCP server. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]; Claude Code surfaces the authorization URL in the error so you can finish the handshake.
+|===
+
+== Next steps
+
+* xref:cli:index.adoc[]
+* xref:gateway:configure-provider.adoc[]
+* xref:gateway:connect-agent.adoc[]

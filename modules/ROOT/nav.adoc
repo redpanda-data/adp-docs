@@ -50,7 +50,7 @@
 ** xref:connect:integrations.adoc[Integrate with Your Stack]
 *** xref:connect:integration-overview.adoc[Choose an Integration Pattern]
 *** xref:connect:pipeline-integration-patterns.adoc[Integrate with Redpanda Pipelines]
-*** xref:connect:claude-code.adoc[Use Claude Code with Agentic Data Plane]
+*** xref:connect:coding-agents.adoc[Run Claude Code and Codex]
 
 * xref:monitor:index.adoc[Monitor & Debug]
 ** xref:monitor:concepts.adoc[How Observability Works]

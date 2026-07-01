@@ -34,6 +34,11 @@ Update the plugin later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk 
 
 The `rpk ai` command is self-contained: it has its own login and its own environment selection, independent of any `rpk cloud` session. You sign in once, choose an Agentic Data Plane environment, and `rpk ai` targets that environment's AI Gateway for every command.
 
+[NOTE]
+====
+The `rpk` CLI starts the `rpk ai` plugin only after you have signed in to Redpanda Cloud. Before your first `rpk ai` command, run `rpk cloud login --no-profile` to sign in without selecting a cluster. This sign-in only unlocks the plugin. The plugin keeps its own credentials from `rpk ai auth login`.
+====
+
 . Sign in to Redpanda Cloud. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the Agentic Data Plane environments in your organization so you can pick one:
 +
 [,bash]
