@@ -1,0 +1,70 @@
+= Release Notes
+:description: What's new in the Agentic Data Plane: new features, improvements, and bug fixes, by release.
+:page-topic-type: reference
+
+// @generated from adp/RELEASE_NOTES.md by adp/cmd/releasenotes — do not edit by hand.
+
+The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
+
+== v0.2.16 (2026-07-01)
+
+=== Features
+
+OAuth Clients:: MCP clients such as Claude Code, Cursor, and ChatGPT can now register themselves through OAuth Dynamic Client Registration (DCR), instead of needing an OAuth client created by hand.
+
+=== Improvements
+
+Agents `[UI]`:: Creating policies is now faster, since resource options load as you need them instead of all at once.
+MCP Servers `[UI]`:: Claude Code users can now set up managed MCP servers with a single command, or use manual configuration from a separate tab.
+
+== v0.2.12 (2026-07-01)
+
+=== Features
+
+Models:: Claude Sonnet 5 is now available to select on the Anthropic and Bedrock providers.
+
+=== Bug fixes
+
+Agents `[UI]`:: A completed tool call in the agent inspector now switches to **Completed** the moment it finishes, instead of showing **Working** until the next step.
+
+== v0.2.11 (2026-06-30)
+
+=== Bug fixes
+
+CLI:: Signing in with `rpk ai auth login` now clears the expired-token errors that kept `rpk ai` commands failing even after a successful login.
+
+== v0.2.10 (2026-06-30)
+
+=== Features
+
+Agents `[UI]`:: When an agent produces a chart, the agent inspector now displays it: switch between the chart, its data, and its definition, and zoom in or download it.
+Error handling `[UI]`:: Capture a failed request for support and get a reference ID to quote.
+
+=== Improvements
+
+Error handling `[UI]`:: Failed requests now show the full error message and type, with expandable technical details, instead of a generic internal error.
+List pages `[UI]`:: The MCP servers, LLM providers, OAuth providers, OAuth clients, and Secrets Store lists now have consistent search, filtering, and multi-row selection.
+
+=== Bug fixes
+
+LLM Providers:: The Bedrock provider rejected valid model IDs whose version contains a dot, in all regions; these now route correctly.
+
+== v0.2.9 (2026-06-29)
+
+=== Features
+
+MCP Servers:: Connect to Sentry through a new managed MCP server.
+LLM Providers:: Set your own per-model pricing on a provider, so usage and cost reflect the rates you actually pay.
+rpk ai `[CLI]`:: Apply or diff your LLM providers, MCP servers, and OAuth providers from config files, now against an ADP environment.
+
+=== Improvements
+
+MCP Servers:: Filter the server list by type and status.
+OAuth Providers:: Filter providers and clients by status and how they were created.
+Cost & Usage:: Export charts to CSV and download a full usage report.
+Environments:: The environment switcher now shows each environment's region, so you don't make changes in the wrong one.
+
+=== Bug fixes
+
+Reliability:: Fixed hangs when switching environments, and the app now recovers on its own after a new version ships instead of showing errors.
+Lists:: Fixed filters showing wrong results, and lists now refresh immediately after you add or edit an item.
