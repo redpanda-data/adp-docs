@@ -1,0 +1,192 @@
+= Draw Charts from an Agent
+:description: Make an agent render interactive charts in the Inspector by emitting a chart code block that holds a Chart.js configuration.
+:page-topic-type: how-to
+:personas: agent_builder
+:learning-objective-1: Emit a chart code block whose body is a Chart.js configuration
+:learning-objective-2: Instruct an agent to draw a chart through its system prompt
+:learning-objective-3: Diagnose a chart that renders as an error or stays a placeholder
+
+// Source: cloudv2 `apps/adp-ui/src/components/agents/inspector/components/chart-block.tsx`, `chart-block-renderer.tsx`, and `ai-elements/response.tsx` on origin/main. Verified 2026-06-30.
+
+An agent draws a chart by emitting a fenced code block tagged `chart` whose body is a https://www.chartjs.org/docs/latest/[Chart.js^] configuration in JSON. The agent's *Inspector* tab renders that block as an interactive chart with Chart, Data, and Code views, PNG export, and zoom for cartesian charts. This is a rendering convention: the agent decides when a chart helps and writes the configuration, and the Inspector draws it. No tool call, configuration, or extra code is required.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* A deployed agent in Redpanda Cloud. If you don't have one, see xref:connect:create-agent.adoc[].
+* An understanding of how to write an agent system prompt. See xref:connect:system-prompts.adoc[].
+
+== How chart rendering works
+
+When the agent's response contains a fenced code block tagged `chart`, the Inspector parses the block body as a Chart.js configuration and draws the chart in place of the code. Every other code block renders as plain code, so a `chart` block is the agent's only departure from ordinary output.
+
+The Inspector supplies what the agent leaves out. A bare configuration with a type and data renders with a themed color palette, sizing that tracks the panel, and, for cartesian charts, zoom and pan controls. The Inspector fills only the gaps: a color or an option the agent sets itself is kept as written.
+
+The Redpanda Cloud UI draws a `chart` block wherever it shows the agent's response: the agent's *Inspector* tab and the *Transcripts* tab. When an external application calls the agent, whether that application draws the chart depends on how it renders the agent's output.
+
+== Write the chart block
+
+The contract is narrow. Follow it exactly, or the block renders as an error.
+
+* Tag the fence `chart`. The opening fence is three backticks followed by the word `chart`, with no other language tag.
+* Write the body as strict JSON. The Inspector parses the body with a JSON parser, not a JavaScript evaluator, so the body follows JSON rules: double-quoted keys and strings, unquoted numbers, no trailing commas, no comments, and no JavaScript expressions, functions, or callbacks.
+* Make the body a raw Chart.js configuration. The top level holds a `type` field and a `data` object, and an optional `options` object. Do not wrap the configuration in any envelope object.
+
+A minimal bar chart:
+
+[,text]
+----
+```chart
+{
+  "type": "bar",
+  "data": {
+    "labels": ["Jan", "Feb", "Mar"],
+    "datasets": [
+      { "label": "Orders", "data": [120, 190, 140] }
+    ]
+  }
+}
+```
+----
+
+This configuration sets no colors and no options. The Inspector supplies the palette, the sizing, and the zoom controls.
+
+=== Supported chart types
+
+Set `type` to one of these Chart.js types:
+
+[cols="1,2"]
+|===
+|Type |Use for
+
+|`bar`
+|Comparisons across categories. Supports zoom and pan.
+
+|`line`
+|Trends over an ordered axis, such as time. Supports zoom and pan.
+
+|`scatter`
+|Correlation between two numeric variables, plotted as x/y points. Supports zoom and pan.
+
+|`bubble`
+|Three numeric variables, plotted as x/y points sized by a radius. Supports zoom and pan.
+
+|`pie`
+|Parts of a whole, as wedges.
+
+|`doughnut`
+|Parts of a whole, as a ring.
+
+|`polarArea`
+|Parts of a whole, with wedge length scaled by value.
+
+|`radar`
+|Several metrics for one or more series, on shared axes.
+|===
+
+== Instruct the agent through its system prompt
+
+The Inspector draws any `chart` block the agent emits, so you get charts by telling the agent to emit them. Add the convention to the agent's xref:connect:system-prompts.adoc[system prompt]: name the fence tag, state the strict-JSON rule, list the types the agent can use, and give one worked example. Models follow a single concrete example more reliably than a prose description.
+
+The following snippet works as a standalone prompt or as a section added to an existing one:
+
+[,text]
+----
+You can draw charts inline. When a chart communicates better than text,
+emit ONE fenced code block tagged exactly `chart` whose body is a Chart.js
+configuration as strict JSON.
+
+Rules for the chart block:
+- The fence language tag is exactly: chart
+- The body is valid JSON: double-quoted keys and strings, unquoted numbers,
+  no trailing commas, no comments, and no JavaScript, functions, or callbacks.
+- The body is a raw Chart.js configuration with a top-level "type" and "data",
+  and an optional "options". Do not wrap it in any envelope.
+- Allowed "type" values: "bar", "line", "pie", "doughnut", "polarArea",
+  "radar", "scatter", "bubble".
+- Omit colors and most "options". The Inspector supplies a color palette,
+  sizing, and zoom. Set only the options you need, such as a title.
+- Put a one- or two-sentence plain-text explanation before the chart block.
+  Do not also paste a data table; the Inspector has a built-in Data view.
+
+Example response to "show the cake by volume":
+
+A classic layered cake, broken down by volume:
+
+```chart
+{
+  "type": "doughnut",
+  "data": {
+    "labels": ["Sponge", "Frosting", "Strawberries", "Whipped cream", "Chocolate"],
+    "datasets": [
+      { "label": "Cake by volume (%)", "data": [40, 20, 15, 15, 10] }
+    ]
+  },
+  "options": {
+    "plugins": { "title": { "display": true, "text": "Anatomy of a cake" } }
+  }
+}
+```
+----
+
+For prompt-writing patterns that make this output reliable, see xref:connect:system-prompts.adoc#output-formatting[Output formatting].
+
+== Test the chart in the Inspector
+
+. Open the agent and switch to the *Inspector* tab.
+. Enter a prompt that calls for a chart, such as `Show last quarter's orders by month as a bar chart`.
+. Wait for the response. The chart appears in place of the `chart` block.
+
+image::connect:agent-chart-rendered.png[A rendered doughnut chart in the Inspector, with a segmented control offering Chart, Data, and Code views and a download control.]
+
+The rendered chart carries a segmented control with three views:
+
+* *Chart*: The drawn chart. For a cartesian chart (`bar`, `line`, `scatter`, or `bubble`), scroll to zoom, drag to zoom into a region, and, after zooming, drag to pan. A *Reset zoom* control appears after you zoom or pan.
+* *Data*: The chart's values as a table, reconstructed from the configuration.
+* *Code*: The Chart.js configuration the Inspector parsed.
+
+In the *Chart* view, a download control exports the chart as a PNG file named `chart.png`.
+
+== Set options and colors
+
+The agent can set any Chart.js option. For colors, the palette, and zoom, the Inspector keeps what the agent writes and fills in only what the agent omits, so set these only when the default doesn't fit.
+
+* *Title, legend, and axis labels*: Set them under `options.plugins` and `options.scales`, the same as in any Chart.js configuration.
+* *Colors*: Omit them to take the themed palette, which tracks the light and dark Inspector themes. To fix specific colors, set `backgroundColor` and `borderColor` on a dataset; the Inspector then leaves that dataset's colors alone.
+* *Zoom and pan*: Cartesian charts get zoom and pan automatically. To turn them off or adjust them, set `options.plugins.zoom` yourself.
+
+For the full set of options, see the https://www.chartjs.org/docs/latest/configuration/[Chart.js configuration documentation^].
+
+== Troubleshooting
+
+A block that doesn't satisfy the contract renders as an inline error that names the problem and shows the body the agent sent, in place of the chart.
+
+image::connect:agent-chart-error.png[An inline error reading Failed to render chart, naming the JSON problem and showing the body the agent sent.]
+
+[cols="1,2"]
+|===
+|Symptom |Cause and fix
+
+|A *Failed to render chart* error appears in place of the chart
+|The block body doesn't satisfy the contract. The error message names the problem, and the block below it shows the body the agent sent. Common causes: invalid JSON, such as single quotes, trailing commas, or a comment; a missing `type` field; or a missing `data` object. Tighten the system prompt's strict-JSON rule and run the agent again.
+
+|A *Building chart…* placeholder doesn't resolve
+|The placeholder shows while the `chart` block streams in, because the Inspector can't parse the configuration until the closing fence arrives. It resolves to the chart when the agent finishes the response. If the response finishes and the body still can't parse, the placeholder gives way to the *Failed to render chart* error. A placeholder that stays means the response is still streaming or never finished: instruct the agent to emit one complete `chart` block and nothing after the closing fence.
+
+|The chart renders but the colors look wrong
+|The agent set colors that clash with the theme. Remove the `backgroundColor` and `borderColor` fields from the datasets to fall back to the themed palette.
+
+|The agent pastes a table or raw JSON instead of a chart
+|The agent either didn't tag the fence `chart` or wrote prose instead of a block. Reinforce the rule and the worked example in the system prompt.
+|===
+
+== Next steps
+
+* xref:connect:system-prompts.adoc[]
+* xref:connect:create-agent.adoc[]
+* xref:monitor:transcripts.adoc[]
