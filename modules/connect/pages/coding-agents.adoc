@@ -3,13 +3,13 @@
 :description: Launch Claude Code or Codex with rpk ai run, routing their model traffic through a managed, enterprise-passthrough, or AWS Bedrock Agentic Data Plane provider.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Launch Claude Code through an Agentic Data Plane Anthropic or AWS Bedrock provider with rpk ai run claude
-:learning-objective-2: Launch Codex through an Agentic Data Plane OpenAI provider with rpk ai run codex
+:learning-objective-1: pass:q[Launch Claude Code through an Agentic Data Plane Anthropic or AWS Bedrock provider with `rpk ai run claude`]
+:learning-objective-2: pass:q[Launch Codex through an Agentic Data Plane OpenAI provider with `rpk ai run codex`]
 :learning-objective-3: Choose between a managed (API-key) provider and an enterprise passthrough (subscription-seat) provider for Claude Code
 
 // Source: proto/public/cloud/redpanda/api/adp/v1alpha1/llm_provider.proto (anthropic_config.authorization_passthrough, api_key_ref); cloudv2 apps/rpai/internal/cmd/run/ and `rpk ai run <tool> --help`; apps/adp-ui/src/components/llm-providers. Verified against origin/main and adp-production on 2026-07-01. Bedrock support: cloudv2 #27633 (merged 2026-07-02), verified end-to-end on adp-production in that PR.
 
-Claude Code and Codex are command-line coding agents. The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command launches either one with its model traffic routed through an AI Gateway provider, reusing your `rpk ai` sign-in so you don't set base URLs or mint tokens by hand. Your team's coding-agent calls then flow through Agentic Data Plane: provider credentials stay in the dataplane secret store, usage rolls up on the *Cost & Usage* page, and no token is written to disk.
+Claude Code and Codex are command-line coding agents. The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command launches either one with its model traffic routed through an AI Gateway provider, reusing your `rpk ai` sign-in so you don't set base URLs or mint tokens by hand. Your team's coding-agent calls then flow through Agentic Data Plane: provider credentials stay in the dataplane secret store, usage rolls up on the *Cost & Usage* page, and no provider key or session token is written to disk.
 
 After completing this guide, you will be able to:
 
@@ -151,7 +151,7 @@ If a server exposes a large tool catalog, turn on xref:gateway:code-mode.adoc[co
 
 == Observe usage
 
-From the navigation menu, select *Governance* > *Cost & Usage*, then filter by your provider. Within a few seconds, the requests from your coding-agent session appear, and the provider's *Overview* tab breaks spend down per model.
+Open *Cost & Usage* under *Governance* in the sidebar, then filter by your provider. Within a few seconds, the requests from your coding-agent session appear, and the provider's *Overview* tab breaks spend down per model.
 
 Ad-hoc `rpk ai run` sessions are not registered agents, so they do not appear in the per-agent xref:monitor:transcripts.adoc[Transcripts view]. Transcripts cover agents you create in Agentic Data Plane.
 

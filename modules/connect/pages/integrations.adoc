@@ -2,4 +2,4 @@
 :description: Choose an integration pattern and connect the Agentic Data Plane to your existing stack, Redpanda pipelines, and developer tools.
 :page-layout: index
 
-Connect the Agentic Data Plane to your existing systems. Choose an integration pattern, wire in Redpanda pipelines, and use Redpanda Agentic Data Plane from developer tools like Claude Code.
+Connect the Agentic Data Plane to your existing systems. Choose an integration pattern, wire in Redpanda pipelines, and use Redpanda Agentic Data Plane from developer tools like Claude Code and Codex.
