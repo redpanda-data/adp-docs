@@ -1,0 +1,58 @@
+= rpk ai agent a2a task watch
+:description: rpk ai agent a2a task watch
+:page-beta: true
+
+Reattach to a running task's event stream (A2A tasks/resubscribe) and
+print events until the task reaches a terminal state. Use after a
+disconnected --stream send or a --no-block send.
+
+Watch waits as long as the task runs (no timeout by default; bound it
+with --timeout). Exit codes match send: 0 success or input-required,
+4 task failed/canceled/rejected, 1 anything else.
+
+== Usage
+
+[,bash]
+----
+rpk ai agent a2a task watch <agent|url> <task-id> [flags]
+----
+
+== Aliases
+
+[,bash]
+----
+watch, resubscribe
+----
+
+== Examples
+
+[,bash]
+----
+rpk ai agent a2a task watch financial-advisor TASK_ID
+rpk ai agent a2a task watch financial-advisor TASK_ID -o json   # one JSON event per line
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-h, --help |- |help for watch.
+
+|--timeout |duration |abort after this long (default: wait forever).
+
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
+|===

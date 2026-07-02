@@ -1,0 +1,40 @@
+= rpk ai agent a2a card
+:description: rpk ai agent a2a card
+:page-beta: true
+
+Fetch the A2A agent card — the JSON discovery document describing the
+agent's identity, skills, supported transports and capabilities.
+
+Use -o json to feed the raw card to other tools.
+
+== Usage
+
+[,bash]
+----
+rpk ai agent a2a card <agent|url> [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-h, --help |- |help for card.
+
+|--timeout |duration |abort the call after this long (0 to wait forever) (default 5m0s).
+
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
+|===

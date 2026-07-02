@@ -2,14 +2,23 @@
 :description: rpk ai agent
 :page-beta: true
 
-Manage agents.
+Manage agents registered with the Redpanda AI platform.
+
+Agents are either managed (adp runs them; configured via a model, LLM
+provider, system prompt and MCP servers) or self-managed (a metadata-only
+record tracking a user-hosted agent). `create` makes a managed agent by
+default; pass --self-managed for the metadata-only variant.
+
+The `credential` subcommand provisions client-id/secret pairs an agent
+uses to authenticate against the gateway. The `a2a` subcommand talks to
+a running agent over the A2A protocol (fetch its card, send messages,
+manage tasks).
 
 == Usage
 
 [,bash]
 ----
-rpk ai agent [flags]
-  rpk ai agent [command]
+rpk ai agent [command]
 ----
 
 == Aliases
@@ -33,11 +42,11 @@ agent, agents
 
 |-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
 
-|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
 
 |-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
 
 |-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
 
-|--token |string |static bearer token override (env: RPAI_TOKEN).
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai) Use "rpk ai agent [command] --help" for more information about a command.
 |===

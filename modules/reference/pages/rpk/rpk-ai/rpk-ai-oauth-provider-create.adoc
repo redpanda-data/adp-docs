@@ -1,5 +1,6 @@
-= rpk ai oauth create
-:description: rpk ai oauth create
+= rpk ai oauth-provider create
+:description: rpk ai oauth-provider create
+:page-aliases: rpk/rpk-ai/rpk-ai-oauth-create.adoc
 :page-beta: true
 
 Create an OAuth provider
@@ -8,7 +9,7 @@ Create an OAuth provider
 
 [,bash]
 ----
-rpk ai oauth create [flags]
+rpk ai oauth-provider create [flags]
 ----
 
 == Flags
@@ -49,11 +50,11 @@ rpk ai oauth create [flags]
 
 |-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
 
-|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
 
 |-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
 
 |-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
 
-|--token |string |static bearer token override (env: RPAI_TOKEN).
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
 |===

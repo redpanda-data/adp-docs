@@ -2,7 +2,7 @@
 :description: rpk ai agent list
 :page-beta: true
 
-List agents.
+List agents
 
 == Usage
 
@@ -17,6 +17,8 @@ rpk ai agent list [flags]
 |===
 |*Value* |*Type* |*Description*
 
+|--filter |string |AIP-160 filter expression, e.g. name:"web" or display_name="prod".
+
 |-h, --help |- |help for list.
 
 |-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
@@ -25,11 +27,11 @@ rpk ai agent list [flags]
 
 |-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
 
-|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
 
 |-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
 
 |-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
 
-|--token |string |static bearer token override (env: RPAI_TOKEN).
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
 |===

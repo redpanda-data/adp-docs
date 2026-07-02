@@ -96,9 +96,9 @@ Each Agentic Data Plane resource has its own command group, and each group suppo
 |MCP servers and their tools
 |xref:reference:rpk/rpk-ai/rpk-ai-mcp.adoc[`rpk ai mcp`]
 
-|rpk ai oauth
+|rpk ai oauth-provider
 |OAuth providers for user-delegated MCP connections
-|xref:reference:rpk/rpk-ai/rpk-ai-oauth.adoc[`rpk ai oauth`]
+|xref:reference:rpk/rpk-ai/rpk-ai-oauth-provider.adoc[`rpk ai oauth-provider`]
 
 |rpk ai oauth-client
 |OAuth clients that external tools use to reach an MCP server

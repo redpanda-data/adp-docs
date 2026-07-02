@@ -1,14 +1,16 @@
-= rpk ai oauth list
-:description: rpk ai oauth list
+= rpk ai run
+:description: rpk ai run
 :page-beta: true
 
-List OAuth providers
+Launch a third-party coding agent configured to send its model traffic
+through the Redpanda AI gateway for the active profile, reusing rpai's
+login and auto-refreshing token.
 
 == Usage
 
 [,bash]
 ----
-rpk ai oauth list [flags]
+rpk ai run [command]
 ----
 
 == Flags
@@ -17,9 +19,7 @@ rpk ai oauth list [flags]
 |===
 |*Value* |*Type* |*Description*
 
-|--filter-name |string |filter by name (contains).
-
-|-h, --help |- |help for list.
+|-h, --help |- |help for run.
 
 |-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
 
@@ -27,11 +27,11 @@ rpk ai oauth list [flags]
 
 |-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
 
-|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
 
 |-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
 
 |-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
 
-|--token |string |static bearer token override (env: RPAI_TOKEN).
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai) Use "rpk ai run [command] --help" for more information about a command.
 |===

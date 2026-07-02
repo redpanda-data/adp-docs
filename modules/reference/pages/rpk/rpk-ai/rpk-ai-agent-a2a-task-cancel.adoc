@@ -1,0 +1,46 @@
+= rpk ai agent a2a task cancel
+:description: rpk ai agent a2a task cancel
+:page-beta: true
+
+Ask the agent to cancel a running task and print the task's resulting
+state. Cancellation is cooperative — the agent may already have
+finished, in which case the terminal state is returned unchanged.
+
+== Usage
+
+[,bash]
+----
+rpk ai agent a2a task cancel <agent|url> <task-id> [flags]
+----
+
+== Examples
+
+[,bash]
+----
+rpk ai agent a2a task cancel financial-advisor TASK_ID
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-h, --help |- |help for cancel.
+
+|--timeout |duration |abort the call after this long (0 to wait forever) (default 5m0s).
+
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
+|===

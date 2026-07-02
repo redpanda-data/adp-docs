@@ -1,0 +1,61 @@
+= rpk ai oauth-client dcr update
+:description: rpk ai oauth-client dcr update
+:page-beta: true
+
+Update the tenant's DCR settings. Only the flags you pass change;
+everything else keeps its current value (the CLI reads the current
+settings and writes back the merged result).
+
+Enable open self-registration:
+
+  rpk ai oauth-client dcr update --enabled --admission-mode open
+
+Require admin-minted Initial Access Tokens instead:
+
+  rpk ai oauth-client dcr update --admission-mode initial-access-token
+
+Turn the endpoint off again:
+
+  rpk ai oauth-client dcr update --enabled=false
+
+== Usage
+
+[,bash]
+----
+rpk ai oauth-client dcr update [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|--admission-mode |string |how callers are admitted: open, initial-access-token.
+
+|--allowed-resource |strings |MCP URL every DCR-issued client may request tokens for; "*" = any. repeatable.
+
+|--client-cap |int32 |max concurrent DCR-issued clients (0 = runtime default).
+
+|--enabled |- |whether the public registration endpoint accepts requests.
+
+|-h, --help |- |help for update.
+
+|--inactive-ttl-days |int32 |days of inactivity before a DCR client is removed (0 = never).
+
+|--rate-per-hour |int32 |max registrations per hour (0 = runtime default).
+
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
+|===

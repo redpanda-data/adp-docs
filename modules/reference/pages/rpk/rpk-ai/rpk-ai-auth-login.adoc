@@ -1,0 +1,44 @@
+= rpk ai auth login
+:description: rpk ai auth login
+:page-beta: true
+
+Run the OAuth 2.0 device authorization grant against Redpanda Cloud's
+cloud-api, persist the resulting credentials to the rpai credentials file
+(0600), and — for new profiles — prompt to pick an ADP environment whose AI
+Gateway URL becomes the profile's dataplane_url.
+
+If the active profile's stored credentials are still valid, login is a
+no-op and prints "Already logged in ...". Log out first (or delete the
+credential entry) to force a re-auth.
+
+== Usage
+
+[,bash]
+----
+rpk ai auth login [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-h, --help |- |help for login.
+
+|--no-browser |- |do not attempt to open the browser; print the URL only.
+
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
+|===

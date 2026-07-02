@@ -1,0 +1,37 @@
+= rpk ai oauth-client dcr iat revoke
+:description: rpk ai oauth-client dcr iat revoke
+:page-beta: true
+
+Revoke an unconsumed Initial Access Token so it can no longer be
+exchanged at the registration endpoint. Idempotent — revoking an
+already-revoked or consumed token returns 0.
+
+== Usage
+
+[,bash]
+----
+rpk ai oauth-client dcr iat revoke <id> [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-h, --help |- |help for revoke.
+
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
+|===
