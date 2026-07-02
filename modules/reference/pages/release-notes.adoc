@@ -6,6 +6,24 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.17 (2026-07-02)
+
+=== Features
+
+CLI:: Launch Claude Code against one of your Amazon Bedrock LLM providers with `rpk ai run claude -L <provider>`; the gateway authenticates to AWS for you, so your machine needs no AWS credentials.
+Agents:: Give each subagent its own model and LLM provider in the agent editor.
+
+=== Improvements
+
+Agents:: Updating an agent no longer interrupts it: the new version starts and takes over before the old one stops.
+Models:: Each model now reports its `max_input_tokens` and `max_output_tokens` limits through the API.
+
+=== Bug fixes
+
+LLM Providers `[UI]`:: Filters in the metric detail panel on provider and model pages now apply to the chart, and the panel no longer hides its filter menus or covers the sidebar.
+LLM Providers `[UI]`:: The spend total in the metric detail panel was inflated when grouping by cost type; only the display was wrong, recorded usage was unaffected.
+Cost & Usage `[UI]`:: In period comparisons grouped by model or user, each line now compares against its own numbers from the previous period, not another line's.
+
 == v0.2.16 (2026-07-01)
 
 === Features
