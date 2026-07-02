@@ -109,7 +109,7 @@ Codex has no passthrough mode. Every Codex session authenticates to the gateway 
 
 == Make it a shortcut
 
-If you launch the same agent and provider often, define a shell alias so the launch becomes a short command. Anything after `--` is passed to the agent, so you can pin your own agent flags in the alias too. For example, to launch Claude Code through your provider with its approval prompts disabled every time:
+If you launch the same agent and provider often, define a shell alias so the launch becomes a short command. Anything after `--` is passed to the agent, so you can pin your own agent flags in the alias too. For example, to launch Claude Code through your provider with your preferred model every time:
 
 [tabs]
 ======
@@ -120,7 +120,7 @@ Add the alias to `~/.bashrc` or `~/.zshrc`:
 
 [source,bash]
 ----
-alias claude-gw='rpk ai run claude -L <anthropic-provider> -- --dangerously-skip-permissions'
+alias claude-gw='rpk ai run claude -L <anthropic-provider> -m claude-sonnet-4-6'
 ----
 --
 
@@ -131,15 +131,10 @@ Define a saved alias (fish persists it as a function):
 
 [source,fish]
 ----
-alias --save claude-gw 'rpk ai run claude -L <anthropic-provider> -- --dangerously-skip-permissions'
+alias --save claude-gw 'rpk ai run claude -L <anthropic-provider> -m claude-sonnet-4-6'
 ----
 --
 ======
-
-[CAUTION]
-====
-The `--dangerously-skip-permissions` flag belongs to Claude Code: it disables the approval prompts Claude Code normally shows before it runs commands or edits files. Pin it only for work in repositories you trust, or drop it from the alias to keep the prompts.
-====
 
 == Attach Agentic Data Plane-hosted MCP servers (optional)
 
