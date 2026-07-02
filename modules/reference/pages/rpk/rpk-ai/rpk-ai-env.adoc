@@ -1,26 +1,21 @@
-= rpk ai oauth
-:description: rpk ai oauth
+= rpk ai env
+:description: rpk ai env
 :page-beta: true
 
-Manage OAuth authorization-server configurations registered with the Redpanda AI gateway.
-
-OAuth providers describe third-party authorization servers (GitHub, Google, Slack, ...)
-that user-facing MCP servers can authenticate against via the device-consent flow.
-
-Aliases: `oauth-provider` (compat with aigwctl), `op`.
+Manage rpai environments (list, use, add, show, rename, delete)
 
 == Usage
 
 [,bash]
 ----
-rpk ai oauth [command]
+rpk ai env [command]
 ----
 
 == Aliases
 
 [,bash]
 ----
-oauth, oauth-provider, op
+env, environment
 ----
 
 == Flags
@@ -29,7 +24,7 @@ oauth, oauth-provider, op
 |===
 |*Value* |*Type* |*Description*
 
-|-h, --help |- |help for oauth.
+|-h, --help |- |help for env.
 
 |-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
 
@@ -37,11 +32,11 @@ oauth, oauth-provider, op
 
 |-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
 
-|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
 
 |-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
 
 |-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
 
-|--token |string |static bearer token override (env: RPAI_TOKEN).
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai) Use "rpk ai env [command] --help" for more information about a command.
 |===

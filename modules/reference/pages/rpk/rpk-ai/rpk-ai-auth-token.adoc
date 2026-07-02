@@ -1,0 +1,37 @@
+= rpk ai auth token
+:description: rpk ai auth token
+:page-beta: true
+
+Print the current bearer access token to stdout (refreshes if expired)
+
+== Usage
+
+[,bash]
+----
+rpk ai auth token [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-h, --help |- |help for token.
+
+|--refresh-within |duration |proactively refresh if the token expires within this window (for polling callers like a Codex/Claude auth helper); 0 uses the default 60s leeway.
+
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
+|===

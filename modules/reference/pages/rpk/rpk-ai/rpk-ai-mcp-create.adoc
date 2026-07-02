@@ -23,7 +23,7 @@ rpk ai mcp create [flags]
 
 |-h, --help |- |help for create.
 
-|--managed-config |- |rpai mcp types   managed MCP config JSON. The @type may be the short name from rpai mcp types (e.g. '{"@type":"SQLMCP","driver":"sqlite3","dsn":":memory:"}') or the full proto URL. The per-MCP oneof `auth` carries any credentials (static_key / user_oauth) — specify it inside the JSON.
+|--managed-config |- |rpk ai mcp types   managed MCP config JSON. The @type may be the short name from rpk ai mcp types (e.g. '{"@type":"SQLMCP","driver":"sqlite3","dsn":":memory:"}') or the full proto URL. The per-MCP oneof `auth` carries any credentials (static_key / user_oauth) — specify it inside the JSON.
 
 |--name |string |server name (required).
 
@@ -41,11 +41,11 @@ rpk ai mcp create [flags]
 
 |-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
 
-|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
 
 |-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
 
 |-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
 
-|--token |string |static bearer token override (env: RPAI_TOKEN).
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
 |===

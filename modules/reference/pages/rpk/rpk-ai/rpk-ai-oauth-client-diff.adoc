@@ -1,0 +1,43 @@
+= rpk ai oauth-client diff
+:description: rpk ai oauth-client diff
+:page-beta: true
+
+Dry-run of apply for OAuth clients. Prints, per manifest, whether apply would
+create, update (and which fields), or leave the resource unchanged. Exits
+non-zero when any change is pending, so CI can gate on "no drift".
+
+Note: diff proves only that the fields a manifest names match live. It does not
+detect resources that exist live but are absent from the manifests (no prune),
+nor drift in fields a manifest omits.
+
+== Usage
+
+[,bash]
+----
+rpk ai oauth-client diff -f <file|dir|-> [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-f, --filename |strings |manifest file, directory, or - for stdin (repeatable).
+
+|-h, --help |- |help for diff.
+
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
+|===

@@ -1,14 +1,14 @@
-= rpk ai oauth get
-:description: rpk ai oauth get
+= rpk ai env rename
+:description: rpk ai env rename
 :page-beta: true
 
-Get an OAuth provider
+Rename an environment in both config and credentials files
 
 == Usage
 
 [,bash]
 ----
-rpk ai oauth get <name> [flags]
+rpk ai env rename OLD NEW [flags]
 ----
 
 == Flags
@@ -17,7 +17,7 @@ rpk ai oauth get <name> [flags]
 |===
 |*Value* |*Type* |*Description*
 
-|-h, --help |- |help for get.
+|-h, --help |- |help for rename.
 
 |-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
 
@@ -25,11 +25,11 @@ rpk ai oauth get <name> [flags]
 
 |-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
 
-|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
 
 |-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
 
 |-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
 
-|--token |string |static bearer token override (env: RPAI_TOKEN).
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
 |===

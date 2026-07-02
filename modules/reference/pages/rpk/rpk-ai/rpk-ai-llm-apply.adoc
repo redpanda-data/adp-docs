@@ -1,0 +1,49 @@
+= rpk ai llm apply
+:description: rpk ai llm apply
+:page-beta: true
+
+Reconcile LLM providers from one or more YAML manifests.
+
+For each manifest: create the resource if absent, otherwise update only the
+fields that are present in the manifest AND differ from the live resource.
+Fields you omit are left untouched; to clear a field, write it explicitly.
+Lists, maps and oneof variants replace wholesale. Fields that can only be set
+at creation time are immutable; changing one is an error.
+
+Manifests round-trip with `get -o yaml` for this resource. Pass -f - to
+read stdin.
+
+This does not delete resources absent from the manifests (no prune), and drift
+is detected only for the fields a manifest names — see `diff --help`.
+
+== Usage
+
+[,bash]
+----
+rpk ai llm apply -f <file|dir|-> [flags]
+----
+
+== Flags
+
+[cols="1m,1a,2a"]
+|===
+|*Value* |*Type* |*Description*
+
+|-f, --filename |strings |manifest file, directory, or - for stdin (repeatable).
+
+|-h, --help |- |help for apply.
+
+|-o, --format |string |output format: table{vbar}wide{vbar}json{vbar}yaml{vbar}markdown (env: RPAI_FORMAT) (default "table").
+
+|--no-color |- |disable colored output (env: NO_COLOR).
+
+|-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
+
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
+
+|-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
+
+|-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
+
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
+|===

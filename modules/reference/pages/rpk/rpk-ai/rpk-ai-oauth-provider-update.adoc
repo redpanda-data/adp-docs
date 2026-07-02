@@ -1,5 +1,6 @@
-= rpk ai oauth update
-:description: rpk ai oauth update
+= rpk ai oauth-provider update
+:description: rpk ai oauth-provider update
+:page-aliases: rpk/rpk-ai/rpk-ai-oauth-update.adoc
 :page-beta: true
 
 Update an OAuth provider
@@ -8,7 +9,7 @@ Update an OAuth provider
 
 [,bash]
 ----
-rpk ai oauth update <name> [flags]
+rpk ai oauth-provider update <name> [flags]
 ----
 
 == Flags
@@ -41,11 +42,11 @@ rpk ai oauth update <name> [flags]
 
 |-c, --rpai-config |string |path to rpai config (env: RPAI_CONFIG) (default "/var/lib/redpanda/.rpai/config").
 
-|-s, --rpai-endpoint |string |override dataplane URL (env: RPAI_ENDPOINT).
+|-s, --rpai-endpoint |string |override the selected environment's AI Gateway URL for this invocation.
 
 |-p, --rpai-profile |string |rpai profile name (env: RPAI_PROFILE).
 
 |-v, --rpai-verbose |- |verbose debug logging to stderr (env: RPAI_VERBOSE).
 
-|--token |string |static bearer token override (env: RPAI_TOKEN).
+|--token |string |static bearer token override (ambient RPAI_TOKEN is ignored under rpk ai).
 |===
