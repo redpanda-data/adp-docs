@@ -7,7 +7,7 @@
 :learning-objective-2: Walk through the consent flow and verify the connection on the Connections page
 :learning-objective-3: Send a test message through the Inspector
 
-The *Slack* managed MCP server is the canonical user-delegated OAuth example for Redpanda ADP. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time: so messages posted by the agent appear as the user, not as a shared bot.
+The *Slack* managed MCP server is the canonical user-delegated OAuth example for Redpanda Agentic Data Plane. Each agent caller authenticates against Slack with their own credentials, and Redpanda injects their token at call time: so messages posted by the agent appear as the user, not as a shared bot.
 
 After reading this page, you will be able to:
 
@@ -31,12 +31,12 @@ Before you create the server, make sure you have:
 * A Slack OAuth app registered (your own or a Redpanda-published reference app).
 +
 // TODO: confirm whether Redpanda ships a reference Slack OAuth app or whether each customer brings their own. Document the path.
-* An glossterm:OAuth provider[,OAuth Provider] configured in ADP under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An glossterm:OAuth provider[,OAuth Provider] configured in Agentic Data Plane under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:connect:user-delegated-oauth.adoc[].
 
 == Configure
 
-Create a new Slack MCP server in ADP:
+Create a new Slack MCP server in Agentic Data Plane:
 
 . Open *MCP Servers > Create Server*.
 . Pick *Slack* from the marketplace picker.
@@ -59,7 +59,7 @@ After creating the server, run a tool that requires Slack authentication to veri
 . Run a tool that requires the user's identity, for example `post`.
 . The first call returns `OAuthConnectionRequired` with a Slack `authorize_url`. The Inspector surfaces it as a consent prompt.
 . Click *Authorize*. You're redirected to Slack; pick the workspace and approve the requested scopes.
-. Slack redirects back to ADP. Your connection now appears under *Connections*.
+. Slack redirects back to Agentic Data Plane. Your connection now appears under *Connections*.
 . Re-run the original tool call. The message posts to Slack as your user.
 
 // TODO: screenshots of the consent prompt, Slack's approval screen, and the Connections entry post-consent.
@@ -109,5 +109,5 @@ Common symptoms and fixes:
 
 This page does not cover:
 
-* *Configuring the Slack OAuth app*: Slack-side configuration (creating the app, picking redirect URIs, choosing scopes) happens in api.slack.com, not in ADP.
+* *Configuring the Slack OAuth app*: Slack-side configuration (creating the app, picking redirect URIs, choosing scopes) happens in api.slack.com, not in Agentic Data Plane.
 * *Listing channels and looking up users*: Not exposed as tools. The server reads threads, posts messages, and adds reactions.

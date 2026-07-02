@@ -19,7 +19,7 @@ After completing these steps, you will be able to:
 
 A *budget* caps LLM spend over a recurring period. When an agent's spend for the period reaches the budget's hard limit, AI Gateway rejects that agent's next LLM request with `HTTP 429` until the period resets. A separate warning threshold fires before the cap, so you can react before AI Gateway cuts the agent off.
 
-Redpanda ADP enforces budgets per agent. A budget identifies an _agent_ by its resource name in the form `agents/<slug>`, the same identity that appears as `agent_name` in spend data.
+Redpanda Agentic Data Plane enforces budgets per agent. A budget identifies an _agent_ by its resource name in the form `agents/<slug>`, the same identity that appears as `agent_name` in spend data.
 
 === How a budget works
 
@@ -31,7 +31,7 @@ Redpanda ADP enforces budgets per agent. A budget identifies an _agent_ by its r
 |The hard cap on per-period spend. You set it in dollars in the UI; the API stores it in USD microcents (1 cent = 1,000,000 microcents). When a matching agent's accrued spend for the period reaches this value, the agent's next LLM request through the gateway gets `HTTP 429`. Spend resets to zero at the start of each period.
 
 |Warning threshold
-|A spend level, lower than the limit, at which ADP warns: gateway responses carry a `SpendLimit-Warning` header and ADP records a warning metric. Requests still pass. Must be greater than zero and less than the limit.
+|A spend level, lower than the limit, at which Agentic Data Plane warns: gateway responses carry a `SpendLimit-Warning` header and Agentic Data Plane records a warning metric. Requests still pass. Must be greater than zero and less than the limit.
 
 |Period
 |How often the spend pool resets: daily, weekly, or monthly. Periods are calendar-aligned in UTC: daily at 00:00 UTC, weekly at 00:00 UTC Monday, monthly at 00:00 UTC on the first of the month.
@@ -87,7 +87,7 @@ To give one agent a different cap, click *Add override*, pick the agent (each ag
 
 A service account needs the matching `dataplane_adp_budget_*` permission for each operation (`create`, `get`, `list`, `update`, or `delete`). See xref:control:permissions-reference.adoc#budget-permissions[Budget permissions].
 
-== What ADP records automatically
+== What Agentic Data Plane records automatically
 
 Every LLM call routed through AI Gateway becomes a spending event. Each event captures:
 
@@ -98,19 +98,19 @@ Every LLM call routed through AI Gateway becomes a spending event. Each event ca
 
 No setup required: the gateway captures spending the moment your first agent runs through it.
 
-ADP tracks streaming and non-streaming requests the same way, and attributes cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) correctly on streaming responses, so cost rollups stay accurate when an agent reuses long system prompts.
+Agentic Data Plane tracks streaming and non-streaming requests the same way, and attributes cache-write tokens (Anthropic 4.x, OpenAI 4.x prompt caches) correctly on streaming responses, so cost rollups stay accurate when an agent reuses long system prompts.
 
 [NOTE]
 ====
-ADP reports cost in *microcents*. 1 cent = 1,000,000 microcents, so $1 = 100,000,000 microcents. Divide `total_cost_microcents` by 100,000,000 to convert to dollars.
+Agentic Data Plane reports cost in *microcents*. 1 cent = 1,000,000 microcents, so $1 = 100,000,000 microcents. Divide `total_cost_microcents` by 100,000,000 to convert to dollars.
 ====
 
 === Per-request pricing variations
 
-A few request- or response-time signals change the rate ADP applies to a single call. You don't configure these; the spending pipeline picks them up from the upstream response or request and bills accordingly.
+A few request- or response-time signals change the rate Agentic Data Plane applies to a single call. You don't configure these; the spending pipeline picks them up from the upstream response or request and bills accordingly.
 
-* *Anthropic fast mode*: Anthropic exposes a fast-mode option on some models (for example, Opus 4.6 fast) that carries a per-token premium over the default rate. ADP reads the `speed` field on each Anthropic response and bills fast-mode calls at the model's fast-mode rate. Requests without a `speed` field fall back to the default rate.
-* *Context-tier pricing*: A few models charge a different rate once a request crosses a context-length threshold. Gemini Pro, for example, prices requests above a 128K-token context at a higher tier than shorter requests. ADP uses the call's context-token count so requests at or above the threshold bill at the tiered rate automatically.
+* *Anthropic fast mode*: Anthropic exposes a fast-mode option on some models (for example, Opus 4.6 fast) that carries a per-token premium over the default rate. Agentic Data Plane reads the `speed` field on each Anthropic response and bills fast-mode calls at the model's fast-mode rate. Requests without a `speed` field fall back to the default rate.
+* *Context-tier pricing*: A few models charge a different rate after a request crosses a context-length threshold. Gemini Pro, for example, prices requests above a 128K-token context at a higher tier than shorter requests. Agentic Data Plane uses the call's context-token count so requests at or above the threshold bill at the tiered rate automatically.
 
 == Where to view your spend
 
@@ -139,7 +139,7 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 [[query-spend-programmatically]]
 == Query spend programmatically
 
-`SpendingService.GetSpendingBreakdown` is the canonical RPC for pulling spend out of ADP. Use it for chargeback reporting, scheduled emails, internal cost dashboards, or any workflow the built-in UI doesn't cover.
+`SpendingService.GetSpendingBreakdown` is the canonical RPC for pulling spend out of Agentic Data Plane. Use it for chargeback reporting, scheduled emails, internal cost dashboards, or any workflow the built-in UI doesn't cover.
 
 === Authenticate
 
@@ -254,7 +254,7 @@ The proto-generated client (Connect-Go or grpc-python) is the long-term recommen
 
 == Guardrail cost
 
-AWS bills guardrail evaluation directly to the AWS account whose credentials the guardrail's backend uses. This cost does not appear in ADP cost reporting and is not counted against budgets. For current rates, see https://aws.amazon.com/bedrock/pricing/[AWS Bedrock pricing^].
+AWS bills guardrail evaluation directly to the AWS account whose credentials the guardrail's backend uses. This cost does not appear in Agentic Data Plane cost reporting and is not counted against budgets. For current rates, see https://aws.amazon.com/bedrock/pricing/[AWS Bedrock pricing^].
 
 For what each policy does, see xref:control:guardrails/overview.adoc[How guardrails work] and xref:control:guardrails/types-reference.adoc[Guardrail policy reference].
 

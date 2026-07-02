@@ -26,12 +26,12 @@ It is *not* a replacement for the Ironclad web UI for complex workflow managemen
 Before you create the server, make sure you have:
 
 * An Ironclad tenant where you can register an OAuth app.
-* An glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP for Ironclad. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An glossterm:OAuth provider[,OAuth Provider] configured in Redpanda Agentic Data Plane for Ironclad. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Get Ironclad credentials
 
-Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
+Set up the OAuth app on Ironclad and the matching OAuth Provider in Agentic Data Plane:
 
 . Log in to your Ironclad account and go to *Settings > API > OAuth Apps*.
 . Create a new OAuth app. Set the redirect URI to your AI Gateway callback URL (typically `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`).
@@ -42,7 +42,7 @@ Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
 * `public.workflows.createWorkflows`
 * `public.workflows.readDocuments`
 . Copy the `Client ID` and `Client Secret`.
-. In ADP, register an OAuth Provider with:
+. In Agentic Data Plane, register an OAuth Provider with:
 +
 * *Authorization endpoint*: `\https://na1.ironcladapp.com/oauth/authorize` (use `eu1` for EU-hosted accounts; `demo` for sandbox)
 * *Token endpoint*: `\https://na1.ironcladapp.com/oauth/token` (adjust region accordingly)
@@ -50,7 +50,7 @@ Set up the OAuth app on Ironclad and the matching OAuth Provider in ADP:
 
 == Configure
 
-Create a new Ironclad MCP server in ADP:
+Create a new Ironclad MCP server in Agentic Data Plane:
 
 . Open *MCP Servers > Create Server*.
 . Pick `Ironclad` from the marketplace picker.

@@ -38,8 +38,8 @@ It also exposes the following write tools:
 * A Jira (Atlassian Cloud) site and its base URL, for example `https://mycompany.atlassian.net`.
 * Credentials for one of the following authentication modes:
 +
-** `Basic auth`: An Atlassian account email and an API token from `id.atlassian.com`, with the token stored in the Redpanda ADP secret store.
-** `User-delegated OAuth`: An Atlassian OAuth 2.0 (3LO) app registered against `https://api.atlassian.com`, plus an glossterm:OAuth provider[,OAuth Provider] in Redpanda ADP configured for Atlassian's authorize/token URLs and carrying the app's client credentials. See xref:connect:user-delegated-oauth.adoc[].
+** `Basic auth`: An Atlassian account email and an API token from `id.atlassian.com`, with the token stored in the Redpanda Agentic Data Plane secret store.
+** `User-delegated OAuth`: An Atlassian OAuth 2.0 (3LO) app registered against `https://api.atlassian.com`, plus an glossterm:OAuth provider[,OAuth Provider] in Redpanda Agentic Data Plane configured for Atlassian's authorize/token URLs and carrying the app's client credentials. See xref:connect:user-delegated-oauth.adoc[].
 +
 // TODO: confirm whether Redpanda publishes a reference Atlassian app or whether each customer brings their own.
 
@@ -120,7 +120,7 @@ With user-delegated OAuth, define the server's `required_scopes` to include ever
 
 == Limitations
 
-* *Atlassian app management*: The OAuth app and its callback URLs are managed in `developer.atlassian.com`, not in ADP.
+* *Atlassian app management*: The OAuth app and its callback URLs are managed in `developer.atlassian.com`, not in Agentic Data Plane.
 * *Jira Server / Data Center* (self-hosted): This MCP type targets Atlassian Cloud. Self-hosted Jira may need a self-managed MCP server instead. See xref:connect:register-remote.adoc[Register a self-managed MCP server].
 * *Confluence access*: Separate scope namespace; not exposed by this MCP server.
 

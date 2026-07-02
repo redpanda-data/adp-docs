@@ -1,14 +1,14 @@
 = How Guardrails Work
-:description: Learn how ADP guardrails use AWS Bedrock policies to inspect and control LLM requests and responses, and how a blocked request surfaces.
+:description: Learn how Agentic Data Plane guardrails use AWS Bedrock policies to inspect and control LLM requests and responses, and how a blocked request surfaces.
 :page-topic-type: overview
 :personas: security_compliance_lead, platform_engineer, agent_builder
 :learning-objective-1: Describe what a guardrail does and how you attach one to an AWS Bedrock LLM provider
 :learning-objective-2: Identify the available policy types and the situations each fits
 :learning-objective-3: Recognize how a blocked request surfaces and which page to read next
 
-A guardrail is a set of safety and policy filters that inspect and control how agents and gateways use models. A guardrail can block prompt injection, deny off-topic content, redact or block personally identifiable information (PII), and check responses for factual grounding. You attach a guardrail to an AWS Bedrock LLM provider, and ADP applies it to every request and response that flows through that provider.
+A guardrail is a set of safety and policy filters that inspect and control how agents and gateways use models. A guardrail can block prompt injection, deny off-topic content, redact or block personally identifiable information (PII), and check responses for factual grounding. You attach a guardrail to an AWS Bedrock LLM provider, and Agentic Data Plane applies it to every request and response that flows through that provider.
 
-ADP guardrails run on AWS Bedrock Guardrails. Each guardrail syncs its policy configuration to the Bedrock control plane, so it needs an AWS region and Bedrock credentials. Guardrails attach to AWS Bedrock providers only; other provider types don't expose a guardrail setting.
+Agentic Data Plane guardrails run on AWS Bedrock Guardrails. Each guardrail syncs its policy configuration to the Bedrock control plane, so it needs an AWS region and Bedrock credentials. Guardrails attach to AWS Bedrock providers only; other provider types don't expose a guardrail setting.
 
 After reading this page, you will be able to:
 
@@ -49,26 +49,26 @@ For each policy's full configuration, see xref:control:guardrails/types-referenc
 
 A guardrail evaluates both sides of an LLM call:
 
-* Input: ADP evaluates the prompt before forwarding it upstream. Use input evaluation to stop sensitive or malicious content from reaching the model.
-* Output: ADP evaluates the model's response before returning it to the caller. Use output evaluation to control what the model generates.
+* Input: Agentic Data Plane evaluates the prompt before forwarding it upstream. Use input evaluation to stop sensitive or malicious content from reaching the model.
+* Output: Agentic Data Plane evaluates the model's response before returning it to the caller. Use output evaluation to control what the model generates.
 
 Some policies are direction-specific. Content-filter prompt-attack detection runs on input only, contextual grounding runs on output only, and automated reasoning runs on output and only reports findings.
 
-For streaming responses, ADP skips output evaluation in this release. Input evaluation still applies.
+For streaming responses, Agentic Data Plane skips output evaluation in this release. Input evaluation still applies.
 
 == Where you attach a guardrail
 
 You attach a guardrail by setting an AWS Bedrock LLM provider's guardrail. The guardrail setting appears in the provider's Bedrock settings, and only Bedrock providers can reference a guardrail. Each provider references at most one guardrail, and a single guardrail can be reused across many providers. The guardrail's detail page lists the providers that use it. You create and configure the guardrail first, then attach it from the provider. See xref:control:guardrails/create-guardrail.adoc[Create a guardrail].
 
-ADP enforces this reference in both directions. A provider can only point at a guardrail that exists, and you cannot delete a guardrail while a provider still references it. To remove a guardrail that is in use, detach it from each provider first.
+Agentic Data Plane enforces this reference in both directions. A provider can only point at a guardrail that exists, and you cannot delete a guardrail while a provider still references it. To remove a guardrail that is in use, detach it from each provider first.
 
 == What happens when a guardrail blocks
 
-When a policy blocks an input, ADP stops the request and returns your configured blocked input message to the caller. When a policy blocks an output, ADP returns your configured blocked output message instead of the model's response.
+When a policy blocks an input, Agentic Data Plane stops the request and returns your configured blocked input message to the caller. When a policy blocks an output, Agentic Data Plane returns your configured blocked output message instead of the model's response.
 
-The sensitive-information policy can also anonymize matched PII in place rather than block, replacing each match with its entity type, such as `{EMAIL}`. The two directions differ: on output, ADP delivers the redacted response to the caller. On input, ADP does not forward the redacted prompt to the model. ADP short-circuits the request like a block and returns your configured blocked input message.
+The sensitive-information policy can also anonymize matched PII in place rather than block, replacing each match with its entity type, such as `{EMAIL}`. The two directions differ: on output, Agentic Data Plane delivers the redacted response to the caller. On input, Agentic Data Plane does not forward the redacted prompt to the model. Agentic Data Plane short-circuits the request like a block and returns your configured blocked input message.
 
-ADP records guardrail activity as attributes on the request's OpenTelemetry trace, which you read in glossterm:transcript[,transcripts]. This release does not include a separate violations dashboard. See xref:control:guardrails/violations.adoc[Review blocked requests] for how a blocked request surfaces.
+Agentic Data Plane records guardrail activity as attributes on the request's OpenTelemetry trace, which you read in glossterm:transcript[,transcripts]. This release does not include a separate violations dashboard. See xref:control:guardrails/violations.adoc[Review blocked requests] for how a blocked request surfaces.
 
 == Next steps
 

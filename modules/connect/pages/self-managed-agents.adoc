@@ -9,7 +9,7 @@
 
 // Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Agent.agent_type oneof, OauthClient) cross-referenced against `apps/adp-ui/src/components/agents/agent-type-picker.tsx`, `self-managed-create-form.tsx`, `credentials-tab.tsx`, and `setup-tab.tsx` on origin/main, and verified on adp-production 2026-06-16.
 
-A self-managed agent is an agent you build and run yourself, registered with Redpanda ADP as an identity. You keep your runtime, framework, and hosting; ADP gives the agent a service account and a client credential, and the glossterm:AI Gateway[] becomes the agent's LLM and MCP endpoint. Because every model call and tool call flows through the gateway, ADP attributes spend, tokens, latency, and traces back to the agent and reconstructs each session as a transcript. ADP does not host or run your agent.
+A self-managed agent is an agent you build and run yourself, registered with Redpanda Agentic Data Plane as an identity. You keep your runtime, framework, and hosting; Agentic Data Plane gives the agent a service account and a client credential, and the glossterm:AI Gateway[] becomes the agent's LLM and MCP endpoint. Because every model call and tool call flows through the gateway, Agentic Data Plane attributes spend, tokens, latency, and traces back to the agent and reconstructs each session as a transcript. Agentic Data Plane does not host or run your agent.
 
 After reading this page, you will be able to:
 
@@ -26,14 +26,14 @@ The two agent types differ in who runs the agent and how it is defined. They coe
 |Question |Self-managed |Managed
 
 |Who runs the agent?
-|You do. ADP registers the agent and proxies its LLM and tool calls, but the runtime is yours.
+|You do. Agentic Data Plane registers the agent and proxies its LLM and tool calls, but the runtime is yours.
 |Redpanda deploys, runs, and observes the agent for you.
 
 |How is the agent defined?
 |It is already coded in your own framework, for example, LangChain, CrewAI, or a custom runtime.
 |You configure it declaratively through the create form, with no runtime code to maintain.
 
-|What connects it to ADP?
+|What connects it to Agentic Data Plane?
 |A client credential the agent exchanges for a gateway token. Your code points its LLM and MCP clients at the gateway.
 |The managed runtime wires the gateway for you.
 |===
@@ -43,15 +43,15 @@ For the declarative path, see xref:connect:create-agent.adoc[Create an agent].
 == Prerequisites
 
 * The `dataplane_adp_agent_create` permission, granted by the Writer built-in role. See xref:control:permissions-reference.adoc#agent-management-permissions[Agent management permissions].
-* At least one xref:gateway:configure-provider.adoc[LLM provider configured] in ADP. The agent calls the model through this provider.
-* If the agent calls tools: One or more xref:connect:mcp-overview.adoc[MCP servers] registered in ADP.
+* At least one xref:gateway:configure-provider.adoc[LLM provider configured] in Agentic Data Plane. The agent calls the model through this provider.
+* If the agent calls tools: One or more xref:connect:mcp-overview.adoc[MCP servers] registered in Agentic Data Plane.
 * An agent built in your own framework. The *Setup* tab generates ready-to-paste samples for ai-sdk-go, LangChain, CrewAI, ADK Java, ADK Go, ADK Python, Vercel AI SDK, and Mastra.
 
 == Register the agent
 
 . Open *Agents* in the sidebar.
 . Click *Create agent*.
-. Click *I host it myself*, so ADP registers the agent as an identity and leaves the runtime to you.
+. Click *I host it myself*, so Agentic Data Plane registers the agent as an identity and leaves the runtime to you.
 +
 image::shared:create-agent-runtime-choice.png[The runtime choice in the create-agent flow, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
 
@@ -66,7 +66,7 @@ The agent opens on its detail page with a *Self-managed* type badge. A self-mana
 
 == Issue a client secret
 
-ADP provisions a service account for the agent at registration. To authenticate the agent's calls, issue an OAuth 2.0 client secret on the agent's *Credentials* tab.
+Agentic Data Plane provisions a service account for the agent at registration. To authenticate the agent's calls, issue an OAuth 2.0 client secret on the agent's *Credentials* tab.
 
 . Open the agent's *Credentials* tab.
 +
@@ -77,7 +77,7 @@ image::self-managed-agent-credentials.png[The Credentials tab for a self-managed
 . Optionally enter a *Label* to identify the secret in the list and in audit logs, for example, `production`.
 . Click *Generate secret*.
 +
-ADP shows the plaintext *Client secret* one time.
+Agentic Data Plane shows the plaintext *Client secret* one time.
 +
 image::self-managed-agent-secret-created.png[The Secret created dialog showing a masked client secret, a Copy secret button, and a warning that the plaintext is shown only at creation]
 
@@ -85,7 +85,7 @@ image::self-managed-agent-secret-created.png[The Secret created dialog showing a
 
 [IMPORTANT]
 ====
-The client secret is shown only at creation. ADP stores a hash and cannot show the plaintext again. Each secret expires 90 days after creation. To rotate without downtime, create a new secret, deploy it, and then revoke the old one with *Revoke* on its row in the secrets list.
+The client secret is shown only at creation. Agentic Data Plane stores a hash and cannot show the plaintext again. Each secret expires 90 days after creation. To rotate without downtime, create a new secret, deploy it, and then revoke the old one with *Revoke* on its row in the secrets list.
 ====
 
 == Connect your agent to the AI Gateway
@@ -120,7 +120,7 @@ Point your SDK's base URL at the provider's gateway endpoint instead of the upst
 <gateway-base>/llm/v1/providers/<provider-name>
 ----
 
-In this URL, `<provider-name>` is the name of an LLM provider you configured in ADP. The gateway forwards each provider's native API to the upstream, so you keep using the provider's own SDK. The provider enforces a model allow-list: pick a model the provider serves, or the gateway rejects the call. For the full proxy contract and per-SDK setup, see xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].
+In this URL, `<provider-name>` is the name of an LLM provider you configured in Agentic Data Plane. The gateway forwards each provider's native API to the upstream, so you keep using the provider's own SDK. The provider enforces a model allow-list: pick a model the provider serves, or the gateway rejects the call. For the full proxy contract and per-SDK setup, see xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].
 
 === Route MCP tool calls through the gateway
 
@@ -131,7 +131,7 @@ Point your MCP client at each server's gateway URL, with the same bearer token:
 <gateway-base>/mcp/v1/<server-name>
 ----
 
-In this URL, `<server-name>` is the name of an MCP server registered in ADP. Routing tool calls through the gateway keeps them under the same identity, governance, and observability as the model calls.
+In this URL, `<server-name>` is the name of an MCP server registered in Agentic Data Plane. Routing tool calls through the gateway keeps them under the same identity, governance, and observability as the model calls.
 
 === Group calls into transcripts
 
@@ -1454,7 +1454,7 @@ NOTE: ADK Go ships only Gemini-shaped models, so the ADK Go sample works against
 
 == Observe the agent
 
-Because the agent's traffic flows through the gateway, ADP attributes its activity without any instrumentation in your code:
+Because the agent's traffic flows through the gateway, Agentic Data Plane attributes its activity without any instrumentation in your code:
 
 * *Cost & Usage*: Spend, tokens, and latency roll up to the agent. See them on the agent's *Cost & Usage* tab and in xref:control:budgets.adoc[budgets].
 * *Transcripts*: Each session that carries the conversation header appears on the agent's *Transcripts* tab. See xref:monitor:transcripts.adoc[See what your agent did].

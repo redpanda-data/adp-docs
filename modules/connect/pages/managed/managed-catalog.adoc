@@ -3,9 +3,10 @@
 :page-topic-type: reference
 :personas: agent_builder, platform_engineer
 
-Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in Redpanda ADP and pick the type from the marketplace picker. See xref:connect:create-server.adoc[Create an MCP Server] for the full create flow.
+Managed MCP servers are in-process implementations Redpanda hosts for you. Each type has a fixed set of glossterm:tool[,tools] and a type-specific configuration schema. To create one, open *MCP Servers > Create Server* in Redpanda Agentic Data Plane and pick the type from the marketplace picker. See xref:connect:create-server.adoc[Create an MCP Server] for the full create flow.
 
 // Source: `cloudv2` `apps/aigw/internal/mcp/managed/defaults.go` and managed type registration files on `origin/main`, verified at 6565ccaaa7, 2026-06-10. Gmail (google_gmail, ungated) added in this sweep. AWS S3 and SharePoint are alpha-gated in source but listed as beta by docs-team decision. neo4j and neo4j_aura are registered but alpha-gated and intentionally not listed.
+// Sentry (utility, ungated read-only MCP, per-user OAuth) added 2026-06-26 from cloudv2 f7121d02d (catalogue) + bcdaea997 (16 read tools); not alpha-gated in register_mcp.go, listed as beta.
 This catalog lists the managed MCP server types Redpanda registers by default, grouped by category.
 
 == Choosing managed vs. self-managed
@@ -18,7 +19,7 @@ This catalog lists the managed MCP server types Redpanda registers by default, g
 |You want Redpanda to host it.
 
 |Where do upstream credentials live?
-|You're happy storing them in the ADP secret store.
+|You're happy storing them in the Agentic Data Plane secret store.
 
 |Do you need custom tool logic?
 |The fixed tool set of the managed type covers your use case.
@@ -148,7 +149,7 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |
 
 |*Gmail* badge:beta[label=beta]
-|Read and send emails via Gmail with a service account or per-user OAuth.
+|Read and send emails through Gmail with a service account or per-user OAuth.
 |
 
 |*Google Calendar*
@@ -236,6 +237,10 @@ If any of these answers are "no," prefer xref:connect:register-remote.adoc[a sel
 |*Salesforce*
 |Query, create, update, and delete Salesforce CRM records using SOQL and the REST API, and run and inspect saved Salesforce reports.
 |xref:connect:managed/salesforce.adoc[Setup guide]
+
+|*Sentry* badge:beta[label=beta]
+|Read-only access to Sentry organizations, projects, issues, events, and releases for diagnosing and fixing errors.
+|xref:connect:managed/sentry.adoc[Setup guide]
 
 |*SharePoint* badge:beta[label=beta]
 |Access SharePoint sites, document libraries, lists, and files through the Microsoft Graph API.

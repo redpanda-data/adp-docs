@@ -32,19 +32,19 @@ Before you create the server, make sure you have:
 
 * A ServiceNow instance and its URL (for example, `https://acme.service-now.com`).
 * A ServiceNow service account, or an OAuth client, with the roles your workflows need (typically `itil` for incidents, `knowledge` for the knowledge base, and read access to `sys_dictionary` and `sys_choice` for schema discovery).
-* For User-OAuth mode: an glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* For User-OAuth mode: an glossterm:OAuth provider[,OAuth Provider] configured in Redpanda Agentic Data Plane. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 
 == Choose an authentication method
 
 The MCP authenticates to ServiceNow as a single principal; it does not impersonate end-users. When creating an incident, the agent passes the requesting user's `sys_id` in `caller_id`. Pick one of three methods:
 
-* Basic authentication (simplest): A dedicated ServiceNow user (for example, `svc_redpanda`) and its password. The username is plaintext; the password lives in the ADP secret store.
+* Basic authentication (simplest): A dedicated ServiceNow user (for example, `svc_redpanda`) and its password. The username is plaintext; the password lives in the Agentic Data Plane secret store.
 * OAuth client credentials (service account): An OAuth API client registered under *System OAuth > Application Registry*. ServiceNow's token endpoint is `https://<instance>.service-now.com/oauth_token.do`.
 * User OAuth: Per-user delegation through an OAuth Provider. ServiceNow's recommended integration model is the service account, so prefer Basic authentication or OAuth client credentials unless you specifically need per-user attribution.
 
 == Configure
 
-Create a new ServiceNow MCP server in ADP:
+Create a new ServiceNow MCP server in Agentic Data Plane:
 
 . Open *MCP Servers > Create Server*.
 . Pick `ServiceNow` from the marketplace picker.

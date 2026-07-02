@@ -1,6 +1,6 @@
 = Get Started
 :page-aliases: cloud-data-platform:ai-agents:agents/get-started-index.adoc
-:description: Stand up Redpanda ADP and ship your first agent.
+:description: Stand up Redpanda Agentic Data Plane and ship your first agent.
 :page-layout: index
 
-Redpanda's Agentic Data Plane (ADP) runs and governs AI agents on your streaming data. Get an overview of the platform, then follow a quickstart to stand up ADP and ship your first agent.
+Redpanda's Agentic Data Plane runs and governs AI agents on your streaming data. Get an overview of the platform, then follow a quickstart to stand up Agentic Data Plane and ship your first agent.

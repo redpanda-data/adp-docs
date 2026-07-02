@@ -1,5 +1,5 @@
 = How AI Gateway Works
-:description: AI Gateway is ADP's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
+:description: AI Gateway is Agentic Data Plane's managed proxy for LLM APIs. Create a provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint, and point your applications at a Redpanda-hosted URL with managed secrets, authentication, and observability.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer, security_compliance_lead
 :page-aliases: cloud-data-platform:ai-agents:ai-gateway/gateway-architecture.adoc, cloud-data-platform:ai-agents:ai-gateway/builders/discover-gateways.adoc, cloud-data-platform:ai-agents:ai-gateway/gateway-quickstart.adoc, cloud-data-platform:ai-agents:ai-gateway/what-is-ai-gateway.adoc, cloud-data-platform:ai-agents:ai-gateway/index.adoc, cloud-data-platform:ai-agents:ai-gateway/overview.adoc, cloud-data-platform:ai-agents:ai-gateway/ai-gateway.adoc, cloud-data-platform:ai-agents:ai-gateway/ai-gateway-overview.adoc, cloud-data-platform:ai-agents:ai-gateway/gateway-modes.adoc, cloud-data-platform:ai-agents:ai-gateway/migration-guide.adoc, cloud-data-platform:ai-agents:ai-gateway/cel-routing-cookbook.adoc, cloud-data-platform:ai-agents:ai-gateway/observability-logs.adoc, cloud-data-platform:ai-agents:ai-gateway/observability-metrics.adoc, cloud-data-platform:ai-agents:ai-gateway/quickstart-enhanced.adoc, cloud-data-platform:ai-agents:ai-gateway/admin/configure-ai-hub.adoc, cloud-data-platform:ai-agents:ai-gateway/admin/eject-to-custom-mode.adoc, cloud-data-platform:ai-agents:ai-gateway/admin/setup-guide.adoc, cloud-data-platform:ai-agents:ai-gateway/builders/use-ai-hub-gateway.adoc, cloud-data-platform:ai-agents:ai-gateway.adoc
@@ -7,7 +7,7 @@
 :learning-objective-2: Explain how LLM providers, secrets, and OIDC authentication fit together in AI Gateway
 :learning-objective-3: Identify use cases where AI Gateway fits, and use cases where it does not
 
-AI Gateway is Redpanda ADP's managed proxy for LLM APIs. Instead of giving every application a provider API key and letting it call the upstream directly, you create an *LLM provider* in ADP and point your applications at a Redpanda-hosted proxy URL. Redpanda handles the upstream credentials, forwards the request, and records usage. Your code continues to use the provider's native SDK.
+AI Gateway is Redpanda Agentic Data Plane's managed proxy for LLM APIs. Instead of giving every application a provider API key and letting it call the upstream directly, you create an *LLM provider* in Agentic Data Plane and point your applications at a Redpanda-hosted proxy URL. Redpanda handles the upstream credentials, forwards the request, and records usage. Your code continues to use the provider's native SDK.
 
 After reading this page, you will be able to:
 
@@ -45,17 +45,17 @@ Use the provider's own SDK: OpenAI, Anthropic, Google AI, AWS Bedrock, or any Op
 
 === Managed authentication
 
-Applications authenticate to ADP with OIDC service accounts instead of long-lived provider API keys. Service accounts use the same role and audit model as every other ADP resource, and mint short-lived tokens that are easy to revoke. For local command-line workflows, use xref:reference:rpk/rpk-cloud/rpk-cloud-login.adoc[`rpk cloud login`] to authenticate and xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] to talk to the gateway. CI and programmatic clients use the OIDC client-credentials grant directly. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].
+Applications authenticate to Agentic Data Plane with OIDC service accounts instead of long-lived provider API keys. Service accounts use the same role and audit model as every other Agentic Data Plane resource, and mint short-lived tokens that are easy to revoke. For local command-line workflows, use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] to sign in (`rpk ai auth login`) and talk to the gateway. CI and programmatic clients use the OIDC client-credentials grant directly. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].
 
 === Per-provider observability
 
-The provider's detail page in ADP records spend, request counts, and token counts for the last 7 days. The *Cost & Usage* page under *Governance* expands that view with time-series charts, provider and model grouping, date ranges, and filters for provider, model, cost type, token type, user, and agent.
+The provider's detail page in Agentic Data Plane records spend, request counts, and token counts for the last 7 days. The *Cost & Usage* page under *Governance* expands that view with time-series charts, provider and model grouping, date ranges, and filters for provider, model, cost type, token type, user, and agent.
 
 == What's in the UI
 
-In ADP (https://ai.redpanda.com[ai.redpanda.com^]) you'll find these areas:
+In Agentic Data Plane (https://ai.redpanda.com[ai.redpanda.com^]) you'll find these areas:
 
-* *Home*: The landing page after sign-in. A snapshot of items that need attention (such as a budget over its cap or a disabled resource, with quick actions to resolve them), recent request and spend activity, budget status, and counts of your ADP resources with quick links into each area.
+* *Home*: The landing page after sign-in. A snapshot of items that need attention (such as a budget over its cap or a disabled resource, with quick actions to resolve them), recent request and spend activity, budget status, and counts of your Agentic Data Plane resources with quick links into each area.
 * *Agents*: Create and manage Redpanda-hosted agents and registered self-managed agents.
 * *Guardrails*: Define content policies, word filters, and PII rules that apply to traffic on a Bedrock provider.
 * *LLM Providers*: Create, edit, enable, and delete providers. This is the home of AI Gateway configuration.
@@ -100,7 +100,7 @@ AI Gateway is a good fit when you want to:
 
 * Pull provider API keys out of application code and manage them centrally.
 * Keep LLM traffic inside your dataplane's VPC and your secrets out of application code.
-* Authenticate applications to LLMs using the same OIDC identity you use for other ADP resources.
+* Authenticate applications to LLMs using the same OIDC identity you use for other Agentic Data Plane resources.
 * Run a self-hosted OpenAI-compatible endpoint (vLLM, Ollama, LM Studio) alongside 1P providers behind a single management plane.
 * Separate operator and developer roles. Operators configure providers and credentials; developers point at proxy URLs.
 
@@ -112,11 +112,11 @@ It is not the right fit when you:
 [[out-of-scope]]
 == Limitations
 
-AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
+AI Gateway does not provide these capabilities. For current status, see the xref:reference:release-notes.adoc[Agentic Data Plane release notes].
 
 * *Multi-provider routing, failover, and retries.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
 * *Rate limits.* Requests-per-second, per-minute, or per-day caps are not available. To cap spend rather than request rate, use xref:control:budgets.adoc[budgets], which enforce a per-agent hard cap.
-* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in ADP.
+* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in Agentic Data Plane.
 
 == Next steps
 

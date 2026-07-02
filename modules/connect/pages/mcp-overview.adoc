@@ -1,9 +1,9 @@
 = How MCP Servers Work
 :page-aliases: cloud-data-platform:ai-agents:mcp/index.adoc, cloud-data-platform:ai-agents:mcp/overview.adoc, cloud-data-platform:ai-agents:mcp/remote/index.adoc, cloud-data-platform:ai-agents:mcp/remote/overview.adoc, cloud-data-platform:ai-agents:mcp/remote/concepts.adoc
-:description: Connect AI agents to your databases, APIs, and business systems through managed MCP servers Redpanda hosts for you, or self-managed servers you register with ADP.
+:description: Connect AI agents to your databases, APIs, and business systems through managed MCP servers Redpanda hosts for you, or self-managed servers you register with Agentic Data Plane.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Explain how AI agents connect to tools through MCP servers in ADP
+:learning-objective-1: Explain how AI agents connect to tools through MCP servers in Agentic Data Plane
 :learning-objective-2: Distinguish managed from self-managed MCP server backends and choose the right type for your use case
 :learning-objective-3: Identify key MCP capabilities including tool discovery, authentication, and code mode
 
@@ -58,9 +58,9 @@ The default catalog covers databases, cloud and productivity services, streaming
 |You manage
 |===
 
-== What's in Redpanda ADP
+== What's in Redpanda Agentic Data Plane
 
-ADP has these top-level areas:
+Agentic Data Plane has these top-level areas:
 
 * *LLM Providers*: OpenAI, Anthropic, Bedrock, Google AI, OpenAI-compatible endpoints. See xref:gateway:configure-provider.adoc[Configure your LLM provider].
 * *MCP Servers*: You are here. Both managed and self-managed servers live in this list.
@@ -68,14 +68,14 @@ ADP has these top-level areas:
 * *OAuth Clients*: External tools registered to request access tokens from the gateway. See xref:connect:remote-mcp-clients.adoc[Connect Remote MCP Clients].
 * *Connections*: Per-user OAuth connections for user-delegated MCP servers. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
-// TODO: screenshot of the sidebar on adp-production once standalone-ADP wording is final.
+// TODO: screenshot of the sidebar on adp-production once standalone-Agentic Data Plane wording is final.
 
 == Key capabilities
 
 * *Tool discovery*: After you create or register a server, Redpanda performs a live `tools/list` against it and populates the server's detail page so you can see which tools are visible to agents.
 * *Service-account and user-delegated authentication*: Pick a single shared upstream identity for all callers, or have each end-user authenticate against the upstream system with their own credentials.
 * *Code mode*: For a server with a large tool catalog, turn on code mode to expose just two tools, `search` and `execute`, so an agent can find tools by regex and run them through a JavaScript sandbox instead of loading every tool definition into its context. See xref:gateway:code-mode.adoc[Code Mode].
-* *Inspector*: Test each tool, resource, and prompt directly from ADP before pointing an agent at the server. See xref:connect:test-tools.adoc[Test a server's tools].
+* *Inspector*: Test each tool, resource, and prompt directly from Agentic Data Plane before pointing an agent at the server. See xref:connect:test-tools.adoc[Test a server's tools].
 
 == Next steps
 

@@ -1,6 +1,6 @@
 = Configure an LLM Provider
 :page-aliases: cloud-data-platform:ai-agents:ai-gateway/configure-provider.adoc, cloud-data-platform:ai-agents:ai-gateway/admin/secret-management.adoc
-:description: Create an LLM provider to proxy requests to OpenAI, Anthropic, Google AI, AWS Bedrock, or any OpenAI-compatible endpoint through Redpanda ADP.
+:description: Create an LLM provider to proxy requests to OpenAI, Anthropic, Google AI, AWS Bedrock, or any OpenAI-compatible endpoint through Redpanda Agentic Data Plane.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder
 // Legacy gateway-object-model pages (gateway-quickstart.adoc, gateway-architecture.adoc, admin/setup-guide.adoc, builders/discover-gateways.adoc) were archived to gateway/partials/archived-ai-gateway-pages.adoc and removed from the nav. aggregation.adoc was reframed and renamed to code-mode.adoc ("Code Mode"), a current page that was kept (old URL redirects via :page-aliases: on code-mode.adoc). Old cloud URLs redirect via :page-aliases: on gateway/overview.adoc.
@@ -21,7 +21,7 @@ After reading this page, you will be able to:
 * An API key (or AWS credentials for Bedrock) for the upstream provider you want to configure.
 * One or more secrets already created in your dataplane's secret store for the provider's credentials. Secret references must use `UPPER_SNAKE_CASE`. For example: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `AWS_ACCESS_KEY_ID`.
 +
-// TODO: xref the secrets-management page for ADP once confirmed.
+// TODO: xref the secrets-management page for Agentic Data Plane once confirmed.
 
 [[open-the-create-llm-provider-page]]
 == Open the Create LLM provider page
@@ -239,7 +239,7 @@ Enter rates in dollars per million tokens. Each field is independent:
 
 Cache writes with an unknown TTL always bill at the catalog rate; they have no override field.
 
-Use the reset control on a field to clear a single override, or clear every field to drop all overrides for the model. Overrides are scoped to this provider and model, and they change what ADP's cost reporting computes, not what the upstream provider actually charges you.
+Use the reset control on a field to clear a single override, or clear every field to drop all overrides for the model. Overrides are scoped to this provider and model, and they change what Agentic Data Plane's cost reporting computes, not what the upstream provider actually charges you.
 
 After you create the provider, its detail page has two tabs. The *Overview* tab carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `TOKENS`) with sparklines and a *View more* link on each card, the Connection card (provider type, status, authentication passthrough state, proxy URL, upstream base URL, and the API key secret reference), and the model list, where each model shows its input and output prices per million tokens and its spend from requests routed through this provider over the last 7 days. For analysis across providers, use the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
 
@@ -457,18 +457,18 @@ The spend chart footer summarizes the selected view by cost bucket, including to
 |Gemini uses the `x-goog-api-key` header, not `Authorization`. If you're seeing 401s on Gemini, check that the client is sending the correct header. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].
 
 |Provider list empty or 403
-|Confirm your account has the `dataplane_adp_llmprovider_*` permissions in ADP. The Reader built-in role is the minimum required to list providers. The Writer role is required to create one. See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions].
+|Confirm your account has the `dataplane_adp_llmprovider_*` permissions in Agentic Data Plane. The Reader built-in role is the minimum required to list providers. The Writer role is required to create one. See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions].
 |===
 
 // TODO: add screenshots of common error toasts once captured from the live environment.
 
 == Limitations
 
-AI Gateway does not provide these capabilities. For current status, consult the ADP release notes.
+AI Gateway does not provide these capabilities. For current status, see the xref:reference:release-notes.adoc[Agentic Data Plane release notes].
 
 * *Multi-provider routing, failover, and retries across providers.* A synthetic provider that fans requests to multiple upstreams is not part of AI Gateway.
 * *Rate limits.* Requests-per-second, per-minute, or per-day limits are not available. To cap spend rather than request rate, use xref:control:budgets.adoc[budgets], which enforce a per-agent hard cap.
-* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in ADP.
+* *Managed MCP aggregation at the gateway.* Register MCP tool servers separately under *MCP Servers* in Agentic Data Plane.
 
 == Next steps
 

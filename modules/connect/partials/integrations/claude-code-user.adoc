@@ -202,7 +202,7 @@ If deferred tool loading is enabled in your gateway, you'll see a search tool an
 
 Check that requests route through the gateway by monitoring the AI Gateway dashboard:
 
-. Sign in to ADP
+. Sign in to Agentic Data Plane
 . Navigate to your gateway's observability dashboard
 . Send a test request from Claude Code:
 +
@@ -292,7 +292,7 @@ curl -H "Authorization: Bearer YOUR_API_KEY" \
      <your-gateway-endpoint>/mcp
 ----
 +
-You should receive a valid MCP protocol response. If you get `401 Unauthorized`, regenerate your API key in ADP.
+You should receive a valid MCP protocol response. If you get `401 Unauthorized`, regenerate your API key in Agentic Data Plane.
 
 . **Gateway endpoint URL mismatch**
 +
@@ -335,7 +335,7 @@ Ensure requests use the `vendor/model_id` format (for example, `anthropic/claude
 
 . **Gateway geographic distance**
 +
-If your gateway is in a different region than you or the upstream provider, this adds network latency. Check gateway region in ADP.
+If your gateway is in a different region than you or the upstream provider, this adds network latency. Check gateway region in Agentic Data Plane.
 
 . **Provider pool failover**
 +

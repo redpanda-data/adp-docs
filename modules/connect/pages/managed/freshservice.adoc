@@ -30,7 +30,7 @@ Before you create the server, make sure you have:
 
 * A Freshservice instance and its domain (for example, `mycompany.freshservice.com`).
 * For API-key mode: the API key from your Freshservice profile (see <<Get Freshservice credentials>>).
-* For User-OAuth mode: a Freshservice OAuth app and an glossterm:OAuth provider[,OAuth Provider] configured in Redpanda ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* For User-OAuth mode: a Freshservice OAuth app and an glossterm:OAuth provider[,OAuth Provider] configured in Redpanda Agentic Data Plane. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 
 == Get Freshservice credentials
 
@@ -38,23 +38,23 @@ Before you create the server, make sure you have:
 
 . In Freshservice, open *Profile Settings*.
 . Copy the value from the *API Key* section.
-. Store the key in the ADP secret store under a name like `FRESHSERVICE_API_KEY`.
+. Store the key in the Agentic Data Plane secret store under a name like `FRESHSERVICE_API_KEY`.
 
 The MCP sends the key as the HTTP Basic authentication username with `X` as the password (`base64(<api-key>:X)`), which is the Freshservice convention. The API key inherits the permissions of the Freshservice user it belongs to, so use an account with the roles your workflows need (agent, asset, and change permissions).
 
 === Option 2: User OAuth
 
-For per-user authentication, register an OAuth app on Freshservice and a matching OAuth Provider in ADP:
+For per-user authentication, register an OAuth app on Freshservice and a matching OAuth Provider in Agentic Data Plane:
 
 . Register a Freshservice OAuth app at the Freshworks developer portal to obtain a client ID and client secret.
-. Register a matching OAuth Provider in ADP. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The `freshservice` preset pre-fills the authorization and token endpoints; ADP substitutes your Freshservice subdomain into the `{domain}` placeholders.
+. Register a matching OAuth Provider in Agentic Data Plane. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The `freshservice` preset pre-fills the authorization and token endpoints; Agentic Data Plane substitutes your Freshservice subdomain into the `{domain}` placeholders.
 . Each end-user authenticates once through the OAuth flow; tokens are stored in the gateway's token vault.
 
 The OAuth scopes are `read` and `write`. Drop `write` if the MCP only needs to read.
 
 == Configure
 
-Create a new Freshservice MCP server in ADP:
+Create a new Freshservice MCP server in Agentic Data Plane:
 
 . Open *MCP Servers > Create Server*.
 . Pick `Freshservice` from the marketplace picker.

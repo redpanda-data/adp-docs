@@ -1,16 +1,16 @@
 = Create an Agent
 :page-aliases: cloud-data-platform:ai-agents:agents/create-agent.adoc
-:description: Configure an ADP agent declaratively through the create form. No Python or JavaScript code required.
+:description: Configure an Agentic Data Plane agent declaratively through the create form. No Python or JavaScript code required.
 :page-topic-type: how-to
 :personas: agent_builder
-:learning-objective-1: Create an ADP agent through the create form
+:learning-objective-1: Create an Agentic Data Plane agent through the create form
 :learning-objective-2: Configure an LLM provider, model, and execution settings
 :learning-objective-3: Configure tools, subagents, and discovery metadata for an agent
 
 // Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (AgentCreate, ManagedAgentSpec) cross-referenced against `apps/adp-ui/src/routes/_authenticated/agents/create.page.tsx` on origin/main and a live adp-production screenshot, verified 2026-06-10.
 // This page follows the single-page create form with five sections (Details, Model, Behavior, Tools, Subagents) and a scroll-synced stepper. The old six-step Continue/Back wizard (Basics ... Review) is gone.
 
-Create a new glossterm:AI agent[] declaratively through Redpanda ADP. No Python or JavaScript code required. This guide walks through the create form section by section, then covers the post-create steps for discovery metadata and testing.
+Create a new glossterm:AI agent[] declaratively through Redpanda Agentic Data Plane. No Python or JavaScript code required. This guide walks through the create form section by section, then covers the post-create steps for discovery metadata and testing.
 
 After reading this page, you will be able to:
 
@@ -20,8 +20,8 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* At least one xref:gateway:configure-provider.adoc[LLM provider configured] in ADP.
-* Optional: One or more xref:connect:mcp-overview.adoc[MCP servers] registered in ADP if you want the agent to call tools.
+* At least one xref:gateway:configure-provider.adoc[LLM provider configured] in Agentic Data Plane.
+* Optional: One or more xref:connect:mcp-overview.adoc[MCP servers] registered in Agentic Data Plane if you want the agent to call tools.
 * A system prompt prepared in advance (see xref:connect:system-prompts.adoc[System prompt best practices]).
 
 == Open the create form
@@ -32,13 +32,13 @@ After reading this page, you will be able to:
 +
 image::shared:create-agent-runtime-choice.png[The runtime choice in the create-agent flow, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
 
-ADP configures the agent on a single page with five sections: Details, Model, Behavior, Tools, and Subagents. A stepper on the left tracks the sections and summarizes what you've set in each; click a step to jump to its section. Required fields are marked with a red asterisk.
+Agentic Data Plane configures the agent on a single page with five sections: Details, Model, Behavior, Tools, and Subagents. A stepper on the left tracks the sections and summarizes what you've set in each; click a step to jump to its section. Required fields are marked with a red asterisk.
 
 == Details
 
 In the *Details* section, configure the identity fields that appear in the agent registry list, transcripts, and audit logs.
 
-. Review the *Agent ID*. ADP pre-fills a generated ID and re-derives it from the display name as you type, using lowercase letters, numbers, and hyphens (up to 63 characters). Editing the ID directly stops the auto-derive. The ID is used in URLs and CLI commands and can't be changed after creation.
+. Review the *Agent ID*. Agentic Data Plane pre-fills a generated ID and re-derives it from the display name as you type, using lowercase letters, numbers, and hyphens (up to 63 characters). Editing the ID directly stops the auto-derive. The ID is used in URLs and CLI commands and can't be changed after creation.
 . Enter a *Display name*. Required. Shown in the agent registry list and detail header (for example, `Customer Support Agent`).
 . Optionally, add a *Description*. Up to 1024 characters.
 . Optionally, add *Tags* as key/value pairs to organize and filter agents in the registry.
@@ -47,7 +47,7 @@ In the *Details* section, configure the identity fields that appear in the agent
 
 In the *Model* section, select the glossterm:large language model (LLM)[] provider and model the agent uses to interpret user intent and decide which tools to invoke.
 
-. Select an *LLM provider*. Required. The dropdown lists every LLM provider configured in ADP (for example, `support-bedrock-v2`). To add a new provider, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
+. Select an *LLM provider*. Required. The dropdown lists every LLM provider configured in Agentic Data Plane (for example, `support-bedrock-v2`). To add a new provider, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
 . Select a *Model*. Required. The list is populated by the selected provider (for example, `us.anthropic.claude-haiku-4-5-20251001-v1:0`). If the provider has no allowlist, you can type the model identifier directly.
 +
 For model selection guidance, see xref:connect:architecture-patterns.adoc#model-selection-guide[Model selection guide].
@@ -114,7 +114,7 @@ For registering MCP servers, see xref:connect:create-server.adoc[Create an MCP s
 
 == Subagents
 
-In the *Subagents* section, optionally add internal specialists within the same agent. Each subagent has its own name, description, system prompt, and MCP tools, but all subagents share the parent agent's provider, model, and execution settings.
+In the *Subagents* section, optionally add internal specialists within the same agent. Each subagent has its own name, description, system prompt, and MCP tools. By default, a subagent inherits the parent agent's model and LLM provider, but you can override either or both per subagent. All subagents share the parent agent's provider credentials, gateway endpoint, and execution settings.
 
 . To add a specialist, click *Add subagent* and configure it:
 +
@@ -122,6 +122,8 @@ In the *Subagents* section, optionally add internal specialists within the same 
 * *Description*: Optional. Up to 1024 characters.
 * *System prompt*: Up to 16,384 characters. Domain-specific instructions for what the subagent does.
 * *MCP tools*: Select the tools this subagent can access.
+* *LLM provider*: Optional. Route this subagent through a different xref:gateway:configure-provider.adoc[LLM provider] than the parent. Leave it blank to inherit the parent's provider.
+* *Model*: Optional. Override the parent's model with a model the subagent's effective provider serves. Leave it blank to inherit the parent's model. Required when you set an *LLM provider*: model names are provider-specific, so a provider switch needs its own model.
 
 . To keep the agent flat, leave the list empty.
 
@@ -135,21 +137,21 @@ For multi-agent design patterns, see xref:connect:architecture-patterns.adoc[Age
 . Click *Create agent*. If a required field is missing, a "Cannot create agent" error lists what to fix.
 . Wait for the agent to reach the *Running* state.
 
-ADP creates the agent's service account automatically when you create the agent. The default name uses the pattern `cluster-<cluster-id>-agent-<agent-name>-sa`, and ADP applies default permissions. For details and how to manage service accounts, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
+Agentic Data Plane creates the agent's service account automatically when you create the agent. The default name uses the pattern `cluster-<cluster-id>-agent-<agent-name>-sa`, and Agentic Data Plane applies default permissions. For details and how to manage service accounts, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
 
-When the agent is running, ADP shows its A2A endpoint URL on the *Connect* tab, along with authentication guidance and ready-to-paste code examples for calling the agent with the official A2A client SDKs.
+When the agent is running, Agentic Data Plane shows its A2A endpoint URL on the *Connect* tab, along with authentication guidance and ready-to-paste code examples for calling the agent with the official A2A client SDKs.
 
 You can use this URL to call the agent programmatically or integrate it with external systems. See xref:connect:integration-overview.adoc[].
 
 == Issue agent credentials
 
-Every agent has a hidden service account in ADP that scopes the calls the agent makes to MCP servers and the Redpanda broker. To call the agent from an external system as that service account, issue an OAuth 2.0 client credential on the agent's *Credentials* tab.
+Every agent has a hidden service account in Agentic Data Plane that scopes the calls the agent makes to MCP servers and the Redpanda broker. To call the agent from an external system as that service account, issue an OAuth 2.0 client credential on the agent's *Credentials* tab.
 
 The *Setup* tab on the agent detail page shows the equivalent OAuth client configuration (token endpoint, scopes, sample request) after a credential exists. The sample requests target a specific LLM provider's gateway endpoint: pick a provider on the tab and the examples fill in its endpoint URL.
 
 [IMPORTANT]
 ====
-The `client_secret` value is plaintext and returned only at create time. ADP cannot retrieve it again. Capture the value into your secret store before you leave the dialog. To rotate, create a new credential, update the consumer, then delete the old one.
+The `client_secret` value is plaintext and returned only at create time. Agentic Data Plane cannot retrieve it again. Capture the value into your secret store before you leave the dialog. To rotate, create a new credential, update the consumer, then delete the old one.
 ====
 
 . Open the agent and click the *Credentials* tab.
@@ -158,7 +160,7 @@ The `client_secret` value is plaintext and returned only at create time. ADP can
 . Optionally pick an Expires at date. Leave it unset for a non-expiring credential.
 . Click *Create*.
 +
-ADP shows a one-time dialog containing:
+Agentic Data Plane shows a one-time dialog containing:
 +
 * *Client ID*: An OAuth 2.0 client identifier in the form `serviceaccounts/<agent-name>`. Stable across credentials and rotations: every credential on the same agent carries the same value.
 * *Client secret*: The plaintext OAuth client secret, shown only at create time.

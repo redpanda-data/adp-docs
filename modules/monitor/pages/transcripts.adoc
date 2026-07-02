@@ -1,6 +1,6 @@
 = See What Your Agent Did
 :page-aliases: cloud-data-platform:ai-agents:observability/transcripts.adoc, cloud-data-platform:ai-agents:observability/view-transcripts.adoc
-:description: Open a transcript in ADP, read the conversation turn by turn, and investigate errors, costs, and performance.
+:description: Open a transcript in Agentic Data Plane, read the conversation turn by turn, and investigate errors, costs, and performance.
 :page-topic-type: how-to
 :personas: agent_builder, domain_evaluator, platform_engineer, security_compliance_lead
 :learning-objective-1: Open a transcript from an agent's Transcripts tab
@@ -126,7 +126,7 @@ The transcript shows token usage per turn. For spend analysis across agents, mod
 A transcript stays in `RUNNING` until the root span closes. Common causes:
 
 * The agent or MCP server is still executing (this is normal: Wait, or open a newer transcript).
-* The root span never flushed because the process was killed mid-execution. Expect this to resolve once the OTLP ingestion lag clears; if it doesn't after several minutes, the trace is likely orphaned.
+* The root span never flushed because the process was killed mid-execution. Expect this to resolve after the OTLP ingestion lag clears; if it doesn't after several minutes, the trace is likely orphaned.
 
 === USD cost shows 0
 

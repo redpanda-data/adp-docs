@@ -1,8 +1,8 @@
 * xref:home:index.adoc[Overview]
 
 * xref:get-started:index.adoc[Get Started]
-** xref:get-started:adp-overview.adoc[Redpanda ADP Overview]
-** xref:get-started:adp-quickstart.adoc[ADP Quickstart]
+** xref:get-started:adp-overview.adoc[Redpanda Agentic Data Plane Overview]
+** xref:get-started:adp-quickstart.adoc[Agentic Data Plane Quickstart]
 
 * xref:connect:agents.adoc[Build Agents]
 ** xref:connect:agents-overview.adoc[How Agents Work]
@@ -11,6 +11,7 @@
 ** xref:connect:architecture-patterns.adoc[Choose an Agent Architecture]
 ** xref:connect:system-prompts.adoc[Write Effective System Prompts]
 ** xref:connect:create-agent.adoc[Create an Agent]
+** xref:connect:draw-charts.adoc[Draw Charts from an Agent]
 ** xref:connect:self-managed-agents.adoc[Set Up a Self-Managed Agent]
 ** xref:connect:triggers/overview.adoc[Trigger Agents from External Channels]
 *** xref:connect:triggers/microsoft-teams.adoc[Connect an Agent to Microsoft Teams]
@@ -30,6 +31,7 @@
 **** xref:connect:managed/openapi.adoc[OpenAPI]
 **** xref:connect:managed/ramp.adoc[Ramp]
 **** xref:connect:managed/salesforce.adoc[Salesforce]
+**** xref:connect:managed/sentry.adoc[Sentry]
 **** xref:connect:managed/servicenow.adoc[ServiceNow]
 **** xref:connect:managed/sharepoint.adoc[SharePoint]
 **** xref:connect:managed/slack.adoc[Slack]
@@ -48,7 +50,7 @@
 ** xref:connect:integrations.adoc[Integrate with Your Stack]
 *** xref:connect:integration-overview.adoc[Choose an Integration Pattern]
 *** xref:connect:pipeline-integration-patterns.adoc[Integrate with Redpanda Pipelines]
-*** xref:connect:claude-code.adoc[Use Claude Code with ADP]
+*** xref:connect:coding-agents.adoc[Run Claude Code and Codex]
 
 * xref:monitor:index.adoc[Monitor & Debug]
 ** xref:monitor:concepts.adoc[How Observability Works]
@@ -72,6 +74,9 @@
 ** xref:gateway:configure-provider.adoc[Configure an LLM Provider]
 *** xref:gateway:bedrock-setup.adoc[Set Up AWS Bedrock as an LLM Provider]
 ** xref:gateway:connect-agent.adoc[Connect Your App to AI Gateway]
+
+* xref:cli:index.adoc[Use the Agentic Data Plane CLI]
+** xref:cli:gitops.adoc[Manage Resources with GitOps]
 
 * xref:reference:index.adoc[Reference]
 ** xref:reference:rpk-install.adoc[Install or Update rpk]
@@ -158,3 +163,4 @@
 *** xref:reference:rpk/rpk-profile/rpk-profile.adoc[rpk profile]
 *** xref:reference:rpk/rpk-x-options.adoc[rpk -X]
 ** xref:reference:glossary.adoc[Glossary]
+** xref:reference:release-notes.adoc[Release Notes]

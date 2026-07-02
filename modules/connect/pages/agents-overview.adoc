@@ -1,13 +1,13 @@
 = How Agents Work
 :page-aliases: cloud-data-platform:ai-agents:agents/overview.adoc, connect:tutorials/index.adoc, connect:tutorials/customer-support-agent.adoc, connect:tutorials/transaction-dispute-resolution.adoc, cloud-data-platform:ai-agents:agents/tutorials/customer-support-agent.adoc, cloud-data-platform:ai-agents:agents/tutorials/transaction-dispute-resolution.adoc
-:description: Learn how ADP agents use a declarative approach backed by a broad library of prebuilt tools and integrations to replace custom agent code.
+:description: Learn how Agentic Data Plane agents use a declarative approach backed by a broad library of prebuilt tools and integrations to replace custom agent code.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Describe what AI agents are and their essential components
-:learning-objective-2: Explain how ADP streaming infrastructure benefits agent architectures
-:learning-objective-3: Identify use cases where ADP agents provide value
+:learning-objective-2: Explain how Agentic Data Plane streaming infrastructure benefits agent architectures
+:learning-objective-3: Identify use cases where Agentic Data Plane agents provide value
 
-Redpanda ADP AI agents take a declarative approach: instead of writing Python or JavaScript agent code, you declare the behavior you want by selecting an LLM, writing a system prompt, and attaching prebuilt tools and integrations. The framework handles execution, tool orchestration, and scaling, backed by real-time streaming infrastructure and built-in filtering and data enrichment.
+Redpanda Agentic Data Plane AI agents take a declarative approach: instead of writing Python or JavaScript agent code, you declare the behavior you want by selecting an LLM, writing a system prompt, and attaching prebuilt tools and integrations. The framework handles execution, tool orchestration, and scaling, backed by real-time streaming infrastructure and built-in filtering and data enrichment.
 
 After reading this page, you will be able to:
 
@@ -17,11 +17,11 @@ After reading this page, you will be able to:
 
 == What is an AI agent?
 
-An AI agent is a system built around a glossterm:large language model (LLM)[] that interprets user intent, selects the right tools, and chains multiple steps into a workflow. In ADP, agents are declarative: you configure the agent's role, constraints, and available tools rather than writing imperative agent code. Agents reach tools through MCP servers, and Redpanda Connect provides the real-time streaming and data-processing capabilities the framework orchestrates for you.
+An AI agent is a system built around a glossterm:large language model (LLM)[] that interprets user intent, selects the right tools, and chains multiple steps into a workflow. In Agentic Data Plane, agents are declarative: you configure the agent's role, constraints, and available tools rather than writing imperative agent code. Agents reach tools through MCP servers, and Redpanda Connect provides the real-time streaming and data-processing capabilities the framework orchestrates for you.
 
 == Declarative agent components
 
-When you create an agent, you configure the components through ADP rather than writing code:
+When you create an agent, you configure the components through Agentic Data Plane rather than writing code:
 
 * *System prompt*: Defines the agent's role, responsibilities, and constraints
 * *LLM*: Interprets user intent and decides which tools to invoke
@@ -36,7 +36,7 @@ For a deeper understanding of how agents execute, manage context, and maintain s
 
 == Key benefits
 
-ADP agents are designed to reduce the infrastructure and integration work of building production AI systems.
+Agentic Data Plane agents are designed to reduce the infrastructure and integration work of building production AI systems.
 
 * Declarative configuration: Configure agent behavior instead of coding it, with access to a broad library of prebuilt tools and integrations for data sources, APIs, and services.
 * Real-time streaming data: Agents access live events instead of batch snapshots.
@@ -47,7 +47,7 @@ ADP agents are designed to reduce the infrastructure and integration work of bui
 
 == Use cases
 
-ADP AI agents unlock new capabilities across multiple fields.
+Agentic Data Plane AI agents unlock new capabilities across multiple fields.
 
 === For AI agent developers
 
@@ -63,7 +63,7 @@ Process every event with AI reasoning at scale. Invoke agents automatically from
 
 == Limitations
 
-* MCP servers must be hosted in ADP
+* MCP servers must be hosted in Agentic Data Plane
 * Cross-agent calling between separate agents is not supported. Use internal subagents for delegation within a single agent.
 
 == Next steps

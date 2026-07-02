@@ -1,0 +1,266 @@
+= Sentry Managed MCP Server
+:page-beta: true
+:description: Give an agent read-only access to Sentry organizations, projects, issues, events, and releases through per-user OAuth, so it can read a stack trace, scope an error's impact, and localize the fix.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Configure the Sentry managed MCP server with per-user OAuth
+:learning-objective-2: Confine the server to a single Sentry organization (optional)
+:learning-objective-3: Diagnose an issue from the Inspector or an agent, from discovery through to the suspect commit
+
+The *Sentry* managed MCP server gives agents read-only access to a Sentry instance: discover organizations and projects, list and read issues, read the events (with stack traces) behind them, scope an error's impact across releases and tags, and surface the commits most likely responsible. The intended use is an agent that reads a Sentry issue and its stack trace to diagnose a bug, then fixes it in the codebase.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== What this MCP server does
+
+Wraps the Sentry REST API and exposes read-only tools grouped by the diagnose-and-fix flow: discover organizations and projects, read the error and its stack trace, scope the impact across tags and releases, and localize the fix to a suspect commit.
+
+Authentication is per-user OAuth only. Every tool call runs as the authenticated user against a Sentry OAuth token resolved from the gateway's glossterm:token vault[], so there is no shared service account and each action is attributed to the calling end-user. The server requests only read scopes (`org:read`, `project:read`, `event:read`, `project:releases`).
+
+The server is read-only by design: resolving or ignoring issues, commenting, and any other write operation is deliberately absent. Use the Sentry UI or its API directly for those.
+
+[NOTE]
+====
+Tool output is developer-facing observability data and is not guaranteed to be free of personally identifiable information (PII). The curated event shape omits Sentry's `user` and `request` context, but event `tags` are forwarded verbatim and can carry user-supplied values (for example `user`, `url`, `server_name`, or custom tags), and suspect-commit and release-commit output includes commit author names and email addresses.
+====
+
+This MCP server connects to `sentry.io` only. Self-hosted Sentry is not supported.
+
+== Prerequisites
+
+Before you create the server, make sure you have:
+
+* A Sentry account on `sentry.io` with access to the organizations and projects you want the agent to read.
+* A Sentry OAuth application and a matching glossterm:OAuth provider[,OAuth Provider] configured in Redpanda Agentic Data Plane. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+
+== Get Sentry credentials
+
+Sentry MCP uses per-user OAuth, so you register an OAuth application on Sentry and a matching OAuth Provider in Agentic Data Plane:
+
+. In Sentry, go to *Settings > Account > API > Applications* and create a new application. Set the authorized redirect URI to your Agentic Data Plane gateway's OAuth callback.
+. Copy the Client ID and Client Secret, and store the client secret in the Agentic Data Plane secret store.
+. Register a matching OAuth Provider in Agentic Data Plane. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. Use Sentry's authorize endpoint (`https://sentry.io/oauth/authorize/`) and token endpoint (`https://sentry.io/oauth/token/`).
+. Each end-user authenticates once through the OAuth flow; tokens are stored in the gateway's token vault.
+
+Required scopes: `org:read`, `project:read`, `event:read`, and `project:releases` cover all tools. `org:read` lists organizations and projects and resolves event IDs; `project:read` lists issues and reads project events and suspect commits; `event:read` reads issue events, tags, and hashes (the stack trace); and `project:releases` reads releases and their commits. All scopes are read-only.
+
+== Configure
+
+Create a new Sentry MCP server in Agentic Data Plane:
+
+. Open *MCP Servers > Create Server*.
+. Pick `Sentry` from the marketplace picker.
+. Fill in identity fields (`name`, `description`).
+. In the Sentry configuration form:
++
+[cols="1,3"]
+|===
+|Field |Notes
+
+|`organization_slug`
+|Optional. Confines the server to a single Sentry organization. When set, every tool that takes an `organization_slug` is forced to this value and a request targeting a different organization is rejected; `list_organizations` stays unrestricted so it can still be used for discovery. Leave empty for unrestricted access, bounded only by the OAuth token. The slug is the URL segment at `sentry.io/organizations/<slug>`, not the display name.
+
+|`user_oauth`
+|`provider_name` (the Sentry OAuth Provider you configured) and the minimum required scopes (`org:read`, `project:read`, `event:read`, `project:releases` covers all tools).
+|===
++
+. Click *Create*.
+
+// TODO: confirm the exact UI field labels after an authenticated UI walkthrough; the form may not use the proto field names shown above.
+
+=== Configure from the CLI
+
+Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] to create the server with a managed config. Set the OAuth provider and scopes inside the `--managed-config` JSON. Per-user OAuth is the only supported authentication method.
+
+[tabs]
+======
+Unrestricted::
++
+The caller supplies the organization on each call, bounded only by the OAuth token's access.
++
+[source,bash]
+----
+rpk ai mcp create --name acme-sentry --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.sentry.v1.SentryMCPConfig",
+  "user_oauth": {
+    "provider_name": "sentry-prod",
+    "required_scopes": ["org:read", "project:read", "event:read", "project:releases"]
+  }
+}'
+----
+
+Confined to one organization::
++
+Pin the server to a single organization with `organization_slug`.
++
+[source,bash]
+----
+rpk ai mcp create --name acme-sentry --managed-config '{
+  "@type": "type.googleapis.com/redpanda.mcps.sentry.v1.SentryMCPConfig",
+  "organization_slug": "my-org",
+  "user_oauth": {
+    "provider_name": "sentry-prod",
+    "required_scopes": ["org:read", "project:read", "event:read", "project:releases"]
+  }
+}'
+----
+======
+
+== Tools
+
+The Sentry MCP exposes read-only tools, grouped by the diagnose-and-fix flow:
+
+[cols="1,2"]
+|===
+|Tool |Description
+
+|`list_organizations`
+|List the Sentry organizations the token can access. Used for discovery; never restricted by `organization_slug`.
+
+|`list_projects`
+|List the projects within an organization.
+
+|`list_issues`
+|List a project's issues, filtered by a Sentry search query (for example, `is:unresolved`).
+
+|`get_issue`
+|Fetch issue detail by numeric ID or short ID (for example, `WEB-1`).
+
+|`get_issue_latest_event`
+|Return the most recent event for an issue, including its exception stack trace.
+
+|`list_issue_events`
+|List the individual occurrences of an issue (compare a failing against a passing event).
+
+|`get_issue_event`
+|Return one event of an issue with a full stack trace, by ID or the alias `latest`, `oldest`, or `recommended` (`oldest` is the regression boundary).
+
+|`get_event`
+|Fetch an event by ID within a project, plus the issue ID it belongs to.
+
+|`resolve_event_id`
+|Resolve a bare event ID to its issue and project at organization scope.
+
+|`get_issue_tag`
+|Return the distribution of one tag (for example, release, environment, browser, or OS) for an issue.
+
+|`list_issue_tag_values`
+|List the full set of values behind a tag's capped top values.
+
+|`list_issue_hashes`
+|List the issue's grouping hashes. More than one hash means several crash signatures.
+
+|`get_event_committers`
+|Return the commits and authors Sentry deems most likely responsible (suspect commits). Requires a source-code integration; returns empty when none is configured.
+
+|`list_releases`
+|List an organization's releases. Line an issue's first-seen date up against a deploy.
+
+|`get_release`
+|Return a single release's detail by version.
+
+|`list_release_commits`
+|List the commits that shipped in a release (the candidate changes behind a regression).
+|===
+
+== Tool examples
+
+List the organizations you can read:
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-sentry \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": { "name": "list_organizations", "arguments": {} }
+  }'
+----
+
+Replace `<cluster-id>` with your cluster ID and `$TOKEN` with a gateway access token.
+
+Find unresolved issues in a project:
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-sentry \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/call",
+    "params": {
+      "name": "list_issues",
+      "arguments": {
+        "organization_slug": "my-org",
+        "project_slug": "web",
+        "query": "is:unresolved",
+        "stats_period": "24h"
+      }
+    }
+  }'
+----
+
+Read an issue's latest event and stack trace. This is the diagnostic step: the latest event carries the exception stack trace the agent reasons over.
+
+[source,bash]
+----
+curl -s https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/acme-sentry \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 3,
+    "method": "tools/call",
+    "params": {
+      "name": "get_issue_latest_event",
+      "arguments": {
+        "organization_slug": "my-org",
+        "issue_id": "WEB-1"
+      }
+    }
+  }'
+----
+
+== Troubleshooting
+
+Common symptoms and fixes:
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|`OAuthConnectionRequired`
+|First call from a user with no stored token. The user completes Sentry's OAuth consent flow, the token lands in the vault, and subsequent calls reuse it. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+
+|`scope_upgrade_required`
+|The server's `required_scopes` was extended after users had already consented. Users re-consent with the higher scope.
+
+|A request is rejected naming two organization slugs
+|The server is confined with `organization_slug` and the call targeted a different organization. Target the pinned organization, or use an unrestricted server.
+
+|`get_event_committers` returns empty
+|Sentry has no source-code integration configured for the project, so it cannot attribute suspect commits. Configure a source-code integration in Sentry.
+|===
+
+== Limitations
+
+This page does not cover:
+
+* *Write operations*: Resolving or ignoring issues, commenting, and managing alerts are deliberately absent. The server is read-only.
+* *Self-hosted Sentry*: The server connects to `sentry.io` only.
+
+== Next steps
+
+* xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
+* xref:connect:user-delegated-oauth.adoc[User-delegated OAuth]
+* xref:connect:create-server.adoc[Create an MCP Server]
+* xref:connect:test-tools.adoc[Test an MCP Server's Tools with the Inspector]
