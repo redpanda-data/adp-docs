@@ -114,7 +114,7 @@ For registering MCP servers, see xref:connect:create-server.adoc[Create an MCP s
 
 == Subagents
 
-In the *Subagents* section, optionally add internal specialists within the same agent. Each subagent has its own name, description, system prompt, and MCP tools, but all subagents share the parent agent's provider, model, and execution settings.
+In the *Subagents* section, optionally add internal specialists within the same agent. Each subagent has its own name, description, system prompt, and MCP tools. By default, a subagent inherits the parent agent's model and LLM provider, but you can override either or both per subagent. All subagents share the parent agent's provider credentials, gateway endpoint, and execution settings.
 
 . To add a specialist, click *Add subagent* and configure it:
 +
@@ -122,6 +122,8 @@ In the *Subagents* section, optionally add internal specialists within the same 
 * *Description*: Optional. Up to 1024 characters.
 * *System prompt*: Up to 16,384 characters. Domain-specific instructions for what the subagent does.
 * *MCP tools*: Select the tools this subagent can access.
+* *LLM provider*: Optional. Route this subagent through a different xref:gateway:configure-provider.adoc[LLM provider] than the parent. Leave it blank to inherit the parent's provider.
+* *Model*: Optional. Override the parent's model with a model the subagent's effective provider serves. Leave it blank to inherit the parent's model. Required when you set an *LLM provider*: model names are provider-specific, so a provider switch needs its own model.
 
 . To keep the agent flat, leave the list empty.
 

@@ -42,7 +42,7 @@ Match agent architecture to domain structure:
 | Multiple business areas, shared infrastructure
 | Root agent with internal subagents
 | Separation of concerns, easier debugging, shared resources reduce cost
-| Single point of failure, all subagents constrained to same model and budget
+| Single point of failure, subagents share the parent's credentials and budget
 
 | Cross-organization workflows, independent evolution
 | External agent-to-agent
@@ -55,7 +55,7 @@ Every architecture pattern involves trade-offs.
 
 - *Latency versus isolation:* Internal subagents have lower latency because they avoid network calls, but they share a failure domain. External agents have higher latency due to network overhead, but they provide independent failure isolation.
 
-- *Shared state versus independence:* Single deployments share model, budget, and policies but offer less flexibility. Multiple deployments allow independent scaling and updates but add coordination complexity.
+- *Shared state versus independence:* Single deployments share provider credentials, budget, and policies but offer less flexibility. Multiple deployments allow independent scaling and updates but add coordination complexity.
 
 - *Complexity now versus complexity later:* Starting simple means faster initial development but may require refactoring. Starting structured requires more upfront work but makes the system easier to extend.
 
@@ -87,7 +87,7 @@ A multi-agent architecture uses a root agent that delegates to specialized inter
 
 This pattern works for complex domains spanning multiple areas, multiple data sources with different access patterns, and tasks requiring specialized expertise within one deployment.
 
-NOTE: Subagents in Agentic Data Plane are internal specialists within a single agent. They share the parent agent's model, budget, and policies, but each can have different names, descriptions, system prompts, and MCP tools.
+NOTE: Subagents in Agentic Data Plane are internal specialists within a single agent. They share the parent agent's provider credentials, budget, and policies, but each can have different names, descriptions, system prompts, and MCP tools. By default, a subagent uses the parent's model and LLM provider, but each subagent can override either or both.
 
 === How it works
 
@@ -95,11 +95,11 @@ The root agent interprets user requests and routes them to appropriate subagents
 
 Each subagent owns a specific business area with focused expertise. Subagents access only the MCP tools they need.
 
-All subagents share the same LLM model and budget from the parent agent.
+By default, subagents use the parent agent's model and LLM provider, but each subagent can override either or both. All subagents share the parent agent's provider credentials and budget.
 
 === Example: E-commerce platform
 
-A typical e-commerce agent includes a root agent that interprets requests and delegates to specialists, an order subagent for processing, history, and status updates, an inventory subagent for stock checks and warehouse operations, and a customer subagent for profiles, preferences, and history. All subagents share the same model but have different system prompts and tool access.
+A typical e-commerce agent includes a root agent that interprets requests and delegates to specialists, an order subagent for processing, history, and status updates, an inventory subagent for stock checks and warehouse operations, and a customer subagent for profiles, preferences, and history. By default these subagents use the parent's model, but each has its own system prompt and tool access, and can override the model or LLM provider when a specialist needs one.
 
 === Why choose internal subagents
 
