@@ -1,13 +1,13 @@
 = Run Claude Code and Codex through AI Gateway
 :page-aliases: claude-code.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-admin.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-user.adoc
-:description: Launch Claude Code or Codex with rpk ai run, routing their model traffic through a managed or enterprise-passthrough Agentic Data Plane provider.
+:description: Launch Claude Code or Codex with rpk ai run, routing their model traffic through a managed, enterprise-passthrough, or AWS Bedrock Agentic Data Plane provider.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
-:learning-objective-1: Launch Claude Code through an Agentic Data Plane Anthropic provider with rpk ai run claude
+:learning-objective-1: Launch Claude Code through an Agentic Data Plane Anthropic or AWS Bedrock provider with rpk ai run claude
 :learning-objective-2: Launch Codex through an Agentic Data Plane OpenAI provider with rpk ai run codex
 :learning-objective-3: Choose between a managed (API-key) provider and an enterprise passthrough (subscription-seat) provider for Claude Code
 
-// Source: proto/public/cloud/redpanda/api/adp/v1alpha1/llm_provider.proto (anthropic_config.authorization_passthrough, api_key_ref); cloudv2 apps/rpai/internal/cmd/run/ and `rpk ai run <tool> --help`; apps/adp-ui/src/components/llm-providers. Verified against origin/main and adp-production on 2026-07-01.
+// Source: proto/public/cloud/redpanda/api/adp/v1alpha1/llm_provider.proto (anthropic_config.authorization_passthrough, api_key_ref); cloudv2 apps/rpai/internal/cmd/run/ and `rpk ai run <tool> --help`; apps/adp-ui/src/components/llm-providers. Verified against origin/main and adp-production on 2026-07-01. Bedrock support: cloudv2 #27633 (merged 2026-07-02), verified end-to-end on adp-production in that PR.
 
 Claude Code and Codex are command-line coding agents. The xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] command launches either one with its model traffic routed through an AI Gateway provider, reusing your `rpk ai` sign-in so you don't set base URLs or mint tokens by hand. Your team's coding-agent calls then flow through Agentic Data Plane: provider credentials stay in the dataplane secret store, usage rolls up on the *Cost & Usage* page, and no token is written to disk.
 
@@ -20,12 +20,12 @@ After completing this guide, you will be able to:
 == Prerequisites
 
 * The `rpk ai` CLI, installed and signed in to the Agentic Data Plane environment whose gateway you want to target. See xref:cli:index.adoc[Use the Agentic Data Plane CLI]. The `rpk ai run` command uses the credentials from `rpk ai auth login`, not a `rpk cloud` session.
-* An enabled glossterm:large language model (LLM)[] provider of the matching type. Claude Code needs an Anthropic provider; Codex needs an OpenAI or OpenAI-compatible provider. To create one, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
+* An enabled glossterm:large language model (LLM)[] provider of the matching type. Claude Code needs an Anthropic or AWS Bedrock provider; Codex needs an OpenAI or OpenAI-compatible provider. To create one, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
 * The coding agent installed on your workstation:
 +
 ** Claude Code. See https://code.claude.com/docs[Anthropic's Claude Code documentation].
 ** Codex. See https://github.com/openai/codex[OpenAI's Codex documentation]. The `rpk ai run codex` command needs a recent Codex version and tells you when yours is too old.
-* A Redpanda service account or user with permission to invoke the provider (`dataplane_adp_llmprovider_invoke`). See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions]. To let `rpk ai run claude` read the provider and auto-detect its Anthropic auth mode, also grant `dataplane_adp_llmprovider_get`; without read access, pass `--passthrough` for a passthrough provider.
+* A Redpanda service account or user with permission to invoke the provider (`dataplane_adp_llmprovider_invoke`). See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions]. To let `rpk ai run claude` read the provider and auto-detect its type and auth mode, also grant `dataplane_adp_llmprovider_get`; without read access, pass `--passthrough` for a passthrough provider or `--bedrock` for a Bedrock provider.
 
 [NOTE]
 ====
@@ -43,7 +43,7 @@ rpk ai run claude -L <anthropic-provider> -m <model>
 
 In this command, `<anthropic-provider>` is the name of your Anthropic provider (the segment after `/providers/` in its *Proxy URL*), and `<model>` is a model the provider allows. The flags work as follows:
 
-* `-L`, `--llmprovider`: The provider to route through. Required, and it must be an Anthropic provider.
+* `-L`, `--llmprovider`: The provider to route through. Required, and it must be an Anthropic or Bedrock provider.
 * `-m`, `--model`: The model to use. Omit it to let Claude Code pick its default.
 
 Flags before a literal `--` configure `rpk ai run` itself. Everything after `--` is passed straight through to Claude Code, so you can set any of its own flags. For example, to start Claude Code in plan mode:
@@ -57,7 +57,7 @@ Claude Code starts in your real configuration home, so your workspace trust, onb
 
 === Choose managed or enterprise passthrough
 
-The `rpk ai run claude` command reads the provider's *Auth passthrough* setting and picks one of two auth modes. The choice determines who pays for the tokens.
+For an Anthropic provider, the `rpk ai run claude` command reads its *Auth passthrough* setting and picks one of two auth modes. The choice determines who pays for the tokens.
 
 Managed (API key)::
 The provider stores an Anthropic API key in the dataplane secret store, shown as *API key reference* on its *Connection* card. The gateway authenticates each request with your Redpanda token, injects the stored key, and forwards the call to Anthropic. Tokens are billed as API usage against the account that owns that key, and per-model spend appears on the provider's *Overview* tab. You need no Anthropic credential of your own.
@@ -67,8 +67,23 @@ The provider has *Auth passthrough* enabled and stores no API key. Claude Code s
 
 [NOTE]
 ====
-When `rpk ai run claude` cannot read the provider (invoke-only access), it cannot detect the auth mode and defaults to managed. Pass `--passthrough` to force passthrough for a subscription provider. When the provider is readable, its own setting wins, and a contradicting `--passthrough` is ignored with a warning.
+When `rpk ai run claude` cannot read the provider (invoke-only access), it cannot detect the provider's type or auth mode, and it launches in managed Anthropic mode by default. Pass `--passthrough` to force passthrough for a subscription provider, or pass `--bedrock` for a Bedrock provider. When the provider is readable, its own type and setting win: the launch ignores a contradicting `--passthrough` on a managed Anthropic provider, or a contradicting `--bedrock` on an Anthropic provider, with a warning.
 ====
+
+=== Use an AWS Bedrock provider
+
+Claude Code can also route through a Bedrock provider, running in its native Bedrock mode:
+
+[source,bash]
+----
+rpk ai run claude -L <bedrock-provider> -m us.anthropic.claude-sonnet-4-6
+----
+
+In this command, `<bedrock-provider>` is the name of your Bedrock provider. For `-m`, pass an inference-profile ID the provider allows: a model identifier with a region prefix such as `us.`, `eu.`, `apac.`, or `global.`. Bedrock requires an inference profile for Claude 4.6 and later models; older models also accept bare foundation-model IDs. For selection guidance, see xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM].
+
+AI Gateway signs each upstream call with the AWS credentials stored on the provider, so no AWS keys reach your machine. The session authenticates to the gateway with your Redpanda token, exactly like a managed Anthropic provider, and the token refreshes for the whole session. Enterprise passthrough does not apply to Bedrock: a Claude subscription has no Bedrock analog, so `--passthrough` fails with an error.
+
+In Bedrock mode, Claude Code runs background tasks on a Haiku-class model by default. If the provider's allowlist does not include one, set `ANTHROPIC_SMALL_FAST_MODEL` to an allowlisted inference-profile ID before you launch.
 
 == Run Codex
 
@@ -168,7 +183,7 @@ In this example, `<oidc-access-token>` is an access token minted with the `clien
 |The `rpk ai run` command needs the provider to route through. Pass `-L <provider-name>`, using the provider's exact name.
 
 |Provider is the wrong type for the agent
-|Claude Code needs an Anthropic provider, and Codex needs an OpenAI or OpenAI-compatible provider. Confirm the *Type* on the provider's *Connection* card, and pass a provider of the matching type to `-L`.
+|Claude Code needs an Anthropic or Bedrock provider, and Codex needs an OpenAI or OpenAI-compatible provider. Confirm the *Type* on the provider's *Connection* card, and pass a provider of the matching type to `-L`. An older `rpk ai` plugin also rejects Bedrock providers for Claude Code; update it with `rpk ai upgrade`.
 
 |Provider is disabled
 |The provider's *Status* is not *Active*. Enable it with `rpk ai llm update <provider-name> --enabled`, or from the provider detail page.
@@ -176,8 +191,8 @@ In this example, `<oidc-access-token>` is an access token minted with the `clien
 |`no usable gateway token`
 |The cached `rpk ai` credentials are missing or expired. Run `rpk ai auth login` to refresh them, then relaunch. The error's `rpai auth login` hint refers to the same sign-in.
 
-|The agent reports that the model is not allowed for the provider (HTTP 403)
-|The model you passed to `-m` is not in the provider's allowlist. Open the provider detail page, confirm the model row appears, and pass that exact identifier.
+|The session hangs, or the agent reports that the model is not allowed for the provider (HTTP 403)
+|The model you passed to `-m` is not in the provider's allowlist. Claude Code retries the rejected requests silently, so the session can appear to hang; when `rpk ai run claude` can read the provider, the launch warns you and names the allowed models. Open the provider detail page, confirm the model row appears, and pass that exact identifier. For a Bedrock provider, that identifier is an inference-profile ID.
 
 |Missing `claude` or `codex` binary on the `PATH`
 |The agent binary is not installed or not on your `PATH`. Install it (see Prerequisites), then relaunch.
