@@ -9,6 +9,7 @@
 // Source: `cloudv2` `pkg/permissions/permissions_constants.go` on origin/main, verified 2026-05-18.
 // Transcript permissions and the TranscriptReader role verified against cloudv2 commit 6dfd3b3 (PR #26829), 2026-06-08.
 // Guardrail, agent-trigger, and dataplane_adp_a2a_invoke permissions added after verifying against origin/main, 2026-06-09.
+// Agent-session permissions added after verifying against cloudv2 commit 7093932 (PR #27659) and permissions_constants.go on origin/main, 2026-07-04.
 
 Every Redpanda Agentic Data Plane API call enforces a single permission. This reference lists every Agentic Data Plane-namespaced permission, the operation it gates, and which built-in role grants it.
 
@@ -271,6 +272,35 @@ The `dataplane_adp_agent_trigger_*` permissions gate triggers that start an agen
 |===
 
 A further `dataplane_adp_agent_trigger_report_health` permission lets internal trigger observers report trigger health. No tenant-facing role grants it.
+
+== Agent session permissions
+
+The `dataplane_adp_agent_session_*` permissions gate access to an agent's conversation sessions: the persisted conversation threads a managed agent accumulates as it runs. Sessions exist for managed agents only; a self-managed agent keeps no session store. The runtime creates sessions, so there is no create or update permission.
+
+[cols="2,2,1,1"]
+|===
+|Permission |Operation |Writer |Reader
+
+|`dataplane_adp_agent_session_list`
+|List an agent's conversation sessions (summaries only)
+|✓
+|✓
+
+|`dataplane_adp_agent_session_get`
+|View one conversation session, including its full message transcript
+|✓
+|✓
+
+|`dataplane_adp_agent_session_delete`
+|Delete an agent's conversation sessions
+|✓
+|
+|===
+
+[NOTE]
+====
+`dataplane_adp_agent_session_get` returns a session's full conversation content (prompts, tool inputs and outputs, and model output), the same class of content that transcript access exposes. Unlike the transcript permissions, it is granted to the general-purpose Reader role, so any principal with Reader can read an agent's conversation content through the session API. Grant the Reader role only to principals you trust with that content.
+====
 
 [[transcript-permissions]]
 == Transcript permissions
