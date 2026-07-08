@@ -1,6 +1,6 @@
 = rpk ai model
 :description: rpk ai model
-:page-beta: true
+:page-preview: true
 
 Discover the models the Redpanda AI gateway exposes.
 

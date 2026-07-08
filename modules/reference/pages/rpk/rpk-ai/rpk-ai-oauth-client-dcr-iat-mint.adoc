@@ -1,6 +1,6 @@
 = rpk ai oauth-client dcr iat mint
 :description: rpk ai oauth-client dcr iat mint
-:page-beta: true
+:page-preview: true
 
 Mint a one-shot Initial Access Token
 

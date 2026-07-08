@@ -1,6 +1,6 @@
 = rpk ai agent
 :description: rpk ai agent
-:page-beta: true
+:page-preview: true
 
 Manage agents registered with the Redpanda AI platform.
 

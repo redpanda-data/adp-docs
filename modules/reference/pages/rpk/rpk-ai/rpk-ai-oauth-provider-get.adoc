@@ -1,7 +1,7 @@
 = rpk ai oauth-provider get
 :description: rpk ai oauth-provider get
 :page-aliases: rpk/rpk-ai/rpk-ai-oauth-get.adoc
-:page-beta: true
+:page-preview: true
 
 Get an OAuth provider
 

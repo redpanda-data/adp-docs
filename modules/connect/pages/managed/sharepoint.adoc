@@ -1,5 +1,5 @@
 = SharePoint Managed MCP Server
-:page-beta: true
+:page-preview: true
 :description: Let agents read SharePoint sites, document libraries, lists, and files, upload files, and search content through the Microsoft Graph API, using each end-user's own Microsoft identity through user-delegated OAuth.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer
@@ -19,7 +19,7 @@ After reading this page, you will be able to:
 
 [NOTE]
 ====
-The SharePoint managed MCP server is in beta. If you don't see SharePoint in the picker, contact Redpanda support.
+The SharePoint managed MCP server is in preview. If you don't see SharePoint in the picker, contact Redpanda support.
 ====
 
 == What this MCP server does

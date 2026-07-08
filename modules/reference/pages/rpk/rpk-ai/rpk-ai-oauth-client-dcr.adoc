@@ -1,6 +1,6 @@
 = rpk ai oauth-client dcr
 :description: rpk ai oauth-client dcr
-:page-beta: true
+:page-preview: true
 
 Manage the tenant's Dynamic Client Registration policy.
 

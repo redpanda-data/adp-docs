@@ -1,6 +1,6 @@
 = rpk ai agent a2a card
 :description: rpk ai agent a2a card
-:page-beta: true
+:page-preview: true
 
 Fetch the A2A agent card — the JSON discovery document describing the
 agent's identity, skills, supported transports and capabilities.

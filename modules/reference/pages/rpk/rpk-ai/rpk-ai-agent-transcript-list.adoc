@@ -1,6 +1,6 @@
 = rpk ai agent transcript list
 :description: rpk ai agent transcript list
-:page-beta: true
+:page-preview: true
 
 List an agent's conversation transcripts
 

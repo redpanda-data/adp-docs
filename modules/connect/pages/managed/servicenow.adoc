@@ -1,5 +1,5 @@
 = ServiceNow Managed MCP Server
-:page-beta: true
+:page-preview: true
 :description: Read and write a ServiceNow instance from an agent: incidents, knowledge articles, and allow-listed records, with service-account or per-user authentication.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

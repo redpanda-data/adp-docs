@@ -1,5 +1,6 @@
 = How Guardrails Work
 :description: Learn how Agentic Data Plane guardrails use AWS Bedrock policies to inspect and control LLM requests and responses, and how a blocked request surfaces.
+:page-preview: true
 :page-topic-type: overview
 :personas: security_compliance_lead, platform_engineer, agent_builder
 :learning-objective-1: Describe what a guardrail does and how you attach one to an AWS Bedrock LLM provider

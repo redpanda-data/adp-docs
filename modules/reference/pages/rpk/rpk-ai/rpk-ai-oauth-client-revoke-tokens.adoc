@@ -1,6 +1,6 @@
 = rpk ai oauth-client revoke-tokens
 :description: rpk ai oauth-client revoke-tokens
-:page-beta: true
+:page-preview: true
 
 Revoke every refresh token aigw has issued under <name>. Forces
 all users that have connected this client to sign in again. Already-

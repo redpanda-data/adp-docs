@@ -1,6 +1,6 @@
 = rpk ai run
 :description: rpk ai run
-:page-beta: true
+:page-preview: true
 
 Launch a third-party coding agent configured to send its model traffic
 through the Redpanda AI gateway for the active profile, reusing rpai's

@@ -1,6 +1,6 @@
 = rpk ai env use
 :description: rpk ai env use
-:page-beta: true
+:page-preview: true
 
 Switch to a local environment, or select an ADP environment by name or id
 

@@ -1,5 +1,5 @@
 = NetSuite Managed MCP Server
-:page-beta: true
+:page-preview: true
 :description: Let agents read NetSuite records and run SuiteQL with each caller's NetSuite OAuth identity.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

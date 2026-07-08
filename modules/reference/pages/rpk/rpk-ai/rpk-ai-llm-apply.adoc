@@ -1,6 +1,6 @@
 = rpk ai llm apply
 :description: rpk ai llm apply
-:page-beta: true
+:page-preview: true
 
 Reconcile LLM providers from one or more YAML manifests.
 

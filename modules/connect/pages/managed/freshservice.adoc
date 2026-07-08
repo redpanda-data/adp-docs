@@ -1,5 +1,5 @@
 = Freshservice Managed MCP Server
-:page-beta: true
+:page-preview: true
 :description: Manage Freshworks Freshservice ITSM tickets, assets, change requests, and agents from an agent, with API-key or per-user OAuth authentication.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

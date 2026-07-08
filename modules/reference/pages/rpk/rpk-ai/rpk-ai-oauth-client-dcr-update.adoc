@@ -1,6 +1,6 @@
 = rpk ai oauth-client dcr update
 :description: rpk ai oauth-client dcr update
-:page-beta: true
+:page-preview: true
 
 Update the tenant's DCR settings. Only the flags you pass change;
 everything else keeps its current value (the CLI reads the current

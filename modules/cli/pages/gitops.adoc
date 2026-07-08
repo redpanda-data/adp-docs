@@ -1,5 +1,5 @@
 = Manage Resources with GitOps
-:page-beta: true
+:page-preview: true
 :description: Keep Agentic Data Plane resources in Git and reconcile them with rpk ai apply and diff: declarative create-or-update, drift detection, and CI gating.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder

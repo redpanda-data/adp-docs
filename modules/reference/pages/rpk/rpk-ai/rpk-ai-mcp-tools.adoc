@@ -1,6 +1,6 @@
 = rpk ai mcp tools
 :description: rpk ai mcp tools
-:page-beta: true
+:page-preview: true
 
 Interact with tools on an MCP server
 

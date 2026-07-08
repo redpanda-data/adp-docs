@@ -1,6 +1,6 @@
 = rpk ai upgrade
 :description: rpk ai upgrade
-:page-beta: true
+:page-preview: true
 
 Upgrade to the latest Redpanda AI CLI version
 

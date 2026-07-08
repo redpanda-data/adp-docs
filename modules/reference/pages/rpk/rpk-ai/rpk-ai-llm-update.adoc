@@ -1,6 +1,6 @@
 = rpk ai llm update
 :description: rpk ai llm update
-:page-beta: true
+:page-preview: true
 
 Update an LLM provider
 

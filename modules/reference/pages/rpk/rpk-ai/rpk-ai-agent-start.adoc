@@ -1,6 +1,6 @@
 = rpk ai agent start
 :description: rpk ai agent start
-:page-beta: true
+:page-preview: true
 
 Start a managed agent (desired_state=RUNNING)
 

@@ -1,6 +1,6 @@
 = rpk ai env rename
 :description: rpk ai env rename
-:page-beta: true
+:page-preview: true
 
 Rename an environment in both config and credentials files
 

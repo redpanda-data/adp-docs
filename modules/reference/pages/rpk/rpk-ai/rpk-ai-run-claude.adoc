@@ -1,6 +1,6 @@
 = rpk ai run claude
 :description: rpk ai run claude
-:page-beta: true
+:page-preview: true
 
 Launch Anthropic's Claude Code CLI with its model traffic
 routed through the Redpanda AI gateway for the active rpai profile.

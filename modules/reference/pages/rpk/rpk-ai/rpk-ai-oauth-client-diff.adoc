@@ -1,6 +1,6 @@
 = rpk ai oauth-client diff
 :description: rpk ai oauth-client diff
-:page-beta: true
+:page-preview: true
 
 Dry-run of apply for OAuth clients. Prints, per manifest, whether apply would
 create, update (and which fields), or leave the resource unchanged. Exits

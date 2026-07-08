@@ -1,6 +1,6 @@
 = rpk ai agent apply
 :description: rpk ai agent apply
-:page-beta: true
+:page-preview: true
 
 Reconcile agents from one or more YAML manifests.
 

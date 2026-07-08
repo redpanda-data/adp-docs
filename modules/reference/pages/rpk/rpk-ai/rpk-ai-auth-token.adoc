@@ -1,6 +1,6 @@
 = rpk ai auth token
 :description: rpk ai auth token
-:page-beta: true
+:page-preview: true
 
 Print the current bearer access token to stdout (refreshes if expired)
 

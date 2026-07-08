@@ -1,6 +1,6 @@
 = rpk ai env add
 :description: rpk ai env add
-:page-beta: true
+:page-preview: true
 
 Add a manual rpai environment with explicit URLs
 

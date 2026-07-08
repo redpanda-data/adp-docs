@@ -1,6 +1,6 @@
 = rpk ai agent transcript get
 :description: rpk ai agent transcript get
-:page-beta: true
+:page-preview: true
 
 Get a single conversation transcript with its turns
 

@@ -1,6 +1,6 @@
 = rpk ai mcp update
 :description: rpk ai mcp update
-:page-beta: true
+:page-preview: true
 
 Update an MCP server
 

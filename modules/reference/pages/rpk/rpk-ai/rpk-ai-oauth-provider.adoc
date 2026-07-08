@@ -1,7 +1,7 @@
 = rpk ai oauth-provider
 :description: rpk ai oauth-provider
 :page-aliases: rpk/rpk-ai/rpk-ai-oauth.adoc
-:page-beta: true
+:page-preview: true
 
 Manage OAuth authorization-server configurations registered with the Redpanda AI gateway.
 

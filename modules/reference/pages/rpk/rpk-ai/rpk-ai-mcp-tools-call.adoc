@@ -1,6 +1,6 @@
 = rpk ai mcp tools call
 :description: rpk ai mcp tools call
-:page-beta: true
+:page-preview: true
 
 Invoke a tool on an MCP server through the aigw MCP proxy.
 

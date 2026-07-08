@@ -1,6 +1,6 @@
 = rpk ai mcp diff
 :description: rpk ai mcp diff
-:page-beta: true
+:page-preview: true
 
 Dry-run of apply for MCP servers. Prints, per manifest, whether apply would
 create, update (and which fields), or leave the resource unchanged. Exits

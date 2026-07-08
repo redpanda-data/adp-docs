@@ -1,5 +1,6 @@
 = Create a Guardrail
 :description: Create a guardrail with the wizard, configure its Bedrock authentication and policies, attach it to a Bedrock LLM provider, and verify that it blocks.
+:page-preview: true
 :page-topic-type: how-to
 :personas: security_compliance_lead, platform_engineer
 :learning-objective-1: Create a guardrail and configure its backend and policies
