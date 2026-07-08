@@ -175,7 +175,7 @@ For the full OpenAPI MCP reference (authentication modes, operation filters, bas
 
 === Build your agent
 
-Combine the Anthropic provider and the PetStore MCP server into an agent. Agentic Data Plane configures a managed agent on a single page with five sections: *Details*, *Model*, *Behavior*, *Tools*, and *Subagents*. A stepper on the left tracks the sections and summarizes what you've set in each; click a step to jump to its section. For the full reference, see xref:connect:create-agent.adoc[Create an agent].
+Combine the Anthropic provider and the PetStore MCP server into an agent. Agentic Data Plane configures a managed agent on a single canvas titled *New managed agent*, with sections for *Identity*, *Model*, *Instructions*, and *Tools*, plus a collapsible *Advanced* area for subagents and tags. Each field is marked *Required* or *Optional*. For the full reference, see xref:connect:create-agent.adoc[Create an agent].
 
 . Open *Agents* in the sidebar.
 
@@ -187,21 +187,17 @@ image::shared:create-agent-runtime-choice.png[The runtime choice in the create-a
 +
 NOTE: The other option, `I host it myself`, registers an agent you run on your own infrastructure. This quickstart uses the managed runtime.
 
-. In the *Details* section, set the following:
+. In the *Identity* section, set the following:
 +
-* `Agent ID`: Skip for now. Agentic Data Plane pre-fills a generated ID and re-derives it from the display name you enter next. You can't change the ID after creation.
-* `Display name`: Enter `pet-store-assistant`. This name appears in the agent registry list and the detail header, and the Agent ID updates to match.
+* `Name`: Enter `pet-store-assistant`. This name appears in the agent registry list and the detail header. Agentic Data Plane derives the agent's resource ID from it when you create the agent; you don't enter the ID directly, and it can't be changed after creation.
 * `Description`: Enter `Quickstart agent that answers questions about the PetStore inventory`.
-* `Tags`: Skip. Tags are optional metadata for filtering and grouping.
 
-. In the *Model* section, set the following:
+. In the *Model* section, pick the provider and model together in the picker:
 +
-* `LLM provider`: Select `anthropic-quickstart`. This provider supplies the credentials and routing for the agent. The dropdown lists every provider configured for your organization. If it's empty, no provider exists yet. Ask your administrator to configure one, or complete the admin steps first.
-* `Model`: Select `claude-sonnet-4-6`. Sonnet handles multi-step tool use more reliably than Haiku.
-+
-Leave the `Advanced` options, such as `Max iterations`, at their defaults.
+* Select the `anthropic-quickstart` provider. This provider supplies the credentials and routing for the agent. The picker lists every provider configured for your organization. If it's empty, no provider exists yet. Ask your administrator to configure one, or complete the admin steps first.
+* Select the `claude-sonnet-4-6` model. Sonnet handles multi-step tool use more reliably than Haiku.
 
-. In the *Behavior* section, paste the following into the `System prompt` editor:
+. In the *Instructions* section, paste the following into the `System prompt` field:
 +
 [,text]
 ----
@@ -223,13 +219,13 @@ Rules:
   delete pets.
 ----
 
-. In the *Tools* section, select `petstore-quickstart` under `MCP servers`. The agent discovers the server's tools at runtime; you don't pre-select individual tools. The system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
+. In the *Tools* section, click *Add MCP server* and select `petstore-quickstart`. The agent discovers the server's tools at runtime; you don't pre-select individual tools. The system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
 
-. In the *Subagents* section, leave the list empty to keep the agent flat. The quickstart uses a single agent.
+. Leave the *Advanced* area collapsed. The quickstart uses a single agent with no subagents or tags.
 
-. Confirm the stepper summaries on the left, then click *Create agent*. If a required field is missing, a "Cannot create agent" error lists what to fix.
+. Click *Create agent*. If the button is disabled, the helper text next to it tells you which required field is still missing (a name and a model).
 
-. Wait for the agent status to change from `Starting` to `Running`. Agentic Data Plane creates the agent's service account at this point; for details, see xref:connect:concepts.adoc#service-account-authorization[service account authorization].
+. Wait for the agent status to change from `Starting` to `Running`. To call the agent from outside the UI, open its *Connect* tab for the A2A endpoint and authentication guidance; for how the agent's service account works, see xref:connect:concepts.adoc#service-account-authorization[service account authorization].
 
 === Test the agent in the Inspector
 
