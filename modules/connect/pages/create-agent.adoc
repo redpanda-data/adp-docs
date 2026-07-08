@@ -141,7 +141,7 @@ Add *Tags* as key/value pairs to organize and filter agents in the registry and 
 
 When the agent is running, open its detail page. A managed agent has these tabs:
 
-* *Overview*: The agent's full configuration as an editable form. Change the name's identity fields, model, system prompt (in the *Behavior* section), tools, and subagents here, then save.
+* *Overview*: The agent's full configuration as an editable form. Change the description and tags (in the *Details* section; the name is read-only there), the model, the system prompt (in the *Behavior* section), tools, and subagents, then save.
 * *Connect*: The agent's A2A endpoint URL, authentication guidance, and ready-to-paste code examples for calling the agent. See <<connect-to-the-agent,Connect to the agent>>.
 * *Triggers*: Schedules and event sources that invoke the agent. See xref:connect:triggers/overview.adoc[].
 * *Inspector*: An interactive test surface. See <<test-your-agent,Test your agent>>.
