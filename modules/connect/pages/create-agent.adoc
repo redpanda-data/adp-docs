@@ -227,6 +227,8 @@ Two tabs on the agent detail page support testing and observability:
 * *Inspector*: Send test prompts interactively and inspect each step of the agent's reasoning, tool calls, and responses. Use Inspector during development and tuning.
 * *Transcripts*: Records every conversation against the agent (prompt, tool calls, tool outputs, final response). Use Transcripts to audit production behavior.
 
+To test the agent in Inspector:
+
 . Open the agent's *Inspector* tab.
 . Enter a test prompt.
 . Verify the agent:
