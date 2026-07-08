@@ -204,6 +204,8 @@ For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs
 Redpanda stores models as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). Each model can carry custom pricing overrides that replace the catalog rates for that model in cost reporting; see <<pricing-overrides>>. The legacy flat `models` field still works on writes for backward compatibility.
 ====
 
+Beyond pricing, the catalog carries each model's capabilities and context-window limits. The model discovery API (the `ListModels` and `GetModel` methods on `ModelService`) reports `max_input_tokens` (the largest context the model accepts) and `max_output_tokens` (the most it can generate in a single response) for each model. Both are read-only catalog metadata: a limit the catalog doesn't declare stays unset rather than reported as zero. Clients read `max_input_tokens` to show how full an agent's context window is, such as the context-window indicator in the agent inspector.
+
 [[pricing-overrides]]
 === Override per-model pricing
 
@@ -243,7 +245,7 @@ Use the reset control on a field to clear a single override, or clear every fiel
 
 After you create the provider, its detail page has two tabs. The *Overview* tab carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `TOKENS`) with sparklines and a *View more* link on each card, the Connection card (provider type, status, authentication passthrough state, proxy URL, upstream base URL, and the API key secret reference), and the model list, where each model shows its input and output prices per million tokens and its spend from requests routed through this provider over the last 7 days. For analysis across providers, use the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
 
-The *Connect* tab generates ready-made client configuration for this provider: a gateway-token step, setup instructions for popular clients such as Claude Code, and code examples in several languages, all with the provider's proxy URL prefilled. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for the underlying flow.
+The *Connect* tab generates ready-made client configuration for this provider: a gateway-token step, ready-to-run `rpk ai` setup steps, setup instructions for popular clients such as Claude Code, and code examples in several languages, all with the provider's proxy URL prefilled. For a Bedrock provider, the Claude Code snippets run against the gateway without local AWS credentials, because the gateway signs the upstream AWS requests for you. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for the underlying flow.
 
 [[transcript-logging]]
 == Configure transcript logging
@@ -412,7 +414,7 @@ The page includes these charts:
 * *Requests over time*: Request count for the selected range.
 * *Tokens over time*: Token count for the selected range.
 
-Use *Group by* to switch the chart breakdown between providers, models, and token type. Group by provider to see which upstream consumed the most budget. Group by model to see which model drove spend inside one or more providers. Group by token type to separate input, output, cached, cache-write, and reasoning usage where those buckets apply.
+Use *Group by* to switch the chart breakdown between providers, models, token type, agents, and users. Group by provider to see which upstream consumed the most budget. Group by model to see which model drove spend inside one or more providers. Group by token type to separate input, output, cached, cache-write, and reasoning usage where those buckets apply. Group by agent or user to attribute spend to the agent or the identified caller that drove it.
 
 Use *Filter* to narrow the charts by provider, model, cost type, token type, user, or agent. Each filter appears as a chip above the chart, and you can combine them. For example, filter to one Anthropic provider, drill into `claude-opus-4-7`, then limit the spend view to input tokens. Selecting an agent also narrows the provider options to the providers that agent used.
 
@@ -427,6 +429,16 @@ The chart palette is colorblind-safe. When multiple providers of the same type e
 The spend chart footer summarizes the selected view by cost bucket, including total, input, output, cached, cache writes, and reasoning when the selected traffic includes those categories.
 
 // TODO: When the cached-token totals reconciliation fix lands (tracked internally as AI-1152), confirm the spend footer cost-bucket totals match cached-token spend across mixed cache-hit / cache-miss traffic, then this comment can be removed.
+
+[[download-cost-and-usage-report]]
+=== Download the report as CSV
+
+To export the data behind the charts, use the download controls in the toolbar:
+
+* Click *Download full report* to download the complete, untruncated dataset for the current filters and date range as a CSV file. Every cost type and token type is a separate column.
+* Use the report options control (the sliders icon next to *Download full report*) to choose how the exported rows are grouped. Under *Time bucket*, pick *Hourly*, *Daily*, *Monthly*, or *Total (no time column)*. Under *Break down by*, select any combination of *Provider*, *Model*, *User*, and *Agent*.
+
+Each chart also has its own export that downloads the data as currently shown, including any truncation the chart applies to keep the top series readable. Use *Download full report* when you need the whole dataset rather than the charted view.
 
 == Edit, disable, or delete a provider
 
