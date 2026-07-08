@@ -219,6 +219,8 @@ Output format:
 
 The system prompt is a Go template that Redpanda renders on every invocation. Use `{{.Variable}}` expressions to inject the current date and the calling user into the prompt at request time. A prompt with no template expressions renders unchanged, so existing prompts keep working without edits. The same variables are available in agent and subagent system prompts.
 
+System prompts support field substitution (such as `{{.User.Email}}`) and the simple conditionals `{{if}}` and `{{with}}`. Loops (`{{range}}`), sub-template definitions (`{{define}}` and `{{block}}`), and template invocation (`{{template}}`) are not supported. Agentic Data Plane rejects a prompt that uses them.
+
 === Available variables
 
 [cols="1,2,1"]
@@ -267,7 +269,15 @@ Model providers can cache an identical prompt prefix between requests to reduce 
 
 === Validate template changes
 
-The agent parses the system prompt when it starts. A broken template stops the agent from starting rather than failing on each request, so the mistake surfaces at deploy time. Common mistakes are an unclosed `{{ }}` expression, a reference to a variable that does not exist, and a time call that returns more than one value, such as `{{.Now.Time.Clock}}`. Test the agent after editing the prompt.
+When you create or update a managed agent, Agentic Data Plane validates the system prompt and rejects an invalid template with an error that names the field, so a mistake surfaces when you save the agent rather than after deployment. The agent also parses the prompt when it starts. Common mistakes include:
+
+* An unclosed `{{ }}` expression
+* A reference to a variable that does not exist
+* An unsupported construct, such as `{{range}}`
+* An undefined function from a stray non-template macro, such as `{{ FQ_START_DATE }}`
+* A time call that returns more than one value, such as `{{.Now.Time.Clock}}`
+
+Test the agent after editing the prompt.
 
 [[evaluation-and-testing]]
 == Evaluation and testing

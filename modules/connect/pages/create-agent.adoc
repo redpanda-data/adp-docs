@@ -52,7 +52,7 @@ In the *Model* section, select the glossterm:large language model (LLM)[] provid
 +
 For model selection guidance, see xref:connect:architecture-patterns.adoc#model-selection-guide[Model selection guide].
 
-. Optionally, expand *Advanced* and set *Max iterations*. Leave it at 0 to use the runtime default. Max iterations is the upper bound on agent reasoning loops per request; the proto contract allows 0-200. Each iteration consumes tokens and adds latency.
+. Optionally, expand *Advanced* and set *Max iterations*. Max iterations is the upper bound on agent reasoning loops per request. Valid values are 0 to 200. Each iteration consumes tokens and adds latency. Leave it at 0 to use the runtime default. When you save the agent, Agentic Data Plane replaces a 0 (or unset) value with the default of 100, so the saved agent always shows an explicit positive limit. Agentic Data Plane rejects negative values.
 +
 If you override the default, choose based on task complexity:
 +
@@ -109,6 +109,8 @@ In the *Tools* section, select the glossterm:Model Context Protocol (MCP)[] serv
 . The agent discovers each server's tools at runtime; you don't pre-select individual tools. The agent calls them based on the LLM's interpretation of the system prompt and the user request. Keep the system prompt aligned with the servers you select so the model knows what's available.
 
 TIP: Apply the principle of least privilege. Connect only the servers the agent needs.
+
+An agent can reference at most 32 MCP servers in total, counting the servers on the root agent plus every subagent's servers. The limit counts references, not distinct servers, so a server referenced by both the root agent and a subagent counts twice. If the total exceeds 32, you can't save the agent.
 
 For registering MCP servers, see xref:connect:create-server.adoc[Create an MCP server].
 
@@ -224,6 +226,8 @@ Two tabs on the agent detail page support testing and observability:
 
 * *Inspector*: Send test prompts interactively and inspect each step of the agent's reasoning, tool calls, and responses. Use Inspector during development and tuning.
 * *Transcripts*: Records every conversation against the agent (prompt, tool calls, tool outputs, final response). Use Transcripts to audit production behavior.
+
+To test the agent in Inspector:
 
 . Open the agent's *Inspector* tab.
 . Enter a test prompt.
