@@ -1,5 +1,6 @@
 = Guardrail Policy Reference
 :description: Reference for the guardrail policy types, their configuration fields, actions, directions, and limits.
+:page-preview: true
 :page-topic-type: reference
 :personas: security_compliance_lead, platform_engineer
 
