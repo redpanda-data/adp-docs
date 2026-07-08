@@ -52,7 +52,7 @@ In the *Model* section, select the glossterm:large language model (LLM)[] provid
 +
 For model selection guidance, see xref:connect:architecture-patterns.adoc#model-selection-guide[Model selection guide].
 
-. Optionally, expand *Advanced* and set *Max iterations*. Leave it at 0 to use the runtime default. Max iterations is the upper bound on agent reasoning loops per request; the proto contract allows 0-200. Each iteration consumes tokens and adds latency.
+. Optionally, expand *Advanced* and set *Max iterations*. Max iterations is the upper bound on agent reasoning loops per request; the proto contract accepts 0-200. Each iteration consumes tokens and adds latency. Leave it at 0 to use the runtime default: when you save the agent, Agentic Data Plane clamps a 0 (or unset) value to the default of 100, so a saved agent always carries an explicit positive limit and the value you read back is never 0. Negative values are rejected.
 +
 If you override the default, choose based on task complexity:
 +
@@ -109,6 +109,8 @@ In the *Tools* section, select the glossterm:Model Context Protocol (MCP)[] serv
 . The agent discovers each server's tools at runtime; you don't pre-select individual tools. The agent calls them based on the LLM's interpretation of the system prompt and the user request. Keep the system prompt aligned with the servers you select so the model knows what's available.
 
 TIP: Apply the principle of least privilege. Connect only the servers the agent needs.
+
+An agent can reference at most 32 MCP servers in total, counting the servers on the root agent plus every subagent's servers. References are counted, not distinct servers, so a server referenced by both the root agent and a subagent counts twice. A configuration that exceeds this limit is rejected when you save the agent.
 
 For registering MCP servers, see xref:connect:create-server.adoc[Create an MCP server].
 
