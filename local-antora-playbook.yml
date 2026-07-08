@@ -28,7 +28,9 @@ content:
     branches: main
 ui:
   bundle:
-    url: https://github.com/redpanda-data/docs-ui/releases/latest/download/ui-bundle.zip
+    # TEMP for PR 126 deploy preview only: bundle built from redpanda-data/docs-ui#398.
+    # REVERT to the releases/latest URL (and delete .netlify-preview/) before merge.
+    url: ./.netlify-preview/ui-bundle-docs-ui-pr398.zip
 asciidoc:
   attributes:
   extensions:
