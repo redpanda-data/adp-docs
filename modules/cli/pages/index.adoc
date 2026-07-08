@@ -1,5 +1,5 @@
 = Use the Agentic Data Plane CLI
-:page-beta: true
+:page-preview: true
 :description: Manage Agentic Data Plane resources from the terminal with rpk ai. Install the CLI, connect it to an AI Gateway, and script LLM providers, MCP servers, OAuth, and agents.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder

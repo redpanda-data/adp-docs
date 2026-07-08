@@ -1,6 +1,6 @@
 = rpk ai connection list
 :description: rpk ai connection list
-:page-beta: true
+:page-preview: true
 
 List OAuth connections — coming soon
 

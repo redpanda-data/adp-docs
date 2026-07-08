@@ -1,6 +1,6 @@
 = rpk ai auth login
 :description: rpk ai auth login
-:page-beta: true
+:page-preview: true
 
 Run the OAuth 2.0 device authorization grant against Redpanda Cloud's
 cloud-api, persist the resulting credentials to the rpai credentials file

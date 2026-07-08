@@ -1,6 +1,6 @@
 = rpk ai llm check
 :description: rpk ai llm check
-:page-beta: true
+:page-preview: true
 
 Runs a lightweight probe against the upstream to verify credentials and reachability.
 

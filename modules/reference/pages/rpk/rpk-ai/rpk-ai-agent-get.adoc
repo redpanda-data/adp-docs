@@ -1,6 +1,6 @@
 = rpk ai agent get
 :description: rpk ai agent get
-:page-beta: true
+:page-preview: true
 
 Get an agent
 

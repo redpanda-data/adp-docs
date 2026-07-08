@@ -1,6 +1,6 @@
 = rpk ai agent update
 :description: rpk ai agent update
-:page-beta: true
+:page-preview: true
 
 Update an agent
 

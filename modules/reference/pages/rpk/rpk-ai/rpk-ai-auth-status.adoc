@@ -1,6 +1,6 @@
 = rpk ai auth status
 :description: rpk ai auth status
-:page-beta: true
+:page-preview: true
 
 Show the authentication state for the current profile
 

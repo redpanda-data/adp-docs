@@ -1,6 +1,6 @@
 = rpk ai agent a2a send
 :description: rpk ai agent a2a send
-:page-beta: true
+:page-preview: true
 
 Send a text message to an agent over A2A and print the reply.
 

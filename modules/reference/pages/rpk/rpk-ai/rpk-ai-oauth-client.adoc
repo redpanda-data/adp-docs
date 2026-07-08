@@ -1,6 +1,6 @@
 = rpk ai oauth-client
 :description: rpk ai oauth-client
-:page-beta: true
+:page-preview: true
 
 Manage OAuth clients registered with the AI gateway's in-dataplane
 OAuth Authorization Server.

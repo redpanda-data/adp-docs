@@ -1,6 +1,6 @@
 = rpk ai agent stop
 :description: rpk ai agent stop
-:page-beta: true
+:page-preview: true
 
 Stop a managed agent (desired_state=STOPPED)
 

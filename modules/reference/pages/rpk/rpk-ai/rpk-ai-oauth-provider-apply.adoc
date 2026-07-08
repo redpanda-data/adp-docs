@@ -1,6 +1,6 @@
 = rpk ai oauth-provider apply
 :description: rpk ai oauth-provider apply
-:page-beta: true
+:page-preview: true
 
 Reconcile OAuth providers from one or more YAML manifests.
 

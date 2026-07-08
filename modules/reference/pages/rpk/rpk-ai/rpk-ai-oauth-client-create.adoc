@@ -1,6 +1,6 @@
 = rpk ai oauth-client create
 :description: rpk ai oauth-client create
-:page-beta: true
+:page-preview: true
 
 Register an OAuth client. The generated client_secret is printed
 once to stderr with a "copy this now" banner — it cannot be retrieved

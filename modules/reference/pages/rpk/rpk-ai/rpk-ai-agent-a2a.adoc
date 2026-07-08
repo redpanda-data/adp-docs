@@ -1,6 +1,6 @@
 = rpk ai agent a2a
 :description: rpk ai agent a2a
-:page-beta: true
+:page-preview: true
 
 Interact with an agent over the A2A (Agent-to-Agent) protocol.
 

@@ -1,6 +1,6 @@
 = rpk ai mcp types
 :description: rpk ai mcp types
-:page-beta: true
+:page-preview: true
 
 List available managed MCP types
 

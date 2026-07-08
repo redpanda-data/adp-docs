@@ -1,6 +1,6 @@
 = rpk ai mcp apply
 :description: rpk ai mcp apply
-:page-beta: true
+:page-preview: true
 
 Reconcile MCP servers from one or more YAML manifests.
 

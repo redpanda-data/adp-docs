@@ -1,7 +1,7 @@
 = rpk ai oauth-provider update
 :description: rpk ai oauth-provider update
 :page-aliases: rpk/rpk-ai/rpk-ai-oauth-update.adoc
-:page-beta: true
+:page-preview: true
 
 Update an OAuth provider
 

@@ -1,6 +1,6 @@
 = rpk ai agent list
 :description: rpk ai agent list
-:page-beta: true
+:page-preview: true
 
 List agents
 

@@ -1,6 +1,6 @@
 = rpk ai env list
 :description: rpk ai env list
-:page-beta: true
+:page-preview: true
 
 List environments (local + live ADP environments, merged)
 

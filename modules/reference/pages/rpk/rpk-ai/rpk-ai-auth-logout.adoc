@@ -1,6 +1,6 @@
 = rpk ai auth logout
 :description: rpk ai auth logout
-:page-beta: true
+:page-preview: true
 
 Delete stored credentials for the current profile (or all)
 

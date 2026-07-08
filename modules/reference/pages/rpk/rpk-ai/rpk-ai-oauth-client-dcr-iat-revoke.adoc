@@ -1,6 +1,6 @@
 = rpk ai oauth-client dcr iat revoke
 :description: rpk ai oauth-client dcr iat revoke
-:page-beta: true
+:page-preview: true
 
 Revoke an unconsumed Initial Access Token so it can no longer be
 exchanged at the registration endpoint. Idempotent — revoking an

@@ -1,6 +1,6 @@
 = rpk ai agent a2a task get
 :description: rpk ai agent a2a task get
-:page-beta: true
+:page-preview: true
 
 Fetch a task's current state, status message, artifacts and (optionally
 truncated) message history. Use -o json for the full task object.

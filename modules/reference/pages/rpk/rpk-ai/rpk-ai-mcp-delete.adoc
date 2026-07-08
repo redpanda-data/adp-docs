@@ -1,6 +1,6 @@
 = rpk ai mcp delete
 :description: rpk ai mcp delete
-:page-beta: true
+:page-preview: true
 
 Delete an MCP server
 

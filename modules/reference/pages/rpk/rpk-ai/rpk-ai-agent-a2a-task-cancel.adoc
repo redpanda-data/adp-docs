@@ -1,6 +1,6 @@
 = rpk ai agent a2a task cancel
 :description: rpk ai agent a2a task cancel
-:page-beta: true
+:page-preview: true
 
 Ask the agent to cancel a running task and print the task's resulting
 state. Cancellation is cooperative — the agent may already have

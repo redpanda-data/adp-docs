@@ -1,6 +1,6 @@
 = rpk ai agent a2a task
 :description: rpk ai agent a2a task
-:page-beta: true
+:page-preview: true
 
 Inspect and control long-running A2A tasks.
 

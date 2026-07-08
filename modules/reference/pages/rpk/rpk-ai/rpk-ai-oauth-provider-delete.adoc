@@ -1,7 +1,7 @@
 = rpk ai oauth-provider delete
 :description: rpk ai oauth-provider delete
 :page-aliases: rpk/rpk-ai/rpk-ai-oauth-delete.adoc
-:page-beta: true
+:page-preview: true
 
 Delete an OAuth provider
 

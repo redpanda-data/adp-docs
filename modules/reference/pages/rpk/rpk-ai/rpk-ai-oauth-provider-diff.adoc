@@ -1,6 +1,6 @@
 = rpk ai oauth-provider diff
 :description: rpk ai oauth-provider diff
-:page-beta: true
+:page-preview: true
 
 Dry-run of apply for OAuth providers. Prints, per manifest, whether apply would
 create, update (and which fields), or leave the resource unchanged. Exits

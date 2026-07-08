@@ -1,5 +1,5 @@
 = Sentry Managed MCP Server
-:page-beta: true
+:page-preview: true
 :description: Give an agent read-only access to Sentry organizations, projects, issues, events, and releases through per-user OAuth, so it can read a stack trace, scope an error's impact, and localize the fix.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

@@ -1,6 +1,6 @@
 = rpk ai mcp
 :description: rpk ai mcp
-:page-beta: true
+:page-preview: true
 
 Manage MCP servers (create, get, list, update, delete, types)
 

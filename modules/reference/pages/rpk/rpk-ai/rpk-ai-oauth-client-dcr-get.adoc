@@ -1,6 +1,6 @@
 = rpk ai oauth-client dcr get
 :description: rpk ai oauth-client dcr get
-:page-beta: true
+:page-preview: true
 
 Show the tenant's DCR settings
 

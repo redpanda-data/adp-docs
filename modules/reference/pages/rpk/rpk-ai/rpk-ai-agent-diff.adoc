@@ -1,6 +1,6 @@
 = rpk ai agent diff
 :description: rpk ai agent diff
-:page-beta: true
+:page-preview: true
 
 Dry-run of apply for agents. Prints, per manifest, whether apply would
 create, update (and which fields), or leave the resource unchanged. Exits

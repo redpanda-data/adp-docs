@@ -1,6 +1,6 @@
 = rpk ai auth
 :description: rpk ai auth
-:page-beta: true
+:page-preview: true
 
 Manage rpai authentication (login, logout, token, status)
 

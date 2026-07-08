@@ -1,5 +1,5 @@
 = OpenAPI Managed MCP Server
-:page-beta: true
+:page-preview: true
 :description: Expose any OpenAPI 3.x-described HTTP API as MCP tools. Point Redpanda at a spec URL and get a fully-typed tool surface for agents, with no custom code.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

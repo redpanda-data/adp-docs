@@ -1,6 +1,6 @@
 = rpk ai oauth-client dcr iat list
 :description: rpk ai oauth-client dcr iat list
-:page-beta: true
+:page-preview: true
 
 List Initial Access Tokens (plaintext is never shown)
 

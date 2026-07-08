@@ -1,6 +1,6 @@
 = rpk ai oauth-client list
 :description: rpk ai oauth-client list
-:page-beta: true
+:page-preview: true
 
 List OAuth clients
 

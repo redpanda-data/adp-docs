@@ -1,5 +1,5 @@
 = Ironclad Managed MCP Server
-:page-beta: true
+:page-preview: true
 :description: Read and manage contracts in Ironclad CLM. Per-user OAuth so each agent action runs as the calling end-user with their own Ironclad permissions.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer

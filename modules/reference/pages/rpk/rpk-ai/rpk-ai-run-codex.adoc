@@ -1,6 +1,6 @@
 = rpk ai run codex
 :description: rpk ai run codex
-:page-beta: true
+:page-preview: true
 
 Launch the OpenAI Codex CLI with its model traffic routed
 through the Redpanda AI gateway for the active rpai profile.

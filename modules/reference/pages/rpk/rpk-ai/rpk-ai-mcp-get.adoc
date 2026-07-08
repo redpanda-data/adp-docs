@@ -1,6 +1,6 @@
 = rpk ai mcp get
 :description: rpk ai mcp get
-:page-beta: true
+:page-preview: true
 
 Get an MCP server
 

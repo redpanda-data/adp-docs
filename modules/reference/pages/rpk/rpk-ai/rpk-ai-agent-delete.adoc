@@ -1,6 +1,6 @@
 = rpk ai agent delete
 :description: rpk ai agent delete
-:page-beta: true
+:page-preview: true
 
 Delete an agent
 

@@ -1,6 +1,6 @@
 = rpk ai model list
 :description: rpk ai model list
-:page-beta: true
+:page-preview: true
 
 List available models in the catalog
 

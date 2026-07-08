@@ -1,6 +1,6 @@
 = rpk ai env show
 :description: rpk ai env show
-:page-beta: true
+:page-preview: true
 
 Show the effective resolved environment as YAML (tokens redacted)
 

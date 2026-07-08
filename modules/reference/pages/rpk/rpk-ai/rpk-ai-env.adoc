@@ -1,6 +1,6 @@
 = rpk ai env
 :description: rpk ai env
-:page-beta: true
+:page-preview: true
 
 Manage rpai environments (list, use, add, show, rename, delete)
 

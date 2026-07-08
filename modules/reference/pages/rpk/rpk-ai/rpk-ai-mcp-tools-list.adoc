@@ -1,6 +1,6 @@
 = rpk ai mcp tools list
 :description: rpk ai mcp tools list
-:page-beta: true
+:page-preview: true
 
 List tools on an MCP server by calling tools/list through the aigw MCP proxy.
 

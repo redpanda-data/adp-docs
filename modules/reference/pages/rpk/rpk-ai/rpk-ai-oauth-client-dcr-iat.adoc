@@ -1,6 +1,6 @@
 = rpk ai oauth-client dcr iat
 :description: rpk ai oauth-client dcr iat
-:page-beta: true
+:page-preview: true
 
 Manage Initial Access Tokens (IATs) — one-shot bearer credentials a
 caller presents to the public registration endpoint when the tenant's

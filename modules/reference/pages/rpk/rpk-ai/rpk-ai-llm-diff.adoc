@@ -1,6 +1,6 @@
 = rpk ai llm diff
 :description: rpk ai llm diff
-:page-beta: true
+:page-preview: true
 
 Dry-run of apply for LLM providers. Prints, per manifest, whether apply would
 create, update (and which fields), or leave the resource unchanged. Exits

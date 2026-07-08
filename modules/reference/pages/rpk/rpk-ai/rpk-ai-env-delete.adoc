@@ -1,6 +1,6 @@
 = rpk ai env delete
 :description: rpk ai env delete
-:page-beta: true
+:page-preview: true
 
 Delete an environment from config and credentials files
 
