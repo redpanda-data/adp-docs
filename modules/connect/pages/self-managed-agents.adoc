@@ -55,12 +55,11 @@ For the declarative path, see xref:connect:create-agent.adoc[Create an agent].
 +
 image::shared:create-agent-runtime-choice.png[The runtime choice in the create-agent flow, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
 
-. Fill in the identity fields, then click *Create agent*:
+. Fill in the identity fields on the *Register self-managed agent* canvas, then click *Create agent*:
 +
-* *Agent ID*: Required. Lowercase letters, numbers, and hyphens, up to 63 characters. Used in URLs, in cost-attribution queries, and as the agent's resource identifier. Immutable after creation.
-* *Display name*: Human-readable name shown in the agent list and detail header.
-* *Description*: Optional. Up to 1024 characters.
-* *Tags*: Optional key/value pairs to organize and filter agents.
+* *Name*: Required. Human-readable name shown in the agent list and detail header. Agentic Data Plane derives the agent's resource ID from this name when you register the agent; you don't enter the ID directly. The derived ID is used in URLs, in cost-attribution queries, and as the agent's resource identifier, and it can't be changed after creation.
+* *Description*: Optional. Up to 1024 characters. An internal note shown on the agent's detail page.
+* *Tags*: Optional key/value pairs to organize and filter agents. Expand the *Advanced* area to add them.
 
 The agent opens on its detail page with a *Self-managed* type badge. A self-managed agent carries no provider, model, or tool configuration of its own: it is an identity that calls the organization's shared gateway resources.
 
