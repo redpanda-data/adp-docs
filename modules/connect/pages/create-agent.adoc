@@ -161,7 +161,7 @@ For more about calling agents and integrating them with other systems, see xref:
 
 == Update a managed agent
 
-Change a managed agent's configuration at any time after you create it, either in Agentic Data Plane or with `rpk ai agent update`. You can edit settings such as the model, system prompt, tools, and subagents. The agent ID is fixed and can't change.
+Change a managed agent's configuration at any time after you create it, either in Agentic Data Plane or with the xref:reference:rpk/rpk-ai/rpk-ai-agent-update.adoc[`rpk ai agent update`] command. You can edit settings such as the model, system prompt, tools, and subagents. The agent ID is fixed and can't change.
 
 Updates roll out without interrupting the agent. Redpanda starts the new version and waits for it to become ready before it stops the old one, so in-flight and new requests keep reaching a running instance throughout the change.
 

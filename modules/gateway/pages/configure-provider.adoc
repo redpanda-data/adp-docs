@@ -204,7 +204,7 @@ For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs
 Redpanda stores models as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). Each model can carry custom pricing overrides that replace the catalog rates for that model in cost reporting; see <<pricing-overrides>>. The legacy flat `models` field still works on writes for backward compatibility.
 ====
 
-Beyond pricing, the catalog carries each model's capabilities and context-window limits. The model discovery API (the `ListModels` and `GetModel` methods on `ModelService`) reports `max_input_tokens` (the largest context the model accepts) and `max_output_tokens` (the most it can generate in a single response) for each model. Both are read-only catalog metadata: a limit the catalog doesn't declare stays unset rather than reported as zero. Clients read `max_input_tokens` to show how full an agent's context window is, such as the context-window indicator in the agent inspector.
+Beyond pricing, the catalog carries each model's capabilities and context-window limits. The model discovery API (the `ListModels` and `GetModel` methods on `ModelService`) reports `max_input_tokens` (the largest context the model accepts) and `max_output_tokens` (the most it can generate in a single response) for each model. Both are read-only catalog metadata: a limit the catalog doesn't declare stays unset rather than reported as zero. Clients read `max_input_tokens` to show how full an agent's context window is, such as the context-window indicator on the agent's *Inspector* tab.
 
 [[pricing-overrides]]
 === Override per-model pricing
@@ -436,7 +436,7 @@ The spend chart footer summarizes the selected view by cost bucket, including to
 To export the data behind the charts, use the download controls in the toolbar:
 
 * Click *Download full report* to download the complete, untruncated dataset for the current filters and date range as a CSV file. Every cost type and token type is a separate column.
-* Use the report options control (the sliders icon next to *Download full report*) to choose how the exported rows are grouped. Under *Time bucket*, pick *Hourly*, *Daily*, *Monthly*, or *Total (no time column)*. Under *Break down by*, select any combination of *Provider*, *Model*, *User*, and *Agent*.
+* Use the report options control (the sliders icon next to *Download full report*) to choose how the exported rows are grouped. Under Time bucket, pick Hourly, Daily, Monthly, or Total (no time column). Under Break down by, select any combination of Provider, Model, User, and Agent.
 
 Each chart also has its own export that downloads the data as currently shown, including any truncation the chart applies to keep the top series readable. Use *Download full report* when you need the whole dataset rather than the charted view.
 
