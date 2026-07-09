@@ -8,6 +8,10 @@ The latest updates to the Agentic Data Plane. For the in-product summary, open *
 
 == v0.2.20 (2026-07-09)
 
+=== Features
+
+Cost & Usage:: Tag your agents and break down cost and usage by tag: group the report by a tag key, filter by tag values, and see untagged traffic in its own bucket.
+
 === Improvements
 
 Security:: This release includes general security and stability improvements.
