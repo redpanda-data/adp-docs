@@ -6,6 +6,23 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.22 (2026-07-10)
+
+=== Features
+
+Models:: Amazon Bedrock providers now offer two new models: Mistral Large 3 and Amazon Nova 2 Lite.
+
+=== Improvements
+
+MCP Servers:: The Amazon Bedrock MCP server can now generate embeddings with Cohere Embed v4.
+Agents:: Creating or updating an agent now rejects an invalid Bedrock model name immediately, instead of accepting it and failing later.
+Agents `[UI]`:: When an agent task is still running after five minutes, the inspector stops the live view and points you to the **Activity** page to follow it; the task keeps running.
+Security:: This release includes general security and stability improvements.
+
+=== Bug fixes
+
+Agents:: A reply that was cut off by the model's token limit no longer causes the next message in the conversation to fail.
+
 == v0.2.20 (2026-07-09)
 
 === Features
