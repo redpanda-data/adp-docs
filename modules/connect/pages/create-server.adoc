@@ -196,7 +196,7 @@ rpk ai mcp update github-proxy \
 |JSON blob carrying the managed type's `_config.proto` shape, including a `@type` URL.
 
 |`--user-oauth-provider`
-|Self-managed servers only. Name of an OAuth Provider already registered under *OAuth Providers*. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893). Managed servers that support user-delegated OAuth carry their auth shape inside `--managed-config`.
+|Self-managed servers only. Name of an OAuth provider already registered on the *Outbound providers* tab of *Integrations setup*. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893). Managed servers that support user-delegated OAuth carry their auth shape inside `--managed-config`.
 
 |`--user-oauth-scopes`
 |Self-managed servers only. Comma-separated scopes the server requires. Provide every scope any tool may need; user re-consent is required if scopes change later.

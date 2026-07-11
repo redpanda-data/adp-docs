@@ -16,7 +16,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* An OAuth provider resource configured in Redpanda Agentic Data Plane under *OAuth providers*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An OAuth provider resource configured in Redpanda Agentic Data Plane on the *Outbound providers* tab of *Integrations setup*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * The required scopes for the upstream API you plan to call.
 * For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
 * For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:connect:managed/managed-catalog.adoc[Managed catalog] before configuring.
@@ -46,15 +46,15 @@ The first time a user calls a tool that needs this server's authentication, Redp
 . The upstream provider redirects back to Redpanda with a token. Redpanda stores it in the token vault under that user's identity.
 . The original tool call retries automatically. Subsequent calls reuse the stored token.
 
-After consent, the user can see and revoke their connection under *Connections* in Agentic Data Plane.
+After consent, the user can see and revoke their connection under *My Connections* in Agentic Data Plane.
 
-// TODO: screenshot of the consent prompt and the resulting *Connections* entry.
+// TODO: screenshot of the consent prompt and the resulting *My Connections* entry.
 
 == Manage your connections
 
-The *Connections* page in the sidebar is each user's view of their own third-party connections: it lists one card per configured OAuth provider, so a user can authorize the providers their MCP servers need without waiting for a tool call to trigger the consent flow.
+The *My Connections* page in the sidebar is each user's view of their own third-party connections, so a user can authorize the providers their MCP servers need without waiting for a tool call to trigger the consent flow.
 
-Each card shows the provider's name, the scopes it requests, and a status of *Not connected* or connected. Click *Connect* to run the consent flow for that provider and store a token in the vault under your identity. Connections persist until you revoke them; remove and re-add a connection if the upstream credentials change.
+The page has two panes. A left rail groups the available OAuth providers into *Needs attention*, *Connected*, and *Available to connect*, with each row showing the provider's name, a status indicator, and a quick *Connect* or *Reconnect* action. Selecting a row opens a detail pane that shows the provider's requested scopes and its status — one of *Connected*, *Needs attention*, *Action required*, or *Not connected* — with *Connect*, *Reconnect*, and *Disconnect* actions. Click *Connect* to run the consent flow for that provider and store a token in the vault under your identity. Connections persist until you disconnect them. A connection whose access token can still be renewed from its stored refresh token stays *Connected*; one that can no longer be renewed moves to *Needs attention* so you can *Reconnect* it.
 
 NOTE: Connections are per-user. Each user authorizes their own accounts, and one user's connections are not visible to or usable by another.
 
@@ -94,13 +94,13 @@ For the field-by-field service-account-OAuth setup, see xref:connect:create-serv
 |User-delegated OAuth requires `https://` URLs on the MCP server (proto rule `remote_mcp.user_oauth_requires_https`). Switch the server's URL to HTTPS.
 
 |`OAuthConnectionRequired` returned even after the user consented
-|The user's vault entry might have been revoked or the token expired with no refresh. Have the user re-consent through *Connections*.
+|The user's vault entry might have been revoked or the token expired with no refresh. Have the user re-consent through *My Connections*.
 
 |`scope_upgrade_required` returned
 |The required scopes on the server changed (or the user originally consented with fewer scopes). The user re-consents with the higher scope.
 
-|*Connections* shows stale entries
-|Connections persist until manually revoked. Have the user remove and re-add the connection if upstream credentials changed.
+|*My Connections* shows stale entries
+|Connections persist until manually revoked. Have the user disconnect and reconnect the connection if upstream credentials changed.
 |===
 
 == Next steps
