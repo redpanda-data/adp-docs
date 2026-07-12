@@ -88,7 +88,7 @@ The Session panel keeps a running history of every call you've made through the 
 |User-delegated auth has no stored token for the calling user. Redpanda includes an `authorize_url` in the error detail; complete the consent flow per xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 |`OAuthTokenExpired`
-|Stored token is expired and refresh failed. Re-consent through *Connections*.
+|Stored token is expired and refresh failed. Re-consent from *My Connections*.
 
 |`scope_upgrade_required`
 |The user's connection lacks one of the server's `required_scopes`. Re-consent with the higher scope.

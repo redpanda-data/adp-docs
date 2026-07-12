@@ -31,7 +31,7 @@ Before you create the server, make sure you have:
 * A Slack OAuth app registered (your own or a Redpanda-published reference app).
 +
 // TODO: confirm whether Redpanda ships a reference Slack OAuth app or whether each customer brings their own. Document the path.
-* An glossterm:OAuth provider[,OAuth Provider] configured in Agentic Data Plane under *OAuth Providers*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* An glossterm:OAuth provider[,OAuth Provider] configured in Agentic Data Plane on the *Outbound providers* tab of *Integrations setup*, pointing at Slack's authorize/token URLs and carrying the OAuth app's client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * Familiarity with xref:connect:user-delegated-oauth.adoc[].
 
 == Configure
@@ -59,7 +59,7 @@ After creating the server, run a tool that requires Slack authentication to veri
 . Run a tool that requires the user's identity, for example `post`.
 . The first call returns `OAuthConnectionRequired` with a Slack `authorize_url`. The Inspector surfaces it as a consent prompt.
 . Click *Authorize*. You're redirected to Slack; pick the workspace and approve the requested scopes.
-. Slack redirects back to Agentic Data Plane. Your connection now appears under *Connections*.
+. Slack redirects back to Agentic Data Plane. Your connection now appears on the *My Connections* page.
 . Re-run the original tool call. The message posts to Slack as your user.
 
 // TODO: screenshots of the consent prompt, Slack's approval screen, and the Connections entry post-consent.
@@ -91,7 +91,7 @@ Common symptoms and fixes:
 |Symptom |What to check
 
 |`OAuthConnectionRequired` even after consent
-|The token might be revoked or expired with no refresh. Check *Connections*; remove and re-add if needed.
+|The token might be revoked or expired with no refresh. Check *My Connections*; disconnect and reconnect if needed.
 
 |`scope_upgrade_required`
 |The server's required scopes were widened after the user consented. The user re-consents to grant the new scope.

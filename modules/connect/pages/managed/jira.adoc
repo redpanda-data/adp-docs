@@ -88,7 +88,7 @@ NOTE: Always include `offline_access` in `required_scopes`. Without it, `OAuthTo
 . Run an issue-search tool with a small JQL filter.
 . The first call returns `OAuthConnectionRequired` with an Atlassian `authorize_url`. The Inspector surfaces it as a consent prompt.
 . Click *Authorize*. Atlassian asks you to pick a site (Cloud instance) and approve scopes.
-. Atlassian redirects back. Your connection appears under *Connections* with a site label.
+. Atlassian redirects back. Your connection appears on the *My Connections* page with a site label.
 . Re-run the search; results come back.
 
 == Use with agents

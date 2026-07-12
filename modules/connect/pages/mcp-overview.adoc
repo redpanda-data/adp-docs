@@ -64,9 +64,8 @@ Agentic Data Plane has these top-level areas:
 
 * *LLM Providers*: OpenAI, Anthropic, Bedrock, Google AI, OpenAI-compatible endpoints. See xref:gateway:configure-provider.adoc[Configure your LLM provider].
 * *MCP Servers*: You are here. Both managed and self-managed servers live in this list.
-* *OAuth Providers*: Reusable upstream OAuth provider definitions used by user-delegated MCP authentication. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
-* *OAuth Clients*: External tools registered to request access tokens from the gateway. See xref:connect:remote-mcp-clients.adoc[Connect Remote MCP Clients].
-* *Connections*: Per-user OAuth connections for user-delegated MCP servers. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+* *Integrations setup*: The OAuth plumbing behind MCP tools, on two tabs. *Outbound providers* holds reusable upstream OAuth provider definitions used by user-delegated MCP authentication (see xref:connect:oauth-providers.adoc[Configure an OAuth Provider]); *Inbound clients* holds external tools registered to request access tokens from the gateway (see xref:connect:remote-mcp-clients.adoc[Connect Remote MCP Clients]).
+* *My Connections*: Your own per-user OAuth connections for user-delegated MCP servers. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 // TODO: screenshot of the sidebar on adp-production once standalone-Agentic Data Plane wording is final.
 

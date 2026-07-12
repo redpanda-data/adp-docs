@@ -71,7 +71,7 @@ Throughout this tutorial, fields marked with * are required.
 
 Register GitHub as an OAuth provider in Agentic Data Plane.
 
-. Open *OAuth Providers* in the sidebar.
+. Open *Integrations setup* in the sidebar and select the *Outbound providers* tab.
 . Click **Create provider** and select **GitHub** from the catalog.
 . Fill in the provider details:
 
@@ -176,13 +176,13 @@ PKCE (RFC 7636) protects against authorization code interception attacks. When e
 . Review all fields to ensure they match the values above
 . Click **Create provider**
 
-The provider appears in the **OAuth Providers** list with status "Enabled".
+The provider appears in the **Outbound providers** list with status "Enabled".
 
 == Test the connection on the Connections page
 
 Before creating an MCP server, proactively test the OAuth flow to verify your provider configuration is correct.
 
-. Open *Connections* in the sidebar.
+. Open *My Connections* in the sidebar.
 . Find the **GitHub** provider card.
 +
 . Click **Connect**.

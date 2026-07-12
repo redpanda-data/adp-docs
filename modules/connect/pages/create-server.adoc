@@ -116,7 +116,7 @@ Both managed and self-managed servers offer the same set of authentication modes
 |2-legged OAuth client credentials. One shared upstream identity for every caller. Provide `client_id`, `client_secret_ref`, `token_url`, and any required `scopes`.
 
 |`User-delegated OAuth`
-|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. Pick the configured *OAuth Provider* and the required scopes. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; Redpanda stores the resulting connection in the token vault, where it shows up under *Connections*. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
+|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. Pick the configured *OAuth Provider* and the required scopes. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; Redpanda stores the resulting connection in the token vault, where it shows up on the user's *My Connections* page. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
 |===
 
 NOTE: Choosing between `Service-account OAuth` and `User-delegated OAuth` is the credential-mode decision. Service-account authentication gives every caller the same identity at the upstream; user-delegated authentication gives each caller their own.
@@ -196,7 +196,7 @@ rpk ai mcp update github-proxy \
 |JSON blob carrying the managed type's `_config.proto` shape, including a `@type` URL.
 
 |`--user-oauth-provider`
-|Self-managed servers only. Name of an OAuth Provider already registered under *OAuth Providers*. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893). Managed servers that support user-delegated OAuth carry their auth shape inside `--managed-config`.
+|Self-managed servers only. Name of an OAuth Provider already registered on the *Outbound providers* tab of *Integrations setup*. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893). Managed servers that support user-delegated OAuth carry their auth shape inside `--managed-config`.
 
 |`--user-oauth-scopes`
 |Self-managed servers only. Comma-separated scopes the server requires. Provide every scope any tool may need; user re-consent is required if scopes change later.
