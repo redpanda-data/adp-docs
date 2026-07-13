@@ -115,7 +115,7 @@ Create an OAuth Client to give the chat app the credentials it needs to authenti
 |Whether the client can start new consent flows. Disabled clients reject new flows.
 |===
 +
-. Click *Add external tool*.
+. Click *Register Client*.
 
 On submit, AI Gateway mints the `client_id`. Confidential clients (those using a Client Secret authentication method) also receive a `client_secret`, *shown only once*. Copy it immediately. The OAuth Server Endpoints panel shows the `Authorization Endpoint` and `Token/Refresh Endpoint` (under `/oauth/idp/`) and the `mcp` scope; paste these into the external app's OAuth configuration.
 
@@ -136,6 +136,8 @@ Run the `rpk ai oauth-client dcr update` command to enable DCR and choose how ca
 ----
 rpk ai oauth-client dcr update --enabled --admission-mode open
 ----
+
+TIP: You can also review and change DCR self-registration from the UI: on the *Integrations setup* page, open the *Inbound clients* tab and click *Manage DCR* to open the DCR governance panel.
 
 Inspect the current policy at any time:
 
