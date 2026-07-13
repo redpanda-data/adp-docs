@@ -66,7 +66,7 @@ The Provider type card shows five cards. Pick the one that matches your upstream
 |Reach Gemini Pro, Flash, and multimodal models through Google AI Studio. Ideal for long-context workloads and image/video inputs.
 
 |*AWS Bedrock*
-|Invoke foundation models (Claude, Llama, Titan, Nova, Mistral, AI21 Jamba) hosted inside your AWS account. Requires an AWS region and credentials (static, STS-assumed role, or the default credential chain). Supports the native Bedrock APIs (`InvokeModel`, `Converse`) and an OpenAI-compatible Chat Completions endpoint for `gpt-oss` models. See <<bedrock-inference-profiles>> for picking the right model identifier, and xref:gateway:bedrock-setup.adoc[Set up AWS Bedrock as an LLM provider] for a step-by-step IAM and access-key walkthrough.
+|Invoke foundation models (Claude, Llama, Titan, Nova, Mistral, AI21 Jamba, Gemma) hosted inside your AWS account. Requires an AWS region and credentials (static, STS-assumed role, or the default credential chain). Supports the native Bedrock APIs (`InvokeModel`, `Converse`) and an OpenAI-compatible Chat Completions endpoint for `gpt-oss` and Gemma models. See <<bedrock-inference-profiles>> for picking the right model identifier, and xref:gateway:bedrock-setup.adoc[Set up AWS Bedrock as an LLM provider] for a step-by-step IAM and access-key walkthrough.
 
 |*OpenAI-compatible*
 |Point at any OpenAI-compatible endpoint that ships `/v1/chat/completions` (vLLM, Ollama, LM Studio, LocalAI, Together, Groq, OpenRouter). Useful for self-hosted models and aggregator gateways. Requires a `Base URL`. Authentication is optional.

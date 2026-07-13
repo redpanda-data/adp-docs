@@ -78,8 +78,8 @@ Register a client by hand when it can't self-register, when it needs a confident
 
 Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
 
-. Open *OAuth Clients* in the sidebar. The page lists every external tool registered to request access tokens from this gateway, with its `Name`, `Grant Types`, `Status`, and `Scopes`.
-. Click *Register Client*.
+. Open *Integrations setup* in the sidebar and select the *Inbound clients* tab. The tab lists every external tool registered to request access tokens from this gateway, with its `Name`, `Grant Types`, `Status`, and `Scopes`. (The older `/oauth-clients` path still works but redirects here.)
+. Click *Add external tool*.
 . Pick a well-known client to prefill its redirect URIs and recommended scopes, or choose *Custom Client* to register one from scratch. The catalog includes *Claude.ai Custom Connectors*, *Claude Desktop*, *ChatGPT*, *Cursor*, *Windsurf*, *Visual Studio Code* (which also covers GitHub Copilot in VS Code), *Zed*, *Gemini CLI*, and *mcp-remote bridge* (a stdio-to-HTTP bridge for clients without native remote OAuth). For any client not in the catalog (for example, the Gemini consumer apps or Microsoft Copilot Studio), use *Custom Client* and paste the redirect URIs the tool publishes.
 . Fill in the form:
 +
@@ -115,11 +115,11 @@ Create an OAuth Client to give the chat app the credentials it needs to authenti
 |Whether the client can start new consent flows. Disabled clients reject new flows.
 |===
 +
-. Click *Register Client*.
+. Click *Add external tool*.
 
 On submit, AI Gateway mints the `client_id`. Confidential clients (those using a Client Secret authentication method) also receive a `client_secret`, *shown only once*. Copy it immediately. The OAuth Server Endpoints panel shows the `Authorization Endpoint` and `Token/Refresh Endpoint` (under `/oauth/idp/`) and the `mcp` scope; paste these into the external app's OAuth configuration.
 
-// TODO: capture screenshots of the Register Client catalog, the custom form, and the post-create detail page.
+// TODO: capture screenshots of the Add external tool catalog, the custom form, and the post-create detail page.
 
 [[self-register-with-dcr]]
 == Let clients self-register with Dynamic Client Registration
@@ -207,7 +207,7 @@ Replace `<token-id>` with the ID from the IAT list.
 
 === Review self-registered clients
 
-Self-registered clients appear alongside manually registered ones in the `rpk ai oauth-client list` output and on the *OAuth Clients* page, marked with a DCR badge and a name of the form `dcr-<id>`. They authenticate with PKCE and no client secret. Audit them like any other client, and delete one to revoke its tokens:
+Self-registered clients appear alongside manually registered ones in the `rpk ai oauth-client list` output and on the *Inbound clients* tab, marked with a DCR badge and a name of the form `dcr-<id>`. They authenticate with PKCE and no client secret. Audit them like any other client, and delete one to revoke its tokens:
 
 [source,bash]
 ----
@@ -251,7 +251,7 @@ NOTE: Anthropic's modal warns that connectors are user-trust-based; Anthropic do
 
 == Wire up other chat clients
 
-The flow mirrors Claude Desktop. *ChatGPT*, *Cursor*, *Windsurf*, *Visual Studio Code*, *Zed*, *Gemini CLI*, and *mcp-remote bridge* have catalog presets in the *Register Client* flow that prefill their redirect URIs; the others use a *Custom Client*. The exact menu paths and field labels differ by client:
+The flow mirrors Claude Desktop. *ChatGPT*, *Cursor*, *Windsurf*, *Visual Studio Code*, *Zed*, *Gemini CLI*, and *mcp-remote bridge* have catalog presets in the *Add external tool* flow that prefill their redirect URIs; the others use a *Custom Client*. The exact menu paths and field labels differ by client:
 
 * *ChatGPT desktop*: Recent builds support remote MCP custom connectors. Confirm the latest menu path; OpenAI iterates on this surface.
 * *Cursor*: Supports remote MCP servers in recent builds.
@@ -282,7 +282,7 @@ This handshake runs *once per user* when the connector is first added.
 * The OAuth Client's name (for example, _Claude (GitHub Read demo) wants to access your data_).
 * The *Resource* being authorized: The MCP server name and URL.
 * The *Requested permissions*: The gateway's internal scopes for this handshake (`mcp` and `offline_access`). These are *not* the upstream system's scopes; the upstream's scopes appear during the next handshake.
-* A footer reminding the user that they can revoke access from their *Connections* page in Agentic Data Plane.
+* A footer reminding the user that they can revoke this access at any time in their Redpanda dashboard.
 +
 . The user clicks *Allow*. AI Gateway redirects the chat client back to the redirect URI with an authorization code.
 . The chat client exchanges the code for an access token and a refresh token, and stores them locally in its credential store.
@@ -311,7 +311,7 @@ NOTE: If the MCP server uses a service-account authentication mode instead of us
 
 Maintain registered OAuth Clients without re-creating them:
 
-* *List registered clients*: Open *OAuth Clients* in the sidebar. Each row shows the Name, Grant Types, Status, and Scopes.
+* *List registered clients*: Open *Integrations setup* in the sidebar and select the *Inbound clients* tab. Each row shows the Name, Grant Types, Status, and Scopes.
 * *Edit a client*: Change the display name, logo URI, redirect URIs, allowed MCP resources, grant types, or token endpoint authentication method. The `client_id` is immutable; delete and recreate the client if you need a new one.
 * *Reissue the secret*: The Client Secret is shown only once at creation and can't be regenerated in place. To issue a new secret, delete and recreate the client, then update every chat client that used it.
 * *Revoke all tokens*: Invalidate every refresh token AI Gateway has issued under this client without deleting the client itself (see <<revoke-all-tokens>>).
@@ -326,7 +326,7 @@ Revoking all tokens invalidates every refresh token AI Gateway has issued under 
 
 Revoke from the UI:
 
-. Open *OAuth Clients* in the sidebar and click the client whose tokens you want to revoke.
+. Open *Integrations setup* in the sidebar, select the *Inbound clients* tab, and click the client whose tokens you want to revoke.
 . On the client detail page, click *Revoke all tokens*.
 . Confirm the action.
 

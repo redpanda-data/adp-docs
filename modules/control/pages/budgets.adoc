@@ -45,7 +45,7 @@ Redpanda Agentic Data Plane enforces budgets per agent. A budget identifies an _
 You can have one default budget per tenant and at most one override per agent:
 
 * The *default* budget (no target agent) gives every agent its own independent pool of the limit per period. One agent reaching its cap doesn't affect another.
-* A *per-agent override* targets a single agent by resource name (`agents/<slug>`) and replaces the default for that agent. Use an override to give a specific agent a higher or lower cap than the fleet default.
+* A *per-agent override* targets a single agent by resource name (`agents/<slug>`) and replaces the default for that agent. Use an override to give a specific agent a higher or lower cap than the fleet default. Adding an override partway through a period doesn't reset the agent's usage: while a default budget exists, a new override inherits the default's current spending window instead of starting a fresh one, so spend the agent already accrued this period still counts toward the override's cap. (If no default budget exists, the override starts a new window when you create it.)
 
 The target agent is immutable. To move an override to a different agent, delete it and create a new one. An override matches on the agent's resource name, so recreating an agent with the same name keeps the override pointed at it; the new instance counts as a continuation for budget purposes. When you read a budget, it also reports the current period's spend, when the period started, when it resets, and (for the default budget) the agent currently closest to its cap.
 

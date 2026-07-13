@@ -21,7 +21,7 @@ OAuth providers and OAuth clients govern *opposite directions* of authentication
 * An *OAuth provider* (this page) governs *outbound* authentication: AI Gateway authenticating to an upstream system (GitHub, Slack, Salesforce, and so on) on a user's behalf so MCP servers can call that upstream.
 * An *OAuth client* governs *inbound* authentication: an external app (Claude Desktop, ChatGPT, Copilot Studio) authenticating to AI Gateway so the app's users can invoke MCP tools.
 
-The two live under separate sidebar entries (*OAuth Providers* and *OAuth Clients*) with separate API definitions, permissions, and lifecycles. To register or manage an OAuth client (including revoking its refresh tokens to force a re-sign-in), see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
+Both are managed under the *Integrations setup* entry in the sidebar: OAuth providers on the *Outbound providers* tab, OAuth clients on the *Inbound clients* tab. They remain separate resources with separate API definitions, permissions, and lifecycles. To register or manage an OAuth client (including revoking its refresh tokens to force a re-sign-in), see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
 ====
 
 == Prerequisites
@@ -63,7 +63,7 @@ NOTE: The `_attach` permission is independent from `_get`, `_create`, `_update`,
 
 == Browse OAuth providers
 
-The *OAuth Providers* page lists every provider registered in your organization. The list shows the following columns:
+Open *Integrations setup* in the sidebar and select the *Outbound providers* tab. The tab lists every provider registered in your organization. (The older `/oauth-providers` path still works but redirects here.) The list shows the following columns:
 
 [cols="1,3"]
 |===
@@ -88,7 +88,7 @@ A *Filter* button narrows the list. The *Create provider* button opens the creat
 
 Walk through the create form to register the upstream:
 
-. Open *OAuth Providers* in the sidebar.
+. Open *Integrations setup* in the sidebar and select the *Outbound providers* tab.
 . Click *Create provider*.
 . Pick a preset from the catalog, or choose *Custom Provider* to enter the endpoints yourself. Picking a preset pre-fills the standard authorization and token endpoints and recommended scopes.
 +
@@ -139,7 +139,7 @@ The catalog groups presets into categories you can filter with the category chip
 . Optionally turn on `Require PKCE` to add PKCE (RFC 7636) to the consent flow. Leave `Enabled` on so the provider can start consent flows.
 . Click *Create Provider*.
 
-The provider appears in the *OAuth Providers* list.
+The provider appears in the *Outbound providers* list.
 
 == Register from the CLI
 
