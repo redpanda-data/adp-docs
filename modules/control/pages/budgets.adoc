@@ -49,6 +49,8 @@ You can have one default budget per tenant and at most one override per agent:
 
 The target agent is immutable. To move an override to a different agent, delete it and create a new one. An override matches on the agent's resource name, so recreating an agent with the same name keeps the override pointed at it; the new instance counts as a continuation for budget purposes. When you read a budget, it also reports the current period's spend, when the period started, when it resets, and (for the default budget) the agent currently closest to its cap.
 
+Adding an override for an agent that the tenant default budget was already governing takes over the agent's current-period spend rather than starting it fresh: the spend the agent has already accrued this period continues to count toward the override's limit, and the period keeps resetting on its normal schedule. Deleting and recreating an override behaves the same way, so an agent can't gain fresh runway by having its override recreated mid-period. An override created for an agent with no tenant default in effect is that agent's first budget, so it counts spend only from the time you create it. Editing an existing budget (for example, raising or lowering its limit) never moves the spend window; spend already accrued this period keeps counting.
+
 === Set a budget in the UI
 
 Open *Budgets* under *Governance* in the sidebar. The page shows the tenant default budget as a card: its cap and period, the warn threshold, and how many agents are doing fine, getting close, or over the limit. Per-agent overrides appear in a table below the card, with each override's `Agent override` target, `Period`, current `Usage` against the cap, `Warn at` threshold, and when it was last `Updated`.
