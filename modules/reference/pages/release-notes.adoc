@@ -6,6 +6,23 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.24 (2026-07-13)
+
+=== Features
+
+Models:: OpenAI providers now offer the GPT-5.6 model family: GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol.
+
+=== Improvements
+
+Models `[UI]`:: Each model now has a detail page showing its overview, pricing, and capabilities.
+
+=== Bug fixes
+
+Models `[UI]`:: Model usage now shows a clear error when a usage query fails, instead of misleading zero values.
+Cost & Usage:: Cost and usage reports now count cached tokens accurately even when a provider returns incomplete usage data.
+MCP Servers `[UI]`:: The inspector shows upstream HTML and XML errors as readable text instead of raw markup.
+My Connections `[UI]`:: The Connect and Reconnect buttons now show a loading state while the provider's consent screen opens.
+
 == v0.2.23 (2026-07-13)
 
 === Features
