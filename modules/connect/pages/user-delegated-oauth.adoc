@@ -52,9 +52,16 @@ After consent, the user can see and revoke their connection under *My Connection
 
 == Manage your connections
 
-The *My Connections* page in the sidebar is each user's view of their own third-party connections, so a user can authorize the providers their MCP servers need without waiting for a tool call to trigger the consent flow.
+The *My Connections* page in the sidebar is each user's view of their own third-party connections, so a user can authorize the providers their MCP servers need without waiting for a tool call to trigger the consent flow. It shows connections for your own identity only.
 
-The page has two panes. A left rail groups the available OAuth providers into *Needs attention*, *Connected*, and *Available to connect*, with each row showing the provider's name, a status indicator, and a quick *Connect* or *Reconnect* action. Selecting a row opens a detail pane that shows the provider's requested scopes, its status (one of *Connected*, *Needs attention*, *Action required*, or *Not connected*), and *Connect*, *Reconnect*, and *Disconnect* actions. Click *Connect* to run the consent flow for that provider and store a token in the vault under your identity. Connections persist until you disconnect them. A connection whose access token can still be renewed from its stored refresh token stays *Connected*; one that can no longer be renewed moves to *Needs attention* so you can *Reconnect* it.
+The page uses a two-pane layout. The left rail lists providers grouped by status:
+
+* *Available to connect*: Providers you haven't authorized yet.
+* *Connected*: Providers with a usable connection.
+* *Needs attention*: Connections that have failed, or whose refresh token is close to expiring, and need to be reconnected.
+
+// Source: cloudv2 PR #28055 (9fcea916d), apps/adp-ui/src/components/connections/ (connection-master-rail.tsx buckets, connection-detail-pane.tsx badges/actions, connection-status.ts reconnectDeadline).
+Select a provider to open its detail pane on the right. The pane shows the granted scopes, a status badge (*Connected*, *Needs attention*, *Action required*, or *Not connected*), and the actions for that provider: *Connect* runs the consent flow and stores a token in the vault under your identity, *Reconnect* re-runs consent for an existing connection (for example, to grant additional scopes or recover after a refresh token expires), and *Disconnect* revokes it. A connection that the gateway can renew automatically from a stored refresh token stays *Connected* with no action from you; it moves to *Needs attention* or *Action required* only when it can no longer renew on its own.
 
 NOTE: Connections are per-user. Each user authorizes their own accounts, and one user's connections are not visible to or usable by another.
 
@@ -66,9 +73,12 @@ If a user's stored connection has fewer scopes than the server's `required_scope
 
 == Refresh and expiry
 
-Redpanda transparently refreshes tokens before they expire, using the refresh token returned at consent time.
+Redpanda transparently refreshes tokens before they expire, using the refresh token returned at consent time. A connection is only considered expired when its access token has lapsed *and* the gateway can no longer renew it automatically. As long as a usable refresh token is stored, the connection stays active across access-token expiry, and the gateway renews access silently on the next call. This matters for upstreams that issue short-lived access tokens with long-lived refresh tokens: a GitHub App, for example, issues 8-hour access tokens backed by refresh tokens that last around six months, so an idle connection stays active for months rather than showing as expired within hours.
 
-When refresh fails (revoked token, idle too long, upstream error), the next tool call returns `OAuthTokenExpired` with a `reason`. The user must re-consent through the same flow as initial connection.
+A connection is reported as expired, meaning the user must reconnect, only when the access token has lapsed and no usable refresh token exists: either none was stored, or the refresh token itself has expired. When that happens, the next tool call returns `OAuthTokenExpired` with a `reason`, and the user must re-consent through the same flow as the initial connection.
+
+// Source: cloudv2 PR #28045 (4cca44e94), proto/public/cloud/redpanda/api/adp/v1alpha1/oauth_connection.proto ConnectionStatus ACTIVE/EXPIRED semantics + Connection.refresh_token_present / refresh_token_expires_at.
+Each connection reports whether a refresh token backs it, so a client can tell a connection that renews automatically from one that needs reconnecting. The `OAuthConnectionService.ListConnections` and `GetConnection` responses expose this on the `Connection` message through two read-only fields: `refresh_token_present` (a refresh token is stored, so the gateway renews access automatically) and `refresh_token_expires_at` (when the refresh token itself expires, if the upstream reports it, as GitHub Apps do; absent when unknown or non-expiring).
 
 == Service-account OAuth contrast
 
