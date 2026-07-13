@@ -6,6 +6,22 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.23 (2026-07-13)
+
+=== Features
+
+Models:: You can now use the Google Gemma 4 model family with your Amazon Bedrock providers, in three sizes from largest to smallest: Gemma 4 31B, Gemma 4 26B-A4B, and Gemma 4 E2B.
+
+=== Improvements
+
+Integrations setup `[UI]`:: Manage OAuth providers and MCP client access in one tabbed **Integrations setup** area, replacing the separate pages.
+My Connections `[UI]`:: The **My Connections** page groups your account connections by status and lets you connect or reconnect without leaving the page.
+Security:: This release includes general security and stability improvements.
+
+=== Bug fixes
+
+My Connections:: Connections that renew automatically, for example GitHub, no longer show as expired shortly after connecting. You are prompted to reconnect only when a connection can no longer renew itself.
+
 == v0.2.22 (2026-07-10)
 
 === Features
