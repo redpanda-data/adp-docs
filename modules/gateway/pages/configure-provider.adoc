@@ -252,16 +252,16 @@ The *Connect* tab generates ready-made client configuration for this provider: a
 
 From the model list on the provider's *Overview* tab, select a model (*View model details*) to open its detail page. The page gathers what the catalog knows about that model on this provider in one place:
 
-* An overview strip with the model's *Context window* (largest input it accepts), *Max output* (most it can generate in a single response), and *Price* (input and output rates per million tokens). Each stat appears only when the catalog declares it.
-* *Model details*: the model ID and the provider's proxy URL, each with a copy control.
-* *Pricing*: a read-only rate card of the model's effective per-bucket rates, that is, the catalog rates with any per-model overrides applied (see <<pricing-overrides>>). This section appears only when rates are known, and links to the upstream provider's pricing reference.
-* *Capabilities*: the model's capabilities from the catalog, with a link to the upstream provider's capabilities reference. This section appears only when the catalog declares capabilities.
-* *Usage*: *Spend*, *Requests*, and *Tokens* cards for traffic routed to this model through this provider over the last 7 days. Select *View more* on a card to open a metric detail drawer.
+* An overview strip with the model's context window (largest input it accepts), maximum output (most it can generate in a single response), and price (input and output rates per million tokens). Each value appears only when the catalog declares it.
+* Model details: The model ID and the provider's proxy URL, each with a copy control.
+* Pricing: A read-only rate card of the model's effective per-bucket rates, that is, the catalog rates with any per-model overrides applied (see <<pricing-overrides>>). This section appears only when rates are known, and links to the upstream provider's pricing reference.
+* Capabilities: The model's capabilities from the catalog, with a link to the upstream provider's capabilities reference. This section appears only when the catalog declares capabilities.
+* Usage: Spend, Requests, and Tokens cards for traffic routed to this model through this provider over the last 7 days. Select *View more* on a card to open a metric detail drawer.
 
 [[transcript-logging]]
 == Configure transcript logging
 
-The Transcripts card controls whether AI Gateway records the message bodies this provider proxies. It has two independent toggles, *both off by default*:
+The Transcripts card controls whether AI Gateway records the message bodies this provider proxies. It has two independent toggles, both off by default:
 
 [cols="1,3"]
 |===
