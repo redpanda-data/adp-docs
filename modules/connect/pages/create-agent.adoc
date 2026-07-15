@@ -66,7 +66,7 @@ For an AWS Bedrock provider, Agentic Data Plane validates the model when you cre
 
 == Instructions
 
-In the *Instructions* section, write the *System prompt* that defines the agent's role, responsibilities, constraints, and output format. The system prompt is optional but strongly recommended; when set, it's sent on every invocation as the first message. The inline field is a plain text editor. To write in a larger, formatted surface, click *Expand editor* to open a dialog with a Markdown editor that has both a visual editing tab and a *Raw* tab for editing the Markdown source directly. You can also start from a template with *Templates*.
+In the *Instructions* section, write the *System prompt* that defines the agent's role, responsibilities, constraints, and output format. The system prompt is optional but strongly recommended; when set, it's sent on every invocation as the first message. The field is a Markdown editor with a *Write* tab and a *Preview* tab. On the *Write* tab, type the prompt directly and use the formatting toolbar for headings, bold, italic, links, lists, quotes, and code blocks, or select the upload icon to import a Markdown file. The *Preview* tab renders the formatted result. To edit in a larger surface, click *Expand editor*, and to start from a template, select *Templates*.
 
 A typical prompt defines:
 
