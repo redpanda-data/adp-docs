@@ -254,7 +254,7 @@ The *Overview* tab carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `
 
 === Models
 
-The *Models* tab lists the chat models this provider exposes. Each row shows the model's name and identifier, capability chips (such as `vision`, `tools`, `json`, or `reasoning`), its context-window limit, and its input and output prices per million tokens. Use the toggle on a row to enable or disable that model on the provider. Select a model to open its detail page (see <<model-detail-page>>).
+The *Models* tab lists the chat models available on this provider. Each row shows the model's name and identifier, icons for the capabilities it supports (such as vision, tools, JSON, or reasoning), its context-window limit, and its input and output prices per million tokens. Use the toggle on a row to enable or disable that model on the provider. Select a model to open its detail page (see <<model-detail-page>>).
 
 === Connect
 
@@ -418,7 +418,7 @@ The *LLM Providers* list page is the at-a-glance home for every provider in your
 |Column |What it shows
 
 |`Provider`
-|The provider-type icon (OpenAI, Anthropic, Google, AWS Bedrock, or OpenAI-compatible), the display name, and the resource identifier beneath it. Select the row to open the provider's detail page.
+|The provider-type icon (OpenAI, Anthropic, Google, AWS Bedrock, or OpenAI-compatible), the display name, and the resource identifier beneath it. Select the provider name to open its detail page.
 
 |`Status`
 |`Active` for an enabled provider. A disabled provider rejects requests to its proxy URL until you enable it again.
