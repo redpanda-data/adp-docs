@@ -27,7 +27,7 @@ After reading this page, you will be able to:
 == Open the Create LLM provider page
 
 . Open *LLM Providers* in the sidebar.
-. Click *Create provider*.
+. Click *Add provider*.
 
 == Fill in the provider card
 
@@ -243,14 +243,35 @@ Cache writes with an unknown TTL always bill at the catalog rate; they have no o
 
 Use the reset control on a field to clear a single override, or clear every field to drop all overrides for the model. Overrides are scoped to this provider and model, and they change what Agentic Data Plane's cost reporting computes, not what the upstream provider actually charges you.
 
-After you create the provider, its detail page has two tabs. The *Overview* tab carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `TOKENS`) with sparklines and a *View more* link on each card, the Connection card (provider type, status, authentication passthrough state, proxy URL, upstream base URL, and the API key secret reference), and the model list, where each model shows its input and output prices per million tokens and its spend from requests routed through this provider over the last 7 days. Select a model in this list to open its detail page (see <<model-detail-page>>). For analysis across providers, use the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
+[[provider-detail-page]]
+== Explore the provider detail page
+
+After you create the provider, its detail page organizes everything about it into tabs: *Overview*, *Models*, *Connect*, *Activity*, and *Settings*.
+
+=== Overview
+
+The *Overview* tab carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `TOKENS`), where each card has a sparkline and a *View more* link that opens a metric detail drawer, and the Connection card (provider type, status, authentication passthrough state, proxy URL, upstream base URL, and the API key secret reference). The *Delete this provider* control sits at the bottom of this tab. For analysis across providers, use the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
+
+=== Models
+
+The *Models* tab lists the chat models this provider exposes. Each row shows the model's name and identifier, capability chips (such as `vision`, `tools`, `json`, or `reasoning`), its context-window limit, and its input and output prices per million tokens. Use the toggle on a row to enable or disable that model on the provider. Select a model to open its detail page (see <<model-detail-page>>).
+
+=== Connect
 
 The *Connect* tab generates ready-made client configuration for this provider: a gateway-token step, ready-to-run `rpk ai` setup steps, setup instructions for popular clients such as Claude Code, and code examples in several languages, all with the provider's proxy URL prefilled. For a Bedrock provider, the Claude Code snippets run against the gateway without local AWS credentials, because the gateway signs the upstream AWS requests for you. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for the underlying flow.
+
+=== Activity
+
+The *Activity* tab shows recent agent activity scoped to this provider. It ranks the agents that sent the most traffic through the provider over a time window you select, and, where transcripts are recorded, lets you open an agent's recent requests and drill into individual transcripts. Transcripts are recorded per agent rather than per provider, so an agent's transcript list can include requests it sent to other providers.
+
+=== Settings
+
+The *Settings* tab shows read-only identification (the provider's display name and resource identifier) and the Secret Store references it uses to authenticate. From here you can open the Secret Store to rotate or replace those secret values.
 
 [[model-detail-page]]
 === View a model's detail page
 
-From the model list on the provider's *Overview* tab, select a model (*View model details*) to open its detail page. The page gathers what the catalog knows about that model on this provider in one place:
+From the *Models* tab, select a model to open its detail page. The page gathers what the catalog knows about that model on this provider in one place:
 
 * An overview strip with the model's context window (largest input it accepts), maximum output (most it can generate in a single response), and price (input and output rates per million tokens). Each value appears only when the catalog declares it.
 * Model details: The model ID and the provider's proxy URL, each with a copy control.
@@ -397,22 +418,22 @@ The *LLM Providers* list page is the at-a-glance home for every provider in your
 |Column |What it shows
 
 |`Provider`
-|User-given name plus the provider-type icon (OpenAI, Anthropic, Google, AWS Bedrock, OpenAI-compatible) and a copyable preview of the proxy base URL.
+|The provider-type icon (OpenAI, Anthropic, Google, AWS Bedrock, or OpenAI-compatible), the display name, and the resource identifier beneath it. Select the row to open the provider's detail page.
 
 |`Status`
-|Shows `Active` for an enabled provider. A disabled provider rejects requests to its proxy URL until you enable it again.
+|`Active` for an enabled provider. A disabled provider rejects requests to its proxy URL until you enable it again.
 
 |`Models`
-|First two model identifiers exposed by the provider, plus a `+N` overflow chip when more are configured.
+|The model identifiers configured on the provider, shown as chips. A provider with no models configured shows a dash.
 
-|`Spend (7d)`
-|Spend over the last 7 days with a small sparkline. The window is fixed at 7 days on this view. Longer-range analysis runs through the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
+|`24h requests`
+|Request count over the last 24 hours, with a sparkline.
 
-|`Updated`
-|Relative timestamp of the last edit.
+|`30d spend`
+|Spend over the last 30 days, with a sparkline. For longer-range or cross-provider analysis, use the *Cost & Usage* page under *Governance* (see <<view-cost-and-usage>>).
 |===
 
-The *Filter* button narrows the list by provider type, status, or name. The *Create provider* button opens the create flow described in <<open-the-create-llm-provider-page,Open the Create LLM provider page>>. The list paginates, with a rows-per-page selector in the footer.
+Use the search box to find a provider by name, and the *Filter* button to narrow the list by provider type, model, or status. The *Add provider* button opens the create flow described in <<open-the-create-llm-provider-page,Open the Create LLM provider page>>. Each row's actions menu can activate or deactivate the provider, copy its proxy or base URL, or delete it. The list paginates, with a rows-per-page selector in the footer.
 
 [[view-cost-and-usage]]
 == View cost and usage

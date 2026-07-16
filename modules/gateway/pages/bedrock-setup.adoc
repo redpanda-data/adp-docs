@@ -115,7 +115,7 @@ A successful model response confirms the IAM policy, region, and credentials are
 
 == Register Bedrock as an LLM provider
 
-. Open *LLM Providers* in the sidebar and click *Create provider*.
+. Open *LLM Providers* in the sidebar and click *Add provider*.
 . Select *AWS Bedrock* as the provider type.
 . Enter a Name such as `my-bedrock`. Use lowercase letters, digits, and hyphens. The name is immutable and appears in the proxy URL.
 . Select the Region where you want to invoke Bedrock, such as `us-east-1`.
