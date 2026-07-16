@@ -90,7 +90,7 @@ Now point Agentic Data Plane at Anthropic. Agentic Data Plane references provide
 
 . Open *LLM Providers* in the sidebar.
 
-. Click *Create provider*.
+. Click *Add provider*.
 
 . `Display name`: Enter `anthropic-quickstart`. This label appears in dashboards and model selectors.
 
