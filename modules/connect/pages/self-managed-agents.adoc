@@ -73,7 +73,7 @@ image::self-managed-agent-credentials.png[The Credentials tab for a self-managed
 
 . Note the *Client ID*. It has the form `serviceaccounts/<agent-id>`, where `<agent-id>` is the agent's identifier. The Client ID is public and stable: every secret on the agent shares it.
 . Click *Create secret*.
-. Optionally enter a *Label* to identify the secret in the list and in audit logs, for example, `production`.
+. Optionally enter a *Name* to identify the secret in the list and in audit logs, for example, `production`. If you leave it blank, Agentic Data Plane assigns a default name such as `secret-1`.
 . Click *Generate secret*.
 +
 Agentic Data Plane shows the plaintext *Client secret* one time.

@@ -254,7 +254,9 @@ The *Overview* tab carries a Last 7 days KPI strip (`TOTAL SPEND`, `REQUESTS`, `
 
 === Models
 
-The *Models* tab lists the chat models available on this provider. Each row shows the model's name and identifier, icons for the capabilities it supports (such as vision, tools, JSON, or reasoning), its context-window limit, and its input and output prices per million tokens. Use the toggle on a row to enable or disable that model on the provider. Select a model to open its detail page (see <<model-detail-page>>).
+The *Models* tab lists the chat models available on this provider. Each row shows the model's name and identifier, icons for the capabilities it supports (such as vision, tools, JSON, or reasoning), its context-window limit, and its input and output prices per million tokens. Hover over a capability icon to read what that capability means. Use the toggle on a row to enable or disable that model on the provider. Select a model to open its detail page (see <<model-detail-page>>).
+
+Enabled models sort to the top, followed by the newest catalog models. Use the search box to find a model by display name or identifier, and the *Status* and *Capability* filters to narrow the list. By default the tab hides legacy, deprecated, and unavailable models; turn on *Show legacy, deprecated, and unavailable models* to include them.
 
 === Connect
 
