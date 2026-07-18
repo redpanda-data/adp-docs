@@ -137,12 +137,13 @@ NOTE: Defer advanced code-mode patterns (sandboxing limits, runtime selection, d
 
 . Click *Create*. The server appears in the list with a *Type* badge: *Managed* or *Self-managed*.
 . Open the detail page. The *Overview* tab shows the *API URL*: this is the MCP URL agents connect to. Copy it for use later.
+. Open the *Activity* tab to review how agents have used this server. The *Recent calls* table lists high-confidence tool calls inferred from up to 50 recent conversations across the agents attached to this server over the last 7 days, showing each call's time, tool, agent, caller, duration, and status. Click *Refresh* to reload the feed. If no traffic has run yet, the tab shows an empty state instead.
 . Open the *Connection* tab to see ready-to-paste connection snippets, pre-filled with this server's API URL, for common MCP clients such as Claude Code, Claude Desktop, and Cursor, plus code examples in several languages. The code examples authenticate with the OAuth authorization-code flow and surface the OAuth client ID to use.
 . Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:connect:test-tools.adoc[Test a server's tools] for how to call them.
 
 A populated tools list confirms that the connection works and credentials resolve correctly. If the list is empty or the tab shows an error, see <<troubleshooting>>.
 
-// Tab names verified 2026-06-09 against adp-ui $name.index.page.tsx on origin/main: Overview / Connection / Inspector. The Connection tab is the canonical home for client snippets (connect-client-guide + connection-tab components).
+// Tab names verified 2026-07-18 against adp-ui $name.index.page.tsx and $name.index.tsx (VALID_TABS) on main: Overview / Activity / Connection / Inspector. The Activity tab was added in cloudv2 PR #28227 and shows inferred recent tool calls; it is ungated. The Connection tab is the canonical home for client snippets (connect-client-guide + connection-tab components).
 
 == Create from the CLI
 
