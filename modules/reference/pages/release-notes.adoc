@@ -6,6 +6,26 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.25 (2026-07-17)
+
+=== Features
+
+Models `[UI]`:: Every LLM provider now has a **Models** tab where you can browse the models it serves, turn individual models on or off, and filter them by capability or status.
+LLM Providers `[UI]`:: Each provider now has an **Activity** tab that shows the agents, requests, and conversations routed through it over a time range you choose.
+
+=== Improvements
+
+LLM Providers `[UI]`:: The providers list shows each provider's models with small trend charts for recent requests and spend, and you can filter the list to providers that serve a specific model.
+LLM Providers `[UI]`:: Each provider's **Settings** tab shows which Secret Store entries authenticate it, with a shortcut to manage those keys.
+LLM Providers `[UI]`:: The **Connect** setup guide lets you pick your coding agent and operating system, and gives copy-paste `rpk ai` steps tailored to your environment.
+MCP Servers `[UI]`:: Running a tool in the server inspector now shows clear, actionable validation errors for invalid inputs instead of a generic failure.
+
+=== Bug fixes
+
+OAuth Clients:: Connecting an AI client to a **Code Mode** MCP server over OAuth now succeeds; Code Mode adds tools that let agents run sandboxed code against the server. Clients such as Claude Code and the MCP Inspector now register automatically through Dynamic Client Registration (DCR) instead of failing with a missing-scope error.
+My Connections `[UI]`:: Using the browser Back button after starting a connection no longer leaves the **Connect** button stuck; the connection state resets cleanly.
+Home `[UI]`:: A brand-new environment no longer shows a misleading all-clear health status before you have set anything up.
+
 == v0.2.24 (2026-07-13)
 
 === Features
