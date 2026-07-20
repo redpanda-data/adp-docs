@@ -5,7 +5,7 @@
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Create a managed or self-managed MCP server in Agentic Data Plane
 :learning-objective-2: Configure each authentication mode and pick the right one for your use case
-:learning-objective-3: Save the server, verify the API URL, and confirm tools were discovered
+:learning-objective-3: Save the server, verify the MCP Server URL, and confirm tools were discovered
 
 Create MCP servers to give agents structured access to your databases, queues, CRMs, and other business systems. Each server exposes glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] that an agent can discover and invoke. Choose managed types that Redpanda hosts for you, or register self-managed servers you host yourself.
 
@@ -27,7 +27,7 @@ After completing this guide, you will be able to:
 . Open *MCP Servers* in the sidebar.
 +
 // TODO: screenshot of the MCP Servers list page on `adp-production`.
-. Click *Create Server*.
+. Click *Add MCP server*.
 
 == Pick a backend
 
@@ -125,7 +125,7 @@ NOTE: Choosing between `Service-account OAuth` and `User-delegated OAuth` is the
 
 == Code mode (optional)
 
-Toggle *Code mode* to add `\{name}_search` and `\{name}_execute` tools alongside the server's own tools. Agents can use `_search` to discover available tools and `_execute` to run sandboxed Python or JavaScript that orchestrates them. This is useful when you'd rather have the agent generate a small program than call tools one at a time.
+Toggle *Enable Code Mode* to add `\{name}_search` and `\{name}_execute` tools alongside the server's own tools. Agents can use `_search` to discover available tools and `_execute` to run sandboxed Python or JavaScript that orchestrates them. This is useful when you'd rather have the agent generate a small program than call tools one at a time.
 
 When code mode is enabled, the server's detail page surfaces a second URL, the *code-mode MCP URL*, that clients can connect to instead of the standard one.
 
@@ -135,9 +135,9 @@ NOTE: Defer advanced code-mode patterns (sandboxing limits, runtime selection, d
 
 == Save and verify
 
-. Click *Create*. The server appears in the list with a *Type* badge: *Managed* or *Self-managed*.
-. Open the detail page. The *Overview* tab shows the *API URL*: this is the MCP URL agents connect to. Copy it for use later.
-. Open the *Connection* tab to see ready-to-paste connection snippets, pre-filled with this server's API URL, for common MCP clients such as Claude Code, Claude Desktop, and Cursor, plus code examples in several languages. The code examples authenticate with the OAuth authorization-code flow and surface the OAuth client ID to use.
+. Click *Create server*. The server appears in the list with a *Type* badge: *Managed* or *Self-managed*.
+. Open the detail page. The *Overview* tab shows the `MCP Server URL`: the URL clients use to connect to the server. Copy it for use later.
+. Open the *Connection* tab to see ready-to-paste connection snippets, pre-filled with this server's URL, for common MCP clients such as Claude Code, Claude Desktop, and Cursor, plus code examples in several languages. The code examples authenticate with the OAuth authorization-code flow and surface the OAuth client ID to use.
 . Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:connect:test-tools.adoc[Test a server's tools] for how to call them.
 
 A populated tools list confirms that the connection works and credentials resolve correctly. If the list is empty or the tab shows an error, see <<troubleshooting>>.

@@ -68,7 +68,7 @@ The OpenAPI managed MCP server type takes any OpenAPI 3.x spec URL and generates
 PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. Before you start, open https://petstore3.swagger.io/api/v3/openapi.json[the spec URL^] in your browser. If it doesn't return JSON, wait a few minutes and retry; PetStore usually recovers quickly. Checking now saves you from debugging your agent later for an upstream outage that isn't your fault.
 ====
 
-. Open *MCP Servers* in the sidebar and click *Create server*.
+. Open *MCP Servers* in the sidebar and click *Add MCP server*.
 
 . Search for and select the `OpenAPI` card from the marketplace picker.
 +
@@ -78,21 +78,21 @@ image::create-mcp-server-picker.png[The Create MCP Server marketplace picker fil
 
 . `Description`: Enter `Public PetStore API exposed as MCP tools for quickstart testing`. Optional, but helps you find the server later.
 
-. Leave the `Code mode` toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools. The PetStore catalog is small enough that you don't need it for this quickstart.
+. Leave the `Enable Code Mode` toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools. The PetStore catalog is small enough that you don't need it for this quickstart.
 
 . `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`.
 
-. `Base URL override`: Leave blank. The PetStore spec already declares the right `servers` block, so no override is needed.
+. `Base URL`: Leave blank. The PetStore spec already declares the right `servers` block, so no override is needed.
 
 . Skip all other optional configuration fields.
 
 . For the authentication mode, select `None`. PetStore is a public API.
 
-. Click *Create*.
+. Click *Create server*.
 
 . Redpanda fetches the spec, parses it, and generates one MCP tool per operation. When the server is ready, open its detail page.
 
-. On the *Overview* tab, copy the `API URL`. This is the MCP URL the agent connects to.
+. On the *Overview* tab, copy the `MCP Server URL`. MCP clients use this URL to connect to the server.
 
 . Open the *Inspector* tab. Redpanda runs a live `tools/list` against the server and lists every tool it discovered. Confirm the list includes `findpetsbystatus`, `getpetbyid`, `findpetsbytags`, and `addpet`. The OpenAPI MCP server lowercases tool names when it generates them from the spec's `operationId` values.
 +
@@ -219,7 +219,7 @@ The *Detailed* view is where you verify the agent did what you asked: which tool
 
 PetStore proves the flow. To build something your team uses, swap the demo API for a real system:
 
-. Open *MCP Servers* in the sidebar and click *Create server*.
+. Open *MCP Servers* in the sidebar and click *Add MCP server*.
 . Pick a type from the marketplace picker that matches a system your team uses, such as Slack, Jira, or a SQL database. See the xref:connect:managed/managed-catalog.adoc[managed MCP catalog] for every type Redpanda hosts, with links to setup guides.
 . Configure its authentication. Unlike PetStore, real systems need credentials: an API key stored as a secret, or per-user OAuth. Some authentication modes need one-time setup from your administrator; see xref:connect:authentication.adoc[Set up authentication].
 . Add the new server to your agent's *Tools* section, and update the system prompt to describe the new tools and rules.
