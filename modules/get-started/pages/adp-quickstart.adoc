@@ -5,7 +5,7 @@
 :personas: platform_engineer
 :learning-objective-1: Configure your first LLM provider in Agentic Data Plane with an Anthropic API key
 :learning-objective-2: Verify the provider is enabled and its connection is active
-:learning-objective-3: Hand off to agent builders with the role and links they need
+:learning-objective-3: Grant builders the Writer role and point them to the agent builder quickstart
 
 // Source: drafted against `adp-production` UI flows for LLM providers; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider protos on cloudv2 origin/main.
 // Provider field labels follow the canonical doc: gateway:configure-provider.adoc. Keep this page consistent with it at PR time.

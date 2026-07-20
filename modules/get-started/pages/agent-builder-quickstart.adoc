@@ -29,7 +29,7 @@ After reading this page, you will be able to:
 
 == What you build
 
-You create two Agentic Data Plane resources, in order:
+You create the following Agentic Data Plane resources, in order:
 
 . *PetStore glossterm:MCP server[]*. Exposes the public Swagger PetStore API as a set of glossterm:MCP tool[,MCP tools] the agent can call. PetStore is a public demo API with no authentication, so you can focus on the flow instead of credentials.
 . *Pet store assistant agent*. Combines your organization's LLM provider and the MCP server so a natural-language question becomes a real API call against PetStore.
@@ -241,5 +241,5 @@ Leave your organization's LLM provider alone. It's a shared resource that other 
 * Use your MCP tools from Claude Desktop, ChatGPT, or another chat app: xref:connect:remote-mcp-clients.adoc[]
 * Call the agent from your own application over its A2A endpoint: xref:connect:create-agent.adoc#connect-to-the-agent[Connect to the agent]
 * Let the agent respond in Microsoft Teams: xref:connect:triggers/overview.adoc[]
-* Prefer the terminal? Create and manage agents with the CLI: xref:cli:index.adoc[]
+* Create and manage agents from the terminal: xref:cli:index.adoc[]
 * Write better instructions for your agent: xref:connect:system-prompts.adoc[]
