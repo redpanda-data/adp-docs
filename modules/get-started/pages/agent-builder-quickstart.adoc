@@ -146,7 +146,7 @@ Rules:
   delete pets.
 ----
 
-. In the *Tools* section, click *Add MCP server* and select `petstore-quickstart`. The agent discovers the server's tools at runtime; you don't pre-select individual tools. The system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
+. In the *Tools* section, type `petstore-quickstart` in the *Search MCP servers* box and select its checkbox. Don't click *Add MCP server* on the left: that opens the create-server flow to build a new server, and you already have one. The agent discovers the server's tools at runtime; you don't pre-select individual tools, and the system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
 
 . Leave the *Advanced* area collapsed. The quickstart uses a single agent with no subagents or tags.
 

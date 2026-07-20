@@ -102,8 +102,8 @@ For full guidance on writing effective prompts, see xref:connect:system-prompts.
 
 In the *Tools* section, grant the agent access to the glossterm:Model Context Protocol (MCP)[] servers that expose tools to it. This section is optional, and you can change the list at any time after creation.
 
-. Click *Add MCP server* and select each server you want the agent to call.
-. The agent discovers each server's tools at runtime; you don't pre-select individual tools. The agent calls them based on the LLM's interpretation of the system prompt and the user request. Keep the system prompt aligned with the servers you select so the model knows what's available.
+. In the *Search MCP servers* box, find each server you want the agent to call and select its checkbox. To create a new server instead of attaching an existing one, click *Add MCP server*, which opens the server-creation flow in a new tab.
+. The agent discovers each selected server's tools at runtime; you don't pre-select individual tools. The agent calls them based on the LLM's interpretation of the system prompt and the user request. Keep the system prompt aligned with the servers you select so the model knows what's available.
 
 TIP: Apply the principle of least privilege. Connect only the servers the agent needs.
 
