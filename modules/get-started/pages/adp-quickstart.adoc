@@ -78,8 +78,8 @@ Now point Agentic Data Plane at Anthropic. Agentic Data Plane references provide
 
 . `API key reference`: Switch to the *New* tab and create the secret inline:
 +
-* Name the secret `ANTHROPIC_API_KEY`. Agentic Data Plane uppercases the name automatically, and you can't change it after creation.
-* Under `Secret value`, leave the *Text* tab selected and paste the `sk-ant-` key you copied from Anthropic.
+* Name the secret `ANTHROPIC_API_KEY`. Use UPPER_SNAKE_CASE (uppercase letters, numbers, and underscores); a secret's name can't be changed after you create it.
+* After you enter the name, a `Secret value` field appears. Leave the *Text* tab selected and paste the `sk-ant-` key you copied from Anthropic.
 * Click *Create secret*.
 +
 The secret value is write-only: Agentic Data Plane can't show it again after creation, so if you mistype the key, create a new secret. New secrets get the AI Gateway scope automatically, which makes them usable across the platform: LLM providers, MCP servers, and agents. To create secrets ahead of time or manage them later, open *Secrets Store* in the sidebar.
