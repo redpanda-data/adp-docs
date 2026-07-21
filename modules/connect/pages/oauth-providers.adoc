@@ -84,13 +84,18 @@ Open *Integrations setup* in the sidebar and select the *Outbound providers* tab
 
 A *Filter* button narrows the list. The *Create provider* button opens the create form.
 
+[[register-an-oauth-provider-in-the-ui]]
 == Register an OAuth provider in the UI
 
 Walk through the create form to register the upstream:
 
 . Open *Integrations setup* in the sidebar and select the *Outbound providers* tab.
 . Click *Create provider*.
-. Pick a preset from the catalog, or choose *Custom Provider* to enter the endpoints yourself. Picking a preset pre-fills the standard authorization and token endpoints and recommended scopes.
+. Pick how to configure the provider:
++
+* Pick a preset from the catalog to pre-fill the standard authorization and token endpoints and recommended scopes.
+* Choose *Custom Provider* to enter the endpoints yourself.
+* Choose *Discover from MCP server URL* to point the gateway at a remote MCP server and let it detect the OAuth configuration for you. See <<discover-a-provider-from-an-mcp-server-url,Discover a provider from an MCP server URL>>.
 +
 The catalog groups presets into categories you can filter with the category chips: *Identity & SSO*, *Code & Dev*, *Productivity*, *Files & Storage*, *Communication*, *CRM & Support*, *Data Platform*, *Observability*, *Infrastructure*, and *HR & Legal*. It covers common providers across these categories, such as GitHub, Google, Okta, Microsoft, and Slack, with more added over time. For any upstream without a preset, use *Custom Provider* and enter its endpoints manually.
 +
@@ -140,6 +145,36 @@ The catalog groups presets into categories you can filter with the category chip
 . Click *Create Provider*.
 
 The provider appears in the *Outbound providers* list.
+
+[[discover-a-provider-from-an-mcp-server-url]]
+== Discover a provider from an MCP server URL
+
+When you connect to a remote MCP server that authenticates users over OAuth, you can let AI Gateway detect the server's OAuth configuration instead of entering endpoints and credentials by hand. If the remote server supports OAuth Dynamic Client Registration (DCR), the gateway registers itself as an OAuth client automatically, so you have no endpoints or client credentials to paste.
+
+NOTE: This is the *outbound* direction: AI Gateway registers itself as a client of a remote MCP server's OAuth server. It is distinct from the inbound DCR that lets external MCP clients register themselves with AI Gateway. To let clients such as Claude Code or ChatGPT register with the gateway, see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
+
+To discover a provider:
+
+. Open *Integrations setup* in the sidebar and select the *Outbound providers* tab.
+. Click *Create provider*, then select the *Discover from MCP server URL* card.
+. Enter the remote MCP server's URL and start the discovery probe.
+. Review the result and finish the setup. The gateway takes one of these paths, depending on what the probe finds:
++
+[cols="1,3"]
+|===
+|Result |What happens
+
+|Server supports DCR
+|The gateway registers itself as an OAuth client with the remote server's authorization server and pre-fills the provider. Confirm the details to create the provider.
+
+|A matching provider already exists
+|The gateway points you at the provider already registered for that server so you can attach it instead of creating a duplicate.
+
+|Server has no OAuth, or OAuth without DCR
+|The gateway falls back to the manual create form, pre-filling whatever it could detect. Complete the remaining fields as described in <<register-an-oauth-provider-in-the-ui,Register an OAuth provider in the UI>>.
+|===
+
+A provider created this way is marked with a *Discovered* badge in the list and on its detail page, which distinguishes it from a provider you configured manually. Its detail page also shows a *Registration* card. See <<view-provider-details,View provider details>>.
 
 == Register from the CLI
 
@@ -244,13 +279,15 @@ The response carries the matching `oauth_providers`, a `next_page_token` for the
 
 To attach an OAuth provider to an MCP server, the principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider plus the usual `mcpserver_create` / `mcpserver_update` permission. See xref:connect:create-server.adoc[Create an MCP Server] for the full attach flow and xref:connect:user-delegated-oauth.adoc[User-delegated OAuth] for the consent flow that runs on first call.
 
+[[view-provider-details]]
 == View provider details
 
-Click a provider in the list to open its detail page. The header shows the display name, status badge, and resource name, with *Connect*, *Edit*, and *Delete* actions. The page groups the configuration into cards:
+Click a provider in the list to open its detail page. The header shows the display name, status badge, and resource name, with *Connect*, *Edit*, and *Delete* actions. A provider that was set up through discovery also shows a *Discovered* badge. The page groups the configuration into cards:
 
 * *Authorization Callback URL*: The gateway callback to register on the upstream OAuth app.
 * *OAuth Endpoints*: The authorization, token/refresh, and revocation endpoints.
 * *Client Configuration*: Client ID, Client Secret Ref, Auth Method, and whether PKCE is required.
+* *Registration* (discovered providers only): The dynamic-registration state. It shows the registration endpoint, the client-configuration URI (the RFC 7592 endpoint used to verify, refresh, or delete the registered client), and when the registration was last verified. The registration access token is a managed credential kept in the secret store, and its value is never shown.
 * *Scopes & Grant Types*: The default scopes and grant types.
 * *Metadata*: When the provider was created and last updated.
 
