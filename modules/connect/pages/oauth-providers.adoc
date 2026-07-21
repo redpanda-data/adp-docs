@@ -93,7 +93,7 @@ Walk through the create form to register the upstream:
 . Click *Create provider*.
 . Pick how to configure the provider:
 +
-* Pick a preset from the catalog to pre-fill the standard authorization and token endpoints and recommended scopes.
+* Choose a preset from the catalog to pre-fill the standard authorization and token endpoints and recommended scopes.
 * Choose *Custom Provider* to enter the endpoints yourself.
 * Choose *Discover from MCP server URL* to point the gateway at a remote MCP server and let it detect the OAuth configuration for you. See <<discover-a-provider-from-an-mcp-server-url,Discover a provider from an MCP server URL>>.
 +
@@ -151,7 +151,7 @@ The provider appears in the *Outbound providers* list.
 
 When you connect to a remote MCP server that authenticates users over OAuth, you can let AI Gateway detect the server's OAuth configuration instead of entering endpoints and credentials by hand. If the remote server supports OAuth Dynamic Client Registration (DCR), the gateway registers itself as an OAuth client automatically, so you have no endpoints or client credentials to paste.
 
-NOTE: This is the *outbound* direction: AI Gateway registers itself as a client of a remote MCP server's OAuth server. It is distinct from the inbound DCR that lets external MCP clients register themselves with AI Gateway. To let clients such as Claude Code or ChatGPT register with the gateway, see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
+NOTE: This is the _outbound_ direction: AI Gateway registers itself as a client of a remote MCP server's OAuth server. It is distinct from the inbound DCR that lets external MCP clients register themselves with AI Gateway. To let clients such as Claude Code or ChatGPT register with the gateway, see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
 
 To discover a provider:
 
