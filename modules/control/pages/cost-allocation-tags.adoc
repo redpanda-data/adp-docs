@@ -1,0 +1,193 @@
+= Track Spend by Tag
+:description: Group and filter LLM spend by the tags you set on agents, so you can attribute cost to a department, team, or environment for chargeback and reporting.
+:page-topic-type: how-to
+:personas: platform_engineer, pilot_lead
+:learning-objective-1: Tag agents so their LLM spend is attributed to a department, team, or environment
+:learning-objective-2: Group and filter spend by tag in the Cost & Usage page
+:learning-objective-3: Query spend by tag programmatically through SpendingService
+
+// Source: proto/public/cloud/redpanda/api/adp/v1alpha1/spending_service.proto, spending_event.proto, agent.proto; apps/adp-ui/src Cost & Usage tab. Verified against code on 2026-07-21; not yet verified against production.
+
+Cost-allocation tags reuse the key/value tags you already set on an agent and give them a second job: grouping and filtering glossterm:large language model (LLM)[,LLM] spend. Tag your agents with a dimension that matches how you report cost (for example, `department`, `team`, or `env`), and the Agentic Data Plane (ADP) attributes every LLM call that agent makes to those tags. You can then break spend down by `department` on the *Cost & Usage* page, filter a report to `env=prod`, or pull per-team totals through the API for chargeback.
+
+You configure no separate tag registry and no spending pipeline. Tag an agent, and its spend is attributed automatically from the next call onward.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* A running agent. If you do not have one, see xref:get-started:adp-quickstart.adoc[].
+* To query spend through the API, a service account with the `dataplane_adp_spending_get` permission. See xref:control:permissions-reference.adoc#spending-permissions[Spending permissions].
+
+== How tag-based spend tracking works
+
+When an agent makes an LLM call through AI Gateway, ADP records a spending event and stamps it with a snapshot of that agent's tags at the time of the call. Cost reports then group and filter on those stamped tags.
+
+Three behaviors follow from this design:
+
+Attribution is point-in-time and immutable::
+The tags recorded on a spending event are the agent's tags at the moment of the call. Editing an agent's tags later never rewrites past spend: historical rows keep the tags they were recorded with, and new spend picks up the new tags. A chargeback report for a closed period stays stable even after you retag agents.
+
+Tag changes take a short time to propagate::
+ADP refreshes its view of agent tags on a background cycle of about 15 seconds. A newly created or freshly retagged agent can record a few calls under its old tags, or as untagged, until the refresh catches up.
+
+Unattributable spend is grouped as *Untagged*::
+Calls that carry no value for the tag key you group on collapse into a single *Untagged* bucket. This bucket covers direct user calls that do not run through an agent, calls from an agent that has no tags, and the brief window before a new agent's tags propagate.
+
+== Tag your agents for cost tracking
+
+Tags live on the agent. Set them when you create an agent or edit an existing one, either in the agent form (the *Tags* section) or through the `CreateAgent` and `UpdateAgent` methods. See xref:connect:create-agent.adoc[].
+
+A tag is a key/value pair. Choose keys that match your reporting dimensions and apply them consistently across agents:
+
+[cols="1,2"]
+|===
+|Tag |Attributes spend to
+
+|`department=sales`
+|A business unit or cost center.
+
+|`team=revops`
+|A team within a department.
+
+|`env=prod`
+|An environment, to separate production spend from staging or development.
+|===
+
+Keep two rules in mind:
+
+[CAUTION]
+====
+Do not put secrets or personally identifiable information (PII) in tag values. Tag values appear in cost reports and API responses.
+====
+
+Use an identifier-safe key for any tag you want to filter by. To use a tag in the tag filter or in an https://google.aip.dev/160[AIP-160^] filter expression, its key must match the pattern `^[a-zA-Z_][a-zA-Z0-9_]*$` (letters, digits, and underscores, and not starting with a digit). A key such as `cost-center`, with a hyphen, is still stored on the agent and can be grouped on, but ADP skips it in the tag filter. If you need to filter by it, use `cost_center` instead.
+
+== Track spend by tag in the UI
+
+Open *Cost & Usage* under *Governance* in the sidebar. For the page overview, see xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage]. Tags add two independent controls:
+
+Group by Tag::
+Choose *Tag* as the group-by dimension, then pick a tag key, for example, `department`. You can group by any tag key. Each chart series becomes one tag value, plus an *Untagged* series for spend with no value for that key. Use it to see how spend splits across departments or environments over the selected range.
+
+Tag filter::
+Add a tag filter to scope the whole page to specific tag values, independent of what you group by. Only identifier-safe keys appear in the tag filter. Selecting several values of the same key matches any of them (OR); selecting values across different keys requires all of them (AND). For example, filter to `department=sales` OR `department=support`, and `env=prod`, to see production spend for those two departments.
+
+The filter also applies to the CSV export, so an exported report matches what you see on screen.
+
+== Query spend by tag with the API
+
+The `SpendingService` API exposes tags as a breakdown dimension and a filter, alongside a helper method that lists which tag keys exist. These calls use the same authentication, `SpendingFilter` shape, and `dataplane_adp_spending_get` permission as the rest of the spending API. For authentication and the base request shape, see xref:control:budgets.adoc#query-spend-programmatically[Query spend programmatically].
+
+// The tag methods are part of the `redpanda.api.adp.v1alpha1.SpendingService` package, reached over the Connect protocol (POST + JSON) at `<dataplane-base>/redpanda.api.adp.v1alpha1.SpendingService/<Method>`. The request shapes below are proto-accurate but were not exercised against a live cluster. Confirm the wire encoding (Connect JSON compared to gRPC, enum value form) on your deployment before you rely on the examples.
+
+=== Group a breakdown by tag
+
+The `GetSpendingBreakdown` and `GetSpendingTimeSeriesByDimension` methods accept `BREAKDOWN_DIMENSION_TAG` as the `dimension`, together with a `tag_key` that names the key to group on:
+
+[cols="1,3"]
+|===
+|Field |Meaning
+
+|`dimension`
+|Set to `BREAKDOWN_DIMENSION_TAG` to group results by a tag value.
+
+|`tag_key`
+|The tag key to group on, for example, `department`. Any key works, including keys that are not identifier-safe. Required when `dimension` is `BREAKDOWN_DIMENSION_TAG`, and ignored for any other dimension. A tag breakdown with an empty `tag_key` is rejected.
+|===
+
+Each entry in the response keys on a tag value, with the same `stats` object (cost in microcents, request count, and token buckets) as the other breakdown dimensions. Spend with no value for the key is returned under the empty-string key, which the UI labels *Untagged*.
+
+=== Filter any query by tag
+
+Every spending query reads a `SpendingFilter`, which accepts an AIP-160 `filter` expression. Reference a tag with `tags.<key>`, where `<key>` is the tag key to match:
+
+[source]
+----
+tags.department = "sales"
+tags.department = "sales" AND tags.env = "prod"
+----
+
+Tag predicates compose with the structured `SpendingFilter` fields, such as `provider_name`, `model_id`, `user_email`, and `agent_name`, so you can scope a per-user breakdown to one department. As in the UI, only identifier-safe tag keys work in a filter expression.
+
+=== Discover which tag keys exist
+
+The `GetSpendingTagKeys` method returns the distinct tag keys observed on spend within a time window, so a dashboard can populate a key picker without hard-coding key names.
+
+[cols="1,3"]
+|===
+|Field |Meaning
+
+|`start_time`, `end_time`
+|RFC 3339 timestamps that bracket the window. The window is half-open: it includes `start_time` and excludes `end_time`. Both are required, and `end_time` must be after `start_time`.
+|===
+
+The response returns `keys`: the distinct tag keys seen on spend in that window, sorted ascending. The list is empty when no tagged spend exists in the range.
+
+=== cURL example
+
+Break down the last seven days of spend by `department`:
+
+[source,bash]
+----
+ACCESS_TOKEN="<oidc-access-token>"   # from the client_credentials flow
+DATAPLANE_BASE="https://aigw.<cluster-id>.clusters.rdpa.co"
+
+curl -s --request POST \
+  --url "${DATAPLANE_BASE}/redpanda.api.adp.v1alpha1.SpendingService/GetSpendingBreakdown" \
+  --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "filter": {
+      "start_time": "2026-05-17T00:00:00Z",
+      "end_time":   "2026-05-24T00:00:00Z"
+    },
+    "dimension": "BREAKDOWN_DIMENSION_TAG",
+    "tag_key": "department"
+  }' | jq
+----
+
+In this URL, `<cluster-id>` is your cluster's ID, and `<oidc-access-token>` is a token from the client-credentials flow. The response carries one `entries` row per `department` value in the window, plus an empty-key row for untagged spend. Each entry has a `key`, the tag value, and a `stats` object with `total_cost_microcents`, `total_requests`, and per-bucket token usage. Divide `total_cost_microcents` by 100,000,000 to convert to dollars.
+
+== Limits and constraints
+
+[cols="1,2"]
+|===
+|Constraint |Value
+
+|Tags per agent
+|At most 50 key/value pairs per agent.
+
+|Tag value length
+|At most 256 characters per value.
+
+|Filterable keys
+|Only keys that match `^[a-zA-Z_][a-zA-Z0-9_]*$` can be used in the tag filter or an AIP-160 filter expression. You can group a breakdown by any key. ADP stores other keys on the agent but skips them in the tag filter.
+
+|Distinct tag keys
+|No fixed limit. The keys available for grouping are whatever keys exist across agents that have recorded spend in the selected window.
+
+|Untagged spend
+|Spend with no value for the grouped key (direct user calls, untagged agents, and spend recorded before tag propagation) is grouped under a single *Untagged* bucket.
+|===
+
+== Troubleshooting
+
+Spend you expect under a tag shows as *Untagged*::
+The agent had no tags when it made the call, or you added the tags within the last 15 seconds and they have not propagated yet. Recheck after the refresh cycle. Direct user calls that do not run through an agent are always untagged.
+
+A tag key is missing from the tag filter::
+The key is not identifier-safe. Keys that contain a hyphen or another disallowed character, or that start with a digit, are stored on the agent and can be grouped on, but they are skipped in the tag filter and in filter expressions. If you need to filter by it, retag the agent with a key that uses only letters, digits, and underscores, and that does not start with a digit.
+
+Editing an agent's tags did not change past reports::
+Attribution is point-in-time by design. Only spend recorded after the edit picks up the new tags; historical spend keeps the tags it was recorded with.
+
+== Next steps
+
+* xref:control:budgets.adoc[]
+* xref:gateway:configure-provider.adoc#view-cost-and-usage[]
+* xref:connect:create-agent.adoc[]
