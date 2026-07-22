@@ -13,7 +13,7 @@
 // Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 // DOC-2342 split: the builder half of the original combined quickstart now lives in get-started:agent-builder-quickstart.adoc.
 
-This quickstart sets up Redpanda Agentic Data Plane for your organization. An administrator configures a glossterm:large language model (LLM)[] provider: a one-time task, and the gate for everything else. Until a provider exists, no one in your organization can build glossterm:AI agent[,agents] against the platform.
+This quickstart sets up Redpanda Agentic Data Plane for your organization. An administrator configures a glossterm:large language model (LLM)[] provider. This is a one-time task. Until a provider exists, no one in your organization can build glossterm:AI agent[,agents] against the platform.
 
 You get an Anthropic API key, create the provider with the key stored in the platform secret store, confirm the connection is active, and hand off to your builders. This quickstart configures an Anthropic provider, but Agentic Data Plane also supports OpenAI, Google AI, AWS Bedrock, and OpenAI-compatible endpoints.
 
@@ -47,9 +47,9 @@ Anthropic requires a payment method before it issues an API key. Add billing fir
 
 . In the sidebar, select a workspace other than `Claude Code`. The `Claude Code` workspace uses a separate key-creation flow that doesn't fit this quickstart.
 
-. Click *API keys* in the sidebar.
+. In the sidebar, click *API keys*.
 
-. Click *+ Create key* in the top right. In the Create API key dialog, name the key `adp-quickstart` and click *Add*.
+. Click *+ Create key*. In the Create API key dialog, name the key `adp-quickstart` and click *Add*.
 
 . Copy the key (it starts with `sk-ant-`).
 +
@@ -66,9 +66,9 @@ Now point Agentic Data Plane at Anthropic. Agentic Data Plane references provide
 
 . Sign in to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^].
 
-. Open *LLM Providers* in the sidebar.
+. In the sidebar, open *LLM Providers*.
 
-. Click *Add provider*.
+. Click *+ Add provider*.
 
 . `Display name`: Enter `anthropic-quickstart`. This label appears in dashboards and model selectors.
 
@@ -95,9 +95,11 @@ The secret value is write-only: Agentic Data Plane can't show it again after cre
 +
 The catalog of available models is maintained by Redpanda. Models you select here become the catalog this provider exposes to agents and applications; you can change the list later from the provider detail page.
 
+. For Transcripts, turn on `Record inputs` and `Record outputs`. Both are off by default, which limits transcripts to token counts, latency, and tool calls. Turning them on lets your builders replay full conversations, including prompts, responses, and tool arguments. This setting applies to every agent on the provider, so leave it off for providers that carry regulated or sensitive data. See xref:gateway:configure-provider.adoc#transcript-logging[Configure transcript logging].
+
 . Click *Create provider*.
 
-. On the provider detail page, confirm the badge next to the provider name shows `Enabled` and the `Status` in the Connection card shows `Active`.
+. On the provider detail page, select the *Overview* tab. Confirm the badge next to the provider name shows `Enabled` and the `Status` in the Connection card shows `Active`.
 
 If the Status badge stays in a failure state, see the xref:gateway:configure-provider.adoc#troubleshooting[provider troubleshooting table]. The most common cause is a typo in the secret reference or a key that wasn't issued in the workspace Agentic Data Plane can read.
 
@@ -127,9 +129,8 @@ If you want to keep the provider but rotate the key, edit the provider and chang
 
 == Next steps
 
-* Point builders at their quickstart: xref:get-started:agent-builder-quickstart.adoc[]
-* Add more LLM providers (OpenAI, Google AI, AWS Bedrock, OpenAI-compatible): xref:gateway:configure-provider.adoc[]
-* Set up AWS Bedrock as a provider: xref:gateway:bedrock-setup.adoc[]
-* Track spend across teams: xref:control:budgets.adoc[]
-* Put guardrails on agent traffic: xref:control:guardrails/index.adoc[]
-* Control who can do what: xref:control:permissions-overview.adoc[]
+* xref:get-started:agent-builder-quickstart.adoc[]
+* xref:gateway:configure-provider.adoc[]
+* xref:control:budgets.adoc[]
+* xref:control:guardrails/index.adoc[]
+* xref:control:permissions-overview.adoc[]
