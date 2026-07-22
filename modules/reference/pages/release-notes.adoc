@@ -6,6 +6,24 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.26 (2026-07-22)
+
+=== Features
+
+OAuth Providers:: Connecting a remote MCP server that uses OAuth no longer requires you to paste in authorization and token endpoints or a client ID and secret. Redpanda reads the server's OAuth configuration from its URL and registers a client automatically through Dynamic Client Registration (DCR).
+MCP Servers:: The ServiceNow MCP server can now search CMDB configuration items, so agents can look up servers, laptops, applications, and services.
+
+=== Improvements
+
+MCP Servers `[UI]`:: The setup guides for connecting an AI client now cover Claude, ChatGPT, Zed, and the Codex CLI, with corrected steps.
+MCP Servers `[UI]`:: The copy-paste code examples for connecting to MCP servers and LLM providers now use the latest SDK versions across Node, Python, Go, Java, and curl.
+Interface `[UI]`:: List rows are now fully clickable to open the detail view, instead of only the name link.
+Interface `[UI]`:: When something fails, the interface now offers clear next steps such as retry, reload, and copying the error details.
+
+=== Bug fixes
+
+My Connections:: Connecting a remote MCP server that signs you in with your own account (user-delegated OAuth) now works. Sign-in no longer fails before completing.
+
 == v0.2.25 (2026-07-17)
 
 === Features
