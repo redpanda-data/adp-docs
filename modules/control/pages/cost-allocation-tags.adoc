@@ -58,24 +58,20 @@ A tag is a key/value pair. Choose keys that match your reporting dimensions and 
 |An environment, to separate production spend from staging or development.
 |===
 
-Keep two rules in mind:
-
 [CAUTION]
 ====
 Do not put secrets or personally identifiable information (PII) in tag values. Tag values appear in cost reports and API responses.
 ====
-
-Use an identifier-safe key for any tag you want to filter by. To use a tag in the tag filter or in an https://google.aip.dev/160[AIP-160^] filter expression, its key must match the pattern `^[a-zA-Z_][a-zA-Z0-9_]*$` (letters, digits, and underscores, and not starting with a digit). A key such as `cost-center`, with a hyphen, is still stored on the agent and can be grouped on, but ADP skips it in the tag filter. If you need to filter by it, use `cost_center` instead.
 
 == Track spend by tag in the UI
 
 Open *Cost & Usage* under *Governance* in the sidebar. For the page overview, see xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage]. Tags add two independent controls:
 
 Group by Tag::
-Choose *Tag* as the group-by dimension, then pick a tag key, for example, `department`. You can group by any tag key. Each chart series becomes one tag value, plus an *Untagged* series for spend with no value for that key. Use it to see how spend splits across departments or environments over the selected range.
+Choose *Tag* as the group-by dimension, then pick a tag key, for example, `department`. Each chart series becomes one tag value, plus an *Untagged* series for spend with no value for that key. Use it to see how spend splits across departments or environments over the selected range.
 
 Tag filter::
-Add a tag filter to scope the whole page to specific tag values, independent of what you group by. Only identifier-safe keys appear in the tag filter. Selecting several values of the same key matches any of them (OR); selecting values across different keys requires all of them (AND). For example, filter to `department=sales` OR `department=support`, and `env=prod`, to see production spend for those two departments.
+Add a tag filter to scope the whole page to specific tag values, independent of what you group by. Selecting several values of the same key matches any of them (OR); selecting values across different keys requires all of them (AND). For example, filter to `department=sales` OR `department=support`, and `env=prod`, to see production spend for those two departments.
 
 The filter also applies to the CSV export, so an exported report matches what you see on screen.
 
@@ -97,14 +93,14 @@ The `GetSpendingBreakdown` and `GetSpendingTimeSeriesByDimension` methods accept
 |Set to `BREAKDOWN_DIMENSION_TAG` to group results by a tag value.
 
 |`tag_key`
-|The tag key to group on, for example, `department`. Any key works, including keys that are not identifier-safe. Required when `dimension` is `BREAKDOWN_DIMENSION_TAG`, and ignored for any other dimension. A tag breakdown with an empty `tag_key` is rejected.
+|The tag key to group on, for example, `department`. Required when `dimension` is `BREAKDOWN_DIMENSION_TAG`, and ignored for any other dimension. A tag breakdown with an empty `tag_key` is rejected.
 |===
 
 Each entry in the response keys on a tag value, with the same `stats` object (cost in microcents, request count, and token buckets) as the other breakdown dimensions. Spend with no value for the key is returned under the empty-string key, which the UI labels *Untagged*.
 
 === Filter any query by tag
 
-Every spending query reads a `SpendingFilter`, which accepts an AIP-160 `filter` expression. Reference a tag with `tags.<key>`, where `<key>` is the tag key to match:
+Every spending query reads a `SpendingFilter`, which accepts an https://google.aip.dev/160[AIP-160^] `filter` expression. Reference a tag with `tags.<key>`, where `<key>` is the tag key to match:
 
 [source]
 ----
@@ -112,7 +108,7 @@ tags.department = "sales"
 tags.department = "sales" AND tags.env = "prod"
 ----
 
-Tag predicates compose with the structured `SpendingFilter` fields, such as `provider_name`, `model_id`, `user_email`, and `agent_name`, so you can scope a per-user breakdown to one department. As in the UI, only identifier-safe tag keys work in a filter expression.
+Tag predicates compose with the structured `SpendingFilter` fields, such as `provider_name`, `model_id`, `user_email`, and `agent_name`, so you can scope a per-user breakdown to one department.
 
 === Discover which tag keys exist
 
@@ -165,9 +161,6 @@ In this URL, `<cluster-id>` is your cluster's ID, and `<oidc-access-token>` is a
 |Tag value length
 |At most 256 characters per value.
 
-|Filterable keys
-|Only keys that match `^[a-zA-Z_][a-zA-Z0-9_]*$` can be used in the tag filter or an AIP-160 filter expression. You can group a breakdown by any key. ADP stores other keys on the agent but skips them in the tag filter.
-
 |Distinct tag keys
 |No fixed limit. The keys available for grouping are whatever keys exist across agents that have recorded spend in the selected window.
 
@@ -179,9 +172,6 @@ In this URL, `<cluster-id>` is your cluster's ID, and `<oidc-access-token>` is a
 
 Spend you expect under a tag shows as *Untagged*::
 The agent had no tags when it made the call, or you tagged or retagged it moments earlier and the change had not taken effect yet. Recheck after a short wait. Direct user calls that do not run through an agent are always untagged.
-
-A tag key is missing from the tag filter::
-The key is not identifier-safe. Keys that contain a hyphen or another disallowed character, or that start with a digit, are stored on the agent and can be grouped on, but they are skipped in the tag filter and in filter expressions. If you need to filter by it, retag the agent with a key that uses only letters, digits, and underscores, and that does not start with a digit.
 
 Editing an agent's tags did not change past reports::
 Attribution is point-in-time by design. Only spend recorded after the edit picks up the new tags; historical spend keeps the tags it was recorded with.
