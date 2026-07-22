@@ -6,7 +6,7 @@
 :learning-objective-2: Group and filter spend by tag in the Cost & Usage page
 :learning-objective-3: Query spend by tag programmatically through SpendingService
 
-// Source: proto/public/cloud/redpanda/api/adp/v1alpha1/spending_service.proto, spending_event.proto, agent.proto; apps/adp-ui/src Cost & Usage tab. Verified against code on 2026-07-21; not yet verified against production.
+// Source: proto/public/cloud/redpanda/api/adp/v1alpha1/spending_service.proto, spending_event.proto, agent.proto; apps/adp-ui/src Cost & Usage tab. Verified against code on 2026-07-21 and against the ign integration cluster (aigw SpendingService) on 2026-07-22.
 
 Cost-allocation tags reuse the key/value tags you already set on an agent and give them a second job: grouping and filtering glossterm:large language model (LLM)[,LLM] spend. Tag your agents with a dimension that matches how you report cost (for example, `department`, `team`, or `env`), and the Agentic Data Plane (ADP) attributes every LLM call that agent makes to those tags. You can then break spend down by `department` on the *Cost & Usage* page, filter a report to `env=prod`, or pull per-team totals through the API for chargeback.
 
@@ -79,7 +79,7 @@ The filter also applies to the CSV export, so an exported report matches what yo
 
 The `SpendingService` API exposes tags as a breakdown dimension and a filter, alongside a helper method that lists which tag keys exist. These calls use the same authentication, `SpendingFilter` shape, and `dataplane_adp_spending_get` permission as the rest of the spending API. For authentication and the base request shape, see xref:control:budgets.adoc#query-spend-programmatically[Query spend programmatically].
 
-// The tag methods are part of the `redpanda.api.adp.v1alpha1.SpendingService` package, reached over the Connect protocol (POST + JSON) at `<dataplane-base>/redpanda.api.adp.v1alpha1.SpendingService/<Method>`. The request shapes below are proto-accurate but were not exercised against a live cluster. Confirm the wire encoding (Connect JSON compared to gRPC, enum value form) on your deployment before you rely on the examples.
+Reach the methods over the Connect protocol (POST and JSON) at `<dataplane-base>/redpanda.api.adp.v1alpha1.SpendingService/<Method>`. In this path, `<dataplane-base>` is your cluster's AI Gateway base URL. Request fields use snake_case (`start_time`, `tag_key`), and the JSON response uses camelCase (`totalCostMicrocents`, `totalRequests`).
 
 === Group a breakdown by tag
 
@@ -147,7 +147,7 @@ curl -s --request POST \
   }' | jq
 ----
 
-In this URL, `<cluster-id>` is your cluster's ID, and `<oidc-access-token>` is a token from the client-credentials flow. The response carries one `entries` row per `department` value in the window, plus an empty-key row for untagged spend. Each entry has a `key`, the tag value, and a `stats` object with `total_cost_microcents`, `total_requests`, and per-bucket token usage. Divide `total_cost_microcents` by 100,000,000 to convert to dollars.
+In this URL, `<cluster-id>` is your cluster's ID, and `<oidc-access-token>` is a token from the client-credentials flow. The response carries one `entries` row per `department` value in the window, plus a row for untagged spend whose `key` is the empty string (omitted from the JSON). Each row has a `key`, the tag value, and a `stats` object whose fields use camelCase JSON names, such as `totalCostMicrocents` and `totalRequests`, plus per-bucket token usage. Divide `totalCostMicrocents` by 100,000,000 to convert to dollars.
 
 == Limits and constraints
 
