@@ -49,7 +49,7 @@ Anthropic requires a payment method before it issues an API key. Add billing fir
 
 . In the sidebar, click *API keys*.
 
-. Click *+ Create key*. In the Create API key dialog, name the key `adp-quickstart` and click *Add*.
+. Click *Create key*. In the Create API key dialog, name the key `adp-quickstart` and click *Add*.
 
 . Copy the key (it starts with `sk-ant-`).
 +
@@ -68,7 +68,7 @@ Now point Agentic Data Plane at Anthropic. Agentic Data Plane references provide
 
 . In the sidebar, open *LLM Providers*.
 
-. Click *+ Add provider*.
+. Click *Add provider*.
 
 . `Display name`: Enter `anthropic-quickstart`. This label appears in dashboards and model selectors.
 

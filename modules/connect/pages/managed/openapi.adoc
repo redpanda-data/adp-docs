@@ -54,19 +54,19 @@ OpenAPI is the most flexible managed type for authentication: the upstream API c
 |===
 |Mode |Use when
 
-|`None`
+|`No Auth`
 |Public APIs (rare in practice).
 
 |`Bearer`
 |API expects a bearer token. The handler sends `Authorization: Bearer <token>`.
 
-|`API key`
+|`API Key`
 |API expects a key in a header or query parameter. Choose the placement and the parameter name.
 
 |`Basic`
 |API expects HTTP Basic authentication (a username and password).
 
-|`User-delegated OAuth`
+|`User OAuth`
 |API supports OAuth on behalf of users and you want per-user identities. Requires an OAuth Provider configured for that API. See xref:connect:user-delegated-oauth.adoc[].
 |===
 

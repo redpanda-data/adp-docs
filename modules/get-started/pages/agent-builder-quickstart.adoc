@@ -68,7 +68,7 @@ The OpenAPI managed MCP server type takes any OpenAPI 3.x spec URL and generates
 PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. Before you start, open https://petstore3.swagger.io/api/v3/openapi.json[the spec URL^] in your browser. If it doesn't return JSON, wait a few minutes and retry; PetStore usually recovers quickly. Checking now saves you from debugging your agent later for an upstream outage that isn't your fault.
 ====
 
-. In the sidebar, open *MCP Servers* and click *+ Add MCP server*.
+. In the sidebar, open *MCP Servers* and click *Add MCP server*.
 
 . Search for and select the `OpenAPI` card from the marketplace picker.
 +
@@ -106,7 +106,7 @@ Combine your organization's LLM provider and the PetStore MCP server into an age
 
 . In the sidebar, open *Agents*.
 
-. Click *+ Create agent*.
+. Click *Create agent*.
 
 . Choose how the agent runs. Click `Redpanda manages it`, so Redpanda deploys, runs, and observes the agent for you.
 +
