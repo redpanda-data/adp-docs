@@ -32,11 +32,11 @@ Three behaviors follow from this design:
 Attribution is point-in-time and immutable::
 The tags recorded on a spending event are the agent's tags at the moment of the call. Editing an agent's tags later never rewrites past spend: historical rows keep the tags they were recorded with, and new spend picks up the new tags. A chargeback report for a closed period stays stable even after you retag agents.
 
-Tag changes take a short time to propagate::
-ADP refreshes its view of agent tags on a background cycle of about 15 seconds. A newly created or freshly retagged agent can record a few calls under its old tags, or as untagged, until the refresh catches up.
+Tag changes take a short time to take effect::
+After you create or retag an agent, its spend can briefly record under the old tags, or as untagged, until the change takes effect.
 
 Unattributable spend is grouped as *Untagged*::
-Calls that carry no value for the tag key you group on collapse into a single *Untagged* bucket. This bucket covers direct user calls that do not run through an agent, calls from an agent that has no tags, and the brief window before a new agent's tags propagate.
+Calls that carry no value for the tag key you group on collapse into a single *Untagged* bucket. This bucket covers direct user calls that do not run through an agent, calls from an agent that has no tags, and the brief window before a new agent's tags take effect.
 
 == Tag your agents for cost tracking
 
@@ -172,13 +172,13 @@ In this URL, `<cluster-id>` is your cluster's ID, and `<oidc-access-token>` is a
 |No fixed limit. The keys available for grouping are whatever keys exist across agents that have recorded spend in the selected window.
 
 |Untagged spend
-|Spend with no value for the grouped key (direct user calls, untagged agents, and spend recorded before tag propagation) is grouped under a single *Untagged* bucket.
+|Spend with no value for the grouped key (direct user calls, untagged agents, and spend recorded before an agent's tags take effect) is grouped under a single *Untagged* bucket.
 |===
 
 == Troubleshooting
 
 Spend you expect under a tag shows as *Untagged*::
-The agent had no tags when it made the call, or you added the tags within the last 15 seconds and they have not propagated yet. Recheck after the refresh cycle. Direct user calls that do not run through an agent are always untagged.
+The agent had no tags when it made the call, or you tagged or retagged it moments earlier and the change had not taken effect yet. Recheck after a short wait. Direct user calls that do not run through an agent are always untagged.
 
 A tag key is missing from the tag filter::
 The key is not identifier-safe. Keys that contain a hyphen or another disallowed character, or that start with a digit, are stored on the agent and can be grouped on, but they are skipped in the tag filter and in filter expressions. If you need to filter by it, retag the agent with a key that uses only letters, digits, and underscores, and that does not start with a digit.
