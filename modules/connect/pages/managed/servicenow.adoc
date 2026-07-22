@@ -7,7 +7,7 @@
 :learning-objective-2: Use projections and hierarchies to shape responses and gate table reads
 :learning-objective-3: Search, create, and update incidents and read allow-listed records from the Inspector or an agent
 
-The ServiceNow managed MCP server lets agents work with a ServiceNow instance through the REST Table API: search, create, and update incidents, append work notes, search the knowledge base, look up users and assignment groups, discover table schema and field choices, and read allow-listed tables.
+The ServiceNow managed MCP server lets agents work with a ServiceNow instance through the REST Table API: search, create, and update incidents, append work notes, search the knowledge base, look up users and assignment groups, search the configuration management database (CMDB) for configuration items, discover table schema and field choices, and read allow-listed tables.
 
 After reading this page, you will be able to:
 
@@ -188,6 +188,9 @@ The ServiceNow MCP exposes tools across incidents, knowledge, schema discovery, 
 
 |`lookup_group`
 |Find assignment groups by name; returns their `sys_id`.
+
+|`search_cmdb_ci`
+|Search configuration items (`cmdb_ci`) with a ServiceNow encoded query; the `sys_class_name` field distinguishes CI classes such as servers, computers, applications, and services.
 
 |`query_records`
 |Read any allow-listed table with an encoded query.
