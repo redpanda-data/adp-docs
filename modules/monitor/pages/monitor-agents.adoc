@@ -86,6 +86,14 @@ The *Inspector* tab provides real-time conversation testing. Use it to test agen
 . Check the conversation panel to see tool calls.
 . Start a new session to test fresh conversations or click *Clear context* to reset history.
 
+=== Context-window usage
+
+As you test, the composer tracks how much of the model's context window the conversation consumes. When the agent uses a model from Redpanda's catalog, a context-usage indicator appears in the composer after the first response and shows the share of the context window in use. Click it to open a breakdown of the window size, the input, output, reasoning, and cached tokens for the session, the *Session total*, and the estimated *Total cost*.
+
+The indicator counts input tokens plus cached tokens, so it reflects the full context occupancy under prompt caching, not fresh input alone. As a conversation grows and the indicator approaches the window size, start a new session or click *Clear context* to reset the history before responses slow down or the agent starts dropping earlier context.
+
+For models that aren't in the catalog, such as OpenAI-compatible providers or hand-entered model IDs, the composer shows a plain input and output token count instead, because the context-window size isn't known.
+
 === Long-running tasks
 
 The Inspector live view streams a test run as it happens. If a task is still running after about five minutes, Inspector stops the live view and shows a *Still running* notice: the task keeps running in the background, so you don't need to hold the Inspector open. Follow it to completion on the *Activity* tab of the *Cost & Usage* page under *Governance*.

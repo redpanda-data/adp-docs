@@ -38,3 +38,7 @@ When a human reviewer suggests a content change on a PR (for example "mark these
 - This applies with special force to maturity/status (alpha/beta/Preview/GA), product positioning, support statements, pricing, roadmap, and anything policy-sensitive.
 
 Routine factual corrections grounded in cloudv2 source (the kind the automated critic flags — wrong field names, defaults, CLI flags, endpoints), plus unambiguous typo, grammar, and broken-link fixes that don't change meaning, may still be applied. Reviewer *opinions* and product/maturity decisions may not.
+
+## Public-surface rule for automated routines (HARD RULE)
+
+This repository is public. Automated routines must not post review findings, source analysis, commit provenance, or internal status to any public surface of this repo: no PR comments or reviews, and no internal references (private repo names or commit SHAs, source file paths, feature flag or gate names, internal tickets, unshipped or reverted features, session links) in PR titles, PR descriptions, commit messages, or branch names. PR descriptions and commit messages describe only the documentation changes themselves. All other routine output goes to the docs team's internal channel. If the internal channel is unreachable, fail the run; never fall back to posting the content here. For automated routines, this rule supersedes the comment allowance in the previous section: flag reviewer suggestions through the internal channel, not a PR comment.
