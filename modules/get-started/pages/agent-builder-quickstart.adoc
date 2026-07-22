@@ -11,9 +11,9 @@
 // Markup convention: bold for click targets (buttons, tabs, sidebar/nav); monospace for field labels, option values, toggles, and status values; plain text for UI regions (cards, badges, panes).
 // Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 
-This quickstart is for builders whose organization already runs Redpanda Agentic Data Plane. You sign in, see what glossterm:AI agent[,agents] your organization already has, then build your own: an agent that turns a natural-language question into a real API call. By the end, you have a working agent you can test, tune, and share with your team.
+New to Redpanda Agentic Data Plane? It's Redpanda's platform for running and governing glossterm:AI agent[,AI agents] on your streaming data. For the bigger picture, see the xref:get-started:adp-overview.adoc[Agentic Data Plane overview].
 
-If your organization hasn't set up Agentic Data Plane yet, an administrator must configure a glossterm:large language model (LLM)[] provider first. Send them the xref:get-started:adp-quickstart.adoc[administrator quickstart].
+This quickstart takes you from zero to a working agent: you sign in, explore the agents your organization already runs, then build your own that turns a natural-language question into a real API call. By the end, you have an agent you can test, tune, and share with your team.
 
 After reading this page, you will be able to:
 
@@ -23,9 +23,14 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
+[IMPORTANT]
+====
+Before you build, your organization needs a glossterm:large language model (LLM)[] provider configured. If your administrator has already set one up, continue. If not, or you're not sure, complete the xref:get-started:adp-quickstart.adoc[administrator quickstart] first, then come back. It's a one-time setup.
+====
+
 * Access to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^]. If you can't sign in, ask your administrator for an invitation.
 * The xref:control:permissions-overview.adoc[Writer role]. The Reader role can list and inspect resources but cannot create them.
-* At least one LLM provider configured in your organization. If none exists, ask your administrator to complete the xref:get-started:adp-quickstart.adoc[administrator quickstart] first.
+* At least one LLM provider configured in your organization.
 
 == What you build
 
@@ -228,6 +233,14 @@ PetStore proves the flow. To build something your team uses, swap the demo API f
 
 Your own API works too: if it has an OpenAPI 3.x spec, the same OpenAPI server type you used for PetStore exposes it as tools. See xref:connect:managed/openapi.adoc[].
 
+== Use your agent beyond the UI
+
+Your agent isn't limited to the Agentic Data Plane UI. Once it's running, you can reach it and its tools from other software:
+
+* Surface your MCP tools in a chat client like Claude Desktop or ChatGPT: xref:connect:remote-mcp-clients.adoc[]
+* Call the agent from your own application over its A2A endpoint: xref:connect:create-agent.adoc#connect-to-the-agent[Connect to the agent]
+* Let the agent respond in a Microsoft Teams channel: xref:connect:triggers/overview.adoc[]
+
 == Clean up
 
 If this was a one-off exercise, delete the resources you created so they don't continue to count against your organization.
@@ -240,8 +253,5 @@ Leave your organization's LLM provider alone. It's a shared resource that other 
 
 == Next steps
 
-* Use your MCP tools from Claude Desktop, ChatGPT, or another chat app: xref:connect:remote-mcp-clients.adoc[]
-* Call the agent from your own application over its A2A endpoint: xref:connect:create-agent.adoc#connect-to-the-agent[Connect to the agent]
-* Let the agent respond in Microsoft Teams: xref:connect:triggers/overview.adoc[]
 * Create and manage agents from the terminal: xref:cli:index.adoc[]
 * Write better instructions for your agent: xref:connect:system-prompts.adoc[]
