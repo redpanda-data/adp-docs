@@ -9,11 +9,11 @@
 // Source: extracted from the combined adp-quickstart.adoc (PR #71 lineage) as part of the DOC-2342 quickstart split. Builder flow verified end-to-end on adp-production 2026-07-20 via rpk ai: OpenAPI MCP server creation from the PetStore spec, tool generation, live tool calls through the gateway, and A2A agent responses.
 // MCP and agent labels follow the canonical docs: connect:create-server.adoc, connect:managed/openapi.adoc, and connect:create-agent.adoc. The agent detail tab list mirrors connect:create-agent.adoc. Keep this page consistent with those at PR time.
 // Markup convention: bold for click targets (buttons, tabs, sidebar/nav); monospace for field labels, option values, toggles, and status values; plain text for UI regions (cards, badges, panes).
-// Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
-
-New to Redpanda Agentic Data Plane? It's Redpanda's platform for running and governing glossterm:AI agent[,AI agents] on your streaming data. For the bigger picture, see the xref:get-started:adp-overview.adoc[Agentic Data Plane overview].
+// Model ID (claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 
 This quickstart takes you from zero to a working agent: you sign in, explore the agents your organization already runs, then build your own that turns a natural-language question into a real API call. By the end, you have an agent you can test, tune, and share with your team.
+
+Redpanda Agentic Data Plane is Redpanda's platform for running and governing glossterm:AI agent[,AI agents] on your streaming data. For the bigger picture, see the xref:get-started:adp-overview.adoc[Agentic Data Plane overview].
 
 After reading this page, you will be able to:
 
@@ -126,8 +126,10 @@ NOTE: The other option, `I host it myself`, registers an agent you run on your o
 
 . For *Model*, open the picker and choose the model:
 +
-* Select `claude-haiku-4-5`. It's fast and inexpensive, which is all this quickstart needs; the PetStore tasks are simple read operations. The models listed come from your organization's configured providers. If the picker is empty, no provider exists yet; ask your administrator to complete the xref:get-started:adp-quickstart.adoc[administrator quickstart].
+* Select `claude-sonnet-4-6`. It handles multi-step tool use reliably, which is what an agent needs. The models listed come from your organization's configured providers. If the picker is empty, no provider exists yet; ask your administrator to complete the xref:get-started:adp-quickstart.adoc[administrator quickstart].
 * Select the `anthropic-quickstart` provider your administrator configured. The picker lists every provider that offers the model you chose.
++
+NOTE: These names assume the Anthropic provider from the administrator quickstart. If your organization configured a different provider, select that provider instead and pick any model it offers that supports tool use.
 
 . For *Instructions*, paste in the following system prompt:
 +
@@ -172,7 +174,7 @@ The *Inspector* tab is a chat surface for the agent. Type a prompt into the inpu
 What pets are available right now?
 ----
 +
-The agent calls `findpetsbystatus` with `status=available` and returns a summary of the pets, naming the tool. This PetStore endpoint is occasionally flaky; if it returns an HTTP 500, retry the prompt. The public PetStore is occasionally down.
+The agent calls `findpetsbystatus` with `status=available` and returns a summary of the pets, naming the tool. This PetStore endpoint is occasionally flaky; if it returns an HTTP 500, retry the prompt.
 
 . (Optional) Send an open-ended prompt to confirm multi-step reasoning:
 +
@@ -226,7 +228,7 @@ The *Detailed* view is where you verify the agent did what you asked: which tool
 
 PetStore proves the flow. To build something your team uses, swap the demo API for a real system:
 
-. Open *MCP Servers* in the sidebar and click *Add MCP server*.
+. In the sidebar, open *MCP Servers* and click *Add MCP server*.
 . Pick a type from the marketplace picker that matches a system your team uses, such as Slack, Jira, or a SQL database. See the xref:connect:managed/managed-catalog.adoc[managed MCP catalog] for every type Redpanda hosts, with links to setup guides.
 . Configure its authentication. Unlike PetStore, real systems need credentials: an API key stored as a secret, or per-user OAuth. Some authentication modes need one-time setup from your administrator; see xref:connect:authentication.adoc[Set up authentication].
 . Add the new server to your agent's *Tools* section, and update the system prompt to describe the new tools and rules.
@@ -239,7 +241,7 @@ Your agent isn't limited to the Agentic Data Plane UI. Once it's running, you ca
 
 * Surface your MCP tools in a chat client like Claude Desktop or ChatGPT: xref:connect:remote-mcp-clients.adoc[]
 * Call the agent from your own application over its A2A endpoint: xref:connect:create-agent.adoc#connect-to-the-agent[Connect to the agent]
-* Let the agent respond in a Microsoft Teams channel: xref:connect:triggers/overview.adoc[]
+* Let the agent respond in Microsoft Teams: xref:connect:triggers/overview.adoc[]
 
 == Clean up
 
@@ -253,5 +255,5 @@ Leave your organization's LLM provider alone. It's a shared resource that other 
 
 == Next steps
 
-* Create and manage agents from the terminal: xref:cli:index.adoc[]
-* Write better instructions for your agent: xref:connect:system-prompts.adoc[]
+* xref:cli:index.adoc[]
+* xref:connect:system-prompts.adoc[]

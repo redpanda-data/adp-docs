@@ -10,7 +10,7 @@
 // Source: drafted against `adp-production` UI flows for LLM providers; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider protos on cloudv2 origin/main.
 // Provider field labels follow the canonical doc: gateway:configure-provider.adoc. Keep this page consistent with it at PR time.
 // Markup convention: bold for click targets (buttons, tabs, sidebar/nav); monospace for field labels, option values, toggles, and status values; plain text for UI regions (cards, badges, panes).
-// Model IDs (claude-haiku-4-5, claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
+// Model ID (claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
 // DOC-2342 split: the builder half of the original combined quickstart now lives in get-started:agent-builder-quickstart.adoc.
 
 This quickstart sets up Redpanda Agentic Data Plane for your organization. An administrator configures a glossterm:large language model (LLM)[] provider. This is a one-time task. Until a provider exists, no one in your organization can build glossterm:AI agent[,agents] against the platform.
@@ -88,10 +88,7 @@ The secret value is write-only: Agentic Data Plane can't show it again after cre
 
 . Leave the default `Base URL` in place. The form prefills the standard Anthropic endpoint.
 
-. `Models`: Select these models from the catalog:
-+
-* `claude-haiku-4-5` (fast and inexpensive, good for testing)
-* `claude-sonnet-4-6` (higher quality, better tool use, a good default for agents)
+. `Models`: Select `claude-sonnet-4-6` from the catalog. It's a good default for agents and handles multi-step tool use reliably.
 +
 The catalog of available models is maintained by Redpanda. Models you select here become the catalog this provider exposes to agents and applications; you can change the list later from the provider detail page.
 
