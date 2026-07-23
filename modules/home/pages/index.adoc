@@ -5,7 +5,7 @@
 :page-pathways-title: Pick where to start
 :page-pathway-1-title: Build a new agent
 :page-pathway-1-desc: Start from scratch with governance built in. Set up an agent, connect your data, and deploy with identity, routing, and logging from day one.
-:page-pathway-1-link: get-started:adp-quickstart.adoc
+:page-pathway-1-link: get-started:agent-builder-quickstart.adoc
 :page-pathway-1-cta: Get started
 :page-pathway-1-icon: sparkles
 :page-pathway-2-title: Bring an agent you already built

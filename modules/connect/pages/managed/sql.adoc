@@ -73,7 +73,7 @@ User-delegated OAuth and service-account OAuth are not supported for SQL: there'
 
 == Use with agents
 
-Once the SQL server is created, point an agent at the *API URL* on the server's detail page. The agent sees the SQL tools alongside any other MCP servers it has access to.
+Once the SQL server is created, point an agent at the `MCP Server URL` on the server's detail page. The agent sees the SQL tools alongside any other MCP servers it has access to.
 
 // TODO: link the Agents docs section that walks through wiring an MCP server into an agent definition.
 

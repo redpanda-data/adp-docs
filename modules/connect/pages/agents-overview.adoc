@@ -68,6 +68,6 @@ Process every event with AI reasoning at scale. Invoke agents automatically from
 
 == Next steps
 
-* xref:get-started:adp-quickstart.adoc[]
+* xref:get-started:agent-builder-quickstart.adoc[]
 * xref:connect:concepts.adoc[]
 * xref:connect:create-agent.adoc[]

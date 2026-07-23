@@ -39,7 +39,7 @@ By default the generator walks schemas up to a depth of 5 (`max_schema_depth`); 
 . In the OpenAPI configuration form:
 +
 * `Spec`: A URL to the OpenAPI 3.x spec (JSON or YAML), or paste the spec inline. Set exactly one. Inline specs are capped at 3 MiB; host larger specs and use the URL instead.
-* `Base URL override` (optional): Useful when the spec's `servers` block doesn't match your environment.
+* `Base URL` (optional): Useful when the spec's `servers` block doesn't match your environment.
 * `Operation filter` (optional): Include or exclude operations by tag, `operationId` glob, path glob, or HTTP method.
 * `Max schema depth` (optional): Maximum depth for schema conversion. Defaults to 5.
 * `Extract headers` (optional): Response header names to surface to the agent, such as `X-CSRF-Token` or `Set-Cookie`. Listed headers are appended to the tool result; all other response headers are dropped. Matching is case-insensitive.
@@ -54,19 +54,19 @@ OpenAPI is the most flexible managed type for authentication: the upstream API c
 |===
 |Mode |Use when
 
-|`None`
+|`No Auth`
 |Public APIs (rare in practice).
 
 |`Bearer`
 |API expects a bearer token. The handler sends `Authorization: Bearer <token>`.
 
-|`API key`
+|`API Key`
 |API expects a key in a header or query parameter. Choose the placement and the parameter name.
 
 |`Basic`
 |API expects HTTP Basic authentication (a username and password).
 
-|`User-delegated OAuth`
+|`User OAuth`
 |API supports OAuth on behalf of users and you want per-user identities. Requires an OAuth Provider configured for that API. See xref:connect:user-delegated-oauth.adoc[].
 |===
 
@@ -82,7 +82,7 @@ See xref:connect:test-tools.adoc[] for general Inspector usage.
 
 == Use with agents
 
-Once tools generate cleanly, point an agent at the *API URL* on the server's detail page. The agent sees one tool per OpenAPI operation, named accordingly.
+Once tools generate cleanly, point an agent at the `MCP Server URL` on the server's detail page. The agent sees one tool per OpenAPI operation, named accordingly.
 
 Every generated tool also accepts an optional `headers` input, which lets the agent set request headers the spec doesn't declare. Agent-supplied headers can't override the configured authentication headers or the spec's own header parameters. Combined with `Extract headers`, this supports APIs that round-trip headers, such as a CSRF token fetched from one response and echoed on the next request.
 
@@ -105,7 +105,7 @@ Every generated tool also accepts an optional `headers` input, which lets the ag
 |Authentication mode or credentials are wrong. Confirm secret content and the API's expected authentication header.
 
 |Calls return 404 with the right operation
-|`servers` block in the spec doesn't match your real API endpoint. Use the *Base URL override*.
+|`servers` block in the spec doesn't match your real API endpoint. Use the `Base URL` field.
 |===
 
 // TODO: capture more spec-specific failure modes during the live walkthrough.

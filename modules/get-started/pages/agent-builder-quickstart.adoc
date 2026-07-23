@@ -1,0 +1,259 @@
+= Agentic Data Plane Quickstart for Agent Builders
+:description: Sign in to Redpanda Agentic Data Plane, explore the agents your organization already runs, then build, test, and iterate on your own agent backed by MCP tools.
+:page-topic-type: quickstart
+:personas: agent_builder
+:learning-objective-1: Find and evaluate the agents that already run in your organization
+:learning-objective-2: Build an agent that combines an LLM provider with tools from an MCP server
+:learning-objective-3: Test, iterate on, and verify agent behavior with the Inspector and Transcripts tabs
+
+// Source: extracted from the combined adp-quickstart.adoc (PR #71 lineage) as part of the DOC-2342 quickstart split. Builder flow verified end-to-end on adp-production 2026-07-20 via rpk ai: OpenAPI MCP server creation from the PetStore spec, tool generation, live tool calls through the gateway, and A2A agent responses.
+// MCP and agent labels follow the canonical docs: connect:create-server.adoc, connect:managed/openapi.adoc, and connect:create-agent.adoc. The agent detail tab list mirrors connect:create-agent.adoc. Keep this page consistent with those at PR time.
+// Markup convention: bold for click targets (buttons, tabs, sidebar/nav); monospace for field labels, option values, toggles, and status values; plain text for UI regions (cards, badges, panes).
+// Model ID (claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
+
+This quickstart takes you from zero to a working agent: you sign in, explore the agents your organization already runs, then build your own that turns a natural-language question into a real API call. By the end, you have an agent you can test, tune, and share with your team.
+
+Redpanda Agentic Data Plane is Redpanda's platform for running and governing glossterm:AI agent[,AI agents] on your streaming data. For the bigger picture, see the xref:get-started:adp-overview.adoc[Agentic Data Plane overview].
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+[IMPORTANT]
+====
+Before you build, your organization needs a glossterm:large language model (LLM)[] provider configured. If your administrator has already set one up, continue. If not, or you're not sure, complete the xref:get-started:adp-quickstart.adoc[administrator quickstart] first, then come back. It's a one-time setup.
+====
+
+* Access to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^]. If you can't sign in, ask your administrator for an invitation.
+* The xref:control:permissions-overview.adoc[Writer role]. The Reader role can list and inspect resources but cannot create them.
+* At least one LLM provider configured in your organization.
+
+== What you build
+
+You create the following Agentic Data Plane resources, in order:
+
+. *PetStore glossterm:MCP server[]*. Exposes the public Swagger PetStore API as a set of glossterm:MCP tool[,MCP tools] the agent can call. PetStore is a public demo API with no authentication, so you can focus on the flow instead of credentials.
+. *Pet store assistant agent*. Combines your organization's LLM provider and the MCP server so a natural-language question becomes a real API call against PetStore.
+
+After the agent works, you replay one of its runs turn-by-turn on its *Transcripts* tab, then learn how to swap the demo API for a system your team actually uses.
+
+== Sign in and look around
+
+Sign in to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^]. You land on the Home page: a snapshot of items that need your attention, recent request and spend activity, budget status, and counts of your Agentic Data Plane resources. Start every task in this guide from the sidebar.
+
+== Explore existing agents
+
+Before you build anything, see what already exists. Your organization may run agents you can use or learn from.
+
+. In the sidebar, open *Agents*. The agent registry lists every agent in your organization with its status.
+
+. Select an agent to open its detail page. The tabs give you a complete picture of the agent:
++
+* *Overview*: The agent's full configuration, including its model, system prompt, and tools.
+* *Connect*: The endpoint and code examples for calling the agent from other software.
+* *Triggers*: Schedules and event sources that invoke the agent.
+* *Inspector*: An interactive chat surface for testing the agent.
+* *Cost & Usage*: The agent's budget status and its spend and request volume, broken down by LLM provider.
+* *Transcripts*: A record of every conversation against the agent.
+
+. (Optional) Open the *Inspector* tab of an existing agent and send it a prompt to see how it behaves.
+
+If an existing agent already covers your use case, you can stop here and use it. Otherwise, continue to build your own.
+
+== Create an MCP server with a public OpenAPI spec
+
+The OpenAPI managed MCP server type takes any OpenAPI 3.x spec URL and generates one MCP tool per operation. You point it at the public Swagger PetStore, which exposes a small pet-inventory API with no authentication.
+
+[NOTE]
+====
+PetStore is a public demo that Swagger hosts for testing and is occasionally unavailable. Before you start, open https://petstore3.swagger.io/api/v3/openapi.json[the spec URL^] in your browser. If it doesn't return JSON, wait a few minutes and retry; PetStore usually recovers quickly. Checking now saves you from debugging your agent later for an upstream outage that isn't your fault.
+====
+
+. In the sidebar, open *MCP Servers* and click *Add MCP server*.
+
+. Search for and select the `OpenAPI` card from the marketplace picker.
++
+image::create-mcp-server-picker.png[The Create MCP Server marketplace picker filtered by a search for openAPI, showing the Remote (Proxied) card and the OpenAPI card]
+
+. `Name`: Enter `petstore-quickstart`.
+
+. `Description`: Enter `Public PetStore API exposed as MCP tools for quickstart testing`. Optional, but helps you find the server later.
+
+. Leave the `Enable Code Mode` toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools. The PetStore catalog is small enough that you don't need it for this quickstart.
+
+. `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`.
+
+. `Base URL`: Leave blank. The PetStore spec already declares the right `servers` block, so no override is needed.
+
+. Skip all other optional configuration fields.
+
+. For the authentication mode, select `No Auth`. PetStore is a public API.
+
+. Click *Create server*.
+
+. Redpanda fetches the spec, parses it, and generates one MCP tool per operation. When the server is ready, open its detail page.
+
+. On the *Overview* tab, copy the `MCP Server URL`. MCP clients use this URL to connect to the server.
+
+. Open the *Inspector* tab. Redpanda runs a live `tools/list` against the server and lists every tool it discovered. Confirm the list includes `findpetsbystatus`, `getpetbyid`, `findpetsbytags`, and `addpet`. The OpenAPI MCP server lowercases tool names when it generates them from the spec's `operationId` values.
++
+The exact tool count depends on the operations defined in the spec at fetch time. A populated list confirms the connection works. If the list is empty or the tab shows an error, see xref:connect:managed/openapi.adoc#troubleshooting[OpenAPI MCP troubleshooting].
+
+For the full OpenAPI MCP reference (authentication modes, operation filters, base URL overrides), see xref:connect:managed/openapi.adoc[OpenAPI managed MCP server].
+
+== Build your agent
+
+Combine your organization's LLM provider and the PetStore MCP server into an agent. Agentic Data Plane configures a managed agent on a single canvas titled *New managed agent*, with sections for *Identity*, *Model*, *Instructions*, and *Tools*, plus a collapsible *Advanced* area for subagents and tags. Required fields are marked with an asterisk (`*`). For the full reference, see xref:connect:create-agent.adoc[Create an agent].
+
+. In the sidebar, open *Agents*.
+
+. Click *Create agent*.
+
+. Choose how the agent runs. Click `Redpanda manages it`, so Redpanda deploys, runs, and observes the agent for you.
++
+image::shared:create-agent-runtime-choice.png[The runtime choice in the create-agent flow, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
++
+NOTE: The other option, `I host it myself`, registers an agent you run on your own infrastructure. This quickstart uses the managed runtime.
+
+. On the *New managed agent* page, in the *Identity* section, set the following:
++
+* `Name`: Enter `pet-store-assistant`. This name appears in the agent registry list and the detail header. Agentic Data Plane derives the agent's resource ID from it when you create the agent; you don't enter the ID directly, and it can't be changed after creation.
+* `Description`: Enter `Quickstart agent that answers questions about the PetStore inventory`.
+
+. For *Model*, open the picker and choose the model:
++
+* Select `claude-sonnet-4-6`. It handles multi-step tool use reliably, which is what an agent needs. The models listed come from your organization's configured providers. If the picker is empty, no provider exists yet; ask your administrator to complete the xref:get-started:adp-quickstart.adoc[administrator quickstart].
+* Select the `anthropic-quickstart` provider your administrator configured. The picker lists every provider that offers the model you chose.
++
+NOTE: These names assume the Anthropic provider from the administrator quickstart. If your organization configured a different provider, select that provider instead and pick any model it offers that supports tool use.
+
+. For *Instructions*, paste in the following system prompt:
++
+[,text]
+----
+You are a pet store inventory assistant.
+
+You have access to PetStore API tools through MCP. Use them to answer
+questions about pets. The most useful read tools are:
+- findpetsbystatus: List pets by status (available, pending, sold)
+- getpetbyid: Look up a specific pet by ID
+- findpetsbytags: Search by tag
+
+Rules:
+- Always call a tool before answering. Don't make up pet data.
+- After each tool call, summarize what the tool returned and cite the
+  tool name in your response.
+- If a tool fails or returns no data, say so and stop. Don't retry
+  with invented IDs.
+- Stick to read operations for this quickstart. Don't add, update, or
+  delete pets.
+----
+
+. For *Tools*, type `petstore-quickstart` in the *Search MCP servers* box and select its checkbox. (Don't click *Add MCP server* on the left. That builds a new server, and you already have one.) The agent discovers the server's tools at runtime; you don't pre-select individual tools, and the system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
+
+. Leave the *Advanced* area collapsed. The quickstart uses a single agent with no subagents or tags.
+
+. Click *Create agent*. If the button is disabled, the helper text next to it tells you which required field is still missing (a name and a model).
+
+. Wait for the agent status to change from `Starting` to `Running`.
+
+== Test the agent in the Inspector
+
+The *Inspector* tab is a chat surface for the agent. Type a prompt into the input at the bottom of the page and click the paper-plane icon in the input's bottom-right corner to send. Each prompt creates a Task card in the conversation that walks through the agent's execution turn-by-turn: TaskStatusUpdate entries (`Submitted` -> `Working` -> `Completed`) with token counts, individual tool-call cards showing the tool name and latency, and an Artifact card holding the final response. *Clear context* (at the bottom of the input) resets the conversation between tests.
+
+. On the agent detail page, open the *Inspector* tab.
+
+. Send the first prompt:
++
+[,text]
+----
+What pets are available right now?
+----
++
+The agent calls `findpetsbystatus` with `status=available` and returns a summary of the pets, naming the tool. This PetStore endpoint is occasionally flaky; if it returns an HTTP 500, retry the prompt.
+
+. (Optional) Send an open-ended prompt to confirm multi-step reasoning:
++
+[,text]
+----
+Find a pet tagged "friendly" and tell me whether it's available.
+----
++
+The agent may call `findpetsbytags` first, then `getpetbyid` for one of the matches, then summarize.
+
+If the agent hallucinates data instead of calling a tool, tighten the system prompt's "Always call a tool before answering" rule. See xref:connect:system-prompts.adoc[system prompt best practices] for patterns.
+
+If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet store API being unavailable, that's the public Swagger PetStore being intermittently down. The agent is behaving correctly (the "if a tool fails, say so and stop" rule in the system prompt is what produced the apology). Retry the prompt; PetStore usually recovers within a few minutes.
+
+== Iterate on your agent
+
+Agent configuration isn't fixed after you create it. Edit the system prompt or model, save, and re-test in the Inspector to see how behavior changes.
+
+. On the agent detail page, open the *Overview* tab. The tab shows the agent's full configuration as an editable form.
+
+. Adjust the `System prompt` to change how the agent responds. For example:
++
+* Add a constraint: `Never call more than one tool per response.`
+* Change the output format: `Always format pet details as a bulleted list.`
+* Add a confirmation step: `Before answering, restate which tool you plan to call and why.`
+
+. Click *Save changes*.
+
+. Open the *Inspector* tab, click *Clear context*, and re-send one of the earlier prompts to compare the agent's behavior against your change.
+
+For system prompt patterns and anti-patterns, see xref:connect:system-prompts.adoc[Write effective system prompts].
+
+== See what your agent did
+
+Every conversation with the agent is recorded as a glossterm:transcript[] you can replay turn-by-turn. Your Inspector tests are already there.
+
+NOTE: The *Chat* view and the tool arguments and results depend on message recording, which the LLM provider controls with the `Record inputs` and `Record outputs` toggles, both off by default. The paired xref:get-started:adp-quickstart.adoc[administrator quickstart] turns them on. If your administrator left them off, transcripts still capture token counts, latency, and tool calls, but the message text is empty. For details, see xref:gateway:configure-provider.adoc#transcript-logging[Configure transcript logging].
+
+. On the agent detail page, open the *Transcripts* tab. The tab lists the agent's recent conversations, one row per conversation, with its start time, duration, turn count, status, and token total.
+
+. Select the conversation from your Inspector test.
+
+. Toggle between the two views:
++
+* *Chat*: The user-visible exchange, as a conversation.
+* *Detailed*: Adds per-turn metadata: latency, input/output token splits, and each tool call with its arguments, result, latency, and status.
+
+The *Detailed* view is where you verify the agent did what you asked: which tool it called, with which arguments, and what came back. For the full transcript reference, see xref:monitor:transcripts.adoc[See what your agent did].
+
+== Make it real
+
+PetStore proves the flow. To build something your team uses, swap the demo API for a real system:
+
+. In the sidebar, open *MCP Servers* and click *Add MCP server*.
+. Pick a type from the marketplace picker that matches a system your team uses, such as Slack, Jira, or a SQL database. See the xref:connect:managed/managed-catalog.adoc[managed MCP catalog] for every type Redpanda hosts, with links to setup guides.
+. Configure its authentication. Unlike PetStore, real systems need credentials: an API key stored as a secret, or per-user OAuth. Some authentication modes need one-time setup from your administrator; see xref:connect:authentication.adoc[Set up authentication].
+. Add the new server to your agent's *Tools* section, and update the system prompt to describe the new tools and rules.
+
+Your own API works too: if it has an OpenAPI 3.x spec, the same OpenAPI server type you used for PetStore exposes it as tools. See xref:connect:managed/openapi.adoc[].
+
+== Use your agent beyond the UI
+
+Your agent isn't limited to the Agentic Data Plane UI. Once it's running, you can reach it and its tools from other software:
+
+* Surface your MCP tools in a chat client like Claude Desktop or ChatGPT: xref:connect:remote-mcp-clients.adoc[]
+* Call the agent from your own application over its A2A endpoint: xref:connect:create-agent.adoc#connect-to-the-agent[Connect to the agent]
+* Let the agent respond in Microsoft Teams: xref:connect:triggers/overview.adoc[]
+
+== Clean up
+
+If this was a one-off exercise, delete the resources you created so they don't continue to count against your organization.
+
+. Delete the agent (`pet-store-assistant`) first. Open the agent detail page, scroll to the delete section, and click *Delete*.
+
+. Delete the MCP server (`petstore-quickstart`). Same pattern.
+
+Leave your organization's LLM provider alone. It's a shared resource that other builders use.
+
+== Next steps
+
+* xref:cli:index.adoc[]
+* xref:connect:system-prompts.adoc[]

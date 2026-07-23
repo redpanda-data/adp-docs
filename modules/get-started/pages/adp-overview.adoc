@@ -82,5 +82,6 @@ Common Redpanda Agentic Data Plane use cases include:
 
 == Next steps
 
-* xref:get-started:adp-quickstart.adoc[Agentic Data Plane Quickstart]
+* xref:get-started:agent-builder-quickstart.adoc[Quickstart for Agent Builders]
+* xref:get-started:adp-quickstart.adoc[Quickstart for Administrators]
 * xref:gateway:configure-provider.adoc[Configure an LLM provider]
