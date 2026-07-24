@@ -8,7 +8,7 @@
 
 // Source: proto/public/cloud/redpanda/api/adp/v1alpha1/spending_service.proto, spending_event.proto, agent.proto; apps/adp-ui/src Cost & Usage tab. Verified against code on 2026-07-21 and against the ign integration cluster (aigw SpendingService) on 2026-07-22.
 
-Cost-allocation tags reuse the key/value tags you already set on an agent and give them a second job: grouping and filtering glossterm:large language model (LLM)[,LLM] spend. Tag your agents with a dimension that matches how you report cost (for example, `department`, `team`, or `env`), and the Agentic Data Plane (ADP) attributes every LLM call that agent makes to those tags. You can then break spend down by `department` on the *Cost & Usage* page, filter a report to `env=prod`, or pull per-team totals through the API for chargeback.
+Cost-allocation tags reuse the key/value tags you already set on an agent and give them a second job: grouping and filtering glossterm:large language model (LLM)[,LLM] spend. Tag your agents with a dimension that matches how you report cost (for example, `department`, `team`, or `env`), and the Agentic Data Plane attributes every LLM call that agent makes to those tags. You can then break spend down by `department` on the *Cost & Usage* page, filter a report to `env=prod`, or pull per-team totals through the API for chargeback.
 
 You configure no separate tag registry and no spending pipeline. Tag an agent, and its spend is attributed automatically from the next call onward.
 
