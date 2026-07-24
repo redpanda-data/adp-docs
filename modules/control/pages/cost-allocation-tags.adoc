@@ -165,5 +165,5 @@ Attribution is point-in-time by design. Only spend recorded after the edit picks
 == Next steps
 
 * xref:control:budgets.adoc[]
-* xref:gateway:configure-provider.adoc#view-cost-and-usage[]
+* xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage]
 * xref:connect:create-agent.adoc[]
