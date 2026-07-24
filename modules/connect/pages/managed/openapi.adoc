@@ -68,7 +68,12 @@ OpenAPI is the most flexible managed type for authentication: the upstream API c
 
 |`User-delegated OAuth`
 |API supports OAuth on behalf of users and you want per-user identities. Requires an OAuth Provider configured for that API. See xref:connect:user-delegated-oauth.adoc[].
+
+|`Service-account OAuth`
+|API supports the OAuth client-credentials grant and you want a single shared service-account identity for every call, rather than per-user tokens.
 |===
+
+For *Service-account OAuth*, the gateway runs the client-credentials exchange once per server and shares the resulting token across all callers. Supply the client ID, a secret-store reference for the client secret, the token URL, and any scopes the API requires. Store the client secret in the Agentic Data Plane secret store under an `UPPER_SNAKE_CASE` key, such as `OAUTH_CLIENT_SECRET`, and reference it from the form. The token URL must be an `https` URL.
 
 == Test
 
@@ -83,6 +88,8 @@ See xref:connect:test-tools.adoc[] for general Inspector usage.
 == Use with agents
 
 Once tools generate cleanly, point an agent at the *API URL* on the server's detail page. The agent sees one tool per OpenAPI operation, named accordingly.
+
+Each tool returns the upstream response as a structured result with three fields: `status_code`, `headers`, and `body`. `body` is the parsed JSON payload when the response is JSON, or the raw response text otherwise. `headers` holds the response headers you selected with *Extract headers*, and is empty when none are configured. Agents that read structured output can address these fields directly, and a plain-text copy of the same result is also included for clients that read only text.
 
 Every generated tool also accepts an optional `headers` input, which lets the agent set request headers the spec doesn't declare. Agent-supplied headers can't override the configured authentication headers or the spec's own header parameters. Combined with `Extract headers`, this supports APIs that round-trip headers, such as a CSRF token fetched from one response and echoed on the next request.
 
