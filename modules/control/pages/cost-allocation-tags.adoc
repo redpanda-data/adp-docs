@@ -25,7 +25,7 @@ After reading this page, you will be able to:
 
 == How tag-based spend tracking works
 
-When an agent makes an LLM call through AI Gateway, ADP records a spending event and stamps it with a snapshot of that agent's tags at the time of the call. Cost reports then group and filter on those stamped tags.
+When an agent makes an LLM call through AI Gateway, the Agentic Data Plane records a spending event and stamps it with a snapshot of that agent's tags at the time of the call. Cost reports then group and filter on those stamped tags.
 
 Three behaviors follow from this design:
 
