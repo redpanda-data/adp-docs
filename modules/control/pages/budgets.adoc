@@ -180,7 +180,9 @@ For more expressive queries, `SpendingFilter` also accepts an AIP-160 `filter` e
 |AIP-160 expression that combines and negates dimensions in a single string (for example, `provider_name="anthropic" AND model_id!="claude-sonnet-4-6"`). Composes with the structured fields above; populate one or both.
 |===
 
-The `dimension` value chooses the breakdown dimension. Valid values are the `BreakdownDimension` enum: `BREAKDOWN_DIMENSION_PROVIDER`, `BREAKDOWN_DIMENSION_MODEL`, `BREAKDOWN_DIMENSION_USER`, `BREAKDOWN_DIMENSION_AGENT`, and `BREAKDOWN_DIMENSION_PROVIDER_TYPE`. A breakdown on `BREAKDOWN_DIMENSION_AGENT` keys on the agent's resource name (`agents/<slug>`) and excludes rows with no agent (direct user calls), the same way the other dimensions skip empty keys. Spend is summed across every instance that has used the name, so an agent that was deleted and recreated appears as a single entry.
+The `dimension` value chooses the breakdown dimension. Valid values are the `BreakdownDimension` enum: `BREAKDOWN_DIMENSION_PROVIDER`, `BREAKDOWN_DIMENSION_MODEL`, `BREAKDOWN_DIMENSION_USER`, `BREAKDOWN_DIMENSION_AGENT`, `BREAKDOWN_DIMENSION_PROVIDER_TYPE`, and `BREAKDOWN_DIMENSION_TAG`. A breakdown on `BREAKDOWN_DIMENSION_AGENT` keys on the agent's resource name (`agents/<slug>`) and excludes rows with no agent (direct user calls), the same way the other dimensions skip empty keys. Spend is summed across every instance that has used the name, so an agent that was deleted and recreated appears as a single entry.
+
+`BREAKDOWN_DIMENSION_TAG` groups spend by the value of a tag you set on your agents (for example, `department`) and takes an extra `tag_key` field. Use it to attribute cost to a department, team, or environment. See xref:control:cost-allocation-tags.adoc[].
 
 === cURL example
 
