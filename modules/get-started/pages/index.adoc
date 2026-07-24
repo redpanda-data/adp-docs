@@ -3,4 +3,4 @@
 :description: Stand up Redpanda Agentic Data Plane and ship your first agent.
 :page-layout: index
 
-Redpanda's Agentic Data Plane runs and governs AI agents on your streaming data. Get an overview of the platform, then follow a quickstart to stand up Agentic Data Plane and ship your first agent.
+Redpanda's Agentic Data Plane runs and governs AI agents on your streaming data. Get an overview of the platform, then follow the quickstart that matches your role: agent builders create and test their first agent, and administrators set up the LLM provider that makes agent building possible.

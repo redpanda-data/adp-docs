@@ -93,7 +93,7 @@ NOTE: Always include `offline_access` in `required_scopes`. Without it, `OAuthTo
 
 == Use with agents
 
-Point an agent at the *API URL* on the server's detail page. Each user calling the agent will trigger their own consent flow on first call.
+Point an agent at the `MCP Server URL` on the server's detail page. Each user calling the agent will trigger their own consent flow on first call.
 
 With user-delegated OAuth, define the server's `required_scopes` to include every scope the tools need: Atlassian doesn't allow per-tool scope upgrades, so the user consents once with the full set.
 

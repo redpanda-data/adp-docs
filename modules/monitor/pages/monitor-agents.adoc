@@ -19,7 +19,7 @@ For conceptual background on traces and observability, see xref:monitor:concepts
 
 == Prerequisites
 
-You must have a running agent. If you do not have one, see xref:get-started:adp-quickstart.adoc[].
+You must have a running agent. If you do not have one, see xref:get-started:agent-builder-quickstart.adoc[].
 
 == Debug agent execution with Transcripts
 

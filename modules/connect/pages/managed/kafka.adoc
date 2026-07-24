@@ -77,7 +77,7 @@ TLS controls transport encryption: enable it, and optionally skip certificate ve
 
 == Use with agents
 
-Once the Kafka server is created, point an agent at the *API URL* on the server's detail page. The agent can then produce messages to topics through the exposed `produce` tool.
+Once the Kafka server is created, point an agent at the `MCP Server URL` on the server's detail page. The agent can then produce messages to topics through the exposed `produce` tool.
 
 == Troubleshooting
 

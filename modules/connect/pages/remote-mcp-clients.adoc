@@ -68,7 +68,7 @@ When a user invokes a tool, AI Gateway runs both authentication handshakes: Clau
 Before you wire up the chat-client connector, make sure you have:
 
 * An MCP server already created in AI Gateway. See xref:connect:create-server.adoc[Create an MCP Server].
-* The MCP server's `API URL`. Copy it from the server's *Overview* tab.
+* The server's `MCP Server URL`. Copy it from the server's *Overview* tab.
 * For user-delegated MCP servers: An OAuth Provider configured for the upstream system. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * End-users have accounts with the chat client (Claude, ChatGPT, Gemini, Cursor) and the upstream system the MCP server connects to.
 
@@ -235,7 +235,7 @@ Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and
 |Anything that helps the user identify the connector (for example, `Redpanda GitHub`). Surfaces in Claude's tool list.
 
 |`Remote MCP server URL`
-|The MCP server's `API URL` from AI Gateway. Format: `\https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>`.
+|The server's `MCP Server URL` from AI Gateway. Format: `\https://aigw.<cluster-id>.clusters.rdpa.co/mcp/v1/<server-name>`.
 
 |`OAuth client ID` (optional, under *Advanced settings*)
 |The Client ID from the AI Gateway OAuth Client. Required for any MCP server that requires authentication. Leave blank only for public MCP servers that don't require authentication.
@@ -359,7 +359,7 @@ Common symptoms and fixes:
 |Symptom |What to check
 
 |_Couldn't connect to MCP server_ or connector setup fails immediately
-|The MCP URL is wrong, or the Client ID + Client Secret don't match an OAuth Client. Confirm the API URL on the MCP server's *Overview* tab and the credentials on the OAuth Client's detail page.
+|The MCP URL is wrong, or the Client ID + Client Secret don't match an OAuth Client. Confirm the `MCP Server URL` on the MCP server's *Overview* tab and the credentials on the OAuth Client's detail page.
 
 |`redirect_uri_mismatch` during the connect flow
 |The chat client's callback URL isn't registered on the OAuth Client. Add the URL the chat client publishes (Claude Desktop has two; check Claude's docs for the current set).

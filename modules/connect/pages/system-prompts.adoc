@@ -484,5 +484,5 @@ Decision criteria enable reliable tool selection based on request context.
 
 == Next steps
 
-* xref:get-started:adp-quickstart.adoc[]
+* xref:get-started:agent-builder-quickstart.adoc[]
 * xref:connect:mcp-overview.adoc[]

@@ -2,7 +2,8 @@
 
 * xref:get-started:index.adoc[Get Started]
 ** xref:get-started:adp-overview.adoc[Redpanda Agentic Data Plane Overview]
-** xref:get-started:adp-quickstart.adoc[Agentic Data Plane Quickstart]
+** xref:get-started:agent-builder-quickstart.adoc[Quickstart for Agent Builders]
+** xref:get-started:adp-quickstart.adoc[Quickstart for Administrators]
 
 * xref:connect:agents.adoc[Build Agents]
 ** xref:connect:agents-overview.adoc[How Agents Work]
