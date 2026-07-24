@@ -6,6 +6,23 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.28 (2026-07-24)
+
+=== Features
+
+MCP Servers:: As a preview, MCP servers now have a **Data Policies** tab where you can define rules that mask, redact, or filter fields out of a tool's results before the model sees them. Author and preview policies per server.
+MCP Servers:: OpenAPI MCP servers can now authenticate to a downstream API with an OAuth client-credentials (service-account) flow. All requests share one service-account identity instead of each user's own credentials.
+
+=== Improvements
+
+MCP Servers:: OpenAPI MCP servers now return tool results as structured output with the response's status code, headers, and parsed body, so agents can read them reliably.
+LLM Providers `[UI]`:: You can now find a provider in the list by its display name, not just its ID.
+
+=== Bug fixes
+
+CLI:: Deriving an environment with `rpk ai env add --from <base>` now inherits the base environment's ADP API URL and authentication mode instead of resetting them to defaults.
+CLI:: The `rpk ai env list` output no longer shows duplicate or stale local-only environments.
+
 == v0.2.27 (2026-07-22)
 
 === Improvements
