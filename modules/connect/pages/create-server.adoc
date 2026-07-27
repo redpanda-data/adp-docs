@@ -143,17 +143,19 @@ In the *Output format* section, set *Encoding* to one of these values:
 |===
 |Encoding |Result
 
-|*JSON (default)*
+|JSON (default)
 |Forwards results to the agent unchanged.
 
-|*TOON (token-optimized)*
+|TOON (token-optimized)
 |Re-encodes tabular and nested-object results into a denser TOON representation that uses fewer tokens than JSON.
 
-|*JTON (token-optimized)*
+|JTON (token-optimized)
 |Re-encodes tabular results into JTON, a compact superset of JSON.
 |===
 
 The gateway re-encodes a result only when it can do so without losing data. When a result isn't tabular, or can't be converted losslessly, the gateway forwards the original JSON unchanged, so changing the encoding never drops or corrupts a result. To change the encoding later, edit the server.
+
+The selected encoding takes effect after token-optimized output is enabled for your gateway. Until then, results are forwarded as JSON.
 
 NOTE: Output format is a preview capability.
 
