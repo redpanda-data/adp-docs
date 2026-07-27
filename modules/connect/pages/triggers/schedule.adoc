@@ -30,16 +30,16 @@ After reading this page, you will be able to:
 
 . In Redpanda Cloud, open your agent's *Triggers* tab.
 . Click *Add trigger* and select *Schedule*.
-. Under details, enter a display name, for example, `Daily summary`. The trigger's unique ID is derived from it at creation and can't be changed afterward. To describe the trigger for other people, add a description.
+. Under Details, enter a display name, for example, `Daily summary`. The trigger's unique ID is derived from it at creation and can't be changed afterward. To describe the trigger for other people, add a description.
 . Set the schedule and timezone. See <<Set the schedule>> and <<Choose the timezone>>.
-. Under input, enter an input prompt. This text is the message the agent receives on every run, for example, `Summarize new support tickets from the last 24 hours`.
+. Under Input, enter an input prompt. This text is the message the agent receives on every run, for example, `Summarize new support tickets from the last 24 hours`.
 . Click *Create trigger*. The trigger is active as soon as you create it.
 
 An agent can have up to 10 schedule triggers, so you can run the same agent on several schedules, each with its own input prompt.
 
 == Set the schedule
 
-Under schedule, set when the agent runs:
+Under Schedule, set when the agent runs:
 
 * For a common cadence, pick a preset and set the time. The presets are hourly, daily, weekdays, weekly, and monthly.
 * For a schedule the presets don't cover, expand the *Advanced* section and enter a standard five-field cron expression.
