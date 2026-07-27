@@ -133,6 +133,30 @@ When code mode is enabled, the server's detail page surfaces a second URL, the *
 
 NOTE: Defer advanced code-mode patterns (sandboxing limits, runtime selection, dependency management) to follow-up content; this page covers only enabling it.
 
+== Output format (optional)
+
+By default, a server forwards each tool's results to the agent as JSON. To reduce the number of tokens an agent spends reading large, tabular results, set the server's *Output format* to a token-optimized encoding.
+
+In the *Output format* section, set *Encoding* to one of these values:
+
+[cols="1,3"]
+|===
+|Encoding |Result
+
+|*JSON (default)*
+|Forwards results to the agent unchanged.
+
+|*TOON (token-optimized)*
+|Re-encodes tabular and nested-object results into a denser TOON representation that uses fewer tokens than JSON.
+
+|*JTON (token-optimized)*
+|Re-encodes tabular results into JTON, a compact superset of JSON.
+|===
+
+The gateway re-encodes a result only when it can do so without losing data. When a result isn't tabular, or can't be converted losslessly, the gateway forwards the original JSON unchanged, so changing the encoding never drops or corrupts a result. To change the encoding later, edit the server.
+
+NOTE: Output format is a preview capability.
+
 == Save and verify
 
 . Click *Create server*. The server appears in the list with a *Type* badge: *Managed* or *Self-managed*.
