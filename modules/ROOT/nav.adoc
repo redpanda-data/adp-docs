@@ -16,6 +16,7 @@
 ** xref:connect:self-managed-agents.adoc[Set Up a Self-Managed Agent]
 ** xref:connect:triggers/overview.adoc[Trigger Agents from External Channels]
 *** xref:connect:triggers/microsoft-teams.adoc[Connect an Agent to Microsoft Teams]
+*** xref:connect:triggers/schedule.adoc[Run an Agent on a Schedule]
 
 * xref:connect:index.adoc[Connect Data & Tools]
 ** xref:connect:mcp-servers.adoc[Connect Tools with MCP Servers]

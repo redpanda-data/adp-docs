@@ -1,0 +1,107 @@
+= Run an Agent on a Schedule
+:description: Add a schedule trigger to a deployed agent so it runs automatically on a recurring cron schedule, in the timezone you choose.
+:page-topic-type: how-to
+:personas: agent_builder, platform_engineer
+:learning-objective-1: Add a schedule trigger to an agent using a preset or a cron expression
+:learning-objective-2: Choose the timezone and input prompt for scheduled runs
+:learning-objective-3: Describe how a scheduled run invokes the agent and who it runs as
+
+// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, CronTrigger, TriggerRun) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` and the scheduler in `apps/adp-api/internal/agent/trigger/cron/` on origin/main. UI surface verified against adp-production on 2026-07-24.
+
+A schedule trigger runs a deployed agent automatically on a recurring schedule that you define with a cron expression. Each run sends a fixed message, the input prompt, to the agent in the timezone you choose.
+
+A schedule trigger is one-directional. It starts the agent on time and records the run as a transcript. This differs from a Microsoft Teams trigger, where a person sends a message and the agent's reply streams back to them.
+
+Each scheduled run invokes the agent on behalf of the person who created the trigger, with that person's access, and the run is attributed to them in transcripts and cost reporting. Editing the schedule later doesn't change who it runs as.
+
+NOTE: Triggers are available for Redpanda-managed agents only. A self-managed agent runs on your own infrastructure and is invoked through it, so it has no *Triggers* tab. To bring a self-managed agent into Agentic Data Plane for observability and governance, see xref:connect:self-managed-agents.adoc[Set up a self-managed agent].
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== Prerequisites
+
+* A deployed Redpanda-managed agent. If you don't have one, see xref:connect:create-agent.adoc[].
+
+== Add a schedule trigger
+
+. In Redpanda Cloud, open your agent's *Triggers* tab.
+. Click *Add trigger* and select *Schedule*.
+. Under *Details*, enter a *Display name*, for example, `Daily summary`. The trigger's unique ID is derived from it at creation and can't be changed afterward. To describe the trigger for other people, add a *Description*.
+. Set the schedule and timezone. See <<Set the schedule>> and <<Choose the timezone>>.
+. Under *Input*, enter an *Input prompt*. This text is the message the agent receives on every run, for example, `Summarize new support tickets from the last 24 hours`.
+. Click *Create trigger*. The trigger is active as soon as you create it.
+
+An agent can have up to 10 schedule triggers, so you can run the same agent on several schedules, each with its own input prompt.
+
+== Set the schedule
+
+Under *Schedule*, set when the agent runs:
+
+* For a common cadence, pick a preset from *Runs* and set the time. The presets are *Hourly*, *Daily*, *Weekdays*, *Weekly*, and *Monthly*.
+* For a schedule the presets don't cover, expand *Advanced — cron expression* and enter a standard five-field cron expression.
+
+A cron expression has five fields, separated by spaces: minute, hour, day of month, month, and day of week. For example, `0 9 * * 1-5` runs at 9:00 AM on weekdays. The readback below the field restates the schedule in plain language and previews the next run, so you can confirm the expression does what you intend.
+
+Two limits apply to the schedule:
+
+* Runs must be at least 15 minutes apart. A schedule whose runs fall closer together than that is rejected with the message that the schedule runs too frequently.
+* Shortcut expressions such as `@daily` and `@hourly` are not supported. Use a five-field expression instead.
+
+== Choose the timezone
+
+Select a *Timezone*. The schedule is evaluated in this timezone, and it accounts for daylight saving, so a run set for 9:00 AM stays at 9:00 AM across the change. The field defaults to your browser's timezone, and you can change it to any IANA timezone, for example, `Europe/Prague` or `America/New_York`.
+
+The *Next run* time shown on the form and on the trigger's card is a preview, computed in the schedule's timezone. Redpanda remains the authority on the exact time each run fires.
+
+== How a scheduled run works
+
+At each scheduled time, Redpanda invokes the agent with the input prompt as a user message. The agent processes the message as it would a chat, and the work is recorded as a transcript. Because the run is one-directional, no reply is delivered anywhere.
+
+Only one run of a trigger is in flight at a time. Redpanda records each run in the trigger's run history with an outcome:
+
+* *Succeeded*: Redpanda started the run and the agent accepted it.
+* *Failed*: The run could not be started, or the agent rejected it. The recorded error explains the reason.
+* *Missed*: The scheduled time passed during Redpanda downtime. Missed runs are not retried or caught up later.
+* *Skipped*: The previous run of the same trigger was still in progress at the scheduled time.
+
+To review past runs, expand the trigger's card and click *View runs*. Each run is listed with its outcome, and a run that reached the agent produces a transcript, the same as any other agent invocation.
+
+== Manage a schedule trigger
+
+Schedule triggers live on the agent's *Triggers* tab, each on its own card:
+
+* To change a trigger, edit it on its card. The trigger's unique ID and its type are fixed. The display name, description, schedule, timezone, and input prompt stay editable.
+* To review past runs, expand the card and click *View runs*.
+* To stop the schedule, delete the trigger on its card. Deleting stops all future runs and can't be undone.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|The schedule is rejected as running too frequently
+|Two runs fall less than 15 minutes apart. Widen the schedule so consecutive runs are at least 15 minutes apart.
+
+|A shortcut expression such as `@daily` is rejected
+|Shortcut expressions are not supported. Rewrite the schedule as a five-field cron expression, for example, `0 0 * * *` for every day at midnight.
+
+|Runs fire at an unexpected local time
+|Check the trigger's timezone. The schedule is evaluated in the timezone set on the trigger, not the viewer's local time, and it shifts with daylight saving.
+
+|A run is recorded as *Missed*
+|The scheduled time passed while Redpanda was unavailable. Missed runs are not caught up. The next scheduled run proceeds as normal.
+
+|A run is recorded as *Skipped*
+|The previous run of the same trigger was still in progress at the scheduled time. Give the agent more time between runs, or simplify the input prompt so each run finishes sooner.
+|===
+
+== Next steps
+
+* xref:connect:triggers/overview.adoc[]
+* xref:connect:triggers/microsoft-teams.adoc[]
+* xref:connect:create-agent.adoc[]
