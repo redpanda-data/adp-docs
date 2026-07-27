@@ -14,7 +14,7 @@
 ** xref:connect:create-agent.adoc[Create an Agent]
 ** xref:connect:draw-charts.adoc[Draw Charts from an Agent]
 ** xref:connect:self-managed-agents.adoc[Set Up a Self-Managed Agent]
-** xref:connect:triggers/overview.adoc[Trigger Agents from External Channels]
+** xref:connect:triggers/overview.adoc[Trigger Agents]
 *** xref:connect:triggers/microsoft-teams.adoc[Connect an Agent to Microsoft Teams]
 *** xref:connect:triggers/schedule.adoc[Run an Agent on a Schedule]
 

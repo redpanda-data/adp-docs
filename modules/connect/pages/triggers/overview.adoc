@@ -1,4 +1,4 @@
-= Trigger Agents from External Channels
+= Trigger Agents
 :description: Triggers invoke a deployed agent without calling its API directly, from Microsoft Teams or on a schedule.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer
@@ -37,11 +37,11 @@ A Microsoft Teams trigger also exposes a messaging endpoint: a URL that Teams de
 
 Adding a trigger does not validate it on the spot. For a Microsoft Teams trigger, Redpanda's messaging bridge checks each trigger in the background, about every 30 seconds, by validating its credentials with Microsoft, and reports the result. The *Triggers* tab shows one of three states:
 
-* *Pending*: No check has been reported yet. A trigger sits here briefly after you add it.
-* *Connected*: The latest check passed. For a Microsoft Teams trigger, this means Microsoft accepted the bot credentials.
-* *Error*: The latest check failed. The message on the card explains the reason, for example, a rejected client secret.
+* Pending: No check has been reported yet. A trigger sits here briefly after you add it.
+* Connected: The latest check passed. For a Microsoft Teams trigger, this means Microsoft accepted the bot credentials.
+* Error: The latest check failed. The message on the card explains the reason, for example, a rejected client secret.
 
-Because the check runs continuously, the status also catches problems that appear later: if a bot's client secret expires, the trigger flips to *Error* without anyone sending a message. The tab refreshes the status on its own, and you can also refresh on demand.
+Because the check runs continuously, the status also catches problems that appear later: if a bot's client secret expires, the trigger flips to Error without anyone sending a message. The tab refreshes the status on its own, and you can also refresh on demand.
 
 A schedule trigger reports the outcome of its runs rather than a connection check. Its card shows the last run's outcome and the next run time. For the outcomes a run can have, see xref:connect:triggers/schedule.adoc[].
 

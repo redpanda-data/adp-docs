@@ -30,19 +30,19 @@ After reading this page, you will be able to:
 
 . In Redpanda Cloud, open your agent's *Triggers* tab.
 . Click *Add trigger* and select *Schedule*.
-. Under *Details*, enter a *Display name*, for example, `Daily summary`. The trigger's unique ID is derived from it at creation and can't be changed afterward. To describe the trigger for other people, add a *Description*.
+. Under details, enter a display name, for example, `Daily summary`. The trigger's unique ID is derived from it at creation and can't be changed afterward. To describe the trigger for other people, add a description.
 . Set the schedule and timezone. See <<Set the schedule>> and <<Choose the timezone>>.
-. Under *Input*, enter an *Input prompt*. This text is the message the agent receives on every run, for example, `Summarize new support tickets from the last 24 hours`.
+. Under input, enter an input prompt. This text is the message the agent receives on every run, for example, `Summarize new support tickets from the last 24 hours`.
 . Click *Create trigger*. The trigger is active as soon as you create it.
 
 An agent can have up to 10 schedule triggers, so you can run the same agent on several schedules, each with its own input prompt.
 
 == Set the schedule
 
-Under *Schedule*, set when the agent runs:
+Under schedule, set when the agent runs:
 
-* For a common cadence, pick a preset from *Runs* and set the time. The presets are *Hourly*, *Daily*, *Weekdays*, *Weekly*, and *Monthly*.
-* For a schedule the presets don't cover, expand *Advanced — cron expression* and enter a standard five-field cron expression.
+* For a common cadence, pick a preset and set the time. The presets are hourly, daily, weekdays, weekly, and monthly.
+* For a schedule the presets don't cover, expand the *Advanced* section and enter a standard five-field cron expression.
 
 A cron expression has five fields, separated by spaces: minute, hour, day of month, month, and day of week. For example, `0 9 * * 1-5` runs at 9:00 AM on weekdays. The readback below the field restates the schedule in plain language and previews the next run, so you can confirm the expression does what you intend.
 
@@ -53,9 +53,9 @@ Two limits apply to the schedule:
 
 == Choose the timezone
 
-Select a *Timezone*. The schedule is evaluated in this timezone, and it accounts for daylight saving, so a run set for 9:00 AM stays at 9:00 AM across the change. The field defaults to your browser's timezone, and you can change it to any IANA timezone, for example, `Europe/Prague` or `America/New_York`.
+Select a timezone. The schedule is evaluated in this timezone, and it accounts for daylight saving, so a run set for 9:00 AM stays at 9:00 AM across the change. The field defaults to your browser's timezone, and you can change it to any IANA timezone, for example, `Europe/Prague` or `America/New_York`.
 
-The *Next run* time shown on the form and on the trigger's card is a preview, computed in the schedule's timezone. Redpanda remains the authority on the exact time each run fires.
+The next run time shown on the form and on the trigger's card is a preview, computed in the schedule's timezone. Redpanda remains the authority on the exact time each run fires.
 
 == How a scheduled run works
 
@@ -63,10 +63,10 @@ At each scheduled time, Redpanda invokes the agent with the input prompt as a us
 
 Only one run of a trigger is in flight at a time. Redpanda records each run in the trigger's run history with an outcome:
 
-* *Succeeded*: Redpanda started the run and the agent accepted it.
-* *Failed*: The run could not be started, or the agent rejected it. The recorded error explains the reason.
-* *Missed*: The scheduled time passed during Redpanda downtime. Missed runs are not retried or caught up later.
-* *Skipped*: The previous run of the same trigger was still in progress at the scheduled time.
+* Succeeded: Redpanda started the run and the agent accepted it.
+* Failed: The run could not be started, or the agent rejected it. The recorded error explains the reason.
+* Missed: The scheduled time passed during Redpanda downtime. Missed runs are not retried or caught up later.
+* Skipped: The previous run of the same trigger was still in progress at the scheduled time.
 
 To review past runs, expand the trigger's card and click *View runs*. Each run is listed with its outcome, and a run that reached the agent produces a transcript, the same as any other agent invocation.
 
@@ -93,10 +93,10 @@ Schedule triggers live on the agent's *Triggers* tab, each on its own card:
 |Runs fire at an unexpected local time
 |Check the trigger's timezone. The schedule is evaluated in the timezone set on the trigger, not the viewer's local time, and it shifts with daylight saving.
 
-|A run is recorded as *Missed*
+|A run is recorded as Missed
 |The scheduled time passed while Redpanda was unavailable. Missed runs are not caught up. The next scheduled run proceeds as normal.
 
-|A run is recorded as *Skipped*
+|A run is recorded as Skipped
 |The previous run of the same trigger was still in progress at the scheduled time. Give the agent more time between runs, or simplify the input prompt so each run finishes sooner.
 |===
 
