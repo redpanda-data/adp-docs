@@ -6,6 +6,23 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.30 (2026-07-27)
+
+=== Improvements
+
+Security:: This release includes general security and stability improvements.
+
+== v0.2.29 (2026-07-27)
+
+=== Features
+
+Agents:: Agents now support scheduled triggers. Give an agent a cron schedule and it runs automatically at the times you set.
+MCP Servers:: You can now pick a token-optimized output format for each MCP server. Set a server's **Output format** to JSON, TOON, or JTON to control how tool results are encoded before an agent reads them.
+
+=== Bug fixes
+
+MCP Servers:: Connecting a remote MCP server now streams its responses reliably, so its tools load instead of appearing empty.
+
 == v0.2.28 (2026-07-24)
 
 === Features
