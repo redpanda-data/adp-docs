@@ -147,7 +147,7 @@ For prompt-writing patterns that make this output reliable, see xref:connect:sys
 . Wait for the response.
 The chart appears in place of the `chart` block.
 
-image::connect:agent-chart-rendered.png[A rendered bar chart in the Inspector, with a segmented control offering Chart, Data, and Code views.]
+image::connect:agent-chart-rendered.png[alt="A rendered bar chart in the Inspector with Chart, Data, and Code views."]
 
 The rendered chart carries a segmented control with three views:
 
