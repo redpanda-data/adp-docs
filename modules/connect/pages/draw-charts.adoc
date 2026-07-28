@@ -4,12 +4,14 @@
 :personas: agent_builder
 :learning-objective-1: Emit a chart code block that follows the ADP chart contract
 :learning-objective-2: Instruct an agent to draw a bar or line chart through its system prompt
-:learning-objective-3: Migrate a Chart.js prompt to the current chart contract
+:learning-objective-3: Migrate an earlier chart prompt to the current chart contract
 :learning-objective-4: Diagnose a chart that renders as an error or stays a placeholder
 
 // Verified against the Redpanda Cloud chart renderer on 2026-07-28.
 
 An agent draws a chart by emitting a fenced code block tagged `chart` whose body is strict JSON that follows the ADP chart contract.
+The Inspector renders the data with the Redpanda Cloud shadcn/Recharts chart components.
+The fence body contains data, not Recharts component code.
 The agent's *Inspector* tab renders that block with Chart, Data, and Code views.
 This is a rendering convention: the agent decides when a chart helps and writes the data, and the Inspector draws it.
 No tool call, configuration, or extra code is required.
@@ -17,10 +19,11 @@ No tool call, configuration, or extra code is required.
 [IMPORTANT]
 ====
 The chart contract supports `bar` and `line` charts.
-If an existing system prompt asks the agent to emit a Chart.js configuration, update it to use the contract on this page.
-Legacy Chart.js-shaped `bar` and `line` blocks still render.
-The renderer reads `options.plugins.title.text` as the title, but ignores other Chart.js-specific options, plugins, scales, animations, and colors.
-Other Chart.js chart types render as an error.
+The current renderer uses shadcn/Recharts, not Chart.js.
+Existing `bar` and `line` blocks written for the earlier Chart.js format still render.
+The renderer reads `options.plugins.title.text` as the title, but ignores other legacy presentation options.
+Other legacy chart types render as an error.
+See <<migrate-chart-js-prompt>> to update an existing prompt.
 ====
 
 After reading this page, you will be able to:
@@ -40,7 +43,7 @@ After reading this page, you will be able to:
 When the agent's response contains a fenced code block tagged `chart`, the Inspector parses the block body as an ADP chart configuration and draws the chart in place of the code.
 Every other code block renders as plain code, so a `chart` block is the agent's only departure from ordinary output.
 
-The Inspector supplies the visual presentation.
+The shadcn/Recharts renderer supplies the visual presentation.
 A valid configuration renders as a responsive SVG chart with the Redpanda Cloud theme, a tooltip, and a legend.
 The agent supplies the chart type, optional title, labels, series names, and numeric values.
 
@@ -60,7 +63,7 @@ The Inspector parses the body with a JSON parser, not a JavaScript evaluator, so
 Each dataset contains a `data` array and can include a `label`.
 Values in a dataset must be finite numbers or `null`.
 * To display a title, add a top-level `title` string.
-* Do not add Chart.js `options`, plugins, scales, animations, or color properties.
+* Do not add renderer-specific `options`, plugins, scales, animations, or color properties.
 The Inspector controls those presentation details.
 
 A bar chart:
@@ -116,7 +119,7 @@ Rules for the chart block:
 - Allowed "type" values: "bar" and "line".
 - "data" contains "labels" and "datasets". Each dataset contains a numeric
   "data" array and can include a "label".
-- Do not emit Chart.js options, plugins, scales, animations, or colors.
+- Do not emit renderer-specific options, plugins, scales, animations, or colors.
 - Put a one- or two-sentence plain-text explanation before the chart block.
   Do not also paste a data table; the Inspector has a built-in Data view.
 
@@ -159,15 +162,15 @@ Hover over the chart to inspect values.
 The Chart view does not provide zoom, pan, or PNG export.
 
 [#migrate-chart-js-prompt]
-== Migrate an existing Chart.js prompt
+== Migrate from Chart.js
 
 Existing `bar` and `line` configurations keep their type, labels, datasets, and values.
-Move the title to the top level and remove Chart.js presentation options.
+Move the title to the top level and remove legacy presentation options.
 Convert other chart types to `bar` or `line`.
 
 [cols="1,1"]
 |===
-|Existing Chart.js prompt |Current chart contract
+|Earlier Chart.js configuration |Current chart contract
 
 |`"type": "bar"` or `"type": "line"`
 |Keep the type.
