@@ -83,7 +83,7 @@ provider_models:
 - name: gpt-4o-mini
 type: LLM_PROVIDER_TYPE_OPENAI
 updated_at: "2026-06-20T10:15:30Z"
-url: https://openai.aigw.d0example1cluster234.clusters.cloud.redpanda.com/openai/v1
+url: https://openai.aigw.d0example1cluster234.clusters.rdpa.co/openai/v1
 ----
 
 The `@type` line records the resource kind. It is optional when you apply with a resource command, because `rpk ai llm apply` already implies the kind, but keeping it lets a reader and any validator know what the file describes.

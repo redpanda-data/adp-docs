@@ -10,7 +10,7 @@
 
 A Microsoft Teams trigger connects a deployed agent to Microsoft Teams so people in your organization can chat with it in a personal Teams chat. Replies stream back into the chat as the agent produces them, and the agent receives the message sender's verified email address, so it can identify the user.
 
-The setup spans three systems: the Microsoft Teams Developer Portal hosts the bot and the Teams app, the Azure portal holds the bot's authentication settings and permissions, and Redpanda Cloud holds the agent's trigger.
+The setup spans three systems: the Microsoft Teams Developer Portal hosts the bot and the Teams app, the Azure portal holds the bot's authentication settings and permissions, and Agentic Data Plane holds the agent's trigger.
 
 After reading this page, you will be able to:
 
@@ -20,7 +20,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* A deployed agent in Redpanda Cloud. If you don't have one, see xref:connect:create-agent.adoc[].
+* A deployed agent. If you don't have one, see xref:connect:create-agent.adoc[].
 * Microsoft Entra admin access for your organization. Granting API permission consent and approving the Teams app require an admin.
 * Access to the https://dev.teams.microsoft.com[Teams Developer Portal^] and the https://admin.teams.microsoft.com[Teams admin center^].
 
@@ -117,7 +117,7 @@ Granting admin consent requires a Microsoft Entra admin role, such as Global Adm
 
 == Add the Microsoft Teams trigger to your agent
 
-. In Redpanda Cloud, open your agent's *Triggers* tab.
+. Open your agent's *Triggers* tab.
 . Click *Add trigger* and select *Microsoft Teams*.
 . Fill in the trigger configuration:
 +
@@ -200,7 +200,7 @@ By default, the app is available to everyone in the organization. To restrict it
 
 == Verify
 
-. In Redpanda Cloud, open the agent's *Triggers* tab and confirm the trigger status is *Connected*. This confirms that Redpanda validated the bot credentials with Microsoft. It does not confirm that the endpoint URL is set correctly on the bot, so also send a real message.
+. Open the agent's *Triggers* tab and confirm the trigger status is *Connected*. This confirms that Redpanda validated the bot credentials with Microsoft. It does not confirm that the endpoint URL is set correctly on the bot, so also send a real message.
 . In Microsoft Teams, find the app in your chats and send it a message. While the agent works, Teams shows a progress indicator, and then the reply streams into the chat with an AI-generated label. Tool calls appear as cards that update in place as they finish.
 
 == How a message flows

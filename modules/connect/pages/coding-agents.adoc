@@ -27,11 +27,6 @@ After completing this guide, you will be able to:
 ** Codex. See https://github.com/openai/codex[OpenAI's Codex documentation]. The `rpk ai run codex` command needs a recent Codex version and tells you when yours is too old.
 * A Redpanda service account or user with permission to invoke the provider (`dataplane_adp_llmprovider_invoke`). See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions]. To let `rpk ai run claude` read the provider and auto-detect its type and auth mode, also grant `dataplane_adp_llmprovider_get`; without read access, pass `--passthrough` for a passthrough provider or `--bedrock` for a Bedrock provider.
 
-[NOTE]
-====
-The `rpk` CLI starts the `rpk ai` plugin only after you have signed in to Redpanda Cloud. Before your first `rpk ai` command, run `rpk cloud login --no-profile` to sign in without selecting a cluster. This sign-in only unlocks the plugin. The `rpk ai run` command still authenticates with your separate `rpk ai auth login` credentials and its own Agentic Data Plane environment.
-====
-
 == Run Claude Code
 
 Launch Claude Code with its traffic routed through an Anthropic provider:
@@ -193,7 +188,7 @@ In this example, `<oidc-access-token>` is an access token minted with the `clien
 |The agent binary is not installed or not on your `PATH`. Install it (see Prerequisites), then relaunch.
 
 |Sign-in required before `rpk ai` starts
-|Sign in to Redpanda Cloud first with `rpk cloud login --no-profile`, then run `rpk ai auth login`. See the note under Prerequisites.
+|Run `rpk ai auth login` to sign in and select an Agentic Data Plane environment.
 
 |Unknown command error from `rpk ai run`
 |Your `rpk ai` plugin predates `rpk ai run`. Update it with `rpk ai upgrade`, then relaunch.

@@ -1,4 +1,5 @@
 = Use the Agentic Data Plane CLI
+:page-aliases: reference:rpk/rpk-cloud/rpk-cloud.adoc, reference:rpk/rpk-cloud/rpk-cloud-login.adoc, reference:rpk/rpk-cloud/rpk-cloud-logout.adoc, reference:rpk/rpk-cloud/rpk-cloud-cluster.adoc, reference:rpk/rpk-cloud/rpk-cloud-cluster-select.adoc
 :page-preview: true
 :description: Manage Agentic Data Plane resources from the terminal with rpk ai. Install the CLI, connect it to an AI Gateway, and script LLM providers, MCP servers, OAuth, and agents.
 :page-topic-type: how-to
@@ -34,12 +35,7 @@ Update the plugin later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk 
 
 The `rpk ai` command is self-contained: it has its own login and its own environment selection, independent of any `rpk cloud` session. You sign in once, choose an Agentic Data Plane environment, and `rpk ai` targets that environment's AI Gateway for every command.
 
-[NOTE]
-====
-The `rpk` CLI starts the `rpk ai` plugin only after you have signed in to Redpanda Cloud. Before your first `rpk ai` command, run `rpk cloud login --no-profile` to sign in without selecting a cluster. This sign-in only unlocks the plugin. The plugin keeps its own credentials from `rpk ai auth login`.
-====
-
-. Sign in to Redpanda Cloud. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the Agentic Data Plane environments in your organization so you can pick one:
+. Sign in to Agentic Data Plane. This runs an OAuth device-authorization flow in your browser, caches credentials in `~/.rpai/credentials` (readable only by you), then lists the Agentic Data Plane environments in your organization so you can pick one:
 +
 [,bash]
 ----
@@ -69,7 +65,7 @@ To target a different AI Gateway URL for a single command without switching envi
 
 [,bash]
 ----
-rpk ai --rpai-endpoint https://aigw.<cluster-id>.clusters.cloud.redpanda.com llm list
+rpk ai --rpai-endpoint https://aigw.<cluster-id>.clusters.rdpa.co llm list
 ----
 
 This overrides the selected environment's AI Gateway URL for that one command; the flag is not bound to an environment variable. For a local or manual gateway you use repeatedly, define it once as an environment with `rpk ai env add`:
