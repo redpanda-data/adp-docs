@@ -1,0 +1,4 @@
+= rpk ai mcp-server apply
+:page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-apply.adoc
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-apply.adoc[tag=single-source]

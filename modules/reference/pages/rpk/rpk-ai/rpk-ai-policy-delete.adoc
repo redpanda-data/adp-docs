@@ -1,0 +1,3 @@
+= rpk ai policy delete
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-policy-delete.adoc[tag=single-source]

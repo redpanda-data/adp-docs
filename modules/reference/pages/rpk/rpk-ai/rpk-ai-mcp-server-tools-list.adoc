@@ -1,0 +1,4 @@
+= rpk ai mcp-server tools list
+:page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-tools-list.adoc
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-tools-list.adoc[tag=single-source]

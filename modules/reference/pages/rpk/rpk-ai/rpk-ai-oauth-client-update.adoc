@@ -1,0 +1,3 @@
+= rpk ai oauth-client update
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-update.adoc[tag=single-source]

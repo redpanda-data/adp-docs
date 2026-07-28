@@ -1,0 +1,4 @@
+= rpk ai mcp-server types
+:page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-types.adoc
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-types.adoc[tag=single-source]

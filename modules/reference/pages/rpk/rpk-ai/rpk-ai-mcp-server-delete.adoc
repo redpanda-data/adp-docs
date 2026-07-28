@@ -1,0 +1,4 @@
+= rpk ai mcp-server delete
+:page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-delete.adoc
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-delete.adoc[tag=single-source]

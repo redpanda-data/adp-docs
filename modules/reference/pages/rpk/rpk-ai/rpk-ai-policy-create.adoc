@@ -1,0 +1,3 @@
+= rpk ai policy create
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-policy-create.adoc[tag=single-source]

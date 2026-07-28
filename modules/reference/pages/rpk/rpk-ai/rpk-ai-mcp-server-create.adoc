@@ -1,0 +1,4 @@
+= rpk ai mcp-server create
+:page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-create.adoc
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-create.adoc[tag=single-source]

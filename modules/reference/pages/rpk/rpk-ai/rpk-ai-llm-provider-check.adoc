@@ -1,0 +1,4 @@
+= rpk ai llm-provider check
+:page-aliases: reference:rpk/rpk-ai/rpk-ai-llm-check.adoc
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-llm-provider-check.adoc[tag=single-source]

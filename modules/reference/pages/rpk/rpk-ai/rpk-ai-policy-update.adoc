@@ -1,0 +1,3 @@
+= rpk ai policy update
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-policy-update.adoc[tag=single-source]
