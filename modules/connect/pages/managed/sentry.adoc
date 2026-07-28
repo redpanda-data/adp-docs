@@ -84,7 +84,7 @@ The caller supplies the organization on each call, bounded only by the OAuth tok
 +
 [source,bash]
 ----
-rpk ai mcp create --name acme-sentry --managed-config '{
+rpk ai mcp-server create --name acme-sentry --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.sentry.v1.SentryMCPConfig",
   "user_oauth": {
     "provider_name": "sentry-prod",
@@ -99,7 +99,7 @@ Pin the server to a single organization with `organization_slug`.
 +
 [source,bash]
 ----
-rpk ai mcp create --name acme-sentry --managed-config '{
+rpk ai mcp-server create --name acme-sentry --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.sentry.v1.SentryMCPConfig",
   "organization_slug": "my-org",
   "user_oauth": {

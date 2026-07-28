@@ -88,11 +88,11 @@ Create a new Metabase MCP server in Agentic Data Plane:
 
 === Configure from the CLI
 
-Run `rpk ai mcp create` with the Metabase managed-config payload:
+Run `rpk ai mcp-server create` with the Metabase managed-config payload:
 
 [source,bash]
 ----
-rpk ai mcp create --name metabase --managed-config '{
+rpk ai mcp-server create --name metabase --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.metabase.v1.MetabaseMCPConfig",
   "base_url": "https://metabase.mycompany.com",
   "api_key": {

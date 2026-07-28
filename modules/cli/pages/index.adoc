@@ -56,7 +56,7 @@ In these commands, `<environment>` is the name or ID of an Agentic Data Plane en
 +
 [,bash]
 ----
-rpk ai llm list
+rpk ai llm-provider list
 ----
 
 For the full setup walkthrough, including token expiry behavior and the supported environment variables, see xref:gateway:connect-agent.adoc#authenticate-with-rpk-ai[Use `rpk ai` for local development].
@@ -65,7 +65,7 @@ To target a different AI Gateway URL for a single command without switching envi
 
 [,bash]
 ----
-rpk ai --rpai-endpoint https://aigw.<cluster-id>.clusters.rdpa.co llm list
+rpk ai --rpai-endpoint https://aigw.<cluster-id>.clusters.rdpa.co llm-provider list
 ----
 
 This overrides the selected environment's AI Gateway URL for that one command; the flag is not bound to an environment variable. For a local or manual gateway you use repeatedly, define it once as an environment with `rpk ai env add`:
@@ -84,13 +84,13 @@ Each Agentic Data Plane resource has its own command group, and each group suppo
 |===
 |Command |Manages |Reference
 
-|rpk ai llm
+|rpk ai llm-provider
 |LLM providers (OpenAI, Anthropic, Google, AWS Bedrock, and OpenAI-compatible endpoints)
-|xref:reference:rpk/rpk-ai/rpk-ai-llm.adoc[`rpk ai llm`]
+|xref:reference:rpk/rpk-ai/rpk-ai-llm.adoc[`rpk ai llm-provider`]
 
-|rpk ai mcp
+|rpk ai mcp-server
 |MCP servers and their tools
-|xref:reference:rpk/rpk-ai/rpk-ai-mcp.adoc[`rpk ai mcp`]
+|xref:reference:rpk/rpk-ai/rpk-ai-mcp.adoc[`rpk ai mcp-server`]
 
 |rpk ai oauth-provider
 |OAuth providers for user-delegated MCP connections
@@ -113,8 +113,8 @@ For example, to create and inspect an LLM provider:
 
 [,bash]
 ----
-rpk ai llm create --name openai --type openai --api-key-ref OPENAI_API_KEY
-rpk ai llm get openai
+rpk ai llm-provider create --name openai --type openai --api-key-ref OPENAI_API_KEY
+rpk ai llm-provider get openai
 ----
 
 In this command, `--api-key-ref` names a secret already stored in Agentic Data Plane. The CLI never takes a raw API key, so secrets stay out of your shell history and out of any file you commit.

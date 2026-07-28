@@ -176,7 +176,7 @@ In this example, `<oidc-access-token>` is an access token minted with the `clien
 |Claude Code needs an Anthropic or Bedrock provider, and Codex needs an OpenAI or OpenAI-compatible provider. Confirm the *Type* on the provider's *Connection* card, and pass a provider of the matching type to `-L`. An older `rpk ai` plugin also rejects Bedrock providers for Claude Code; update it with `rpk ai upgrade`.
 
 |Provider is disabled
-|The provider's *Status* is not *Active*. Enable it with `rpk ai llm update <provider-name> --enabled`, or from the provider detail page.
+|The provider's *Status* is not *Active*. Enable it with `rpk ai llm-provider update <provider-name> --enabled`, or from the provider detail page.
 
 |`no usable gateway token`
 |The cached `rpk ai` credentials are missing or expired. Run `rpk ai auth login` to refresh them, then relaunch. The error's `rpai auth login` hint refers to the same sign-in.

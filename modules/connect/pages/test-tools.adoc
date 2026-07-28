@@ -109,14 +109,14 @@ Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] for the same tool calls outs
 [source,bash]
 ----
 # List every tool exposed by a server
-rpk ai mcp tools list <server-name>
+rpk ai mcp-server tools list <server-name>
 
 # Call a tool with a JSON arg blob
-rpk ai mcp tools call <server-name> <tool-name> --input '{"arg1":"value"}'
+rpk ai mcp-server tools call <server-name> <tool-name> --input '{"arg1":"value"}'
 
 # Get server detail; includes the tool list by default. Add --no-tools
 # to skip discovery (faster when you only want metadata).
-rpk ai mcp get <server-name>
+rpk ai mcp-server get <server-name>
 ----
 
 The command targets the AI Gateway of your selected Agentic Data Plane environment, using credentials from `rpk ai auth login`. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for installation and sign-in.

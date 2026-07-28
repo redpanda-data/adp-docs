@@ -78,7 +78,7 @@ Inspect the resolved environment and token state at any time with `rpk ai env sh
 +
 [source,bash]
 ----
-rpk ai llm list
+rpk ai llm-provider list
 ----
 
 If the cached token has expired, `rpk ai` returns a 401; rerun `rpk ai auth login` to refresh it.
@@ -94,7 +94,7 @@ To target a specific AI Gateway URL for a single invocation (for example, a loca
 
 [source,bash]
 ----
-rpk ai --rpai-endpoint http://localhost:8090 llm list
+rpk ai --rpai-endpoint http://localhost:8090 llm-provider list
 ----
 
 This overrides the selected environment's AI Gateway URL for that one command, and the flag is not bound to an environment variable. For a manual or local gateway you use repeatedly, define it once as an environment instead:
@@ -117,8 +117,8 @@ The `rpk ai` command honors the following environment variables:
 |`RPAI_TOKEN`
 |Static bearer token for the gateway. `rpk ai` normally manages its own token through `rpk ai auth login`; set this (or pass `--token`) to override, for example in a headless or CI shell.
 
-|`RPAI_PROFILE`, `RPAI_CONFIG`, `RPAI_VERBOSE`, `RPAI_FORMAT`
-|Map to `--rpai-profile`, `--rpai-config`, `--rpai-verbose`, `--format`. Long flag names are renamed under `rpk ai` to avoid collision with `rpk`'s globals; short flags (`-p`, `-c`, `-v`, `-o`) are unchanged. There is no environment variable for the AI Gateway URL override; use the `--rpai-endpoint` flag.
+|`RPAI_CONFIG`, `RPAI_VERBOSE`, `RPAI_FORMAT`
+|Map to `--rpai-config`, `--rpai-verbose`, `--format` (short flags `-c`, `-v`, `-o`). Long flag names are renamed under `rpk ai` to avoid collision with `rpk`'s globals. There is no environment variable for environment selection (use `--rpai-environment` or `rpk ai env use`) or for the AI Gateway URL override (use the `--rpai-endpoint` flag).
 |===
 
 [[authenticate-with-oidc-client-credentials]]

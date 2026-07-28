@@ -125,7 +125,7 @@ For service-account OAuth, supply the Connected App's `clientId`, a secret-store
 
 [source,bash]
 ----
-rpk ai mcp create --name my-salesforce --managed-config '{
+rpk ai mcp-server create --name my-salesforce --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.salesforce.v1.SalesforceMCPConfig",
   "orgUrl": "https://mycompany.my.salesforce.com",
   "serviceAccountOauth": {
@@ -140,7 +140,7 @@ For per-user OAuth, reference the Salesforce OAuth Provider by name. The per-use
 
 [source,bash]
 ----
-rpk ai mcp create --name my-salesforce --managed-config '{
+rpk ai mcp-server create --name my-salesforce --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.salesforce.v1.SalesforceMCPConfig",
   "orgUrl": "https://mycompany.my.salesforce.com",
   "userOauth": {

@@ -66,7 +66,7 @@ Create a new Grafana MCP server in Agentic Data Plane:
 
 [source,bash]
 ----
-rpk ai mcp create --name acme-grafana --managed-config '{
+rpk ai mcp-server create --name acme-grafana --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.grafana.v1.GrafanaMCPConfig",
   "base_url": "https://myorg.grafana.net",
   "org_id": "1",

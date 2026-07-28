@@ -87,7 +87,7 @@ Ramp authenticates per-user through the Ramp OAuth Provider you configured. Refe
 
 [source,bash]
 ----
-rpk ai mcp create --name my-ramp --managed-config '{
+rpk ai mcp-server create --name my-ramp --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.ramp.v1.RampMCPConfig",
   "environment": "production",
   "userOauth": {

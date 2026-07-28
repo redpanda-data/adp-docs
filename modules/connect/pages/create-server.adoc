@@ -178,7 +178,7 @@ Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] for a non-UI path through th
 [source,bash]
 ----
 # Managed type (Workday example)
-rpk ai mcp create --name workday-hr \
+rpk ai mcp-server create --name workday-hr \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.workday.v1.WorkdayMCPConfig",
     "tenant": "acme",
@@ -192,7 +192,7 @@ rpk ai mcp create --name workday-hr \
 
 # Managed type with user-delegated OAuth inside the managed config
 # (NetSuite example)
-rpk ai mcp create --name netsuite \
+rpk ai mcp-server create --name netsuite \
   --description "NetSuite ERP with user OAuth" \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.netsuite.v1.NetSuiteMCPConfig",
@@ -204,13 +204,13 @@ rpk ai mcp create --name netsuite \
   }'
 
 # Self-managed server with user-delegated OAuth
-rpk ai mcp create --name github-proxy \
+rpk ai mcp-server create --name github-proxy \
   --url https://mcp.example.com/sse \
   --user-oauth-provider github \
   --user-oauth-scopes repo,read:org
 
 # Update a self-managed server's user-delegated OAuth scopes
-rpk ai mcp update github-proxy \
+rpk ai mcp-server update github-proxy \
   --user-oauth-provider github \
   --user-oauth-scopes repo,read:org,workflow
 ----
@@ -229,7 +229,7 @@ rpk ai mcp update github-proxy \
 |Self-managed servers only. Comma-separated scopes the server requires. Provide every scope any tool may need; user re-consent is required if scopes change later.
 |===
 
-// TODO(rpk-ai): --auth-config does not exist on `rpk ai mcp create` today (verified against cloudv2/apps/rpai/internal/cmd/mcp/cmd.go on 2026-05-05). For non-convenience auth shapes, encode them inside `--managed-config` JSON. Re-add this row if a flag lands later.
+// TODO(rpk-ai): --auth-config does not exist on `rpk ai mcp-server create` today (verified against cloudv2/apps/rpai/internal/cmd/mcp/cmd.go on 2026-05-05). For non-convenience auth shapes, encode them inside `--managed-config` JSON. Re-add this row if a flag lands later.
 
 The command targets the AI Gateway of your selected Agentic Data Plane environment, using credentials from `rpk ai auth login`.
 
