@@ -1,0 +1,3 @@
+= rpk profile edit
+
+include::streaming:reference:rpk/rpk-profile/rpk-profile-edit.adoc[tag=single-source]
