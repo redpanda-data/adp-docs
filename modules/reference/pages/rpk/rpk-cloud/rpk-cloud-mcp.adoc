@@ -1,3 +1,0 @@
-= rpk cloud mcp
-
-include::streaming:reference:partial$rpk-cloud/rpk-cloud-mcp.adoc[tag=single-source]

@@ -1,3 +1,0 @@
-= rpk cloud byoc
-
-include::streaming:reference:partial$rpk-cloud/rpk-cloud-byoc.adoc[tag=single-source]
