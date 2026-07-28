@@ -1,20 +1,20 @@
-= Draw Charts from an Agent
-:description: Make an agent render inline bar and line charts in the Inspector by emitting a chart code block that follows the ADP chart contract.
+= Draw charts from an agent
+:description: Make an agent render inline bar and line charts in the Inspector by emitting a chart code block that follows the current chart contract.
 :page-topic-type: how-to
 :personas: agent_builder
-:learning-objective-1: Emit a chart code block that follows the ADP chart contract
+:learning-objective-1: Emit a chart code block that follows the current chart contract
 :learning-objective-2: Instruct an agent to draw a bar or line chart through its system prompt
 :learning-objective-3: Migrate an earlier chart prompt to the current chart contract
 :learning-objective-4: Diagnose a chart that renders as an error or stays a placeholder
 
 // Verified against the Redpanda Cloud chart renderer on 2026-07-28.
 
-An agent draws a chart by emitting a fenced code block tagged `chart` whose body is strict JSON that follows the ADP chart contract.
-The Inspector renders the data with the Redpanda Cloud shadcn/Recharts chart components.
+An agent draws a chart by emitting a fenced code block tagged `chart` whose body is strict JSON that follows the current chart contract.
+The Inspector renders the data with Redpanda Cloud's shared shadcn/Recharts components.
 The fence body contains data, not Recharts component code.
 The agent's *Inspector* tab renders that block with Chart, Data, and Code views.
 This is a rendering convention: the agent decides when a chart helps and writes the data, and the Inspector draws it.
-No tool call, configuration, or extra code is required.
+No tool call or application setup is required.
 
 [IMPORTANT]
 ====
@@ -22,7 +22,8 @@ The chart contract supports `bar` and `line` charts.
 The current renderer uses shadcn/Recharts, not Chart.js.
 Existing `bar` and `line` blocks written for the earlier Chart.js format still render.
 The renderer reads `options.plugins.title.text` as the title, but ignores other legacy presentation options.
-Other legacy chart types render as an error.
+Other legacy chart types show an error.
+Convert them to `bar` or `line`.
 See <<migrate-chart-js-prompt>> to update an existing prompt.
 ====
 
@@ -35,12 +36,12 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* A deployed agent in Redpanda Cloud. If you don't have one, see xref:connect:create-agent.adoc[].
+* A deployed agent in Redpanda Cloud. To create one, see xref:connect:create-agent.adoc[].
 * An understanding of how to write an agent system prompt. See xref:connect:system-prompts.adoc[].
 
 == How chart rendering works
 
-When the agent's response contains a fenced code block tagged `chart`, the Inspector parses the block body as an ADP chart configuration and draws the chart in place of the code.
+When the agent's response contains a fenced code block tagged `chart`, the Inspector parses the block body as a chart configuration and draws the chart in place of the code.
 Every other code block renders as plain code, so a `chart` block is the agent's only departure from ordinary output.
 
 The shadcn/Recharts renderer supplies the visual presentation.
@@ -52,7 +53,8 @@ When an external application calls the agent, whether that application draws the
 
 == Write the chart block
 
-Follow the contract exactly, or the block renders as an error.
+Use the fields below.
+Unsupported chart types or invalid values show an error.
 
 * Tag the fence `chart`.
 The opening fence is three backticks followed by the word `chart`, with no other language tag.
@@ -99,17 +101,16 @@ A bar chart:
 
 == Instruct the agent through its system prompt
 
-The Inspector draws any valid `chart` block the agent emits, so you get charts by telling the agent to emit them.
-Add the convention to the agent's xref:connect:system-prompts.adoc[system prompt]: name the fence tag, state the strict-JSON rule, list the supported types, and give one worked example.
-Models follow a single concrete example more reliably than a prose description.
+To render a chart, tell the agent to emit a valid `chart` block.
+Add the convention to the agent's xref:connect:system-prompts.adoc[system prompt]: name the fence tag, state the strict JSON rules, list the supported types, and include 1 worked example.
 
 The following snippet works as a standalone prompt or as a section added to an existing one:
 
 [,text]
 ----
 You can draw charts inline. When a bar or line chart communicates better than
-text, emit ONE fenced code block tagged exactly `chart` whose body follows the
-ADP chart contract as strict JSON.
+text, emit one fenced code block tagged exactly `chart` whose body follows the
+chart contract as strict JSON.
 
 Rules for the chart block:
 - The fence language tag is exactly: chart
@@ -120,7 +121,7 @@ Rules for the chart block:
 - "data" contains "labels" and "datasets". Each dataset contains a numeric
   "data" array and can include a "label".
 - Do not emit renderer-specific options, plugins, scales, animations, or colors.
-- Put a one- or two-sentence plain-text explanation before the chart block.
+- Put a brief plain-text explanation (1 or 2 sentences) before the chart block.
   Do not also paste a data table; the Inspector has a built-in Data view.
 
 Example response to "show last quarter's orders by month":
@@ -147,19 +148,19 @@ For prompt-writing patterns that make this output reliable, see xref:connect:sys
 
 . Open the agent and switch to the *Inspector* tab.
 . Enter a prompt that calls for a chart, such as `Show last quarter's orders by month as a bar chart`.
-. Wait for the response.
+. Wait for the agent to finish its response.
 The chart appears in place of the `chart` block.
 
 image::connect:agent-chart-rendered.png[alt="A rendered bar chart in the Inspector with Chart, Data, and Code views."]
 
-The rendered chart carries a segmented control with three views:
+Use the view selector to switch between:
 
 * *Chart*: The responsive bar or line chart.
 Hover over the chart to inspect values.
 * *Data*: The chart's values as a table, reconstructed from the configuration.
 * *Code*: The JSON configuration the Inspector parsed.
 
-The Chart view does not provide zoom, pan, or PNG export.
+Zoom, pan, and PNG export are not available.
 
 [#migrate-chart-js-prompt]
 == Migrate from Chart.js
@@ -238,32 +239,32 @@ With:
 
 == Troubleshooting
 
-A block that doesn't satisfy the contract renders as an inline error that names the problem and shows the body the agent sent, in place of the chart.
+A block that does not satisfy the contract shows an inline error that names the problem and displays the body the agent sent.
 
-image::connect:agent-chart-error.png[An inline error reading Failed to render chart, naming the JSON problem and showing the body the agent sent.]
+image::connect:agent-chart-error.png[alt="An error that explains why a chart could not be rendered and shows the chart configuration."]
 
 [cols="1,2"]
 |===
 |Symptom |Cause and fix
 
-|A *Failed to render chart* error appears in place of the chart
-|The block body doesn't satisfy the contract.
+|*Failed to render chart* appears in place of the chart
+|The block body does not satisfy the contract.
 The error message names the problem, and the block below it shows the body the agent sent.
-Common causes include invalid JSON, a missing `type` field, a missing `data` object, a type other than `bar` or `line`, or a nonnumeric dataset value.
+Common causes include invalid JSON, a missing `type` field, a missing `data` object, a type other than `bar` or `line`, or a non-numeric dataset value.
 
-|An unsupported chart type error appears
+|*Unsupported chart type* appears
 |Change the type to `bar` or `line`.
 For migration guidance, see <<migrate-chart-js-prompt>>.
 
-|A *Building chart…* placeholder doesn't resolve
-|The placeholder shows while the `chart` block streams in, because the Inspector can't parse the configuration until the closing fence arrives.
-It resolves to the chart when the agent finishes the response.
-If the response finishes and the body still can't parse, the placeholder gives way to the *Failed to render chart* error.
-A placeholder that stays means the response is still streaming or never finished: instruct the agent to emit one complete `chart` block and nothing after the closing fence.
+|A *Building chart…* placeholder remains visible
+|The placeholder shows while the `chart` block streams in, because the Inspector cannot parse the configuration until the closing fence arrives.
+The chart replaces the placeholder when the agent finishes the response.
+If the response finishes and the body cannot be parsed, the *Failed to render chart* error replaces the placeholder.
+If the placeholder remains after the agent stops responding, instruct the agent to emit 1 complete `chart` block with a closing fence.
 
 |The agent pastes a table or raw JSON instead of a chart
-|The agent either didn't tag the fence `chart` or wrote prose instead of a block.
-Reinforce the rule and the worked example in the system prompt.
+|The agent either did not tag the fence `chart` or wrote prose instead of a block.
+Add the fence rule and worked example to the system prompt.
 |===
 
 == Next steps
