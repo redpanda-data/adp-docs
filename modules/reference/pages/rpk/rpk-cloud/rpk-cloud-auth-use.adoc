@@ -1,0 +1,3 @@
+= rpk cloud auth use
+
+include::streaming:reference:partial$rpk-cloud/rpk-cloud-auth-use.adoc[tag=single-source]
