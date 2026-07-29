@@ -173,7 +173,7 @@ Use xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk ai`] to create the server with a 
 
 [source,bash]
 ----
-rpk ai mcp create --name sharepoint \
+rpk ai mcp-server create --name sharepoint \
   --description "SharePoint MCP over Microsoft Graph with per-user OAuth" \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.sharepoint.v1.SharePointMCPConfig",

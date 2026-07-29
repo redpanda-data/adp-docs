@@ -11,8 +11,8 @@
 
 GitOps keeps the definition of your glossterm:Agentic Data Plane[] resources in Git and reconciles the live environment toward those files, instead of running imperative `create`, `update`, and `delete` commands by hand. With the xref:cli:index.adoc[Agentic Data Plane CLI], `rpk ai <resource> apply -f` creates what is missing and updates what has drifted, and `rpk ai <resource> diff -f` is a read-only dry-run that reports what `apply` would change. In these commands, `<resource>` is one of the resource command groups that support GitOps:
 
-* LLM providers (`rpk ai llm`)
-* MCP servers (`rpk ai mcp`)
+* LLM providers (`rpk ai llm-provider`)
+* MCP servers (`rpk ai mcp-server`)
 * OAuth providers (`rpk ai oauth`)
 * OAuth clients (`rpk ai oauth-client`)
 * Agents (`rpk ai agent`)
@@ -64,7 +64,7 @@ Start from a live resource so the manifest is complete. Dump it to YAML and redi
 
 [,bash]
 ----
-rpk ai llm get openai -o yaml > openai.yaml
+rpk ai llm-provider get openai -o yaml > openai.yaml
 ----
 
 A dumped OpenAI provider looks like this, ready to commit:
@@ -83,10 +83,10 @@ provider_models:
 - name: gpt-4o-mini
 type: LLM_PROVIDER_TYPE_OPENAI
 updated_at: "2026-06-20T10:15:30Z"
-url: https://openai.aigw.d0example1cluster234.clusters.cloud.redpanda.com/openai/v1
+url: https://openai.aigw.d0example1cluster234.clusters.rdpa.co/openai/v1
 ----
 
-The `@type` line records the resource kind. It is optional when you apply with a resource command, because `rpk ai llm apply` already implies the kind, but keeping it lets a reader and any validator know what the file describes.
+The `@type` line records the resource kind. It is optional when you apply with a resource command, because `rpk ai llm-provider apply` already implies the kind, but keeping it lets a reader and any validator know what the file describes.
 
 [NOTE]
 ====
@@ -106,7 +106,7 @@ Run `diff` to see the plan:
 
 [,bash]
 ----
-rpk ai llm diff -f openai.yaml
+rpk ai llm-provider diff -f openai.yaml
 ----
 
 [,text]
@@ -138,7 +138,7 @@ Reconcile the environment toward the manifest:
 
 [,bash]
 ----
-rpk ai llm apply -f openai.yaml
+rpk ai llm-provider apply -f openai.yaml
 ----
 
 The `apply` command prints one line per manifest as it works:
@@ -157,10 +157,10 @@ The `-f` flag is repeatable and accepts a file, a directory, or a stream:
 [,bash]
 ----
 # A directory of manifests; the CLI reads every .yaml and .yml file, sorted by name.
-rpk ai mcp apply -f ./manifests/
+rpk ai mcp-server apply -f ./manifests/
 
 # Several paths in one run.
-rpk ai llm apply -f openai.yaml -f anthropic.yaml
+rpk ai llm-provider apply -f openai.yaml -f anthropic.yaml
 
 # Standard input, for piping a manifest from another tool.
 rpk ai oauth apply -f -
@@ -175,8 +175,8 @@ Because `diff` exits non-zero when the environment differs from your manifests, 
 [,bash]
 ----
 # Fails the job if an apply would change anything.
-rpk ai llm diff -f ./llm/
-rpk ai mcp diff -f ./mcp/
+rpk ai llm-provider diff -f ./llm/
+rpk ai mcp-server diff -f ./mcp/
 ----
 
 A common pipeline runs `diff` on a pull request to preview changes, then runs `apply` after the merge to roll them out:
@@ -184,8 +184,8 @@ A common pipeline runs `diff` on a pull request to preview changes, then runs `a
 [,bash]
 ----
 # Deploy step, after merge to the main branch.
-rpk ai llm apply -f ./llm/
-rpk ai mcp apply -f ./mcp/
+rpk ai llm-provider apply -f ./llm/
+rpk ai mcp-server apply -f ./mcp/
 ----
 
 == Manifests are declarative

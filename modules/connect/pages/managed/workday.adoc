@@ -95,7 +95,7 @@ Create a new Workday MCP server in Agentic Data Plane:
 
 [source,bash]
 ----
-rpk ai mcp create --name workday-hr --managed-config '{
+rpk ai mcp-server create --name workday-hr --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.workday.v1.WorkdayMCPConfig",
   "tenant": "acme",
   "host": "wd2-impl-services1.workday.com",

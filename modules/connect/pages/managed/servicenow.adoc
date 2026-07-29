@@ -89,7 +89,7 @@ Basic authentication::
 +
 [source,bash]
 ----
-rpk ai mcp create --name acme-servicenow --managed-config '{
+rpk ai mcp-server create --name acme-servicenow --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.servicenow.v1.ServiceNowMCPConfig",
   "instance_url": "https://acme.service-now.com",
   "basic_auth": {
@@ -118,7 +118,7 @@ OAuth client credentials::
 +
 [source,bash]
 ----
-rpk ai mcp create --name acme-servicenow-oauth --managed-config '{
+rpk ai mcp-server create --name acme-servicenow-oauth --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.servicenow.v1.ServiceNowMCPConfig",
   "instance_url": "https://acme.service-now.com",
   "oauth": {
@@ -133,7 +133,7 @@ User OAuth::
 +
 [source,bash]
 ----
-rpk ai mcp create --name acme-servicenow-user --managed-config '{
+rpk ai mcp-server create --name acme-servicenow-user --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.servicenow.v1.ServiceNowMCPConfig",
   "instance_url": "https://acme.service-now.com",
   "user_oauth": {

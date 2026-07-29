@@ -1,3 +1,0 @@
-= rpk cloud cluster
-
-include::streaming:reference:partial$rpk-cloud/rpk-cloud-cluster.adoc[tag=single-source]

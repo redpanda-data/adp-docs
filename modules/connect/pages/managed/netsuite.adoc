@@ -91,11 +91,11 @@ Create a managed MCP server with the NetSuite type. NetSuite authentication is p
 }
 ----
 
-For a non-UI path, use `rpk ai mcp create` with `--managed-config`. The top-level `--user-oauth-provider` and `--user-oauth-scopes` flags apply to self-managed servers only.
+For a non-UI path, use `rpk ai mcp-server create` with `--managed-config`. The top-level `--user-oauth-provider` and `--user-oauth-scopes` flags apply to self-managed servers only.
 
 [source,bash]
 ----
-rpk ai mcp create --name netsuite \
+rpk ai mcp-server create --name netsuite \
   --description "NetSuite ERP with user OAuth" \
   --managed-config '{
     "@type": "type.googleapis.com/redpanda.mcps.netsuite.v1.NetSuiteMCPConfig",
