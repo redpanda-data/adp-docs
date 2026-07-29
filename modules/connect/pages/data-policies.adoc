@@ -1,0 +1,167 @@
+= Shape Tool Data with Data Policies
+:description: Add data policies to an MCP server to mask, drop, or filter the data its tools send and return, restrict argument values, and preview the effect before saving.
+:page-topic-type: how-to
+:page-preview: true
+:personas: platform_engineer, agent_builder
+:learning-objective-1: Create a data policy that masks, drops, or filters the data a tool returns
+:learning-objective-2: Restrict the argument values that callers can send to a tool
+:learning-objective-3: Preview the composed effect of a server's data policies before saving
+
+// Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/data_policy.proto and mcp_server.proto (PreviewDataPolicies, PreviewToolResponse); enforcement in apps/aigw/internal/mcp/data_policy_hook.go and apps/aigw/internal/services/mcpserver/{service,preview}.go; UI in apps/adp-ui/src/components/mcp-servers/tools-tab*. Verified against origin/main on 2026-07-29.
+
+Data policies shape the data an MCP server exposes. Use them to mask, drop, or hash sensitive fields in the results a glossterm:tool[] returns, restrict the argument values a caller can send, and filter whole records out of list results, all before the model sees the data. Sensitive data stays protected without turning tools off.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+== How data policies work
+
+A data policy belongs to one MCP server. It binds a set of transforms to the tools they shape and the people they apply to:
+
+* *Tools*: The tools on this server the policy shapes. An empty list means every tool.
+* *Principals*: Who the policy applies to, as `User:<email>` entries. An empty list means every caller.
+* *Transforms*: What the policy does to tool-call arguments on the way to the server and to results on the way back.
+
+Data policies complement permissions. Permissions decide _whether_ a caller can invoke a tool. A server's data policies decide _what the data looks like_ for the callers they match. See xref:control:permissions-overview.adoc[].
+
+The glossterm:AI Gateway[] enforces data policies on live traffic in both directions. A server can carry several data policies, and every policy that matches a call applies. Policies compose most-restrictively: adding a policy can only narrow what a caller sees, never widen it.
+
+Data policies fail closed. If a rule cannot be enforced, matching calls are denied rather than served unshaped data.
+
+== Prerequisites
+
+You need an MCP server with discovered tools. To create one, see xref:connect:create-server.adoc[].
+
+== Open the Data Policies tab
+
+. Open *MCP Servers* in the sidebar.
+. Select a server.
+. Open the *Data Policies* tab.
+
+The *Tools* list shows every tool the server exposes, with a count of how many are protected. A colored dot marks each tool's status: green when at least one data policy shapes it, yellow when the tool handles data but no policy covers it, and gray when there is nothing to protect.
+
+== Create a data policy
+
+. In the *Tools* list, select the tool you want to shape.
+. Click *+* to start a new policy. The policy gets a suggested name, which you can edit.
+. On the *Configuration* tab, choose a treatment for each request or response field:
++
+* *Keep*: Preserve the field. In allowlist mode, only kept fields survive.
+* *Mask*: Replace the field's value but keep the field present. Choose one of the <<mask-methods,mask methods>>.
+* *Drop*: Remove the field entirely.
+. Save the policy.
+
+A new policy applies only to the tool you created it from until you widen its targeting. See <<target-tools-and-people>>.
+
+You can also edit the policy as YAML. The form and the YAML editor are two views of the same draft: switch between them at any time.
+
+[[mask-methods]]
+=== Mask methods
+
+[cols="1,3"]
+|===
+|Method |What it does
+
+|Redact
+|Replaces the value with a fixed placeholder. The default placeholder is `[REDACTED]`.
+
+|Partial
+|Keeps the first or last characters and masks the rest. For example, keeping the last four characters turns `123-45-6789` into `*******6789`.
+
+|Hash
+|Replaces the value with a salted SHA-256 digest. Equal inputs produce equal digests, so values stay correlatable without exposing the plaintext. The salt comes from a secret you reference by name, never from the policy itself.
+
+|Pattern
+|Rewrites the value with an RE2 regular-expression substitution. The replacement text can reference capture groups, such as `$1`.
+|===
+
+=== Select fields
+
+A rule selects fields with a JSONPath expression, such as `$.user.email` (you can omit the leading `$.`). To match a field wherever it appears, use a descendant selector such as `$..ssn` with mask and drop rules. Wildcard, index, and filter expressions are not supported: you can't save a policy that uses them.
+
+For list results, selectors evaluate against each record. For single-object results, they evaluate against the whole payload.
+
+By default, a mask or drop rule whose selector matches nothing denies the call. This protects you when an upstream API renames a field: the renamed field fails the call instead of silently leaking. If a field is legitimately optional, mark its rule absence-safe so a missing field is acceptable.
+
+=== Allowlist mode
+
+By default, fields you don't select pass through unchanged, and only your mask and drop rules take effect. Switch a policy's field rules to allowlist mode to invert this: only fields with an explicit *Keep* survive, and everything else is dropped.
+
+== Restrict argument values
+
+A policy can tighten the allowed values of a tool-call argument. The AI Gateway rejects a call whose argument falls outside the limits, with an error that names the violated argument.
+
+Address the argument with a JSONPath into the tool's arguments, such as `$.query.limit`, then apply any of these limits:
+
+[cols="1,2"]
+|===
+|Limit |Applies to
+
+|Minimum and maximum value
+|Numbers
+
+|Minimum and maximum length
+|Strings
+
+|Pattern (RE2 regular expression)
+|Strings
+
+|Format, such as `email`, `date`, or `uuid`
+|Strings
+
+|Allowed values
+|Strings
+
+|Minimum and maximum item count
+|Arrays
+|===
+
+The gateway also merges these limits into the input schema the tool advertises, so agents see the tightened contract up front instead of discovering it through failed calls.
+
+== Filter records out of results
+
+A row filter drops whole records from a list-shaped result. It names the record array and the condition a record must satisfy to survive:
+
+* *Path*: Where the record array is in the result, such as `$.body` for an OpenAPI server's response envelope, `$.result` for a ServiceNow-style wrapper, or `$` when the result is a bare array. If the path is absent or not an array, the filter does nothing.
+* *Condition*: A comparison of a record field against a literal value, such as `@.priority >= 8`. Supported operators are `==`, `!=`, `<`, `+<=+`, `>`, and `>=`. The literal can be a string, number, boolean, or null.
+
+A record that doesn't have the compared field never survives the filter. Conditions on the same array combine across rules and policies, so a record must satisfy all of them.
+
+[[target-tools-and-people]]
+== Target tools and people
+
+By default, a saved policy applies to the tool you created it from. Widen or narrow its targeting on the *Configuration* tab:
+
+* *Tools*: List the tools the policy shapes. Clear the list to shape every tool on the server.
+* *Principals*: List the people the policy applies to, as `User:<email>` entries with the caller's full email address, for example `User:alice@example.com`. Clear the list to apply the policy to every caller.
+
+Group-based targeting is not supported: you can't save a policy with a `Group:` principal.
+
+== Preview the effect
+
+Before you save, check what a policy actually does:
+
+* The *Configuration* tab shows the composed effect for the selected tool across all of the server's policies, including your unsaved edits, with each field's winning treatment and which policy contributed it.
+* The *Preview* tab runs sample arguments and a sample result through the same code that shapes live traffic and shows the shaped data an agent would receive.
+
+If matching calls would be denied, a banner explains why, for example an unenforceable rule or a strict selector that matches nothing.
+
+== Limitations
+
+Data policies are a preview capability with these limitations:
+
+* Principals accept individual users only. Group-based targeting is not supported.
+* Field selectors support named paths and descendant selectors only. Wildcard, index, and filter expressions are rejected.
+* On a self-managed server that uses the legacy Server-Sent Events (SSE) transport, results stream past response shaping. Calls that match a policy with response rules are denied on those servers. Request rules still work.
+* If your gateway does not enforce data policies, the tool header shows a *Not enforced here* badge: rules save but don't apply to live traffic.
+
+To read a server's data policies through the API, get the individual server. List responses omit data policies to keep payloads small.
+
+== Next steps
+
+* xref:connect:test-tools.adoc[]
+* xref:control:permissions-overview.adoc[]
+* xref:monitor:transcripts.adoc[]
