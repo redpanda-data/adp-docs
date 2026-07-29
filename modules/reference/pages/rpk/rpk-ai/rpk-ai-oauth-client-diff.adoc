@@ -1,3 +1,4 @@
 = rpk ai oauth-client diff
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-diff.adoc[tag=single-source]

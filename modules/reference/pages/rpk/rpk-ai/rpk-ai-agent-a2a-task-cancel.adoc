@@ -1,3 +1,4 @@
 = rpk ai agent a2a task cancel
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-a2a-task-cancel.adoc[tag=single-source]

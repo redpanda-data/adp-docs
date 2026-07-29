@@ -1,3 +1,4 @@
 = rpk ai oauth-client delete
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-delete.adoc[tag=single-source]

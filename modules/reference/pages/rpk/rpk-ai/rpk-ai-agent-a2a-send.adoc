@@ -1,3 +1,4 @@
 = rpk ai agent a2a send
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-a2a-send.adoc[tag=single-source]

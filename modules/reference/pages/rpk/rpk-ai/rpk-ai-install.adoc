@@ -1,3 +1,4 @@
 = rpk ai install
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-install.adoc[tag=single-source]

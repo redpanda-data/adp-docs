@@ -1,3 +1,4 @@
 = rpk ai policy
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-policy.adoc[tag=single-source]

@@ -1,3 +1,4 @@
 = rpk ai oauth-client revoke-tokens
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-revoke-tokens.adoc[tag=single-source]

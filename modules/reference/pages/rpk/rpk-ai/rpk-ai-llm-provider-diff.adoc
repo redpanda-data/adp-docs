@@ -1,4 +1,5 @@
 = rpk ai llm-provider diff
+:page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-llm-diff.adoc
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-llm-provider-diff.adoc[tag=single-source]

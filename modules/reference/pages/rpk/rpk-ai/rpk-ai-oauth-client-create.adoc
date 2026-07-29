@@ -1,3 +1,4 @@
 = rpk ai oauth-client create
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-create.adoc[tag=single-source]

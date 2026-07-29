@@ -1,4 +1,5 @@
 = rpk ai llm-provider create
+:page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-llm-create.adoc
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-llm-provider-create.adoc[tag=single-source]

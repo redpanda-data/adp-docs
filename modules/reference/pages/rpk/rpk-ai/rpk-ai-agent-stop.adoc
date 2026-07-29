@@ -1,3 +1,4 @@
 = rpk ai agent stop
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-stop.adoc[tag=single-source]

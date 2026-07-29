@@ -1,3 +1,4 @@
 = rpk ai uninstall
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-uninstall.adoc[tag=single-source]

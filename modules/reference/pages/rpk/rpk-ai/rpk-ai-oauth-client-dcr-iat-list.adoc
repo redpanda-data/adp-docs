@@ -1,3 +1,4 @@
 = rpk ai oauth-client dcr iat list
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-dcr-iat-list.adoc[tag=single-source]

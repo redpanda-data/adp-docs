@@ -1,3 +1,4 @@
 = rpk ai auth status
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-auth-status.adoc[tag=single-source]

@@ -1,4 +1,5 @@
 = rpk ai mcp-server
+:page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp.adoc
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server.adoc[tag=single-source]

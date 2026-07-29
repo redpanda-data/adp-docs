@@ -1,4 +1,5 @@
 = rpk ai mcp-server tools call
+:page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-tools-call.adoc
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-tools-call.adoc[tag=single-source]

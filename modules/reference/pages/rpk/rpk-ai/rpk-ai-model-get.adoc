@@ -1,3 +1,4 @@
 = rpk ai model get
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-model-get.adoc[tag=single-source]

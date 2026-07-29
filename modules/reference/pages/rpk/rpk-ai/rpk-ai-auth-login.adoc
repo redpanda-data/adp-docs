@@ -1,3 +1,4 @@
 = rpk ai auth login
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-auth-login.adoc[tag=single-source]

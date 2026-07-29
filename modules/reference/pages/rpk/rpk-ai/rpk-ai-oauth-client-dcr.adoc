@@ -1,3 +1,4 @@
 = rpk ai oauth-client dcr
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-dcr.adoc[tag=single-source]

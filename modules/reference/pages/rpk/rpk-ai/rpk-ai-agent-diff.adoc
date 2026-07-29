@@ -1,3 +1,4 @@
 = rpk ai agent diff
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-diff.adoc[tag=single-source]

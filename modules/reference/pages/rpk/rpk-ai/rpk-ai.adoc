@@ -1,3 +1,4 @@
 = rpk ai
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai.adoc[tag=single-source]

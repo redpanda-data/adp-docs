@@ -1,3 +1,4 @@
 = rpk ai run codex
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-run-codex.adoc[tag=single-source]

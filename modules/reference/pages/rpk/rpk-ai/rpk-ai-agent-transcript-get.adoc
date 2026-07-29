@@ -1,3 +1,4 @@
 = rpk ai agent transcript get
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-transcript-get.adoc[tag=single-source]

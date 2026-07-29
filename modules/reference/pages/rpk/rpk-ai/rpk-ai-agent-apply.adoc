@@ -1,3 +1,4 @@
 = rpk ai agent apply
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-apply.adoc[tag=single-source]

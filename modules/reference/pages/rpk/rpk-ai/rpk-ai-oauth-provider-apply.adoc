@@ -1,3 +1,4 @@
 = rpk ai oauth-provider apply
+:page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-provider-apply.adoc[tag=single-source]
