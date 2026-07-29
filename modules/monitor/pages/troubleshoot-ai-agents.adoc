@@ -418,7 +418,7 @@ The `agent_card_url` must point to the agent card JSON file, not the base agent 
 ----
 processors:
   - a2a_message:
-      agent_card_url: "https://your-agent-id.ai-agents.your-cluster-id.cloud.redpanda.com"
+      agent_card_url: "https://your-agent-id.ai-agents.your-cluster-id.clusters.rdpa.co"
       prompt: "Analyze this transaction: ${!content()}"
 ----
 
@@ -428,7 +428,7 @@ processors:
 ----
 processors:
   - a2a_message:
-      agent_card_url: "https://your-agent-id.ai-agents.your-cluster-id.cloud.redpanda.com/.well-known/agent-card.json"
+      agent_card_url: "https://your-agent-id.ai-agents.your-cluster-id.clusters.rdpa.co/.well-known/agent-card.json"
       prompt: "Analyze this transaction: ${!content()}"
 ----
 

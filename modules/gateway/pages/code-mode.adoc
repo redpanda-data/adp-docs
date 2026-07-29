@@ -72,20 +72,20 @@ Enable code mode on the MCP server, then point your agent or client at the code-
 
 == Test from the CLI
 
-The `--code-mode` flag on `rpk ai mcp tools` targets the virtual `-code` endpoint instead of the server's primary endpoint, so you can exercise `search` and `execute` directly.
+The `--code-mode` flag on `rpk ai mcp-server tools` targets the virtual `-code` endpoint instead of the server's primary endpoint, so you can exercise `search` and `execute` directly.
 
 List the code-mode tools:
 
 [source,bash]
 ----
-rpk ai mcp tools list <server-name> --code-mode
+rpk ai mcp-server tools list <server-name> --code-mode
 ----
 
 Search the underlying catalog:
 
 [source,bash]
 ----
-rpk ai mcp tools call <server-name> search --code-mode \
+rpk ai mcp-server tools call <server-name> search --code-mode \
   --args '{"query":"(?i)pull.*create"}'
 ----
 
@@ -93,7 +93,7 @@ Run code through the `execute` tool:
 
 [source,bash]
 ----
-rpk ai mcp tools call <server-name> execute --code-mode \
+rpk ai mcp-server tools call <server-name> execute --code-mode \
   --args '{"code":"var pulls = call_tool({ name: \"github_pulls_list\", arguments: { owner: \"redpanda-data\", repo: \"redpanda\", state: \"open\" } }); JSON.stringify(pulls.map(function (p) { return { number: p.number, title: p.title }; }));"}'
 ----
 

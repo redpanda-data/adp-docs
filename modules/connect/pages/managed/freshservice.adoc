@@ -90,7 +90,7 @@ API-key mode::
 +
 [source,bash]
 ----
-rpk ai mcp create --name acme-freshservice --managed-config '{
+rpk ai mcp-server create --name acme-freshservice --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.freshservice.v1.FreshServiceMCPConfig",
   "domain": "mycompany.freshservice.com",
   "api_key": {
@@ -103,7 +103,7 @@ User-OAuth mode::
 +
 [source,bash]
 ----
-rpk ai mcp create --name acme-freshservice-oauth --managed-config '{
+rpk ai mcp-server create --name acme-freshservice-oauth --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.freshservice.v1.FreshServiceMCPConfig",
   "domain": "mycompany.freshservice.com",
   "user_oauth": {

@@ -1,14 +1,17 @@
-= Trigger Agents from External Channels
-:description: Triggers connect a deployed agent to the outside world, so people and systems can invoke it without calling its API directly.
+= Trigger Agents
+:description: Triggers invoke a deployed agent without calling its API directly, from Microsoft Teams or on a schedule.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Describe what an agent trigger is and how a trigger invokes an agent
 :learning-objective-2: Describe how triggers are added, edited, and disconnected on an agent
 :learning-objective-3: Interpret the status that an agent's Triggers tab reports for each trigger
 
-// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, TeamsTrigger) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` on origin/main, verified against adp-production on 2026-06-11. Only Microsoft Teams is selectable in the production trigger picker; do not list other kinds here.
+// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, TeamsTrigger, CronTrigger) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` on origin/main. UI surface verified against adp-production: Microsoft Teams on 2026-06-11, Schedule on 2026-07-24. Microsoft Teams and Schedule are selectable in the production trigger picker; the Slack and Webhook tiles are disabled and not documented.
 
-A trigger is a configured way for the outside world to invoke an agent. Without a trigger, an agent only responds to direct calls against its API. Add a trigger and you connect the agent to a channel: with a Microsoft Teams trigger, people in your organization chat with the agent in a personal Teams chat, and replies stream back as the agent produces them.
+A trigger is a configured way to invoke an agent without calling its API directly. Without a trigger, an agent only responds to direct calls against its API. Two trigger types are available:
+
+* A Microsoft Teams trigger connects the agent to Microsoft Teams. People in your organization chat with the agent in a personal Teams chat, and replies stream back as the agent produces them. See xref:connect:triggers/microsoft-teams.adoc[].
+* A schedule trigger runs the agent automatically on a recurring schedule. Each run sends a fixed message to the agent and is recorded as a transcript, with no reply path back. See xref:connect:triggers/schedule.adoc[].
 
 Each trigger is its own resource on the agent, created, edited, and disconnected on its own, so you can attach several to the same agent. For example, one agent can serve a production Teams bot and a test Teams bot side by side, each through its own trigger.
 
@@ -26,22 +29,24 @@ Triggers live on the agent's detail page, on the *Triggers* tab:
 
 * Click *Add trigger*, pick the trigger type, and fill in its configuration. A Microsoft Teams trigger takes the bot's application (client) ID, directory (tenant) ID, and a secret store reference to the bot's client secret. For the full setup, including the Microsoft side, see xref:connect:triggers/microsoft-teams.adoc[].
 * To change a trigger's configuration, edit it on its card. The trigger's unique ID, derived from its display name at creation, and the trigger's type are fixed; the display name, description, and type-specific configuration stay editable.
-* To remove a trigger, disconnect it on its card. Disconnecting stops the agent from being invoked through that trigger and can't be undone.
+* To remove a trigger, disconnect or delete it on its card, depending on its type. Removing it stops the agent from being invoked through that trigger and can't be undone.
 
 A Microsoft Teams trigger also exposes a messaging endpoint: a URL that Teams delivers inbound messages to. Redpanda reports this URL on the trigger's card shortly after you add the trigger, and you register it with your bot so Teams knows where to send messages.
 
 == Trigger status
 
-Adding a trigger does not validate it on the spot. Redpanda's messaging bridge checks each trigger in the background, about every 30 seconds, by validating its credentials with Microsoft, and reports the result. The *Triggers* tab shows one of three states:
+Adding a trigger does not validate it on the spot. For a Microsoft Teams trigger, Redpanda's messaging bridge checks each trigger in the background, about every 30 seconds, by validating its credentials with Microsoft, and reports the result. The *Triggers* tab shows one of three states:
 
-* *Pending*: No check has been reported yet. A trigger sits here briefly after you add it.
-* *Connected*: The latest check passed. For a Microsoft Teams trigger, this means Microsoft accepted the bot credentials.
-* *Error*: The latest check failed. The message on the card explains the reason, for example, a rejected client secret.
+* Pending: No check has been reported yet. A trigger sits here briefly after you add it.
+* Connected: The latest check passed. For a Microsoft Teams trigger, this means Microsoft accepted the bot credentials.
+* Error: The latest check failed. The message on the card explains the reason, for example, a rejected client secret.
 
-Because the check runs continuously, the status also catches problems that appear later: if a bot's client secret expires, the trigger flips to *Error* without anyone sending a message. The tab refreshes the status on its own, and you can also refresh on demand.
+Because the check runs continuously, the status also catches problems that appear later: if a bot's client secret expires, the trigger flips to Error without anyone sending a message. The tab refreshes the status on its own, and you can also refresh on demand.
+
+A schedule trigger reports the outcome of its runs rather than a connection check. Its card shows the last run's outcome and the next run time. For the outcomes a run can have, see xref:connect:triggers/schedule.adoc[].
 
 == Next steps
 
 * xref:connect:triggers/microsoft-teams.adoc[]
+* xref:connect:triggers/schedule.adoc[]
 * xref:connect:create-agent.adoc[]
-* xref:connect:agents-overview.adoc[]

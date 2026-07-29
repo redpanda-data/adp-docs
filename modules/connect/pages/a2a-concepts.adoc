@@ -43,7 +43,7 @@ The agent card is a JSON document that describes what the agent can do and how t
 
 Agentic Data Plane agents expose their agent cards at the `/.well-known/agent-card.json` subpath of the agent URL. You can find the agent URL on the *Agents* page.
 
-For example, if your agent URL is `\https://my-agent.ai-agents.abc123.cloud.redpanda.com`, your agent card URL is `\https://my-agent.ai-agents.abc123.cloud.redpanda.com/.well-known/agent-card.json`.
+For example, if your agent URL is `\https://my-agent.ai-agents.abc123.clusters.rdpa.co`, your agent card URL is `\https://my-agent.ai-agents.abc123.clusters.rdpa.co/.well-known/agent-card.json`.
 
 The `.well-known` path follows internet standards for service discovery, making agents discoverable without configuration.
 

@@ -81,7 +81,7 @@ Ironclad authenticates per-user through the Ironclad OAuth Provider you configur
 
 [source,bash]
 ----
-rpk ai mcp create --name my-ironclad --managed-config '{
+rpk ai mcp-server create --name my-ironclad --managed-config '{
   "@type": "type.googleapis.com/redpanda.mcps.ironclad.v1.IroncladMCPConfig",
   "region": "IRONCLAD_REGION_NA",
   "userOauth": {
