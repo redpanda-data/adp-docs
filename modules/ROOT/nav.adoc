@@ -122,7 +122,6 @@
 ***** xref:reference:rpk/rpk-ai/rpk-ai-env-show.adoc[]
 ***** xref:reference:rpk/rpk-ai/rpk-ai-env-use.adoc[]
 **** xref:reference:rpk/rpk-ai/rpk-ai-install.adoc[]
-**** xref:reference:rpk/rpk-ai/rpk-ai-llm.adoc[]
 **** xref:reference:rpk/rpk-ai/rpk-ai-llm-provider.adoc[]
 ***** xref:reference:rpk/rpk-ai/rpk-ai-llm-provider-apply.adoc[]
 ***** xref:reference:rpk/rpk-ai/rpk-ai-llm-provider-check.adoc[]

@@ -1,4 +1,0 @@
-= rpk ai llm
-:page-preview: true
-
-include::streaming:reference:partial$rpk-ai/rpk-ai-llm.adoc[tag=single-source]
