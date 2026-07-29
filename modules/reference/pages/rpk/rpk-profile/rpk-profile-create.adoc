@@ -1,0 +1,3 @@
+= rpk profile create
+
+include::streaming:reference:rpk/rpk-profile/rpk-profile-create.adoc[tag=single-source]

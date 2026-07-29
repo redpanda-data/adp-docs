@@ -1,0 +1,3 @@
+= rpk profile set-globals
+
+include::streaming:reference:rpk/rpk-profile/rpk-profile-set-globals.adoc[tag=single-source]
