@@ -1,0 +1,4 @@
+= rpk ai policy diff
+:page-preview: true
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-policy-diff.adoc[tag=single-source]

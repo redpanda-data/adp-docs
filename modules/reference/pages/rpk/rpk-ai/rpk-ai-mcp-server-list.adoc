@@ -1,0 +1,5 @@
+= rpk ai mcp-server list
+:page-preview: true
+:page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-list.adoc
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-list.adoc[tag=single-source]

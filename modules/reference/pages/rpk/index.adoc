@@ -6,4 +6,4 @@ This section documents the `rpk` commands you use to manage the Redpanda Agentic
 
 Use `rpk ai` to manage AI Gateway resources (LLM providers, MCP servers, OAuth providers) and call MCP tools directly from your terminal. `rpk ai` is self-contained: it has its own login (`rpk ai auth login`) and its own Agentic Data Plane environment selection (`rpk ai env`), independent of any `rpk cloud` session. The active AI Gateway URL comes from the selected environment unless you override it with `--rpai-endpoint`.
 
-For subcommands available after install (`rpk ai llm`, `rpk ai mcp`, `rpk ai oauth`, and more), run `rpk ai <command> --help` from your terminal.
+For subcommands available after install (`rpk ai llm-provider`, `rpk ai mcp-server`, `rpk ai oauth-provider`, and more), run `rpk ai <command> --help` from your terminal.
