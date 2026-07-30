@@ -7,7 +7,7 @@
 :learning-objective-2: Write policy conditions that read tags and ownership safely
 :learning-objective-3: Manage access policies from the CLI
 
-// Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/{cedar_options,policy_service,system_policy_service,effective_policy_set_service}.proto; action ids and verb/entity sets in pkg/permissions/cedar/{actionindex,schema,validate}.go; seeded templates and the Owner lifecycle policy in apps/adp-api/internal/seed/seed.go; role grants in pkg/permissions/permissions_constants.go; UI in apps/adp-ui/src/routes/_authenticated/access_.policies.create.page.tsx and components/{access,organisms}/. Verified against origin/main and the main branch deploy of the ADP UI on 2026-07-30. Action ids are entity-qualified (`Agent.get`), NOT the flat `dataplane_adp_*` permission strings.
+// Action ids, entity types, attribute-bearing types, and validation rules verified against the generated Cedar schema and the ADP UI on 2026-07-30. Action ids are entity-qualified (`Agent.get`) and are not interchangeable with role permission strings.
 
 Access policies are Cedar `permit` and `forbid` statements that decide, per request, who may do what to which resource. Conditions read resource tags and ownership at evaluation time, so you can express rules roles can't: deny a group access to production-tagged agents, or let only a resource's creator modify it. They compose with the roles you already have.
 
@@ -36,9 +36,9 @@ Every request resolves the same way:
 
 Enforcement is fail-closed. A `forbid` that errors during evaluation denies the request rather than being skipped. Policy changes also reach the enforcement points asynchronously, so a successful save is not yet an enforcement guarantee.
 
-=== Where RBAC fits
+=== How roles compose with policies
 
-Use RBAC to get started and to stay coarse: provision the first user, and hand out broad administrative roles where per-resource precision isn't the point. Redpanda turns those role bindings into permits for you, so they take part in the same evaluation and you never author them by hand.
+Use roles to get started and to stay coarse: provision the first user, and hand out broad administrative roles where per-resource precision isn't the point. Redpanda turns those role bindings into permits for you, so they take part in the same evaluation and you never author them by hand.
 
 From there, authorization defers to policy evaluation. Every decision that needs a condition, a specific resource, or a denial belongs in a policy, and a `forbid` overrides whatever a role granted.
 
@@ -122,7 +122,7 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 
 Entity type names are case-sensitive, and the casing doesn't always follow the prose (`McpServer`, not `MCPServer`). Copy them from this table.
 
-Access policies cover the entity types listed here and nothing else. Anything outside the table, including Redpanda Connect pipelines and knowledge bases, is gated by RBAC permissions alone. Neither the RBAC permission strings nor these action IDs translate mechanically into the other, so look an action up rather than deriving it.
+Access policies cover the entity types listed here and nothing else. A policy can't govern anything outside the table, including Redpanda Connect pipelines and knowledge bases. Copy action IDs from this table rather than deriving them from a resource or API name, because the two don't line up predictably.
 
 === Action groups
 
@@ -172,7 +172,7 @@ NOTE: `McpServer` carries no tags yet. Tag-based conditions on MCP servers arriv
 == Prerequisites
 
 * Access policies enabled for your organization.
-* Permission to author policies: the `dataplane_adp_policy_*` permissions. The built-in Admin and Writer roles carry them, and Reader can view policies but not change them.
+* An account that can author access policies. The built-in Admin and Writer roles can create, edit, and delete them; Reader can view them but not change them.
 
 == Open the Access page
 
@@ -420,7 +420,7 @@ Validation runs in strict mode against the current schema and reports every prob
 |Error contains |Fix
 
 |`unrecognized action`
-|Use an `<Entity>.<verb>` action ID from <<action-reference,Action reference>>. RBAC permission strings such as `dataplane_adp_agent_get` are not policy actions.
+|Use an `<Entity>.<verb>` action ID from <<action-reference,Action reference>>. Flat permission strings such as `dataplane_adp_agent_get` are not policy actions.
 
 |`unrecognized entity type`
 |Check the spelling and the casing. A resource that exists in the API isn't automatically a policy entity type.
@@ -446,7 +446,7 @@ A denial caused by access policies surfaces as a permission-denied error:
 
 * A `forbid` that matches cleanly returns a generic permission-denied message. Check the *Policies* tab for a `forbid` covering the action and resource.
 * A `forbid` that errors during evaluation also denies, and the error names the policy. Check that policy for an unguarded tag or attribute read, then re-save it to run current validation against it.
-* A missing `permit` also denies, with the same generic message. Confirm the principal holds a role that covers the action, or add a `permit` policy for it.
+* A missing `permit` also denies, with the same generic message. Confirm a `permit` covers the action, whether from a policy or from a role binding, and add one if nothing does.
 
 On update actions, authorization runs inside the write transaction, after request validation. An unauthorized caller can therefore receive an invalid-argument or not-found error instead of a permission-denied one. Treat any of the three as a failure, and don't branch on which arrives first.
 

@@ -2,4 +2,4 @@
 :description: Control who can do what in the Agentic Data Plane with roles and permissions.
 :page-layout: index
 
-Control who can do what in the Agentic Data Plane. Assign roles to users and service accounts, look up the permissions each role grants, and refine roles with access policies.
+Control who can do what in the Agentic Data Plane. Set access policies that permit or forbid specific actions, assign roles to users and service accounts, and look up the permissions each role grants.
