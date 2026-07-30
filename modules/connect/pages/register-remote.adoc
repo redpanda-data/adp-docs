@@ -32,7 +32,8 @@ If you don't already run a server, prefer a managed type. See xref:connect:manag
 * The endpoint URL. `http://` is allowed for everything except user-delegated OAuth, which requires `https://` (proto rule `remote_mcp.user_oauth_requires_https`).
 * Knowledge of which transport the server speaks (SSE or Streamable HTTP). If you don't know, see <<test-transport>>.
 * If using static-key or service-account-OAuth: secrets pre-created in the Redpanda Agentic Data Plane secret store, `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`).
-* If using user-delegated OAuth: an OAuth Provider already configured. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+* If using user-delegated OAuth with automatic setup: nothing, when the server supports dynamic client registration. If it doesn't, register an OAuth app with the upstream vendor and have its client ID ready, plus a client-secret reference in the secret store for a confidential app.
+* If attaching an OAuth provider your organization already manages instead: the provider registered first. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Create the server
 
@@ -89,7 +90,7 @@ The authentication modes from xref:connect:create-server.adoc#configure-authenti
 |The upstream server already validates client tokens; Redpanda just forwards the caller's `Authorization` header.
 |===
 
-For user-delegated OAuth, the URL must be `https://` and you also need an OAuth Provider. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+For user-delegated OAuth, the URL must be `https://`. Redpanda can set up OAuth automatically for the server, or you can attach an OAuth provider you already registered. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 // TODO: screenshots of each auth-mode form panel after walking `adp-production`.
 
