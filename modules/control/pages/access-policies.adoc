@@ -60,6 +60,12 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |`AgentTrigger`
 |`get`, `list`, `create`, `update`, `delete`
 
+|`AgentTriggerRun`
+|`list`
+
+|`AgentNetwork`
+|`get`
+
 |`Session`
 |`get`, `list`, `delete`
 
@@ -105,9 +111,14 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |`PolicyTemplate`
 |`get`, `list`, `create`, `update`, `delete`
 
+|`SystemPolicy`
+|`list`
+
 |`EffectivePolicySet`
 |`get`, `list`
 |===
+
+`SystemPolicy.list` gates reading the permits derived from role bindings. That view names every binding's principal, so it sits on its own action rather than riding along with `Policy.list`.
 
 Entity type names are case-sensitive, and the casing doesn't always follow the prose (`McpServer`, not `MCPServer`). Copy them from this table.
 
@@ -136,7 +147,7 @@ Conditions read the following attributes. Every one is optional at the schema le
 |Attribute |Entity types that carry it |Guard form
 
 |Tags
-|`Agent`, `Policy`
+|`Agent`, `Budget`, `Guardrail`, `LLMProvider`, `OAuthClient`, `OAuthProvider`, `Policy`
 |`resource.hasTag("<key>") && resource.getTag("<key>") == "<value>"`
 
 |`created_by`, `updated_by`
@@ -144,13 +155,19 @@ Conditions read the following attributes. Every one is optional at the schema le
 |`resource has created_by && resource.created_by == principal`
 
 |`changed_tags`
-|`Agent`, on update only
+|`Agent`, `Budget`, `Guardrail`, `LLMProvider`, `OAuthClient`, `OAuthProvider`, on update only
 |`resource has changed_tags && resource.changed_tags.contains("<key>")`
 |===
 
-`created_by` and `updated_by` hold `User` references, so compare them to `principal` directly rather than to a string. Agent credentials and sessions record no creator, so an ownership condition on them can never match.
+Tags are the attribute-based half of ABAC, and they're carried by the resources with a create and update lifecycle. The read-only and derived types don't have them, for the same reason they record no creator: sessions, transcripts, models, agent credentials, OAuth connections, and the derived policy views.
+
+`Policy` carries tags but no `changed_tags`, so you can condition on a policy's current tags but not on a tag transition.
+
+`created_by` and `updated_by` hold `User` references, so compare them to `principal` directly rather than to a string.
 
 A condition on any attribute a type doesn't carry is dead code. It's valid Cedar, it saves when the resource type isn't pinned, and it never matches. Pin the type and validation catches it instead.
+
+NOTE: `McpServer` carries no tags yet. Tag-based conditions on MCP servers arrive with the next Agentic Data Plane API version. Scope MCP policies by resource instead, with `resource == McpServer::"<name>"`.
 
 == Prerequisites
 
@@ -250,7 +267,7 @@ forbid (
 
 Without the `hasTag` guard, the policy errors on every untagged resource, and an erroring `forbid` denies. You would block access to every untagged agent, the opposite of the intent. Validation rejects the unguarded form when you save.
 
-Only `Agent` and `Policy` resources carry tags. A tag condition on any other type is dead code: it's valid Cedar but can never match, and validation flags it when the policy pins the resource type. Pin the type on every policy that reads tags so you get that check.
+A tag condition on a type that carries no tags is dead code: it's valid Cedar but can never match, and validation flags it when the policy pins the resource type. Pin the type on every policy that reads tags so you get that check. See <<attribute-reference,Attribute reference>> for which types carry tags.
 
 === Model people facts as groups
 
@@ -288,7 +305,7 @@ forbid (
 };
 ----
 
-`changed_tags` exists only on the update path, so this policy doesn't fire on create. `Agent` is the only entity type that carries it. To close the create case too, pair the policy with a create-scoped clause that reads the tag directly:
+`changed_tags` exists only on the update path, so this policy doesn't fire on create. To close the create case too, pair the policy with a create-scoped clause that reads the tag directly:
 
 [source,cedar]
 ----

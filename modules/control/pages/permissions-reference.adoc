@@ -445,7 +445,14 @@ These permissions control who may author policies. They are not the actions a po
 |Delete an access policy
 |✓
 |
+
+|`dataplane_adp_systempolicy_list`
+|List the permits derived from role bindings
+|✓
+|✓
 |===
+
+`dataplane_adp_systempolicy_list` is separate from `dataplane_adp_policy_list` because the derived view names the principal of every role binding, which is a wider disclosure than listing the access policies a caller already owns. Grant it on its own to let someone review the organization's RBAC projection without granting access-policy reads.
 
 == Policy template permissions
 
