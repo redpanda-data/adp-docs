@@ -22,6 +22,7 @@ The OpenAPI managed type:
 * Loads an OpenAPI 3.x spec (3.0 or 3.1) from a URL or pasted JSON/YAML. Swagger 2.0 specs are not supported.
 * Generates one MCP tool per operation, with input schemas derived from the spec's parameter and request-body schemas. `oneOf`, `anyOf`, and `discriminator` are supported; `callbacks` are not.
 * Forwards calls to the upstream API, applying the configured authentication.
+* Returns each successful result as structured output carrying the response's `status_code`, selected `headers`, and parsed `body`, so agents can read fields reliably instead of parsing raw text. A 4xx or 5xx response comes back as a tool error instead.
 
 By default the generator walks schemas up to a depth of 5 (`max_schema_depth`); schemas nested deeper than that are truncated.
 
