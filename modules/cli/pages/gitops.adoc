@@ -53,6 +53,9 @@ Lists, maps, and provider or backend variants are replaced as a unit, not merged
 Create-only fields are immutable::
 A field that can be set only at creation time, such as an LLM provider's `type`, an MCP server's backend kind, an OAuth provider's `client_id`, or an agent's managed-or-self-managed kind, cannot change on an existing resource. Changing one is an error that tells you to delete and recreate the resource.
 
+Request-only fields are instructions, not state::
+A few fields tell the gateway to do something rather than describe what a resource is. An MCP server's `remote.user_oauth.automatic_setup` asks the gateway to set up OAuth for the server itself instead of attaching a provider by name. Set it in a manifest when you want automatic setup, and leave `provider_name` out: on an existing server an empty `provider_name` preserves the provider already attached, and setting both is an error. Omitting `automatic_setup` leaves an existing attachment untouched, so an unrelated edit such as a scopes change never re-runs OAuth setup. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+
 Secrets stay by reference::
 Manifests reference secrets by name, for example, `api_key_ref` and `client_secret_ref`, and never contain secret values, so a manifest is safe to commit to Git.
 

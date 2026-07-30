@@ -98,9 +98,9 @@ For user-delegated OAuth, the URL must be `https://`. Redpanda can set up OAuth 
 
 After create, Redpanda runs a live `tools/list` (the `ListMCPServerTools` RPC) against the server. The result is cached on the `MCPServer.tools` output-only field and shown on the detail page's *Overview* tab. The *Inspector* tab (see xref:connect:test-tools.adoc[Test a server's tools]) exercises individual glossterm:tool[,tools].
 
-If the tools list is empty or stale, hit the *Refresh tools* action on the Overview tab to re-query the server.
+If the tools list is empty or stale, open the *Inspector* tab and click *Refresh* to re-run discovery against the server.
 
-// TODO: confirm exact UI affordance for triggering a re-list.
+// Verified 2026-07-30 against adp-ui on origin/main (inspector-session-sidebar.tsx): the re-list control is the Refresh button in the Inspector session sidebar (with Ping beside it); the Overview tab has no refresh action.
 
 == Connection errors and retry
 

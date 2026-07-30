@@ -2,4 +2,4 @@
 :description: Configure OAuth providers, user-delegated OAuth, and client connections so agents and tools authenticate securely.
 :page-layout: index
 
-Agents and tools authenticate through OAuth. Configure an OAuth provider, enable user-delegated access so agents act as the signed-in user, and connect remote MCP clients.
+Agents and tools authenticate through OAuth. Enable user-delegated access so agents act as the signed-in user, register an OAuth provider when you want to manage one yourself, and connect remote MCP clients.
