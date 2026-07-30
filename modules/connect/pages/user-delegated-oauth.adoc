@@ -2,11 +2,13 @@
 :description: Have each end-user authenticate against the MCP server's upstream system with their own credentials. Redpanda stores their token in the vault and injects it at call time.
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder, security_compliance_lead
-:learning-objective-1: Configure an MCP server to use user-delegated OAuth with a registered OAuth provider
+:learning-objective-1: Configure an MCP server to use user-delegated OAuth, with either automatic setup or a provider you registered
 :learning-objective-2: Walk an end-user through the consent flow and verify the connection
 :learning-objective-3: Troubleshoot scope upgrades, token expiry, and refresh failures
 
 User-delegated OAuth means each end-user authenticates against the MCP server's upstream system (for example, Slack, Jira, Google) with their own credentials. Redpanda stores their token in the token vault and injects it at call time. Contrast with service-account OAuth, where one shared identity is used for every caller.
+
+For a self-managed server, Redpanda can set up the OAuth client for you from the server URL, or you can attach an OAuth provider your organization already registered. Managed servers always attach a provider.
 
 After completing this guide, you will be able to:
 
@@ -16,33 +18,38 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* For a managed MCP server, or to reuse a provider your organization already manages on a self-managed server: an OAuth provider resource configured on the *Outbound providers* tab of *Integrations setup*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. A self-managed server can instead set up OAuth automatically, described below, with no provider registered first.
-* The required scopes for the upstream API you plan to call.
+* For a *managed* MCP server, or to attach a provider your organization already manages on a *self-managed* server: an OAuth provider resource configured on the *Outbound providers* tab of *Integrations setup*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* For automatic setup on a *self-managed* server: nothing, if the server supports dynamic client registration. If it doesn't, you need an OAuth app registered with the upstream vendor, its client ID, and, for a confidential app, a client-secret reference already created in the secret store in `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`).
+* The scopes the upstream API needs, if you want to request a specific set rather than whatever the server advertises.
 * For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
 * For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:connect:managed/managed-catalog.adoc[Managed catalog] before configuring.
 
 == Configure the server
 
-. Create or edit your MCP server (see xref:connect:create-server.adoc[Create an MCP Server]).
-. In the authentication section, choose *User-delegated OAuth*.
-. Configure how Redpanda gets an OAuth client for the upstream:
+. Create your MCP server (see xref:connect:create-server.adoc[Create an MCP Server]).
+. Set up the OAuth client for the upstream. What you do depends on the server type:
 +
 --
-* For a *self-managed* (remote) server, pick a `Setup` mode:
+* For a *self-managed* (remote) server, enter the server URL and let Redpanda check what it supports. For a server that authenticates users over OAuth, Redpanda recommends setting up OAuth automatically, which means Redpanda registers an OAuth client and manages each user's tokens for you.
 +
-** `Set up automatically` (the default): Redpanda registers an OAuth client and manages each user's tokens for you. When the server supports OAuth Dynamic Client Registration (DCR), there is nothing else to configure. When it doesn't, expand *Add a client ID* and enter the `Client ID` from the upstream's developer console, and, for a confidential client, a `Client Secret` (leave it empty for a public PKCE client). Redpanda shows the callback URL to add to the upstream app.
-** `Attach existing provider`: select an OAuth provider you already registered (`UserOAuthAuth.provider_name`), or click *New* to create one without leaving the form.
-* For a *managed* server, select the OAuth provider in the type's configuration (`UserOAuthAuth.provider_name`).
+If the server supports dynamic client registration, there is nothing else to configure. If it doesn't, Redpanda walks you through the parts it can't do for you: register an OAuth app in the upstream's developer console, add the authorization callback URL that Redpanda displays to that app, then paste the app's credentials back into the form. The credentials are the `Client ID` from the developer console and, for a confidential app, a client-secret reference from the secret store in `UPPER_SNAKE_CASE`, for example `GITHUB_CLIENT_SECRET`. Leave the reference empty for a public PKCE app.
++
+Either way, Redpanda records the provider it resolved or created for the server, marked with a *Discovered* badge in the *Outbound providers* list so you can tell it from a provider you registered by hand.
++
+To attach an OAuth provider your organization already manages instead, click *Use a different authentication method*, set `Method` to `User-delegated OAuth`, then set `Setup` to `Attach existing provider` and select the provider (`UserOAuthAuth.provider_name`). Click *New* to register a provider without leaving the form. The same `Setup` toggle switches back to `Set up automatically`.
+* For a *managed* server, select the OAuth provider in the type's configuration (`UserOAuthAuth.provider_name`). Managed types always attach a provider, so automatic setup doesn't apply.
 --
-. Set the *required scopes* (`UserOAuthAuth.required_scopes`) the upstream API needs. Redpanda enforces these at consent time. On the automatic-setup path this is the optional *Set specific scopes* override; leave it empty to request whatever the server advertises.
+. (Optional) Restrict the scopes Redpanda requests. Expand *Set specific scopes* and list the scopes the upstream API needs (`UserOAuthAuth.required_scopes`). Redpanda enforces them at consent time. Leave it empty to request whatever the server advertises.
 . (Optional) Override token injection through the API or CLI. By default Redpanda sends `Authorization: Bearer <token>`. To use a different header, set `TokenInjection.header_name`. To omit the prefix entirely (for example, an upstream that expects a bare API key as the token), set `TokenInjection.header_prefix` to the empty string. The create form doesn't expose these fields.
 +
-// Verified 2026-07-30 against adp-ui remote-auth-fields.tsx on origin/main: the remote user-delegated form shows a Setup toggle ("Set up automatically" / "Attach existing provider"), an "Add a client ID" disclosure for servers without DCR (Client ID + optional Client Secret), and an optional "Set specific scopes" override. TokenInjection header_name/header_prefix remain API/CLI-level only.
+// Verified 2026-07-30 against adp-ui on origin/main (remote-auth-fields.tsx, proxied-create-form.tsx, $name.edit.page.tsx) and proto/mcps/redpanda/mcps/v1/auth.proto. The create form probes the URL and renders the recommendation card ("Set up OAuth automatically"); the Setup toggle and Method picker appear only behind "Use a different authentication method", and the edit page renders the picker with no probe. The callback-URL step belongs to the no-DCR setup list on the recommendation card, not to the "Add a client ID" disclosure. client_secret_ref is a secret-store reference validated as ^[A-Z][A-Z0-9_]*$. The scopes override is shared by both Setup modes. TokenInjection header_name/header_prefix remain API/CLI-level only. Screenshot still pending.
 . Save.
 
 NOTE: Choosing user-delegated OAuth instead of service-account OAuth *is* the credential-mode decision: there's no separate field. User-delegated gives each caller a per-user upstream identity; service-account gives every caller one shared identity. Switching between them later requires re-consent for every active user.
 
-TIP: To configure user-delegated OAuth from the CLI, use `--user-oauth-provider` and `--user-oauth-scopes` on `rpk ai mcp-server create` or `rpk ai mcp-server update`. See xref:connect:create-server.adoc[Create an MCP Server].
+NOTE: Editing an existing server works differently. The edit page doesn't re-check the server URL, so you set `Method` and `Setup` yourself. Leaving the provider empty there keeps the provider the server already has, so switching an existing server to automatic setup is an explicit choice (`UserOAuthAuth.automatic_setup`): automatic setup re-runs discovery and can register a new upstream client. Setting both a provider name and automatic setup is rejected.
+
+TIP: From the CLI, `--user-oauth-provider` and `--user-oauth-scopes` on `rpk ai mcp-server create` or `rpk ai mcp-server update` attach a provider you already registered; the flags don't request automatic setup. To script automatic setup, set `automatic_setup: true` under the server's `user_oauth` block in a GitOps manifest. See xref:connect:create-server.adoc[Create an MCP Server] and xref:cli:gitops.adoc[Manage Resources with GitOps].
 
 == The user connection flow
 

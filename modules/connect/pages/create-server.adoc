@@ -20,7 +20,8 @@ After completing this guide, you will be able to:
 * For any authentication mode that uses upstream credentials: the credentials in hand and a secret already created in the Redpanda Agentic Data Plane secret store. Secret references must be `UPPER_SNAKE_CASE` (proto regex `^[A-Z][A-Z0-9_]*$`). For example: `MCP_API_KEY`, `OPENAI_API_KEY`.
 +
 // TODO: xref the Agentic Data Plane secrets-management page once confirmed.
-* For user-delegated OAuth on a managed server, or to attach an existing provider on a self-managed server: an glossterm:OAuth provider[,OAuth provider] resource already configured. A self-managed server can instead set up OAuth automatically, with no provider registered first. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+* For user-delegated OAuth on a managed server, or to attach an existing provider on a self-managed server: an glossterm:OAuth provider[,OAuth provider] resource already configured. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
+* For automatic OAuth setup on a self-managed server: nothing, unless the server doesn't support dynamic client registration. In that case, an OAuth app registered with the upstream vendor, its client ID, and a client-secret reference for a confidential app.
 
 == Open the MCP Servers page
 
@@ -116,12 +117,12 @@ Both managed and self-managed servers offer the same set of authentication modes
 |2-legged OAuth client credentials. One shared upstream identity for every caller. Provide `client_id`, `client_secret_ref`, `token_url`, and any required `scopes`.
 
 |`User-delegated OAuth`
-|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. For a self-managed server, pick a `Setup` mode: `Set up automatically` lets Redpanda register an OAuth client for you (through Dynamic Client Registration where the server supports it, or from a client ID you supply where it doesn't), and `Attach existing provider` reuses an OAuth provider your organization already registered. A managed type that supports this mode attaches an OAuth provider in the type's configuration. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; Redpanda stores the resulting connection in the token vault, where it shows up under *My Connections*. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
+|Each end-user authenticates against the upstream system with their own credentials, and Redpanda injects the user's token at call time. For a self-managed server, Redpanda can set up OAuth automatically from the server URL, or you can attach an OAuth provider your organization already registered. A managed type that supports this mode attaches an OAuth provider in the type's configuration. The first time a user calls a tool that needs this server, Redpanda surfaces a consent prompt; Redpanda stores the resulting connection in the token vault, where it shows up under *My Connections*. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth] for the full flow.
 |===
 
 NOTE: Choosing between `Service-account OAuth` and `User-delegated OAuth` is the credential-mode decision. Service-account authentication gives every caller the same identity at the upstream; user-delegated authentication gives each caller their own.
 
-// Verified 2026-07-30 against adp-ui remote-auth-fields.tsx on origin/main: for a remote server the user-delegated form shows a Setup toggle ("Set up automatically" / "Attach existing provider"). Automatic setup registers a client through DCR, or takes a Client ID (and optional Client Secret) via the "Add a client ID" disclosure for a server without DCR, and offers an optional "Set specific scopes" override. TokenInjection header_name/header_prefix remain API/CLI-only. Screenshot still pending.
+// Verified 2026-07-30 against adp-ui on origin/main (remote-auth-fields.tsx, proxied-create-form.tsx): for a remote server the create form probes the URL and recommends automatic OAuth setup; the Setup toggle ("Set up automatically" / "Attach existing provider") sits behind "Use a different authentication method". The setup-mode detail lives on the user-delegated-oauth page, not in this table. TokenInjection header_name/header_prefix remain API/CLI-only. Screenshot still pending.
 
 == Code mode (optional)
 
@@ -223,7 +224,7 @@ rpk ai mcp-server update github-proxy \
 |JSON blob carrying the managed type's `_config.proto` shape, including a `@type` URL.
 
 |`--user-oauth-provider`
-|Self-managed servers only. Name of an OAuth provider already registered on the *Outbound providers* tab of *Integrations setup*. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893). Managed servers that support user-delegated OAuth carry their auth shape inside `--managed-config`.
+|Self-managed servers only. Name of an OAuth provider already registered on the *Outbound providers* tab of *Integrations setup*. This flag is the attach-a-provider path; it doesn't request automatic OAuth setup. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. The principal needs `dataplane_aigateway_oauthprovider_attach` on the named provider (AI-893). Managed servers that support user-delegated OAuth carry their auth shape inside `--managed-config`.
 
 |`--user-oauth-scopes`
 |Self-managed servers only. Comma-separated scopes the server requires. Provide every scope any tool may need; user re-consent is required if scopes change later.
