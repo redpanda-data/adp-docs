@@ -75,7 +75,7 @@ Each chart can be maximized for a closer look, and exported on its own: the char
 To export the data behind the charts, use the download controls in the toolbar:
 
 * Click *Download full report* to download the complete, untruncated dataset for the current filters and date range as a CSV file. Every cost type and token type is a separate column.
-* Use the report options control (the sliders icon next to *Download full report*) to choose how the exported rows are grouped. Under Time bucket, pick Hourly, Daily, Monthly, or Total (no time column). Under Break down by, select any combination of Provider, Model, User, and Agent.
+* Next to *Download full report*, open the report-grouping options to choose how the exported rows are grouped. Under Time bucket, pick Hourly, Daily, Monthly, or Total (no time column). Under Break down by, select any combination of Provider, Model, User, and Agent.
 
 Use *Download full report* when you need the whole dataset rather than the charted view.
 
