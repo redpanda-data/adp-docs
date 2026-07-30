@@ -420,7 +420,7 @@ Validation runs in strict mode against the current schema and reports every prob
 |Error contains |Fix
 
 |`unrecognized action`
-|Use an `<Entity>.<verb>` action ID from <<action-reference,Action reference>>. Flat permission strings such as `dataplane_adp_agent_get` are not policy actions.
+|Use an `<Entity>.<verb>` action ID from <<action-reference,Action reference>>. A role permission name is not a policy action, so copy the action ID rather than reusing a permission you found elsewhere.
 
 |`unrecognized entity type`
 |Check the spelling and the casing. A resource that exists in the API isn't automatically a policy entity type.

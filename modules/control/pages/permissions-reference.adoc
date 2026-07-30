@@ -21,6 +21,8 @@ Use this reference to:
 
 For an explanation of how permissions, roles, and role bindings fit together, see xref:control:permissions-overview.adoc[Control Who Can Do What].
 
+Access policies are authorized on their own vocabulary and don't appear in this reference. For the actions a policy can name, see xref:control:access-policies.adoc#action-reference[Action reference].
+
 == How to read this reference
 
 Each table column means the same thing across every namespace.
@@ -409,102 +411,6 @@ The `dataplane_adp_guardrail_*` permissions gate guardrail policies that screen 
 |Delete a guardrail policy
 |✓
 |
-|===
-
-== Access policy permissions
-
-The `dataplane_adp_policy_*` permissions gate the Cedar-based access policies that refine RBAC. Access policies are a preview capability. See xref:control:access-policies.adoc[].
-
-These permissions control who may author policies. They are not the actions a policy can name, and the two naming schemes don't translate mechanically into each other. Look up policy actions in xref:control:access-policies.adoc#action-reference[Action reference].
-
-[cols="2,2,1,1"]
-|===
-|Permission |Operation |Writer |Reader
-
-|`dataplane_adp_policy_create`
-|Create an access policy
-|✓
-|
-
-|`dataplane_adp_policy_get`
-|View one access policy
-|✓
-|✓
-
-|`dataplane_adp_policy_list`
-|List access policies
-|✓
-|✓
-
-|`dataplane_adp_policy_update`
-|Modify an access policy
-|✓
-|
-
-|`dataplane_adp_policy_delete`
-|Delete an access policy
-|✓
-|
-
-|`dataplane_adp_systempolicy_list`
-|List the permits derived from role bindings
-|✓
-|✓
-|===
-
-`dataplane_adp_systempolicy_list` is separate from `dataplane_adp_policy_list` because the derived view names the principal of every role binding, which is a wider disclosure than listing the access policies a caller already owns. Grant it on its own to let someone review the organization's RBAC projection without granting access-policy reads.
-
-== Policy template permissions
-
-The `dataplane_adp_policytemplate_*` permissions gate reusable access-policy templates, including the built-in quick-start set. See xref:control:access-policies.adoc[].
-
-[cols="2,2,1,1"]
-|===
-|Permission |Operation |Writer |Reader
-
-|`dataplane_adp_policytemplate_create`
-|Create a policy template
-|✓
-|
-
-|`dataplane_adp_policytemplate_get`
-|View one policy template
-|✓
-|✓
-
-|`dataplane_adp_policytemplate_list`
-|List policy templates
-|✓
-|✓
-
-|`dataplane_adp_policytemplate_update`
-|Modify a policy template
-|✓
-|
-
-|`dataplane_adp_policytemplate_delete`
-|Delete a policy template
-|✓
-|
-|===
-
-== Effective policy set permissions
-
-The `dataplane_adp_effectivepolicyset_*` permissions gate read access to the derived policy set the dataplane enforces: your access policies plus the permits derived from role bindings. Only highly privileged users can read it, and it's read-only.
-
-[cols="2,2,1,1"]
-|===
-|Permission |Operation |Writer |Reader
-
-|`dataplane_adp_effectivepolicyset_get`
-|View the derived effective policy set
-|✓
-|✓
-
-|`dataplane_adp_effectivepolicyset_list`
-|List the derived effective policy sets
-|✓
-|✓
 |===
 
 == A2A runtime permissions

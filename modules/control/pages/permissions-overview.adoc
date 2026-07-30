@@ -92,7 +92,7 @@ With access policies enabled, use RBAC for what it's good at: provisioning the f
 
 A request is allowed when a `permit` matches it and no `forbid` matches it. A `forbid` always wins, including over access that a role grants.
 
-Access policies use their own action vocabulary. A policy names an entity type and a verb, such as `Action::"Agent.get"`, not the `dataplane_adp_*` permission strings listed on this page. See xref:control:access-policies.adoc#action-reference[Action reference].
+Access policies use their own action vocabulary. A policy names an entity type and a verb, such as `Action::"Agent.get"`, not the permission strings listed on this page. See xref:control:access-policies.adoc#action-reference[Action reference].
 
 When access policies aren't enabled for your organization, RBAC behaves exactly as this page describes, with no policy layer involved.
 
