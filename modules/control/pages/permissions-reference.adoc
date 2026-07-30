@@ -415,7 +415,7 @@ The `dataplane_adp_guardrail_*` permissions gate guardrail policies that screen 
 
 The `dataplane_adp_policy_*` permissions gate the Cedar-based access policies that refine RBAC. Access policies are a preview capability. See xref:control:access-policies.adoc[].
 
-These permissions control who may author policies. They are not the actions a policy can name: a policy names an entity type and a verb, such as `Action::"Policy.create"`. See xref:control:access-policies.adoc#action-reference[Action reference].
+These permissions control who may author policies. They are not the actions a policy can name, and the two naming schemes don't translate mechanically into each other. Look up policy actions in xref:control:access-policies.adoc#action-reference[Action reference].
 
 [cols="2,2,1,1"]
 |===
@@ -483,7 +483,7 @@ The `dataplane_adp_policytemplate_*` permissions gate reusable access-policy tem
 
 == Effective policy set permissions
 
-The `dataplane_adp_effectivepolicyset_*` permissions gate read access to the derived policy set the dataplane enforces: your access policies plus the permits derived from role bindings. It's an audit view for highly privileged users, not something you author.
+The `dataplane_adp_effectivepolicyset_*` permissions gate read access to the derived policy set the dataplane enforces: your access policies plus the permits derived from role bindings. Only highly privileged users can read it, and it's read-only.
 
 [cols="2,2,1,1"]
 |===
