@@ -138,8 +138,6 @@ By default, a saved policy applies to the tool you created it from. Widen or nar
 * *Tools*: List the tools the policy shapes. Clear the list to shape every tool on the server.
 * *Principals*: List the people the policy applies to, as `User:<email>` entries with the caller's full email address, for example `User:alice@example.com`. Clear the list to apply the policy to every caller.
 
-Group-based targeting is not supported: you can't save a policy with a `Group:` principal.
-
 == Preview the effect
 
 Before you save, check what a policy actually does:
