@@ -22,7 +22,6 @@ The OpenAPI managed type:
 * Loads an OpenAPI 3.x spec (3.0 or 3.1) from a URL or pasted JSON/YAML. Swagger 2.0 specs are not supported.
 * Generates one MCP tool per operation, with input schemas derived from the spec's parameter and request-body schemas. `oneOf`, `anyOf`, and `discriminator` are supported; `callbacks` are not.
 * Forwards calls to the upstream API, applying the configured authentication.
-* Returns each successful result as structured output carrying the response's `status_code`, selected `headers`, and parsed `body`, so agents can read fields reliably instead of parsing raw text. A 4xx or 5xx response comes back as a tool error instead.
 
 By default the generator walks schemas up to a depth of 5 (`max_schema_depth`); schemas nested deeper than that are truncated.
 
@@ -90,7 +89,7 @@ See xref:connect:test-tools.adoc[] for general Inspector usage.
 
 Once tools generate cleanly, point an agent at the `MCP Server URL` on the server's detail page. The agent sees one tool per OpenAPI operation, named accordingly.
 
-Each tool returns the upstream response as a structured result with the fields `status_code`, `headers`, and `body`. `body` is the parsed JSON payload when the response is JSON, or the raw response text otherwise. `headers` holds the response headers you selected with `Extract headers`, and is empty when none are configured. Agents that read structured output can address these fields directly, and a plain-text copy of the same result is also included for clients that read only text.
+Each tool returns the upstream response as a structured result with the fields `status_code`, `headers`, and `body`. `body` is the parsed JSON payload when the response is JSON, or the raw response text otherwise. `headers` holds the response headers you selected with `Extract headers`, and is empty when none are configured. Agents that read structured output can address these fields directly, and a plain-text copy of the same result is also included for clients that read only text. A 4xx or 5xx response surfaces as a tool error rather than a structured result.
 
 Every generated tool also accepts an optional `headers` input, which lets the agent set request headers the spec doesn't declare. Agent-supplied headers can't override the configured authentication headers or the spec's own header parameters. Combined with `Extract headers`, this supports APIs that round-trip headers, such as a CSRF token fetched from one response and echoed on the next request.
 
