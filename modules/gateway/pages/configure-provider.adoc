@@ -6,7 +6,7 @@
 // Legacy gateway-object-model pages (gateway-quickstart.adoc, gateway-architecture.adoc, admin/setup-guide.adoc, builders/discover-gateways.adoc) were archived to gateway/partials/archived-ai-gateway-pages.adoc and removed from the nav. aggregation.adoc was reframed and renamed to code-mode.adoc ("Code Mode"), a current page that was kept (old URL redirects via :page-aliases: on code-mode.adoc). Old cloud URLs redirect via :page-aliases: on gateway/overview.adoc.
 :learning-objective-1: Create an LLM provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint
 :learning-objective-2: Select the models you want to expose through the provider
-:learning-objective-3: Verify the provider is reachable using the built-in Test Connection control
+:learning-objective-3: Verify the provider is reachable using the built-in Test connection control
 
 Create an LLM provider to give your applications a managed proxy URL: Redpanda handles the upstream API keys, forwards requests to the provider, and records usage for you. Create a provider for each upstream you use, whether that's OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint.
 
@@ -309,10 +309,12 @@ NOTE: Changing a toggle takes effect for new requests. Transcripts already captu
 
 . Click *Create provider*. The button activates after `Name` and `Type` are both set. The Summary panel checks them off as you fill them in.
 . On the provider's detail page, the Connection card shows your `Proxy URL`, `Discovery` URL, `Base URL`, and `API key ref`. Copy the `Proxy URL`: this is where your applications point.
-. Scroll to the Verify connection section. Pick a model from the dropdown and click *Test Connection*. The status updates from _Not tested yet_ to a pass/fail indicator. Use the *Show commands* disclosure if you want to see the equivalent curl or SDK call.
+. Click *Test connection*. The result appears as a pass or fail message.
++
+// TODO: re-verify this save-and-verify flow end to end. The Test connection button now lives on the provider edit page with no model picker, no "Verify connection" section heading, and no "Show commands" disclosure; confirm where the docs should send readers after create, and whether the Connection card fields listed above still match.
 . To wire up an application, open *Connect your app* further down the page or follow xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].
 
-A successful Test Connection result confirms that the provider's credentials, region (Bedrock), and network path are all correct. If the call fails, see <<troubleshooting>>.
+A successful *Test connection* result confirms that the provider's credentials, region (Bedrock), and network path are all correct. If the call fails, see <<troubleshooting>>.
 
 [[bedrock-inference-profiles]]
 == AWS Bedrock: Inference profiles and IAM
@@ -440,39 +442,7 @@ Use the search box to find a provider by name, and the *Filter* button to narrow
 [[view-cost-and-usage]]
 == View cost and usage
 
-The *Cost & Usage* page tracks spend, request volume, and token volume over time across providers and models. Open *Cost & Usage* under *Governance* in the sidebar. Use it when you want to understand which provider or model generated usage during a selected time window.
-
-The page includes these charts:
-
-* *Spend over time*: Estimated spend in USD for the selected range.
-* *Requests over time*: Request count for the selected range.
-* *Tokens over time*: Token count for the selected range.
-
-Use *Group by* to switch the chart breakdown between providers, models, token type, agents, and users. Group by provider to see which upstream consumed the most budget. Group by model to see which model drove spend inside one or more providers. Group by token type to separate input, output, cached, cache-write, and reasoning usage where those buckets apply. Group by agent or user to attribute spend to the agent or the identified caller that drove it.
-
-Use *Filter* to narrow the charts by provider, model, cost type, token type, user, or agent. Each filter appears as a chip above the chart, and you can combine them. For example, filter to one Anthropic provider, drill into `claude-opus-4-7`, then limit the spend view to input tokens. Selecting an agent also narrows the provider options to the providers that agent used.
-
-The date-range picker supports last 7 days, last 14 days, last 30 days, last 90 days, month to date, quarter to date, year to date, and custom ranges. The chart subtitle shows the selected date range and bucket size.
-
-A custom range writes `customStart` and `customEnd` ISO-8601 timestamps to the page URL, so the view is shareable: copy the URL after picking a custom range and any teammate who opens it lands on the same window.
-
-The chart renders empty buckets in the selected range as zero-height bars rather than gaps, so quiet days line up with their date label and the trend stays readable when traffic is bursty.
-
-The chart palette is colorblind-safe. When multiple providers of the same type exist (for example, two OpenAI providers), the chart renders each one with a distinct hatched pattern so the series stay visually distinguishable.
-
-The spend chart footer summarizes the selected view by cost bucket, including total, input, output, cached, cache writes, and reasoning when the selected traffic includes those categories.
-
-// TODO: When the cached-token totals reconciliation fix lands (tracked internally as AI-1152), confirm the spend footer cost-bucket totals match cached-token spend across mixed cache-hit / cache-miss traffic, then this comment can be removed.
-
-[[download-cost-and-usage-report]]
-=== Download the report as CSV
-
-To export the data behind the charts, use the download controls in the toolbar:
-
-* Click *Download full report* to download the complete, untruncated dataset for the current filters and date range as a CSV file. Every cost type and token type is a separate column.
-* Use the report options control (the sliders icon next to *Download full report*) to choose how the exported rows are grouped. Under Time bucket, pick Hourly, Daily, Monthly, or Total (no time column). Under Break down by, select any combination of Provider, Model, User, and Agent.
-
-Each chart also has its own export that downloads the data as currently shown, including any truncation the chart applies to keep the top series readable. Use *Download full report* when you need the whole dataset rather than the charted view.
+The *Cost & Usage* page under *Governance* tracks spend, request volume, and token volume over time across providers, models, agents, and users, with period comparisons and CSV export. This report moved to its own page: see xref:control:cost-usage.adoc[Analyze Cost and Usage].
 
 == Edit, disable, or delete a provider
 

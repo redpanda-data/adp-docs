@@ -80,33 +80,27 @@ rpk ai env use local
 
 Each Agentic Data Plane resource has its own command group, and each group supports the standard `create`, `get`, `list`, `update`, and `delete` actions. The model catalog is read-only.
 
-[cols="1m,2,1a"]
+[cols="1a,2"]
 |===
-|Command |Manages |Reference
+|Command |Manages
 
-|rpk ai llm-provider
-|LLM providers (OpenAI, Anthropic, Google, AWS Bedrock, and OpenAI-compatible endpoints)
 |xref:reference:rpk/rpk-ai/rpk-ai-llm.adoc[`rpk ai llm-provider`]
+|LLM providers (OpenAI, Anthropic, Google, AWS Bedrock, and OpenAI-compatible endpoints)
 
-|rpk ai mcp-server
-|MCP servers and their tools
 |xref:reference:rpk/rpk-ai/rpk-ai-mcp-server.adoc[`rpk ai mcp-server`]
+|MCP servers and their tools
 
-|rpk ai oauth-provider
-|OAuth providers for user-delegated MCP connections
 |xref:reference:rpk/rpk-ai/rpk-ai-oauth-provider.adoc[`rpk ai oauth-provider`]
+|OAuth providers for user-delegated MCP connections
 
-|rpk ai oauth-client
-|OAuth clients that external tools use to reach an MCP server
 |xref:reference:rpk/rpk-ai/rpk-ai-oauth-client.adoc[`rpk ai oauth-client`]
+|OAuth clients that external tools use to reach an MCP server
 
-|rpk ai agent
-|Agents in the agent registry
 |xref:reference:rpk/rpk-ai/rpk-ai-agent.adoc[`rpk ai agent`]
+|Agents in the agent registry
 
-|rpk ai model
-|The model catalog (read-only discovery)
 |xref:reference:rpk/rpk-ai/rpk-ai-model.adoc[`rpk ai model`]
+|The model catalog (read-only discovery)
 |===
 
 For example, to create and inspect an LLM provider:

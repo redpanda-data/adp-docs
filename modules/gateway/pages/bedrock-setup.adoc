@@ -137,7 +137,7 @@ Secret names are normalized to `UPPER_SNAKE_CASE` automatically and get the AI G
 For Anthropic Claude 4.6 and later, pick the inference profile (for example, `us.anthropic.claude-sonnet-4-6`) rather than the bare foundation-model ID.
 
 . Click *Create provider*.
-. On the provider detail page, scroll to the Verify connection section, pick a model, and click *Test Connection*. A successful response confirms that the credentials, region, and IAM policy are correctly configured.
+. Verify the provider by clicking *Test connection* on its edit page. A successful response confirms that the credentials, region, and IAM policy are correctly configured.
 
 == Cross-region inference profile billing
 

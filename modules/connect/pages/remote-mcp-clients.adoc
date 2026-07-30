@@ -74,7 +74,7 @@ Before you wire up the chat-client connector, make sure you have:
 
 == Register an OAuth Client in AI Gateway
 
-Register a client by hand when it can't self-register, when it needs a confidential `client_secret`, or when you want to pre-provision it before the first connection. For spec-conformant clients that support Dynamic Client Registration, you can skip this manual flow and let them register themselves. See <<self-register-with-dcr,Let clients self-register with Dynamic Client Registration>>.
+Register a client by hand when it can't self-register, when it needs a confidential `client_secret`, or when you want to pre-provision it before the first connection. For spec-conformant clients that support dynamic client registration, you can skip this manual flow and let them register themselves. See <<self-register-with-dcr,Let clients self-register>>.
 
 Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
 
@@ -122,22 +122,22 @@ On submit, AI Gateway mints the `client_id`. Confidential clients (those using a
 // TODO: capture screenshots of the Add external tool catalog, the custom form, and the post-create detail page.
 
 [[self-register-with-dcr]]
-== Let clients self-register with Dynamic Client Registration
+== Let clients self-register
 
-Instead of registering every client by hand, you can let spec-conformant MCP clients register themselves. AI Gateway supports OAuth 2.0 Dynamic Client Registration (DCR, RFC 7591), but self-registration is off for each organization by default. After you enable it, the gateway advertises a `registration_endpoint` in its authorization-server metadata at `/.well-known/oauth-authorization-server`. Clients that read this metadata (Claude Code, Cursor, ChatGPT, and other spec-conformant MCP clients) register on their first connection attempt, run the authorization-code flow with PKCE, and obtain tokens without an admin provisioning a `client_id` or `client_secret` first.
+Instead of registering every client by hand, you can let spec-conformant MCP clients register themselves. AI Gateway supports the OAuth 2.0 Dynamic Client Registration Protocol (RFC 7591), but self-registration is off for each organization by default. After you enable it, the gateway advertises a `registration_endpoint` in its authorization-server metadata at `/.well-known/oauth-authorization-server`. Clients that read this metadata (Claude Code, Cursor, ChatGPT, and other spec-conformant MCP clients) register on their first connection attempt, run the authorization-code flow with PKCE, and obtain tokens without an admin provisioning a `client_id` or `client_secret` first.
 
 Enable self-registration before conformant clients can register.
 
 === Enable self-registration
 
-Run the `rpk ai oauth-client dcr update` command to enable DCR and choose how callers are admitted:
+Run the `rpk ai oauth-client dcr update` command to enable self-registration and choose how callers are admitted:
 
 [source,bash]
 ----
 rpk ai oauth-client dcr update --enabled --admission-mode open
 ----
 
-TIP: You can also review and change DCR self-registration from the UI: on the *Integrations setup* page, open the *Inbound clients* tab and click *Manage DCR* to open the DCR governance panel.
+TIP: You can also review and change self-registration from the UI: on the *Integrations setup* page, open the *Inbound clients* tab and select *Self-registration* to open its settings.
 
 Inspect the current policy at any time:
 
@@ -146,11 +146,11 @@ Inspect the current policy at any time:
 rpk ai oauth-client dcr get
 ----
 
-The command reports whether DCR is enabled, the admission mode, and the resource and rate caps, for example `ENABLED: true`, `ADMISSION_MODE: OPEN`, `ALLOWED_RESOURCES: ["*"]`.
+The command reports whether self-registration is enabled, the admission mode, and the resource and rate caps, for example `ENABLED: true`, `ADMISSION_MODE: OPEN`, `ALLOWED_RESOURCES: ["*"]`.
 
 === Admission modes
 
-The admission mode controls who may register after DCR is enabled:
+The admission mode controls who may register after you enable self-registration:
 
 [cols="1,3"]
 |===
@@ -174,16 +174,16 @@ Pass caps to the same `rpk ai oauth-client dcr update` command to bound what sel
 |Flag |Purpose
 
 |`--allowed-resource`
-|MCP server URL that every DCR-issued client may request tokens for. Repeatable. `*` allows any MCP server on the gateway.
+|MCP server URL that every self-registered client may request tokens for. Repeatable. `*` allows any MCP server on the gateway.
 
 |`--client-cap`
-|Maximum number of concurrent DCR-issued clients.
+|Maximum number of concurrent self-registered clients.
 
 |`--rate-per-hour`
 |Maximum registrations accepted per hour.
 
 |`--inactive-ttl-days`
-|Days of inactivity before AI Gateway removes a DCR-issued client. `0` keeps clients indefinitely.
+|Days of inactivity before AI Gateway removes a self-registered client. `0` keeps clients indefinitely.
 |===
 
 AI Gateway disables and then removes inactive self-registered clients according to this policy, so abandoned registrations don't accumulate.

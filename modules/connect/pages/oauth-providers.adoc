@@ -149,9 +149,9 @@ The provider appears in the *Outbound providers* list.
 [[discover-a-provider-from-an-mcp-server-url]]
 == Discover a provider from an MCP server URL
 
-When you connect to a remote MCP server that authenticates users over OAuth, you can let AI Gateway detect the server's OAuth configuration instead of entering endpoints and credentials by hand. If the remote server supports OAuth Dynamic Client Registration (DCR), the gateway registers itself as an OAuth client automatically, so you have no endpoints or client credentials to paste.
+When you connect to a remote MCP server that authenticates users over OAuth, you can let AI Gateway detect the server's OAuth configuration instead of entering endpoints and credentials by hand. If the remote server supports dynamic client registration, the gateway registers itself as an OAuth client automatically, so you have no endpoints or client credentials to paste.
 
-NOTE: This is the _outbound_ direction: AI Gateway registers itself as a client of a remote MCP server's OAuth server. It is distinct from the inbound DCR that lets external MCP clients register themselves with AI Gateway. To let clients such as Claude Code or ChatGPT register with the gateway, see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
+NOTE: This is the _outbound_ direction: AI Gateway registers itself as a client of a remote MCP server's OAuth server. It is distinct from the inbound direction, where external MCP clients register themselves with AI Gateway. To let clients such as Claude Code or ChatGPT register with the gateway, see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
 
 To discover a provider:
 
@@ -164,17 +164,19 @@ To discover a provider:
 |===
 |Result |What happens
 
-|Server supports DCR
+|Server supports dynamic client registration
 |The gateway registers itself as an OAuth client with the remote server's authorization server and pre-fills the provider. Confirm the details to create the provider.
 
 |A matching provider already exists
 |The gateway points you at the provider already registered for that server so you can attach it instead of creating a duplicate.
 
-|Server has no OAuth, or OAuth without DCR
+|Server has no OAuth, or OAuth without dynamic client registration
 |The gateway falls back to the manual create form, pre-filling whatever it could detect. Complete the remaining fields as described in <<register-an-oauth-provider-in-the-ui,Register an OAuth provider in the UI>>.
 |===
 
 A provider created this way is marked with a *Discovered* badge in the list and on its detail page, which distinguishes it from a provider you configured manually. Its detail page also shows a *Registration* card. See <<view-provider-details,View provider details>>.
+
+You can reach the same automatic setup from the other direction. When you create a self-managed MCP server that authenticates users over OAuth, Redpanda checks the server URL and sets up the OAuth client as part of creating the server, with no provider registered first. The provider it creates appears here with the same *Discovered* badge. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 
 == Register from the CLI
 

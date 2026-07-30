@@ -34,7 +34,7 @@ After completing this guide, you will be able to:
 +
 If the server supports dynamic client registration, there is nothing else to configure. If it doesn't, Redpanda walks you through the parts it can't do for you: register an OAuth app in the upstream's developer console, add the authorization callback URL that Redpanda displays to that app, then paste the app's credentials back into the form. The credentials are the `Client ID` from the developer console and, for a confidential app, a client-secret reference from the secret store in `UPPER_SNAKE_CASE`, for example `GITHUB_CLIENT_SECRET`. Leave the reference empty for a public PKCE app.
 +
-Either way, Redpanda records the provider it resolved or created for the server, marked with a *Discovered* badge in the *Outbound providers* list so you can tell it from a provider you registered by hand.
+Either way, Redpanda records the provider it resolved or created for the server, marked with a *Discovered* badge in the *Outbound providers* list so you can tell it from a provider you registered by hand. See xref:connect:oauth-providers.adoc#discover-a-provider-from-an-mcp-server-url[Discover a provider from an MCP server URL].
 +
 To attach an OAuth provider your organization already manages instead, click *Use a different authentication method*, set `Method` to `User-delegated OAuth`, then set `Setup` to `Attach existing provider` and select the provider (`UserOAuthAuth.provider_name`). Click *New* to register a provider without leaving the form. The same `Setup` toggle switches back to `Set up automatically`.
 * For a *managed* server, select the OAuth provider in the type's configuration (`UserOAuthAuth.provider_name`). Managed types always attach a provider, so automatic setup doesn't apply.
