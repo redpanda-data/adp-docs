@@ -411,6 +411,93 @@ The `dataplane_adp_guardrail_*` permissions gate guardrail policies that screen 
 |
 |===
 
+== Access policy permissions
+
+The `dataplane_adp_policy_*` permissions gate the Cedar-based access policies that refine RBAC. Access policies are a preview capability. See xref:control:access-policies.adoc[].
+
+[cols="2,2,1,1"]
+|===
+|Permission |Operation |Writer |Reader
+
+|`dataplane_adp_policy_create`
+|Create an access policy
+|✓
+|
+
+|`dataplane_adp_policy_get`
+|View one access policy
+|✓
+|✓
+
+|`dataplane_adp_policy_list`
+|List access policies
+|✓
+|✓
+
+|`dataplane_adp_policy_update`
+|Modify an access policy
+|✓
+|
+
+|`dataplane_adp_policy_delete`
+|Delete an access policy
+|✓
+|
+|===
+
+== Policy template permissions
+
+The `dataplane_adp_policytemplate_*` permissions gate reusable access-policy templates, including the built-in quick-start set. See xref:control:access-policies.adoc[].
+
+[cols="2,2,1,1"]
+|===
+|Permission |Operation |Writer |Reader
+
+|`dataplane_adp_policytemplate_create`
+|Create a policy template
+|✓
+|
+
+|`dataplane_adp_policytemplate_get`
+|View one policy template
+|✓
+|✓
+
+|`dataplane_adp_policytemplate_list`
+|List policy templates
+|✓
+|✓
+
+|`dataplane_adp_policytemplate_update`
+|Modify a policy template
+|✓
+|
+
+|`dataplane_adp_policytemplate_delete`
+|Delete a policy template
+|✓
+|
+|===
+
+== Effective policy set permissions
+
+The `dataplane_adp_effectivepolicyset_*` permissions gate read access to the compiled policy set the dataplane enforces (your access policies plus the system policies generated from role bindings).
+
+[cols="2,2,1,1"]
+|===
+|Permission |Operation |Writer |Reader
+
+|`dataplane_adp_effectivepolicyset_get`
+|View the compiled policy set
+|✓
+|✓
+
+|`dataplane_adp_effectivepolicyset_list`
+|List compiled policy sets
+|✓
+|✓
+|===
+
 == A2A runtime permissions
 
 The `dataplane_aiagent_a2a_*` permissions, along with `dataplane_adp_a2a_invoke`, gate agent-to-agent (A2A) runtime traffic. The AIAgentInvoker built-in role grants every A2A permission.

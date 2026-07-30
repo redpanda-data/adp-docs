@@ -70,6 +70,7 @@
 ** xref:control:cost-allocation-tags.adoc[Track Spend by Tag]
 ** xref:control:access.adoc[Manage Access]
 *** xref:control:permissions-overview.adoc[Control Who Can Do What]
+*** xref:control:access-policies.adoc[Manage Access Policies]
 *** xref:control:permissions-reference.adoc[Roles and Permissions Reference]
 
 * xref:gateway:index.adoc[Routing & LLM Settings]

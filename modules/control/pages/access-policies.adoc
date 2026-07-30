@@ -1,0 +1,214 @@
+= Manage Access Policies
+:description: Create Cedar-based access policies that permit or forbid specific actions in the Agentic Data Plane, with conditions over tags, groups, and ownership.
+:page-topic-type: how-to
+:page-preview: true
+:personas: security_compliance_lead, platform_engineer
+:learning-objective-1: Create an access policy that permits or forbids specific actions
+:learning-objective-2: Write safe policy conditions over tags, groups, and ownership
+:learning-objective-3: Manage access policies from the CLI
+
+// Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/{policy_service,system_policy_service,effective_policy_set_service}.proto; validation and enforcement in pkg/permissions/cedar and docs/adp/cedar-policy-authoring.md; seeded templates in apps/adp-api/internal/seed/seed.go; role grants in pkg/permissions/permissions_constants.go; UI in apps/adp-ui/src/routes/_authenticated/access.page.tsx and components/access/. Verified against origin/main on 2026-07-29.
+
+Access policies give you fine-grained, attribute-based access control (ABAC) on top of roles: permit or forbid specific actions for specific people, groups, or resources, with conditions that read resource tags and ownership. Use them to express rules that roles can't, such as denying a group access to production-tagged agents or letting only a resource's creator modify it.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+NOTE: Access policies are a preview capability, available when your organization has them enabled. If you don't see *Access* in the sidebar, they aren't enabled for your organization.
+
+== How access policies work
+
+Access policies use the https://www.cedarpolicy.com/[Cedar policy language^]. A policy is a `permit` or `forbid` statement over three parts:
+
+* *Principal*: Who the policy applies to. A user (`User::"alice@example.com"`) or a group (`Group::"support"`). Principals don't carry attributes such as department or nationality: model those facts as group membership.
+* *Action*: What operation the policy covers. Actions are the same permission strings that roles bundle, such as `Action::"dataplane_adp_agent_get"`. See xref:control:permissions-reference.adoc[].
+* *Resource*: What the action targets, as a typed entity, for example `resource is Agent` or `resource is McpServer`.
+
+Access policies compose with role-based access control (RBAC) rather than replacing it:
+
+* Every request is denied unless a `permit` matches it.
+* Your existing role bindings appear as system policies: one `permit` for each binding, generated automatically. Roles keep working unchanged.
+* A matching `forbid` always wins, including over permits that come from role bindings. This is what makes cross-cutting denials possible: one `forbid` can override any number of grants.
+
+Enforcement is fail-closed. A `forbid` that errors during evaluation denies the request rather than being skipped, and enforcement continues from the last delivered policy set if policy distribution is interrupted.
+
+== Prerequisites
+
+* Access policies enabled for your organization.
+* Permission to author policies: the `dataplane_adp_policy_*` permissions. The built-in Admin and Writer roles carry them; Reader can view policies but not change them. See xref:control:permissions-reference.adoc[].
+
+== Open the Access page
+
+Open *Access* in the sidebar. The page has four tabs:
+
+* *Policies*: The access policies you author. This is where you create, edit, and delete them.
+* *System policies*: Read-only policies generated from your role bindings, one per binding. Use this tab to see what RBAC already grants.
+* *Roles*: The roles defined for your organization, viewed as bundles of actions.
+* *Templates*: Reusable policy templates, including the built-in quick-start set.
+
+== Create a policy
+
+. On the *Policies* tab, click *New policy*.
+. Choose the effect: *Permit* grants access that roles don't, and *Forbid* takes access away no matter what roles grant.
+. Set the principal (a user or group), the permissions (actions) the policy covers, and the resources it applies to.
+. Add conditions if the policy needs them: *Condition* rows narrow when the policy applies, and *Unless* rows carve out exceptions.
+. Save the policy.
+
+Every save validates the policy against the current schema. The save fails with a specific error if the policy references an unknown action or entity type, reads an attribute that doesn't exist, or uses an unsafe condition, so a policy that stores successfully is well-formed.
+
+You can also write the Cedar text directly instead of using the form fields. Both produce the same policy.
+
+=== Start from a template
+
+The *Templates* tab includes four built-in quick-start templates, each a superset of the one before it:
+
+[cols="1,3"]
+|===
+|Template |Grants
+
+|Read only
+|View-only access across all resources (get, list, and read).
+
+|Sandboxed
+|Read-only access plus the ability to use agents and MCP servers (invoke, call tools). No management.
+
+|Standard
+|Sandboxed access plus full management of agents, MCP servers, LLM providers, guardrails, triggers, and budgets. Excludes managing access policies.
+
+|Full access
+|Every action, including managing access policies.
+|===
+
+A built-in Owner lifecycle policy also ships with the feature: users can manage the resources they created, including agents and their triggers and credentials, MCP servers, LLM providers, guardrails, and budgets.
+
+== Write conditions
+
+Conditions make policies attribute-based: they read resource tags, group membership, and ownership at evaluation time. Follow these rules to write conditions that behave the way you expect. Validation at save time enforces most of them.
+
+=== Guard every tag read
+
+Reading a tag a resource doesn't have is an evaluation error, not false. Always pair `getTag` with a `hasTag` check on the same key:
+
+[source,cedar]
+----
+forbid (
+  principal,
+  action == Action::"dataplane_adp_agent_get",
+  resource
+) when {
+  resource.hasTag("itar") &&
+  resource.getTag("itar") == "true" &&
+  !(principal in Group::"us-persons")
+};
+----
+
+Without the `hasTag` guard, the policy errors on every untagged resource, and an erroring `forbid` denies. You would block access to every untagged agent, the opposite of the intent. Validation rejects the unguarded form when you save.
+
+Only `Agent` and `Policy` resources carry tags.
+
+=== Model people facts as groups
+
+Principals carry an email and group memberships, nothing else. Write `principal in Group::"nationality/US"`, not `principal.nationality == "US"`. Validation rejects attribute reads on principals.
+
+=== Guard ownership reads
+
+To reference a resource's creator, guard the read the same way as a tag:
+
+[source,cedar]
+----
+resource has created_by && resource.created_by == principal
+----
+
+Write the attribute on the left of the comparison. The condition builder on the Access page parses this shape back into editable rows.
+
+=== Conditions on writes evaluate the resulting state
+
+On create and update actions, `resource` is the state the operation produces, not the stored row. A `forbid` on production-tagged agents therefore fires on any update to an agent that carries the tag, even an update that doesn't touch tags, and stops firing on the update that removes the tag. To gate the transition itself (adding or removing a specific tag), condition on `changed_tags`:
+
+[source,cedar]
+----
+forbid (
+  principal,
+  action == Action::"dataplane_adp_agent_update",
+  resource is Agent
+) when {
+  resource has changed_tags &&
+  resource.changed_tags.contains("itar") &&
+  !(principal in Group::"itar-cleared")
+};
+----
+
+== Manage an agent's permissions
+
+Each agent's detail page includes a *Permissions* tab where you manage the access policies that apply to that agent. Use it to scope what an individual agent can do without leaving the agent's page.
+
+== Manage policies from the CLI
+
+Run `rpk ai policy` commands to create, get, list, update, and delete access policies, and to apply or diff them from manifest files for GitOps workflows. See xref:reference:rpk/rpk-ai/rpk-ai-policy.adoc[].
+
+== Examples
+
+These policies show the most common shapes: a group-scoped denial, an ownership rule, and a default-closed gate. Adapt the group names, tag keys, and actions to your environment.
+
+=== Deny a group access to production agents
+
+Members of `contractors` can't read agents tagged `env=prod`, no matter what their roles grant:
+
+[source,cedar]
+----
+forbid (
+  principal in Group::"contractors",
+  action == Action::"dataplane_adp_agent_get",
+  resource is Agent
+) when {
+  resource.hasTag("env") &&
+  resource.getTag("env") == "prod"
+};
+----
+
+=== Only owners can modify their agents
+
+Nobody but an agent's creator can update it:
+
+[source,cedar]
+----
+forbid (
+  principal,
+  action == Action::"dataplane_adp_agent_update",
+  resource is Agent
+) unless {
+  resource has created_by && resource.created_by == principal
+};
+----
+
+=== Default-closed classification gate
+
+Nothing is readable until it's explicitly cleared. An agent with no `classification` tag is denied, and only `classification=public` clears the gate:
+
+[source,cedar]
+----
+forbid (
+  principal,
+  action == Action::"dataplane_adp_agent_get",
+  resource is Agent
+) unless {
+  resource.hasTag("classification") &&
+  resource.getTag("classification") == "public"
+};
+----
+
+== Troubleshoot a denied request
+
+A denial caused by access policies surfaces as a permission-denied error:
+
+* A `forbid` that matches cleanly returns a generic permission-denied message. Check the *Policies* tab for a `forbid` covering the action and resource.
+* A `forbid` that errors during evaluation also denies, and the error names the policy. Check that policy for an unguarded tag or attribute read, then re-save it to run current validation against it.
+
+== Next steps
+
+* xref:control:permissions-overview.adoc[]
+* xref:control:permissions-reference.adoc[]
+* xref:reference:rpk/rpk-ai/rpk-ai-policy.adoc[]

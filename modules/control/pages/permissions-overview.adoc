@@ -84,6 +84,14 @@ Agentic Data Plane includes the following built-in roles. Admin, Writer, and Rea
 
 Pick the narrowest role that covers a workload. For example, an application that only needs to call an LLM through AI Gateway should hold the LLMProviderInvoker role, not the Writer role.
 
+== Access policies: refine RBAC with conditions
+
+As a preview capability, you can layer xref:control:access-policies.adoc[access policies] on top of RBAC. Access policies are Cedar-based `permit` and `forbid` statements that express what roles can't: conditions over resource tags and ownership, grants scoped to a single resource, and cross-cutting denials that override every role.
+
+The two layers compose with a simple rule: a request is allowed when a `permit` matches it and no `forbid` matches it. Your role bindings participate as automatically generated permits, so RBAC keeps working unchanged, and a `forbid` always wins, including over access that a role grants.
+
+When access policies aren't enabled for your organization, RBAC behaves exactly as this page describes, with no policy layer involved.
+
 == Identity and impersonation
 
 Agentic Data Plane API calls authenticate as one of two identity types:
@@ -100,3 +108,4 @@ Agentic Data Plane permissions are part of the same Cloud RBAC system that gates
 == Next steps
 
 * xref:control:permissions-reference.adoc[Roles and Permissions Reference]
+* xref:control:access-policies.adoc[Manage Access Policies]
