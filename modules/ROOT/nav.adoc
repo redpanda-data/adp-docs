@@ -43,6 +43,7 @@
 *** xref:connect:create-server.adoc[Create an MCP Server]
 *** xref:connect:register-remote.adoc[Register a Self-Managed MCP Server]
 *** xref:connect:test-tools.adoc[Test an MCP Server's Tools with the Inspector]
+*** xref:connect:data-policies.adoc[Shape Tool Data with Data Policies]
 *** xref:gateway:code-mode.adoc[Code Mode]
 ** xref:connect:authentication.adoc[Set Up Authentication]
 *** xref:connect:oauth-providers.adoc[Configure an OAuth Provider]
