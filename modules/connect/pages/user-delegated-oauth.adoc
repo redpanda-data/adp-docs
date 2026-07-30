@@ -16,7 +16,7 @@ After completing this guide, you will be able to:
 
 == Prerequisites
 
-* An OAuth provider resource configured in Redpanda Agentic Data Plane on the *Outbound providers* tab of *Integrations setup*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
+* For a managed MCP server, or to reuse a provider your organization already manages on a self-managed server: an OAuth provider resource configured on the *Outbound providers* tab of *Integrations setup*. The provider declares the upstream's `authorize_url`, `token_url`, supported scopes, and client credentials. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. A self-managed server can instead set up OAuth automatically, described below, with no provider registered first.
 * The required scopes for the upstream API you plan to call.
 * For *self-managed* MCP servers: the server URL must be `https://` (proto rule `remote_mcp.user_oauth_requires_https`). HTTP is rejected at create time.
 * For *managed* MCP servers: the type must support user-delegated OAuth. SQL doesn't; Slack, Jira, and Google managed types do. Check xref:connect:managed/managed-catalog.adoc[Managed catalog] before configuring.
@@ -25,11 +25,19 @@ After completing this guide, you will be able to:
 
 . Create or edit your MCP server (see xref:connect:create-server.adoc[Create an MCP Server]).
 . In the authentication section, choose *User-delegated OAuth*.
-. Pick the configured *OAuth provider* (`UserOAuthAuth.provider_name`).
-. List the *required scopes* (`UserOAuthAuth.required_scopes`). Redpanda enforces these at consent time.
-. (Optional) Override token injection through the API or CLI. By default Redpanda sends `Authorization: Bearer <token>`. To use a different header, set `TokenInjection.header_name`. To omit the prefix entirely (for example, an upstream that expects a bare API key as the token), set `TokenInjection.header_prefix` to the empty string. The create form doesn't expose these fields; the UI's user-delegated authentication section takes only the OAuth provider and required scopes.
+. Configure how Redpanda gets an OAuth client for the upstream:
 +
-// Verified 2026-06-09 against adp-ui remote-auth-fields.tsx on origin/main: UserOAuthFields renders only "OAuth Provider" + "Required Scopes (optional)"; TokenInjection header_name/header_prefix are API/CLI-level only.
+--
+* For a *self-managed* (remote) server, pick a `Setup` mode:
++
+** `Set up automatically` (the default): Redpanda registers an OAuth client and manages each user's tokens for you. When the server supports OAuth Dynamic Client Registration (DCR), there is nothing else to configure. When it doesn't, expand *Add a client ID* and enter the `Client ID` from the upstream's developer console, and, for a confidential client, a `Client Secret` (leave it empty for a public PKCE client). Redpanda shows the callback URL to add to the upstream app.
+** `Attach existing provider`: select an OAuth provider you already registered (`UserOAuthAuth.provider_name`), or click *New* to create one without leaving the form.
+* For a *managed* server, select the OAuth provider in the type's configuration (`UserOAuthAuth.provider_name`).
+--
+. Set the *required scopes* (`UserOAuthAuth.required_scopes`) the upstream API needs. Redpanda enforces these at consent time. On the automatic-setup path this is the optional *Set specific scopes* override; leave it empty to request whatever the server advertises.
+. (Optional) Override token injection through the API or CLI. By default Redpanda sends `Authorization: Bearer <token>`. To use a different header, set `TokenInjection.header_name`. To omit the prefix entirely (for example, an upstream that expects a bare API key as the token), set `TokenInjection.header_prefix` to the empty string. The create form doesn't expose these fields.
++
+// Verified 2026-07-30 against adp-ui remote-auth-fields.tsx on origin/main: the remote user-delegated form shows a Setup toggle ("Set up automatically" / "Attach existing provider"), an "Add a client ID" disclosure for servers without DCR (Client ID + optional Client Secret), and an optional "Set specific scopes" override. TokenInjection header_name/header_prefix remain API/CLI-level only.
 . Save.
 
 NOTE: Choosing user-delegated OAuth instead of service-account OAuth *is* the credential-mode decision: there's no separate field. User-delegated gives each caller a per-user upstream identity; service-account gives every caller one shared identity. Switching between them later requires re-consent for every active user.
