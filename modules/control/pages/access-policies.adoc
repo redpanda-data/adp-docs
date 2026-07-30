@@ -142,7 +142,7 @@ To grant a verb across every type, name each `<Entity>.<verb>` action explicitly
 
 Conditions read the following attributes. Every one is optional at the schema level, so each needs a `has` guard before you read it. An unguarded read is an evaluation error, and in a `forbid` that error denies.
 
-[cols="1,3,2"]
+[cols="2,4,3"]
 |===
 |Attribute |Entity types that carry it |Required guard
 
