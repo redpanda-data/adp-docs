@@ -6,6 +6,37 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.32 (2026-07-30)
+
+=== Features
+
+MCP Servers:: Connecting a remote MCP server that uses **User OAuth** now takes a URL and one sign-in per person, with no app created by hand in a vendor console. Select **Set up automatically** and ADP reads the server's OAuth configuration and registers itself as a client using Dynamic Client Registration (DCR, RFC 7591). For a server that does not support DCR, you can still enter a client ID and secret yourself.
+Models:: Claude Opus 5, Gemini 3.6 Flash, and Gemini 3.5 Flash Lite are now in the model catalog. Enable `claude-opus-5` on an Anthropic provider, or `gemini-3.6-flash` and `gemini-3.5-flash-lite` on a Google provider. Claude Opus 5 is also in the Amazon Bedrock catalog.
+CLI:: The `rpk ai connection` commands bring your own OAuth connections to the terminal, matching what **My Connections** shows in the UI. Run `rpk ai connection list` to see the services you are signed in to, and `rpk ai connection revoke <provider>` to disconnect your own account from one.
+
+=== Improvements
+
+LLM Providers `[UI]`:: Creating an LLM provider is now a single form: paste model IDs one per line, and create the provider's API key secret without leaving the page. For Amazon Bedrock you can browse the catalog by model family and enable or disable models in bulk.
+MCP Servers:: OpenAI MCP servers now transcribe audio files with `gpt-transcribe` instead of `whisper-1`. Servers that set a transcription model explicitly keep it.
+MCP Servers `[UI]`:: When the inspector cannot reach a server, it now explains the failure in readable text and offers **Try again** and **Edit server**. The raw response stays available in a collapsed panel for network debugging.
+
+=== Bug fixes
+
+MCP Servers:: Remote MCP servers set to **OAuth (Service Account)** now attach the service account's access token to their upstream requests. They previously sent no credentials at all, so a server requiring authentication rejected every request.
+Cost & Usage:: Cost reporting understated large Anthropic requests: above 200,000 input tokens, Anthropic charges a higher long-context rate that ADP was not applying. Those requests now report their real cost, so expect reported spend to step up with no change in usage. Figures recorded before this release keep their earlier, lower numbers.
+Interface `[UI]`:: Selecting **Contact support** on an error now files a support request with Redpanda. The error was previously logged for diagnostics without a request being created.
+
+== v0.2.31 (2026-07-28)
+
+=== Improvements
+
+Environments `[UI]`:: When your organization has no Agentic Data Plane environment yet, ADP now shows which of your clusters can host one, with each cluster's cloud region and city.
+
+=== Bug fixes
+
+Activity:: Conversation transcripts are recorded again after new conversations stopped appearing in the Activity views on **LLM Providers** and **Cost & Usage** in the previous release.
+Interface `[UI]`:: Filtering and paging through lists now work correctly across **Connections**, **Integrations**, and **Secrets**. Filter checkboxes show and clear what you selected, and lists no longer jump to the wrong page while data reloads.
+
 == v0.2.30 (2026-07-27)
 
 === Improvements
