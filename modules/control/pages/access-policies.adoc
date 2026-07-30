@@ -1,5 +1,5 @@
 = Manage Access Policies
-:description: Create Cedar-based access policies that permit or forbid specific actions in the Agentic Data Plane, with conditions over tags, groups, and ownership.
+:description: Create Cedar-based access policies that permit or forbid specific actions in the Agentic Data Plane, with conditions over resource tags and ownership.
 :page-topic-type: how-to
 :page-preview: true
 :personas: security_compliance_lead, platform_engineer
@@ -25,7 +25,7 @@ Access policies use the https://www.cedarpolicy.com/[Cedar policy language^]. A 
 
 * *Principal*: Who the policy applies to. A user (`User::"alice@example.com"`) or a group (`Group::"support"`). Principals don't carry attributes such as department or nationality: model those facts as group membership.
 * *Action*: What operation the policy covers. An action ID is an entity type and a verb joined by a dot, for example `Action::"Agent.get"` or `Action::"McpServerTool.call"`. See <<action-reference,Action reference>>.
-* *Resource*: What the action targets, as a typed entity, for example `resource is Agent` for every agent or `resource == Agent::"support-bot"` for one. Entity IDs are the resource's own name, the same value the API and `rpk ai` use.
+* *Resource*: What the action targets, as a typed entity, for example `resource is Agent` for every agent or `resource == Agent::"support-bot"` for one. Most entity IDs are the resource's bare name, the same one the API path uses. The policy resources are the exception: `Policy` and `PolicyTemplate` carry their collection prefix, as in `Policy::"policies/deny-prod-reads"`.
 
 Always pin the resource type. With a specific action ID such as `Action::"Agent.get"` the pin is redundant, because the action already names its one entity type, but it costs nothing. With an action group a `permit` requires it. Validation also uses the pin to catch conditions that can never match, so pinning is what turns a silent no-op into a save-time error.
 
