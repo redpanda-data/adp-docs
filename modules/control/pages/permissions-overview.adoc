@@ -86,9 +86,11 @@ Pick the narrowest role that covers a workload. For example, an application that
 
 == Access policies: refine RBAC with conditions
 
-As a preview capability, you can layer xref:control:access-policies.adoc[access policies] on top of RBAC. Access policies are Cedar-based `permit` and `forbid` statements that express what roles can't: conditions over resource tags and ownership, grants scoped to a single resource, and cross-cutting denials that override every role.
+As a preview capability, you can layer xref:control:access-policies.adoc[access policies] on top of RBAC. Access policies are Cedar-based `permit` and `forbid` statements that express what roles can't. They condition on resource tags and ownership, scope down to a single resource, and deny across every role that would otherwise grant access.
 
 The two layers compose with a simple rule: a request is allowed when a `permit` matches it and no `forbid` matches it. Your role bindings participate as automatically generated permits, so RBAC keeps working unchanged, and a `forbid` always wins, including over access that a role grants.
+
+Access policies use their own action vocabulary. A policy names an entity type and a verb, such as `Action::"Agent.get"`, not the `dataplane_adp_*` permission strings listed on this page. See xref:control:access-policies.adoc#action-reference[Action reference].
 
 When access policies aren't enabled for your organization, RBAC behaves exactly as this page describes, with no policy layer involved.
 

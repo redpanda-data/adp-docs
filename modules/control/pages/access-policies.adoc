@@ -7,7 +7,7 @@
 :learning-objective-2: Write safe policy conditions over tags, groups, and ownership
 :learning-objective-3: Manage access policies from the CLI
 
-// Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/{policy_service,system_policy_service,effective_policy_set_service}.proto; validation and enforcement in pkg/permissions/cedar and docs/adp/cedar-policy-authoring.md; seeded templates in apps/adp-api/internal/seed/seed.go; role grants in pkg/permissions/permissions_constants.go; UI in apps/adp-ui/src/routes/_authenticated/access.page.tsx and components/access/. Verified against origin/main on 2026-07-29.
+// Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/{cedar_options,policy_service,system_policy_service,effective_policy_set_service}.proto; action ids and verb/entity sets in pkg/permissions/cedar/{actionindex,schema,validate}.go; seeded templates and the Owner lifecycle policy in apps/adp-api/internal/seed/seed.go; role grants in pkg/permissions/permissions_constants.go; UI in apps/adp-ui/src/routes/_authenticated/access_.policies.create.page.tsx and components/{access,organisms}/. Verified against origin/main and the main branch deploy of the ADP UI on 2026-07-30. Action ids are entity-qualified (`Agent.get`), NOT the flat `dataplane_adp_*` permission strings.
 
 Access policies give you fine-grained, attribute-based access control (ABAC) on top of roles: permit or forbid specific actions for specific people, groups, or resources, with conditions that read resource tags and ownership. Use them to express rules that roles can't, such as denying a group access to production-tagged agents or letting only a resource's creator modify it.
 
@@ -24,42 +24,136 @@ NOTE: Access policies are a preview capability, available when your organization
 Access policies use the https://www.cedarpolicy.com/[Cedar policy language^]. A policy is a `permit` or `forbid` statement over three parts:
 
 * *Principal*: Who the policy applies to. A user (`User::"alice@example.com"`) or a group (`Group::"support"`). Principals don't carry attributes such as department or nationality: model those facts as group membership.
-* *Action*: What operation the policy covers. Actions are the same permission strings that roles bundle, such as `Action::"dataplane_adp_agent_get"`. See xref:control:permissions-reference.adoc[].
-* *Resource*: What the action targets, as a typed entity, for example `resource is Agent` or `resource is McpServer`.
+* *Action*: What operation the policy covers. An action ID is an entity type and a verb joined by a dot, for example `Action::"Agent.get"` or `Action::"McpServerTool.call"`. The entity rides inside the action ID, so an action always names the one resource type it applies to. See <<action-reference,Action reference>>.
+* *Resource*: What the action targets, as a typed entity, for example `resource is Agent` for every agent or `resource == Agent::"support-bot"` for one.
+
+[IMPORTANT]
+====
+Access policies use a different action vocabulary from RBAC. The `dataplane_adp_*` permission strings that roles bundle still gate the API and still appear in xref:control:permissions-reference.adoc[], but they are *not* policy actions. A policy that names one fails validation with an unrecognized-action error.
+====
 
 Access policies compose with role-based access control (RBAC) rather than replacing it:
 
 * Every request is denied unless a `permit` matches it.
-* Your existing role bindings appear as system policies: one `permit` for each binding, generated automatically. Roles keep working unchanged.
-* A matching `forbid` always wins, including over permits that come from role bindings. This is what makes cross-cutting denials possible: one `forbid` can override any number of grants.
+* Your existing role bindings count as permits. Redpanda derives them for you, so roles keep working unchanged and you never author them by hand.
+* A matching `forbid` always wins, including over the access a role grants. This is what makes cross-cutting denials possible: one `forbid` can override any number of grants.
 
 Enforcement is fail-closed. A `forbid` that errors during evaluation denies the request rather than being skipped, and enforcement continues from the last delivered policy set if policy distribution is interrupted.
+
+[#action-reference]
+== Action reference
+
+Verbs are shared across entity types, and an action ID pairs one verb with one entity. The following table lists the verbs each entity type supports. Combine them with a dot to get the action ID: `Budget` plus `update` is `Action::"Budget.update"`.
+
+[cols="1,3"]
+|===
+|Entity type |Verbs
+
+|`Agent`
+|`get`, `list`, `create`, `update`, `delete`, `invoke`
+
+|`AgentCredential`
+|`list`, `create`, `delete`
+
+|`AgentTrigger`
+|`get`, `list`, `create`, `update`, `delete`
+
+|`Session`
+|`get`, `list`, `delete`
+
+|`Transcript`
+|`get`, `list`
+
+|`McpServer`
+|`get`, `list`, `create`, `update`, `delete`, `initialize`, `ping`, `tools_list`, `prompts_get`, `prompts_list`, `resources_list`, `resources_read`, `resources_templates_list`, `logging_set_level`
+
+|`McpServerTool`
+|`call`
+
+|`LLMProvider`
+|`get`, `list`, `create`, `update`, `delete`, `invoke`
+
+|`Model`
+|`get`, `list`
+
+|`Guardrail`
+|`get`, `list`, `create`, `update`, `delete`
+
+|`Budget`
+|`get`, `list`, `create`, `update`, `delete`
+
+|`Spending`
+|`get`
+
+|`OAuthProvider`
+|`get`, `list`, `create`, `update`, `delete`, `attach`
+
+|`OAuthClient`
+|`get`, `list`, `create`, `update`, `delete`
+
+|`OAuthConnection`
+|`get`, `list`, `authorize`, `revoke`
+
+|`AdminConnection`
+|`list`, `revoke`, `rotate`
+
+|`Policy`
+|`get`, `list`, `create`, `update`, `delete`
+
+|`PolicyTemplate`
+|`get`, `list`, `create`, `update`, `delete`
+
+|`EffectivePolicySet`
+|`get`, `list`
+|===
+
+Each verb also exists as an action group, so `action in Action::"get"` matches every `<Entity>.get` action. Groups are shorthand, and they come with one rule.
+
+[IMPORTANT]
+====
+A `permit` that references an action group must pin the resource type, with `resource is Agent` or `resource == Agent::"support-bot"`. Saving an unpinned group permit fails, because group membership grows as new resource types adopt the verb, so the stored grant would silently widen on the next deployment. `forbid` statements are exempt: a growing deny widens in the safe direction.
+
+To grant a verb across the whole data plane, name each `<Entity>.<verb>` action explicitly. The Access page does this for you when you pick verbs with the *All resources* scope.
+====
 
 == Prerequisites
 
 * Access policies enabled for your organization.
-* Permission to author policies: the `dataplane_adp_policy_*` permissions. The built-in Admin and Writer roles carry them; Reader can view policies but not change them. See xref:control:permissions-reference.adoc[].
+* Permission to author policies: the `dataplane_adp_policy_*` permissions. The built-in Admin and Writer roles carry them, and Reader can view policies but not change them. See xref:control:permissions-reference.adoc[].
 
 == Open the Access page
 
-Open *Access* in the sidebar. The page has four tabs:
+Open *Access* in the sidebar. Two tabs cover everyday work:
 
 * *Policies*: The access policies you author. This is where you create, edit, and delete them.
-* *System policies*: Read-only policies generated from your role bindings, one per binding. Use this tab to see what RBAC already grants.
-* *Roles*: The roles defined for your organization, viewed as bundles of actions.
 * *Templates*: Reusable policy templates, including the built-in quick-start set.
+
+The *Roles* tab shows the roles defined for your organization as bundles of actions, and a *System policies* tab gives highly privileged users a read-only audit view of the permits derived from role bindings. Neither is something you author.
 
 == Create a policy
 
-. On the *Policies* tab, click *New policy*.
-. Choose the effect: *Permit* grants access that roles don't, and *Forbid* takes access away no matter what roles grant.
-. Set the principal (a user or group), the permissions (actions) the policy covers, and the resources it applies to.
-. Add conditions if the policy needs them: *Condition* rows narrow when the policy applies, and *Unless* rows carve out exceptions.
-. Save the policy.
+. On the *Policies* tab, click *Create policy*.
+. Give the policy a *Name*.
+. Choose the *Effect*: *Permit* grants access that roles don't, and *Forbid* takes access away no matter what roles grant.
+. Set the *Principal*: a user from your organization directory, or a group name from your identity provider. Group membership stays managed in the IdP.
+. Under *Permissions*, choose how to grant:
+** *Actions* picks individual verbs by hand for a one-off grant.
+** *Template* links to a reusable template. A template carries a fixed, permit-only action set, and the policy's own effect and conditions don't apply.
+. In *Actions* mode, work through the three steps:
+.. *Action*: Select verbs. They're grouped as Management (`get`, `list`, `create`, `update`, `delete`), Execution (`invoke`, `call`), Access lifecycle (`attach`, `authorize`, `revoke`, `rotate`), and MCP protocol.
+.. *Applies to*: Choose *All resources* for the whole data plane, *All of a type* for every resource of one type, or *Specific resource* for one. Picking a child type under *Specific resource* scopes to the children of one parent, such as the tools of one MCP server.
+.. *Conditions*: Optional. Add *WHEN* rows to narrow when the policy applies and *UNLESS* rows to carve out exceptions. Each row conditions on a resource tag, its creator, or its creation time.
+. Click *Create policy*.
+
+The picker only offers verbs the scoped type supports, and narrowing the scope drops any selected verb the new type doesn't have. The footer summarizes the grant in plain language and lists whatever is still missing before you can save.
+
+A `permit` that covers write verbs across the whole data plane triggers a warning. Narrow the scope instead.
 
 Every save validates the policy against the current schema. The save fails with a specific error if the policy references an unknown action or entity type, reads an attribute that doesn't exist, or uses an unsafe condition, so a policy that stores successfully is well-formed.
 
-You can also write the Cedar text directly instead of using the form fields. Both produce the same policy.
+The *Form* and *Cedar* toggle at the top of the page switches between the form fields and the Cedar text, in sync both ways. Writing Cedar directly produces the same policy. The toggle doesn't appear when your starting point fixes the principal or the scope, such as an agent's *Permissions* tab, because raw Cedar could rewrite the locked clause.
+
+Some older policies grant a whole role bundle instead of a set of verbs. You can open one to see what it grants, but not edit it here.
 
 === Start from a template
 
@@ -79,10 +173,12 @@ The *Templates* tab includes four built-in quick-start templates, each a superse
 |Sandboxed access plus full management of agents, MCP servers, LLM providers, guardrails, triggers, and budgets. Excludes managing access policies.
 
 |Full access
-|Every action, including managing access policies.
+|Every Agent Data Plane action, including managing access policies.
 |===
 
-A built-in Owner lifecycle policy also ships with the feature: users can manage the resources they created, including agents and their triggers and credentials, MCP servers, LLM providers, guardrails, and budgets.
+Templates are permit-only, so a policy that links one grants access and never denies it. Later edits to the template apply to every policy linked to it.
+
+A built-in *Owner lifecycle* policy also ships with the feature: users can get, update, and delete the agents, MCP servers, LLM providers, guardrails, and budgets they created, plus create and manage triggers on their own agents. It doesn't cover creating top-level resources, because a create authorizes against a payload that has no creator recorded yet, and it doesn't cover agent credentials or sessions, which record no creator at all.
 
 == Write conditions
 
@@ -96,8 +192,8 @@ Reading a tag a resource doesn't have is an evaluation error, not false. Always 
 ----
 forbid (
   principal,
-  action == Action::"dataplane_adp_agent_get",
-  resource
+  action == Action::"Agent.get",
+  resource is Agent
 ) when {
   resource.hasTag("itar") &&
   resource.getTag("itar") == "true" &&
@@ -107,7 +203,7 @@ forbid (
 
 Without the `hasTag` guard, the policy errors on every untagged resource, and an erroring `forbid` denies. You would block access to every untagged agent, the opposite of the intent. Validation rejects the unguarded form when you save.
 
-Only `Agent` and `Policy` resources carry tags.
+Only `Agent` and `Policy` resources carry tags. A tag condition on any other type is dead code: it's valid Cedar but can never match, and validation flags it when the policy pins the resource type. Pin the type on every policy that reads tags so you get that check.
 
 === Model people facts as groups
 
@@ -122,17 +218,19 @@ To reference a resource's creator, guard the read the same way as a tag:
 resource has created_by && resource.created_by == principal
 ----
 
-Write the attribute on the left of the comparison. The condition builder on the Access page parses this shape back into editable rows.
+Write the attribute on the left of the comparison. The condition builder on the Access page parses this shape back into editable rows, and `principal == resource.created_by` leaves the policy read-only in the UI.
 
 === Conditions on writes evaluate the resulting state
 
-On create and update actions, `resource` is the state the operation produces, not the stored row. A `forbid` on production-tagged agents therefore fires on any update to an agent that carries the tag, even an update that doesn't touch tags, and stops firing on the update that removes the tag. To gate the transition itself (adding or removing a specific tag), condition on `changed_tags`:
+On create and update actions, `resource` is the state the operation produces, not the stored row. A `forbid` on production-tagged agents therefore fires on any update to an agent that carries the tag, even an update that doesn't touch tags, and stops firing on the update that removes the tag. That makes a write-scoped tag condition a state invariant, not a request check, so a violating resource is frozen for non-exempt principals until an update fixes the violation. Deleting always works, because delete evaluates the stored row.
+
+To gate the transition itself (adding or removing a specific tag), condition on `changed_tags`, the set of tag keys the update adds, removes, or changes:
 
 [source,cedar]
 ----
 forbid (
   principal,
-  action == Action::"dataplane_adp_agent_update",
+  action == Action::"Agent.update",
   resource is Agent
 ) when {
   resource has changed_tags &&
@@ -141,9 +239,32 @@ forbid (
 };
 ----
 
+`changed_tags` exists only on the update path, so this policy doesn't fire on create. `Agent` is the only entity type that carries it. To close the create case too, pair the policy with a create-scoped clause that reads the tag directly:
+
+[source,cedar]
+----
+forbid (
+  principal,
+  action == Action::"Agent.create",
+  resource is Agent
+) when {
+  resource.hasTag("itar") &&
+  !(principal in Group::"itar-cleared")
+};
+----
+
+=== Guard optional scalar attributes too
+
+A scalar field that holds its zero value doesn't appear on the entity at all, so `resource.enabled == true` errors whenever `enabled` is `false`, and that error denies. Guard scalar reads the same way as tags: `resource has enabled && resource.enabled == true`.
+
 == Manage an agent's permissions
 
-Each agent's detail page includes a *Permissions* tab where you manage the access policies that apply to that agent. Use it to scope what an individual agent can do without leaving the agent's page.
+Each agent's detail page includes a *Permissions* tab with two cards:
+
+* *Roles & access* lists the RBAC role bindings that apply to the agent, both bound directly to it and inherited from the data-plane scope. It's read-only here, because those bindings are managed in the control plane.
+* *Access policies* lists what the agent itself may do, acting as its own principal. *Create policy* opens the same policy form with the principal locked to the agent's service account, so the policy targets a `User` principal like any other.
+
+An MCP server's *Access* tab works the same way, with the scope locked to that server.
 
 == Manage policies from the CLI
 
@@ -151,7 +272,7 @@ Run `rpk ai policy` commands to create, get, list, update, and delete access pol
 
 == Examples
 
-These policies show the most common shapes: a group-scoped denial, an ownership rule, and a default-closed gate. Adapt the group names, tag keys, and actions to your environment.
+These policies cover the shapes that come up most often. Adapt the group names, tag keys, and actions to your environment.
 
 === Deny a group access to production agents
 
@@ -161,7 +282,7 @@ Members of `contractors` can't read agents tagged `env=prod`, no matter what the
 ----
 forbid (
   principal in Group::"contractors",
-  action == Action::"dataplane_adp_agent_get",
+  action == Action::"Agent.get",
   resource is Agent
 ) when {
   resource.hasTag("env") &&
@@ -177,7 +298,7 @@ Nobody but an agent's creator can update it:
 ----
 forbid (
   principal,
-  action == Action::"dataplane_adp_agent_update",
+  action == Action::"Agent.update",
   resource is Agent
 ) unless {
   resource has created_by && resource.created_by == principal
@@ -192,7 +313,7 @@ Nothing is readable until it's explicitly cleared. An agent with no `classificat
 ----
 forbid (
   principal,
-  action == Action::"dataplane_adp_agent_get",
+  action == Action::"Agent.get",
   resource is Agent
 ) unless {
   resource.hasTag("classification") &&
@@ -200,12 +321,46 @@ forbid (
 };
 ----
 
-== Troubleshoot a denied request
+== Troubleshoot
+
+=== A policy won't save
+
+Validation runs in strict mode against the current schema and reports every problem it finds. The most common ones:
+
+[cols="2,3"]
+|===
+|Error |Fix
+
+|Unrecognized action
+|Use an `<Entity>.<verb>` action ID from <<action-reference,Action reference>>. RBAC permission strings such as `dataplane_adp_agent_get` are not access-policy actions.
+
+|Unrecognized entity type
+|Check the spelling. A resource that exists in the API isn't automatically a policy entity type.
+
+|Can't guarantee the safety of a tag access
+|Add `resource.hasTag("<key>") &&` immediately before the `getTag` call, on the same key.
+
+|Attribute not found on entity type `User`
+|Principals carry no attributes. Model the fact as a group and write `principal in Group::"…"`.
+
+|Permit references an action group without a resource type pin
+|Add `resource is <Entity>`, or name each `<Entity>.<verb>` action explicitly.
+
+|Clause can never match
+|The condition targets something that doesn't exist on the pinned type, such as a tag condition on a type that carries no tags. Retarget the policy or drop the clause.
+|===
+
+Validation applies to new writes only. Validation never rejects a policy stored before a schema change, so re-save an older policy (even a no-op edit) to run the current checks against it.
+
+=== A request is denied
 
 A denial caused by access policies surfaces as a permission-denied error:
 
 * A `forbid` that matches cleanly returns a generic permission-denied message. Check the *Policies* tab for a `forbid` covering the action and resource.
 * A `forbid` that errors during evaluation also denies, and the error names the policy. Check that policy for an unguarded tag or attribute read, then re-save it to run current validation against it.
+* A missing `permit` also denies, with the same generic message. Confirm the principal holds a role that covers the action, or add a `permit` policy for it.
+
+On the payload-gated update actions, authorization runs inside the write transaction, so an unauthorized caller can receive an invalid-argument or not-found error before the permission-denied one. Don't write clients that assume a deny always comes first.
 
 == Next steps
 
