@@ -1,0 +1,92 @@
+= Analyze Cost and Usage
+:description: Break down LLM spend, requests, and tokens by provider, model, token type, agent, user, or tag. Compare periods, export CSV reports, and see which agents are active right now.
+:page-topic-type: how-to
+:personas: platform_engineer, pilot_lead
+:learning-objective-1: Break down spend, requests, and tokens by provider, model, token type, agent, user, or tag
+:learning-objective-2: Turn on period comparisons and export the data as CSV
+:learning-objective-3: Identify the agents active right now and open their recent conversations
+
+The *Cost & Usage* page is the spending and usage report for your Agentic Data Plane: every glossterm:large language model (LLM)[,LLM] call the gateway routes is recorded, priced, and charted here. Use it to see where spend comes from, attribute it to a provider, model, agent, user, or tag, and export the numbers for reporting.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+// Source: apps/adp-ui/src routes/_authenticated/governance/cost-and-usage.page.tsx, components/llm-providers/cost-usage-tab.tsx, components/cost-and-usage/*, lib/governance-time-range.ts, lib/activity.ts on origin/main, verified 2026-07-30. Much of the report content moved here from configure-provider.adoc's view-cost-and-usage section, which now points here.
+
+== Prerequisites
+
+This page assumes traffic through at least one xref:gateway:configure-provider.adoc[LLM provider]; with no traffic, the charts are empty.
+
+NOTE: Dollar values come from per-model pricing: the built-in catalog rates, or the overrides you set on a provider. Cost reporting works without any pricing setup. See xref:control:budgets.adoc#override-per-model-pricing[Override per-model pricing].
+
+== Open the report
+
+Open *Cost & Usage* under *Governance* in the sidebar. The page has two tabs:
+
+* *Cost & usage*: The spending report. Charts of spend, requests, and tokens over a time window, with grouping, filters, and CSV export.
+* *Activity*: The live view. The agents active right now, with a drill-down into their recent conversations.
+
+== Choose the time window
+
+The date-range picker offers last 24 hours, last 7 days (the default), last 14 days, last 30 days, last 90 days, month to date, quarter to date, year to date, and custom ranges. The chart subtitle shows the selected date range and bucket size.
+
+A custom range writes `customStart` and `customEnd` ISO-8601 timestamps to the page URL, so the view is shareable: copy the URL after picking a custom range and any teammate who opens it lands on the same window.
+
+To compare against the period before, turn on the *Compare to previous period* switch in the date-range picker. The picker shows which previous window the report compares against, and each series in the report compares against its own numbers from that period.
+
+== Break down and filter
+
+Use *Group by* to switch the chart breakdown between providers, models, token type, agents, users, and tags:
+
+* Group by provider to see which upstream consumed the most budget.
+* Group by model to see which model drove spend inside one or more providers.
+* Group by token type to separate input, output, cached, cache-write, and reasoning usage where those buckets apply.
+* Group by agent or user to attribute spend to the agent or the identified caller that drove it.
+* Group by a tag key to attribute spend to a dimension you define, such as `department` or `env`. Tag grouping picks the key from a submenu, and the control shows the active key, for example `Tag: department`. See xref:control:cost-allocation-tags.adoc[Track Spend by Tag].
+
+Each dimension, Provider, Model, Cost type, Token type, User, and Agent, has its own filter button above the charts, and you can combine them freely. For example, filter to one Anthropic provider, drill into `claude-opus-4-7`, then limit the spend view to input tokens. Selecting an agent also narrows the provider options to the providers that agent used. The tag filter is independent of grouping, so you can group by model while filtering to `env=prod`.
+
+Deleted providers stay in the report so history remains complete. Turn off *Show deleted providers* to hide them; when everything that matches your filters is from deleted providers, the chart says so instead of rendering blank.
+
+== Read the charts
+
+The report includes these charts:
+
+* Spend over time: Estimated spend in USD for the selected range.
+* Requests over time: Request count for the selected range.
+* Tokens over time: Token count for the selected range.
+
+The chart renders empty buckets in the selected range as zero-height bars rather than gaps, so quiet days line up with their date label and the trend stays readable when traffic is bursty.
+
+The chart palette is colorblind-safe. When multiple providers of the same type exist (for example, two OpenAI providers), the chart renders each one with a distinct hatched pattern so the series stay visually distinguishable.
+
+The spend chart footer summarizes the selected view by cost bucket, including total, input, output, cached, cache writes, and reasoning when the selected traffic includes those categories.
+
+// TODO: When the cached-token totals reconciliation fix lands (tracked internally as AI-1152), confirm the spend footer cost-bucket totals match cached-token spend across mixed cache-hit / cache-miss traffic, then this comment can be removed.
+
+Each chart can be maximized for a closer look, and exported on its own: the chart export downloads the data as currently shown, including any truncation the chart applies to keep the top series readable.
+
+[[download-cost-and-usage-report]]
+== Download the report as CSV
+
+To export the data behind the charts, use the download controls in the toolbar:
+
+* Click *Download full report* to download the complete, untruncated dataset for the current filters and date range as a CSV file. Every cost type and token type is a separate column.
+* Use the report options control (the sliders icon next to *Download full report*) to choose how the exported rows are grouped. Under Time bucket, pick Hourly, Daily, Monthly, or Total (no time column). Under Break down by, select any combination of Provider, Model, User, and Agent.
+
+Use *Download full report* when you need the whole dataset rather than the charted view.
+
+== See which agents are active now
+
+The *Activity* tab answers a different question from the report: instead of what something cost, it shows what's running right now. It ranks the agents with traffic over a window of the last hour (the default), the last 24 hours, or the last 7 days, and shows each agent's change against the previous window. Select an agent to see its recent requests and open a conversation.
+
+The Inspector's live view also hands off to this tab: when an agent task is still running after several minutes, the Inspector points you here to follow it to completion.
+
+== Next steps
+
+* xref:control:budgets.adoc[Set Up Budgets]
+* xref:control:cost-allocation-tags.adoc[Track Spend by Tag]
+* xref:monitor:transcripts.adoc[See What Your Agent Did]

@@ -65,7 +65,7 @@ Do not put secrets or personally identifiable information (PII) in tag values. T
 
 == Track spend by tag in the UI
 
-Open *Cost & Usage* under *Governance* in the sidebar. For the page overview, see xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage]. Tags add two independent controls:
+Open *Cost & Usage* under *Governance* in the sidebar. For the page overview, see xref:control:cost-usage.adoc[Analyze Cost and Usage]. Tags add two independent controls:
 
 Group by Tag::
 Choose *Tag* as the group-by dimension, then pick a tag key, for example, `department`. Each chart series becomes one tag value, plus an *Untagged* series for spend with no value for that key. Use it to see how spend splits across departments or environments over the selected range.
@@ -165,5 +165,5 @@ Attribution is point-in-time by design. Only spend recorded after the edit picks
 == Next steps
 
 * xref:control:budgets.adoc[]
-* xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage]
+* xref:control:cost-usage.adoc[Analyze Cost and Usage]
 * xref:connect:create-agent.adoc[]

@@ -121,7 +121,7 @@ You don't view spend on the *Budgets* page. The *Cost & Usage* page, transcripts
 |Surface |Use it for
 
 |*Cost & Usage* page (*Governance* sidebar group)
-|Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, user, or agent. See xref:gateway:configure-provider.adoc#view-cost-and-usage[View cost and usage].
+|Time-series spend, request, and token charts across providers and models. Use it to group by provider, model, or token type, then filter by provider, model, cost type, token type, user, or agent. See xref:control:cost-usage.adoc[Analyze Cost and Usage].
 
 |Transcripts
 |Per-call cost on individual executions. Useful when investigating a specific agent run or debugging a cost anomaly. See xref:monitor:transcripts.adoc[Read a transcript].
