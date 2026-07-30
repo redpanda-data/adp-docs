@@ -142,22 +142,24 @@ To grant a verb across every type, name each `<Entity>.<verb>` action explicitly
 
 Conditions read the following attributes. Every one is optional at the schema level, so each needs a `has` guard before you read it. An unguarded read is an evaluation error, and in a `forbid` that error denies.
 
-[cols="1,2,2"]
+[cols="1,3,2"]
 |===
-|Attribute |Entity types that carry it |Guard form
+|Attribute |Entity types that carry it |Required guard
 
 |Tags
 |`Agent`, `Budget`, `Guardrail`, `LLMProvider`, `OAuthClient`, `OAuthProvider`, `Policy`
-|`resource.hasTag("<key>") && resource.getTag("<key>") == "<value>"`
+|`resource.hasTag("<key>")`
 
 |`created_by`, `updated_by`
 |`Agent`, `AgentTrigger`, `Budget`, `Guardrail`, `LLMProvider`, `McpServer`, `OAuthClient`, `OAuthProvider`, `Policy`, `PolicyTemplate`
-|`resource has created_by && resource.created_by == principal`
+|`resource has created_by`
 
 |`changed_tags`
 |`Agent`, `Budget`, `Guardrail`, `LLMProvider`, `OAuthClient`, `OAuthProvider`, on update only
-|`resource has changed_tags && resource.changed_tags.contains("<key>")`
+|`resource has changed_tags`
 |===
+
+Put the guard first in the same boolean expression, then read the value. <<write-conditions,Write conditions>> shows the full form for each.
 
 Tags are the attribute-based half of ABAC, and they're carried by the resources with a create and update lifecycle. The read-only and derived types don't have them, for the same reason they record no creator: sessions, transcripts, models, agent credentials, OAuth connections, and the derived policy views.
 
@@ -244,13 +246,16 @@ One policy ships with the feature and applies to everyone: users can get, update
 
 It deliberately stops short in two places. Creating a resource at the top level isn't covered, because a create authorizes against a payload that records no creator yet, so ownership can't grant it. Agent credentials and sessions aren't covered either, because neither records a creator at all.
 
+[#write-conditions]
 == Write conditions
 
 Conditions make policies attribute-based: they read resource tags, group membership, and ownership at evaluation time. Follow these rules to write conditions that behave the way you expect. Validation at save time enforces most of them.
 
+Put the rule in `when` and the exemption in `unless`. Both clauses can sit on the same policy, and a negated test inside `when` is harder to read than the `unless` that replaces it.
+
 === Guard every tag read
 
-Reading a tag a resource doesn't have is an evaluation error, not false. Always pair `getTag` with a `hasTag` check on the same key:
+Reading a tag a resource doesn't have is an evaluation error, not false. Always pair `getTag` with a `hasTag` check on the same key. This policy denies reads of ITAR-tagged agents, and exempts US persons:
 
 [source,cedar]
 ----
@@ -260,8 +265,9 @@ forbid (
   resource is Agent
 ) when {
   resource.hasTag("itar") &&
-  resource.getTag("itar") == "true" &&
-  !(principal in Group::"us-persons")
+  resource.getTag("itar") == "true"
+} unless {
+  principal in Group::"us-persons"
 };
 ----
 
@@ -300,8 +306,9 @@ forbid (
   resource is Agent
 ) when {
   resource has changed_tags &&
-  resource.changed_tags.contains("itar") &&
-  !(principal in Group::"itar-cleared")
+  resource.changed_tags.contains("itar")
+} unless {
+  principal in Group::"itar-cleared"
 };
 ----
 
@@ -314,8 +321,9 @@ forbid (
   action == Action::"Agent.create",
   resource is Agent
 ) when {
-  resource.hasTag("itar") &&
-  !(principal in Group::"itar-cleared")
+  resource.hasTag("itar")
+} unless {
+  principal in Group::"itar-cleared"
 };
 ----
 
