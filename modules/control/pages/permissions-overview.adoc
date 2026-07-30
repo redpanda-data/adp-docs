@@ -84,11 +84,13 @@ Agentic Data Plane includes the following built-in roles. Admin, Writer, and Rea
 
 Pick the narrowest role that covers a workload. For example, an application that only needs to call an LLM through AI Gateway should hold the LLMProviderInvoker role, not the Writer role.
 
-== Access policies: refine RBAC with conditions
+== Where access policies take over
 
-As a preview capability, you can layer xref:control:access-policies.adoc[access policies] on top of RBAC. Access policies are Cedar-based `permit` and `forbid` statements that express what roles can't. They condition on resource tags and ownership, scope down to a single resource, and deny across every role that would otherwise grant access.
+As a preview capability, xref:control:access-policies.adoc[access policies] carry the authorization decision. Access policies are Cedar-based `permit` and `forbid` statements that express what roles can't. They condition on resource tags and ownership, scope down to a single resource, and deny across every role that would otherwise grant access.
 
-The two layers compose with a simple rule: a request is allowed when a `permit` matches it and no `forbid` matches it. Your role bindings participate as automatically generated permits, so RBAC keeps working unchanged, and a `forbid` always wins, including over access that a role grants.
+With access policies enabled, use RBAC for what it's good at: provisioning the first user, and handing out broad administrative roles where per-resource precision isn't the point. Redpanda turns those role bindings into permits, so they take part in the same evaluation. Everything finer than that belongs in a policy.
+
+A request is allowed when a `permit` matches it and no `forbid` matches it. A `forbid` always wins, including over access that a role grants.
 
 Access policies use their own action vocabulary. A policy names an entity type and a verb, such as `Action::"Agent.get"`, not the `dataplane_adp_*` permission strings listed on this page. See xref:control:access-policies.adoc#action-reference[Action reference].
 

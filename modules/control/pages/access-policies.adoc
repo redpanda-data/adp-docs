@@ -29,13 +29,18 @@ Access policies use the https://www.cedarpolicy.com/[Cedar policy language^]. A 
 
 Always pin the resource type. With a specific action ID such as `Action::"Agent.get"` the pin is redundant, because the action already names its one entity type, but it costs nothing. With an action group a `permit` requires it. Validation also uses the pin to catch conditions that can never match, so pinning is what turns a silent no-op into a save-time error.
 
-Three rules govern how a request resolves:
+Every request resolves the same way:
 
-* Every request is denied unless a `permit` matches it.
-* Your existing role bindings count as permits. Redpanda derives them for you, so roles keep working unchanged and you never author them by hand.
-* A matching `forbid` always wins, including over the access a role grants. This is what makes cross-cutting denials possible: one `forbid` can override any number of grants.
+* A request is denied unless a `permit` matches it.
+* A matching `forbid` always wins. This is what makes cross-cutting denials possible: one `forbid` can override any number of grants.
 
 Enforcement is fail-closed. A `forbid` that errors during evaluation denies the request rather than being skipped. Policy changes also reach the enforcement points asynchronously, so a successful save is not yet an enforcement guarantee.
+
+=== Where RBAC fits
+
+Use RBAC to get started and to stay coarse: provision the first user, and hand out broad administrative roles where per-resource precision isn't the point. Redpanda turns those role bindings into permits for you, so they take part in the same evaluation and you never author them by hand.
+
+From there, authorization defers to policy evaluation. Every decision that needs a condition, a specific resource, or a denial belongs in a policy, and a `forbid` overrides whatever a role granted.
 
 [#action-reference]
 == Action reference
@@ -169,7 +174,7 @@ The *Roles* and *System policies* tabs are read-only views of what RBAC already 
 . Set the *Principal*: a user from your organization directory, or a group name from your identity provider. Group membership stays managed in the IdP.
 . Under *Permissions*, choose how to grant:
 ** *Actions*: pick individual verbs for a one-off grant.
-** *Template*: link to a reusable template. The principal you set still applies, but the template's own action set and its own effect take over, so the *Effect* and *Conditions* you set here are ignored.
+** *Template*: link to a reusable template. The template fixes which actions the policy covers and which effect it carries, so the *Effect* and *Conditions* you set here are ignored. The *Principal* and *Applies to* you set still apply, so you decide who gets it and how far it reaches.
 . In *Actions* mode, work through the three steps:
 .. *Action*: Select verbs. The picker offers them in categories: Management (`get`, `list`, `create`, `update`, `delete`), Execution (`invoke`, `call`), Access lifecycle (`attach`, `authorize`, `revoke`, `rotate`), and MCP protocol. A category is a display grouping, not a Cedar action group.
 .. *Applies to*: Choose *All resources* for every type, *All of a type* for every resource of one type, or *Specific resource* for one. Picking a child type under *Specific resource* scopes to the children of one parent, such as the tools of one MCP server.
@@ -206,6 +211,8 @@ The *Templates* tab includes four built-in quick-start templates, each a superse
 |Full access
 |Every Agentic Data Plane action, including managing access policies.
 |===
+
+A template fixes the action set, not the reach. *Applies to* defaults to *All resources*, and you narrow it from there: to every resource of one type, or to a single resource. The same *Read only* template can therefore back an org-wide viewer grant and a one-agent grant, with no second template to maintain.
 
 All four built-in templates permit. A template you author yourself can forbid instead, and a policy that links it denies.
 
