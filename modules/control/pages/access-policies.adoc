@@ -449,14 +449,14 @@ Validation runs in strict mode against the current schema and reports every prob
 |The condition reads an attribute the pinned type doesn't carry, such as a tag condition on an untagged type. Check <<attribute-reference,Attribute reference>>, then retarget the policy or drop the clause.
 |===
 
-Validation applies to new writes only, so it never rejects a policy stored before a schema change. To run the current checks against an older policy, edit its description and save, or re-apply it with `rpk ai policy`.
+Validation runs against the policy body, and only when a write includes it, so it never rejects a policy stored before a schema change. To run the current checks against an older policy, re-submit its body, for example by re-applying it with `rpk ai policy apply`. Editing only the name or description re-validates nothing.
 
 === A request is denied
 
 A denial caused by access policies surfaces as a permission-denied error:
 
 * A `forbid` that matches cleanly returns a generic permission-denied message. Check the *Policies* tab for a `forbid` covering the action and resource.
-* A `forbid` that errors during evaluation also denies, and the error names the policy. Check that policy for an unguarded tag or attribute read, then re-save it to run current validation against it.
+* A `forbid` that errors during evaluation also denies, and the error names the policy. Check that policy for an unguarded tag or attribute read, then re-submit its body to run current validation against it.
 * A missing `permit` also denies, with the same generic message. Confirm a `permit` covers the action, whether from a policy or from a role binding, and add one if nothing does.
 
 On update actions, authorization runs inside the write transaction, after request validation. An unauthorized caller can therefore receive an invalid-argument or not-found error instead of a permission-denied one. Treat any of the three as a failure, and don't branch on which arrives first.
