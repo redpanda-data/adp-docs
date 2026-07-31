@@ -12,7 +12,7 @@
 
 Redpanda Agentic Data Plane decides who can do what with xref:control:access-policies.adoc[access policies]. A policy names a principal, an action, and a resource, and either permits or forbids. That's the authorization model: policies are what you write, and policy evaluation is what every API call resolves against.
 
-Role-based access control has one job here. Assign the Admin role to the people who administer the deployment, and they author the policies that grant everyone else. Admin is the only built-in role that carries Agentic Data Plane permissions at all.
+Role-based access control (RBAC) has one job here. Assign the Admin role to the people who administer the deployment, and they author the policies that grant everyone else. Admin is the only built-in role that carries Agentic Data Plane permissions at all.
 
 This page explains how the two fit together and how to grant access to a user, a group, or a service account.
 
@@ -50,7 +50,7 @@ Admin grants every Agentic Data Plane permission on every resource, so it is not
 
 == Admin is the only built-in role that reaches Agentic Data Plane
 
-Redpanda provisions built-in roles across Cloud. Only Admin reaches Agentic Data Plane.
+Built-in roles span all of Redpanda Cloud. Only Admin reaches Agentic Data Plane.
 
 [cols="1,3"]
 |===
@@ -95,7 +95,7 @@ A custom role holding Agentic Data Plane permissions still works. Reach for one 
 
 Permissions are the RBAC-side vocabulary. You need them to read what Admin grants and to define a custom role. They are not what a policy names.
 
-Agentic Data Plane permissions live in the following families:
+Agentic Data Plane permissions live in these families:
 
 * `dataplane_adp_mcpserver_*`: Manage and call MCP servers (CRUD plus runtime operations like `tools_call` and `resources_read`).
 * `dataplane_adp_llmprovider_*`: Manage LLM providers and proxy LLM requests through AI Gateway. The `_invoke` permission is what your applications need at runtime.
@@ -126,9 +126,9 @@ Both are policy principals. A service account is granted access the same way a u
 
 Account impersonation, which lets Redpanda Console reuse a user's identity for Kafka API and Schema Registry calls, applies to those two subsystems only. Agentic Data Plane endpoints continue to authenticate clients directly through their OIDC tokens, regardless of how account impersonation is configured at the cluster level.
 
-== Where Agentic Data Plane fits in Cloud RBAC
+== Where Agentic Data Plane fits in Redpanda Cloud RBAC
 
-Agentic Data Plane permissions are part of the same Cloud RBAC system that gates control-plane resources such as resource groups, networks, and clusters. They are scoped more tightly than the rest of it.
+Agentic Data Plane permissions are part of the same Redpanda Cloud RBAC system that gates control-plane resources such as resource groups, networks, and clusters. They are scoped more tightly than the rest of it.
 
 The Writer and Reader roles bundle control-plane permissions with dataplane Kafka permissions, so a Writer binding at the organization scope covers those layers in one grant. It does not reach Agentic Data Plane. A developer who holds Writer on the organization can create a cluster and manage topics and pipelines, and still gets a permission-denied error from every agent, MCP server, and LLM provider API until a policy grants that access.
 

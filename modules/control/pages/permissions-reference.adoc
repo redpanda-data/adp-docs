@@ -21,7 +21,7 @@ Use this reference to:
 
 [IMPORTANT]
 ====
-These permission strings are the RBAC-side vocabulary. They are not what you write to grant access.
+These permission strings are the role-based access control (RBAC) vocabulary. They are not what you write to grant access.
 
 Agentic Data Plane access is granted with xref:control:access-policies.adoc[access policies], which name their own actions, such as `Action::"Agent.get"`. See xref:control:access-policies.adoc#action-reference[Action reference] for the list. Use this page to read what the Admin role covers, to map an API operation to the permission it enforces when you're debugging a denial, or to define a custom role.
 ====
@@ -37,7 +37,7 @@ Each table column means the same thing across every namespace.
 
 Admin is the only built-in role that grants any of the permissions on this page, and it grants all of them, so there is no per-role column to read. Writer, Reader, and the task-specific built-in roles grant none of them.
 
-The two Redpanda Connect namespaces at the end of this page behave differently. <<pipeline-permissions,Pipeline>> and <<knowledge-base-permissions,knowledge base>> permissions are owned outside Agentic Data Plane, so they remain part of Writer and Reader and keep their role columns.
+Two Redpanda Connect namespaces behave differently. <<pipeline-permissions,Pipeline>> and <<knowledge-base-permissions,knowledge base>> permissions are owned outside Agentic Data Plane, so they remain part of Writer and Reader and keep their role columns.
 
 == MCP server permissions
 
@@ -122,7 +122,7 @@ The `dataplane_adp_llmprovider_*` permissions gate AI Gateway provider configura
 |Proxy LLM requests through AI Gateway at runtime
 |===
 
-`dataplane_adp_llmprovider_invoke` is the one permission an application needs to send traffic through AI Gateway. It is the narrowest useful grant for a service account, and no built-in role provides it on its own. Grant it with an access policy naming `Action::"LLMProvider.invoke"`.
+The `dataplane_adp_llmprovider_invoke` permission is all an application needs to send traffic through AI Gateway. It is the narrowest useful grant for a service account, and no built-in role provides it on its own. Grant it with an access policy naming `Action::"LLMProvider.invoke"`.
 
 == Agent management permissions
 
@@ -212,10 +212,9 @@ The `dataplane_adp_agent_session_*` permissions gate access to an agent's conver
 
 [NOTE]
 ====
-`dataplane_adp_agent_session_get` returns a session's full conversation content (prompts, tool inputs and outputs, and model output), the same class of content that transcript access exposes. Treat it as sensitively as the transcript permissions when a policy grants it.
+Granting `dataplane_adp_agent_session_get` exposes a session's full conversation content (prompts, tool inputs and outputs, and model output), the same class of content that transcript access exposes. Treat it as sensitively as the transcript permissions when a policy grants it.
 ====
 
-[[transcript-permissions]]
 == Transcript permissions
 
 The `dataplane_adp_transcript_*` permissions gate read access to agent conversation transcripts. Transcripts carry the full content of an agent's conversations (system prompts, user messages, tool arguments, and model output). See xref:monitor:transcripts.adoc[] for what a transcript records.
@@ -289,7 +288,7 @@ The `dataplane_adp_policy_*` and `dataplane_adp_policytemplate_*` permissions ga
 The permission to author access policies is itself an Agentic Data Plane permission, so Admin is the only built-in role that has it. Whoever manages access for your deployment needs Admin, or a policy that grants the `Policy` actions explicitly. Granting policy authoring is equivalent to granting everything a policy can grant.
 ====
 
-`dataplane_adp_systempolicy_list` is separate from `dataplane_adp_policy_list` because the derived view names the principal of every role binding in the organization.
+The `dataplane_adp_systempolicy_list` permission is separate from `dataplane_adp_policy_list` because the derived view names the principal of every role binding in the organization.
 
 == Spending permissions
 
@@ -384,11 +383,10 @@ The `dataplane_aiagent_a2a_*` permissions, along with `dataplane_adp_a2a_invoke`
 |Read an agent's extended agent card
 |===
 
-`dataplane_adp_a2a_invoke` covers the AI Gateway A2A proxy path, and a policy can grant it by naming `Action::"Agent.invoke"`.
+The `dataplane_adp_a2a_invoke` permission covers the AI Gateway A2A proxy path, and a policy can grant it by naming `Action::"Agent.invoke"`.
 
 The `dataplane_aiagent_a2a_*` permissions are different. The agent's own ingress enforces them against the caller's RBAC permission set, and they have no access-policy action, so a policy can't grant them. A service account that talks to an agent's A2A endpoint directly needs Admin or a custom role holding this set.
 
-[[pipeline-permissions]]
 == Pipeline permissions
 
 The `dataplane_pipeline_*` permissions gate Redpanda Connect pipelines used by Agentic Data Plane for ingestion and transformation. These are Redpanda Connect permissions rather than Agentic Data Plane permissions, so the Writer, Reader, and PipelineInvoker built-in roles grant them as shown. The PipelineInvoker role grants only the runtime invocation permissions.
@@ -460,7 +458,6 @@ The `dataplane_pipeline_*` permissions gate Redpanda Connect pipelines used by A
 
 Access policies can't govern pipelines. The entity types a policy can name are listed in xref:control:access-policies.adoc#action-reference[Action reference], and pipelines aren't among them.
 
-[[knowledge-base-permissions]]
 == Knowledge base permissions
 
 The `dataplane_knowledgebase_*` permissions gate retrieval-augmented generation (RAG) knowledge bases. Like the pipeline permissions, these are Redpanda Connect permissions and remain part of Writer and Reader.

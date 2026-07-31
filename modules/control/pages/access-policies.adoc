@@ -40,7 +40,7 @@ Enforcement is fail-closed. A `forbid` that errors during evaluation denies the 
 
 Use roles to get started and to stay coarse: provision the first user, and hand out the Admin role where per-resource precision isn't the point. Redpanda turns those role bindings into permits for you, so they take part in the same evaluation and you never author them by hand.
 
-Among the built-in roles, only Admin carries Agentic Data Plane permissions, so RBAC gives you one coarse grant and nothing in between. Writer and Reader reach the control plane, Kafka, pipelines, and knowledge bases, but no agent, MCP server, or LLM provider. Policies are how you grant everyone who shouldn't be an Admin. See xref:control:permissions-overview.adoc[Control Who Can Do What].
+Among the built-in roles, only Admin carries Agentic Data Plane permissions, so role-based access control (RBAC) gives you one coarse grant and nothing in between. Writer and Reader reach the control plane, Kafka, pipelines, and knowledge bases, but no agent, MCP server, or LLM provider. Policies are how you grant everyone who shouldn't be an Admin. See xref:control:permissions-overview.adoc[Control Who Can Do What].
 
 From there, authorization defers to policy evaluation. Every decision that needs a condition, a specific resource, or a denial belongs in a policy, and a `forbid` overrides whatever a role granted.
 
@@ -183,7 +183,7 @@ Open *Access* in the sidebar. These tabs cover everyday work:
 * *Policies*: The access policies you author. This is where you create, edit, and delete them.
 * *Templates*: Reusable policy templates, including the built-in quick-start set.
 
-The *Roles* and *System policies* tabs are read-only views of what role-based access control (RBAC) already grants.
+The *Roles* and *System policies* tabs are read-only views of what RBAC already grants.
 
 == Create a policy
 
