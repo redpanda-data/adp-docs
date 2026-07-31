@@ -38,7 +38,9 @@ Enforcement is fail-closed. A `forbid` that errors during evaluation denies the 
 
 === How roles compose with policies
 
-Use roles to get started and to stay coarse: provision the first user, and hand out broad administrative roles where per-resource precision isn't the point. Redpanda turns those role bindings into permits for you, so they take part in the same evaluation and you never author them by hand.
+Use roles to get started and to stay coarse: provision the first user, and hand out the Admin role where per-resource precision isn't the point. Redpanda turns those role bindings into permits for you, so they take part in the same evaluation and you never author them by hand.
+
+Among the built-in roles, only Admin carries Agentic Data Plane permissions, so RBAC gives you one coarse grant and nothing in between. Writer and Reader reach the control plane, Kafka, pipelines, and knowledge bases, but no agent, MCP server, or LLM provider. Policies are how you grant everyone who shouldn't be an Admin. See xref:control:permissions-overview.adoc[Control Who Can Do What].
 
 From there, authorization defers to policy evaluation. Every decision that needs a condition, a specific resource, or a denial belongs in a policy, and a `forbid` overrides whatever a role granted.
 
@@ -172,7 +174,7 @@ A condition on any attribute a type doesn't carry is dead code. It's valid Cedar
 == Prerequisites
 
 * Access policies enabled for your organization.
-* An account that can author access policies. The built-in Admin and Writer roles can create, edit, and delete them; Reader can view them but not change them. See xref:control:permissions-reference.adoc[].
+* An account that can author access policies. Admin is the only built-in role that can, because policy authoring is itself an Agentic Data Plane permission. Writer and Reader can't create, edit, or view them. To let someone author policies without making them an Admin, grant the policy permissions through a custom role, or through a policy that names the `Policy` actions. See xref:control:permissions-reference.adoc#access-policy-permissions[Access policy permissions].
 
 == Open the Access page
 

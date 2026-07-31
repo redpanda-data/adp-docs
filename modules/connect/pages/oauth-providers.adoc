@@ -37,7 +37,9 @@ Before you register the provider, make sure you have:
 
 == Required permissions
 
-OAuth providers are governed by their own permission set. Granting create/update/delete to an admin role is independent from granting attach to MCP-editor roles.
+OAuth providers are governed by their own permission set. Among the built-in roles only Admin holds these permissions, so anyone else acts on OAuth providers through an xref:control:access-policies.adoc[access policy]. A policy names the matching `OAuthProvider` actions: `get`, `list`, `create`, `update`, `delete`, and `attach`.
+
+The `attach` action is worth separating from the rest. A policy can grant someone the ability to bind an existing provider to an MCP server without also letting them create or edit providers.
 
 [cols="1,2"]
 |===
@@ -59,7 +61,7 @@ OAuth providers are governed by their own permission set. Granting create/update
 |*Required to attach this provider to an MCP server.* Enforced as a sub-resource check in `CreateMCPServer` and `UpdateMCPServer` whenever `authConfig.userOauth.provider_name` is set or swapped. Without this permission, a principal with `mcpserver_update` could otherwise bind any provider's token vault to an MCP they control and indirectly consume its tokens.
 |===
 
-NOTE: The `_attach` permission is independent from `_get`, `_create`, `_update`, and `_delete`. Grant it only to roles that need to bind a given provider's token vault to an MCP server.
+NOTE: The `_attach` permission is independent from `_get`, `_create`, `_update`, and `_delete`. Grant it only to the principals that need to bind a given provider's token vault to an MCP server, and scope the policy to that provider with `resource == OAuthProvider::"<name>"`.
 
 == Browse OAuth providers
 
@@ -318,7 +320,7 @@ Common symptoms and fixes:
 |Symptom |What to check
 
 |`PermissionDenied` when creating an MCP server with this provider attached
-|The principal lacks `dataplane_aigateway_oauthprovider_attach` on this provider. Have an admin grant the permission, or delegate the attach to a role that already has it.
+|Nothing grants the principal `dataplane_aigateway_oauthprovider_attach` on this provider. Ask an admin for a policy granting `Action::"OAuthProvider.attach"`, scoped to this provider.
 
 |Consent flow fails with `redirect_uri_mismatch`
 |The OAuth app's registered redirect URI doesn't match the gateway's callback. Update the upstream OAuth app to include `\https://aigw.<cluster-id>.clusters.rdpa.co/oauth/v1/callback`.

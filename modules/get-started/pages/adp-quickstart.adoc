@@ -5,7 +5,7 @@
 :personas: platform_engineer
 :learning-objective-1: Configure your first LLM provider in Agentic Data Plane with an Anthropic API key
 :learning-objective-2: Verify the provider is enabled and its connection is active
-:learning-objective-3: Grant builders the Writer role and point them to the agent builder quickstart
+:learning-objective-3: Grant your builders access and point them to the agent builder quickstart
 
 // Source: drafted against `adp-production` UI flows for LLM providers; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider protos on cloudv2 origin/main.
 // Provider field labels follow the canonical doc: gateway:configure-provider.adoc. Keep this page consistent with it at PR time.
@@ -27,7 +27,7 @@ After reading this page, you will be able to:
 
 == Prerequisites
 
-* The xref:control:permissions-overview.adoc[Admin or Writer role] in Agentic Data Plane.
+* The xref:control:permissions-overview.adoc[Admin role] in Agentic Data Plane. Admin is the only built-in role that carries Agentic Data Plane permissions.
 * An Anthropic account. If you don't have one, the <<get-an-anthropic-api-key,Get an Anthropic API key>> section walks through signup.
 
 == What you set up
@@ -106,9 +106,11 @@ For the full provider field reference (transcript logging, Bedrock IAM, Anthropi
 
 With the provider active, your organization is ready for agents. To get builders started:
 
-. Give each builder the xref:control:permissions-overview.adoc[Writer role] so they can create MCP servers and agents. The Reader role can only list resources.
+. Write an xref:control:access-policies.adoc[access policy] that lets your builders create MCP servers and agents. Point it at the identity provider group they already belong to and grant the whole team in one statement. Don't reach for a role here: Admin is the only built-in role that touches Agentic Data Plane, and it grants far more than a builder needs. See xref:control:permissions-overview.adoc[Control Who Can Do What].
++
+Access policies are a preview capability. If they aren't enabled for your organization yet, a custom role holding `dataplane_adp_agent_*` and `dataplane_adp_mcpserver_*` is the interim path.
 
-. Send them the xref:get-started:agent-builder-quickstart.adoc[agent builder quickstart]. It assumes exactly what you just set up: a signed-in user with the Writer role and an active LLM provider.
+. Send them the xref:get-started:agent-builder-quickstart.adoc[agent builder quickstart]. It assumes exactly what you just set up: a signed-in user who can create agents, and an active LLM provider.
 
 Builders select the provider by its display name (`anthropic-quickstart`) in the agent form's *Model* section. They don't see or handle the API key.
 

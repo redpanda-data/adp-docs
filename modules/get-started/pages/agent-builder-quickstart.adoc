@@ -29,7 +29,7 @@ Before you build, your organization needs a glossterm:large language model (LLM)
 ====
 
 * Access to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^]. If you can't sign in, ask your administrator for an invitation.
-* The xref:control:permissions-overview.adoc[Writer role]. The Reader role can list and inspect resources but cannot create them.
+* Access to create agents and MCP servers. Your administrator grants this with an xref:control:access-policies.adoc[access policy], or with a custom role where policies aren't enabled yet. The Writer and Reader roles don't cover Agentic Data Plane. If a create button is disabled or a save returns a permission error, ask them to check what applies to you or your group.
 * At least one LLM provider configured in your organization.
 
 == What you build

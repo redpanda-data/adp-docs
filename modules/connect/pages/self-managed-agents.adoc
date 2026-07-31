@@ -42,7 +42,7 @@ For the declarative path, see xref:connect:create-agent.adoc[Create an agent].
 
 == Prerequisites
 
-* The `dataplane_adp_agent_create` permission, granted by the Writer built-in role. See xref:control:permissions-reference.adoc#agent-management-permissions[Agent management permissions].
+* Access to create an agent, from an xref:control:access-policies.adoc[access policy] granting `Action::"Agent.create"`, or from the Admin role. See xref:control:permissions-reference.adoc#agent-management-permissions[Agent management permissions].
 * At least one xref:gateway:configure-provider.adoc[LLM provider configured] in Agentic Data Plane. The agent calls the model through this provider.
 * If the agent calls tools: One or more xref:connect:mcp-overview.adoc[MCP servers] registered in Agentic Data Plane.
 * An agent built in your own framework. The *Setup* tab generates ready-to-paste samples for ai-sdk-go, LangChain, CrewAI, ADK Java, ADK Go, ADK Python, Vercel AI SDK, and Mastra.

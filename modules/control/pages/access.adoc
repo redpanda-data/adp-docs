@@ -1,5 +1,5 @@
 = Manage Access
-:description: Control who can do what in the Agentic Data Plane with access policies, roles, and permissions.
+:description: Control who can do what in the Agentic Data Plane with access policies.
 :page-layout: index
 
-Control who can do what in the Agentic Data Plane. Set access policies that permit or forbid specific actions, assign roles to users and service accounts, and look up the permissions each role grants.
+Control who can do what in the Agentic Data Plane. Write access policies that permit or forbid specific actions for a user, a group, or a service account, and look up the permissions behind them.
