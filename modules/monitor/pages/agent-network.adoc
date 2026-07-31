@@ -27,7 +27,7 @@ The Agent Network view requires the `dataplane_adp_agentnetwork_get` permission.
 
 Open *Agents* in the sidebar, then click *Agent Network*.
 
-The header shows totals for the selected time window: agents, conversations, tool calls, cost, tokens, and MCP servers. These totals always cover the whole network, even when the graph is filtered or showing only the busiest agents.
+The header shows your agent and MCP server counts, plus conversations, tool calls, cost, and tokens for the selected time window. These totals always cover the whole network, even when the graph is filtered or showing only the busiest agents.
 
 == Read the graph
 
@@ -43,10 +43,10 @@ Lines connect each agent to the providers and servers it used during the window,
 
 Use the toolbar to control what the graph shows:
 
-* *Window*: Choose the time window: last hour, last 24 hours (the default), last 7 days, or last 30 days.
+* *Window*: Choose from last hour, last 24 hours (the default), last 7 days, or last 30 days.
 * *Status*: Show all nodes, only nodes with activity, or only nodes with errors.
-* *Sort LLMs*: Order providers by cost, token use, or name.
-* *Sort MCPs*: Order servers by tool calls or name.
+* *Sort LLMs*: Order providers by cost or token use, or list them alphabetically.
+* *Sort MCPs*: Order servers by tool calls, or list them alphabetically.
 * *Refresh*: Reload the graph with current data.
 * *Reset view*: Return to the default layout and selection.
 
