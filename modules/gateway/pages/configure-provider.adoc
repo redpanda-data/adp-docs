@@ -246,7 +246,7 @@ Use the reset control on a field to clear a single override, or clear every fiel
 [[provider-detail-page]]
 == Explore the provider detail page
 
-After you create the provider, its detail page organizes everything about it into tabs: *Overview*, *Models*, *Connect*, *Activity*, and *Settings*.
+After you create the provider, its detail page organizes everything about it into tabs: *Overview*, *Models*, *Connect*, and *Settings*.
 
 === Overview
 
@@ -261,10 +261,6 @@ Enabled models sort to the top. Use the search box to find a model by display na
 === Connect
 
 The *Connect* tab generates ready-made client configuration for this provider: a gateway-token step, ready-to-run `rpk ai` setup steps, setup instructions for popular clients such as Claude Code, and code examples in several languages, all with the provider's proxy URL prefilled. For a Bedrock provider, the Claude Code snippets run against the gateway without local AWS credentials, because the gateway signs the upstream AWS requests for you. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for the underlying flow.
-
-=== Activity
-
-The *Activity* tab shows recent agent activity scoped to this provider. It ranks the agents that sent the most traffic through the provider over a time window you select, and, where transcripts are recorded, lets you open an agent's recent requests and drill into individual transcripts. Transcripts are recorded per agent rather than per provider, so an agent's transcript list can include requests it sent to other providers.
 
 === Settings
 
