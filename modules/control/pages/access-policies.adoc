@@ -9,7 +9,7 @@
 
 // Action ids, entity types, attribute-bearing types, and validation rules verified against the generated Cedar schema and the ADP UI on 2026-07-30. Action ids are entity-qualified (`Agent.get`) and are not interchangeable with role permission strings.
 
-Access policies are Cedar `permit` and `forbid` statements that decide, per request, who may do what to which resource. Conditions read resource tags and ownership at evaluation time, so you can express rules roles can't: deny a group access to production-tagged agents, or let only a resource's creator modify it. They compose with the roles you already have.
+Use access policies to express rules that roles can't: deny a group access to production-tagged agents, or let only a resource's creator modify one. Each policy permits or forbids specific actions, with conditions evaluated on every request.
 
 After reading this page, you will be able to:
 
@@ -45,7 +45,7 @@ From there, authorization defers to policy evaluation. Every decision that needs
 [#action-reference]
 == Action reference
 
-Verbs are shared across entity types, and an action ID pairs one verb with one entity. The following table lists the verbs each entity type supports. Combine them with a dot to get the action ID: `Budget` plus `update` is `Action::"Budget.update"`.
+Verbs are shared across entity types, and an action ID pairs one verb with one entity. This table lists the verbs each entity type supports. Combine them with a dot to get the action ID: `Budget` plus `update` is `Action::"Budget.update"`.
 
 [cols="1,3"]
 |===
@@ -118,7 +118,7 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |`get`, `list`
 |===
 
-`SystemPolicy.list` gates reading the permits derived from role bindings. That view names every binding's principal, so it sits on its own action rather than riding along with `Policy.list`.
+The `SystemPolicy.list` action gates reading the permits derived from role bindings. That view names every binding's principal, so it sits on its own action rather than riding along with `Policy.list`.
 
 Entity type names are case-sensitive, and the casing doesn't always follow the prose (`McpServer`, not `MCPServer`). Copy them from this table.
 
@@ -135,12 +135,12 @@ A `permit` that references an action group must pin the resource type. Saving an
 
 Use action groups in `forbid`, where one clause can cover every type that adopts a verb. In a `permit` the required type pin narrows the group back down to the actions of that one type, so naming the actions is equivalent and clearer.
 
-To grant a verb across every type, name each `<Entity>.<verb>` action explicitly. The Access page does this for you when you pick verbs with the *All resources* scope.
+To grant a verb across every type, name each `<Entity>.<verb>` action explicitly. The Access page does this for you when you pick verbs with the All resources scope.
 
 [#attribute-reference]
-=== Attribute reference
+== Attribute reference
 
-Conditions read the following attributes. Every one is optional at the schema level, so each needs a `has` guard before you read it. An unguarded read is an evaluation error, and in a `forbid` that error denies.
+Conditions read the attributes in this table. Every one is optional at the schema level, so each needs a `has` guard before you read it. An unguarded read is an evaluation error, and in a `forbid` that error denies.
 
 [cols="2,4,3"]
 |===
@@ -161,11 +161,11 @@ Conditions read the following attributes. Every one is optional at the schema le
 
 Put the guard first in the same boolean expression, then read the value. <<write-conditions,Write conditions>> shows the full form for each.
 
-Tags are the attribute-based half of ABAC, and they're carried by the resources with a create and update lifecycle. The read-only and derived types don't have them, for the same reason they record no creator: sessions, transcripts, models, agent credentials, OAuth connections, and the derived policy views.
+Tags are the attribute half of attribute-based access control (ABAC), and they're carried by the resources with a create and update lifecycle. The read-only and derived types don't have them, for the same reason they record no creator: sessions, transcripts, models, agent credentials, OAuth connections, and the derived policy views.
 
-`Policy` carries tags but no `changed_tags`, so you can condition on a policy's current tags but not on a tag transition.
+The `Policy` type carries tags but no `changed_tags`, so you can condition on a policy's current tags but not on a tag transition.
 
-`created_by` and `updated_by` hold `User` references, so compare them to `principal` directly rather than to a string.
+Both `created_by` and `updated_by` hold `User` references, so compare them to `principal` directly rather than to a string.
 
 A condition on any attribute a type doesn't carry is dead code. It's valid Cedar, it saves when the resource type isn't pinned, and it never matches. Pin the type and validation catches it instead.
 
@@ -174,33 +174,34 @@ NOTE: `McpServer` carries no tags yet. Tag-based conditions on MCP servers arriv
 == Prerequisites
 
 * Access policies enabled for your organization.
-* An account that can author access policies. The built-in Admin and Writer roles can create, edit, and delete them; Reader can view them but not change them.
+* An account that can author access policies. The built-in Admin and Writer roles can create, edit, and delete them; Reader can view them but not change them. See xref:control:permissions-reference.adoc[].
 
 == Open the Access page
 
-Open *Access* in the sidebar. Two tabs cover everyday work:
+Open *Access* in the sidebar. These tabs cover everyday work:
 
 * *Policies*: The access policies you author. This is where you create, edit, and delete them.
 * *Templates*: Reusable policy templates, including the built-in quick-start set.
 
-The *Roles* and *System policies* tabs are read-only views of what RBAC already grants.
+The *Roles* and *System policies* tabs are read-only views of what role-based access control (RBAC) already grants.
 
 == Create a policy
 
 . On the *Policies* tab, click *Create policy*.
-. Give the policy a *Name*.
-. Choose the *Effect*: *Permit* grants access, and *Forbid* takes access away, overriding anything a permit or a role grants.
-. Set the *Principal*: a user from your organization directory, or a group name from your identity provider. Group membership stays managed in the IdP.
-. Under *Permissions*, choose how to grant:
-** *Actions*: pick individual verbs for a one-off grant.
-** *Template*: link to a reusable template. The template fixes which actions the policy covers and which effect it carries, so the *Effect* and *Conditions* you set here are ignored. The *Principal* and *Applies to* you set still apply, so you decide who gets it and how far it reaches.
-. In *Actions* mode, work through the three steps:
-.. *Action*: Select verbs. The picker offers them in categories: Management (`get`, `list`, `create`, `update`, `delete`), Execution (`invoke`, `call`), Access lifecycle (`attach`, `authorize`, `revoke`, `rotate`), and MCP protocol. A category is a display grouping, not a Cedar action group.
-.. *Applies to*: Choose *All resources* for every type, *All of a type* for every resource of one type, or *Specific resource* for one. Picking a child type under *Specific resource* scopes to the children of one parent, such as the tools of one MCP server.
-.. *Conditions*: Optional. Add *WHEN* rows to narrow when the policy applies and *UNLESS* rows to carve out exceptions. Each row conditions on a resource tag or its creator. See <<attribute-reference,Attribute reference>>.
+. Give the policy a name.
+. Choose the effect: Permit grants access, and Forbid takes access away, overriding anything a permit or a role grants.
+. Set the principal: a user from your organization directory, or a group name from your identity provider (IdP). Group membership stays managed in the IdP.
+. Under Permissions, choose how to grant:
+** Actions: Pick individual verbs for a one-off grant.
+** Template: Link to a reusable template. The template fixes which actions the policy covers and which effect it carries, so the effect and conditions you set here are ignored. The principal and scope you set still apply, so you decide who gets it and how far it reaches.
+. In Actions mode, work through these steps:
+.. Action: Select verbs. The picker offers them in categories: Management (`get`, `list`, `create`, `update`, `delete`), Execution (`invoke`, `call`), Access lifecycle (`attach`, `authorize`, `revoke`, `rotate`), and MCP protocol. A category is a display grouping, not a Cedar action group.
+.. Applies to: Choose All resources for every type, All of a type for every resource of one type, or Specific resource for one. Picking a child type under Specific resource scopes to the children of one parent, such as the tools of one MCP server.
+.. Conditions: Optional. Add WHEN rows to narrow when the policy applies and UNLESS rows to carve out exceptions. Each row conditions on a resource tag or its creator. See <<attribute-reference,Attribute reference>>.
 . Click *Create policy*.
+. Confirm the policy appears on the *Policies* tab with the effect, principal, and scope you set.
 
-TIP: Set *Applies to* before picking verbs if you already know the scope. The picker only offers verbs the scoped type supports, so narrowing the scope afterward drops any selected verb the new type doesn't have.
+TIP: Set the scope before picking verbs if you already know it. The picker only offers verbs the scoped type supports, so narrowing the scope afterward drops any selected verb the new type doesn't have.
 
 The footer summarizes the grant in plain language and lists whatever is still missing before you can save. A `permit` that covers write verbs across every type raises a warning rather than blocking the save. Narrow the scope unless you genuinely want that reach.
 
@@ -212,7 +213,7 @@ A policy that grants a whole role bundle opens read-only in this form. To change
 
 === Start from a template
 
-The *Templates* tab includes four built-in quick-start templates, each a superset of the one before it:
+The *Templates* tab includes built-in quick-start templates, each a superset of the one before it:
 
 [cols="1,3"]
 |===
@@ -231,9 +232,9 @@ The *Templates* tab includes four built-in quick-start templates, each a superse
 |Every Agentic Data Plane action, including managing access policies.
 |===
 
-A template fixes the action set, not the reach. *Applies to* defaults to *All resources*, and you narrow it from there: to every resource of one type, or to a single resource. The same *Read only* template can therefore back an org-wide viewer grant and a one-agent grant, with no second template to maintain.
+A template fixes the action set, not the reach. Applies to defaults to All resources, and you narrow it from there: to every resource of one type, or to a single resource. The same Read only template can therefore back an org-wide viewer grant and a one-agent grant, with no second template to maintain.
 
-All four built-in templates permit. A template you author yourself can forbid instead, and a policy that links it denies.
+The built-in templates all permit. A template you author yourself can forbid instead, and a policy that links it denies.
 
 [NOTE]
 ====
@@ -244,7 +245,7 @@ A template is a live link, not a copy. Editing a template changes what every pol
 
 One policy ships with the feature and applies to everyone: users can get, update, and delete the agents, MCP servers, LLM providers, guardrails, and budgets they created, plus create and manage triggers on their own agents.
 
-It deliberately stops short in two places. Creating a resource at the top level isn't covered, because a create authorizes against a payload that records no creator yet, so ownership can't grant it. Agent credentials and sessions aren't covered either, because neither records a creator at all.
+It deliberately stops short in a few places. Creating a resource at the top level isn't covered, because a create authorizes against a payload that records no creator yet, so ownership can't grant it. Agent credentials and sessions aren't covered either, because neither records a creator at all.
 
 [#write-conditions]
 == Write conditions
@@ -312,7 +313,7 @@ forbid (
 };
 ----
 
-`changed_tags` exists only on the update path, so this policy doesn't fire on create. To close the create case too, pair the policy with a create-scoped clause that reads the tag directly:
+The `changed_tags` attribute exists only on the update path, so this policy doesn't fire on create. To close the create case too, pair the policy with a create-scoped clause that reads the tag directly:
 
 [source,cedar]
 ----
@@ -340,9 +341,9 @@ You can't condition on a scalar's zero value. Absent and `false` are indistingui
 
 == Grant an agent its own permissions
 
-Each agent's detail page includes a *Permissions* tab. The *Access policies* card lists what the agent itself may do, acting as its own principal. *Create policy* opens the same policy form with the principal locked to the agent's service account, so the policy targets a `User` principal like any other.
+Each agent's detail page includes a *Permissions* tab. The Access policies card lists what the agent itself may do, acting as its own principal. *Create policy* opens the same policy form with the principal locked to the agent's service account, so the policy targets a `User` principal like any other.
 
-A read-only *Roles & access* card sits above it, showing the RBAC role bindings that apply to the agent, both direct and inherited. Those are managed in the control plane.
+A read-only Roles & access card shows the RBAC role bindings that apply to the agent, both direct and inherited. Those are managed in the control plane.
 
 An MCP server's *Access* tab uses the same form from the other end: it locks the resource scope to that server rather than the principal.
 
@@ -418,10 +419,12 @@ forbid (
 
 == Troubleshoot
 
+Policy problems surface either when you save a policy or when a request hits it. Start from the error you have.
+
 [#a-policy-wont-save]
 === A policy won't save
 
-Validation runs in strict mode against the current schema and reports every problem it finds at once. The error text below is abbreviated; search your error for the quoted fragment.
+Validation runs in strict mode against the current schema and reports every problem it finds at once. The error text is abbreviated here; search your own error for the quoted fragment.
 
 [cols="2,3"]
 |===
