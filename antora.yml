@@ -9,6 +9,7 @@ asciidoc:
     # Environment flags for conditional content
     env-adp: true
     page-adp: true
+    page-agent-handoff: true
     # AI suggestions for chat drawer (component-specific)
     ai-suggestion-1: "How do I build my first agent?"
     ai-suggestion-2: "Set up MCP with Postgres"
