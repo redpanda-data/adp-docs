@@ -1,4 +1,5 @@
 = Trigger Agents
+:page-aliases: connect:triggers/index.adoc
 :description: Triggers invoke a deployed agent without calling its API directly, from Microsoft Teams or on a schedule.
 :page-topic-type: overview
 :personas: agent_builder, platform_engineer

@@ -1,4 +1,5 @@
 = rpk ai
 :page-preview: true
+:page-aliases: reference:rpk/rpk-ai/index.adoc
 
 include::streaming:reference:partial$rpk-ai/rpk-ai.adoc[tag=single-source]
