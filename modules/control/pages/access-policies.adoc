@@ -81,9 +81,6 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |`LLMProvider`
 |`get`, `list`, `create`, `update`, `delete`, `invoke`
 
-|`Model`
-|`get`, `list`
-
 |`Guardrail`
 |`get`, `list`, `create`, `update`, `delete`
 
@@ -104,6 +101,9 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 
 |`AdminConnection`
 |`list`, `revoke`, `rotate`
+
+|`DCRSettings`
+|`get`, `update`
 
 |`Policy`
 |`get`, `list`, `create`, `update`, `delete`
@@ -147,7 +147,7 @@ Conditions read the attributes in this table. Every one is optional at the schem
 |Attribute |Entity types that carry it |Required guard
 
 |Tags
-|`Agent`, `Budget`, `Guardrail`, `LLMProvider`, `OAuthClient`, `OAuthProvider`, `Policy`
+|`Agent`, `Budget`, `Guardrail`, `LLMProvider`, `McpServer`, `OAuthClient`, `OAuthProvider`, `Policy`
 |`resource.hasTag("<key>")`
 
 |`created_by`, `updated_by`
@@ -155,21 +155,19 @@ Conditions read the attributes in this table. Every one is optional at the schem
 |`resource has created_by`
 
 |`changed_tags`
-|`Agent`, `Budget`, `Guardrail`, `LLMProvider`, `OAuthClient`, `OAuthProvider`, on update only
+|`Agent`, `Budget`, `Guardrail`, `LLMProvider`, `McpServer`, `OAuthClient`, `OAuthProvider`, on update only
 |`resource has changed_tags`
 |===
 
 Put the guard first in the same boolean expression, then read the value. <<write-conditions,Write conditions>> shows the full form for each.
 
-Tags are the attribute half of attribute-based access control (ABAC). Not every type carries them, and the set doesn't follow a rule you can infer, so check the table rather than assuming. The read-only and derived types carry neither tags nor a creator: sessions, transcripts, models, agent credentials, OAuth connections, and the derived policy views.
+Tags are the attribute half of attribute-based access control (ABAC). Not every type carries them, and the set doesn't follow a rule you can infer, so check the table rather than assuming. The read-only and derived types carry neither tags nor a creator: sessions, transcripts, agent credentials, OAuth connections, and the derived policy views.
 
 The `Policy` type carries tags but no `changed_tags`, so you can condition on a policy's current tags but not on a tag transition.
 
 Both `created_by` and `updated_by` hold `User` references, so compare them to `principal` directly rather than to a string.
 
 A condition on any attribute a type doesn't carry is dead code. It's valid Cedar, it saves when the resource type isn't pinned, and it never matches. Pin the type and validation catches it instead.
-
-NOTE: `McpServer` carries no tags yet. Tag-based conditions on MCP servers arrive with the next Agentic Data Plane API version. Scope MCP policies by resource instead, with `resource == McpServer::"<name>"`.
 
 == Prerequisites
 
