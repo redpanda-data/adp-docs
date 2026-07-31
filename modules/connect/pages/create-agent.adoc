@@ -144,7 +144,6 @@ Add *Tags* as key/value pairs to organize and filter agents in the registry and 
 When the agent is running, open its detail page. A managed agent has these tabs:
 
 * *Overview*: The agent's full configuration as an editable form. Change the description and tags (in the *Details* section; the name is read-only there), the model, the system prompt (in the *Behavior* section), tools, and subagents, then save.
-* *Connect*: The agent's A2A endpoint URL, authentication guidance, and ready-to-paste code examples for calling the agent. See <<connect-to-the-agent,Connect to the agent>>.
 * *Triggers*: Schedules and event sources that invoke the agent. See xref:connect:triggers/overview.adoc[].
 * *Inspector*: An interactive test surface. See <<test-your-agent,Test your agent>>.
 * *Cost & Usage*: Spend, tokens, and latency for the agent.
@@ -153,11 +152,11 @@ When the agent is running, open its detail page. A managed agent has these tabs:
 [[connect-to-the-agent]]
 == Connect to the agent
 
-A running managed agent exposes an link:https://a2a-protocol.org/[A2A^] endpoint. Open the agent's *Connect* tab to get everything you need to call it programmatically or integrate it with external systems.
+A running managed agent exposes an link:https://a2a-protocol.org/[A2A^] endpoint that you can call programmatically or integrate with external systems.
 
-* *A2A endpoint*: The URL where the agent receives messages. Copy it from the *Connect* tab. (The URL is provisioned once the agent starts.)
-* *Authentication*: The endpoint accepts Redpanda Cloud bearer tokens. Create a service account, exchange its client credentials for an access token, and send the token as an `Authorization: Bearer` header on every request. Use *Manage service accounts* on the *Connect* tab to open *Organization IAM* > *Service accounts*. For how service accounts and role bindings work, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
-* *Code examples*: Select a language to get a ready-to-paste sample that calls the agent with an official A2A client SDK (Go, Node.js, Python, and Java), or a cURL walkthrough.
+* *A2A endpoint*: The URL where the agent receives messages, provisioned once the agent starts. It is published in the agent's card at `\https://<agent-url>/.well-known/agent-card.json`, and you can fetch it with the xref:reference:rpk/rpk-ai/rpk-ai-agent-a2a-card.adoc[`rpk ai agent a2a card`] command.
+* *Authentication*: The endpoint accepts Redpanda Cloud bearer tokens. Create a service account, exchange its client credentials for an access token, and send the token as an `Authorization: Bearer` header on every request. Manage service accounts in *Organization IAM* > *Service accounts*. For how service accounts and role bindings work, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
+* *Code examples*: Call the agent with an official A2A client SDK (Go, Node.js, Python, and Java), with `curl`, or with the xref:reference:rpk/rpk-ai/rpk-ai-agent-a2a-send.adoc[`rpk ai agent a2a send`] command.
 
 For more about calling agents and integrating them with other systems, see xref:connect:integration-overview.adoc[].
 
@@ -201,7 +200,7 @@ For more about agent cards and how they're consumed, see xref:connect:a2a-concep
 
 Two tabs on the agent detail page support testing and observability:
 
-* *Inspector*: Send test prompts interactively and inspect each step of the agent's reasoning, tool calls, and responses. Use Inspector during development and tuning. You can also override the model or max iterations for a single test run here.
+* *Inspector*: Send test prompts interactively and inspect each step of the agent's reasoning, tool calls, and responses. Use Inspector during development and tuning. The composer shows the agent's provider and model as read-only, so a test run always uses the agent's saved configuration.
 * *Transcripts*: Records every conversation against the agent (prompt, tool calls, tool outputs, final response). Use Transcripts to audit production behavior.
 
 To test the agent in Inspector:
