@@ -130,7 +130,7 @@ Each verb also exists as an action group, so `action in Action::"get"` matches e
 
 [IMPORTANT]
 ====
-A `permit` that references an action group must pin the resource type. Saving an unpinned group permit fails, because group membership grows as new resource types adopt the verb, so the stored grant would silently widen on the next deployment. `forbid` statements are exempt: a growing deny widens in the safe direction.
+A `permit` that references an action group must pin the resource type with `resource is <Entity>` or `resource == <Entity>::"<name>"`. Saving an unpinned group permit fails, because group membership grows as new resource types adopt the verb, so the stored grant would silently widen on the next deployment. Writing `resource in <Entity>::"<name>"` doesn't count as a pin: it bounds the subtree but not the type, so the grant would still widen when a descendant type adopts the verb. `forbid` statements are exempt: a growing deny widens in the safe direction.
 ====
 
 Use action groups in `forbid`, where one clause can cover every type that adopts a verb. In a `permit` the required type pin narrows the group back down to the actions of that one type, so naming the actions is equivalent and clearer.
@@ -161,7 +161,7 @@ Conditions read the attributes in this table. Every one is optional at the schem
 
 Put the guard first in the same boolean expression, then read the value. <<write-conditions,Write conditions>> shows the full form for each.
 
-Tags are the attribute half of attribute-based access control (ABAC), and they're carried by the resources with a create and update lifecycle. The read-only and derived types don't have them, for the same reason they record no creator: sessions, transcripts, models, agent credentials, OAuth connections, and the derived policy views.
+Tags are the attribute half of attribute-based access control (ABAC). Not every type carries them, and the set doesn't follow a rule you can infer, so check the table rather than assuming. The read-only and derived types carry neither tags nor a creator: sessions, transcripts, models, agent credentials, OAuth connections, and the derived policy views.
 
 The `Policy` type carries tags but no `changed_tags`, so you can condition on a policy's current tags but not on a tag transition.
 
@@ -430,8 +430,8 @@ Validation runs in strict mode against the current schema and reports every prob
 |===
 |Error contains |Fix
 
-|`unrecognized action`
-|Use an `<Entity>.<verb>` action ID from <<action-reference,Action reference>>. A role permission name is not a policy action, so copy the action ID rather than reusing a permission you found elsewhere.
+|`Unknown action`
+|The action ID isn't one the schema defines. If you pasted a role permission name, the error names the action ID to use instead. Otherwise take the `<Entity>.<verb>` ID from <<action-reference,Action reference>>; the error suggests a near match when it can find one.
 
 |`unrecognized entity type`
 |Check the spelling and the casing. A resource that exists in the API isn't automatically a policy entity type.
@@ -459,7 +459,7 @@ A denial caused by access policies surfaces as a permission-denied error:
 * A `forbid` that errors during evaluation also denies, and the error names the policy. Check that policy for an unguarded tag or attribute read, then re-submit its body to run current validation against it.
 * A missing `permit` also denies, with the same generic message. Confirm a `permit` covers the action, whether from a policy or from a role binding, and add one if nothing does.
 
-On update actions, authorization runs inside the write transaction, after request validation. An unauthorized caller can therefore receive an invalid-argument or not-found error instead of a permission-denied one. Treat any of the three as a failure, and don't branch on which arrives first.
+On update actions, authorization runs inside the write transaction, after request validation. An unauthorized caller can therefore receive an invalid-argument or not-found error instead of a permission-denied one, and a concurrent-modification conflict can surface as an aborted error. Treat any of them as a failure, and don't branch on which arrives first.
 
 == Next steps
 
