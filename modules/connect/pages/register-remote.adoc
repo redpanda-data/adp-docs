@@ -74,7 +74,7 @@ curl -X POST -H "Content-Type: application/json" \
 [[authentication]]
 == Authentication
 
-The authentication modes from xref:connect:create-server.adoc#configure-authentication[create-server.adoc] all apply. Several patterns are particularly common for self-managed servers:
+The authentication modes from xref:connect:create-server.adoc#configure-authentication[Create an MCP Server] all apply. Several patterns are particularly common for self-managed servers:
 
 [cols="1,2"]
 |===
