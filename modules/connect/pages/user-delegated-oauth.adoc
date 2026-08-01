@@ -80,6 +80,8 @@ Select a provider to open its detail pane on the right. The pane shows the grant
 
 NOTE: Connections are per-user. Each user authorizes their own accounts, and one user's connections are not visible to or usable by another.
 
+You can also manage your connections from the terminal: run `rpk ai connection list` to see the services you are signed in to, and `rpk ai connection revoke <provider>` to disconnect one. See xref:reference:rpk/rpk-ai/rpk-ai-connection.adoc[].
+
 == Scope upgrades
 
 If a user's stored connection has fewer scopes than the server's `required_scopes`, the gateway returns a `scope_upgrade_required` error and surfaces a new `authorize_url` requesting the additional scopes. The user re-consents; the connection is updated in place.
