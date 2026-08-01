@@ -19,6 +19,8 @@ After reading this page, you will be able to:
 
 The view draws on the same recorded telemetry that powers xref:monitor:transcripts.adoc[transcripts], enriched with cost data. It shows what actually ran during the selected window. A configured resource with no traffic in the window still appears, with its metrics marked as having no recorded data yet.
 
+NOTE: The Agent Network view is a preview capability, available when your organization has it enabled. If you don't see *Agent Network* under *Agents* in the sidebar, it isn't enabled for your organization.
+
 == Prerequisites
 
 The Agent Network view requires the `dataplane_adp_agentnetwork_get` permission. See xref:control:permissions-overview.adoc[].
