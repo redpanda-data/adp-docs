@@ -101,7 +101,7 @@ Each connection reports whether a refresh token backs it, so a client can tell a
 
 If you want one shared upstream identity for every caller (instead of per-user identities), choose *Service-account OAuth* on the server instead of *User-delegated OAuth*. With service-account OAuth, every caller of every tool sees the same upstream identity; the upstream system has no idea which Agentic Data Plane user invoked the tool. With user-delegated OAuth, the upstream system sees each end-user as themselves and applies their own permissions.
 
-For the field-by-field service-account-OAuth setup, see xref:connect:create-server.adoc#configure-authentication[create-server.adoc].
+For the field-by-field service-account-OAuth setup, see xref:connect:create-server.adoc#configure-authentication[Create an MCP Server].
 
 == Worked examples
 
