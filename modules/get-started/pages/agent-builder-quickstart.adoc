@@ -97,7 +97,7 @@ image::create-mcp-server-picker.png[The Create MCP Server marketplace picker fil
 
 . Redpanda fetches the spec, parses it, and generates one MCP tool per operation. When the server is ready, open its detail page.
 
-. On the *Overview* tab, copy the `MCP Server URL`. MCP clients use this URL to connect to the server.
+. On the *Connection* tab, copy the `MCP Server URL`. MCP clients use this URL to connect to the server.
 
 . Open the *Inspector* tab. Redpanda runs a live `tools/list` against the server and lists every tool it discovered. Confirm the list includes `findpetsbystatus`, `getpetbyid`, `findpetsbytags`, and `addpet`. The OpenAPI MCP server lowercases tool names when it generates them from the spec's `operationId` values.
 +

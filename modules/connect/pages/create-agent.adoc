@@ -7,8 +7,8 @@
 :learning-objective-2: Configure an LLM provider, model, and tools for an agent
 :learning-objective-3: Connect to and test a running agent
 
-// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (AgentCreate, ManagedAgentSpec) cross-referenced against `apps/adp-ui/src/components/agents/managed-create/` (managed-agent-canvas.tsx, subagent-sheet.tsx, instructions-field.tsx, tool-list.tsx), `apps/adp-ui/src/components/agents/connect-tab.tsx`, and `apps/adp-ui/src/routes/_authenticated/agents/$name.index.page.tsx` on cloudv2 main, verified 2026-07-08.
-// The managed create flow is a single canvas titled "New managed agent" with sections Identity, Model, Instructions, Tools, and a collapsible Advanced area (Subagents, Tags). There is no stepper and no editable Agent ID field; the resource slug is derived from the name at submit. Managed agent detail tabs are Overview, Connect, Triggers, Inspector, Cost & Usage, Transcripts. Credentials and Setup tabs exist only on self-managed agents.
+// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (AgentCreate, ManagedAgentSpec) cross-referenced against `apps/adp-ui/src/components/agents/managed-create/` (managed-agent-canvas.tsx, model-picker.tsx, subagent-sheet.tsx, instructions-field.tsx, tool-list.tsx), `apps/adp-ui/src/components/agents/agent-detail-sections.tsx`, and `apps/adp-ui/src/routes/_authenticated/agents/$name.index.page.tsx` on cloudv2 main, verified 2026-08-01.
+// The managed create flow is a single canvas titled "New managed agent" with sections Identity, Model, Instructions, Tools, and a collapsible Advanced area (Subagents, Tags). The Model picker is a single model-only list; the provider that serves the chosen model is selected automatically. There is no stepper and no editable Agent ID field; the resource slug is derived from the name at submit. The managed agent detail Overview is organized into Agent, Model & runtime, System prompt, MCP servers, and Subagents sections. Managed agent detail tabs are Overview, Triggers, Inspector, Cost & Usage, Transcripts. Credentials and Setup tabs exist only on self-managed agents.
 
 Create a new glossterm:AI agent[] declaratively through Redpanda Agentic Data Plane. No Python or JavaScript code required. This guide walks through the managed create canvas section by section, then covers how to connect to and test the running agent.
 
@@ -46,7 +46,7 @@ TIP: Click *Suggest a name* to generate a placeholder you can edit.
 
 == Model
 
-In the *Model* section, choose the glossterm:large language model (LLM)[] provider and model the agent uses to interpret user intent and decide which tools to invoke. Provider and model are selected together in one picker: pick a provider to see the models it serves, then pick a model. The picker lists every LLM provider configured in Agentic Data Plane (for example, `support-bedrock-v2`) and the models each one exposes (for example, `us.anthropic.claude-haiku-4-5-20251001-v1:0`). Calls to the model are proxied through the xref:gateway:overview.adoc[AI Gateway].
+In the *Model* section, choose the glossterm:large language model (LLM)[] the agent uses to interpret user intent and decide which tools to invoke. The picker is a single searchable list of every model your configured LLM providers expose (for example, `us.anthropic.claude-haiku-4-5-20251001-v1:0`): search by name, select a model, and Agentic Data Plane routes to the provider that serves it. When the same model is served by more than one provider, the picker shows the provider next to the model so you can choose which one to use. To use a model the picker doesn't list, select a provider's *Custom model ID* entry and type the identifier. Calls to the model are proxied through the xref:gateway:overview.adoc[AI Gateway].
 
 To add a new provider, see xref:gateway:configure-provider.adoc[Configure an LLM provider]. For model selection guidance, see xref:connect:architecture-patterns.adoc#model-selection-guide[Model selection guide].
 
@@ -59,10 +59,10 @@ For external model specifications and pricing:
 
 [NOTE]
 ====
-*Max iterations* is not on the create canvas. It's the upper bound on agent reasoning loops per request, and you set it after creation from the agent's *Overview* tab, in the *Model* section. Leave it unset (or `0`) to use the runtime default of 100. Each iteration consumes tokens and adds latency, so tune it to task complexity: simple queries (10-20), balanced workflows (20-40), complex analysis (40-100).
+*Max iterations* is not on the create canvas. It's the upper bound on agent reasoning loops per request, and you set it after creation from the agent's *Overview* tab, in the *Model & runtime* section. Leave it unset (or `0`) to use the runtime default of 100. Each iteration consumes tokens and adds latency, so tune it to task complexity: simple queries (10-20), balanced workflows (20-40), complex analysis (40-100).
 ====
 
-For an AWS Bedrock provider, Agentic Data Plane validates the model when you create or update the agent. A model ID that isn't a valid Bedrock model for the provider's region is rejected at save time, with an error that points at the offending model field, instead of being accepted and then failing later when the agent deploys. A common mistake is the bare foundation-model ID: Claude 4.6 and later require the full inference-profile ID (for example, `us.anthropic.claude-opus-4-7` rather than `claude-opus-4-7`). If you type a model the picker doesn't list, enter the full inference-profile ID. The same check applies to each subagent's model override. See xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM].
+For an AWS Bedrock provider, Agentic Data Plane validates the model when you create or update the agent. A model ID that isn't a valid Bedrock model for the provider's region is rejected at save time, with an error that points at the offending model field, instead of being accepted and then failing later when the agent deploys. A common mistake is the bare foundation-model ID: Claude 4.6 and later require the full inference-profile ID (for example, `us.anthropic.claude-opus-4-7` rather than `claude-opus-4-7`). To use a model the picker doesn't list, select the provider's *Custom model ID* entry and enter the full inference-profile ID. The same check applies to each subagent's model override. See xref:gateway:configure-provider.adoc#bedrock-inference-profiles[AWS Bedrock: Inference profiles and IAM].
 
 == Instructions
 
@@ -123,7 +123,7 @@ To add a specialist, click *Add subagent* (or *Add a subagent*) and configure it
 
 * *Name*: Required. Must start with a lowercase letter, contain only lowercase letters, digits, and hyphens, and end with a letter or digit (for example, `researcher`). The name must be unique among the agent's subagents.
 * *When should the parent use it?*: Required. The delegation hint the parent reads to decide when to route a task to this subagent. Be specific about inputs, outputs, and use cases.
-* *Model*: Optional. Defaults to the parent agent's model. Pick a different provider and model in the picker to override it for this subagent; use *Reset to inherited* to go back to the parent's model.
+* *Model*: Optional. Defaults to the parent agent's model. A subagent always uses the parent agent's LLM provider, so you override only the model, choosing from the models that provider serves. Use *Reset to inherited* to go back to the parent's model.
 * *Instructions*: Required. Domain-specific system prompt for what the subagent does.
 * *Tools*: Optional. Select the MCP servers this subagent can access.
 
@@ -143,7 +143,7 @@ Add *Tags* as key/value pairs to organize and filter agents in the registry and 
 
 When the agent is running, open its detail page. A managed agent has these tabs:
 
-* *Overview*: The agent's full configuration as an editable form. Change the description and tags (in the *Details* section; the name is read-only there), the model, the system prompt (in the *Behavior* section), tools, and subagents, then save.
+* *Overview*: The agent's full configuration, laid out as sections you edit and save one at a time. The *Agent* section holds the display name, description, and tags (the agent ID is fixed). The *Model & runtime* section holds the LLM provider, model, and max iterations, along with the runtime status and endpoint. The *System prompt*, *MCP servers*, and *Subagents* sections hold the instructions, attached servers, and subagents.
 * *Triggers*: Schedules and event sources that invoke the agent. See xref:connect:triggers/overview.adoc[].
 * *Inspector*: An interactive test surface. See <<test-your-agent,Test your agent>>.
 * *Cost & Usage*: Spend, tokens, and latency for the agent.
