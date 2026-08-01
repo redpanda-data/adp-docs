@@ -143,7 +143,7 @@ Add *Tags* as key/value pairs to organize and filter agents in the registry and 
 
 When the agent is running, open its detail page. A managed agent has these tabs:
 
-* *Overview*: The agent's full configuration, laid out as sections you edit and save one at a time. The *Agent* section holds the display name, description, and tags (the agent ID is fixed). The *Model & runtime* section holds the LLM provider, model, and max iterations, along with the runtime status and endpoint. The *System prompt*, *MCP servers*, and *Subagents* sections hold the instructions, attached servers, and subagents.
+* *Overview*: The agent's full configuration, organized into sections that you edit and save one at a time. The *Agent* section holds the display name, description, and tags (the agent ID is fixed). The *Model & runtime* section holds the LLM provider, model, and max iterations, along with the runtime status and endpoint. The *System prompt*, *MCP servers*, and *Subagents* sections hold the instructions, attached servers, and subagents.
 * *Triggers*: Schedules and event sources that invoke the agent. See xref:connect:triggers/overview.adoc[].
 * *Inspector*: An interactive test surface. See <<test-your-agent,Test your agent>>.
 * *Cost & Usage*: Spend, tokens, and latency for the agent.
