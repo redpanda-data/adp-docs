@@ -1,0 +1,4 @@
+= rpk ai connection revoke
+:page-preview: true
+
+include::streaming:reference:partial$rpk-ai/rpk-ai-connection-revoke.adoc[tag=single-source]
