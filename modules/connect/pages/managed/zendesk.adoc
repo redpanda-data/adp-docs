@@ -84,7 +84,7 @@ Create a new Zendesk MCP server in Agentic Data Plane:
 +
 . Click *Create*.
 
-// TODO: capture screenshots of the Zendesk create form on `adp-production`.
+// TODO: capture screenshots of the Zendesk create form on the live environment.
 
 === Configure from the CLI
 

@@ -8,7 +8,7 @@
 
 // Source: `cloudv2` `pkg/permissions/permissions_constants.go` on origin/main, verified 2026-05-18.
 // Guardrail, agent-trigger, and dataplane_adp_a2a_invoke permissions added after verifying against origin/main, 2026-06-09.
-// Agent-session permissions added after verifying against cloudv2 commit 7093932 (PR #27659) and permissions_constants.go on origin/main, 2026-07-04.
+// Agent-session permissions added after verifying against cloudv2 permissions_constants.go on origin/main, 2026-07-04.
 // Admin-only scoping and the access-policy permission names verified against `pkg/permissions/adp_role_permissions_test.go`, `pkg/permissions/permissions_constants.go`, and `apps/backoffice-worker/internal/workflows/organization/builtin_roles.go` on origin/main, 2026-07-31.
 
 Every Redpanda Agentic Data Plane API call enforces a single permission. This reference lists the Agentic Data Plane-namespaced permissions and the operation each one gates.

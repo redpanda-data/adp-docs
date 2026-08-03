@@ -7,10 +7,10 @@
 :learning-objective-2: Verify the provider is enabled and its connection is active
 :learning-objective-3: Grant your builders access and point them to the agent builder quickstart
 
-// Source: drafted against `adp-production` UI flows for LLM providers; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider protos on cloudv2 origin/main.
+// Source: drafted against the live environment UI flows for LLM providers; verified against `apps/adp-ui/src/routes/_authenticated/` and the provider protos on cloudv2 origin/main.
 // Provider field labels follow the canonical doc: gateway:configure-provider.adoc. Keep this page consistent with it at PR time.
 // Markup convention: bold for click targets (buttons, tabs, sidebar/nav); monospace for field labels, option values, toggles, and status values; plain text for UI regions (cards, badges, panes).
-// Model ID (claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
+// Model ID (claude-sonnet-4-6) verified against the live model catalog. Re-verify at PR time; identifiers shift quarterly.
 // DOC-2342 split: the builder half of the original combined quickstart now lives in get-started:agent-builder-quickstart.adoc.
 
 This quickstart sets up Redpanda Agentic Data Plane for your organization. An administrator configures a glossterm:large language model (LLM)[] provider. This is a one-time task. Until a provider exists, no one in your organization can build glossterm:AI agent[,agents] against the platform.

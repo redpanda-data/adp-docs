@@ -41,7 +41,7 @@ AI Gateway forwards the request to the upstream provider, attaches the configure
 
 TIP: The provider detail page generates ready-to-run snippets pre-filled with the correct proxy URL and paths. When in doubt, copy from the Connect your app section there.
 
-// Updated for cloudv2 PR #27510: rpk ai is self-contained (its own auth login + Agentic Data Plane environment selection), no longer tied to the rpk cloud session.
+// rpk ai is self-contained (its own auth login + Agentic Data Plane environment selection), no longer tied to the rpk cloud session.
 [[authenticate-with-rpk-ai]]
 [[authenticate-with-rpai]]
 == Use `rpk ai` for local development

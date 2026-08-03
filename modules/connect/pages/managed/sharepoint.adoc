@@ -7,7 +7,7 @@
 :learning-objective-2: Create the SharePoint managed MCP server with the correct Microsoft Graph scopes
 :learning-objective-3: Authorize a user and run the SharePoint tools from the Inspector or an agent
 
-// Source: `cloudv2` `apps/aigw/internal/mcp/managed/mcps/sharepoint/{register_mcp,register,handler,client}.go`, `proto/mcps/redpanda/mcps/sharepoint/v1/sharepoint_{service,config}.proto`, `proto/mcps/redpanda/mcps/v1/auth.proto`, `apps/aigw/internal/services/oauthprovider/well_known.go`, and `apps/aigw/docs/user-docs/sharepoint-mcp-setup.md` on `origin/main`, verified at 1ce9017a06, 2026-06-11.
+// Source: `cloudv2` `apps/aigw/internal/mcp/managed/mcps/sharepoint/{register_mcp,register,handler,client}.go`, `proto/mcps/redpanda/mcps/sharepoint/v1/sharepoint_{service,config}.proto`, `proto/mcps/redpanda/mcps/v1/auth.proto`, `apps/aigw/internal/services/oauthprovider/well_known.go`, and `apps/aigw/docs/user-docs/sharepoint-mcp-setup.md` on `origin/main`, verified 2026-06-11.
 
 The *SharePoint* managed MCP server lets agents read SharePoint sites, document libraries, lists, and files, upload files, and search content through the https://learn.microsoft.com/en-us/graph/api/resources/sharepoint[Microsoft Graph API^]. Each agent caller authenticates against Microsoft with their own identity through user-delegated OAuth, so every call stays bounded by the signed-in user's own SharePoint permissions: the server never holds workspace-wide access.
 

@@ -239,7 +239,7 @@ rpk ai oauth-provider create \
 |Whether the provider is enabled (default `true`).
 |===
 
-// Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/oauth_provider.proto (OAuthProviderService.ListOAuthProviders, ListOAuthProvidersRequest.Filter.filter + order_by), added in commit 1295dfa (merge #27491). List permission `dataplane_aigateway_oauthprovider_list`; orderable columns and the default order come from the storage table options (orderable: name, display_name, created_at; default_order_by: created_at desc). Request shapes are proto-accurate but were not exercised against a live cluster.
+// Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/oauth_provider.proto (OAuthProviderService.ListOAuthProviders, ListOAuthProvidersRequest.Filter.filter + order_by). List permission `dataplane_aigateway_oauthprovider_list`; orderable columns and the default order come from the storage table options (orderable: name, display_name, created_at; default_order_by: created_at desc). Request shapes are proto-accurate but were not exercised against a live cluster.
 == List and filter providers with the API
 
 To enumerate OAuth providers programmatically, call `OAuthProviderService.ListOAuthProviders`. Beyond the `name_contains` substring match, the request accepts an AIP-160 `filter` expression and an AIP-132 `order_by`, so you can scope and sort the list on the server (for example, to fetch only enabled providers, ordered by display name) instead of filtering the loaded page.
