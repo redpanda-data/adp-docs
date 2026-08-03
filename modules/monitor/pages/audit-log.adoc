@@ -28,8 +28,8 @@ Audit events can include user identities, resource names, network information, c
 
 == Open the Audit Log
 
-. Select *Audit Log* in the sidebar.
-. Review the most recent events. The default time range is *Last 24 hours*.
+. Open *Audit Log* in the sidebar.
+. Review the most recent events. The default time range is Last 24 hours.
 . Select a row to open its details.
 
 The table shows these fields:
@@ -38,22 +38,22 @@ The table shows these fields:
 |===
 |Field |Description
 
-|*Actor*
+|Actor
 |The user accountable for the action. When an agent or another identity acted for the user, the table also identifies that caller when available.
 
-|*Subsystem*
+|Subsystem
 |The part of Agentic Data Plane that handled the action.
 
-|*Action*
+|Action
 |The operation and service involved.
 
-|*Resource*
+|Resource
 |The type and identifier of the affected resource.
 
-|*Outcome*
+|Outcome
 |Whether the authorization decision allowed or denied the action. When available, the deciding policy appears under the outcome.
 
-|*Time*
+|Time
 |When the decision occurred.
 |===
 
@@ -63,10 +63,10 @@ Use the controls above the table to narrow an investigation:
 
 * *Search*: Search event summaries by actor, resource, policy, or related text.
 * *Outcome*: Show allowed or denied actions.
-* *Subsystem*: Select one or more of *Management API*, *LLM proxy*, *MCP gateway*, *A2A proxy*, and *Spending*.
-* *Time range*: Choose *Last hour*, *Last 24 hours*, *Last 7 days*, *Last 30 days*, or *All time*.
+* *Subsystem*: Select one or more of Management API, LLM proxy, MCP gateway, A2A proxy, and Spending.
+* *Time range*: Choose Last hour, Last 24 hours, Last 7 days, Last 30 days, or All time.
 
-Filters work together. For example, select *Denied*, choose *MCP gateway*, and set *Last hour* to investigate recent MCP authorization failures.
+Filters work together. For example, select Denied, choose MCP gateway, and set Last hour to investigate recent MCP authorization failures.
 
 == Inspect an event
 
