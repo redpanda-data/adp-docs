@@ -21,7 +21,7 @@ For conceptual background on traces and observability, see xref:monitor:concepts
 
 You must have a running agent. If you do not have one, see xref:get-started:agent-builder-quickstart.adoc[].
 
-== Debug agent execution with Transcripts
+== Debug agent execution with transcripts
 
 An agent's *Transcripts* tab shows each conversation with timing, errors, and token usage. Use it to debug issues, verify agent behavior, and monitor performance.
 
@@ -35,7 +35,7 @@ Several warning signs indicate problems. Conversations with `Error` status need 
 
 Pay attention to patterns across multiple conversations. When all recent transcripts show errors, start by checking agent status, MCP server connectivity, and system prompt configuration. A list that alternates between success and error typically points to intermittent tool failures or external API issues. If duration increases steadily over a session, your context window is likely filling up. Clear the conversation history to reset it. High token usage combined with relatively few LLM calls usually means tool results are large or your system prompts are verbose.
 
-=== Debug with Transcripts
+=== Debug with transcripts
 
 Use the *Transcripts* tab to diagnose specific issues:
 
