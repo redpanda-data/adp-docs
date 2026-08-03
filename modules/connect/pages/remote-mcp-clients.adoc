@@ -105,7 +105,7 @@ If a client does not support metadata documents, use dynamic client registration
 
 == Register an OAuth Client in AI Gateway
 
-Register a client by hand when it supports neither client metadata documents nor dynamic client registration, when it needs a confidential `client_secret`, or when you want to pre-provision it before the first connection. For supported public clients, you can skip this manual flow. See <<client-metadata-documents,Let clients use metadata documents>> or <<self-register-with-dcr,Let clients self-register with DCR>>.
+Register a client by hand when it supports neither client metadata documents nor dynamic client registration, when it needs a confidential `client_secret`, or when you want to pre-provision it before the first connection. For supported public clients, you can skip this manual flow. See <<client-metadata-documents,Let clients use metadata documents>> or <<self-register-with-dcr,Let clients self-register>>.
 
 Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
 
@@ -153,7 +153,7 @@ On submit, AI Gateway mints the `client_id`. Confidential clients (those using a
 // TODO: capture screenshots of the Add external tool catalog, the custom form, and the post-create detail page.
 
 [[self-register-with-dcr]]
-== Let clients self-register with DCR
+== Let clients self-register
 
 For clients that do not support metadata documents, you can let spec-conformant MCP clients register themselves. AI Gateway supports the OAuth 2.0 Dynamic Client Registration Protocol (RFC 7591), but dynamic registration is off for each organization by default. After you enable it, the gateway advertises a `registration_endpoint` in its authorization-server metadata at `/.well-known/oauth-authorization-server`. Clients that read this metadata (Claude Code, Cursor, ChatGPT, and other spec-conformant MCP clients) register on their first connection attempt, run the authorization-code flow with PKCE, and obtain tokens without an admin provisioning a `client_id` or `client_secret` first.
 
