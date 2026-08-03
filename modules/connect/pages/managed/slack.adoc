@@ -80,7 +80,7 @@ Other gotchas:
 
 == Use with agents
 
-Once the server is created and at least one user has consented, you can point an agent at the `MCP Server URL` on the server's detail page. Each user calling the agent will trigger their own consent flow if they haven't connected yet.
+After the server is created and at least one user has consented, you can point an agent at the `Server URL` on the server's *Connection* tab. Each user calling the agent will trigger their own consent flow if they haven't connected yet.
 
 == Troubleshooting
 

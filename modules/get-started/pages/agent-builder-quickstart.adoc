@@ -237,7 +237,7 @@ Your own API works too: if it has an OpenAPI 3.x spec, the same OpenAPI server t
 
 == Use your agent beyond the UI
 
-Your agent isn't limited to the Agentic Data Plane UI. Once it's running, you can reach it and its tools from other software:
+Your agent isn't limited to the Agentic Data Plane UI. After it's running, you can reach it and its tools from other software:
 
 * Surface your MCP tools in a chat client like Claude Desktop or ChatGPT: xref:connect:remote-mcp-clients.adoc[]
 * Call the agent from your own application over its A2A endpoint: xref:connect:create-agent.adoc#connect-to-the-agent[Connect to the agent]

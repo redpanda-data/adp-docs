@@ -87,7 +87,7 @@ See xref:connect:test-tools.adoc[] for general Inspector usage.
 
 == Use with agents
 
-Once tools generate cleanly, point an agent at the `MCP Server URL` on the server's detail page. The agent sees one tool per OpenAPI operation, named accordingly.
+After tools generate cleanly, point an agent at the `Server URL` on the server's *Connection* tab. The agent sees one tool per OpenAPI operation, named accordingly.
 
 Each tool returns the upstream response as a structured result with the fields `status_code`, `headers`, and `body`. `body` is the parsed JSON payload when the response is JSON, or the raw response text otherwise. `headers` holds the response headers you selected with `Extract headers`, and is empty when none are configured. Agents that read structured output can address these fields directly, and a plain-text copy of the same result is also included for clients that read only text. A 4xx or 5xx response surfaces as a tool error rather than a structured result.
 
