@@ -333,13 +333,13 @@ Transcripts provide:
 
 Transcripts are optimized for execution-level observability and governance.
 
-The Audit Log provides:
+The audit log provides:
 
 * The user accountable for an action, plus the agent or caller that acted for the user when available
 * The affected resource, operation, subsystem, and time
 * The allowed or denied outcome and the deciding policy when available
 
-For access and accountability questions, use xref:monitor:audit-log.adoc[the Audit Log]. For questions about an agent's model turns, tool calls, timing, or errors, use transcripts. An investigation may use both views.
+For access and accountability questions, use xref:monitor:audit-log.adoc[the audit log]. For questions about an agent's model turns, tool calls, timing, or errors, use transcripts. An investigation may use both views.
 
 [[history-reconstruction]]
 == Reconstructed transcript history

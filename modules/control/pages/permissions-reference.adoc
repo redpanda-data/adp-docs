@@ -235,7 +235,7 @@ The `dataplane_adp_transcript_*` permissions gate read access to agent conversat
 Transcript access is separate from agent read access. A principal that can view an agent's configuration through `dataplane_adp_agent_get` cannot read that agent's transcripts. Grant transcript access deliberately, with a policy naming the `Transcript` actions, to the users and service accounts that need to read conversation content.
 ====
 
-== Audit Log permissions
+== Audit log permissions
 
 The `dataplane_adp_auditlog_*` permissions gate read access to authorization events. Audit events can include user identities, resource names, network information, configuration changes, and captured request or response data. See xref:monitor:audit-log.adoc[] for how to review them.
 
@@ -244,7 +244,7 @@ The `dataplane_adp_auditlog_*` permissions gate read access to authorization eve
 |Permission |Operation
 
 |`dataplane_adp_auditlog_list`
-|List Audit Log events and view an event's details
+|List audit log events and view an event's details
 |===
 
 == Access policy permissions
