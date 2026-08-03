@@ -1,0 +1,76 @@
+= Visualize Your Agent Network
+:description: See a live map of your agents, the models they call, and the MCP servers they use, with usage, cost, and health for a chosen time window.
+:page-topic-type: how-to
+:page-preview: true
+:personas: platform_engineer, agent_builder, security_compliance_lead
+:learning-objective-1: Trace which models and tools each agent uses in the network graph
+:learning-objective-2: Scope the view to a time window and health status
+:learning-objective-3: Inspect an agent, LLM provider, MCP server, or tool to check usage, cost, and errors
+
+// Facts verified against the AgentNetworkService API and the Agentic Data Plane UI on 2026-07-31.
+
+The *Agent Network* view is a live map of your Agentic Data Plane: every agent, the glossterm:large language model (LLM)[,LLM] providers it calls, and the glossterm:MCP server[,MCP servers] and tools it uses, drawn as a graph with usage, cost, and health for the time window you choose. Use it to see at a glance what your agents are actually doing, which models and tools carry the most traffic, and where errors are clustering.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+The view draws on the same recorded telemetry that powers xref:monitor:transcripts.adoc[transcripts], enriched with cost data. It shows what actually ran during the selected window. A configured resource with no traffic in the window still appears, with its metrics marked as having no recorded data yet.
+
+NOTE: The Agent Network view is a preview capability, available when your organization has it enabled. If you don't see *Agent Network* under *Agents* in the sidebar, it isn't enabled for your organization.
+
+== Prerequisites
+
+The Agent Network view requires the `dataplane_adp_agentnetwork_get` permission. See xref:control:permissions-overview.adoc[].
+
+== Open the Agent Network view
+
+Open *Agents* in the sidebar, then click *Agent Network*.
+
+The header shows your agent and MCP server counts, plus conversations, tool calls, cost, and tokens for the selected time window. These totals always cover the whole network, even when the graph is filtered or showing only the busiest agents.
+
+== Read the graph
+
+The graph arranges nodes in columns, with traffic flowing left to right:
+
+* *Agents*: Your agents, grouped into a cluster you can click to expand.
+* *LLM providers*: The providers agents send model requests to, with cost and token usage on each card. When you have many providers, the column paginates.
+* *MCP servers*: The servers agents call tools on. Click a server to expand its tools into their own column, showing per-tool call counts.
+
+Lines connect each agent to the providers and servers it used during the window, and line thickness shows traffic volume. Agent-to-provider lines can represent either token usage or cost: switch between *Tokens* and *Cost* in the on-canvas legend. Agent-to-server lines always represent tool calls.
+
+== Scope the view
+
+Use the toolbar to control what the graph shows:
+
+* *Window*: Choose from last hour, last 24 hours (the default), last 7 days, or last 30 days.
+* *Status*: Show all nodes, only nodes with activity, or only nodes with errors.
+* *Sort LLMs*: Order providers by cost or token use, or list them alphabetically.
+* *Sort MCPs*: Order servers by tool calls, or list them alphabetically.
+* *Refresh*: Reload the graph with current data.
+* *Reset view*: Return to the default layout and selection.
+
+Click a node to inspect it, click it again to deselect, and press Esc to reset the selection. The view state persists in the URL, so you can bookmark a scoped view or share it with your team.
+
+== Inspect a node
+
+Selecting a node opens a detail panel:
+
+* *Agent*: The agent's model and description, plus window metrics: conversations, spend, turns per conversation, and 95th-percentile request latency.
+* *LLM provider*: Cost and token usage, split by the models observed in the window.
+* *MCP server*: Tool count, connected agent count, tool calls, and connection status, plus the server's tools and the agents and users that called it during the window. Click an agent to jump to its details.
+* *Tool*: The tool's description and its usage in the window: how many agents called it, how many calls it received, the server it belongs to, and its status.
+
+== Monitor health
+
+Each node carries a health state derived from its error rate in the window: healthy, degraded, or error. Use the *Status* filter to isolate nodes with errors.
+
+When an MCP server's credentials fail to resolve, for example an expired or missing user connection, the view surfaces the failure as an alert that names the affected agents, so you can fix the connection before more calls fail. See xref:connect:user-delegated-oauth.adoc[] for managing user connections.
+
+== Next steps
+
+* xref:monitor:monitor-agents.adoc[]
+* xref:monitor:transcripts.adoc[]
+* xref:monitor:troubleshoot-ai-agents.adoc[]
