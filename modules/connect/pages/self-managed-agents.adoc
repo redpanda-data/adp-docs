@@ -7,7 +7,7 @@
 :learning-objective-2: Register a self-managed agent and issue it an OAuth client credential
 :learning-objective-3: Route an agent's LLM and MCP calls through the AI Gateway and group them into transcripts
 
-// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Agent.agent_type oneof, OauthClient) cross-referenced against `apps/adp-ui/src/components/agents/agent-type-picker.tsx`, `self-managed-create-form.tsx`, `credentials-tab.tsx`, and `setup-tab.tsx` on origin/main, and verified on adp-production 2026-06-16.
+// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Agent.agent_type oneof, OauthClient) cross-referenced against `apps/adp-ui/src/components/agents/agent-type-picker.tsx`, `self-managed-create-form.tsx`, `credentials-tab.tsx`, and `setup-tab.tsx` on origin/main, and verified on the live environment 2026-06-16.
 
 A self-managed agent is an agent you build and run yourself, registered with Redpanda Agentic Data Plane as an identity. You keep your runtime, framework, and hosting; Agentic Data Plane gives the agent a service account and a client credential, and the glossterm:AI Gateway[] becomes the agent's LLM and MCP endpoint. Because every model call and tool call flows through the gateway, Agentic Data Plane attributes spend, tokens, latency, and traces back to the agent and reconstructs each session as a transcript. Agentic Data Plane does not host or run your agent.
 

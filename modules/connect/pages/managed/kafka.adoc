@@ -47,7 +47,7 @@ Consuming messages, listing topics, and inspecting metadata are not currently ex
 * `Timeout` (optional): Produce request timeout. Defaults to `10s`.
 . Click *Create*.
 
-// TODO: screenshot of the Kafka form filled in for a Redpanda Cloud cluster on `adp-production`.
+// TODO: screenshot of the Kafka form filled in for a Redpanda Cloud cluster on the live environment.
 
 == Test
 
@@ -98,7 +98,7 @@ After the Kafka server is created, point an agent at the `Server URL` on the ser
 |The target topic doesn't exist on the broker. Create it first, or confirm the topic name.
 |===
 
-// TODO: gather more Kafka failure modes from `adp-production` walkthroughs.
+// TODO: gather more Kafka failure modes from the live environment walkthroughs.
 
 == Limitations
 

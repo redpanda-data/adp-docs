@@ -67,7 +67,7 @@ Agentic Data Plane has these top-level areas:
 * *My Connections*: Each user's own per-user OAuth connections for user-delegated MCP servers. See xref:connect:user-delegated-oauth.adoc[User-delegated OAuth].
 * *Integrations setup*: The admin home for OAuth plumbing. Its *Outbound providers* tab holds reusable upstream OAuth provider definitions used by user-delegated MCP authentication (see xref:connect:oauth-providers.adoc[Configure an OAuth Provider]); its *Inbound clients* tab holds external tools registered to request access tokens from the gateway (see xref:connect:remote-mcp-clients.adoc[Connect Remote MCP Clients]).
 
-// TODO: screenshot of the sidebar on adp-production once standalone-Agentic Data Plane wording is final.
+// TODO: screenshot of the sidebar on the live environment once standalone-Agentic Data Plane wording is final.
 
 == Key capabilities
 

@@ -81,7 +81,7 @@ For `Service-account OAuth`, the gateway runs the client-credentials exchange on
 . The Tools panel lists every operation from your spec, named per the `operationId` (or per the path if `operationId` is missing). Tool names longer than 64 characters are truncated and given a short hash suffix to keep them unique, because LLM providers cap tool-name length. Parameter names that start with `$` (common in OData APIs, such as `$top` and `$filter`) appear without the `$` prefix in the tool schema; the server still sends the original parameter name to the API.
 . Pick one and run it. The Inspector renders a form from the operation's parameter and request-body schemas.
 
-// TODO: capture screenshots of a non-trivial OpenAPI spec rendered in the Inspector once we walk a real example on `adp-production`.
+// TODO: capture screenshots of a non-trivial OpenAPI spec rendered in the Inspector once we walk a real example on the live environment.
 
 See xref:connect:test-tools.adoc[] for general Inspector usage.
 

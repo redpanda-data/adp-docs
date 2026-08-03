@@ -75,7 +75,7 @@ The page uses a two-pane layout. The left rail lists providers grouped by status
 * *Connected*: Providers with a usable connection.
 * *Needs attention*: Connections that have failed, or whose refresh token is close to expiring, and need to be reconnected.
 
-// Source: cloudv2 PR #28055 (9fcea916d), apps/adp-ui/src/components/connections/ (connection-master-rail.tsx buckets, connection-detail-pane.tsx badges/actions, connection-status.ts reconnectDeadline).
+// Source: cloudv2 apps/adp-ui/src/components/connections/ (connection-master-rail.tsx buckets, connection-detail-pane.tsx badges/actions, connection-status.ts reconnectDeadline).
 Select a provider to open its detail pane on the right. The pane shows the granted scopes, a status badge (*Connected*, *Needs attention*, *Action required*, or *Not connected*), and the actions for that provider: *Connect* runs the consent flow and stores a token in the vault under your identity, *Reconnect* re-runs consent for an existing connection (for example, to grant additional scopes or recover after a refresh token expires), and *Disconnect* revokes it. A connection that the gateway can renew automatically from a stored refresh token stays *Connected* with no action from you; it moves to *Needs attention* or *Action required* only when it can no longer renew on its own.
 
 NOTE: Connections are per-user. Each user authorizes their own accounts, and one user's connections are not visible to or usable by another.
@@ -94,7 +94,7 @@ Redpanda transparently refreshes tokens before they expire, using the refresh to
 
 A connection is reported as expired, meaning the user must reconnect, only when the access token has lapsed and no usable refresh token exists: either none was stored, or the refresh token itself has expired. When that happens, the next tool call returns `OAuthTokenExpired` with a `reason`, and the user must re-consent through the same flow as the initial connection.
 
-// Source: cloudv2 PR #28045 (4cca44e94), proto/public/cloud/redpanda/api/adp/v1alpha1/oauth_connection.proto ConnectionStatus ACTIVE/EXPIRED semantics + Connection.refresh_token_present / refresh_token_expires_at.
+// Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/oauth_connection.proto ConnectionStatus ACTIVE/EXPIRED semantics + Connection.refresh_token_present / refresh_token_expires_at.
 Each connection reports whether a refresh token backs it, so a client can tell a connection that renews automatically from one that needs reconnecting. The `OAuthConnectionService.ListConnections` and `GetConnection` responses expose this on the `Connection` message through two read-only fields: `refresh_token_present` (a refresh token is stored, so the gateway renews access automatically) and `refresh_token_expires_at` (when the refresh token itself expires, if the upstream reports it, as GitHub Apps do; absent when unknown or non-expiring).
 
 == Service-account OAuth contrast
