@@ -20,7 +20,7 @@ After reading this page, you will be able to:
 == Prerequisites
 
 * A xref:connect:create-agent.adoc[running agent] with at least one execution.
-* The xref:control:permissions-reference.adoc#transcript-permissions[TranscriptReader role] (or Admin). Transcript reads are not part of the default Reader or Writer roles.
+* Access to read transcripts, from an xref:control:access-policies.adoc[access policy] granting the `Transcript` actions, or from the Admin role. No other built-in role grants transcript reads.
 
 == Open an agent's transcripts
 
@@ -156,7 +156,7 @@ For long-running conversations, accept some reconstruction; for short conversati
 === Transcript missing entirely
 
 * Confirm the agent or MCP server actually ran: Check its logs and the corresponding session or task topic.
-* Confirm your user holds the TranscriptReader role (or Admin). Transcript reads require the `dataplane_adp_transcript_get` and `dataplane_adp_transcript_list` permissions, which are not part of the default Reader or Writer roles. See xref:control:permissions-reference.adoc#transcript-permissions[Transcript permissions].
+* Confirm your user can read transcripts. Outside the Admin role, transcript reads come from an xref:control:access-policies.adoc[access policy] naming the `Transcript` actions. Check the Access page for a policy that covers your user or one of its groups, and for a `forbid` that overrides it. See xref:control:permissions-reference.adoc#transcript-permissions[Transcript permissions].
 * Confirm the feature flag enabling Transcripts is on for your environment.
 
 == Next steps

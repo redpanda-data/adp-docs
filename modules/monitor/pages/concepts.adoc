@@ -318,7 +318,7 @@ The topic persists even after all agents and MCP servers are deleted, allowing y
 
 Transcripts may contain sensitive information from your tool inputs and outputs. Review the data in transcripts before sharing or exporting to external systems.
 
-Read access to transcript data is governed by the TranscriptReader role rather than by topic ACLs on `redpanda.otel_traces`. See xref:control:permissions-reference.adoc#transcript-permissions[Transcript permissions].
+Read access to transcript data is governed by the transcript permissions rather than by topic ACLs on `redpanda.otel_traces`. Among the built-in roles, only Admin holds them. See xref:control:permissions-reference.adoc#transcript-permissions[Transcript permissions].
 
 == Transcripts compared to audit logs
 

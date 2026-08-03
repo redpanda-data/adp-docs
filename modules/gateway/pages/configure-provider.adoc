@@ -469,7 +469,7 @@ The *Cost & Usage* page under *Governance* tracks spend, request volume, and tok
 |Gemini uses the `x-goog-api-key` header, not `Authorization`. If you're seeing 401s on Gemini, check that the client is sending the correct header. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].
 
 |Provider list empty or 403
-|Confirm your account has the `dataplane_adp_llmprovider_*` permissions in Agentic Data Plane. The Reader built-in role is the minimum required to list providers. The Writer role is required to create one. See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions].
+|Confirm your account can act on LLM providers. Listing them needs `Action::"LLMProvider.list"` and creating one needs `Action::"LLMProvider.create"`. Outside the Admin role, both come from an xref:control:access-policies.adoc[access policy]. See xref:control:permissions-reference.adoc#llm-provider-permissions[LLM provider permissions].
 |===
 
 // TODO: add screenshots of common error toasts once captured from the live environment.

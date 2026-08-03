@@ -1,18 +1,20 @@
 = Control Who Can Do What
-:description: Understand how Agentic Data Plane permissions, built-in roles, and role bindings fit together to control access to AI Gateway, MCP, agents, pipelines, and governance APIs.
+:description: Understand how Agentic Data Plane decides who can do what: access policies carry the decision, and RBAC bootstraps the administrators who author them.
 :page-topic-type: concept
 :personas: security_compliance_lead, platform_engineer
-:learning-objective-1: Explain how Agentic Data Plane permissions, roles, and role bindings fit together
-:learning-objective-2: Differentiate between the Admin, Writer, Reader, and Invoker built-in roles
-:learning-objective-3: Identify which built-in role grants the permissions a user or service account needs
+:learning-objective-1: Explain how access policies decide who can do what in Agentic Data Plane
+:learning-objective-2: Explain why Admin is the only built-in role that reaches Agentic Data Plane
+:learning-objective-3: Grant a user, a group, or a service account the access it needs
 
 // Source: `cloudv2` `pkg/permissions/permissions_constants.go`, `apps/aigw/internal/llm/authz.go`, `apps/aigw/internal/mcp/authz.go`, and `apps/ai-agent/internal/agent/authorization.go` on origin/main, verified 2026-05-18.
-// Transcript permissions and the TranscriptReader role verified against cloudv2 commit 6dfd3b3 (PR #26829), 2026-06-08.
+// Admin-only scoping of ADP permissions verified against `pkg/permissions/adp_role_permissions_test.go`, `pkg/permissions/permissions_constants.go` (writerRolePermissions, readRolePermissions), and `apps/backoffice-worker/internal/workflows/organization/builtin_roles.go` on origin/main, 2026-07-31.
 // TODO: confirm screenshots of the role-binding flow in the Cloud UI once UX-790 (Console-side fine-grained authZ) ships.
 
-Redpanda Agentic Data Plane uses role-based access control (RBAC) to gate every API call, so you can apply least-privilege access across your deployment and keep developers, operators, and service accounts to exactly what they need. RBAC in Agentic Data Plane composes permissions, roles, and role bindings, with scopes that range from the entire organization down to a single dataplane.
+Redpanda Agentic Data Plane decides who can do what with xref:control:access-policies.adoc[access policies]. A policy names a principal, an action, and a resource, and either permits or forbids. That's the authorization model: policies are what you write, and policy evaluation is what every API call resolves against.
 
-Agentic Data Plane ships built-in roles for common patterns (Admin, Writer, Reader, and task-specific Invoker roles) and supports custom roles for more granular control. This page explains the three-layer model, the Agentic Data Plane permission families, and how to pick the right role for each workload.
+Role-based access control (RBAC) has one job here. Assign the Admin role to the people who administer the deployment, and they author the policies that grant everyone else. Admin is the only built-in role that carries Agentic Data Plane permissions at all.
+
+This page explains how the two fit together and how to grant access to a user, a group, or a service account.
 
 After reading this page, you will be able to:
 
@@ -20,69 +22,98 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-== The three-layer model
+== Policies decide, roles bootstrap
 
-Redpanda Agentic Data Plane authorization composes multiple layers. Each layer answers a different question.
+Every Agentic Data Plane request resolves the same way:
 
-* *Permission*: What action is allowed? A permission is a string like `dataplane_adp_llmprovider_invoke` that names exactly one operation on one resource type. The gRPC service that handles an API call checks the caller's permission set before executing.
-* *Role*: Which permissions go together? A role is a named bundle of permissions. Agentic Data Plane ships built-in roles for common access patterns (Admin, Writer, Reader, and a set of Invoker sub-roles), and you can define custom roles for more specific needs.
-* *Role binding*: Who gets the role, and where? A role binding attaches a role to a principal (user or service account) at a scope. Scopes range from the entire organization down to a single resource group or dataplane, so the same principal can have different permissions in different parts of your deployment.
+* A request is denied unless a `permit` matches it.
+* A matching `forbid` always wins, over any `permit` and over anything a role granted.
 
-A successful API call requires all three: the caller must hold a role binding whose role contains the permission the endpoint enforces, at a scope that covers the resource being acted on.
+Both role bindings and access policies feed that one evaluation. Redpanda compiles your role bindings into permits automatically, so an Admin's access arrives through the same path as a policy you wrote. There is no separate RBAC check that runs first and no second system to reason about.
 
-== Agentic Data Plane-namespaced permissions
+The division of labor:
 
-Agentic Data Plane permissions live in the following families, named by the namespace prefix:
+* *Access policies* express the decision. A policy takes a user or an identity provider group as its principal, conditions on resource tags and ownership, narrows to a single resource, and denies. Policies are how you grant access.
+* *RBAC* bootstraps and administers. It gets your first administrators in, and it is deliberately coarse: Admin, or nothing.
+
+RBAC is not the mechanism for granting day-to-day access in Agentic Data Plane. When you need to express something, express it as a policy.
+
+[NOTE]
+====
+Access policies are a preview capability, enabled per organization. Until they're enabled for yours, an Admin binding or a custom role is the only way to reach an Agentic Data Plane API. See xref:control:access-policies.adoc[Manage Access Policies].
+====
+
+[IMPORTANT]
+====
+Admin grants every Agentic Data Plane permission on every resource, so it is not a least-privilege answer for day-to-day users. Bind Admin to the people who administer the deployment. Grant everything else with a policy.
+====
+
+== Admin is the only built-in role that reaches Agentic Data Plane
+
+Built-in roles span all of Redpanda Cloud. Only Admin reaches Agentic Data Plane.
+
+[cols="1,3"]
+|===
+|Role |What it grants in Agentic Data Plane
+
+|Admin
+|Every Agentic Data Plane permission, on every resource. Bootstraps a deployment, and covers the operators who configure providers, agents, MCP servers, and pricing, and who author access policies.
+
+|Writer, Reader
+|Nothing. Both roles keep their control-plane, Kafka, pipeline, and knowledge-base permissions, so a Writer can manage Redpanda Connect pipelines and knowledge bases and still can't read, create, or invoke an agent, MCP server, or LLM provider.
+
+|PipelineInvoker and the Kafka and Schema Registry roles
+|Nothing. These cover Redpanda Connect pipelines, topics, consumer groups, and Schema Registry subjects.
+|===
+
+There are no Agentic Data Plane Invoker or transcript-reader roles to assign. Runtime-only access for a service account (calling an MCP tool, proxying an LLM request) and read access to conversation transcripts come from policies you write, not roles you pick from a list. Redpanda used to ship narrow built-in roles for exactly those cases and no longer provisions them, because a policy does the same job with a condition and a scope attached.
+
+NOTE: If your organization predates this change, those roles may still appear in your role list. Don't build new grants on them. Author the equivalent policy instead.
+
+== Grant access to a user, group, or service account
+
+Write a policy. The principal is a user or a group, so you can grant a whole identity provider group in one statement and let group membership stay managed in your IdP.
+
+For example, to let your support team call the tools on one MCP server and nothing else:
+
+[source,cedar]
+----
+permit (
+  principal in Group::"support",
+  action == Action::"McpServerTool.call",
+  resource is McpServerTool in McpServer::"zendesk"
+);
+----
+
+Policies also do the things a role bundle structurally can't: condition on a resource tag, restrict access to a resource's creator, or deny an action across every principal at once. See xref:control:access-policies.adoc[Manage Access Policies] for the authoring workflow, the actions a policy can name, and worked examples.
+
+Access policies use their own vocabulary. A policy names an entity type and a verb, such as `Action::"Agent.get"`, not the permission strings on this page. See xref:control:access-policies.adoc#action-reference[Action reference].
+
+A custom role holding Agentic Data Plane permissions still works. Reach for one when you need a permission bundle bound at a control-plane scope, or for the `dataplane_aiagent_a2a_*` permissions, which no policy action covers.
+
+== Agentic Data Plane permissions
+
+Permissions are the RBAC-side vocabulary. You need them to read what Admin grants and to define a custom role. They are not what a policy names.
+
+Agentic Data Plane permissions live in these families:
 
 * `dataplane_adp_mcpserver_*`: Manage and call MCP servers (CRUD plus runtime operations like `tools_call` and `resources_read`).
 * `dataplane_adp_llmprovider_*`: Manage LLM providers and proxy LLM requests through AI Gateway. The `_invoke` permission is what your applications need at runtime.
 * `dataplane_adp_agent_*` and `dataplane_adp_agent_credential_*`: Manage declarative AI agents and the OIDC credentials issued to them.
-* `dataplane_adp_transcript_*`: Read agent conversation transcripts. Granted by the dedicated TranscriptReader role (and Admin), not by Writer or Reader, because transcripts carry full conversation content.
+* `dataplane_adp_policy_*` and `dataplane_adp_policytemplate_*`: Author and read access policies and policy templates.
+* `dataplane_adp_transcript_*`: Read agent conversation transcripts, which carry full conversation content.
 * `dataplane_adp_spending_*`: Read AI spending data for governance and cost reporting.
-* `dataplane_aiagent_a2a_*`: Invoke agent-to-agent (A2A) operations on running agents.
-* `dataplane_aigateway_*`: Manage enterprise AI Gateway features (rate limits, spend limits, guardrails, model providers, audit, pricing, IAM).
+* `dataplane_aiagent_a2a_*`: Invoke agent-to-agent (A2A) operations against an agent's own ingress. These are the one Agentic Data Plane family a policy can't govern; see xref:control:permissions-reference.adoc#a2a-runtime-permissions[A2A runtime permissions].
+* `dataplane_aigateway_*`: Manage enterprise AI Gateway features, including OAuth providers and clients, model providers, rate and spend limits, audit, and pricing.
 
-Two more families belong to Redpanda Connect resources that Agentic Data Plane uses:
+Admin is the only built-in role that holds any of them. The legacy `dataplane_mcpserver_*` namespace, which older proto versions still enforce, is scoped the same way.
+
+Two more families belong to Redpanda Connect resources that Agentic Data Plane uses. These are owned outside Agentic Data Plane, so they stay in the Writer and Reader roles and are outside what a policy can govern:
 
 * `dataplane_pipeline_*`: Manage and invoke Redpanda Connect pipelines.
 * `dataplane_knowledgebase_*`: Manage retrieval-augmented generation knowledge bases.
 
-For the full list of permissions and which built-in role grants each one, see xref:control:permissions-reference.adoc[Roles and Permissions Reference].
-
-== Built-in roles
-
-Agentic Data Plane includes the following built-in roles. Admin, Writer, and Reader are general-purpose. The remaining roles are narrow: a set of Invoker roles for runtime-only access, plus TranscriptReader for reading agent conversation transcripts.
-
-[cols="1,3"]
-|===
-|Role |What it grants
-
-|Admin
-|Every permission, on every resource. Use for cluster operators who configure providers, agents, MCP servers, and pricing.
-
-|Writer
-|Full create, read, update, and delete access across every Agentic Data Plane-namespaced API (LLM provider, MCP server, agent, agent credential, AI Gateway, pipeline, knowledge base). Use for developers who need to build and modify Agentic Data Plane resources.
-
-|Reader
-|Read-only access (`_get` and `_list`) across the same APIs, plus MCP runtime read operations such as `resources_list` and `prompts_get`. No create, update, delete, or invoke. Use for auditors, evaluators, and stakeholders who need visibility without mutation rights.
-
-|TranscriptReader
-|Transcript reads only: `dataplane_adp_transcript_get` and `dataplane_adp_transcript_list`. Transcripts carry full conversation content, so this access is granted through a dedicated role rather than bundled into Reader or Writer. Use for users and service accounts that read agent conversation transcripts. Provisioned for organizations with an Agentic Data Plane cluster.
-
-|AIAgentInvoker
-|A2A runtime only: `message_send`, `message_stream`, and the task lifecycle (`get`, `list`, `cancel`, `subscribe`). Use for service accounts that consume agents over A2A but should not manage them.
-
-|MCPInvoker
-|MCP runtime only: `initialize`, `ping`, the `resources_*` read methods, the `prompts_*` read methods, and `tools_list` / `tools_call`. No CRUD. Use for service accounts that call MCP tools without managing the servers themselves.
-
-|LLMProviderInvoker
-|A single permission: `dataplane_adp_llmprovider_invoke`. Use for applications that proxy LLM requests through AI Gateway but should not see or modify provider configuration.
-
-|PipelineInvoker
-|Runtime pipeline invocation only: `gateway_invoke`, `otlp_grpc_invoke`, `otlp_http_invoke`. Use for clients that produce telemetry or send data into Connect pipelines without managing them.
-|===
-
-Pick the narrowest role that covers a workload. For example, an application that only needs to call an LLM through AI Gateway should hold the LLMProviderInvoker role, not the Writer role.
+For the full list, see xref:control:permissions-reference.adoc[Roles and Permissions Reference].
 
 == Identity and impersonation
 
@@ -91,12 +122,19 @@ Agentic Data Plane API calls authenticate as one of two identity types:
 * *User identity (OIDC)*: A human user signed in through Redpanda's OIDC provider. The Agentic Data Plane UI uses this identity when an admin manages Agentic Data Plane resources interactively.
 * *Service account*: A non-human identity backed by OIDC client credentials. Applications, CI jobs, and `rpk ai` use service accounts.
 
+Both are policy principals. A service account is granted access the same way a user is, with a policy naming it as the principal.
+
 Account impersonation, which lets Redpanda Console reuse a user's identity for Kafka API and Schema Registry calls, applies to those two subsystems only. Agentic Data Plane endpoints continue to authenticate clients directly through their OIDC tokens, regardless of how account impersonation is configured at the cluster level.
 
-== Where Agentic Data Plane fits in Cloud RBAC
+== Where Agentic Data Plane fits in Redpanda Cloud RBAC
 
-Agentic Data Plane permissions are part of the same Cloud RBAC system that gates control-plane resources such as resource groups, networks, and clusters. The Admin, Writer, and Reader built-in roles each cover control-plane permissions, dataplane Kafka permissions, and Agentic Data Plane dataplane permissions in a single bundle, so a single role binding on the Writer role at the organization scope grants a developer access to every layer.
+Agentic Data Plane permissions are part of the same Redpanda Cloud RBAC system that gates control-plane resources such as resource groups, networks, and clusters. They are scoped more tightly than the rest of it.
+
+The Writer and Reader roles bundle control-plane permissions with dataplane Kafka permissions, so a Writer binding at the organization scope covers those layers in one grant. It does not reach Agentic Data Plane. A developer who holds Writer on the organization can create a cluster and manage topics and pipelines, and still gets a permission-denied error from every agent, MCP server, and LLM provider API until a policy grants that access.
+
+Admin spans every layer, including Agentic Data Plane.
 
 == Next steps
 
+* xref:control:access-policies.adoc[Manage Access Policies]
 * xref:control:permissions-reference.adoc[Roles and Permissions Reference]
