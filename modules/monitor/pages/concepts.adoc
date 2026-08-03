@@ -320,6 +320,16 @@ Transcripts may contain sensitive information from your tool inputs and outputs.
 
 Read access to transcript data is governed by the transcript permissions rather than by topic ACLs on `redpanda.otel_traces`. Among the built-in roles, only Admin holds them. See xref:control:permissions-reference.adoc#transcript-permissions[Transcript permissions].
 
+== How Redpanda stores audit events
+
+Each audit event is a record in the https://ocsf.io/[Open Cybersecurity Schema Framework (OCSF)^] format, describing one governed action: the actor who requested it, the entity it affected, and the outcome. OCSF is an open, vendor-neutral schema, so security tooling that understands OCSF can consume audit events without custom mapping.
+
+Audit events are produced to a dedicated `redpanda.adp.audit-log` topic. The services that write audit events hold write-only access, so a producer cannot read or alter what another service wrote, which keeps the log append-only.
+
+The topic is Iceberg-enabled. Redpanda materializes audit events into an Apache Iceberg table on object storage, which serves as the durable archive, while the topic holds the recent tail. Queries read the live topic tail and the committed Iceberg archive together, so recent and historical events answer from one place.
+
+Read access to audit events is governed by the audit log permissions rather than by topic ACLs. Reads of the audit log are themselves recorded as audit events. See xref:control:permissions-reference.adoc#audit-log-permissions[Audit log permissions].
+
 == Transcripts compared to audit logs
 
 Transcripts and audit logs serve different but complementary purposes.

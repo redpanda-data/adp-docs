@@ -114,6 +114,7 @@ Use xref:monitor:transcripts.adoc[transcripts] for execution questions about an 
 
 == Next steps
 
+* xref:monitor:concepts.adoc#how-redpanda-stores-audit-events[How Redpanda stores audit events]
 * xref:monitor:concepts.adoc#transcripts-compared-to-audit-logs[Transcripts compared to audit logs]
 * xref:monitor:transcripts.adoc[]
 * xref:control:permissions-overview.adoc[]
