@@ -4,7 +4,7 @@
 :page-topic-type: how-to
 :personas: agent_builder
 :learning-objective-1: Run an MCP tool from the Inspector and read its response
-:learning-objective-2: Inspect resources, prompts, and call history
+:learning-objective-2: Inspect a server's resources, prompts, and session activity
 :learning-objective-3: Diagnose common errors (missing authentication, scope upgrade required, transport mismatch) before pointing an agent at the server
 
 Verify that your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] work correctly before agents depend on them. The Inspector runs on the same JSON-RPC connection agents use, so a passing test means fewer failed tool calls in production. Use the Inspector after creating a server or whenever you change a tool's schema.
@@ -26,40 +26,52 @@ After completing this guide, you will be able to:
 . Open *MCP Servers* in the sidebar and click into your server.
 . Switch to the *Inspector* tab.
 +
-// TODO: screenshot of the Inspector tab with all four panels visible.
+// TODO: screenshot of the Inspector console: tool list, tool runner, and status strip.
 
-The Inspector has four panels: *Tools*, *Resources*, *Prompts*, and *Session*.
+The Inspector is a console: a tool list and a tool runner sit side by side, with a status strip along the top. Resource and prompt panels appear underneath only when the server exposes those capabilities. Two more surfaces open from the status strip: *Session details* and the *Protocol panel*. See <<session>> for both.
 
-== Tools panel
+== Run a tool
 
-The Tools panel lists every tool the server returned from `tools/list`.
+The tool list shows every tool the server returned from `tools/list`. Select a tool to load it into the runner.
 
-. Select a tool from the list. The right-hand pane renders a form from the tool's input JSON schema.
-. Fill in the form fields.
-. Click *Run*. The response appears below the form.
+. Select a tool from the list. The runner shows the tool's input and, once you run it, its response.
+. Provide the tool's input using one of the input modes:
++
+--
+* *Form*: A field-by-field form generated from the tool's input JSON schema.
+* *JSON*: The raw JSON input, for pasting or editing a whole object at once.
+* *cURL*: A ready-to-run `curl` command for the call, with a copy action.
+--
+. Click *Run tool*, or press Ctrl+Enter (Cmd+Enter on macOS). While the call is in flight, a progress bar reflects any progress the server reports, and you can *Cancel* it.
 
-// TODO: screenshot of a successful Tools-panel call (use a SQL `query` against a sample table on `adp-production`).
+// TODO: screenshot of a successful tool call (use a SQL `query` against a sample table on `adp-production`).
 
-If the tool returns an error, the response pane shows the structured error detail. See <<errors>> for what each common error means.
+The response appears in a tabbed result card:
+
+* *Result*: The tool's output. Toggle between *Formatted* (pretty-printed JSON) and *Raw* (the exact response text).
+* *Raw JSON-RPC*: The reconstructed request envelope, matching the method and parameters the server sees.
+* *Output schema*: The tool's declared output schema, shown when the tool provides one.
+
+A status indicator reports whether the call succeeded and how long it took. Copy actions let you copy the input, the output, or the JSON-RPC envelope. If the tool returns an error, the result card shows the structured error detail. See <<errors>> for what each common error means.
 
 === Code-mode tools
 
-If the server has *Code mode* enabled, the Tools panel also lists `{name}_search` and `{name}_execute` alongside the server's regular tools. These are the helpers an agent uses to discover and orchestrate tools through generated Python or JavaScript. Test them like any other tool.
+If the server has *Code mode* enabled, the tool list also includes `{name}_search` and `{name}_execute` alongside the server's regular tools. These are the helpers an agent uses to discover and orchestrate tools through generated Python or JavaScript. Test them like any other tool.
 
-// TODO: screenshot of the code-mode helper tools in the Tools panel and a sample `_execute` call.
+// TODO: screenshot of the code-mode helper tools in the tool list and a sample `_execute` call.
 
-== Resources panel
+== Inspect resources
 
-The Resources panel lists any resources the server exposes through `resources/list`. Many MCP servers don't expose resources at all: if the panel is empty, that's fine.
+When the server exposes resources through `resources/list`, a *Resources* panel appears below the runner. Many MCP servers don't expose resources at all: if there's no panel, that's fine.
 
 If your server does expose resources:
 
-. Click a resource to load its content into the right-hand pane.
+. Click a resource to load its content into the pane.
 . The Inspector renders text, JSON, and binary types differently; binary types show a download link.
 
-== Prompts panel
+== Inspect prompts
 
-The Prompts panel lists any prompt templates the server exposes through `prompts/list`. Prompt templates are parameterized prompts an agent can invoke by name. As with resources, many servers don't expose prompts.
+When the server exposes prompt templates through `prompts/list`, a *Prompts* panel appears below the runner. Prompt templates are parameterized prompts an agent can invoke by name. As with resources, many servers don't expose prompts.
 
 If your server does expose prompts:
 
@@ -67,15 +79,22 @@ If your server does expose prompts:
 . Fill in any required parameters in the rendered form.
 . Click *Run* to see the rendered prompt content.
 
-== Session panel
+[[session]]
+== Review session and protocol details
 
-The Session panel keeps a running history of every call you've made through the Inspector: request, response, latency. Use it to:
+The status strip along the top of the console shows the connection status and how many tool calls you've made this session, along with two controls:
 
-* Replay a previous call by clicking it in the history list.
-* Diff two responses side-by-side (useful when iterating on a tool's logic).
-* Copy a request as JSON-RPC for use outside the Inspector.
+*Session details* opens a side panel with the session's connection health, negotiated capabilities, and protocol version. Use it to confirm the Inspector connected and to see which capabilities (tools, resources, prompts) the server advertised.
 
-// TODO: confirm exact session-history affordances and capture a screenshot.
+*Protocol panel* opens a panel next to the runner:
+
+* *Wire*: The JSON-RPC request and result frames for your calls, any notifications the server sends, and a timing breakdown of the most recent call.
+* *Timeline*: A running log of the calls you've made this session, each with its result and latency.
+* *Logs*: Log lines the server sends over MCP logging.
+
+A telemetry strip reports the last call's latency, time to first byte, payload size, and estimated context tokens. Click *Clear* to empty these views.
+
+// TODO: confirm exact protocol-panel affordances and capture a screenshot.
 
 [[errors]]
 == Common errors

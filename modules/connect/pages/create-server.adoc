@@ -163,14 +163,18 @@ NOTE: Output format is a preview capability.
 == Save and verify
 
 . Click *Create server*. The server appears in the list with a *Type* badge: *Managed* or *Self-managed*.
-. Open the detail page. The *Overview* tab shows the `MCP Server URL`: the URL clients use to connect to the server. Copy it for use later.
-. Open the *Activity* tab to review how agents have used this server. The *Recent calls* table lists recent tool calls across the agents attached to this server over the last 7 days, showing each call's time, tool, agent, caller, duration, and status. Click *Refresh* to reload the feed. If no traffic has run yet, the tab is empty.
-. Open the *Connection* tab to see ready-to-paste connection snippets, pre-filled with this server's URL, for common MCP clients such as Claude Code, Claude Desktop, and Cursor, plus code examples in several languages. The code examples authenticate with the OAuth authorization-code flow and surface the OAuth client ID to use.
+. Open the detail page. The *Overview* tab summarizes the server, including its discovered tools, attached agents, and server metadata.
+. If your organization has the *Activity* tab enabled, open it to review how agents have used this server. The *Recent calls* table lists recent tool calls across the agents attached to this server over the last 7 days, showing each call's time, tool, agent, caller, duration, and status. Click *Refresh* to reload the feed. If no traffic has run yet, the tab is empty.
+. Open the *Connection* tab to get the `Server URL` that clients use to connect. Copy it for use later. The tab also gives you ready-to-paste connection snippets, pre-filled with this server's URL, for common MCP clients such as Claude Code, Claude Desktop, and Cursor, plus code examples in several languages. The code examples authenticate with the OAuth authorization-code flow and surface the OAuth client ID to use.
 . Open the *Inspector* tab. Redpanda performs a live `tools/list` against the server and lists every tool it discovered. See xref:connect:test-tools.adoc[Test a server's tools] for how to call them.
 
 A populated tools list confirms that the connection works and credentials resolve correctly. If the list is empty or the tab shows an error, see <<troubleshooting>>.
 
-// Tab names verified 2026-07-18 against adp-ui $name.index.page.tsx and $name.index.tsx (VALID_TABS) on main: Overview / Activity / Connection / Inspector. The Activity tab was added in cloudv2 PR #28227 and shows inferred recent tool calls; it is ungated. The Connection tab is the canonical home for client snippets (connect-client-guide + connection-tab components).
+To mask, drop, or filter the data this server's tools return before an agent sees it, open the *Data Policies* tab. See xref:connect:data-policies.adoc[].
+
+NOTE: Data policies are a preview capability.
+
+// Tab names verified 2026-08-01 against adp-ui $name.index.page.tsx and $name.index.tsx (VALID_TABS) on main: Overview / Data Policies / Access / Activity / Connection / Inspector (the Data Policies tab's route value is `data-access`; its visible label is Data Policies). The Connection tab is the canonical home for both the server URL and the client snippets (connect-client-guide + connection-tab components); its field label is `Server URL` (not `MCP Server URL`, which is only the row-action label on the servers list), and it also exposes a `Code Mode URL` field for code-mode servers. The redesigned Overview no longer prints the raw URL, and instead shows the discovered tool list, Attached agents, Server instructions (when the server sends any), and Server metadata. The Activity tab shows inferred recent tool calls and is gated behind MCP_SERVER_ACTIVITY (the "ungated" claim in the 2026-07-18 version of this comment was stale). Data Policies is ungated and Preview-badged; Access is gated behind MCP_SERVER_ACCESS plus AGENT_PERMISSIONS. Both are documented separately.
 
 == Create from the CLI
 
@@ -308,4 +312,5 @@ The response carries the matching `mcp_servers`, a `next_page_token` for the nex
 
 * xref:connect:user-delegated-oauth.adoc[]
 * xref:connect:test-tools.adoc[]
+* xref:connect:data-policies.adoc[]
 * xref:connect:managed/managed-catalog.adoc[]
