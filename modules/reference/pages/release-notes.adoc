@@ -6,6 +6,19 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.33 (2026-08-03)
+
+=== Improvements
+
+MCP Servers `[UI]`:: The server details page groups setup, tools, and connection details more clearly, and tool schemas stay readable when you expand a nested object.
+Environments `[UI]`:: Switching to another environment now takes you to the home page of that environment, instead of leaving you on a page that belongs to the previous one.
+Security:: This release includes general security and stability improvements.
+
+=== Bug fixes
+
+OAuth Clients:: An MCP client that registers itself with Dynamic Client Registration (DCR, RFC 7591) can now connect to a server on ADP. Claude.ai, Claude Code, and Cursor were rejected during registration, and the error named the MCP server's vendor rather than the real cause.
+Interface `[UI]`:: Confirmation dialogs now place their buttons in the same order as the rest of the product.
+
 == v0.2.32 (2026-07-30)
 
 === Features
