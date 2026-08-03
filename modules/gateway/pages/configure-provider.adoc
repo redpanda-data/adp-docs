@@ -293,7 +293,7 @@ The Transcripts card controls whether AI Gateway records the message bodies this
 |Captures the full response body (completion content and tool-call results) on observability traces.
 |===
 
-Because both toggles default to off, AI Gateway does not retain message bodies for a new provider until you turn them on. Enable them to power turn-by-turn investigation and per-conversation drill-down in xref:monitor:transcripts.adoc[the Transcripts view]. Leave them off for workloads where the message body must not be retained, such as regulated PII or customer secrets.
+Because both toggles default to off, AI Gateway does not retain message bodies for a new provider until you turn them on. Enable them to power turn-by-turn investigation and per-conversation drill-down in xref:monitor:transcripts.adoc[the transcripts view]. Leave them off for workloads where the message body must not be retained, such as regulated PII or customer secrets.
 
 These are per-provider settings, not per-request: applications cannot opt in or out at call time. To split sensitive from non-sensitive traffic, create one provider with recording on and another with it off, and route each application to whichever proxy URL matches its data class.
 

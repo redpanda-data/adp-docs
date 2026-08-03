@@ -201,7 +201,7 @@ For more about agent cards and how they're consumed, see xref:connect:a2a-concep
 Two tabs on the agent detail page support testing and observability:
 
 * *Inspector*: Send test prompts interactively and inspect each step of the agent's reasoning, tool calls, and responses. Use Inspector during development and tuning. The composer shows the agent's provider and model as read-only, so a test run always uses the agent's saved configuration.
-* *Transcripts*: Records every conversation against the agent (prompt, tool calls, tool outputs, final response). Use Transcripts to audit production behavior.
+* *Transcripts*: Records every conversation against the agent (prompt, tool calls, tool outputs, final response). Use transcripts to audit production behavior.
 
 To test the agent in Inspector:
 
