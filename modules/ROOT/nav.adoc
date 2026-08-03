@@ -59,6 +59,7 @@
 ** xref:monitor:concepts.adoc[How Observability Works]
 ** xref:monitor:monitor-agents.adoc[Monitor Agent Activity]
 ** xref:monitor:agent-network.adoc[Visualize Your Agent Network]
+** xref:monitor:audit-log.adoc[Review the Audit Log]
 ** xref:monitor:transcripts.adoc[See What Your Agent Did]
 ** xref:monitor:troubleshoot-ai-agents.adoc[Troubleshoot Agents]
 

@@ -331,7 +331,15 @@ Transcripts provide:
 * Detailed timing information for performance analysis
 * Ability to reconstruct execution paths and identify bottlenecks
 
-Transcripts are optimized for execution-level observability and governance. For user-level accountability tracking ("who initiated what"), use the session and task topics for agents, which provide records of agent conversations and task execution.
+Transcripts are optimized for execution-level observability and governance.
+
+The Audit Log provides:
+
+* The user accountable for an action, plus the agent or caller that acted for the user when available
+* The affected resource, operation, subsystem, and time
+* The allowed or denied outcome and the deciding policy when available
+
+For access and accountability questions, use xref:monitor:audit-log.adoc[the Audit Log]. For questions about an agent's model turns, tool calls, timing, or errors, use transcripts. An investigation may use both views.
 
 [[history-reconstruction]]
 == Reconstructed transcript history

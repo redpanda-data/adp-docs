@@ -1,0 +1,119 @@
+= Review the Audit Log
+:description: Review authorization decisions across Agentic Data Plane, filter events, and inspect who acted on which resource and whether the request was allowed.
+:page-topic-type: how-to
+:page-preview: true
+:personas: security_compliance_lead, platform_engineer
+:learning-objective-1: Filter authorization events by time, outcome, subsystem, or search term
+:learning-objective-2: Inspect the actor, action, resource, source, and policy behind an authorization decision
+:learning-objective-3: Choose the Audit Log or a transcript for an investigation
+
+The *Audit Log* records authorization decisions across Agentic Data Plane. Use it to answer who performed an action, which resource they acted on, where the request came from, and whether the request was allowed or denied.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+NOTE: The Audit Log is a preview capability, available when your organization has it enabled. If you don't see *Audit Log* in the sidebar, it isn't enabled for your organization.
+
+== Prerequisites
+
+Your account needs the `dataplane_adp_auditlog_list` permission to open the Audit Log and view event details. See xref:control:permissions-reference.adoc#audit-log-permissions[Audit Log permissions].
+
+[IMPORTANT]
+====
+Audit events can include user identities, resource names, network information, configuration changes, and captured request or response data. Grant Audit Log access only to people who need it, and review events before sharing them.
+====
+
+== Open the Audit Log
+
+. Select *Audit Log* in the sidebar.
+. Review the most recent events. The default time range is *Last 24 hours*.
+. Select a row to open its details.
+
+The table shows these fields:
+
+[cols="1,3"]
+|===
+|Field |Description
+
+|*Actor*
+|The user accountable for the action. When an agent or another identity acted for the user, the table also identifies that caller when available.
+
+|*Subsystem*
+|The part of Agentic Data Plane that handled the action.
+
+|*Action*
+|The operation and service involved.
+
+|*Resource*
+|The type and identifier of the affected resource.
+
+|*Outcome*
+|Whether the authorization decision allowed or denied the action. When available, the deciding policy appears under the outcome.
+
+|*Time*
+|When the decision occurred.
+|===
+
+== Filter events
+
+Use the controls above the table to narrow an investigation:
+
+* *Search*: Search event summaries by actor, resource, policy, or related text.
+* *Outcome*: Show allowed or denied actions.
+* *Subsystem*: Select one or more of *Management API*, *LLM proxy*, *MCP gateway*, *A2A proxy*, and *Spending*.
+* *Time range*: Choose *Last hour*, *Last 24 hours*, *Last 7 days*, *Last 30 days*, or *All time*.
+
+Filters work together. For example, select *Denied*, choose *MCP gateway*, and set *Last hour* to investigate recent MCP authorization failures.
+
+== Inspect an event
+
+Select an event to open its detail panel. The panel identifies the actor, outcome, subsystem, operation, resource, deciding policy, source, and time when that information is available.
+
+Depending on the action, the panel may also show:
+
+* The agent or caller that acted for a user
+* The event class and activity
+* A configuration change with before and after values
+* Captured request data
+* Response status, error, or captured response data
+
+Captured values may be redacted, truncated, or absent. An empty field does not mean that no activity occurred. Use the event summary and outcome as the primary record of the authorization decision.
+
+== Audit Log compared to transcripts
+
+Use the Audit Log for access and accountability questions:
+
+* Who attempted an action?
+* Which resource and subsystem were involved?
+* Was the action allowed or denied?
+* Which policy made the decision?
+
+Use xref:monitor:transcripts.adoc[transcripts] for execution questions about an agent conversation, including model turns, tool calls, errors, timing, and token usage. An investigation may need both views: start with the Audit Log to identify an authorization decision, then inspect the related agent activity when you need execution details.
+
+== Troubleshoot the Audit Log
+
+[cols="1,3"]
+|===
+|Issue |What to do
+
+|*Audit Log* is missing from the sidebar
+|The preview may not be enabled for your organization. Contact your Redpanda representative.
+
+|You cannot open the Audit Log
+|Ask an administrator to confirm that your account has `dataplane_adp_auditlog_list`.
+
+|No events match
+|Clear the search and filters, then widen the time range. The default view includes only the last 24 hours.
+
+|An event has no request, response, or configuration details
+|Not every event includes these fields. Use the event's actor, action, resource, outcome, and time to continue the investigation.
+|===
+
+== Next steps
+
+* xref:monitor:concepts.adoc#transcripts-compared-to-audit-logs[Transcripts compared to audit logs]
+* xref:monitor:transcripts.adoc[]
+* xref:control:permissions-overview.adoc[]
