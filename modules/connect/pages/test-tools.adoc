@@ -44,7 +44,7 @@ The tool list shows every tool the server returned from `tools/list`. Select a t
 --
 . Click *Run tool*, or press Ctrl+Enter (Cmd+Enter on macOS). While the call is in flight, a progress bar reflects any progress the server reports, and you can *Cancel* it.
 
-// TODO: screenshot of a successful tool call (use a SQL `query` against a sample table on `adp-production`).
+// TODO: screenshot of a successful tool call (use a SQL `query` against a sample table on the live environment).
 
 The response appears in a tabbed result card:
 
@@ -119,7 +119,7 @@ A telemetry strip reports the last call's latency, time to first byte, payload s
 |The form's input doesn't match the tool's schema. The error message includes the offending field. Update and re-run.
 |===
 
-// TODO: screenshots of each error case once captured against `adp-production`.
+// TODO: screenshots of each error case once captured against the live environment.
 
 == Test from the CLI
 

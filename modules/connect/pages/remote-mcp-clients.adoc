@@ -247,7 +247,7 @@ Anthropic supports custom MCP connectors in Claude.ai (web), Claude Desktop, and
 . Click *Add*. The connector appears in the Connectors list with a `CUSTOM` badge.
 . Click *Connect* on the new connector row. Claude opens a browser tab pointed at AI Gateway's authorization endpoint. Sign in with your AI Gateway identity provider. After approval, the connector becomes invokable in any conversation.
 
-// TODO: capture screenshots of the Add custom connector modal and the post-connect Connectors list against `adp-production`.
+// TODO: capture screenshots of the Add custom connector modal and the post-connect Connectors list against the live environment.
 
 NOTE: Anthropic's modal warns that connectors are user-trust-based; Anthropic doesn't control which tools developers expose. If you're publishing a connector for end-users, document the upstream system and scopes clearly so users know what they're authorizing.
 
@@ -267,7 +267,7 @@ The flow mirrors Claude Desktop. *ChatGPT*, *Cursor*, *Windsurf*, *Visual Studio
 
 The required inputs are the same as Claude Desktop: connector name, MCP URL, Client ID, Client Secret. The chat client's redirect URIs must be registered on the AI Gateway OAuth Client.
 
-// TODO: confirm and document the ChatGPT, Gemini, Cursor, and Microsoft Copilot Studio menu paths once each integration is exercised end-to-end against adp-production. For Copilot Studio specifically: capture the Power Platform / agent designer route to "Add custom connector", the redirect URIs Microsoft publishes for the MCP connector flow, and any tenant-admin consent requirements. Briefing 2026-05-22 names Copilot Studio as a supported client but does not confirm a passing end-to-end test; verify before promising the integration in customer-facing copy.
+// TODO: confirm and document the ChatGPT, Gemini, Cursor, and Microsoft Copilot Studio menu paths once each integration is exercised end-to-end against the live environment. For Copilot Studio specifically: capture the Power Platform / agent designer route to "Add custom connector", the redirect URIs Microsoft publishes for the MCP connector flow, and any tenant-admin consent requirements. Copilot Studio has been named internally as a supported client, but no passing end-to-end test is confirmed; verify before promising the integration in customer-facing copy.
 
 == The OAuth flow
 

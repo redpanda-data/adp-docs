@@ -7,7 +7,7 @@
 :learning-objective-2: Describe how triggers are added, edited, and disconnected on an agent
 :learning-objective-3: Interpret the status that an agent's Triggers tab reports for each trigger
 
-// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, TeamsTrigger, CronTrigger) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` on origin/main. UI surface verified against adp-production: Microsoft Teams on 2026-06-11, Schedule on 2026-07-24. Microsoft Teams and Schedule are selectable in the production trigger picker; the Slack and Webhook tiles are disabled and not documented.
+// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, TeamsTrigger, CronTrigger) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` on origin/main. UI surface verified against the live environment: Microsoft Teams on 2026-06-11, Schedule on 2026-07-24. Microsoft Teams and Schedule are selectable in the production trigger picker; the Slack and Webhook tiles are disabled and not documented.
 
 A trigger is a configured way to invoke an agent without calling its API directly. Without a trigger, an agent only responds to direct calls against its API. Two trigger types are available:
 

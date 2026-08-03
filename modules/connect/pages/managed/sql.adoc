@@ -52,7 +52,7 @@ Guardrails on the server config can restrict it: set `readonly` to disable `exec
 * `Guardrails` (optional): `readonly` (disables `execute`), default and maximum row caps, a per-query timeout, allowed schemas, and blocked statement patterns.
 . Click *Create*.
 
-// TODO: screenshot of the SQL form filled in for a Postgres example on `adp-production`.
+// TODO: screenshot of the SQL form filled in for a Postgres example on the live environment.
 
 == Test
 
@@ -96,7 +96,7 @@ After the SQL server is created, point an agent at the `Server URL` on the serve
 |The driver couldn't introspect the schema. Verify the user has read access to `information_schema` (Postgres/MySQL) or the equivalent.
 |===
 
-// TODO: gather more failure modes once we walk SQL on `adp-production`.
+// TODO: gather more failure modes once we walk SQL on the live environment.
 
 == Limitations
 

@@ -6,7 +6,7 @@
 :learning-objective-2: Add a Microsoft Teams trigger to an agent and copy its messaging endpoint
 :learning-objective-3: Publish the bot to your organization and verify the agent responds in a Teams chat
 
-// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, TeamsTrigger) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` on origin/main. Verified end to end against adp-production on 2026-06-11: trigger created in the UI, status Connected, agent reply streamed into a Teams chat.
+// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, TeamsTrigger) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` on origin/main. Verified end to end against the live environment on 2026-06-11: trigger created in the UI, status Connected, agent reply streamed into a Teams chat.
 
 A Microsoft Teams trigger connects a deployed agent to Microsoft Teams so people in your organization can chat with it in a personal Teams chat. Replies stream back into the chat as the agent produces them, and the agent receives the message sender's verified email address, so it can identify the user.
 

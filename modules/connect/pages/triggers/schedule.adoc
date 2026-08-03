@@ -6,7 +6,7 @@
 :learning-objective-2: Choose the timezone and input prompt for scheduled runs
 :learning-objective-3: Describe how a scheduled run invokes the agent and who it runs as
 
-// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, CronTrigger, TriggerRun) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` and the scheduler in `apps/adp-api/internal/agent/trigger/cron/` on origin/main. UI surface verified against adp-production on 2026-07-24.
+// Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (Trigger, CronTrigger, TriggerRun) cross-referenced against `apps/adp-ui/src/components/agents/triggers/` and the scheduler in `apps/adp-api/internal/agent/trigger/cron/` on origin/main. UI surface verified against the live environment on 2026-07-24.
 
 A schedule trigger runs a deployed agent automatically on a recurring schedule that you define with a cron expression. Each run sends a fixed message, the input prompt, to the agent in the timezone you choose.
 

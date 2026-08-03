@@ -6,10 +6,10 @@
 :learning-objective-2: Build an agent that combines an LLM provider with tools from an MCP server
 :learning-objective-3: Test, iterate on, and verify agent behavior with the Inspector and Transcripts tabs
 
-// Source: extracted from the combined adp-quickstart.adoc (PR #71 lineage) as part of the DOC-2342 quickstart split. Builder flow verified end-to-end on adp-production 2026-07-20 via rpk ai: OpenAPI MCP server creation from the PetStore spec, tool generation, live tool calls through the gateway, and A2A agent responses.
+// Source: extracted from the combined adp-quickstart.adoc (PR #71 lineage) as part of the DOC-2342 quickstart split. Builder flow verified end-to-end on the live environment 2026-07-20 via rpk ai: OpenAPI MCP server creation from the PetStore spec, tool generation, live tool calls through the gateway, and A2A agent responses.
 // MCP and agent labels follow the canonical docs: connect:create-server.adoc, connect:managed/openapi.adoc, and connect:create-agent.adoc. The agent detail tab list mirrors connect:create-agent.adoc. Keep this page consistent with those at PR time.
 // Markup convention: bold for click targets (buttons, tabs, sidebar/nav); monospace for field labels, option values, toggles, and status values; plain text for UI regions (cards, badges, panes).
-// Model ID (claude-sonnet-4-6) verified against the live catalog on adp-production. Re-verify at PR time; identifiers shift quarterly.
+// Model ID (claude-sonnet-4-6) verified against the live model catalog. Re-verify at PR time; identifiers shift quarterly.
 
 This quickstart takes you from zero to a working agent: you sign in, explore the agents your organization already runs, then build your own that turns a natural-language question into a real API call. By the end, you have an agent you can test, tune, and share with your team.
 

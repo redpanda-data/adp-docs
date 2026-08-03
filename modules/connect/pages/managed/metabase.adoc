@@ -84,7 +84,7 @@ Create a new Metabase MCP server in Agentic Data Plane:
 +
 . Click *Create*.
 
-// TODO: capture screenshots of the Metabase create form on `adp-production`.
+// TODO: capture screenshots of the Metabase create form on the live environment.
 
 === Configure from the CLI
 

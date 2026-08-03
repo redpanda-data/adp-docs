@@ -80,7 +80,7 @@ NOTE: Always include `offline_access` in `required_scopes`. Without it, `OAuthTo
 ** For `User-delegated OAuth`: Pick the Atlassian OAuth Provider you configured, and set `Required scopes` to at least `read:jira-user`, `read:jira-work`, and `offline_access`. Add `write:jira-work` if your agents use the write tools.
 . Click *Create*.
 
-// TODO: capture screenshots of the Jira form on `adp-production`.
+// TODO: capture screenshots of the Jira form on the live environment.
 
 == Test the consent flow
 

@@ -42,3 +42,20 @@ Routine factual corrections grounded in cloudv2 source (the kind the automated c
 ## Public-surface rule for automated routines (HARD RULE)
 
 This repository is public. Automated routines must not post review findings, source analysis, commit provenance, or internal status to any public surface of this repo: no PR comments or reviews, and no internal references (private repo names or commit SHAs, source file paths, feature flag or gate names, internal tickets, unshipped or reverted features, session links) in PR titles, PR descriptions, commit messages, or branch names. PR descriptions and commit messages describe only the documentation changes themselves. All other routine output goes to the docs team's internal channel. If the internal channel is unreachable, fail the run; never fall back to posting the content here. For automated routines, this rule supersedes the comment allowance in the previous section: flag reviewer suggestions through the internal channel, not a PR comment.
+
+### AsciiDoc source comments are a public surface too
+
+`//` comments in `.adoc` files never render, but anyone can read them in this repo on GitHub. The `// Source:` and `// TODO:` comments are worth keeping — they are how a later run knows what was verified and what still needs checking — so the rule for them is narrower than the one above rather than a blanket ban.
+
+Do NOT write in a source comment:
+
+- Commit SHAs, or private PR and merge numbers (`cloudv2 PR #28055`, `verified at 1ce9017a06`, `merge #27489`).
+- Feature flag or gate identifiers (`MCP_SERVER_ACTIVITY`). Say "feature-gated" instead; that carries the same meaning for a docs reader without naming the flag.
+- Internal environment names. Write "the live environment".
+- References to internal briefings, meetings, or tickets by date or ID.
+
+Still fine in a source comment, and preferred over dropping the comment:
+
+- Generic source file paths (`apps/adp-ui/src/components/agents/managed-create/model-picker.tsx`) and proto message or field names.
+- The verification date, and what was verified against (`origin/main`, the live environment).
+- Decision records that stop a later run from silently reversing a human call, such as which managed types are deliberately left out of the catalog.
