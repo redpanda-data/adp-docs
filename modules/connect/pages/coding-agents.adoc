@@ -148,7 +148,7 @@ If a server exposes a large tool catalog, turn on xref:gateway:code-mode.adoc[co
 
 Open *Cost & Usage* under *Governance* in the sidebar, then filter by your provider. Within a few seconds, the requests from your coding-agent session appear, and the provider's *Overview* tab breaks spend down per model.
 
-Ad-hoc `rpk ai run` sessions are not registered agents, so they do not appear in the per-agent xref:monitor:transcripts.adoc[transcripts view]. Transcripts cover agents you create in Agentic Data Plane.
+Ad-hoc `rpk ai run` sessions are not registered agents, so they do not appear in the per-agent xref:monitor:transcripts.adoc[Transcripts view]. Transcripts cover agents you create in Agentic Data Plane.
 
 == Configure the agent by hand
 
