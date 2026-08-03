@@ -36,7 +36,7 @@ The division of labor:
 * *Access policies* express the decision. A policy takes a user or an identity provider group as its principal, conditions on resource tags and ownership, narrows to a single resource, and denies. Policies are how you grant access.
 * *RBAC* bootstraps and administers. It gets your first administrators in, and it is deliberately coarse: Admin, or nothing.
 
-RBAC is not the mechanism for granting day-to-day access in Agentic Data Plane, and Redpanda is not extending it in that direction. When you need to express something, express it as a policy.
+RBAC is not the mechanism for granting day-to-day access in Agentic Data Plane. When you need to express something, express it as a policy.
 
 [NOTE]
 ====
