@@ -4,7 +4,7 @@
 :page-topic-type: how-to
 :personas: agent_builder
 :learning-objective-1: Run an MCP tool from the Inspector and read its response
-:learning-objective-2: Inspect resources and prompts, and review session activity
+:learning-objective-2: Inspect a server's resources, prompts, and session activity
 :learning-objective-3: Diagnose common errors (missing authentication, scope upgrade required, transport mismatch) before pointing an agent at the server
 
 Verify that your MCP server's glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] work correctly before agents depend on them. The Inspector runs on the same JSON-RPC connection agents use, so a passing test means fewer failed tool calls in production. Use the Inspector after creating a server or whenever you change a tool's schema.
@@ -23,7 +23,7 @@ After completing this guide, you will be able to:
 
 == Open the Inspector
 
-. Open *MCP Servers* in the navigation menu and click into your server.
+. Open *MCP Servers* in the sidebar and click into your server.
 . Switch to the *Inspector* tab.
 +
 // TODO: screenshot of the Inspector console: tool list, tool runner, and status strip.
@@ -38,9 +38,9 @@ The tool list shows every tool the server returned from `tools/list`. Select a t
 . Provide the tool's input using one of the input modes:
 +
 --
-* *Form*: a field-by-field form generated from the tool's input JSON schema.
-* *JSON*: the raw JSON input, for pasting or editing a whole object at once.
-* *cURL*: a ready-to-run `curl` command for the call, with a copy action.
+* *Form*: A field-by-field form generated from the tool's input JSON schema.
+* *JSON*: The raw JSON input, for pasting or editing a whole object at once.
+* *cURL*: A ready-to-run `curl` command for the call, with a copy action.
 --
 . Click *Run tool*, or press Ctrl+Enter (Cmd+Enter on macOS). While the call is in flight, a progress bar reflects any progress the server reports, and you can *Cancel* it.
 
@@ -48,9 +48,9 @@ The tool list shows every tool the server returned from `tools/list`. Select a t
 
 The response appears in a tabbed result card:
 
-* *Result*: the tool's output. Toggle between *Formatted* (pretty-printed JSON) and *Raw* (the exact response text).
-* *Raw JSON-RPC*: the reconstructed request envelope, matching the method and parameters the server sees.
-* *Output schema*: the tool's declared output schema, shown when the tool provides one.
+* *Result*: The tool's output. Toggle between *Formatted* (pretty-printed JSON) and *Raw* (the exact response text).
+* *Raw JSON-RPC*: The reconstructed request envelope, matching the method and parameters the server sees.
+* *Output schema*: The tool's declared output schema, shown when the tool provides one.
 
 A status indicator reports whether the call succeeded and how long it took. Copy actions let you copy the input, the output, or the JSON-RPC envelope. If the tool returns an error, the result card shows the structured error detail. See <<errors>> for what each common error means.
 
@@ -86,11 +86,11 @@ The status strip along the top of the console shows the connection status and ho
 
 *Session details* opens a side panel with the session's connection health, negotiated capabilities, and protocol version. Use it to confirm the Inspector connected and to see which capabilities (tools, resources, prompts) the server advertised.
 
-*Protocol panel* opens a panel next to the runner with three tabs:
+*Protocol panel* opens a panel next to the runner:
 
-* *Wire*: the JSON-RPC request and result frames for your calls, any notifications the server sends, and a timing breakdown of the most recent call.
-* *Timeline*: a running log of the calls you've made this session, each with its result and latency.
-* *Logs*: log lines the server sends over MCP logging.
+* *Wire*: The JSON-RPC request and result frames for your calls, any notifications the server sends, and a timing breakdown of the most recent call.
+* *Timeline*: A running log of the calls you've made this session, each with its result and latency.
+* *Logs*: Log lines the server sends over MCP logging.
 
 A telemetry strip reports the last call's latency, time to first byte, payload size, and estimated context tokens. Click *Clear* to empty these views.
 
