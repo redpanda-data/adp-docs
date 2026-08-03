@@ -5,7 +5,7 @@
 :personas: agent_builder, platform_engineer
 :learning-objective-1: Create a managed or self-managed MCP server in Agentic Data Plane
 :learning-objective-2: Configure each authentication mode and pick the right one for your use case
-:learning-objective-3: Save the server, verify the MCP Server URL, and confirm tools were discovered
+:learning-objective-3: Save the server, verify the server URL, and confirm tools were discovered
 
 Create MCP servers to give agents structured access to your databases, queues, CRMs, and other business systems. Each server exposes glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] that an agent can discover and invoke. Choose managed types that Redpanda hosts for you, or register self-managed servers you host yourself.
 
@@ -128,7 +128,7 @@ NOTE: Choosing between `Service-account OAuth` and `User-delegated OAuth` is the
 
 Toggle *Enable Code Mode* to add `\{name}_search` and `\{name}_execute` tools alongside the server's own tools. Agents can use `_search` to discover available tools and `_execute` to run sandboxed Python or JavaScript that orchestrates them. This is useful when you'd rather have the agent generate a small program than call tools one at a time.
 
-When code mode is enabled, the server's detail page surfaces a second URL, the *code-mode MCP URL*, that clients can connect to instead of the standard one.
+When code mode is enabled, the *Connection* tab surfaces a second URL, the `Code Mode URL`, that clients can connect to instead of the standard one.
 
 // TODO: screenshot of the code-mode toggle and the resulting two URLs on the detail page.
 

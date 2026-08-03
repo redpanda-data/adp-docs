@@ -34,7 +34,7 @@ The Inspector is a console: a tool list and a tool runner sit side by side, with
 
 The tool list shows every tool the server returned from `tools/list`. Select a tool to load it into the runner.
 
-. Select a tool from the list. The runner shows the tool's input and, once you run it, its response.
+. Select a tool from the list. The runner shows the tool's input and, after you run it, its response.
 . Provide the tool's input using one of the input modes:
 +
 --

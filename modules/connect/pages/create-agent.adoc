@@ -154,7 +154,7 @@ When the agent is running, open its detail page. A managed agent has these tabs:
 
 A running managed agent exposes an link:https://a2a-protocol.org/[A2A^] endpoint that you can call programmatically or integrate with external systems.
 
-* *A2A endpoint*: The URL where the agent receives messages, provisioned once the agent starts. It is published in the agent's card at `\https://<your-agent-url>/.well-known/agent-card.json`, and you can fetch it with the xref:reference:rpk/rpk-ai/rpk-ai-agent-a2a-card.adoc[`rpk ai agent a2a card`] command.
+* *A2A endpoint*: The URL where the agent receives messages, provisioned after the agent starts. It is published in the agent's card at `\https://<your-agent-url>/.well-known/agent-card.json`, and you can fetch it with the xref:reference:rpk/rpk-ai/rpk-ai-agent-a2a-card.adoc[`rpk ai agent a2a card`] command.
 * *Authentication*: The endpoint accepts Redpanda Cloud bearer tokens. Create a service account, exchange its client credentials for an access token, and send the token as an `Authorization: Bearer` header on every request. For how service accounts and role bindings work, see xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
 * *Code examples*: Call the agent with an official A2A client SDK (Go, Node.js, Python, and Java), with `curl`, or with the xref:reference:rpk/rpk-ai/rpk-ai-agent-a2a-send.adoc[`rpk ai agent a2a send`] command.
 
