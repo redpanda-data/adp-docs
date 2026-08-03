@@ -235,6 +235,27 @@ The `dataplane_adp_transcript_*` permissions gate read access to agent conversat
 Transcript access is separate from agent read access. A principal that can view an agent's configuration through `dataplane_adp_agent_get` cannot read that agent's transcripts. Grant transcript access deliberately, with a policy naming the `Transcript` actions, to the users and service accounts that need to read conversation content.
 ====
 
+== Audit log permissions
+
+The `dataplane_adp_auditlog_list` permission gates read access to the audit log, which records every authorization decision Agentic Data Plane evaluated across the management API, the LLM proxy, the MCP gateway, agent-to-agent (A2A) calls, and spending. For what an audit event records, see xref:control:audit-log.adoc[].
+
+[cols="2,3"]
+|===
+|Permission |Operation
+
+|`dataplane_adp_auditlog_list`
+|List audit log events
+|===
+
+[NOTE]
+====
+One permission covers both listing events and reading one event's detail, including the captured request body, the response code the call returned, and the before and after states of a configuration change.
+
+Listing audit events is a read operation, so the built-in *Read only* template grants this permission, along with every template built on top of that one. To let a principal read resource configuration without reading the audit log, author your own template or policy that omits `AuditLog.list` rather than linking a built-in template.
+
+Reading the audit log runs through the same authorization and recording path as every other call, so each read is itself an audit event.
+====
+
 == Access policy permissions
 
 The `dataplane_adp_policy_*` and `dataplane_adp_policytemplate_*` permissions gate the access policies and policy templates themselves. See xref:control:access-policies.adoc[].
@@ -352,7 +373,7 @@ The `dataplane_adp_guardrail_*` permissions gate guardrail policies that screen 
 
 == A2A runtime permissions
 
-The `dataplane_aiagent_a2a_*` permissions, along with `dataplane_adp_a2a_invoke`, gate agent-to-agent (A2A) runtime traffic.
+The `dataplane_aiagent_a2a_*` permissions, along with `dataplane_adp_a2a_invoke`, gate A2A runtime traffic.
 
 [cols="2,3"]
 |===

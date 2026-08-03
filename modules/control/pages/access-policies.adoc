@@ -92,6 +92,9 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |`Spending`
 |`get`
 
+|`AuditLog`
+|`list`
+
 |`OAuthProvider`
 |`get`, `list`, `create`, `update`, `delete`, `attach`
 
@@ -121,6 +124,8 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |===
 
 The `SystemPolicy.list` action gates reading the permits derived from role bindings. That view names every binding's principal, so it sits on its own action rather than riding along with `Policy.list`.
+
+Five entity types in this table each cover exactly one instance for the whole deployment: `AgentNetwork`, `AuditLog`, `DCRSettings`, `EffectivePolicySet`, and `Spending`. Pin the type with `resource is <Entity>`, because the single instance carries a fixed internal ID and a narrower resource clause adds nothing. A role binding scoped to an instance of one of these types resolves to nothing, so grant these actions with a policy instead.
 
 Entity type names are case-sensitive, and the casing doesn't always follow the prose (`McpServer`, not `MCPServer`). Copy them from this table.
 

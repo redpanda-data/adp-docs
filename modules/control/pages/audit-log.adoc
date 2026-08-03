@@ -1,0 +1,147 @@
+= Review the Audit Log
+:description: Read the record of every authorization decision Agentic Data Plane evaluated, including who did what, to which resource, from where, and whether it was allowed and why.
+:page-topic-type: how-to
+:page-preview: true
+:personas: security_compliance_lead, platform_engineer
+:learning-objective-1: Scope the audit log to a time window, an outcome, and a subsystem
+:learning-objective-2: Read an audit event's actor, action, resource, and verdict from the table
+:learning-objective-3: Inspect one event's request body, response, and configuration change
+
+// Facts verified against the AuditLogService API and the Agentic Data Plane UI on 2026-08-03.
+
+The *Audit Log* is the record of every authorization decision Agentic Data Plane evaluated: who did what, to which resource, from where, and whether it was allowed and why. It spans the management API, the glossterm:large language model (LLM)[,LLM] proxy, the glossterm:MCP server[,MCP] gateway, agent-to-agent (A2A) calls, and spending, so one page answers an access question you would otherwise answer by correlating several surfaces.
+
+After reading this page, you will be able to:
+
+* [ ] {learning-objective-1}
+* [ ] {learning-objective-2}
+* [ ] {learning-objective-3}
+
+Reading the audit log is itself an authorized, recorded action, so an investigation leaves its own trail.
+
+[NOTE]
+====
+The audit log is a preview capability. Access to the page is granted per organization, and audit recording is enabled per deployment; the two are independent. If you don't see *Audit Log* in the sidebar, it isn't enabled for your organization, so contact Redpanda support.
+
+The page can therefore appear on a deployment that records nothing. If the table is empty for a period you know had activity, see <<troubleshooting,Troubleshooting>>.
+====
+
+== Prerequisites
+
+Reading the audit log requires the `dataplane_adp_auditlog_list` permission. Among the built-in roles, only Admin grants it. See xref:control:permissions-reference.adoc#audit-log-permissions[Audit log permissions].
+
+To grant audit log access without granting Admin, either link the built-in *Read only* template, which includes this permission, or write an access policy for the `Action::"AuditLog.list"` action with `resource is AuditLog`. See xref:control:access-policies.adoc[].
+
+== Open the audit log
+
+Open *Audit Log* in the sidebar.
+
+The page opens on the last 24 hours, newest event first. You can't sort by column.
+
+== Scope the time window
+
+Choose the window from the range dropdown: *All time*, *Last hour*, *Last 24 hours* (the default), *Last 7 days*, or *Last 30 days*.
+
+The audit log is append-only, and each query reads the record itself rather than a prebuilt index, so *All time* reads every recorded event on every page load and every filter change. Unless you are looking for an older event, keep a bounded window and expect an unbounded query to slow as the record grows.
+
+Choosing a range anchors the window to that moment, so it doesn't slide forward while you page through results.
+
+== Filter events
+
+Two filters narrow the result set, and Agentic Data Plane applies both across the whole window rather than only the rows already on screen:
+
+* *Outcome*: *Allowed* or *Denied*, one at a time.
+* *Subsystem*: *Management API*, *LLM proxy*, *MCP gateway*, *A2A proxy*, and *Spending*. Choose any combination, and an event matches any subsystem you choose. An event whose subsystem was not observed carries the value `unknown`, which matches none of the five, so any subsystem filter hides it.
+
+The search box matches text in the event's one-line summary and ignores case. That summary carries the actor, the operation, the resource, the verdict, and the deciding policy, so a search over it reaches all of them: searching `denied` finds denials, and searching an agent's name finds the events recorded against that agent as a resource.
+
+The time range, both filters, and the search text all live in the page URL, so you can bookmark a scoped view or share the link with your team. A relative window such as *Last 7 days* is stored as the preset, not as fixed timestamps, so a shared link resolves against the recipient's current time.
+
+== Read the table
+
+[cols="1,3"]
+|===
+|Column |What it shows
+
+|*Actor*
+|The accountable identity, as the email address of the person the call is attributed to. On a delegated call, where an agent's service account acts for a person, the address is still the person's. When the event names a bound agent or a caller different from the accountable identity, a second line names what made the request.
+
+|*Subsystem*
+|The component that handled the call.
+
+|*Action*
+|The operation, with the service that exposes it on a second line. On a proxied surface, the operation names the protocol call, such as `tools/call` or `chat/completions`.
+
+|*Resource*
+|What the action targeted, as `<type>/<id>`. In this pair, `<type>` is the audit log's own lowercase resource type, such as `agent` or `mcp_server`, and `<id>` is the targeted resource's name. These types are not spelled the same as the entity names you write in an access policy. A resource with exactly one instance for the whole deployment, such as the audit log itself, shows its type alone.
+
+|*Outcome*
+|*Allowed* or *Denied*, with the deciding policy on a second line. A grant from a role binding on a user collapses to the role, such as *Admin role*; a grant from a role binding on a group shows the binding's full identifier; and a grant from an access policy shows the policy name. A denial that no policy explains, which is the default deny, shows no policy line.
+
+|*Time*
+|How long ago the decision was made. Hover to read the absolute timestamp.
+|===
+
+One request can produce several rows. When authorization filters a collection, Agentic Data Plane evaluates each item and records a decision for each one, so a single list call yields one event per item. Those events share an actor and an operation but differ in *Resource*. An item the filter removed also differs in *Outcome*.
+
+The footer shows the current page, the range of rows on it, and a rows-per-page control. It reports no result total: counting every match costs as much as reading the record.
+
+== Inspect one event
+
+Click a row to open the event.
+
+The header repeats the operation, the verdict, the actor, and the absolute time, followed by the event's one-line summary, which is the same text the search box matches. The *Event* section then lists what the event carries:
+
+* *Actor (user)*, *Invoked by*, and *Agent*: who is accountable and what made the request. *Invoked by* and *Agent* each appear when the event carries that fact: *Invoked by* when the authenticated caller differs from the accountable identity, and *Agent* when the caller is an agent's service account. An agent's service account calling for itself shows *Agent* with *Invoked by* empty.
+* *Subsystem*, *Service*, *Operation*, and *Activity*: what was called. *Activity* is a coarse classification of the event rather than of the wire call: a configuration change reads *Update*, and every other event reads *Other*. Read *Operation* for the specific call.
+* *Event class*: *API activity* for an access decision or *Configuration change* for a resource update that carries before and after states.
+* *Outcome* and *Deciding policy*: the verdict and what produced it.
+* *Resource*: what the action targeted.
+* *Source IP*: the caller's address as attested by the ingress proxy. When the proxy forwards no caller address, the field falls back to the address that opened the connection. Behind an ingress, that address belongs to the proxy rather than the original caller.
+* *Emitted by*: which service recorded the event.
+* *Tenant*: the data plane the event was recorded against, not your organization ID.
+
+Two further sections appear when the event carries the data behind them:
+
+* *Configuration change*: a line-by-line diff of the resource before and after, with counts of added and removed lines. Only an update carries both states, so a diff appears for an agent, LLM provider, MCP server, guardrail, budget, OAuth provider, or OAuth client update. A create or a delete is recorded as *API activity* with no diff. When a change is too large to diff line by line, the page shows each version whole.
+* *Request*: the captured request body, as JSON. The management API and the MCP gateway capture the request body on a call that produced one decision. The LLM proxy, the A2A proxy, and spending capture no body, and neither do the per-item events of a list that evaluated more than one item, so none of those events record more than the call and the verdict.
+
+A *Response* section appears whenever the event captured a request body or the transport reported a failure. Every MCP gateway event carries one, as does every management API event from a call that produced a single decision. *Status* reads either *OK* or *Failed*. A failure adds the *Error* message and *Code*, the numeric Connect RPC status code, so a permission denial reads `7`.
+
+CAUTION: *Status* reflects only what the transport reported, and the MCP gateway reports nothing there, so an MCP gateway event shows *Status* as *OK* even when the call was denied. Read *Outcome* for the authorization verdict.
+
+Agentic Data Plane redacts captured bodies before recording them and truncates long ones. When the detail load fails, the page says so and offers *Retry*. A failed load means the page couldn't fetch the body, not that the event captured none.
+
+== Troubleshooting
+
+[cols="1,2"]
+|===
+|Symptom |What to check
+
+|The table is empty for a period you know had activity.
+|The default window covers the last 24 hours, so widen the range. Then confirm the period falls after Redpanda enabled audit recording on your deployment, because Agentic Data Plane records no events from before that.
+
+|Every query returns a permission error.
+|Reading the audit log needs the `dataplane_adp_auditlog_list` permission, which the Admin role and the built-in *Read only* template grant. See <<prerequisites,Prerequisites>>.
+
+|The page reports that the audit log is unavailable.
+|Either the query engine that serves the audit log isn't configured for your deployment, or its source registration is still pending. If the message says the source isn't available, wait and retry. If it says the engine isn't configured, contact Redpanda support.
+
+|Results take several seconds to arrive.
+|Each query reads the record itself, so its cost tracks the window you chose. Narrow the time range.
+
+|A field carries the value `unknown`.
+|The surface that recorded the event didn't observe that fact. An event with an unknown service or operation still carries its authorization verdict, so it remains evidence of the decision.
+
+|The actor is a service account rather than a person.
+|The call wasn't delegated, so the service account is the accountable identity, and *Invoked by* is empty. A populated *Agent* means the caller is an agent's own service account acting for itself, which is still not a delegated call: on a delegated call, *Actor (user)* would be a person's address.
+
+|The same actor and operation appear on many rows.
+|Authorization filtered a collection, and each item carries its own decision. Compare the *Resource* and *Outcome* columns to see which items were allowed.
+|===
+
+== Next steps
+
+* xref:control:permissions-reference.adoc[]
+* xref:control:access-policies.adoc[]
+* xref:monitor:transcripts.adoc[]
