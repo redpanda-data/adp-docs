@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Require :description: on every page
+      - name: "Require :description: on every page"
         run: |
           # Style guide: every page needs a :description: (search results, link
           # previews, and AI discoverability all read it). Generated rpk stubs
