@@ -6,6 +6,22 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.34 (2026-08-04)
+
+=== Features
+
+OAuth Clients:: An MCP client can now reach a protected server with a Client ID Metadata Document (CIMD), the MCP spec's successor to Dynamic Client Registration. The app hosts its own metadata at an `https` URL and presents that URL as its client ID, so nobody creates a client by hand. Turn on **Accept client metadata documents (CIMD)** on the **Integrations setup** page, choose whether to accept documents from **Any domain** or **Only these domains**, and list the MCP servers those clients can reach.
+Models:: GPT-5.6 Sol, Terra, and Luna are now in the Amazon Bedrock catalog. Enable `openai.gpt-5.6-sol`, `openai.gpt-5.6-terra`, or `openai.gpt-5.6-luna` on a Bedrock provider.
+
+=== Improvements
+
+Security:: This release includes general security and stability improvements.
+
+=== Bug fixes
+
+LLM Providers:: Creating an LLM provider now works on Google Cloud environments. Saving the provider's API key failed because the form attached an internal label that Google Secret Manager rejects.
+Cost & Usage:: Cost reporting overstated GPT-5.6 Luna and Terra spend. OpenAI reduced the rates for both models on July 30, so reported cost now matches the current rates. Figures recorded before this release keep their earlier, higher numbers.
+
 == v0.2.33 (2026-08-03)
 
 === Improvements
