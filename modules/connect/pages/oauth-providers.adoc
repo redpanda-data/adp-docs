@@ -151,9 +151,9 @@ The provider appears in the *Outbound providers* list.
 [[discover-a-provider-from-an-mcp-server-url]]
 == Discover a provider from an MCP server URL
 
-When you connect to a remote MCP server that authenticates users over OAuth, you can let AI Gateway detect the server's OAuth configuration instead of entering endpoints and credentials by hand. If the remote server supports dynamic client registration, the gateway registers itself as an OAuth client automatically, so you have no endpoints or client credentials to paste.
+When you connect to a remote MCP server that authenticates users over OAuth, you can let AI Gateway detect the server's OAuth configuration instead of entering endpoints and credentials by hand. If the remote server supports client metadata documents, AI Gateway identifies itself with an HTTPS URL and does not create a registration. If the server instead supports dynamic client registration, the gateway registers itself automatically. In either case, you have no endpoints or client credentials to paste.
 
-NOTE: This is the _outbound_ direction: AI Gateway registers itself as a client of a remote MCP server's OAuth server. It is distinct from the inbound direction, where external MCP clients register themselves with AI Gateway. To let clients such as Claude Code or ChatGPT register with the gateway, see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
+NOTE: This is the _outbound_ direction: AI Gateway identifies itself to a remote MCP server's OAuth server. It is distinct from the inbound direction, where external MCP clients identify themselves to AI Gateway. To let clients such as Claude Code or ChatGPT connect to the gateway, see xref:connect:remote-mcp-clients.adoc[Connect remote MCP clients to AI Gateway].
 
 To discover a provider:
 
@@ -166,13 +166,16 @@ To discover a provider:
 |===
 |Result |What happens
 
+|Server supports client metadata documents
+|The gateway identifies itself with the client metadata document it publishes and pre-fills the provider. No client registration or shared client secret is required. Confirm the details to create the provider.
+
 |Server supports dynamic client registration
 |The gateway registers itself as an OAuth client with the remote server's authorization server and pre-fills the provider. Confirm the details to create the provider.
 
 |A matching provider already exists
 |The gateway points you at the provider already registered for that server so you can attach it instead of creating a duplicate.
 
-|Server has no OAuth, or OAuth without dynamic client registration
+|Server has no OAuth, or OAuth without client metadata documents or dynamic client registration
 |The gateway falls back to the manual create form, pre-filling whatever it could detect. Complete the remaining fields as described in <<register-an-oauth-provider-in-the-ui,Register an OAuth provider in the UI>>.
 |===
 

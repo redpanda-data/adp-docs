@@ -1,12 +1,12 @@
 = Connect Remote MCP Clients
-:description: Connect external MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps) to MCP servers hosted in AI Gateway. Covers the architecture (MCP server, OAuth Provider, OAuth Client) and the OAuth flow that runs end-to-end.
+:description: Connect external MCP clients to MCP servers in AI Gateway using client metadata documents, dynamic client registration, or manual registration.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer, security_compliance_lead
-:learning-objective-1: Register an OAuth Client in AI Gateway so an external chat app can authenticate users
+:learning-objective-1: Choose a client identification method for an external chat app
 :learning-objective-2: Wire a custom connector in Claude Desktop (or another chat client) to your MCP server
 :learning-objective-3: Walk a user through the OAuth flow that runs end-to-end
 
-External MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps, Cursor) connect to MCP servers hosted in AI Gateway by registering as OAuth clients. End-users get the MCP tools inside their preferred chat app, with Redpanda mediating both client-app authentication and upstream-system authentication.
+External MCP clients (Claude Desktop, ChatGPT desktop, Gemini Apps, Cursor) connect to MCP servers hosted in AI Gateway over OAuth. A client can identify itself with a client metadata document, register itself dynamically, or use a client that an administrator registered manually. End-users get the MCP tools inside their preferred chat app, with Redpanda mediating both client-app authentication and upstream-system authentication.
 
 After completing this guide, you will be able to:
 
@@ -52,7 +52,7 @@ Wiring a remote chat client to an MCP server uses three resources in AI Gateway:
 |Defines how AI Gateway authenticates against the upstream system on behalf of users (for example, GitHub) when the MCP server uses user-delegated OAuth. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider]. Optional: only needed if the MCP server requires per-user upstream identity.
 
 |OAuth Client
-|Defines how an external chat app (Claude Desktop, ChatGPT, Gemini, Cursor) authenticates *against AI Gateway* on behalf of users. The chat client gets a `client_id` + `client_secret` it uses to negotiate access tokens. *This is what makes the chat-client integration possible.*
+|Defines how an external chat app (Claude Desktop, ChatGPT, Gemini, Cursor) authenticates *against AI Gateway* on behalf of users. The client can use an HTTPS URL as its `client_id`, register dynamically, or use credentials from a manual registration. *This is what makes the chat-client integration possible.*
 |===
 
 Putting it together with a GitHub example:
@@ -72,9 +72,40 @@ Before you wire up the chat-client connector, make sure you have:
 * For user-delegated MCP servers: An OAuth Provider configured for the upstream system. See xref:connect:oauth-providers.adoc[Configure an OAuth Provider].
 * End-users have accounts with the chat client (Claude, ChatGPT, Gemini, Cursor) and the upstream system the MCP server connects to.
 
+[[client-metadata-documents]]
+== Let clients use metadata documents
+
+Client ID metadata documents let a public OAuth client use an HTTPS URL as its `client_id`. The client hosts a JSON metadata document at that URL instead of creating a saved registration on AI Gateway. The document identifies the client and lists its redirect URIs.
+
+When the client starts an authorization request, AI Gateway checks that the document names its own URL and includes the requested redirect URI. Clients that use a metadata document run the authorization-code flow with PKCE and do not use a shared client secret.
+
+Use metadata documents when the external MCP client supports them and you want clients to connect without an administrator creating or maintaining a registration. A client that uses a metadata document does not create an entry in the *Inbound clients* list.
+
+=== Enable client metadata documents
+
+. Open *Integrations setup* in the sidebar and select the *Inbound clients* tab.
+. Select *Self-registration*.
+. Turn on *Accept client metadata documents (CIMD)*.
+. Under Trusted document domains, choose one of these options:
++
+* *Any domain*: Accept a valid metadata document from any HTTPS domain.
+* *Only these domains*: Accept documents only from the domains you list. A listed parent domain also covers its subdomains.
++
+. Under Allowed resources, add the exact MCP URLs these clients may access, or allow any MCP server on the gateway.
+. Click *Save settings*.
+
+NOTE: If the settings report that client metadata documents are not active on the gateway, clients cannot use a URL as their client ID yet. Contact the gateway operator before testing the connection.
+
+[IMPORTANT]
+====
+The domain policy controls which clients may identify themselves to the gateway. The allowed-resources policy separately controls which MCP servers those clients may request tokens for. Restrict both lists when only approved clients should reach specific MCP servers.
+====
+
+If a client does not support metadata documents, use dynamic client registration or create the client manually.
+
 == Register an OAuth Client in AI Gateway
 
-Register a client by hand when it can't self-register, when it needs a confidential `client_secret`, or when you want to pre-provision it before the first connection. For spec-conformant clients that support dynamic client registration, you can skip this manual flow and let them register themselves. See <<self-register-with-dcr,Let clients self-register>>.
+Register a client by hand when it supports neither client metadata documents nor dynamic client registration, when it needs a confidential `client_secret`, or when you want to pre-provision it before the first connection. For supported public clients, you can skip this manual flow. See <<client-metadata-documents,Let clients use metadata documents>> or <<self-register-with-dcr,Let clients self-register>>.
 
 Create an OAuth Client to give the chat app the credentials it needs to authenticate against AI Gateway:
 
@@ -124,7 +155,7 @@ On submit, AI Gateway mints the `client_id`. Confidential clients (those using a
 [[self-register-with-dcr]]
 == Let clients self-register
 
-Instead of registering every client by hand, you can let spec-conformant MCP clients register themselves. AI Gateway supports the OAuth 2.0 Dynamic Client Registration Protocol (RFC 7591), but self-registration is off for each organization by default. After you enable it, the gateway advertises a `registration_endpoint` in its authorization-server metadata at `/.well-known/oauth-authorization-server`. Clients that read this metadata (Claude Code, Cursor, ChatGPT, and other spec-conformant MCP clients) register on their first connection attempt, run the authorization-code flow with PKCE, and obtain tokens without an admin provisioning a `client_id` or `client_secret` first.
+For clients that do not support metadata documents, you can let spec-conformant MCP clients register themselves. AI Gateway supports the OAuth 2.0 Dynamic Client Registration Protocol (RFC 7591), but dynamic registration is off for each organization by default. After you enable it, the gateway advertises a `registration_endpoint` in its authorization-server metadata at `/.well-known/oauth-authorization-server`. Clients that read this metadata (Claude Code, Cursor, ChatGPT, and other spec-conformant MCP clients) register on their first connection attempt, run the authorization-code flow with PKCE, and obtain tokens without an admin provisioning a `client_id` or `client_secret` first.
 
 Enable self-registration before conformant clients can register.
 
