@@ -1,0 +1,43 @@
+name: Lint page metadata
+
+# Runs on every PR (no paths filter) so it can be a required status check:
+# a required check that is skipped by a paths filter leaves PRs stuck pending.
+# It passes fast when no pages are affected.
+on: pull_request
+
+jobs:
+  descriptions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Require :description: on every page
+        run: |
+          # Style guide: every page needs a :description: (search results, link
+          # previews, and AI discoverability all read it). Generated rpk stubs
+          # get theirs from the stub generator in docs-extensions-and-macros
+          # (tools/rpk-docs/generate-plugin-stubs.js).
+          missing=0
+          while IFS= read -r f; do
+            if ! grep -qE '^:description: .+' "$f"; then
+              echo "::error file=$f::Missing :description: header attribute"
+              missing=1
+            fi
+          done < <(find modules/*/pages -name '*.adoc' -type f)
+          exit $missing
+
+      - name: Warn on over-length descriptions (changed files only)
+        run: |
+          # Style guide recommends under 155 chars (search snippet cutoff).
+          # Warn-only, and only for files this PR touches, so pre-existing
+          # long descriptions don't spam every PR.
+          git diff --name-only "${{ github.event.pull_request.base.sha }}".."${{ github.event.pull_request.head.sha }}" \
+            | grep -E '^modules/.*/pages/.*\.adoc$' | while IFS= read -r f; do
+            [ -f "$f" ] || continue
+            desc=$(grep -m1 '^:description: ' "$f" | sed 's/^:description: //')
+            if [ -n "$desc" ] && [ "${#desc}" -gt 155 ]; then
+              echo "::warning file=$f::Description is ${#desc} chars; style guide recommends under 155"
+            fi
+          done
