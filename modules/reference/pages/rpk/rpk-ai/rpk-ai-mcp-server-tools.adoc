@@ -1,5 +1,6 @@
 = rpk ai mcp-server tools
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-tools.adoc
+:description: Interact with tools on an MCP server.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-tools.adoc[tag=single-source]

@@ -1,5 +1,6 @@
 = rpk ai mcp-server tools call
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-tools-call.adoc
+:description: pass:q[Invoke a tool on an MCP server through the aigw MCP proxy. The server's /mcp/v1/<name> endpoint is reached with the same bearer token used by the rest of `rpk ai`; aigw resolves user-delegated OAuth tokens from the vault when the MCP server is configured with `--user-oauth-provider`.]
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-tools-call.adoc[tag=single-source]

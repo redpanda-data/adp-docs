@@ -1,4 +1,5 @@
 = rpk ai auth
+:description: pass:q[Manage `rpk` ai authentication (`login`, logout, token, status).]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-auth.adoc[tag=single-source]

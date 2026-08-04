@@ -1,4 +1,5 @@
 = rpk ai agent create
+:description: Create an agent.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-create.adoc[tag=single-source]

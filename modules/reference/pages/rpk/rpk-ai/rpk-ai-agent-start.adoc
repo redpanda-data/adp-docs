@@ -1,4 +1,5 @@
 = rpk ai agent start
+:description: Start a managed agent, setting its desired state to running.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-start.adoc[tag=single-source]

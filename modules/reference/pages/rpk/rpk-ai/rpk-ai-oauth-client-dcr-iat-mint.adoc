@@ -1,4 +1,5 @@
 = rpk ai oauth-client dcr iat mint
+:description: Mint a one-shot Initial Access Token for use at the OAuth client registration endpoint. The token plaintext is printed once and only a hash is stored.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-dcr-iat-mint.adoc[tag=single-source]

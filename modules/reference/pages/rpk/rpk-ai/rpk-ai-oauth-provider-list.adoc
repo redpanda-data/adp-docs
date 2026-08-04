@@ -1,4 +1,5 @@
 = rpk ai oauth-provider list
+:description: List OAuth providers.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-provider-list.adoc[tag=single-source]

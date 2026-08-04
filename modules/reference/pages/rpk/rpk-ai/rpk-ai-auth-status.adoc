@@ -1,4 +1,5 @@
 = rpk ai auth status
+:description: Show the authentication state for the current environment.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-auth-status.adoc[tag=single-source]

@@ -1,4 +1,5 @@
 = rpk ai oauth-client update
+:description: Update an OAuth client.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-update.adoc[tag=single-source]

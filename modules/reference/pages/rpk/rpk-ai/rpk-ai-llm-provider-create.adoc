@@ -1,5 +1,6 @@
 = rpk ai llm-provider create
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-llm-create.adoc
+:description: Create an LLM provider. Choose the provider-config by setting flags from one group; the group you use selects it: openai-config, anthropic-config, google-config, bedrock-config, openai-compatible-config.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-llm-provider-create.adoc[tag=single-source]

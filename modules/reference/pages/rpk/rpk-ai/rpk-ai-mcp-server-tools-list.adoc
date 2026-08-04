@@ -1,5 +1,6 @@
 = rpk ai mcp-server tools list
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-tools-list.adoc
+:description: List tools on an MCP server by calling tools/list through the aigw MCP proxy. Hits the server's /mcp/v1/<name> endpoint, so the same auth and token-vault path used by tools/call is exercised here.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-tools-list.adoc[tag=single-source]

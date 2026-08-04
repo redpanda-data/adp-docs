@@ -1,4 +1,5 @@
 = rpk ai agent a2a
+:description: Interact with an agent over the A2A (Agent-to-Agent) protocol. The AGENT argument is either a registry agent name (resolved to the agent's A2A endpoint via its runtime status) or a full A2A endpoint URL (anything starting with http:// or https://).
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-a2a.adoc[tag=single-source]

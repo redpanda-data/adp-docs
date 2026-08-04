@@ -1,5 +1,6 @@
 = rpk ai llm-provider check
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-llm-check.adoc
+:description: Runs a lightweight probe against the upstream to verify credentials and reachability.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-llm-provider-check.adoc[tag=single-source]

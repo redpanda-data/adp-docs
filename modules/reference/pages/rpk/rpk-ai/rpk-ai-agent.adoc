@@ -1,4 +1,5 @@
 = rpk ai agent
+:description: Manage agents registered with the Redpanda AI platform. Agents are either managed (adp runs them; configured via a model, LLM provider, system prompt and MCP servers) or self-managed (a metadata-only record tracking a user-hosted agent).
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent.adoc[tag=single-source]

@@ -1,4 +1,5 @@
 = rpk ai policy update
+:description: Update a policy in place. Only the flags you pass are written; the field mask is built from the flags actually set, so omitted fields are left untouched.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-policy-update.adoc[tag=single-source]

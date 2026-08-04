@@ -1,4 +1,5 @@
 = rpk ai auth logout
+:description: pass:q[Delete stored credentials for the current organization (or `--all` for a full clean slate).]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-auth-logout.adoc[tag=single-source]

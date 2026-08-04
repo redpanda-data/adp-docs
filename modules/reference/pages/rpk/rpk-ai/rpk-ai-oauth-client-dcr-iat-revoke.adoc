@@ -1,4 +1,5 @@
 = rpk ai oauth-client dcr iat revoke
+:description: Revoke an unconsumed Initial Access Token so it can no longer be exchanged at the registration endpoint. Idempotent: revoking an already-revoked or consumed token returns 0.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-dcr-iat-revoke.adoc[tag=single-source]

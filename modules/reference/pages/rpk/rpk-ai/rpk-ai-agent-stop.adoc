@@ -1,4 +1,5 @@
 = rpk ai agent stop
+:description: Stop a managed agent, setting its desired state to stopped.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-stop.adoc[tag=single-source]

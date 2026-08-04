@@ -1,4 +1,5 @@
 = rpk ai policy list
+:description: List policies.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-policy-list.adoc[tag=single-source]

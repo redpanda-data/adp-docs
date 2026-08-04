@@ -1,4 +1,5 @@
 = rpk ai agent transcript
+:description: pass:q[Inspect an agent's conversation transcripts (`list`, get).]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-transcript.adoc[tag=single-source]

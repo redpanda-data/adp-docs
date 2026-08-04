@@ -1,4 +1,5 @@
 = rpk ai connection list
+:description: List your OAuth connections.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-connection-list.adoc[tag=single-source]

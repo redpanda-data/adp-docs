@@ -1,4 +1,5 @@
 = rpk ai oauth-client dcr get
+:description: Show the Dynamic Client Registration (DCR) settings for the current tenant, including whether DCR is enabled and the configured admission mode.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-dcr-get.adoc[tag=single-source]

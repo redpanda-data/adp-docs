@@ -1,4 +1,5 @@
 = rpk ai oauth-provider get
+:description: Get an OAuth provider.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-provider-get.adoc[tag=single-source]

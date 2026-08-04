@@ -1,4 +1,5 @@
 = rpk ai agent a2a task watch
+:description: pass:q[Reattach to a running task's event stream (A2A tasks/resubscribe) and print events until the task reaches a terminal state. Use after a disconnected `--stream` send or a `--no-block` send.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-a2a-task-watch.adoc[tag=single-source]

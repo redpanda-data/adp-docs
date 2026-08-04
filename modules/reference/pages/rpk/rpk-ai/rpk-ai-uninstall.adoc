@@ -1,4 +1,5 @@
 = rpk ai uninstall
+:description: Uninstall the Redpanda AI CLI.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-uninstall.adoc[tag=single-source]

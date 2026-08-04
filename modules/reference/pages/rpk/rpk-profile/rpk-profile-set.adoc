@@ -1,3 +1,4 @@
 = rpk profile set
+:description: pass:q[Set fields in the current `rpk profile`. As in the create command, this command takes a list of key=value pairs to write to the current profile.]
 
 include::streaming:reference:rpk/rpk-profile/rpk-profile-set.adoc[tag=single-source]

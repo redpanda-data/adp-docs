@@ -1,4 +1,5 @@
 = rpk ai model list
+:description: List available models in the catalog.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-model-list.adoc[tag=single-source]

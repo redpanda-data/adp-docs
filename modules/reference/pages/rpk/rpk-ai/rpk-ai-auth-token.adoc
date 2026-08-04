@@ -1,4 +1,5 @@
 = rpk ai auth token
+:description: Print the current bearer access token to stdout (refreshes if expired).
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-auth-token.adoc[tag=single-source]

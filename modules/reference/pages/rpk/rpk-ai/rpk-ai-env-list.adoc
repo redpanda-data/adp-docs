@@ -1,4 +1,5 @@
 = rpk ai env list
+:description: List environments (current org's live ADP envs + local manual envs).
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-env-list.adoc[tag=single-source]

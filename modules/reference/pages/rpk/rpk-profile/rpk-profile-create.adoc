@@ -1,3 +1,4 @@
 = rpk profile create
+:description: pass:q[Create a new `rpk` profile with connection settings for a Redpanda cluster. There are multiple ways to create a profile.]
 
 include::streaming:reference:rpk/rpk-profile/rpk-profile-create.adoc[tag=single-source]

@@ -1,4 +1,5 @@
 = rpk ai oauth-client dcr iat list
+:description: List Initial Access Tokens (plaintext is never shown).
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-dcr-iat-list.adoc[tag=single-source]

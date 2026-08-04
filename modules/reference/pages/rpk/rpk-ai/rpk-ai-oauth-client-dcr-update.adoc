@@ -1,4 +1,5 @@
 = rpk ai oauth-client dcr update
+:description: Update the tenant's DCR settings. Only the flags you pass change; everything else keeps its current value (the CLI reads the current settings and writes back the merged result).
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-dcr-update.adoc[tag=single-source]

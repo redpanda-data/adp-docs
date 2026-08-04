@@ -1,5 +1,6 @@
 = rpk ai mcp-server update
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-update.adoc
+:description: Update an MCP server.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-update.adoc[tag=single-source]

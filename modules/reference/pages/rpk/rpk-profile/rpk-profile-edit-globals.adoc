@@ -1,3 +1,4 @@
 = rpk profile edit-globals
+:description: pass:q[Edit `rpk` globals. This command opens your default editor to edit the `rpk` global configurations.]
 
 include::streaming:reference:rpk/rpk-profile/rpk-profile-edit-globals.adoc[tag=single-source]

@@ -1,5 +1,6 @@
 = rpk ai mcp-server get
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-get.adoc
+:description: Get an MCP server.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-get.adoc[tag=single-source]

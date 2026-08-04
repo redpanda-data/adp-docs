@@ -1,4 +1,5 @@
 = rpk ai agent a2a task
+:description: pass:q[Manage tasks created by agent-to-agent (A2A) conversations. Task IDs come from `rpk ai agent a2a send` replies.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-a2a-task.adoc[tag=single-source]

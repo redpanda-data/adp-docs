@@ -1,4 +1,5 @@
 = rpk ai agent a2a card
+:description: pass:q[Fetch the A2A agent card: the JSON discovery document describing the agent's identity, skills, supported transports and capabilities. Use `-o json` to feed the raw card to other tools.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-a2a-card.adoc[tag=single-source]

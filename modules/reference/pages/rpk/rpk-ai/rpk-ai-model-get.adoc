@@ -1,4 +1,5 @@
 = rpk ai model get
+:description: Get model details from the catalog.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-model-get.adoc[tag=single-source]

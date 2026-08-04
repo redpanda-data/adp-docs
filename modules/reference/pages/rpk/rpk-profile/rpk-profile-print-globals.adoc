@@ -1,3 +1,4 @@
 = rpk profile print-globals
+:description: pass:q[Print `rpk` global configuration.]
 
 include::streaming:reference:rpk/rpk-profile/rpk-profile-print-globals.adoc[tag=single-source]

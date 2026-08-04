@@ -1,4 +1,5 @@
 = rpk ai agent a2a send
+:description: Send a text message to an agent over A2A and print the reply. The message comes from the positional argument, or from stdin when the argument is omitted or "-" (so you can pipe a prompt in).
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-a2a-send.adoc[tag=single-source]

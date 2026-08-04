@@ -1,4 +1,5 @@
 = rpk ai install
+:description: Install the Redpanda AI CLI. This command installs the latest version by default.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-install.adoc[tag=single-source]
