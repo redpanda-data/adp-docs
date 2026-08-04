@@ -1,4 +1,5 @@
 = Run Claude Code and Codex through AI Gateway
+:page-agent-handoff:
 :page-aliases: claude-code.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-admin.adoc, cloud-data-platform:ai-agents:ai-gateway/integrations/claude-code-user.adoc
 :description: Launch Claude Code or Codex with rpk ai run, routing their model traffic through a managed, enterprise-passthrough, or AWS Bedrock Agentic Data Plane provider.
 :page-topic-type: how-to
