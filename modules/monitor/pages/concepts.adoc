@@ -322,13 +322,15 @@ Read access to transcript data is governed by the transcript permissions rather 
 
 == How Redpanda stores audit events
 
-Each audit event is a record in the https://ocsf.io/[Open Cybersecurity Schema Framework (OCSF)^] format, describing one governed action: the actor who requested it, the entity it affected, and the outcome. OCSF is an open, vendor-neutral schema, so security tooling that understands OCSF can consume audit events without custom mapping.
+Agentic Data Plane structures audit events according to the https://ocsf.io/[Open Cybersecurity Schema Framework (OCSF)^], an open, vendor-neutral schema for security events. OCSF gives events from different subsystems a shared vocabulary. Agentic Data Plane uses the OCSF API Activity event class for authorization decisions on API operations and the Entity Management event class for configuration changes. This keeps fields such as actor, resource, activity, and outcome consistent across the audit log.
 
-Audit events are produced to a dedicated `redpanda.adp.audit-log` topic. The services that write audit events hold write-only access, so a producer cannot read or alter what another service wrote, which keeps the log append-only.
+OCSF standardizes what an event means; it does not define how events are stored or exported. In Agentic Data Plane, use the Audit Log view to review these records.
 
-The topic is Iceberg-enabled. Redpanda materializes audit events into an Apache Iceberg table on object storage, which serves as the durable archive, while the topic holds the recent tail. Queries read the live topic tail and the committed Iceberg archive together, so recent and historical events answer from one place.
+Redpanda keeps recent events in streaming storage and archives them in an Apache Iceberg-backed historical store in object storage. The Audit Log view presents both as one time-ordered history, so you can investigate new and older activity from the same view.
 
-Read access to audit events is governed by the audit log permissions rather than by topic ACLs. Reads of the audit log are themselves recorded as audit events. See xref:control:permissions-reference.adoc#audit-log-permissions[Audit log permissions].
+Captured request, response, or configuration data may contain sensitive information. Agentic Data Plane redacts fields marked as sensitive and may truncate or omit captured data. Review an event before sharing it outside your organization.
+
+The Audit Log view returns events for your Agentic Data Plane environment. Access requires an audit log permission, and viewing the audit log is itself recorded as an audit event. See xref:control:permissions-reference.adoc#audit-log-permissions[Audit log permissions].
 
 == Transcripts compared to audit logs
 
