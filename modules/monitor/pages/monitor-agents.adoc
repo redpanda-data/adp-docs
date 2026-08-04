@@ -1,11 +1,11 @@
 = Monitor Agent Activity
 :page-aliases: cloud-data-platform:ai-agents:observability/monitor-agents.adoc, cloud-data-platform:ai-agents:agents/monitor-agents.adoc
-:description: Monitor agent execution, analyze conversation history, track token usage, and debug issues using Inspector, Transcripts, and agent data topics.
+:description: Monitor agent execution, inspect available MCP tools, analyze conversation history, track token usage, and debug issues using Inspector and Transcripts.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer, domain_evaluator
-:learning-objective-1: pass:q[Verify agent behavior using the *Inspector* tab]
+:learning-objective-1: pass:q[Verify agent behavior and review its MCP capabilities using the *Inspector* tab]
 :learning-objective-2: Track token usage and performance metrics
-:learning-objective-3: pass:q[Debug agent execution using *Transcripts*]
+:learning-objective-3: Debug agent execution using transcripts
 
 Use monitoring to track agent performance, analyze conversation patterns, debug execution issues, and optimize token costs.
 
@@ -21,7 +21,7 @@ For conceptual background on traces and observability, see xref:monitor:concepts
 
 You must have a running agent. If you do not have one, see xref:get-started:agent-builder-quickstart.adoc[].
 
-== Debug agent execution with Transcripts
+== Debug agent execution with transcripts
 
 An agent's *Transcripts* tab shows each conversation with timing, errors, and token usage. Use it to debug issues, verify agent behavior, and monitor performance.
 
@@ -35,7 +35,7 @@ Several warning signs indicate problems. Conversations with `Error` status need 
 
 Pay attention to patterns across multiple conversations. When all recent transcripts show errors, start by checking agent status, MCP server connectivity, and system prompt configuration. A list that alternates between success and error typically points to intermittent tool failures or external API issues. If duration increases steadily over a session, your context window is likely filling up. Clear the conversation history to reset it. High token usage combined with relatively few LLM calls usually means tool results are large or your system prompts are verbose.
 
-=== Debug with Transcripts
+=== Debug with transcripts
 
 Use the *Transcripts* tab to diagnose specific issues:
 
@@ -85,6 +85,38 @@ The *Inspector* tab provides real-time conversation testing. Use it to test agen
 . Enter test queries and review responses.
 . Check the conversation panel to see tool calls.
 . Start a new session to test fresh conversations or click *Clear context* to reset history.
+
+=== Review MCP tools
+
+For a managed agent, the Inspector composer includes a *Tools* control. Use it to review the MCP servers and related capabilities available to the agent before you send a test message.
+
+. Open the agent's *Inspector* tab.
+. Click *Tools* in the composer.
+. Under Direct MCP servers, expand a server to see its type, description, and exposed tools. Each tool entry shows its name and description when the server provides one.
+. Under Subagents, review the subagents this agent can delegate to and the MCP servers configured on each subagent.
+
+The list reflects the agent's current configuration and the tools each direct MCP server exposes. It does not guarantee that a later tool call succeeds. Server availability, access policy, or an external connection can still affect a call at runtime.
+
+Some remote MCP servers require you to connect your own account before their tools are shown. Expand the server and click *Connect*, complete the authorization in the new browser tab, then return to Inspector. The list refreshes when you return. If it does not, click *Refresh tools*.
+
+Use the status shown under a server to resolve common issues:
+
+[cols="1,3"]
+|===
+|Status |What to do
+
+|Authentication required
+|Click *Connect* and complete the authorization flow. Protected tools remain hidden until the connection grants the required access.
+
+|Unavailable
+|Ask an administrator to confirm that the MCP server exists and is enabled for the agent.
+
+|Couldn't load tools
+|Click *Try again*. If the error continues, check the MCP server's availability and authentication settings.
+
+|No tools exposed by this MCP server
+|Confirm that the server publishes tools and that the agent is connected to the intended server.
+|===
 
 === Context-window usage
 
