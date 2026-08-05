@@ -97,9 +97,9 @@ Callers authenticate as themselves, never as the agent they're calling. Each cal
 
 Callers use OAuth2 client credentials to obtain access tokens:
 
-. Exchange the caller's client ID and secret for a time-limited access token through OAuth2.
-. Include the access token in the Authorization header when calling the agent endpoint.
-. When the token expires, exchange credentials again for a new token.
+. The caller exchanges its client ID and secret for a time-limited access token through OAuth2.
+. The caller includes the access token in the Authorization header when calling the agent endpoint.
+. When the token expires, the caller exchanges credentials again for a new token.
 
 This flow ensures:
 
