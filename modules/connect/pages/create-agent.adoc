@@ -66,7 +66,17 @@ For an AWS Bedrock provider, Agentic Data Plane validates the model when you cre
 
 == Instructions
 
-In the *Instructions* section, write the *System prompt* that defines the agent's role, responsibilities, constraints, and output format. The system prompt is optional but strongly recommended; when set, it's sent on every invocation as the first message. The field is a Markdown editor with a *Write* tab and a *Preview* tab. On the *Write* tab, type the prompt directly and use the formatting toolbar for headings, bold, italic, links, lists, quotes, and code blocks, or select the upload icon to import a Markdown file. The *Preview* tab renders the formatted result. To edit in a larger surface, click *Expand editor*, and to start from a template, select *Templates*.
+// Source: `apps/adp-ui/src/components/molecules/markdown-editor.tsx`, `apps/adp-ui/src/lib/markdown-live-preview.ts`, `apps/adp-ui/src/components/agents/managed-create/instructions-field.tsx`, `managed-agent-canvas.tsx`, and `prompt-starters.ts` on cloudv2 main, verified 2026-08-05. The shared Markdown editor now has Live (default), Markdown, and Preview modes, replacing the earlier Write/Preview tabs. Live decorates the CodeMirror surface without changing the stored source; Markdown shows the exact source; Preview renders the value. The formatting toolbar and the import control render in both editing modes and are hidden only in Preview. The same editor is used for subagent instructions.
+// A follow-up polish commit in the same landing removed the Templates section action: the prompt starter cards (Support agent, Data analyst, Coding assistant, Incident responder, Research coordinator) are now always visible above the editor and each one seeds only the system prompt. Do not reintroduce a Templates control here. The canvas has no visible "System prompt" field label either; the section is titled Instructions and the expanded dialog is titled "Edit instructions". "System prompt" is a visible label only on the agent detail Overview and in the subagent drawer.
+In the *Instructions* section, write the system prompt that defines the agent's role, responsibilities, constraints, and output format. The system prompt is optional but strongly recommended; when set, it's sent on every invocation as the first message. To start from a template, select one of the starter cards above the editor. Each card fills in a complete system prompt that you can then edit.
+
+The field is a Markdown editor with three modes:
+
+* *Live*: The default. Styles the formatted Markdown as you type and reveals the raw syntax for the construct you're editing.
+* *Markdown*: Always shows the exact source.
+* *Preview*: Renders the formatted result.
+
+In either editing mode, type the prompt directly and use the formatting toolbar, or select the upload icon to import a Markdown file. To edit in a larger surface, click *Expand editor*.
 
 A typical prompt defines:
 
