@@ -19,7 +19,7 @@ NOTE: The audit log is a preview capability, available when your organization ha
 
 == Prerequisites
 
-Your account needs the `dataplane_adp_auditlog_list` permission to open the audit log and view event details. See xref:control:permissions-reference.adoc#audit-log-permissions[Audit log permissions].
+Your account needs the `dataplane_adp_auditlog_list` permission to open the audit log and view event details. Outside the Admin role, audit log reads come from an xref:control:access-policies.adoc[access policy] naming `Action::"AuditLog.list"`. See xref:control:permissions-reference.adoc#audit-log-permissions[Audit log permissions].
 
 [IMPORTANT]
 ====
@@ -103,7 +103,7 @@ Use xref:monitor:transcripts.adoc[transcripts] for execution questions about an 
 |The preview may not be enabled for your organization. Contact your Redpanda representative.
 
 |You cannot open the audit log
-|Ask an administrator to confirm that your account has `dataplane_adp_auditlog_list`.
+|Ask an administrator to confirm that your account has `dataplane_adp_auditlog_list`, from the Admin role or from an xref:control:access-policies.adoc[access policy] naming `Action::"AuditLog.list"`.
 
 |No events match
 |Clear the search and filters, then widen the time range. The default view includes only the last 24 hours.
