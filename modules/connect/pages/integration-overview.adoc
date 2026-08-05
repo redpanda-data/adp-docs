@@ -116,7 +116,7 @@ When integrating external applications with Agentic Data Plane agents, protect c
 
 === Protect service account credentials
 
-Store the client ID and secret in secure credential stores, not in code. Use environment variables or xref:cloud-data-platform:security:secrets.adoc[secrets management]. Rotate credentials if compromised and restrict access based on the principle of least privilege.
+Store the client ID and secret in secure credential stores, not in code. Use environment variables, or store the secret in the Agentic Data Plane secret store and reference it by name. Rotate credentials if compromised and restrict access based on the principle of least privilege.
 
 === Protect access tokens
 

@@ -21,7 +21,7 @@ After completing this guide, you will be able to:
 
 * A configured LLM provider. If you haven't created one yet, see xref:gateway:configure-provider.adoc[Configure an LLM provider].
 * For local development, nothing else. You'll install `rpk ai` in the next section.
-* For CI or programmatic clients: A Redpanda service account with OIDC client credentials. Service accounts are managed in *Organization IAM*. See xref:cloud-data-platform:security:cloud-authentication.adoc[Authenticate to Redpanda Cloud].
+* For CI or programmatic clients: Your agent's service account client ID and a client secret, issued from the agent's *Credentials* tab. See xref:connect:concepts.adoc#service-account-authorization[Service account authorization].
 * A development environment with your chosen programming language.
 
 == Proxy URL anatomy

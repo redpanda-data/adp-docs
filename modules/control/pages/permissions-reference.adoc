@@ -350,6 +350,7 @@ The `dataplane_adp_guardrail_*` permissions gate guardrail policies that screen 
 |Delete a guardrail policy
 |===
 
+[[a2a-runtime-permissions]]
 == A2A runtime permissions
 
 The `dataplane_aiagent_a2a_*` permissions, along with `dataplane_adp_a2a_invoke`, gate agent-to-agent (A2A) runtime traffic.
