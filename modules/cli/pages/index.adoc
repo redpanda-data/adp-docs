@@ -31,6 +31,8 @@ rpk ai install
 
 Update the plugin later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk ai upgrade`], and remove it with xref:reference:rpk/rpk-ai/rpk-ai-uninstall.adoc[`rpk ai uninstall`].
 
+NOTE: Upgrading `rpk` does not upgrade the plugin. The plugin is a separate binary that stays at its installed version, even across `rpk` upgrades, until you run `rpk ai upgrade`. New commands and flags in the reference marked "introduced in ai version X" require the plugin at that version or later.
+
 == Connect to an AI Gateway
 
 The `rpk ai` command is self-contained: it has its own login and its own environment selection, independent of any `rpk cloud` session. You sign in once, choose an Agentic Data Plane environment, and `rpk ai` targets that environment's AI Gateway for every command.
