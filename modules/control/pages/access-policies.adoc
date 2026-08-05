@@ -8,6 +8,7 @@
 :learning-objective-3: Manage access policies from the CLI
 
 // Action ids, entity types, attribute-bearing types, and validation rules verified against the generated Cedar schema and the ADP UI on 2026-07-30. Action ids are entity-qualified (`Agent.get`) and are not interchangeable with role permission strings.
+// Action reference resynced with the generated Cedar schema on 2026-08-05: added CIMDSettings, and put the entity rows in the schema's own alphabetical order so the two can be diffed in one pass. The verbs within each row stay in reading order (read, then write, then destroy) rather than alphabetical. AgentTrigger.report_health is deliberately omitted: the policy editor never offers it.
 
 Use access policies to express rules that roles can't: deny a group access to production-tagged agents, or let only a resource's creator modify one. Each policy permits or forbids specific actions, with conditions evaluated on every request.
 
@@ -47,11 +48,14 @@ From there, authorization defers to policy evaluation. Every decision that needs
 [#action-reference]
 == Action reference
 
-Verbs are shared across entity types, and an action ID pairs one verb with one entity. This table lists the verbs each entity type supports. Combine them with a dot to get the action ID: `Budget` plus `update` is `Action::"Budget.update"`.
+Verbs are shared across entity types, and an action ID pairs one verb with one entity. This table lists the verbs each entity type supports, by entity type in alphabetical order. Combine them with a dot to get the action ID: `Budget` plus `update` is `Action::"Budget.update"`.
 
 [cols="1,3"]
 |===
 |Entity type |Verbs
+
+|`AdminConnection`
+|`list`, `revoke`, `rotate`
 
 |`Agent`
 |`get`, `list`, `create`, `update`, `delete`, `invoke`
@@ -59,23 +63,35 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |`AgentCredential`
 |`list`, `create`, `delete`
 
+|`AgentNetwork`
+|`get`
+
 |`AgentTrigger`
 |`get`, `list`, `create`, `update`, `delete`
 
 |`AgentTriggerRun`
 |`list`
 
-|`AgentNetwork`
-|`get`
-
-|`Session`
-|`get`, `list`, `delete`
-
-|`Transcript`
-|`get`, `list`
-
 |`AuditLog`
 |`list`
+
+|`Budget`
+|`get`, `list`, `create`, `update`, `delete`
+
+|`CIMDSettings`
+|`get`, `update`
+
+|`DCRSettings`
+|`get`, `update`
+
+|`EffectivePolicySet`
+|`get`, `list`
+
+|`Guardrail`
+|`get`, `list`, `create`, `update`, `delete`
+
+|`LLMProvider`
+|`get`, `list`, `create`, `update`, `delete`, `invoke`
 
 |`McpServer`
 |`get`, `list`, `create`, `update`, `delete`, `initialize`, `ping`, `tools_list`, `prompts_get`, `prompts_list`, `resources_list`, `resources_read`, `resources_templates_list`, `logging_set_level`
@@ -83,32 +99,14 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |`McpServerTool`
 |`call`
 
-|`LLMProvider`
-|`get`, `list`, `create`, `update`, `delete`, `invoke`
-
-|`Guardrail`
-|`get`, `list`, `create`, `update`, `delete`
-
-|`Budget`
-|`get`, `list`, `create`, `update`, `delete`
-
-|`Spending`
-|`get`
-
-|`OAuthProvider`
-|`get`, `list`, `create`, `update`, `delete`, `attach`
-
 |`OAuthClient`
 |`get`, `list`, `create`, `update`, `delete`
 
 |`OAuthConnection`
 |`get`, `list`, `authorize`, `revoke`
 
-|`AdminConnection`
-|`list`, `revoke`, `rotate`
-
-|`DCRSettings`
-|`get`, `update`
+|`OAuthProvider`
+|`get`, `list`, `create`, `update`, `delete`, `attach`
 
 |`Policy`
 |`get`, `list`, `create`, `update`, `delete`
@@ -116,10 +114,16 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |`PolicyTemplate`
 |`get`, `list`, `create`, `update`, `delete`
 
+|`Session`
+|`get`, `list`, `delete`
+
+|`Spending`
+|`get`
+
 |`SystemPolicy`
 |`list`
 
-|`EffectivePolicySet`
+|`Transcript`
 |`get`, `list`
 |===
 
