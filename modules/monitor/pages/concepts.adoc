@@ -320,6 +320,18 @@ Transcripts may contain sensitive information from your tool inputs and outputs.
 
 Read access to transcript data is governed by the transcript permissions rather than by topic ACLs on `redpanda.otel_traces`. Among the built-in roles, only Admin holds them. See xref:control:permissions-reference.adoc#transcript-permissions[Transcript permissions].
 
+== How Redpanda stores audit events
+
+When the Audit Log preview is enabled, Agentic Data Plane structures audit events according to the https://ocsf.io/[Open Cybersecurity Schema Framework (OCSF)^], an open, vendor-neutral schema for security events. OCSF gives events from different subsystems a shared vocabulary. Agentic Data Plane uses the OCSF API Activity event class for authorization decisions on API operations and the Entity Management event class for configuration changes. This keeps fields such as actor, resource, activity, and outcome consistent across the audit log.
+
+OCSF standardizes what an event means; it does not define how events are stored or exported. In Agentic Data Plane, use the Audit Log view to review these records.
+
+Redpanda keeps recent events in streaming storage and archives them in an Apache Iceberg-backed historical store in object storage. The Audit Log view presents both as one time-ordered history, so you can investigate new and older activity from the same view.
+
+Captured request, response, or configuration data may contain sensitive information. Agentic Data Plane redacts supported secret and sensitive configuration fields. Identities and other audit attributes may remain visible, and captured data may be truncated or omitted. Review an event before sharing it outside your organization.
+
+The Audit Log view returns events for your Agentic Data Plane environment. Access requires an audit log permission. See xref:control:permissions-reference.adoc#audit-log-permissions[Audit log permissions].
+
 == Transcripts compared to audit logs
 
 Transcripts and audit logs serve different but complementary purposes.
@@ -331,7 +343,15 @@ Transcripts provide:
 * Detailed timing information for performance analysis
 * Ability to reconstruct execution paths and identify bottlenecks
 
-Transcripts are optimized for execution-level observability and governance. For user-level accountability tracking ("who initiated what"), use the session and task topics for agents, which provide records of agent conversations and task execution.
+Transcripts are optimized for execution-level observability and governance.
+
+The audit log provides:
+
+* The user accountable for an action, plus the agent or caller that acted for the user when available
+* The affected resource, operation, subsystem, and time
+* The allowed or denied outcome and the deciding policy when available
+
+For access and accountability questions, use xref:monitor:audit-log.adoc[the audit log]. For questions about an agent's model turns, tool calls, timing, or errors, use transcripts. An investigation may use both views.
 
 [[history-reconstruction]]
 == Reconstructed transcript history

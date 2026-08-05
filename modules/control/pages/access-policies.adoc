@@ -74,6 +74,9 @@ Verbs are shared across entity types, and an action ID pairs one verb with one e
 |`Transcript`
 |`get`, `list`
 
+|`AuditLog`
+|`list`
+
 |`McpServer`
 |`get`, `list`, `create`, `update`, `delete`, `initialize`, `ping`, `tools_list`, `prompts_get`, `prompts_list`, `resources_list`, `resources_read`, `resources_templates_list`, `logging_set_level`
 
