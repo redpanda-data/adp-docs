@@ -102,6 +102,7 @@ Agentic Data Plane permissions live in these families:
 * `dataplane_adp_agent_*` and `dataplane_adp_agent_credential_*`: Manage declarative AI agents and the OIDC credentials issued to them.
 * `dataplane_adp_policy_*` and `dataplane_adp_policytemplate_*`: Author and read access policies and policy templates.
 * `dataplane_adp_transcript_*`: Read agent conversation transcripts, which carry full conversation content.
+* `dataplane_adp_auditlog_*`: Read audit log events, which record who attempted an action, on which resource, and whether it was allowed.
 * `dataplane_adp_spending_*`: Read AI spending data for governance and cost reporting.
 * `dataplane_aiagent_a2a_*`: Invoke agent-to-agent (A2A) operations against an agent's own ingress. These are the one Agentic Data Plane family a policy can't govern; see xref:control:permissions-reference.adoc#a2a-runtime-permissions[A2A runtime permissions].
 * `dataplane_aigateway_*`: Manage enterprise AI Gateway features, including OAuth providers and clients, model providers, rate and spend limits, audit, and pricing.
