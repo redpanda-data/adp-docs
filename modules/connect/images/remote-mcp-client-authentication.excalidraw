@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -37,8 +37,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -56,8 +56,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -75,8 +75,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -94,8 +94,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -113,8 +113,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -132,8 +132,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -161,8 +161,8 @@
         "id": "inbound"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -190,8 +190,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -219,8 +219,8 @@
         "id": "outbound"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -233,8 +233,8 @@
       "text": "One tool call can cross two OAuth boundaries",
       "fontSize": 34,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -247,8 +247,8 @@
       "text": "Inbound client identity and outbound upstream identity solve different authentication problems",
       "fontSize": 20,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -261,8 +261,8 @@
       "text": "External MCP\nclient",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -272,11 +272,11 @@
       "y": 331,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Claude, ChatGPT,\nGemini, Cursor,\nor another client",
+      "text": "Chat app\nCoding agent\nIDE client\nor custom app",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -289,8 +289,8 @@
       "text": "Inbound OAuth\nclient",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -303,8 +303,8 @@
       "text": "Identifies app\nChecks redirect URI\nAuthorizes access\nto AI Gateway",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -317,8 +317,8 @@
       "text": "AI Gateway\nand MCP",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -331,8 +331,8 @@
       "text": "Authenticates user\nInvokes the tool\nApplies access policy\nRecords the call",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -345,8 +345,8 @@
       "text": "Outbound access",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -359,8 +359,8 @@
       "text": "OAuth provider represents user\nfor delegated OAuth\n\nUpstream: GitHub, Slack,\nor Salesforce",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -373,8 +373,8 @@
       "text": "Inbound: client \u2192 AI Gateway",
       "fontSize": 20,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     },
     {
@@ -387,8 +387,8 @@
       "text": "Outbound: AI Gateway \u2192 upstream",
       "fontSize": 20,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:57.690Z",
-      "updatedAt": "2026-08-06T21:43:57.690Z",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
       "version": 1
     }
   ],

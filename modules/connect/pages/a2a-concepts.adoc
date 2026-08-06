@@ -35,13 +35,13 @@ Current A2A versions make the interface and protocol version explicit during dis
 .A2A separates discovery from authenticated message and task exchange
 image::a2a-message-lifecycle.svg[alt="A2A lifecycle. An application, agent, or Redpanda Connect pipeline fetches an Agentic Data Plane agent card, chooses a supported interface and protocol version, obtains an access token, sends a message, and receives a direct response or streamed task status and artifacts."]
 
-For the complete specification, see link:https://a2a.ag/spec[a2a.ag/spec^].
+For the complete specification, see link:https://a2a-protocol.org/latest/specification/[A2A protocol specification^].
 
 == Agent cards
 
 Every A2A-compliant agent exposes an agent card at a well-known URL.
 
-The agent card is a JSON document that describes what the agent can do and how to interact with it. For the complete agent card specification, see link:https://agent2agent.info/docs/concepts/agentcard/[Agent Card documentation^].
+The agent card is a JSON document that describes what the agent can do and how to interact with it. For the complete agent card specification, see link:https://a2a-protocol.org/latest/specification/#44-agent-card[A2A Agent Card specification^].
 
 [#agent-card-location]
 === Agent card location
@@ -81,8 +81,8 @@ The `a2a_message` processor uses the A2A protocol internally to discover and cal
 A2A enables dynamic discovery without hardcoded configuration:
 
 . The caller fetches the agent card from the well-known URL.
-. The caller checks the protocol version and supported communication modes.
-. The caller uses the input schema from the agent card to format the request properly.
+. The caller checks the supported interfaces, protocol versions, capabilities, and skills.
+. The caller formats message parts for the content types declared by the selected interface and skill.
 . The caller sends the request to the agent's endpoint.
 
 This discovery model allows:
@@ -94,7 +94,7 @@ This discovery model allows:
 [#authentication]
 == Authentication
 
-A2A-compliant agents require authentication to prevent unauthorized access.
+Agentic Data Plane agents require authentication to prevent unauthorized access.
 
 The agent card is the exception. Agentic Data Plane serves the card at the `/.well-known/agent-card.json` subpath without authentication, so that callers can discover how to authenticate before they hold a token. Every other request to the agent, including agent invocation, requires a valid access token.
 
@@ -125,7 +125,7 @@ The `a2a_message` processor handles authentication automatically. Pipelines don'
 
 == Protocol versions
 
-The A2A protocol uses semantic versioning (major.minor.patch). Agents declare their supported version in the agent card.
+The A2A specification uses semantic release versions, but protocol compatibility uses major.minor. Each supported interface in the agent card declares the `protocolVersion` it exposes. Clients select a compatible interface and send that version on requests; patch versions do not affect protocol compatibility.
 
 == Next steps
 

@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -37,8 +37,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -56,8 +56,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -75,8 +75,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -94,8 +94,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -113,8 +113,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -132,8 +132,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -161,8 +161,8 @@
         "id": "login"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -190,8 +190,8 @@
         "id": "manage"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -219,8 +219,8 @@
         "id": "test"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -248,8 +248,8 @@
         "id": "run"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -267,7 +267,7 @@
         ],
         [
           50.64780624407649,
-          24.956890033313073
+          24.95689003331296
         ]
       ],
       "start": {
@@ -277,8 +277,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -306,8 +306,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -335,8 +335,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -349,8 +349,8 @@
       "text": "rpk ai is the terminal entry point to Agentic Data Plane",
       "fontSize": 34,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -363,8 +363,8 @@
       "text": "Install the plugin once, select an environment, then use the same authenticated context for every workflow",
       "fontSize": 20,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.117Z",
-      "updatedAt": "2026-08-06T21:43:30.117Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -377,8 +377,8 @@
       "text": "Install plugin",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -391,8 +391,8 @@
       "text": "rpk ai install\n\nUses your existing\nrpk setup",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -405,8 +405,8 @@
       "text": "Sign in and select",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -419,8 +419,8 @@
       "text": "rpk ai auth login\nrpk ai env use\n\nChoose an Agentic\nData Plane\nenvironment",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -433,8 +433,8 @@
       "text": "Manage resources",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -447,8 +447,8 @@
       "text": "LLM providers\nMCP servers\nOAuth clients\nand agents",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -461,8 +461,8 @@
       "text": "Test protocols",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -475,8 +475,8 @@
       "text": "List or call MCP tools\nSend A2A messages",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -489,8 +489,8 @@
       "text": "Run coding agents",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -503,8 +503,8 @@
       "text": "Claude Code or Codex\nthrough AI Gateway",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -517,8 +517,8 @@
       "text": "Shared command\ncontext",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     },
     {
@@ -528,11 +528,11 @@
       "y": 386,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Same identity\nSame environment\nSame resource scope\nfor each command",
+      "text": "Same sign-in\nSame environment\nacross workflows",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:43:30.118Z",
-      "updatedAt": "2026-08-06T21:43:30.118Z",
+      "createdAt": "2026-08-06T22:35:20.819Z",
+      "updatedAt": "2026-08-06T22:35:20.819Z",
       "version": 1
     }
   ],

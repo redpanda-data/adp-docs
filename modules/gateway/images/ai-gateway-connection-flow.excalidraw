@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -37,8 +37,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -56,8 +56,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -75,8 +75,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -94,8 +94,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -113,8 +113,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -132,8 +132,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -161,8 +161,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -190,8 +190,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -219,8 +219,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -248,8 +248,8 @@
         "id": "provider"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -266,7 +266,7 @@
           0
         ],
         [
-          165.0938783235914,
+          165.09387832359153,
           96.00567924252329
         ]
       ],
@@ -277,8 +277,8 @@
         "id": "observe"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -291,8 +291,8 @@
       "text": "AI Gateway separates client access from provider secrets",
       "fontSize": 34,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -305,8 +305,8 @@
       "text": "Configure the upstream once; every local or deployed client uses the governed proxy path",
       "fontSize": 20,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -319,8 +319,8 @@
       "text": "Configure LLM provider",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -333,8 +333,8 @@
       "text": "Upstream endpoint\nCredential reference\nAllowed models\nOptional guardrail",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
       "version": 1
     },
     {
@@ -347,8 +347,8 @@
       "text": "Local developer",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     },
     {
@@ -361,8 +361,8 @@
       "text": "rpk ai sign-in and\nselected environment",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     },
     {
@@ -375,8 +375,8 @@
       "text": "Application or agent",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     },
     {
@@ -389,8 +389,8 @@
       "text": "OAuth client credentials\nfor deployed workloads",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     },
     {
@@ -403,8 +403,8 @@
       "text": "AI Gateway",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     },
     {
@@ -417,8 +417,8 @@
       "text": "Authenticate caller\nRoute native API\nApply policy and budgets\nRecord tokens, cost, latency",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     },
     {
@@ -431,8 +431,8 @@
       "text": "Upstream model provider",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     },
     {
@@ -445,8 +445,8 @@
       "text": "OpenAI, Anthropic, Google AI,\nAWS Bedrock, or an\nOpenAI-compatible endpoint",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.028Z",
-      "updatedAt": "2026-08-06T21:37:02.028Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     },
     {
@@ -459,8 +459,8 @@
       "text": "Governance and observability",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.029Z",
-      "updatedAt": "2026-08-06T21:37:02.029Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     },
     {
@@ -470,11 +470,11 @@
       "y": 586,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Cost and usage\nTranscripts and audit",
+      "text": "Cost, usage, and latency\nOptional transcripts",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:37:02.029Z",
-      "updatedAt": "2026-08-06T21:37:02.029Z",
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
       "version": 1
     }
   ],

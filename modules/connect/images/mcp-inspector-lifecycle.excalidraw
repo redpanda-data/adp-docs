@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
       "version": 1
     },
     {
@@ -37,8 +37,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
       "version": 1
     },
     {
@@ -56,8 +56,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
       "version": 1
     },
     {
@@ -75,8 +75,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
       "version": 1
     },
     {
@@ -94,8 +94,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
       "version": 1
     },
     {
@@ -113,8 +113,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
       "version": 1
     },
     {
@@ -132,8 +132,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -161,8 +161,8 @@
         "id": "negotiate"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -190,8 +190,8 @@
         "id": "discover"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -219,8 +219,8 @@
         "id": "call"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -248,8 +248,8 @@
         "id": "result"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -277,8 +277,8 @@
         "id": "protocol"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -291,8 +291,8 @@
       "text": "MCP Inspector makes the protocol visible",
       "fontSize": 34,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -305,8 +305,8 @@
       "text": "Discover capabilities, run a real call, and inspect what crossed the wire without creating an agent",
       "fontSize": 20,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -319,8 +319,8 @@
       "text": "Connect",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -333,8 +333,8 @@
       "text": "Open the server\nInspector and confirm\nconnection health",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -344,11 +344,11 @@
       "y": 259,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Negotiate",
+      "text": "Identify protocol",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -361,8 +361,8 @@
       "text": "Protocol version\nServer capabilities\nAvailable features",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -375,8 +375,8 @@
       "text": "Discover",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -389,8 +389,8 @@
       "text": "Tools\nResources\nPrompts",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -403,8 +403,8 @@
       "text": "Run a tool",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -417,8 +417,8 @@
       "text": "Form or JSON input\nJSON-RPC request\nProgress and cancel",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -431,8 +431,8 @@
       "text": "Result",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -445,8 +445,8 @@
       "text": "Formatted or raw output\nSchema and\nstructured errors",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -459,8 +459,8 @@
       "text": "Protocol panel",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     },
     {
@@ -473,8 +473,8 @@
       "text": "Wire frames, timeline, logs,\nlatency, payload, and tokens",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:54:49.123Z",
-      "updatedAt": "2026-08-06T21:54:49.123Z",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
       "version": 1
     }
   ],

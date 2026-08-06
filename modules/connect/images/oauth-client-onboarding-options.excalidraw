@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:55:52.735Z",
-      "updatedAt": "2026-08-06T21:55:52.735Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -37,8 +37,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:55:52.735Z",
-      "updatedAt": "2026-08-06T21:55:52.735Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -56,8 +56,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:55:52.735Z",
-      "updatedAt": "2026-08-06T21:55:52.735Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -75,8 +75,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:55:52.735Z",
-      "updatedAt": "2026-08-06T21:55:52.735Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -94,8 +94,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:55:52.735Z",
-      "updatedAt": "2026-08-06T21:55:52.735Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -113,8 +113,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -132,8 +132,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -161,8 +161,8 @@
         "id": "cimd"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -190,8 +190,8 @@
         "id": "dcr"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -217,8 +217,8 @@
         ]
       ],
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -246,8 +246,8 @@
         "id": "authorize"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.416Z",
+      "updatedAt": "2026-08-06T22:35:39.416Z",
       "version": 1
     },
     {
@@ -275,8 +275,8 @@
         "id": "authorize"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -304,8 +304,8 @@
         "id": "authorize"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -333,8 +333,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -347,8 +347,8 @@
       "text": "Three ways an external MCP client can identify itself",
       "fontSize": 34,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -361,8 +361,8 @@
       "text": "Choose the lightest onboarding method the client supports; all paths end at the same authorization flow",
       "fontSize": 20,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -375,8 +375,8 @@
       "text": "External MCP\nclient",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -389,8 +389,8 @@
       "text": "Needs access to an\nMCP server through\nAI Gateway",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -403,8 +403,8 @@
       "text": "Client ID metadata",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -414,11 +414,11 @@
       "y": 206,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "HTTPS URL as client ID\nGateway reads\nredirect URIs\nNo stored registration",
+      "text": "Preferred for public apps\nHTTPS URL as client ID\nNo saved registration",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -431,8 +431,8 @@
       "text": "Dynamic registration",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -442,11 +442,11 @@
       "y": 436,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Client creates and updates\nits saved registration",
+      "text": "Compatibility fallback\nClient creates and updates\nsaved registration",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -459,8 +459,8 @@
       "text": "Manual registration",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -470,11 +470,11 @@
       "y": 641,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Admin registers\nredirect URIs\nDistributes credentials",
+      "text": "Pre-registered option\nAdmin supplies redirect\nURIs and credentials",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -487,8 +487,8 @@
       "text": "OAuth authorization",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -498,11 +498,11 @@
       "y": 351,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Validate identity\nConfirm redirect URI\nUser grants access\nIssue short-lived\ntokens",
+      "text": "Validate identity\nConfirm redirect URI\nUser grants access\nIssue short-lived token",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -515,8 +515,8 @@
       "text": "AI Gateway",
       "fontSize": 24,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     },
     {
@@ -529,8 +529,8 @@
       "text": "Client can call\npermitted MCP\ntools",
       "fontSize": 21,
       "fontFamily": 2,
-      "createdAt": "2026-08-06T21:55:52.736Z",
-      "updatedAt": "2026-08-06T21:55:52.736Z",
+      "createdAt": "2026-08-06T22:35:39.417Z",
+      "updatedAt": "2026-08-06T22:35:39.417Z",
       "version": 1
     }
   ],
