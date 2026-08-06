@@ -6,6 +6,24 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.35 (2026-08-06)
+
+=== Features
+
+Access `[UI]`:: The new **Access** page, available as a preview, controls what people can do with the resources in your ADP environment. Write your own permit and forbid rules on **Policies**, or start from a **Templates** preset: **Read only**, **Sandboxed** to use agents and MCP servers without changing them, **Standard** to also manage resources, or **Full access**. **Roles** shows what each of your organization's roles can do, and **System policies** shows who already has access through those roles.
+Agents `[UI]`:: The agent prompt editor now formats your prompt as you write it. **Live** mode renders headings, lists, and emphasis, and shows the raw Markdown only on the line your cursor is on. Switch between **Live**, **Markdown**, and **Preview** without losing your place, or start from a template for a support agent, data analyst, coding assistant, incident responder, or research coordinator.
+
+=== Improvements
+
+Agents `[UI]`:: The agent **Setup** tab splits MCP servers into **Managed**, run by Redpanda, and **Self-managed**, run by you, and shows each managed server's logo, so a long list is easier to scan.
+Interface `[UI]`:: The app opens faster on a first visit.
+
+=== Bug fixes
+
+OAuth Clients:: Claude can now connect to an MCP server on ADP with a Client ID Metadata Document (CIMD). Retry the connection from Claude, with nothing to change on your side. Connecting failed with **unable to retrieve client by id** because ADP refused an entire document over a single OAuth grant type that the document lists and ADP does not issue. ADP now ignores those grant types and honors the rest of the document, for any client, not only Claude.
+Agents `[UI]`:: The create-agent wizard previewed a self-managed agent's client ID in a format that `rpk ai agent credential create` no longer returns. Only the preview was wrong, so credentials you already issued are unaffected.
+Interface `[UI]`:: Notifications are readable in dark mode instead of washing out against a dark background, and they now appear at the top right of the screen.
+
 == v0.2.34 (2026-08-04)
 
 === Features
