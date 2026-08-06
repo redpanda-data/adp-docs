@@ -8,6 +8,7 @@
 :learning-objective-3: Connect to and test a running agent
 
 // Source: cloudv2 `proto/public/cloud/redpanda/api/adp/v1alpha1/agent.proto` (AgentCreate, ManagedAgentSpec) cross-referenced against `apps/adp-ui/src/components/agents/managed-create/` (managed-agent-canvas.tsx, model-picker.tsx, subagent-sheet.tsx, instructions-field.tsx, tool-list.tsx), `apps/adp-ui/src/components/agents/agent-detail-sections.tsx`, and `apps/adp-ui/src/routes/_authenticated/agents/$name.index.page.tsx` on cloudv2 main, verified 2026-08-01.
+// Re-verified against apps/adp-ui/src on cloudv2 origin/main, 2026-08-06: required fields carry a red asterisk (components/molecules/create-field.tsx); optional fields have no marker, and the canvas never shows "Required"/"Optional" text labels. The Tools search box renders only when the workspace has more than 8 MCP servers (managed-create/tool-list.tsx).
 // The managed create flow is a single canvas titled "New managed agent" with sections Identity, Model, Instructions, Tools, and a collapsible Advanced area (Subagents, Tags). The Model picker is a single model-only list; the provider that serves the chosen model is selected automatically. There is no stepper and no editable Agent ID field; the resource slug is derived from the name at submit. The managed agent detail Overview is organized into Agent, Model & runtime, System prompt, MCP servers, and Subagents sections. Managed agent detail tabs are Overview, Triggers, Inspector, Cost & Usage, Transcripts, and Permissions. Credentials and Setup tabs exist only on self-managed agents.
 
 Create a new glossterm:AI agent[] declaratively through Redpanda Agentic Data Plane. No Python or JavaScript code required. This guide walks through the managed create canvas section by section, then covers how to connect to and test the running agent.
@@ -32,7 +33,7 @@ After reading this page, you will be able to:
 +
 image::shared:create-agent-runtime-choice.png[The runtime choice in the create-agent flow, with a Redpanda manages it card for the managed runtime and an I host it myself card for self-managed agents]
 
-Agentic Data Plane opens the *New managed agent* canvas: a single page with sections for *Identity*, *Model*, *Instructions*, and *Tools*, plus a collapsible *Advanced* area for subagents and tags. Everything on the canvas is editable later from the agent's *Overview* tab. Each field is marked *Required* or *Optional*; the *Create agent* button stays disabled until you provide the required fields, with helper text explaining what's still missing.
+Agentic Data Plane opens the *New managed agent* canvas: a single page with sections for *Identity*, *Model*, *Instructions*, and *Tools*, plus a collapsible *Advanced* area for subagents and tags. Everything on the canvas is editable later from the agent's *Overview* tab. Required fields are marked with an asterisk; the *Create agent* button stays disabled until you provide them, with helper text explaining what's still missing.
 
 == Identity
 
@@ -112,7 +113,7 @@ For full guidance on writing effective prompts, see xref:connect:system-prompts.
 
 In the *Tools* section, grant the agent access to the glossterm:Model Context Protocol (MCP)[] servers that expose tools to it. This section is optional, and you can change the list at any time after creation.
 
-. In the *Search MCP servers* box, find each server you want the agent to call and select its checkbox. To create a new server instead of attaching an existing one, click *Add MCP server*, which opens the server-creation flow in a new tab.
+. In the server list, select the checkbox of each server you want the agent to call. If your organization runs many MCP servers, a *Search MCP servers* box appears above the list to help you find them. To create a new server instead of attaching an existing one, click *Add MCP server*, which opens the server-creation flow in a new tab.
 . The agent discovers each selected server's tools at runtime; you don't pre-select individual tools. The agent calls them based on the LLM's interpretation of the system prompt and the user request. Keep the system prompt aligned with the servers you select so the model knows what's available.
 
 TIP: Apply the principle of least privilege. Connect only the servers the agent needs.
