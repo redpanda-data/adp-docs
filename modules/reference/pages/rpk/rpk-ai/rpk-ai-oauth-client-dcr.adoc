@@ -1,5 +1,5 @@
 = rpk ai oauth-client dcr
-:description: Manage Dynamic Client Registration (DCR) settings for the AI Gateway. DCR allows OAuth clients to register themselves programmatically at a public endpoint.
+:description: Manage Dynamic Client Registration (DCR) settings for the AI gateway. DCR allows OAuth clients to register themselves programmatically at a public endpoint.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-dcr.adoc[tag=single-source]
