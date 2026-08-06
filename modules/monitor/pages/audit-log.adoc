@@ -64,6 +64,9 @@ The table shows these fields:
 
 == Filter events
 
+// The Subsystem filter values below mirror the UI labels exactly, and the UI label is lowercase-g "MCP gateway"
+// (apps/adp-ui/src/routes/_authenticated/audit-log.utils.ts, verified against origin/main 2026-08-06).
+// Keep these two mentions lowercase even though the product name is written "MCP Gateway" elsewhere.
 Use the controls above the table to narrow an investigation:
 
 * *Search*: Search event summaries by actor, resource, policy, or related text.

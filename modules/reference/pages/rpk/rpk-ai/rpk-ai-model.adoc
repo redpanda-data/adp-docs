@@ -1,5 +1,5 @@
 = rpk ai model
-:description: pass:q[Discover the models the Redpanda AI gateway exposes. The catalog is read-only; `model list` and `model get` are the only verbs.]
+:description: pass:q[Discover the models the Redpanda AI Gateway exposes. The catalog is read-only; `model list` and `model get` are the only verbs.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-model.adoc[tag=single-source]

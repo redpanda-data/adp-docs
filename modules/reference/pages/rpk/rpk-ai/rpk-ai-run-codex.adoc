@@ -1,5 +1,5 @@
 = rpk ai run codex
-:description: pass:q[Launch the OpenAI Codex CLI with its model traffic routed through the Redpanda AI gateway for the current `rpk` ai environment. `rpk` ai generates a throwaway Codex config in a temporary CODEX_HOME, points it at the gateway's OpenAI-compatible Responses endpoint for the chosen provider, and wires Codex's bearer to `rpai auth token` so it refreshes itself for the life of the session.]
+:description: pass:q[Launch the OpenAI Codex CLI with its model traffic routed through the Redpanda AI Gateway for the current `rpk` ai environment. `rpk` ai generates a throwaway Codex config in a temporary CODEX_HOME, points it at the gateway's OpenAI-compatible Responses endpoint for the chosen provider, and wires Codex's bearer to `rpai auth token` so it refreshes itself for the life of the session.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-run-codex.adoc[tag=single-source]

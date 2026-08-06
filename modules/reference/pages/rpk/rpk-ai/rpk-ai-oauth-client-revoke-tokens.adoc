@@ -1,5 +1,5 @@
 = rpk ai oauth-client revoke-tokens
-:description: Revoke every refresh token the AI gateway has issued for the named OAuth client. Forces all users who connected this client to sign in again.
+:description: Revoke every refresh token the AI Gateway has issued for the named OAuth client. Forces all users who connected this client to sign in again.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-revoke-tokens.adoc[tag=single-source]

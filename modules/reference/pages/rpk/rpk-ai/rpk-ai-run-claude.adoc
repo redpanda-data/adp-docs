@@ -1,5 +1,5 @@
 = rpk ai run claude
-:description: pass:q[Launch Anthropic's Claude Code CLI with its model traffic routed through the Redpanda AI gateway for the current `rpk` ai environment. `rpk` ai points ANTHROPIC_BASE_URL at the gateway's Anthropic Messages endpoint for the chosen provider and wires the gateway auth for the life of the session.]
+:description: pass:q[Launch Anthropic's Claude Code CLI with its model traffic routed through the Redpanda AI Gateway for the current `rpk` ai environment. `rpk` ai points ANTHROPIC_BASE_URL at the gateway's Anthropic Messages endpoint for the chosen provider and wires the gateway auth for the life of the session.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-run-claude.adoc[tag=single-source]

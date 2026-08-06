@@ -1,5 +1,5 @@
 = rpk ai oauth-client create
-:description: Register an OAuth client with the AI gateway. The generated client secret is printed once and cannot be retrieved afterward.
+:description: Register an OAuth client with the AI Gateway. The generated client secret is printed once and cannot be retrieved afterward.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-create.adoc[tag=single-source]
