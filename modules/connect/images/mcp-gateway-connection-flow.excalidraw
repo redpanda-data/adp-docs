@@ -1,0 +1,471 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas",
+      "type": "rectangle",
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 1,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:54:22.077Z",
+      "updatedAt": "2026-08-06T21:54:22.077Z",
+      "version": 1
+    },
+    {
+      "id": "callers",
+      "type": "rectangle",
+      "x": 55,
+      "y": 250,
+      "width": 260,
+      "height": 210,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "gateway",
+      "type": "rectangle",
+      "x": 390,
+      "y": 200,
+      "width": 300,
+      "height": 310,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "managed",
+      "type": "rectangle",
+      "x": 785,
+      "y": 155,
+      "width": 265,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "self",
+      "type": "rectangle",
+      "x": 785,
+      "y": 455,
+      "width": 265,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "systems",
+      "type": "rectangle",
+      "x": 1140,
+      "y": 235,
+      "width": 190,
+      "height": 240,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "protocol",
+      "type": "rectangle",
+      "x": 350,
+      "y": 680,
+      "width": 680,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 323,
+      "y": 355,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          59,
+          0
+        ]
+      ],
+      "start": {
+        "id": "callers"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 697.7074115601451,
+      "y": 311.1343623475093,
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          79.5851768797097,
+          -22.136274363892767
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "managed"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 697.1077271582216,
+      "y": 436.1549848896774,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          80.78454568355687,
+          41.72976531998296
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "self"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "a4",
+      "type": "arrow",
+      "x": 1057.5954258267113,
+      "y": 296.33077074584156,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          74.80914834657733,
+          24.740033311466448
+        ]
+      ],
+      "start": {
+        "id": "managed"
+      },
+      "end": {
+        "id": "systems"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "a5",
+      "type": "arrow",
+      "x": 1056.8169498593018,
+      "y": 464.43525914153116,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          76.36610028139648,
+          -46.9020143460545
+        ]
+      ],
+      "start": {
+        "id": "self"
+      },
+      "end": {
+        "id": "systems"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "MCP Gateway gives every server one governed tool path",
+      "fontSize": 34,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 60,
+      "y": 98,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Agents and external clients use the same discovery and call pattern across managed and self-managed backends",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "callers-title",
+      "type": "text",
+      "x": 79,
+      "y": 274,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "MCP callers",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "callers-body",
+      "type": "text",
+      "x": 79,
+      "y": 316,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Managed agents\nSelf-managed agents\nExternal MCP clients",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-title",
+      "type": "text",
+      "x": 414,
+      "y": 224,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "MCP Gateway",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-body",
+      "type": "text",
+      "x": 414,
+      "y": 266,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Authenticate identity\nAuthorize tool access\nResolve upstream auth\nApply data policies\nRecord calls and errors",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
+      "version": 1
+    },
+    {
+      "id": "managed-title",
+      "type": "text",
+      "x": 809,
+      "y": 179,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Managed server",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
+      "version": 1
+    },
+    {
+      "id": "managed-body",
+      "type": "text",
+      "x": 809,
+      "y": 221,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Redpanda runs the\nMCP implementation",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
+      "version": 1
+    },
+    {
+      "id": "self-title",
+      "type": "text",
+      "x": 809,
+      "y": 479,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Self-managed server",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
+      "version": 1
+    },
+    {
+      "id": "self-body",
+      "type": "text",
+      "x": 809,
+      "y": 521,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "You run the endpoint;\nRedpanda fronts it",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
+      "version": 1
+    },
+    {
+      "id": "systems-title",
+      "type": "text",
+      "x": 1164,
+      "y": 259,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Upstream\nsystems",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
+      "version": 1
+    },
+    {
+      "id": "systems-body",
+      "type": "text",
+      "x": 1164,
+      "y": 331,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Databases\nAPIs\nBusiness apps",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
+      "version": 1
+    },
+    {
+      "id": "protocol-text",
+      "type": "text",
+      "x": 368,
+      "y": 693,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "MCP discovery and JSON-RPC stay consistent across both paths",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#0f172a",
+    "gridSize": null
+  }
+}

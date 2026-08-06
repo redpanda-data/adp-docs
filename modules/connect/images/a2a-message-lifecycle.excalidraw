@@ -1,0 +1,442 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas",
+      "type": "rectangle",
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 1,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "caller",
+      "type": "rectangle",
+      "x": 40,
+      "y": 245,
+      "width": 215,
+      "height": 210,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "card",
+      "type": "rectangle",
+      "x": 300,
+      "y": 215,
+      "width": 230,
+      "height": 270,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "auth",
+      "type": "rectangle",
+      "x": 575,
+      "y": 245,
+      "width": 215,
+      "height": 210,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "message",
+      "type": "rectangle",
+      "x": 835,
+      "y": 215,
+      "width": 230,
+      "height": 270,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "outcome",
+      "type": "rectangle",
+      "x": 1110,
+      "y": 215,
+      "width": 230,
+      "height": 270,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "modern",
+      "type": "rectangle",
+      "x": 315,
+      "y": 590,
+      "width": 760,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 263,
+      "y": 350,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "caller"
+      },
+      "end": {
+        "id": "card"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 538,
+      "y": 350,
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "card"
+      },
+      "end": {
+        "id": "auth"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 798,
+      "y": 350,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "auth"
+      },
+      "end": {
+        "id": "message"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "a4",
+      "type": "arrow",
+      "x": 1073,
+      "y": 350,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "message"
+      },
+      "end": {
+        "id": "outcome"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "A2A lets callers discover and invoke an agent",
+      "fontSize": 34,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 60,
+      "y": 98,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "The caller learns the interface first, then authenticates and exchanges messages or task updates",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "caller-title",
+      "type": "text",
+      "x": 64,
+      "y": 269,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Caller",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "caller-body",
+      "type": "text",
+      "x": 64,
+      "y": 311,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Application\nExternal agent\nRedpanda\npipeline",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "card-title",
+      "type": "text",
+      "x": 324,
+      "y": 239,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "1. Discover",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "card-body",
+      "type": "text",
+      "x": 324,
+      "y": 281,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Fetch the public\nagent card\n\nRead capabilities,\ninterfaces, and\nprotocol version",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "auth-title",
+      "type": "text",
+      "x": 599,
+      "y": 269,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "2. Sign in",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "auth-body",
+      "type": "text",
+      "x": 599,
+      "y": 311,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Get a short-lived\naccess token",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "message-title",
+      "type": "text",
+      "x": 859,
+      "y": 239,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "3. Send message",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "message-body",
+      "type": "text",
+      "x": 859,
+      "y": 281,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Use supported\ninterface and\nprotocol version\n\nAgent stays opaque",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "outcome-title",
+      "type": "text",
+      "x": 1134,
+      "y": 239,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "4. Receive",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "outcome-body",
+      "type": "text",
+      "x": 1134,
+      "y": 281,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Direct response\nor streamed task\nstatus and\nartifacts",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    },
+    {
+      "id": "modern-text",
+      "type": "text",
+      "x": 333,
+      "y": 603,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "A2A contract: explicit interfaces, version negotiation, consistent outcomes",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#0f172a",
+    "gridSize": null
+  }
+}

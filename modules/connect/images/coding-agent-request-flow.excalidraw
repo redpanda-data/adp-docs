@@ -1,0 +1,485 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas",
+      "type": "rectangle",
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 1,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "workstation",
+      "type": "rectangle",
+      "x": 58,
+      "y": 250,
+      "width": 260,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "rpk",
+      "type": "rectangle",
+      "x": 382,
+      "y": 250,
+      "width": 240,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "gateway",
+      "type": "rectangle",
+      "x": 686,
+      "y": 220,
+      "width": 280,
+      "height": 250,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "provider",
+      "type": "rectangle",
+      "x": 1030,
+      "y": 250,
+      "width": 290,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "secrets",
+      "type": "rectangle",
+      "x": 430,
+      "y": 575,
+      "width": 300,
+      "height": 130,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "usage",
+      "type": "rectangle",
+      "x": 850,
+      "y": 575,
+      "width": 300,
+      "height": 130,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 326,
+      "y": 345,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          48,
+          0
+        ]
+      ],
+      "start": {
+        "id": "workstation"
+      },
+      "end": {
+        "id": "rpk"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 630,
+      "y": 345,
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          48,
+          0
+        ]
+      ],
+      "start": {
+        "id": "rpk"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 974,
+      "y": 345,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          48,
+          0
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "provider"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "a4",
+      "type": "arrow",
+      "x": 639.3269133332631,
+      "y": 568.8559372629569,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          77.3122750283892,
+          -92.7118745259138
+        ]
+      ],
+      "start": {
+        "id": "secrets"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "a5",
+      "type": "arrow",
+      "x": 903.79313808569,
+      "y": 476.89066514527906,
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          53.803554337094624,
+          91.21866970944188
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "usage"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Coding agents use the gateway, not provider keys",
+      "fontSize": 34,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 60,
+      "y": 98,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "One local sign-in routes model traffic and records usage without writing an upstream key to disk",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "workstation-title",
+      "type": "text",
+      "x": 82,
+      "y": 274,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Developer machine",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "workstation-body",
+      "type": "text",
+      "x": 82,
+      "y": 316,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Claude Code or Codex\n\nNo provider key\nstored here",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "rpk-title",
+      "type": "text",
+      "x": 406,
+      "y": 274,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Run coding agent",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "rpk-body",
+      "type": "text",
+      "x": 406,
+      "y": 316,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "rpk ai run\n\nUses selected context",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-title",
+      "type": "text",
+      "x": 710,
+      "y": 244,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "AI Gateway",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-body",
+      "type": "text",
+      "x": 710,
+      "y": 286,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Authenticates caller\nRoutes native API\nApplies policy\nRecords usage",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "provider-title",
+      "type": "text",
+      "x": 1054,
+      "y": 274,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "LLM provider",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "provider-body",
+      "type": "text",
+      "x": 1054,
+      "y": 316,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Managed access,\nAWS Bedrock, or\nenterprise passthrough",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "secrets-title",
+      "type": "text",
+      "x": 454,
+      "y": 599,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Secret store",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "secrets-body",
+      "type": "text",
+      "x": 454,
+      "y": 641,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Provider credentials stay\nin the data plane",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "usage-title",
+      "type": "text",
+      "x": 874,
+      "y": 599,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Cost and usage",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    },
+    {
+      "id": "usage-body",
+      "type": "text",
+      "x": 874,
+      "y": 641,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Tokens, requests, and\nspend roll up centrally",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:16.492Z",
+      "updatedAt": "2026-08-06T21:37:16.492Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#0f172a",
+    "gridSize": null
+  }
+}

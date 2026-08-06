@@ -1,0 +1,429 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas",
+      "type": "rectangle",
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 1,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "session",
+      "type": "rectangle",
+      "x": 35,
+      "y": 245,
+      "width": 270,
+      "height": 210,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "agent",
+      "type": "rectangle",
+      "x": 370,
+      "y": 215,
+      "width": 270,
+      "height": 270,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "live",
+      "type": "rectangle",
+      "x": 705,
+      "y": 215,
+      "width": 285,
+      "height": 270,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "evidence",
+      "type": "rectangle",
+      "x": 1055,
+      "y": 245,
+      "width": 265,
+      "height": 210,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "retry",
+      "type": "rectangle",
+      "x": 270,
+      "y": 590,
+      "width": 375,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "debug",
+      "type": "rectangle",
+      "x": 705,
+      "y": 590,
+      "width": 430,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 313,
+      "y": 350,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          49,
+          0
+        ]
+      ],
+      "start": {
+        "id": "session"
+      },
+      "end": {
+        "id": "agent"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 648,
+      "y": 350,
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          49,
+          0
+        ]
+      ],
+      "start": {
+        "id": "agent"
+      },
+      "end": {
+        "id": "live"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 998,
+      "y": 350,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          49,
+          0
+        ]
+      ],
+      "start": {
+        "id": "live"
+      },
+      "end": {
+        "id": "evidence"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "a4",
+      "type": "arrow",
+      "x": 698.3908983968206,
+      "y": 451.70005391396336,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -196.1614960417615,
+          133.79219986438096
+        ]
+      ],
+      "start": {
+        "id": "live"
+      },
+      "end": {
+        "id": "retry"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Agent Inspector closes the test-and-observe loop",
+      "fontSize": 34,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 60,
+      "y": 98,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "See streamed output, tool activity, context use, and the durable evidence produced by each run",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "session-title",
+      "type": "text",
+      "x": 59,
+      "y": 269,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Test session",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "session-body",
+      "type": "text",
+      "x": 59,
+      "y": 311,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Write a prompt\nChoose a model\nReview available tools",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "agent-title",
+      "type": "text",
+      "x": 394,
+      "y": 239,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Managed agent",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "agent-body",
+      "type": "text",
+      "x": 394,
+      "y": 281,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Applies instructions\nCalls its LLM\nSelects MCP tools\nBuilds the response",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "live-title",
+      "type": "text",
+      "x": 729,
+      "y": 239,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Live Inspector",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "live-body",
+      "type": "text",
+      "x": 729,
+      "y": 281,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Streaming response\nTool calls and results\nArtifacts\nContext and token use",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "evidence-title",
+      "type": "text",
+      "x": 1079,
+      "y": 269,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "After the run",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "evidence-body",
+      "type": "text",
+      "x": 1079,
+      "y": 311,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Transcripts\nActivity\nCost and usage",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "retry-text",
+      "type": "text",
+      "x": 288,
+      "y": 603,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Retry with context or start fresh",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    },
+    {
+      "id": "debug-text",
+      "type": "text",
+      "x": 723,
+      "y": 603,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Use durable evidence to debug behavior",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#0f172a",
+    "gridSize": null
+  }
+}

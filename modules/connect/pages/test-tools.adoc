@@ -30,6 +30,9 @@ After completing this guide, you will be able to:
 
 The Inspector is a console: a tool list and a tool runner sit side by side, with a status strip along the top. Resource and prompt panels appear underneath only when the server exposes those capabilities. Two more surfaces open from the status strip: *Session details* and the *Protocol panel*. See <<session>> for both.
 
+.The MCP Inspector follows one request from discovery through the protocol view
+image::mcp-inspector-lifecycle.svg[alt="MCP Inspector flow. The Inspector identifies the server's MCP version and capabilities, discovers tools, resources, and prompts, sends a selected tool call as JSON-RPC, and shows the formatted result beside the wire frames, timing, progress, and errors."]
+
 == Run a tool
 
 The tool list shows every tool the server returned from `tools/list`. Select a tool to load it into the runner.
@@ -94,7 +97,7 @@ The status strip along the top of the console shows the connection status and ho
 
 A telemetry strip reports the last call's latency, time to first byte, payload size, and estimated context tokens. Click *Clear* to empty these views.
 
-// TODO: confirm exact protocol-panel affordances and capture a screenshot.
+// Verified against the current ADP implementation on 2026-08-07.
 
 [[errors]]
 == Common errors

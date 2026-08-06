@@ -20,6 +20,9 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
+.`rpk ai` reuses one authenticated environment across resource, protocol, and agent workflows
+image::rpk-ai-workflow.svg[alt="rpk ai workflow. Install the rpk ai plugin, sign in and select an Agentic Data Plane environment, then manage LLM providers, MCP servers, OAuth resources, and agents; list or call MCP tools and send A2A messages; or launch supported coding agents through AI Gateway. These workflows share the selected identity and environment."]
+
 == Install the CLI
 
 The Agentic Data Plane CLI is an `rpk` managed plugin. Install `rpk` first (see xref:reference:rpk-install.adoc[Install or Update rpk]), then install the plugin:

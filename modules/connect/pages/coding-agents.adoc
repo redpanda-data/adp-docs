@@ -18,6 +18,9 @@ After completing this guide, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
+.`rpk ai run` routes coding-agent model traffic through AI Gateway
+image::coding-agent-request-flow.svg[alt="Request flow from Claude Code or Codex through rpk ai run and AI Gateway to a compatible LLM provider. The coding agent receives model responses while provider credentials remain in the Agentic Data Plane secret store and usage flows to Cost and Usage."]
+
 == Prerequisites
 
 * The `rpk ai` CLI, installed and signed in to the Agentic Data Plane environment whose gateway you want to target. See xref:cli:index.adoc[Use the Agentic Data Plane CLI]. The `rpk ai run` command uses the credentials from `rpk ai auth login`, not a `rpk cloud` session.

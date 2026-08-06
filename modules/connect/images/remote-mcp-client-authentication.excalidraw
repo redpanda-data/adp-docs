@@ -1,0 +1,399 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas",
+      "type": "rectangle",
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 1,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "client",
+      "type": "rectangle",
+      "x": 50,
+      "y": 235,
+      "width": 230,
+      "height": 220,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "inbound",
+      "type": "rectangle",
+      "x": 325,
+      "y": 205,
+      "width": 245,
+      "height": 280,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "gateway",
+      "type": "rectangle",
+      "x": 610,
+      "y": 205,
+      "width": 265,
+      "height": 280,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "outbound",
+      "type": "rectangle",
+      "x": 925,
+      "y": 205,
+      "width": 395,
+      "height": 280,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "boundary1",
+      "type": "rectangle",
+      "x": 240,
+      "y": 570,
+      "width": 360,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "boundary2",
+      "type": "rectangle",
+      "x": 780,
+      "y": 570,
+      "width": 430,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 288,
+      "y": 345,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "client"
+      },
+      "end": {
+        "id": "inbound"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 578,
+      "y": 345,
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          24,
+          0
+        ]
+      ],
+      "start": {
+        "id": "inbound"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 883,
+      "y": 345,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          34,
+          0
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "outbound"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "One tool call can cross two OAuth boundaries",
+      "fontSize": 34,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 60,
+      "y": 98,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Inbound client identity and outbound upstream identity solve different authentication problems",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "client-title",
+      "type": "text",
+      "x": 74,
+      "y": 259,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "External MCP\nclient",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "client-body",
+      "type": "text",
+      "x": 74,
+      "y": 331,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Chat app\nCoding agent\nIDE client\nor custom app",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "inbound-title",
+      "type": "text",
+      "x": 349,
+      "y": 229,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Inbound OAuth\nclient",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "inbound-body",
+      "type": "text",
+      "x": 349,
+      "y": 301,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Identifies app\nChecks redirect URI\nAuthorizes access\nto AI Gateway",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-title",
+      "type": "text",
+      "x": 634,
+      "y": 229,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "AI Gateway\nand MCP",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-body",
+      "type": "text",
+      "x": 634,
+      "y": 301,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Authenticates user\nInvokes the tool\nApplies access policy\nRecords the call",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "outbound-title",
+      "type": "text",
+      "x": 949,
+      "y": 229,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Outbound access",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "outbound-body",
+      "type": "text",
+      "x": 949,
+      "y": 271,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "OAuth provider represents user\nfor delegated OAuth\n\nUpstream: GitHub, Slack,\nor Salesforce",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "boundary1-text",
+      "type": "text",
+      "x": 258,
+      "y": 583,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Inbound: client \u2192 AI Gateway",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    },
+    {
+      "id": "boundary2-text",
+      "type": "text",
+      "x": 798,
+      "y": 583,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Outbound: AI Gateway \u2192 upstream",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:32:59.343Z",
+      "updatedAt": "2026-08-06T22:32:59.343Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#0f172a",
+    "gridSize": null
+  }
+}

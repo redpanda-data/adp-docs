@@ -49,6 +49,9 @@ The agent supplies the chart type, optional title, labels, series names, and num
 Agentic Data Plane draws a `chart` block wherever it shows the agent's response: the agent's *Inspector* tab and the *Transcripts* tab.
 When an external application calls the agent, whether that application draws the chart depends on how it renders the agent's output.
 
+.The Inspector turns a chart code block into three synchronized views
+image::agent-chart-rendering.svg[alt="Chart rendering flow. An agent response contains a strict JSON chart code block. The Inspector validates the chart contract and produces Chart, Data, and Code views from the same configuration. Invalid configurations produce a visible inline error."]
+
 == Write the chart block
 
 Use the fields below.

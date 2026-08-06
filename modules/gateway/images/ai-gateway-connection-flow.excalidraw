@@ -1,0 +1,485 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas",
+      "type": "rectangle",
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 1,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "admin",
+      "type": "rectangle",
+      "x": 55,
+      "y": 170,
+      "width": 300,
+      "height": 210,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "local",
+      "type": "rectangle",
+      "x": 55,
+      "y": 500,
+      "width": 300,
+      "height": 155,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "app",
+      "type": "rectangle",
+      "x": 405,
+      "y": 500,
+      "width": 300,
+      "height": 155,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "gateway",
+      "type": "rectangle",
+      "x": 500,
+      "y": 190,
+      "width": 330,
+      "height": 260,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "provider",
+      "type": "rectangle",
+      "x": 965,
+      "y": 190,
+      "width": 350,
+      "height": 210,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "observe",
+      "type": "rectangle",
+      "x": 935,
+      "y": 520,
+      "width": 380,
+      "height": 135,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 362.9619928053482,
+      "y": 290.45280364400145,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          129.07601438930362,
+          12.627001407649288
+        ]
+      ],
+      "start": {
+        "id": "admin"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 350.4272969162951,
+      "y": 496.09232835663914,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          142.59200810915735,
+          -79.82052627849566
+        ]
+      ],
+      "start": {
+        "id": "local"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 591.2495279935279,
+      "y": 492.6431503787869,
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          15.073759546924862,
+          -35.28630075757383
+        ]
+      ],
+      "start": {
+        "id": "app"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "a4",
+      "type": "arrow",
+      "x": 837.9889426346601,
+      "y": 310.8953188087021,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          119.02211473067973,
+          -6.264321827930473
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "provider"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "a5",
+      "type": "arrow",
+      "x": 836.9156776606342,
+      "y": 419.9727038569992,
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          165.09387832359153,
+          96.00567924252329
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "observe"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "AI Gateway separates client access from provider secrets",
+      "fontSize": 34,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 60,
+      "y": 98,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Configure the upstream once; every local or deployed client uses the governed proxy path",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "admin-title",
+      "type": "text",
+      "x": 79,
+      "y": 194,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Configure LLM provider",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "admin-body",
+      "type": "text",
+      "x": 79,
+      "y": 236,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Upstream endpoint\nCredential reference\nAllowed models\nOptional guardrail",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.178Z",
+      "updatedAt": "2026-08-06T22:33:25.178Z",
+      "version": 1
+    },
+    {
+      "id": "local-title",
+      "type": "text",
+      "x": 79,
+      "y": 524,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Local developer",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    },
+    {
+      "id": "local-body",
+      "type": "text",
+      "x": 79,
+      "y": 566,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "rpk ai sign-in and\nselected environment",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    },
+    {
+      "id": "app-title",
+      "type": "text",
+      "x": 429,
+      "y": 524,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Application or agent",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    },
+    {
+      "id": "app-body",
+      "type": "text",
+      "x": 429,
+      "y": 566,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "OAuth client credentials\nfor deployed workloads",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-title",
+      "type": "text",
+      "x": 524,
+      "y": 214,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "AI Gateway",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-body",
+      "type": "text",
+      "x": 524,
+      "y": 256,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Authenticate caller\nRoute native API\nApply policy and budgets\nRecord tokens, cost, latency",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    },
+    {
+      "id": "provider-title",
+      "type": "text",
+      "x": 989,
+      "y": 214,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Upstream model provider",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    },
+    {
+      "id": "provider-body",
+      "type": "text",
+      "x": 989,
+      "y": 256,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "OpenAI, Anthropic, Google AI,\nAWS Bedrock, or an\nOpenAI-compatible endpoint",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    },
+    {
+      "id": "observe-title",
+      "type": "text",
+      "x": 959,
+      "y": 544,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Governance and observability",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    },
+    {
+      "id": "observe-body",
+      "type": "text",
+      "x": 959,
+      "y": 586,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Cost, usage, and latency\nOptional transcripts",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:25.179Z",
+      "updatedAt": "2026-08-06T22:33:25.179Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#0f172a",
+    "gridSize": null
+  }
+}

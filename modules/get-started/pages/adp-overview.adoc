@@ -23,12 +23,19 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
+== Who runs each component
+
+*Managed* and *self-managed* describe runtime ownership, not whether a resource is governed. Redpanda runs managed agents and managed MCP server implementations. You run self-managed agents and MCP servers, while Agentic Data Plane registers their identities and fronts their model or tool traffic through the gateways. An LLM provider is different: it is a gateway connection to an upstream model service, not a model runtime hosted in Agentic Data Plane.
+
+.Runtime ownership changes, but gateway identity and governance stay consistent
+image::resource-ownership-models.svg[alt="Resource ownership comparison. Redpanda runs managed agent runtimes and managed MCP server implementations. Customers run self-managed agent runtimes and self-managed MCP endpoints. AI Gateway and MCP Gateway provide identity, policy, and observability across both ownership models. LLM providers remain upstream model services connected through an Agentic Data Plane provider configuration."]
+
 == Architecture
 
 Agents and clients connect through Agentic Data Plane rather than reaching your systems directly. Agentic Data Plane gives every agent an identity and applies guardrails and spend caps, mediates tool and data access through MCP servers to your systems of record, and routes every LLM call through the AI Gateway. All activity streams to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.
 
 .Redpanda Agentic Data Plane sits between your agents and clients and your external systems and LLM providers
-image::adp-architecture.png[Architecture diagram: Redpanda-managed agents, bring-your-own agents over A2A, and Microsoft Teams connect to the Agentic Data Plane. Inside Agentic Data Plane, out-of-band policy applies identity, guardrails, and spend caps; an MCP gateway provides governed tool and data access to systems of record and MCP servers; and an LLM provider gateway gives one entry point per provider to Anthropic, OpenAI, Gemini, Bedrock, and OpenAI-compatible models. Transcripts stream to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.]
+image::adp-architecture.png[Architecture diagram: Redpanda-managed agents, bring-your-own agents over A2A, and Microsoft Teams connect to the Agentic Data Plane. Inside Agentic Data Plane, out-of-band policy applies identity, guardrails, and spend caps; the MCP Gateway provides governed tool and data access to systems of record and MCP servers; and an LLM provider gateway gives one entry point per provider to Anthropic, OpenAI, Gemini, Bedrock, and OpenAI-compatible models. Transcripts stream to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.]
 
 == AI Gateway
 

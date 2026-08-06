@@ -23,6 +23,9 @@ Teams adopting LLMs can quickly hit operational problems:
 * *SDK lock-in and switching cost:* Each provider has its own SDK, authentication scheme, and model catalog. Swapping OpenAI for Anthropic means a code change, not a configuration change.
 * *No shared view of usage:* Provider dashboards tell you what a single API key spent. They don't tell you what your organization spent, broken down by team or application.
 
+.Configure a provider once, then route every client through one governed AI Gateway path
+image::ai-gateway-connection-flow.svg[alt="AI Gateway connection flow. An administrator configures an LLM provider with its upstream endpoint, credentials, and allowed models. Local developers connect with rpk ai and deployed applications or self-managed agents use OAuth client credentials. AI Gateway authenticates, routes, applies policy, and records usage before calling the upstream model provider."]
+
 == What AI Gateway gives you
 
 AI Gateway consolidates provider access behind the following capabilities.

@@ -57,6 +57,9 @@ Some policies are direction-specific. Content-filter prompt-attack detection run
 
 For streaming responses, Agentic Data Plane skips output evaluation in this release. Input evaluation still applies.
 
+.A guardrail can stop a request before the model or control the response after it
+image::guardrail-evaluation-flow.svg[alt="Guardrail evaluation flow. A caller's prompt passes through input policies before the Bedrock model. Allowed prompts reach the model; blocked prompts return the configured blocked-input message. For non-streaming calls, model output passes through output policies before an allowed, redacted, or blocked response reaches the caller."]
+
 == Where you attach a guardrail
 
 You attach a guardrail by setting an AWS Bedrock LLM provider's guardrail. The guardrail setting appears in the provider's Bedrock settings, and only Bedrock providers can reference a guardrail. Each provider references at most one guardrail, and a single guardrail can be reused across many providers. The guardrail's detail page lists the providers that use it. You create and configure the guardrail first, then attach it from the provider. See xref:control:guardrails/create-guardrail.adoc[Create a guardrail].

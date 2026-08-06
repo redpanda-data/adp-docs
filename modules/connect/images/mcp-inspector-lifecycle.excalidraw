@@ -1,0 +1,485 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas",
+      "type": "rectangle",
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 1,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
+      "version": 1
+    },
+    {
+      "id": "connect",
+      "type": "rectangle",
+      "x": 30,
+      "y": 235,
+      "width": 270,
+      "height": 220,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
+      "version": 1
+    },
+    {
+      "id": "negotiate",
+      "type": "rectangle",
+      "x": 355,
+      "y": 235,
+      "width": 250,
+      "height": 220,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
+      "version": 1
+    },
+    {
+      "id": "discover",
+      "type": "rectangle",
+      "x": 660,
+      "y": 235,
+      "width": 250,
+      "height": 220,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
+      "version": 1
+    },
+    {
+      "id": "call",
+      "type": "rectangle",
+      "x": 965,
+      "y": 235,
+      "width": 250,
+      "height": 220,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
+      "version": 1
+    },
+    {
+      "id": "result",
+      "type": "rectangle",
+      "x": 965,
+      "y": 555,
+      "width": 300,
+      "height": 160,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:12.540Z",
+      "updatedAt": "2026-08-06T22:33:12.540Z",
+      "version": 1
+    },
+    {
+      "id": "protocol",
+      "type": "rectangle",
+      "x": 530,
+      "y": 555,
+      "width": 340,
+      "height": 160,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 308,
+      "y": 345,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          39,
+          0
+        ]
+      ],
+      "start": {
+        "id": "connect"
+      },
+      "end": {
+        "id": "negotiate"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 613,
+      "y": 345,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          39,
+          0
+        ]
+      ],
+      "start": {
+        "id": "negotiate"
+      },
+      "end": {
+        "id": "discover"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 918,
+      "y": 345,
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          39,
+          0
+        ]
+      ],
+      "start": {
+        "id": "discover"
+      },
+      "end": {
+        "id": "call"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "a4",
+      "type": "arrow",
+      "x": 1100.1698653579137,
+      "y": 462.9704381517995,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          7.24647618072413,
+          84.059123696401
+        ]
+      ],
+      "start": {
+        "id": "call"
+      },
+      "end": {
+        "id": "result"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "a5",
+      "type": "arrow",
+      "x": 958.5803012724309,
+      "y": 442.7223400794745,
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -144.5743956483101,
+          107.50403778976897
+        ]
+      ],
+      "start": {
+        "id": "call"
+      },
+      "end": {
+        "id": "protocol"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "MCP Inspector makes the protocol visible",
+      "fontSize": 34,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 60,
+      "y": 98,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Discover capabilities, run a real call, and inspect what crossed the wire without creating an agent",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "connect-title",
+      "type": "text",
+      "x": 54,
+      "y": 259,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Connect",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "connect-body",
+      "type": "text",
+      "x": 54,
+      "y": 301,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Open the server\nInspector and confirm\nconnection health",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "negotiate-title",
+      "type": "text",
+      "x": 379,
+      "y": 259,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Identify protocol",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "negotiate-body",
+      "type": "text",
+      "x": 379,
+      "y": 301,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Protocol version\nServer capabilities\nAvailable features",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "discover-title",
+      "type": "text",
+      "x": 684,
+      "y": 259,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Discover",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "discover-body",
+      "type": "text",
+      "x": 684,
+      "y": 301,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Tools\nResources\nPrompts",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "call-title",
+      "type": "text",
+      "x": 989,
+      "y": 259,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Run a tool",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "call-body",
+      "type": "text",
+      "x": 989,
+      "y": 301,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Form or JSON input\nJSON-RPC request\nProgress and cancel",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "result-title",
+      "type": "text",
+      "x": 989,
+      "y": 579,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Result",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "result-body",
+      "type": "text",
+      "x": 989,
+      "y": 621,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Formatted or raw output\nSchema and\nstructured errors",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "protocol-title",
+      "type": "text",
+      "x": 554,
+      "y": 579,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Protocol panel",
+      "fontSize": 24,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    },
+    {
+      "id": "protocol-body",
+      "type": "text",
+      "x": 554,
+      "y": 621,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Wire frames, timeline, logs,\nlatency, payload, and tokens",
+      "fontSize": 21,
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T22:33:12.541Z",
+      "updatedAt": "2026-08-06T22:33:12.541Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#0f172a",
+    "gridSize": null
+  }
+}

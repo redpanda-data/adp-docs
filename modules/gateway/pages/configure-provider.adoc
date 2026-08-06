@@ -246,7 +246,7 @@ Use the reset control on a field to clear a single override, or clear every fiel
 [[provider-detail-page]]
 == Explore the provider detail page
 
-After you create the provider, its detail page organizes everything about it into tabs: *Overview*, *Models*, *Connect*, and *Settings*.
+After you create the provider, its detail page organizes everything about it into tabs: *Overview*, *Models*, *Connect*, *Playground* (when enabled for your organization), and *Settings*.
 
 === Overview
 
@@ -261,6 +261,13 @@ Enabled models sort to the top. Use the search box to find a model by display na
 === Connect
 
 The *Connect* tab generates ready-made client configuration for this provider: a gateway-token step, ready-to-run `rpk ai` setup steps, setup instructions for popular clients such as Claude Code, and code examples in several languages, all with the provider's proxy URL prefilled. For a Bedrock provider, the Claude Code snippets run against the gateway without local AWS credentials, because the gateway signs the upstream AWS requests for you. See xref:gateway:connect-agent.adoc[Connect your app to AI Gateway] for the underlying flow.
+
+=== Playground
+
+When the *Playground* tab is available, use it to test one of the provider's models before you connect application code. Choose a model, send a prompt, and optionally adjust response controls such as reasoning effort and maximum output tokens. The response streams into the conversation while the Inspector shows the request, response events, status, and timing. Playground conversations are ephemeral.
+
+.Playground turns a model test into an inspectable gateway request
+image::llm-playground-test-loop.svg[alt="LLM Playground test loop. A user selects a model, writes a prompt, and chooses response controls. AI Gateway translates and sends the request to the configured provider, streams the response back, and exposes request details, response events, status, and timing in the Inspector."]
 
 === Settings
 

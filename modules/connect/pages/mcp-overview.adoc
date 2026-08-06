@@ -9,11 +9,16 @@
 
 The Model Context Protocol (MCP) is how AI agents talk to tools. In the Agentic Data Plane, you create *MCP Servers* that agents can connect to. Each MCP server exposes a set of glossterm:tool[,tools], glossterm:resource[,resources], and glossterm:prompt[,prompts] that an agent can discover at runtime through `tools/list` and invoke through structured JSON-RPC calls. Redpanda handles upstream credentials, authentication flows, observability, and aggregation, so you can focus on what your agents do, not on the plumbing.
 
+Current MCP versions keep discovery and calls interoperable while allowing clients and servers to negotiate newer capabilities, such as long-running work and richer user experiences. The Inspector shows the negotiated protocol version and only surfaces capabilities that the server advertises.
+
 After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
+
+.MCP Gateway gives managed and self-managed servers one governed tool path
+image::mcp-gateway-connection-flow.svg[alt="MCP Gateway connection flow. An Agentic Data Plane agent or external MCP client authenticates to MCP Gateway, discovers and calls tools, and receives results. MCP Gateway applies identity, access, authentication, policies, and observability before routing to either a Redpanda-managed MCP implementation or a self-managed MCP endpoint, which then reaches the upstream business system."]
 
 Redpanda offers two kinds of MCP server backends:
 
