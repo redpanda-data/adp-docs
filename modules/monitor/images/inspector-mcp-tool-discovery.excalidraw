@@ -18,27 +18,27 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "tools",
       "type": "rectangle",
-      "x": 25,
+      "x": 55,
       "y": 280,
-      "width": 275,
+      "width": 280,
       "height": 170,
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -51,13 +51,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -70,13 +70,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -89,40 +89,40 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "visible",
       "type": "rectangle",
-      "x": 1160,
+      "x": 1140,
       "y": 250,
-      "width": 165,
+      "width": 190,
       "height": 230,
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "runtime-note",
       "type": "rectangle",
-      "x": 765,
+      "x": 730,
       "y": 610,
-      "width": 550,
+      "width": 585,
       "height": 52,
       "backgroundColor": "#172033",
       "strokeColor": "#f472b6",
@@ -132,26 +132,26 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "a1",
       "type": "arrow",
-      "x": 307.75810833895537,
-      "y": 332.21981379549464,
+      "x": 342.735202866793,
+      "y": 326.01432146570744,
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          84.48378332208927,
-          -21.260819643969455
+          49.52959426641405,
+          -13.070309598081508
         ]
       ],
       "start": {
@@ -161,26 +161,26 @@
         "id": "direct"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "a2",
       "type": "arrow",
-      "x": 307.0691642443497,
-      "y": 433.6459148314435,
+      "x": 341.9932582089723,
+      "y": 446.6629212272068,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          85.86167151130064,
-          45.48962729075532
+          51.013483582055414,
+          28.34082421225304
         ]
       ],
       "start": {
@@ -190,8 +190,8 @@
         "id": "subagents"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -201,7 +201,7 @@
       "y": 310.1632949122239,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -219,8 +219,8 @@
         "id": "gate"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -230,7 +230,7 @@
       "y": 480.79260085469866,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -248,8 +248,8 @@
         "id": "gate"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -259,14 +259,14 @@
       "y": 365,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          84,
+          64,
           0
         ]
       ],
@@ -277,8 +277,8 @@
         "id": "visible"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -290,9 +290,9 @@
       "roughness": 0,
       "text": "Inspector shows the agent\u2019s current tool surface",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.860Z",
-      "updatedAt": "2026-08-06T17:24:41.860Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -304,37 +304,37 @@
       "roughness": 0,
       "text": "Direct servers and subagents expose separate capability paths before a test message is sent",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "tools-title",
       "type": "text",
-      "x": 49,
+      "x": 79,
       "y": 304,
       "strokeColor": "#f8fafc",
       "roughness": 0,
       "text": "Inspector",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "tools-body",
       "type": "text",
-      "x": 49,
+      "x": 79,
       "y": 346,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Open the Tools control\nin the composer",
+      "text": "Open Tools before\nsending a test message",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -346,9 +346,9 @@
       "roughness": 0,
       "text": "Direct MCP servers",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -360,9 +360,9 @@
       "roughness": 0,
       "text": "Server details\nTool names\nTool descriptions",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -374,9 +374,9 @@
       "roughness": 0,
       "text": "Subagents",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -386,11 +386,11 @@
       "y": 536,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Specialist purpose\nConfigured MCP servers\nDelegated capabilities",
+      "text": "Specialist purpose\nConfigured MCP servers\nDelegated tools",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -402,9 +402,9 @@
       "roughness": 0,
       "text": "Runtime checks",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
@@ -416,51 +416,51 @@
       "roughness": 0,
       "text": "Authentication\nAvailability\nAccess policy",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "visible-title",
       "type": "text",
-      "x": 1184,
+      "x": 1164,
       "y": 274,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Visible now",
+      "text": "Available\ntools",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "visible-body",
       "type": "text",
-      "x": 1184,
-      "y": 316,
+      "x": 1164,
+      "y": 346,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Tools\navailable\nin this test\nsession",
+      "text": "Shown in this\ntest session",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     },
     {
       "id": "runtime-note-text",
       "type": "text",
-      "x": 783,
+      "x": 748,
       "y": 623,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Discovery does not guarantee a later call succeeds",
+      "text": "Discovery is session-specific; later calls can fail",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:41.861Z",
-      "updatedAt": "2026-08-06T17:24:41.861Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:44:11.242Z",
+      "updatedAt": "2026-08-06T21:44:11.242Z",
       "version": 1
     }
   ],

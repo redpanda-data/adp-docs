@@ -18,140 +18,140 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.735Z",
+      "updatedAt": "2026-08-06T21:55:52.735Z",
       "version": 1
     },
     {
       "id": "client",
       "type": "rectangle",
       "x": 30,
-      "y": 270,
+      "y": 285,
       "width": 265,
       "height": 190,
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.735Z",
+      "updatedAt": "2026-08-06T21:55:52.735Z",
       "version": 1
     },
     {
       "id": "cimd",
       "type": "rectangle",
-      "x": 385,
-      "y": 155,
-      "width": 285,
-      "height": 190,
+      "x": 345,
+      "y": 140,
+      "width": 315,
+      "height": 210,
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.735Z",
+      "updatedAt": "2026-08-06T21:55:52.735Z",
       "version": 1
     },
     {
       "id": "dcr",
       "type": "rectangle",
-      "x": 385,
-      "y": 390,
-      "width": 285,
-      "height": 190,
+      "x": 345,
+      "y": 370,
+      "width": 315,
+      "height": 180,
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.735Z",
+      "updatedAt": "2026-08-06T21:55:52.735Z",
       "version": 1
     },
     {
       "id": "manual",
       "type": "rectangle",
-      "x": 385,
-      "y": 625,
-      "width": 285,
-      "height": 135,
+      "x": 345,
+      "y": 575,
+      "width": 315,
+      "height": 170,
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.735Z",
+      "updatedAt": "2026-08-06T21:55:52.735Z",
       "version": 1
     },
     {
       "id": "authorize",
       "type": "rectangle",
-      "x": 790,
-      "y": 270,
-      "width": 270,
-      "height": 220,
+      "x": 760,
+      "y": 285,
+      "width": 285,
+      "height": 235,
       "backgroundColor": "#1e293b",
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "gateway",
       "type": "rectangle",
-      "x": 1160,
-      "y": 285,
-      "width": 175,
-      "height": 190,
+      "x": 1130,
+      "y": 305,
+      "width": 205,
+      "height": 195,
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "a1",
       "type": "arrow",
-      "x": 302.6054930226071,
-      "y": 323.3698391557452,
+      "x": 302.4353305060857,
+      "y": 324.4374422990542,
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          74.78901395478579,
-          -24.399252779575534
+          35.129338987828646,
+          -13.948414009873147
         ]
       ],
       "start": {
@@ -161,26 +161,26 @@
         "id": "cimd"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "a2",
       "type": "arrow",
-      "x": 302.5731992484011,
-      "y": 408.42917421222165,
+      "x": 302.7873373466686,
+      "y": 413.00878525803967,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          74.85360150319775,
-          25.482077107471525
+          34.425325306662785,
+          8.100076542744262
         ]
       ],
       "start": {
@@ -190,55 +190,53 @@
         "id": "dcr"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "a3",
       "type": "arrow",
-      "x": 283.1127756648065,
-      "y": 465.44520292262166,
+      "x": 162,
+      "y": 475,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          165.8736853116083,
-          154.10959415475668
+          0,
+          187
+        ],
+        [
+          175,
+          187
         ]
       ],
-      "start": {
-        "id": "client"
-      },
-      "end": {
-        "id": "manual"
-      },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "a4",
       "type": "arrow",
-      "x": 677.6036909311405,
-      "y": 299.09051527307736,
+      "x": 667.4437478091876,
+      "y": 309.94660069986764,
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          104.79261813771905,
-          34.27179964252451
+          85.11250438162483,
+          33.51304860026471
         ]
       ],
       "start": {
@@ -248,26 +246,26 @@
         "id": "authorize"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "a5",
       "type": "arrow",
-      "x": 677.7347025773502,
-      "y": 445.3153615833415,
+      "x": 667.9186030929419,
+      "y": 436.2210758053896,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          104.53059484529967,
-          -27.61185524215466
+          84.16279381411618,
+          -12.098401610779206
         ]
       ],
       "start": {
@@ -277,26 +275,26 @@
         "id": "authorize"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "a6",
       "type": "arrow",
-      "x": 619.6491739125596,
-      "y": 620.0556808863525,
+      "x": 641.2655294518314,
+      "y": 570.6696904153835,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          164.0616521748808,
-          -128.97928630100694
+          112.00777604779341,
+          -72.10500583076691
         ]
       ],
       "start": {
@@ -306,25 +304,25 @@
         "id": "authorize"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "a7",
       "type": "arrow",
-      "x": 1068,
-      "y": 380,
+      "x": 1053,
+      "y": 402.5,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          84,
+          69,
           0
         ]
       ],
@@ -335,8 +333,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
@@ -348,9 +346,9 @@
       "roughness": 0,
       "text": "Three ways an external MCP client can identify itself",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
@@ -362,177 +360,177 @@
       "roughness": 0,
       "text": "Choose the lightest onboarding method the client supports; all paths end at the same authorization flow",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "client-title",
       "type": "text",
       "x": 54,
-      "y": 294,
+      "y": 309,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "External MCP client",
+      "text": "External MCP\nclient",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "client-body",
       "type": "text",
       "x": 54,
-      "y": 336,
+      "y": 381,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Needs permission to\nreach an MCP server\nthrough AI Gateway",
+      "text": "Needs access to an\nMCP server through\nAI Gateway",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "cimd-title",
       "type": "text",
-      "x": 409,
-      "y": 179,
+      "x": 369,
+      "y": 164,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Metadata document",
+      "text": "Client ID metadata",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "cimd-body",
       "type": "text",
-      "x": 409,
-      "y": 221,
+      "x": 369,
+      "y": 206,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
       "text": "HTTPS URL as client ID\nGateway reads\nredirect URIs\nNo stored registration",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "dcr-title",
       "type": "text",
-      "x": 409,
-      "y": 414,
+      "x": 369,
+      "y": 394,
       "strokeColor": "#f8fafc",
       "roughness": 0,
       "text": "Dynamic registration",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "dcr-body",
       "type": "text",
-      "x": 409,
-      "y": 456,
+      "x": 369,
+      "y": 436,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Client creates and\nupdates its own\nsaved registration",
+      "text": "Client creates and updates\nits saved registration",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "manual-title",
       "type": "text",
-      "x": 409,
-      "y": 649,
+      "x": 369,
+      "y": 599,
       "strokeColor": "#f8fafc",
       "roughness": 0,
       "text": "Manual registration",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "manual-body",
       "type": "text",
-      "x": 409,
-      "y": 691,
+      "x": 369,
+      "y": 641,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Administrator creates it\nand shares credentials",
+      "text": "Admin registers\nredirect URIs\nDistributes credentials",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "authorize-title",
       "type": "text",
-      "x": 800,
-      "y": 294,
+      "x": 784,
+      "y": 309,
       "strokeColor": "#f8fafc",
       "roughness": 0,
       "text": "OAuth authorization",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "authorize-body",
       "type": "text",
-      "x": 800,
-      "y": 336,
+      "x": 784,
+      "y": 351,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Validate client\nand redirect URI\nUser grants access\nIssue short-lived\ntokens",
+      "text": "Validate identity\nConfirm redirect URI\nUser grants access\nIssue short-lived\ntokens",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "gateway-title",
       "type": "text",
-      "x": 1184,
-      "y": 309,
+      "x": 1154,
+      "y": 329,
       "strokeColor": "#f8fafc",
       "roughness": 0,
       "text": "AI Gateway",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     },
     {
       "id": "gateway-body",
       "type": "text",
-      "x": 1184,
-      "y": 351,
+      "x": 1154,
+      "y": 371,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Client can call\nallowed MCP\ntools",
+      "text": "Client can call\npermitted MCP\ntools",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:53.608Z",
-      "updatedAt": "2026-08-06T17:26:53.608Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:52.736Z",
+      "updatedAt": "2026-08-06T21:55:52.736Z",
       "version": 1
     }
   ],

@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -32,13 +32,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -51,13 +51,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -70,13 +70,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -89,13 +89,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -113,8 +113,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -132,8 +132,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -143,7 +143,7 @@
       "y": 350,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -161,8 +161,8 @@
         "id": "agent"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -172,7 +172,7 @@
       "y": 350,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -190,8 +190,8 @@
         "id": "live"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -201,7 +201,7 @@
       "y": 350,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -219,8 +219,8 @@
         "id": "evidence"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -231,7 +231,7 @@
       "strokeColor": "#fac515",
       "strokeWidth": 2,
       "strokeStyle": "dashed",
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -249,8 +249,8 @@
         "id": "retry"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -262,9 +262,9 @@
       "roughness": 0,
       "text": "Agent Inspector closes the test-and-observe loop",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -276,9 +276,9 @@
       "roughness": 0,
       "text": "See streamed output, tool activity, context use, and the durable evidence produced by each run",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -290,9 +290,9 @@
       "roughness": 0,
       "text": "Test session",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -304,9 +304,9 @@
       "roughness": 0,
       "text": "Write a prompt\nChoose a model\nReview available tools",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -318,9 +318,9 @@
       "roughness": 0,
       "text": "Managed agent",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -332,9 +332,9 @@
       "roughness": 0,
       "text": "Applies instructions\nCalls its LLM\nSelects MCP tools\nBuilds the response",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -346,9 +346,9 @@
       "roughness": 0,
       "text": "Live Inspector",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -360,9 +360,9 @@
       "roughness": 0,
       "text": "Streaming response\nTool calls and results\nArtifacts\nContext and token use",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -374,9 +374,9 @@
       "roughness": 0,
       "text": "After the run",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -388,9 +388,9 @@
       "roughness": 0,
       "text": "Transcripts\nActivity\nCost and usage",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -402,9 +402,9 @@
       "roughness": 0,
       "text": "Retry with context or start fresh",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     },
     {
@@ -416,9 +416,9 @@
       "roughness": 0,
       "text": "Use durable evidence to debug behavior",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:23.491Z",
-      "updatedAt": "2026-08-06T17:25:23.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:55:12.186Z",
+      "updatedAt": "2026-08-06T21:55:12.186Z",
       "version": 1
     }
   ],

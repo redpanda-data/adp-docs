@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.077Z",
+      "updatedAt": "2026-08-06T21:54:22.077Z",
       "version": 1
     },
     {
@@ -32,13 +32,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -51,13 +51,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -70,13 +70,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -89,13 +89,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -108,13 +108,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -132,8 +132,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -143,7 +143,7 @@
       "y": 355,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -161,8 +161,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -172,7 +172,7 @@
       "y": 311.1343623475093,
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -190,8 +190,8 @@
         "id": "managed"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -201,7 +201,7 @@
       "y": 436.1549848896774,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -219,8 +219,8 @@
         "id": "self"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -230,7 +230,7 @@
       "y": 296.33077074584156,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -248,18 +248,18 @@
         "id": "systems"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
       "id": "a5",
       "type": "arrow",
       "x": 1056.8169498593018,
-      "y": 464.4352591415312,
+      "y": 464.43525914153116,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -267,7 +267,7 @@
         ],
         [
           76.36610028139648,
-          -46.90201434605456
+          -46.9020143460545
         ]
       ],
       "start": {
@@ -277,8 +277,8 @@
         "id": "systems"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -290,9 +290,9 @@
       "roughness": 0,
       "text": "MCP Gateway gives every server one governed tool path",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -304,9 +304,9 @@
       "roughness": 0,
       "text": "Agents and external clients use the same discovery and call pattern across managed and self-managed backends",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -318,9 +318,9 @@
       "roughness": 0,
       "text": "MCP callers",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -332,9 +332,9 @@
       "roughness": 0,
       "text": "Managed agents\nSelf-managed agents\nExternal MCP clients",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -346,9 +346,9 @@
       "roughness": 0,
       "text": "MCP Gateway",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.078Z",
       "version": 1
     },
     {
@@ -360,9 +360,9 @@
       "roughness": 0,
       "text": "Authenticate identity\nAuthorize tool access\nResolve upstream auth\nApply data policies\nRecord calls and errors",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.078Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
       "version": 1
     },
     {
@@ -374,9 +374,9 @@
       "roughness": 0,
       "text": "Managed server",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
       "version": 1
     },
     {
@@ -388,9 +388,9 @@
       "roughness": 0,
       "text": "Redpanda runs the\nMCP implementation",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
       "version": 1
     },
     {
@@ -402,9 +402,9 @@
       "roughness": 0,
       "text": "Self-managed server",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
       "version": 1
     },
     {
@@ -416,9 +416,9 @@
       "roughness": 0,
       "text": "You run the endpoint;\nRedpanda fronts it",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
       "version": 1
     },
     {
@@ -430,9 +430,9 @@
       "roughness": 0,
       "text": "Upstream\nsystems",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
       "version": 1
     },
     {
@@ -444,9 +444,9 @@
       "roughness": 0,
       "text": "Databases\nAPIs\nBusiness apps",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
       "version": 1
     },
     {
@@ -458,9 +458,9 @@
       "roughness": 0,
       "text": "MCP discovery and JSON-RPC stay consistent across both paths",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:29.069Z",
-      "updatedAt": "2026-08-06T17:26:29.069Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:22.079Z",
+      "updatedAt": "2026-08-06T21:54:22.079Z",
       "version": 1
     }
   ],

@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:37.856Z",
-      "updatedAt": "2026-08-06T17:25:37.856Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -32,13 +32,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:37.856Z",
-      "updatedAt": "2026-08-06T17:25:37.856Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -51,13 +51,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:37.856Z",
-      "updatedAt": "2026-08-06T17:25:37.856Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -70,13 +70,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:37.856Z",
-      "updatedAt": "2026-08-06T17:25:37.856Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -89,13 +89,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:37.856Z",
-      "updatedAt": "2026-08-06T17:25:37.856Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -108,13 +108,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:37.856Z",
-      "updatedAt": "2026-08-06T17:25:37.856Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -132,8 +132,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:37.856Z",
-      "updatedAt": "2026-08-06T17:25:37.856Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -143,7 +143,7 @@
       "y": 350,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -161,8 +161,8 @@
         "id": "card"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -172,7 +172,7 @@
       "y": 350,
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -190,8 +190,8 @@
         "id": "auth"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -201,7 +201,7 @@
       "y": 350,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -219,8 +219,8 @@
         "id": "message"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -230,7 +230,7 @@
       "y": 350,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -248,8 +248,8 @@
         "id": "outcome"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -261,9 +261,9 @@
       "roughness": 0,
       "text": "A2A lets callers discover and invoke an agent",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -275,9 +275,9 @@
       "roughness": 0,
       "text": "The caller learns the interface first, then authenticates and exchanges messages or task updates",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -289,9 +289,9 @@
       "roughness": 0,
       "text": "Caller",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -303,9 +303,9 @@
       "roughness": 0,
       "text": "Application\nExternal agent\nRedpanda\npipeline",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -317,9 +317,9 @@
       "roughness": 0,
       "text": "1. Discover",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -331,9 +331,9 @@
       "roughness": 0,
       "text": "Fetch the public\nagent card\n\nRead capabilities,\ninterfaces, and\nprotocol version",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -345,9 +345,9 @@
       "roughness": 0,
       "text": "2. Sign in",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -359,9 +359,9 @@
       "roughness": 0,
       "text": "Get a short-lived\naccess token",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -373,9 +373,9 @@
       "roughness": 0,
       "text": "3. Send message",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -387,9 +387,9 @@
       "roughness": 0,
       "text": "Use supported\ninterface and\nprotocol version\n\nAgent stays opaque",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -401,9 +401,9 @@
       "roughness": 0,
       "text": "4. Receive",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -415,9 +415,9 @@
       "roughness": 0,
       "text": "Direct response\nor streamed task\nstatus and\nartifacts",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     },
     {
@@ -427,11 +427,11 @@
       "y": 603,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Current A2A: explicit interfaces, version negotiation, consistent outcomes",
+      "text": "A2A contract: explicit interfaces, version negotiation, consistent outcomes",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:37.857Z",
-      "updatedAt": "2026-08-06T17:25:37.857Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:17.264Z",
+      "updatedAt": "2026-08-06T21:36:17.264Z",
       "version": 1
     }
   ],

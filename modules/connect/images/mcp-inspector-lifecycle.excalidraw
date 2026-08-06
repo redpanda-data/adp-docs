@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -32,13 +32,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -51,13 +51,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -70,13 +70,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -89,13 +89,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -108,13 +108,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -127,13 +127,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -143,7 +143,7 @@
       "y": 345,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -161,8 +161,8 @@
         "id": "negotiate"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -172,7 +172,7 @@
       "y": 345,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -190,8 +190,8 @@
         "id": "discover"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -201,7 +201,7 @@
       "y": 345,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -219,26 +219,26 @@
         "id": "call"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
       "id": "a4",
       "type": "arrow",
-      "x": 1100.3481927887365,
-      "y": 462.9693977915938,
+      "x": 1100.1698653579137,
+      "y": 462.9704381517995,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          7.373789861123669,
-          84.06120441681242
+          7.24647618072413,
+          84.059123696401
         ]
       ],
       "start": {
@@ -248,26 +248,26 @@
         "id": "result"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:55.351Z",
-      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
       "id": "a5",
       "type": "arrow",
-      "x": 958.5408710219368,
-      "y": 441.0662865608923,
+      "x": 958.5803012724309,
+      "y": 442.7223400794745,
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          -149.4501630965052,
-          109.2135807243692
+          -144.5743956483101,
+          107.50403778976897
         ]
       ],
       "start": {
@@ -277,8 +277,8 @@
         "id": "protocol"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -290,9 +290,9 @@
       "roughness": 0,
       "text": "MCP Inspector makes the protocol visible",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -304,9 +304,9 @@
       "roughness": 0,
       "text": "Discover capabilities, run a real call, and inspect what crossed the wire without creating an agent",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -318,9 +318,9 @@
       "roughness": 0,
       "text": "Connect",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -332,9 +332,9 @@
       "roughness": 0,
       "text": "Open the server\nInspector and confirm\nconnection health",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -346,9 +346,9 @@
       "roughness": 0,
       "text": "Negotiate",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -360,9 +360,9 @@
       "roughness": 0,
       "text": "Protocol version\nServer capabilities\nAvailable features",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -374,9 +374,9 @@
       "roughness": 0,
       "text": "Discover",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -388,9 +388,9 @@
       "roughness": 0,
       "text": "Tools\nResources\nPrompts",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -402,9 +402,9 @@
       "roughness": 0,
       "text": "Run a tool",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -416,9 +416,9 @@
       "roughness": 0,
       "text": "Form or JSON input\nJSON-RPC request\nProgress and cancel",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -430,9 +430,9 @@
       "roughness": 0,
       "text": "Result",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -444,9 +444,9 @@
       "roughness": 0,
       "text": "Formatted or raw output\nSchema and\nstructured errors",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -458,9 +458,9 @@
       "roughness": 0,
       "text": "Protocol panel",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     },
     {
@@ -472,9 +472,9 @@
       "roughness": 0,
       "text": "Wire frames, timeline, logs,\nlatency, payload, and tokens",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:55.352Z",
-      "updatedAt": "2026-08-06T17:24:55.352Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:54:49.123Z",
+      "updatedAt": "2026-08-06T21:54:49.123Z",
       "version": 1
     }
   ],

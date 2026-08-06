@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -32,13 +32,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -51,70 +51,51 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
       "id": "gateway",
       "type": "rectangle",
-      "x": 615,
+      "x": 610,
       "y": 205,
-      "width": 250,
+      "width": 265,
       "height": 280,
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
       "id": "outbound",
       "type": "rectangle",
-      "x": 910,
+      "x": 925,
       "y": 205,
-      "width": 245,
+      "width": 395,
       "height": 280,
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
-      "version": 1
-    },
-    {
-      "id": "upstream",
-      "type": "rectangle",
-      "x": 1200,
-      "y": 250,
-      "width": 150,
-      "height": 190,
-      "backgroundColor": "#1e293b",
-      "strokeColor": "#2ed3ae",
-      "strokeWidth": 2,
-      "roughness": 1,
-      "roundness": {
-        "type": 3
-      },
-      "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -132,8 +113,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -141,7 +122,7 @@
       "type": "rectangle",
       "x": 780,
       "y": 570,
-      "width": 405,
+      "width": 430,
       "height": 52,
       "backgroundColor": "#172033",
       "strokeColor": "#fac515",
@@ -151,8 +132,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -162,7 +143,7 @@
       "y": 345,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -180,8 +161,8 @@
         "id": "inbound"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -191,14 +172,14 @@
       "y": 345,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          29,
+          24,
           0
         ]
       ],
@@ -209,25 +190,25 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
       "id": "a3",
       "type": "arrow",
-      "x": 873,
+      "x": 883,
       "y": 345,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          29,
+          34,
           0
         ]
       ],
@@ -238,37 +219,8 @@
         "id": "outbound"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
-      "version": 1
-    },
-    {
-      "id": "a4",
-      "type": "arrow",
-      "x": 1163,
-      "y": 345,
-      "strokeColor": "#2ed3ae",
-      "strokeWidth": 2,
-      "roughness": 1,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          29,
-          0
-        ]
-      ],
-      "start": {
-        "id": "outbound"
-      },
-      "end": {
-        "id": "upstream"
-      },
-      "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -280,9 +232,9 @@
       "roughness": 0,
       "text": "One tool call can cross two OAuth boundaries",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.491Z",
-      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -294,9 +246,9 @@
       "roughness": 0,
       "text": "Inbound client identity and outbound upstream identity solve different authentication problems",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -308,9 +260,9 @@
       "roughness": 0,
       "text": "External MCP\nclient",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -322,9 +274,9 @@
       "roughness": 0,
       "text": "Claude, ChatGPT,\nGemini, Cursor,\nor another client",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -336,9 +288,9 @@
       "roughness": 0,
       "text": "Inbound OAuth\nclient",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -350,93 +302,65 @@
       "roughness": 0,
       "text": "Identifies app\nChecks redirect URI\nAuthorizes access\nto AI Gateway",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
       "id": "gateway-title",
       "type": "text",
-      "x": 639,
+      "x": 634,
       "y": 229,
       "strokeColor": "#f8fafc",
       "roughness": 0,
       "text": "AI Gateway\nand MCP",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
       "id": "gateway-body",
       "type": "text",
-      "x": 639,
+      "x": 634,
       "y": 301,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
       "text": "Authenticates user\nInvokes the tool\nApplies access policy\nRecords the call",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
       "id": "outbound-title",
       "type": "text",
-      "x": 922,
+      "x": 949,
       "y": 229,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Outbound OAuth\nprovider",
+      "text": "Outbound access",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
       "id": "outbound-body",
       "type": "text",
-      "x": 922,
-      "y": 301,
+      "x": 949,
+      "y": 271,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Acts for user at\nupstream system\nwhen delegated\nOAuth is configured",
+      "text": "OAuth provider represents user\nfor delegated OAuth\n\nUpstream: GitHub, Slack,\nor Salesforce",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
-      "version": 1
-    },
-    {
-      "id": "upstream-title",
-      "type": "text",
-      "x": 1224,
-      "y": 274,
-      "strokeColor": "#f8fafc",
-      "roughness": 0,
-      "text": "Upstream",
-      "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
-      "version": 1
-    },
-    {
-      "id": "upstream-body",
-      "type": "text",
-      "x": 1224,
-      "y": 316,
-      "strokeColor": "#cbd5e1",
-      "roughness": 0,
-      "text": "GitHub\nSlack\nSalesforce",
-      "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -448,9 +372,9 @@
       "roughness": 0,
       "text": "Inbound: client \u2192 AI Gateway",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     },
     {
@@ -462,9 +386,9 @@
       "roughness": 0,
       "text": "Outbound: AI Gateway \u2192 upstream",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:28.492Z",
-      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:57.690Z",
+      "updatedAt": "2026-08-06T21:43:57.690Z",
       "version": 1
     }
   ],

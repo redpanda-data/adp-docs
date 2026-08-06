@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -32,13 +32,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -51,13 +51,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -70,13 +70,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -89,13 +89,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -108,13 +108,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -127,13 +127,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -146,13 +146,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -162,7 +162,7 @@
       "y": 340,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -180,8 +180,8 @@
         "id": "input"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -191,7 +191,7 @@
       "y": 340,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -209,8 +209,8 @@
         "id": "model"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -220,7 +220,7 @@
       "y": 340,
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -238,8 +238,8 @@
         "id": "output"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -249,7 +249,7 @@
       "y": 340,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -267,8 +267,8 @@
         "id": "allowed"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -279,7 +279,7 @@
       "strokeColor": "#e24328",
       "strokeWidth": 2,
       "strokeStyle": "dashed",
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -297,8 +297,8 @@
         "id": "blocked-input"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -309,7 +309,7 @@
       "strokeColor": "#fac515",
       "strokeWidth": 2,
       "strokeStyle": "dashed",
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -327,8 +327,8 @@
         "id": "blocked-output"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -340,9 +340,9 @@
       "roughness": 0,
       "text": "Guardrails evaluate both sides of a model call",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -354,9 +354,9 @@
       "roughness": 0,
       "text": "Input policies protect the model; output policies control what a non-streaming caller receives",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -368,9 +368,9 @@
       "roughness": 0,
       "text": "Caller",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -382,9 +382,9 @@
       "roughness": 0,
       "text": "Prompt",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -396,9 +396,9 @@
       "roughness": 0,
       "text": "Input policies",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -410,9 +410,9 @@
       "roughness": 0,
       "text": "Harmful content\nPrompt attacks\nSensitive data\nDenied topics",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -424,9 +424,9 @@
       "roughness": 0,
       "text": "Bedrock model",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -438,9 +438,9 @@
       "roughness": 0,
       "text": "Runs only after\ninput is allowed",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -452,9 +452,9 @@
       "roughness": 0,
       "text": "Output policies",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -466,9 +466,9 @@
       "roughness": 0,
       "text": "Harmful content\nSensitive data\nGrounding checks\nReasoning findings",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -480,9 +480,9 @@
       "roughness": 0,
       "text": "Caller receives",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -494,9 +494,9 @@
       "roughness": 0,
       "text": "Allowed, redacted,\nor configured\nblocked response",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -508,9 +508,9 @@
       "roughness": 0,
       "text": "Blocked input",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -522,9 +522,9 @@
       "roughness": 0,
       "text": "Model is not called",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -536,9 +536,9 @@
       "roughness": 0,
       "text": "Blocked output",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     },
     {
@@ -550,9 +550,9 @@
       "roughness": 0,
       "text": "Model response\nis withheld",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:25:51.342Z",
-      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:31.158Z",
+      "updatedAt": "2026-08-06T21:37:31.158Z",
       "version": 1
     }
   ],

@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
@@ -32,13 +32,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
@@ -51,13 +51,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
@@ -71,13 +71,13 @@
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
       "strokeStyle": "dashed",
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
@@ -90,13 +90,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
@@ -109,13 +109,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
@@ -128,39 +128,39 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
       "id": "error",
       "type": "rectangle",
-      "x": 990,
-      "y": 600,
-      "width": 300,
-      "height": 135,
+      "x": 400,
+      "y": 570,
+      "width": 280,
+      "height": 140,
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
       "id": "same-config",
       "type": "rectangle",
-      "x": 430,
-      "y": 625,
+      "x": 785,
+      "y": 610,
       "width": 455,
       "height": 52,
       "backgroundColor": "#172033",
@@ -171,8 +171,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
@@ -182,7 +182,7 @@
       "y": 345,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -200,8 +200,8 @@
         "id": "validate"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
@@ -211,7 +211,7 @@
       "y": 345,
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -229,27 +229,27 @@
         "id": "views-zone"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
       "id": "a3",
       "type": "arrow",
-      "x": 687.0465951761252,
-      "y": 424.0375449071673,
+      "x": 540,
+      "y": 478,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
       "strokeStyle": "dashed",
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          320.3254142989125,
-          172.1749101856654
+          0,
+          84
         ]
       ],
       "start": {
@@ -259,8 +259,8 @@
         "id": "error"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "createdAt": "2026-08-06T21:36:32.008Z",
+      "updatedAt": "2026-08-06T21:36:32.008Z",
       "version": 1
     },
     {
@@ -272,9 +272,9 @@
       "roughness": 0,
       "text": "One chart block powers three synchronized views",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -286,9 +286,9 @@
       "roughness": 0,
       "text": "Inspector validates the same configuration before rendering the chart, data, and source",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -300,9 +300,9 @@
       "roughness": 0,
       "text": "Agent response",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -312,11 +312,11 @@
       "y": 316,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "A strict JSON\n`chart` code block",
+      "text": "A strict JSON\nchart code block",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -328,9 +328,9 @@
       "roughness": 0,
       "text": "Inspector validates",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -342,9 +342,9 @@
       "roughness": 0,
       "text": "Chart type\nLabels and series\nNumeric values\nOptional title",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -356,9 +356,9 @@
       "roughness": 0,
       "text": "Valid configuration",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -370,9 +370,9 @@
       "roughness": 0,
       "text": "Three synchronized views",
       "fontSize": 19,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -384,9 +384,9 @@
       "roughness": 0,
       "text": "Chart",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -398,9 +398,9 @@
       "roughness": 0,
       "text": "Rendered\nvisual",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -412,9 +412,9 @@
       "roughness": 0,
       "text": "Data",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -426,9 +426,9 @@
       "roughness": 0,
       "text": "Rows and\nvalues",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -440,9 +440,9 @@
       "roughness": 0,
       "text": "Code",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
@@ -454,51 +454,51 @@
       "roughness": 0,
       "text": "Original\nJSON block",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
       "id": "error-title",
       "type": "text",
-      "x": 1014,
-      "y": 624,
+      "x": 424,
+      "y": 594,
       "strokeColor": "#f8fafc",
       "roughness": 0,
       "text": "Visible error",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
       "id": "error-body",
       "type": "text",
-      "x": 1014,
-      "y": 666,
+      "x": 424,
+      "y": 636,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
       "text": "Invalid configuration\nstays actionable",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     },
     {
       "id": "same-config-text",
       "type": "text",
-      "x": 448,
-      "y": 638,
+      "x": 803,
+      "y": 623,
       "strokeColor": "#f8fafc",
       "roughness": 0,
       "text": "All valid views use one configuration",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:03.990Z",
-      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:36:32.009Z",
+      "updatedAt": "2026-08-06T21:36:32.009Z",
       "version": 1
     }
   ],

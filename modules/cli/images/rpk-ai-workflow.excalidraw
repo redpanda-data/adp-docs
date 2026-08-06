@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:17.653Z",
-      "updatedAt": "2026-08-06T17:26:17.653Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -32,13 +32,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:17.653Z",
-      "updatedAt": "2026-08-06T17:26:17.653Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -51,32 +51,32 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:17.653Z",
-      "updatedAt": "2026-08-06T17:26:17.653Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
       "id": "manage",
       "type": "rectangle",
       "x": 720,
-      "y": 150,
+      "y": 145,
       "width": 275,
-      "height": 165,
+      "height": 195,
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:17.653Z",
-      "updatedAt": "2026-08-06T17:26:17.653Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -89,13 +89,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:17.653Z",
-      "updatedAt": "2026-08-06T17:26:17.653Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -108,32 +108,32 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:17.653Z",
-      "updatedAt": "2026-08-06T17:26:17.653Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
       "id": "gateway",
       "type": "rectangle",
-      "x": 1085,
+      "x": 1060,
       "y": 290,
-      "width": 270,
+      "width": 285,
       "height": 245,
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:17.653Z",
-      "updatedAt": "2026-08-06T17:26:17.653Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -143,7 +143,7 @@
       "y": 335,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -161,26 +161,26 @@
         "id": "login"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
       "id": "a2",
       "type": "arrow",
-      "x": 627.7133121716874,
-      "y": 295.72989396618,
+      "x": 627.7641955337823,
+      "y": 299.5484883573829,
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          84.5733756566251,
-          -23.271868469272704
+          84.4716089324354,
+          -20.976171345638306
         ]
       ],
       "start": {
@@ -190,8 +190,8 @@
         "id": "manage"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -201,7 +201,7 @@
       "y": 378.0847375809608,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -219,8 +219,8 @@
         "id": "test"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -230,7 +230,7 @@
       "y": 454.32677369898795,
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -248,26 +248,26 @@
         "id": "run"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
       "id": "a5",
       "type": "arrow",
-      "x": 1002.1143024185452,
-      "y": 306.8730698152518,
+      "x": 1002.1760968779618,
+      "y": 313.7896709253725,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          75.7713951629097,
-          38.968146083782074
+          50.64780624407649,
+          24.956890033313073
         ]
       ],
       "start": {
@@ -277,26 +277,26 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
       "id": "a6",
       "type": "arrow",
-      "x": 1002.9602975216799,
-      "y": 432.953970247832,
+      "x": 1002.9591472500529,
+      "y": 432.74327491666133,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          74.07940495664025,
-          -7.407940495663979
+          49.08170549989427,
+          -4.979303456511047
         ]
       ],
       "start": {
@@ -306,26 +306,26 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
       "id": "a7",
       "type": "arrow",
-      "x": 967.2777009319761,
-      "y": 575.5079886533019,
+      "x": 965.7737581816592,
+      "y": 575.4637171937853,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
           0
         ],
         [
-          111.1024928728898,
-          -75.39097730660387
+          87.63669416299751,
+          -60.329608300614154
         ]
       ],
       "start": {
@@ -335,8 +335,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -346,11 +346,11 @@
       "y": 46,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "`rpk ai` is the terminal entry point to Agentic Data Plane",
+      "text": "rpk ai is the terminal entry point to Agentic Data Plane",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -360,11 +360,11 @@
       "y": 98,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Install the plugin once, select an environment, then use the same authenticated gateway for every workflow",
+      "text": "Install the plugin once, select an environment, then use the same authenticated context for every workflow",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.117Z",
+      "updatedAt": "2026-08-06T21:43:30.117Z",
       "version": 1
     },
     {
@@ -376,9 +376,9 @@
       "roughness": 0,
       "text": "Install plugin",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
@@ -388,11 +388,11 @@
       "y": 301,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "`rpk ai install`\n\nRuns through your\nexisting `rpk` setup",
+      "text": "rpk ai install\n\nUses your existing\nrpk setup",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
@@ -404,9 +404,9 @@
       "roughness": 0,
       "text": "Sign in and select",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
@@ -416,39 +416,39 @@
       "y": 271,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "`rpk ai auth login`\n`rpk ai env use`\n\nOne active Agentic\nData Plane\nenvironment",
+      "text": "rpk ai auth login\nrpk ai env use\n\nChoose an Agentic\nData Plane\nenvironment",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
       "id": "manage-title",
       "type": "text",
       "x": 744,
-      "y": 174,
+      "y": 169,
       "strokeColor": "#f8fafc",
       "roughness": 0,
       "text": "Manage resources",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
       "id": "manage-body",
       "type": "text",
       "x": 744,
-      "y": 216,
+      "y": 211,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Providers\nMCP servers\nOAuth and agents",
+      "text": "LLM providers\nMCP servers\nOAuth clients\nand agents",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
@@ -458,11 +458,11 @@
       "y": 389,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Test capabilities",
+      "text": "Test protocols",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
@@ -472,11 +472,11 @@
       "y": 431,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "List and call MCP tools\nSend A2A messages",
+      "text": "List or call MCP tools\nSend A2A messages",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
@@ -488,9 +488,9 @@
       "roughness": 0,
       "text": "Run coding agents",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
@@ -502,37 +502,37 @@
       "roughness": 0,
       "text": "Claude Code or Codex\nthrough AI Gateway",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
       "id": "gateway-title",
       "type": "text",
-      "x": 1095,
+      "x": 1084,
       "y": 314,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Selected AI Gateway",
+      "text": "Shared command\ncontext",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     },
     {
       "id": "gateway-body",
       "type": "text",
-      "x": 1095,
-      "y": 356,
+      "x": 1084,
+      "y": 386,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Same identity\nSame environment\nSame resource scope\nfor every command",
+      "text": "Same identity\nSame environment\nSame resource scope\nfor each command",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:17.654Z",
-      "updatedAt": "2026-08-06T17:26:17.654Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:43:30.118Z",
+      "updatedAt": "2026-08-06T21:43:30.118Z",
       "version": 1
     }
   ],

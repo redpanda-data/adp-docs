@@ -18,8 +18,8 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -32,13 +32,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -51,13 +51,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -70,13 +70,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -89,13 +89,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -108,13 +108,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -127,13 +127,13 @@
       "backgroundColor": "#1e293b",
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -143,7 +143,7 @@
       "y": 290.45280364400145,
       "strokeColor": "#fac515",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -161,8 +161,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -172,7 +172,7 @@
       "y": 496.09232835663914,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -190,8 +190,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -201,7 +201,7 @@
       "y": 492.6431503787869,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -219,8 +219,8 @@
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -230,7 +230,7 @@
       "y": 310.8953188087021,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -248,8 +248,8 @@
         "id": "provider"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -259,7 +259,7 @@
       "y": 419.9727038569992,
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
-      "roughness": 1,
+      "roughness": 0,
       "points": [
         [
           0,
@@ -277,8 +277,8 @@
         "id": "observe"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -290,9 +290,9 @@
       "roughness": 0,
       "text": "AI Gateway separates client access from provider secrets",
       "fontSize": 34,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -304,9 +304,9 @@
       "roughness": 0,
       "text": "Configure the upstream once; every local or deployed client uses the governed proxy path",
       "fontSize": 20,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -318,9 +318,9 @@
       "roughness": 0,
       "text": "Configure LLM provider",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -332,9 +332,9 @@
       "roughness": 0,
       "text": "Upstream endpoint\nCredential reference\nAllowed models\nOptional guardrail",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -346,9 +346,9 @@
       "roughness": 0,
       "text": "Local developer",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -358,11 +358,11 @@
       "y": 566,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "`rpk ai` sign-in and\nselected environment",
+      "text": "rpk ai sign-in and\nselected environment",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -374,9 +374,9 @@
       "roughness": 0,
       "text": "Application or agent",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -388,9 +388,9 @@
       "roughness": 0,
       "text": "OAuth client credentials\nfor deployed workloads",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -402,9 +402,9 @@
       "roughness": 0,
       "text": "AI Gateway",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -416,9 +416,9 @@
       "roughness": 0,
       "text": "Authenticate caller\nRoute native API\nApply policy and budgets\nRecord tokens, cost, latency",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -430,9 +430,9 @@
       "roughness": 0,
       "text": "Upstream model provider",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -444,9 +444,9 @@
       "roughness": 0,
       "text": "OpenAI, Anthropic, Google AI,\nAWS Bedrock, or an\nOpenAI-compatible endpoint",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.028Z",
+      "updatedAt": "2026-08-06T21:37:02.028Z",
       "version": 1
     },
     {
@@ -458,9 +458,9 @@
       "roughness": 0,
       "text": "Governance and observability",
       "fontSize": 24,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.029Z",
+      "updatedAt": "2026-08-06T21:37:02.029Z",
       "version": 1
     },
     {
@@ -470,11 +470,11 @@
       "y": 586,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Cost & Usage\nTranscripts and audit",
+      "text": "Cost and usage\nTranscripts and audit",
       "fontSize": 21,
-      "fontFamily": 5,
-      "createdAt": "2026-08-06T17:26:04.523Z",
-      "updatedAt": "2026-08-06T17:26:04.523Z",
+      "fontFamily": 2,
+      "createdAt": "2026-08-06T21:37:02.029Z",
+      "updatedAt": "2026-08-06T21:37:02.029Z",
       "version": 1
     }
   ],
