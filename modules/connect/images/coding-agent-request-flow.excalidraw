@@ -1,0 +1,490 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas-bg",
+      "type": "rectangle",
+      "x": 0,
+      "y": 0,
+      "width": 1200,
+      "height": 650,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 0,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T16:08:27.585Z",
+      "updatedAt": "2026-08-05T16:08:27.585Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 48,
+      "y": 34,
+      "strokeColor": "#f8fafc",
+      "text": "Coding-agent model requests stay governed",
+      "fontSize": 32,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 50,
+      "y": 82,
+      "strokeColor": "#cbd5e1",
+      "text": "rpk ai run handles gateway authentication and provider routing",
+      "fontSize": 18,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "workstation-zone",
+      "type": "rectangle",
+      "x": 38,
+      "y": 138,
+      "width": 340,
+      "height": 430,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#64748b",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "workstation-label",
+      "type": "text",
+      "x": 62,
+      "y": 158,
+      "strokeColor": "#cbd5e1",
+      "text": "Developer workstation",
+      "fontSize": 18,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "agent",
+      "type": "rectangle",
+      "x": 80,
+      "y": 220,
+      "width": 255,
+      "height": 92,
+      "backgroundColor": "#2d3282",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Claude Code\nor Codex"
+      },
+      "fontSize": 23,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "rpk",
+      "type": "rectangle",
+      "x": 80,
+      "y": 385,
+      "width": 255,
+      "height": 92,
+      "backgroundColor": "#711e0f",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "rpk ai run"
+      },
+      "fontSize": 25,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "no-key",
+      "type": "text",
+      "x": 84,
+      "y": 505,
+      "strokeColor": "#cbd5e1",
+      "text": "No provider key stored here",
+      "fontSize": 17,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "adp-zone",
+      "type": "rectangle",
+      "x": 418,
+      "y": 138,
+      "width": 744,
+      "height": 430,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#64748b",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "adp-label",
+      "type": "text",
+      "x": 444,
+      "y": 158,
+      "strokeColor": "#cbd5e1",
+      "text": "Agentic Data Plane",
+      "fontSize": 18,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "gateway",
+      "type": "rectangle",
+      "x": 478,
+      "y": 258,
+      "width": 250,
+      "height": 112,
+      "backgroundColor": "#711e0f",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "AI Gateway"
+      },
+      "fontSize": 26,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "provider",
+      "type": "rectangle",
+      "x": 835,
+      "y": 218,
+      "width": 270,
+      "height": 112,
+      "backgroundColor": "#0c4a6e",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Compatible LLM\nprovider"
+      },
+      "fontSize": 23,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "secrets",
+      "type": "rectangle",
+      "x": 835,
+      "y": 398,
+      "width": 270,
+      "height": 92,
+      "backgroundColor": "#12493b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Secret store\nmanaged / Bedrock credentials"
+      },
+      "fontSize": 18,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:30.020Z",
+      "version": 2
+    },
+    {
+      "id": "usage",
+      "type": "rectangle",
+      "x": 478,
+      "y": 438,
+      "width": 250,
+      "height": 80,
+      "backgroundColor": "#713b12",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Cost & Usage"
+      },
+      "fontSize": 22,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "agent-rpk",
+      "type": "arrow",
+      "x": 207.5,
+      "y": 320,
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          57
+        ]
+      ],
+      "start": {
+        "id": "agent"
+      },
+      "end": {
+        "id": "rpk"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "rpk-gateway",
+      "type": "arrow",
+      "x": 342.67136258275144,
+      "y": 391.01251726376256,
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          127.65727483449712,
+          -37.76460469187407
+        ]
+      ],
+      "start": {
+        "id": "rpk"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-provider",
+      "type": "arrow",
+      "x": 735.952902327499,
+      "y": 299.50922045476847,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          91.09419534500194,
+          -9.928522653406162
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "provider"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "secrets-gateway",
+      "type": "arrow",
+      "x": 832.5975784576054,
+      "y": 395.3288425054188,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -97.0566953767493,
+          -34.379755855524195
+        ]
+      ],
+      "start": {
+        "id": "secrets"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-usage",
+      "type": "arrow",
+      "x": 603,
+      "y": 378,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          52
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "usage"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "agent-rpk-label",
+      "type": "text",
+      "x": 118,
+      "y": 332,
+      "strokeColor": "#cbd5e1",
+      "text": "launch + refresh token",
+      "fontSize": 16,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "rpk-gateway-label",
+      "type": "text",
+      "x": 360,
+      "y": 397,
+      "strokeColor": "#e24328",
+      "text": "OIDC",
+      "fontSize": 17,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-provider-label",
+      "type": "text",
+      "x": 740,
+      "y": 224,
+      "strokeColor": "#38bdf8",
+      "text": "native model API",
+      "fontSize": 17,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    },
+    {
+      "id": "secrets-label",
+      "type": "text",
+      "x": 710,
+      "y": 372,
+      "strokeColor": "#2ed3ae",
+      "text": "credential injection",
+      "fontSize": 15,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:09:07.398Z",
+      "version": 3,
+      "originalText": "credential injection"
+    },
+    {
+      "id": "usage-label",
+      "type": "text",
+      "x": 512,
+      "y": 392,
+      "strokeColor": "#fac515",
+      "text": "request metadata",
+      "fontSize": 16,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T16:08:27.586Z",
+      "updatedAt": "2026-08-05T16:08:27.586Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  }
+}

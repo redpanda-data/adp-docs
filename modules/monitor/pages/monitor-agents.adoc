@@ -90,6 +90,9 @@ The *Inspector* tab provides real-time conversation testing. Use it to test agen
 
 For a managed agent, the Inspector composer includes a *Tools* control. Use it to review the MCP servers and related capabilities available to the agent before you send a test message.
 
+.Inspector shows tool access through direct MCP servers and subagents
+image::inspector-mcp-tool-discovery.svg[alt="Inspector tool discovery. The Tools control displays direct MCP servers and subagents. Direct servers expose their tools to the agent. Each subagent exposes only the tools from the MCP servers configured for that subagent. Authentication and availability affect which tools are visible."]
+
 . Open the agent's *Inspector* tab.
 . Click *Tools* in the composer.
 . Under Direct MCP servers, expand a server to see its type, description, and exposed tools. Each tool entry shows its name and description when the server provides one.

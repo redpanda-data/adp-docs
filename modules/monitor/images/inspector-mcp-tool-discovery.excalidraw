@@ -1,0 +1,427 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas-bg",
+      "type": "rectangle",
+      "x": 0,
+      "y": 0,
+      "width": 1200,
+      "height": 700,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 0,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 48,
+      "y": 34,
+      "strokeColor": "#f8fafc",
+      "text": "Inspector reveals the agent’s current tool surface",
+      "fontSize": 32,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 50,
+      "y": 82,
+      "strokeColor": "#cbd5e1",
+      "text": "Direct servers and subagents expose different capability paths",
+      "fontSize": 18,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "inspector",
+      "type": "rectangle",
+      "x": 46,
+      "y": 260,
+      "width": 250,
+      "height": 142,
+      "backgroundColor": "#711e0f",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Inspector\nTools control"
+      },
+      "fontSize": 25,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "direct",
+      "type": "rectangle",
+      "x": 420,
+      "y": 150,
+      "width": 318,
+      "height": 166,
+      "backgroundColor": "#2d3282",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Direct MCP servers\n\nserver details\ntool names + descriptions"
+      },
+      "fontSize": 19,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "subagents",
+      "type": "rectangle",
+      "x": 420,
+      "y": 420,
+      "width": 318,
+      "height": 166,
+      "backgroundColor": "#0c4a6e",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Subagents\n\nspecialist description\nits configured MCP servers"
+      },
+      "fontSize": 19,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "access-check",
+      "type": "rectangle",
+      "x": 790,
+      "y": 275,
+      "width": 154,
+      "height": 124,
+      "backgroundColor": "#713b12",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Current\nauth +\navailability"
+      },
+      "fontSize": 18,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "visible-tools",
+      "type": "rectangle",
+      "x": 986,
+      "y": 244,
+      "width": 180,
+      "height": 188,
+      "backgroundColor": "#12493b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Tools visible\nin this\ntest session"
+      },
+      "fontSize": 21,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "inspector-direct",
+      "type": "arrow",
+      "x": 303.77875215987905,
+      "y": 299.10706443218595,
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          108.4424956802419,
+          -26.047462197705215
+        ]
+      ],
+      "start": {
+        "id": "inspector"
+      },
+      "end": {
+        "id": "direct"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "inspector-subagents",
+      "type": "arrow",
+      "x": 303.3717218831425,
+      "y": 386.8037651075993,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          109.25655623371495,
+          46.05913645146808
+        ]
+      ],
+      "start": {
+        "id": "inspector"
+      },
+      "end": {
+        "id": "subagents"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "direct-access",
+      "type": "arrow",
+      "x": 745.5244311975335,
+      "y": 293.1338223768871,
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          36.95113760493291,
+          13.343466357336865
+        ]
+      ],
+      "start": {
+        "id": "direct"
+      },
+      "end": {
+        "id": "access-check"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "subagents-access",
+      "type": "arrow",
+      "x": 729.9310867691081,
+      "y": 416.00499859836134,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          53.13782646178379,
+          -30.628052752278222
+        ]
+      ],
+      "start": {
+        "id": "subagents"
+      },
+      "end": {
+        "id": "access-check"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "access-tools",
+      "type": "arrow",
+      "x": 951.9999084285771,
+      "y": 337.4066981264525,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          26.0001831428458,
+          0.1244027901571485
+        ]
+      ],
+      "start": {
+        "id": "access-check"
+      },
+      "end": {
+        "id": "visible-tools"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "direct-label",
+      "type": "text",
+      "x": 307,
+      "y": 195,
+      "strokeColor": "#6172f3",
+      "text": "direct path",
+      "fontSize": 17,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "subagent-label",
+      "type": "text",
+      "x": 305,
+      "y": 515,
+      "strokeColor": "#38bdf8",
+      "text": "delegated path",
+      "fontSize": 17,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "connect-chip",
+      "type": "rectangle",
+      "x": 790,
+      "y": 448,
+      "width": 154,
+      "height": 64,
+      "backgroundColor": "#3f2f06",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "label": {
+        "text": "Connect or\nrefresh tools"
+      },
+      "fontSize": 16,
+      "fontFamily": 5,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "connect-access",
+      "type": "arrow",
+      "x": 867,
+      "y": 440,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -33
+        ]
+      ],
+      "start": {
+        "id": "connect-chip"
+      },
+      "end": {
+        "id": "access-check"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "runtime-note",
+      "type": "text",
+      "x": 822,
+      "y": 558,
+      "strokeColor": "#cbd5e1",
+      "text": "Visible now ≠ guaranteed runtime success",
+      "fontSize": 18,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:58:42.241Z",
+      "version": 1
+    },
+    {
+      "id": "runtime-note-2",
+      "type": "text",
+      "x": 822,
+      "y": 592,
+      "strokeColor": "#94a3b8",
+      "text": "Policies and external systems still apply",
+      "fontSize": 17,
+      "fontFamily": 5,
+      "createdAt": "2026-08-05T15:58:42.241Z",
+      "updatedAt": "2026-08-05T15:59:07.036Z",
+      "version": 2
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  }
+}
