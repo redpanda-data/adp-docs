@@ -93,14 +93,13 @@ A2A-compliant agents require authentication to prevent unauthorized access.
 
 The agent card is the exception. Agentic Data Plane serves the card at the `/.well-known/agent-card.json` subpath without authentication, so that callers can discover how to authenticate before they hold a token. Every other request to the agent, including agent invocation, requires a valid access token.
 
-Agentic Data Plane agents use OAuth2 client credentials flow. When you create an agent, the system provisions a service account with a client ID and secret.
+Callers authenticate as themselves, never as the agent they're calling. Each caller needs its own service account and permission to invoke the agent. See xref:connect:concepts.adoc#service-account-authorization[Service account authorization] and xref:control:permissions-reference.adoc#a2a-runtime-permissions[A2A runtime permissions].
 
-External callers use these credentials to obtain access tokens:
+Callers use OAuth2 client credentials to obtain access tokens:
 
-. Agent creation automatically provisions a service account with credentials.
-. Applications exchange the client ID and secret for a time-limited access token through OAuth2.
-. Applications include the access token in the Authorization header when calling the agent endpoint.
-. When tokens expire, applications exchange credentials again for a new token.
+. The caller exchanges its client ID and secret for a time-limited access token through OAuth2.
+. The caller includes the access token in the Authorization header when calling the agent endpoint.
+. When the token expires, the caller exchanges credentials again for a new token.
 
 This flow ensures:
 
@@ -110,9 +109,7 @@ This flow ensures:
 
 === External integration
 
-External applications must authenticate using the service account credentials. Each agent has its own service account.
-
-For step-by-step authentication instructions, see xref:cloud-data-platform:security:cloud-authentication.adoc[].
+External applications and agents authenticate with their own service account credentials, not the target agent's. Grant the caller permission to invoke the agent with an access policy or a custom role. See xref:control:access-policies.adoc[].
 
 === Internal integration
 
