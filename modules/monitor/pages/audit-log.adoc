@@ -15,7 +15,12 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
-NOTE: The audit log is a preview capability, available when your organization has it enabled. If you don't see *Audit Log* in the sidebar, it isn't enabled for your organization.
+[NOTE]
+====
+The audit log is a preview capability. Access to the page is granted per organization, and audit recording is enabled per deployment; the two are independent. If you don't see *Audit Log* in the sidebar, it isn't enabled for your organization.
+
+A deployment can therefore show the page with no recorded events. If the table is empty for a period you know had activity, see <<troubleshoot-the-audit-log,Troubleshooting>>.
+====
 
 == Prerequisites
 
@@ -106,7 +111,7 @@ Use xref:monitor:transcripts.adoc[transcripts] for execution questions about an 
 |Ask an administrator to confirm that your account has `dataplane_adp_auditlog_list`, from the Admin role or from an xref:control:access-policies.adoc[access policy] naming `Action::"AuditLog.list"`.
 
 |No events match
-|Clear the search and filters, then widen the time range. The default view includes only the last 24 hours.
+|Clear the search and filters, then widen the time range. The default view includes only the last 24 hours. If the table stays empty, audit recording may not be enabled for this deployment yet; page access and recording are gated independently.
 
 |An event has no request, response, or configuration details
 |Not every event includes these fields. Use the event's actor, action, resource, outcome, and time to continue the investigation.
