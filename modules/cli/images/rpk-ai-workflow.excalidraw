@@ -122,7 +122,7 @@
       "type": "rectangle",
       "x": 1085,
       "y": 290,
-      "width": 245,
+      "width": 270,
       "height": 245,
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
@@ -510,7 +510,7 @@
     {
       "id": "gateway-title",
       "type": "text",
-      "x": 1109,
+      "x": 1095,
       "y": 314,
       "strokeColor": "#f8fafc",
       "roughness": 0,
@@ -524,7 +524,7 @@
     {
       "id": "gateway-body",
       "type": "text",
-      "x": 1109,
+      "x": 1095,
       "y": 356,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
