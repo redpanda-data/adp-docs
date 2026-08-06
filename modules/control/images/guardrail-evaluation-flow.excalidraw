@@ -1,0 +1,563 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas",
+      "type": "rectangle",
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 1,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "caller",
+      "type": "rectangle",
+      "x": 40,
+      "y": 245,
+      "width": 190,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "input",
+      "type": "rectangle",
+      "x": 275,
+      "y": 215,
+      "width": 230,
+      "height": 250,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "model",
+      "type": "rectangle",
+      "x": 550,
+      "y": 245,
+      "width": 220,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "output",
+      "type": "rectangle",
+      "x": 815,
+      "y": 215,
+      "width": 230,
+      "height": 250,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "allowed",
+      "type": "rectangle",
+      "x": 1090,
+      "y": 245,
+      "width": 245,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "blocked-input",
+      "type": "rectangle",
+      "x": 260,
+      "y": 570,
+      "width": 260,
+      "height": 125,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "blocked-output",
+      "type": "rectangle",
+      "x": 800,
+      "y": 570,
+      "width": 280,
+      "height": 125,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 238,
+      "y": 340,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "caller"
+      },
+      "end": {
+        "id": "input"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 513,
+      "y": 340,
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "input"
+      },
+      "end": {
+        "id": "model"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 778,
+      "y": 340,
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "model"
+      },
+      "end": {
+        "id": "output"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "a4",
+      "type": "arrow",
+      "x": 1053,
+      "y": 340,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "output"
+      },
+      "end": {
+        "id": "allowed"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "a5",
+      "type": "arrow",
+      "x": 390,
+      "y": 473,
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          89
+        ]
+      ],
+      "start": {
+        "id": "input"
+      },
+      "end": {
+        "id": "blocked-input"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "a6",
+      "type": "arrow",
+      "x": 934.5468488481271,
+      "y": 472.99532880771795,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          3.0430544404980537,
+          89.00934238456415
+        ]
+      ],
+      "start": {
+        "id": "output"
+      },
+      "end": {
+        "id": "blocked-output"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Guardrails evaluate both sides of a model call",
+      "fontSize": 34,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 60,
+      "y": 98,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Input policies protect the model; output policies control what a non-streaming caller receives",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "caller-title",
+      "type": "text",
+      "x": 64,
+      "y": 269,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Caller",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "caller-body",
+      "type": "text",
+      "x": 64,
+      "y": 311,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Prompt",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "input-title",
+      "type": "text",
+      "x": 299,
+      "y": 239,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Input policies",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "input-body",
+      "type": "text",
+      "x": 299,
+      "y": 281,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Harmful content\nPrompt attacks\nSensitive data\nDenied topics",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "model-title",
+      "type": "text",
+      "x": 574,
+      "y": 269,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Bedrock model",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "model-body",
+      "type": "text",
+      "x": 574,
+      "y": 311,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Runs only after\ninput is allowed",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "output-title",
+      "type": "text",
+      "x": 839,
+      "y": 239,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Output policies",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "output-body",
+      "type": "text",
+      "x": 839,
+      "y": 281,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Harmful content\nSensitive data\nGrounding checks\nReasoning findings",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "allowed-title",
+      "type": "text",
+      "x": 1114,
+      "y": 269,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Caller receives",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "allowed-body",
+      "type": "text",
+      "x": 1114,
+      "y": 311,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Allowed, redacted,\nor configured\nblocked response",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "blocked-input-title",
+      "type": "text",
+      "x": 284,
+      "y": 594,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Blocked input",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "blocked-input-body",
+      "type": "text",
+      "x": 284,
+      "y": 636,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Model is not called",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "blocked-output-title",
+      "type": "text",
+      "x": 824,
+      "y": 594,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Blocked output",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    },
+    {
+      "id": "blocked-output-body",
+      "type": "text",
+      "x": 824,
+      "y": 636,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Model response\nis withheld",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:51.342Z",
+      "updatedAt": "2026-08-06T17:25:51.342Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#0f172a",
+    "gridSize": null
+  }
+}

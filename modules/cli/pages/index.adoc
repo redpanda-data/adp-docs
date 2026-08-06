@@ -14,6 +14,9 @@ The Agentic Data Plane command-line interface, `rpk ai`, manages glossterm:Agent
 
 The Agentic Data Plane CLI, also called the Redpanda AI CLI, runs as an xref:reference:rpk/rpk-ai/rpk-ai.adoc[`rpk`] plugin, so you install and run it through your existing `rpk` setup.
 
+.`rpk ai` turns one authenticated environment into resource, test, and agent workflows
+image::rpk-ai-workflow.svg[alt="rpk ai workflow. Install the rpk ai plugin, sign in and select an Agentic Data Plane environment, then manage LLM providers, MCP servers, OAuth resources, and agents; test MCP tools and A2A agents; or launch supported coding agents through the selected AI Gateway."]
+
 After reading this page, you will be able to:
 
 * [ ] {learning-objective-1}

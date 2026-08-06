@@ -4,263 +4,184 @@
   "source": "mcp-excalidraw-server",
   "elements": [
     {
-      "id": "canvas-bg",
+      "id": "canvas",
       "type": "rectangle",
-      "x": 0,
-      "y": 0,
-      "width": 1200,
-      "height": 650,
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
       "backgroundColor": "#0f172a",
       "strokeColor": "#0f172a",
-      "strokeWidth": 0,
+      "strokeWidth": 1,
       "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
-      "id": "title",
-      "type": "text",
-      "x": 48,
-      "y": 34,
-      "strokeColor": "#f8fafc",
-      "text": "A chart block becomes three synchronized views",
-      "fontSize": 32,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
-      "version": 1
-    },
-    {
-      "id": "subtitle",
-      "type": "text",
-      "x": 50,
-      "y": 82,
-      "strokeColor": "#cbd5e1",
-      "text": "The agent supplies data; Agentic Data Plane supplies presentation",
-      "fontSize": 18,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
-      "version": 1
-    },
-    {
-      "id": "agent-output",
+      "id": "response",
       "type": "rectangle",
-      "x": 48,
-      "y": 170,
-      "width": 292,
-      "height": 286,
-      "backgroundColor": "#2d3282",
-      "strokeColor": "#6172f3",
+      "x": 58,
+      "y": 250,
+      "width": 270,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
       "strokeWidth": 2,
       "roughness": 1,
-      "label": {
-        "text": "Agent response\n\n```chart\n{ \"type\": \"bar\",\n  \"data\": { ... } }\n```"
-      },
-      "fontSize": 20,
-      "fontFamily": 5,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
-      "id": "validator",
+      "id": "validate",
       "type": "rectangle",
-      "x": 462,
-      "y": 210,
-      "width": 272,
-      "height": 202,
-      "backgroundColor": "#711e0f",
+      "x": 400,
+      "y": 220,
+      "width": 280,
+      "height": 250,
+      "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
       "roughness": 1,
-      "label": {
-        "text": "Inspector validates\n\nstrict JSON\nbar or line\nlabels + datasets"
-      },
-      "fontSize": 21,
-      "fontFamily": 5,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
       "id": "views-zone",
       "type": "rectangle",
-      "x": 826,
-      "y": 145,
-      "width": 330,
+      "x": 760,
+      "y": 170,
+      "width": 560,
       "height": 350,
-      "backgroundColor": "#0f172a",
-      "strokeColor": "#64748b",
+      "backgroundColor": "#172033",
+      "strokeColor": "#f472b6",
       "strokeWidth": 2,
       "strokeStyle": "dashed",
-      "roughness": 0,
+      "roughness": 1,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
-      "id": "views-label",
-      "type": "text",
-      "x": 850,
-      "y": 166,
-      "strokeColor": "#cbd5e1",
-      "text": "Same chart configuration",
-      "fontSize": 18,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
-      "version": 1
-    },
-    {
-      "id": "chart-view",
+      "id": "chart",
       "type": "rectangle",
-      "x": 866,
-      "y": 218,
-      "width": 250,
-      "height": 66,
-      "backgroundColor": "#12493b",
+      "x": 790,
+      "y": 295,
+      "width": 145,
+      "height": 140,
+      "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
       "roughness": 1,
-      "label": {
-        "text": "Chart view"
-      },
-      "fontSize": 21,
-      "fontFamily": 5,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
-      "id": "data-view",
+      "id": "data",
       "type": "rectangle",
-      "x": 866,
-      "y": 314,
-      "width": 250,
-      "height": 66,
-      "backgroundColor": "#0c4a6e",
-      "strokeColor": "#38bdf8",
-      "strokeWidth": 2,
-      "roughness": 1,
-      "label": {
-        "text": "Data view"
-      },
-      "fontSize": 21,
-      "fontFamily": 5,
-      "roundness": {
-        "type": 3
-      },
-      "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
-      "version": 1
-    },
-    {
-      "id": "code-view",
-      "type": "rectangle",
-      "x": 866,
-      "y": 410,
-      "width": 250,
-      "height": 66,
-      "backgroundColor": "#2d3282",
+      "x": 965,
+      "y": 295,
+      "width": 145,
+      "height": 140,
+      "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
       "roughness": 1,
-      "label": {
-        "text": "Code view"
-      },
-      "fontSize": 21,
-      "fontFamily": 5,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "code",
+      "type": "rectangle",
+      "x": 1140,
+      "y": 295,
+      "width": 145,
+      "height": 140,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
       "id": "error",
       "type": "rectangle",
-      "x": 462,
-      "y": 500,
-      "width": 272,
-      "height": 92,
-      "backgroundColor": "#4c1d1d",
+      "x": 990,
+      "y": 600,
+      "width": 300,
+      "height": 135,
+      "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
       "strokeWidth": 2,
       "roughness": 1,
-      "label": {
-        "text": "Visible inline error\nwith the invalid body"
-      },
-      "fontSize": 19,
-      "fontFamily": 5,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
-      "id": "output-validator",
-      "type": "arrow",
-      "x": 347.9999019721969,
-      "y": 312.2376242476624,
-      "strokeColor": "#6172f3",
-      "strokeWidth": 2,
-      "roughness": 1,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          106.00019605560624,
-          -0.5247534458197833
-        ]
-      ],
-      "start": {
-        "id": "agent-output"
-      },
-      "end": {
-        "id": "validator"
-      },
-      "endArrowhead": "arrow",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
-      "version": 1
-    },
-    {
-      "id": "validator-views",
-      "type": "arrow",
-      "x": 741.9979030449174,
-      "y": 314.297661901792,
+      "id": "same-config",
+      "type": "rectangle",
+      "x": 430,
+      "y": 625,
+      "width": 455,
+      "height": 52,
+      "backgroundColor": "#172033",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 336,
+      "y": 345,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
       "roughness": 1,
       "points": [
         [
@@ -268,28 +189,58 @@
           0
         ],
         [
-          76.00419391016521,
-          1.7405540590113446
+          56,
+          0
         ]
       ],
       "start": {
-        "id": "validator"
+        "id": "response"
+      },
+      "end": {
+        "id": "validate"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 688,
+      "y": 345,
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          64,
+          5.684341886080802e-14
+        ]
+      ],
+      "start": {
+        "id": "validate"
       },
       "end": {
         "id": "views-zone"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
-      "id": "validator-error",
+      "id": "a3",
       "type": "arrow",
-      "x": 598,
-      "y": 420,
+      "x": 687.0465951761252,
+      "y": 424.0375449071673,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
+      "strokeStyle": "dashed",
       "roughness": 1,
       "points": [
         [
@@ -297,76 +248,262 @@
           0
         ],
         [
-          0,
-          72
+          320.3254142989125,
+          172.1749101856654
         ]
       ],
       "start": {
-        "id": "validator"
+        "id": "validate"
       },
       "end": {
         "id": "error"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-05T15:57:58.267Z",
-      "updatedAt": "2026-08-05T15:57:58.267Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
-      "id": "strict-json-label",
+      "id": "title",
       "type": "text",
-      "x": 350,
-      "y": 250,
-      "strokeColor": "#6172f3",
-      "text": "strict JSON",
-      "fontSize": 18,
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "One chart block powers three synchronized views",
+      "fontSize": 34,
       "fontFamily": 5,
-      "createdAt": "2026-08-05T15:57:58.268Z",
-      "updatedAt": "2026-08-05T15:57:58.268Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     },
     {
-      "id": "valid-label",
+      "id": "subtitle",
       "type": "text",
-      "x": 756,
-      "y": 249,
-      "strokeColor": "#2ed3ae",
-      "text": "valid",
-      "fontSize": 18,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:57:58.268Z",
-      "updatedAt": "2026-08-05T15:57:58.268Z",
-      "version": 1
-    },
-    {
-      "id": "invalid-label",
-      "type": "text",
-      "x": 648,
-      "y": 448,
-      "strokeColor": "#e24328",
-      "text": "invalid",
-      "fontSize": 18,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:57:58.268Z",
-      "updatedAt": "2026-08-05T15:57:58.268Z",
-      "version": 1
-    },
-    {
-      "id": "one-source-note",
-      "type": "text",
-      "x": 842,
-      "y": 531,
+      "x": 60,
+      "y": 98,
       "strokeColor": "#cbd5e1",
-      "text": "Chart, Data, and Code never drift",
-      "fontSize": 18,
+      "roughness": 0,
+      "text": "Inspector validates the same configuration before rendering the chart, data, and source",
+      "fontSize": 20,
       "fontFamily": 5,
-      "createdAt": "2026-08-05T15:57:58.268Z",
-      "updatedAt": "2026-08-05T15:57:58.268Z",
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "response-title",
+      "type": "text",
+      "x": 82,
+      "y": 274,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Agent response",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "response-body",
+      "type": "text",
+      "x": 82,
+      "y": 316,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "A strict JSON\n`chart` code block",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "validate-title",
+      "type": "text",
+      "x": 424,
+      "y": 244,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Inspector validates",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "validate-body",
+      "type": "text",
+      "x": 424,
+      "y": 286,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Chart type\nLabels and series\nNumeric values\nOptional title",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "views-title",
+      "type": "text",
+      "x": 785,
+      "y": 195,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Valid configuration",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "views-subtitle",
+      "type": "text",
+      "x": 785,
+      "y": 235,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Three synchronized views",
+      "fontSize": 19,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "chart-title",
+      "type": "text",
+      "x": 814,
+      "y": 319,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Chart",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "chart-body",
+      "type": "text",
+      "x": 814,
+      "y": 361,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Rendered\nvisual",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "data-title",
+      "type": "text",
+      "x": 989,
+      "y": 319,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Data",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "data-body",
+      "type": "text",
+      "x": 989,
+      "y": 361,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Rows and\nvalues",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "code-title",
+      "type": "text",
+      "x": 1164,
+      "y": 319,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Code",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "code-body",
+      "type": "text",
+      "x": 1164,
+      "y": 361,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Original\nJSON block",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "error-title",
+      "type": "text",
+      "x": 1014,
+      "y": 624,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Visible error",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "error-body",
+      "type": "text",
+      "x": 1014,
+      "y": 666,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Invalid configuration\nstays actionable",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
+      "version": 1
+    },
+    {
+      "id": "same-config-text",
+      "type": "text",
+      "x": 448,
+      "y": 638,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "All valid views use one configuration",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:03.990Z",
+      "updatedAt": "2026-08-06T17:24:03.990Z",
       "version": 1
     }
   ],
   "appState": {
-    "viewBackgroundColor": "#ffffff",
+    "viewBackgroundColor": "#0f172a",
     "gridSize": null
   }
 }

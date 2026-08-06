@@ -63,6 +63,9 @@ Putting it together with a GitHub example:
 
 When a user invokes a tool, AI Gateway runs both authentication handshakes: Claude to AI Gateway through the OAuth Client, then AI Gateway to GitHub through the OAuth Provider.
 
+.Choose the lightest client onboarding method the MCP client supports
+image::oauth-client-onboarding-options.svg[alt="OAuth client onboarding options. Client ID Metadata Documents let a public client use a metadata URL without a stored registration. Dynamic Client Registration lets a client create and maintain its own registration in AI Gateway. Manual registration lets an administrator enter redirect URIs and distribute credentials for clients that support neither automated option."]
+
 .A remote MCP tool call crosses separate inbound and outbound OAuth boundaries
 image::remote-mcp-client-authentication.svg[alt="Two-stage OAuth flow. An external chat client authenticates inbound to AI Gateway through an OAuth client. AI Gateway invokes the MCP server, then authenticates outbound to the upstream system through an OAuth provider when user-delegated OAuth is configured."]
 

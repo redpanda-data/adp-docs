@@ -77,6 +77,9 @@ For cost optimization strategies, see xref:connect:concepts.adoc#cost-calculatio
 
 The *Inspector* tab provides real-time conversation testing. Use it to test agent responses interactively and verify behavior before deploying changes.
 
+.Agent Inspector closes the loop between a test prompt and production evidence
+image::agent-inspector-test-loop.svg[alt="Agent Inspector test loop. A user sends a prompt, the agent streams responses, artifacts, and MCP tool calls, and Inspector shows context and token usage. The user can retry or clear context, while completed runs remain available in transcripts and activity views."]
+
 === Access Inspector
 
 . Open *Agents* in the sidebar.

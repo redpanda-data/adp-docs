@@ -30,6 +30,11 @@ The protocol provides:
 * Version negotiation: Protocol versions ensure compatibility between agents.
 * Communication mode flexibility: Supports synchronous request/response and streaming.
 
+Current A2A versions make the interface and protocol version explicit during discovery and standardize how callers receive messages, task status, and artifacts. Callers can integrate with an agent without knowing which framework or runtime implements it.
+
+.A2A separates discovery from authenticated message and task exchange
+image::a2a-message-lifecycle.svg[alt="A2A lifecycle. An application, agent, or Redpanda Connect pipeline fetches an Agentic Data Plane agent card, chooses a supported interface and protocol version, obtains an access token, sends a message, and receives a direct response or streamed task status and artifacts."]
+
 For the complete specification, see link:https://a2a.ag/spec[a2a.ag/spec^].
 
 == Agent cards

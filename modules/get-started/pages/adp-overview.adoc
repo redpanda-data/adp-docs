@@ -23,6 +23,13 @@ After reading this page, you will be able to:
 * [ ] {learning-objective-2}
 * [ ] {learning-objective-3}
 
+== Who runs each component
+
+*Managed* and *self-managed* describe runtime ownership, not whether a resource is governed. Redpanda runs managed agents and managed MCP server implementations. You run self-managed agents and MCP servers, while Agentic Data Plane registers their identities and fronts their model or tool traffic through the gateways. An LLM provider is different: it is a gateway connection to an upstream model service, not a model runtime hosted in Agentic Data Plane.
+
+.Runtime ownership changes, but gateway identity and governance stay consistent
+image::resource-ownership-models.svg[alt="Resource ownership comparison. Redpanda runs managed agent runtimes and managed MCP server implementations. Customers run self-managed agent runtimes and self-managed MCP endpoints. AI Gateway and MCP Gateway provide identity, policy, secrets, and observability for both. LLM providers remain upstream model services connected through an Agentic Data Plane provider configuration."]
+
 == Architecture
 
 Agents and clients connect through Agentic Data Plane rather than reaching your systems directly. Agentic Data Plane gives every agent an identity and applies guardrails and spend caps, mediates tool and data access through MCP servers to your systems of record, and routes every LLM call through the AI Gateway. All activity streams to the Redpanda Data Platform as OpenTelemetry traces for replay, audit, and cost reporting.

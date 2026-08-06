@@ -1,0 +1,429 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "mcp-excalidraw-server",
+  "elements": [
+    {
+      "id": "canvas",
+      "type": "rectangle",
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
+      "backgroundColor": "#0f172a",
+      "strokeColor": "#0f172a",
+      "strokeWidth": 1,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "model",
+      "type": "rectangle",
+      "x": 55,
+      "y": 245,
+      "width": 260,
+      "height": 210,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "prompt",
+      "type": "rectangle",
+      "x": 370,
+      "y": 215,
+      "width": 280,
+      "height": 270,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "gateway",
+      "type": "rectangle",
+      "x": 705,
+      "y": 245,
+      "width": 260,
+      "height": 210,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "response",
+      "type": "rectangle",
+      "x": 1020,
+      "y": 215,
+      "width": 300,
+      "height": 270,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "iterate",
+      "type": "rectangle",
+      "x": 270,
+      "y": 585,
+      "width": 400,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "handoff",
+      "type": "rectangle",
+      "x": 730,
+      "y": 585,
+      "width": 440,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#f472b6",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
+      "type": "arrow",
+      "x": 323,
+      "y": 350,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          39,
+          0
+        ]
+      ],
+      "start": {
+        "id": "model"
+      },
+      "end": {
+        "id": "prompt"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 658,
+      "y": 350,
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          39,
+          0
+        ]
+      ],
+      "start": {
+        "id": "prompt"
+      },
+      "end": {
+        "id": "gateway"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 973,
+      "y": 350,
+      "strokeColor": "#2ed3ae",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          39,
+          0
+        ]
+      ],
+      "start": {
+        "id": "gateway"
+      },
+      "end": {
+        "id": "response"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "a4",
+      "type": "arrow",
+      "x": 1012.5040989471454,
+      "y": 408.7234716782786,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -465.27639712800726,
+          173.4816280720142
+        ]
+      ],
+      "start": {
+        "id": "response"
+      },
+      "end": {
+        "id": "iterate"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Playground turns model testing into evidence",
+      "fontSize": 34,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "x": 60,
+      "y": 98,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Conversations are ephemeral; request details stay visible while you compare models and controls",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "model-title",
+      "type": "text",
+      "x": 79,
+      "y": 269,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Choose target",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "model-body",
+      "type": "text",
+      "x": 79,
+      "y": 311,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Configured provider\nModel\nKnown capabilities",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "prompt-title",
+      "type": "text",
+      "x": 394,
+      "y": 239,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Compose request",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "prompt-body",
+      "type": "text",
+      "x": 394,
+      "y": 281,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "System prompt\nUser message\nReasoning effort\nOutput and sampling",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-title",
+      "type": "text",
+      "x": 729,
+      "y": 269,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "AI Gateway",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-body",
+      "type": "text",
+      "x": 729,
+      "y": 311,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Translates controls\nAuthenticates request\nCalls the provider\nthrough its\nnative API",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "response-title",
+      "type": "text",
+      "x": 1044,
+      "y": 239,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Stream and inspect",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "response-body",
+      "type": "text",
+      "x": 1044,
+      "y": 281,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Rendered response\nEvent stream\nStatus and timing\nRequest payload",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "iterate-text",
+      "type": "text",
+      "x": 288,
+      "y": 598,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Change model or controls, then retry",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    },
+    {
+      "id": "handoff-text",
+      "type": "text",
+      "x": 748,
+      "y": 598,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Copy cURL when the request looks right",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:25:10.022Z",
+      "updatedAt": "2026-08-06T17:25:10.022Z",
+      "version": 1
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#0f172a",
+    "gridSize": null
+  }
+}

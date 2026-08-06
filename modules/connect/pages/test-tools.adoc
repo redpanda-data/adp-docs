@@ -30,6 +30,9 @@ After completing this guide, you will be able to:
 
 The Inspector is a console: a tool list and a tool runner sit side by side, with a status strip along the top. Resource and prompt panels appear underneath only when the server exposes those capabilities. Two more surfaces open from the status strip: *Session details* and the *Protocol panel*. See <<session>> for both.
 
+.The MCP Inspector follows one request from discovery through the protocol view
+image::mcp-inspector-lifecycle.svg[alt="MCP Inspector flow. The Inspector negotiates the server's MCP version and capabilities, discovers tools, resources, and prompts, sends a selected tool call as JSON-RPC, and shows the formatted result beside the wire frames, timing, progress, and errors."]
+
 == Run a tool
 
 The tool list shows every tool the server returned from `tools/list`. Select a tool to load it into the runner.

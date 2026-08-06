@@ -18,17 +18,17 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
       "version": 1
     },
     {
-      "id": "workstation",
+      "id": "connect",
       "type": "rectangle",
-      "x": 58,
-      "y": 250,
-      "width": 260,
-      "height": 190,
+      "x": 55,
+      "y": 235,
+      "width": 245,
+      "height": 220,
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
@@ -37,36 +37,36 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
       "version": 1
     },
     {
-      "id": "rpk",
+      "id": "negotiate",
       "type": "rectangle",
-      "x": 382,
-      "y": 250,
-      "width": 240,
-      "height": 190,
+      "x": 355,
+      "y": 235,
+      "width": 250,
+      "height": 220,
       "backgroundColor": "#1e293b",
-      "strokeColor": "#e24328",
+      "strokeColor": "#fac515",
       "strokeWidth": 2,
       "roughness": 1,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
       "version": 1
     },
     {
-      "id": "gateway",
+      "id": "discover",
       "type": "rectangle",
-      "x": 686,
-      "y": 220,
-      "width": 280,
-      "height": 250,
+      "x": 660,
+      "y": 235,
+      "width": 250,
+      "height": 220,
       "backgroundColor": "#1e293b",
       "strokeColor": "#6172f3",
       "strokeWidth": 2,
@@ -75,17 +75,36 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
       "version": 1
     },
     {
-      "id": "provider",
+      "id": "call",
       "type": "rectangle",
-      "x": 1030,
-      "y": 250,
-      "width": 290,
-      "height": 190,
+      "x": 965,
+      "y": 235,
+      "width": 250,
+      "height": 220,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "version": 1
+    },
+    {
+      "id": "result",
+      "type": "rectangle",
+      "x": 965,
+      "y": 555,
+      "width": 300,
+      "height": 150,
       "backgroundColor": "#1e293b",
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
@@ -94,36 +113,17 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
       "version": 1
     },
     {
-      "id": "secrets",
+      "id": "protocol",
       "type": "rectangle",
-      "x": 430,
-      "y": 575,
-      "width": 300,
-      "height": 130,
-      "backgroundColor": "#1e293b",
-      "strokeColor": "#fac515",
-      "strokeWidth": 2,
-      "roughness": 1,
-      "roundness": {
-        "type": 3
-      },
-      "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
-      "version": 1
-    },
-    {
-      "id": "usage",
-      "type": "rectangle",
-      "x": 850,
-      "y": 575,
-      "width": 300,
-      "height": 130,
+      "x": 530,
+      "y": 555,
+      "width": 340,
+      "height": 150,
       "backgroundColor": "#1e293b",
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
@@ -132,14 +132,14 @@
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
       "version": 1
     },
     {
       "id": "a1",
       "type": "arrow",
-      "x": 326,
+      "x": 308,
       "y": 345,
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
@@ -150,25 +150,54 @@
           0
         ],
         [
-          48,
+          39,
           0
         ]
       ],
       "start": {
-        "id": "workstation"
+        "id": "connect"
       },
       "end": {
-        "id": "rpk"
+        "id": "negotiate"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
       "version": 1
     },
     {
       "id": "a2",
       "type": "arrow",
-      "x": 630,
+      "x": 613,
+      "y": 345,
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          39,
+          0
+        ]
+      ],
+      "start": {
+        "id": "negotiate"
+      },
+      "end": {
+        "id": "discover"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
+      "version": 1
+    },
+    {
+      "id": "a3",
+      "type": "arrow",
+      "x": 918,
       "y": 345,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
@@ -179,26 +208,26 @@
           0
         ],
         [
-          48,
+          39,
           0
         ]
       ],
       "start": {
-        "id": "rpk"
+        "id": "discover"
       },
       "end": {
-        "id": "gateway"
+        "id": "call"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
       "version": 1
     },
     {
-      "id": "a3",
+      "id": "a4",
       "type": "arrow",
-      "x": 974,
-      "y": 345,
+      "x": 1100.3481927887365,
+      "y": 462.9693977915938,
       "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
       "roughness": 1,
@@ -208,55 +237,26 @@
           0
         ],
         [
-          48,
-          0
+          7.373789861123669,
+          84.06120441681242
         ]
       ],
       "start": {
-        "id": "gateway"
+        "id": "call"
       },
       "end": {
-        "id": "provider"
+        "id": "result"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
-      "version": 1
-    },
-    {
-      "id": "a4",
-      "type": "arrow",
-      "x": 639.3269133332631,
-      "y": 568.8559372629569,
-      "strokeColor": "#fac515",
-      "strokeWidth": 2,
-      "roughness": 1,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          77.3122750283892,
-          -92.7118745259138
-        ]
-      ],
-      "start": {
-        "id": "secrets"
-      },
-      "end": {
-        "id": "gateway"
-      },
-      "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.351Z",
+      "updatedAt": "2026-08-06T17:24:55.351Z",
       "version": 1
     },
     {
       "id": "a5",
       "type": "arrow",
-      "x": 903.79313808569,
-      "y": 476.89066514527906,
+      "x": 958.5408710219368,
+      "y": 441.0662865608923,
       "strokeColor": "#f472b6",
       "strokeWidth": 2,
       "roughness": 1,
@@ -266,19 +266,19 @@
           0
         ],
         [
-          53.803554337094624,
-          91.21866970944188
+          -149.4501630965052,
+          109.2135807243692
         ]
       ],
       "start": {
-        "id": "gateway"
+        "id": "call"
       },
       "end": {
-        "id": "usage"
+        "id": "protocol"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
@@ -288,11 +288,11 @@
       "y": 46,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Coding agents use the gateway, not provider keys",
+      "text": "MCP Inspector makes the protocol visible",
       "fontSize": 34,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
@@ -302,179 +302,179 @@
       "y": 98,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "One local sign-in routes model traffic and records usage without writing an upstream key to disk",
+      "text": "Discover capabilities, run a real call, and inspect what crossed the wire without creating an agent",
       "fontSize": 20,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "workstation-title",
+      "id": "connect-title",
       "type": "text",
-      "x": 82,
-      "y": 274,
+      "x": 79,
+      "y": 259,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Developer machine",
+      "text": "Connect",
       "fontSize": 24,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "workstation-body",
+      "id": "connect-body",
       "type": "text",
-      "x": 82,
-      "y": 316,
+      "x": 79,
+      "y": 301,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Claude Code or Codex\n\nNo provider key\nstored here",
+      "text": "Open the server\nInspector and confirm\nconnection health",
       "fontSize": 21,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "rpk-title",
+      "id": "negotiate-title",
       "type": "text",
-      "x": 406,
-      "y": 274,
+      "x": 379,
+      "y": 259,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "`rpk ai run`",
+      "text": "Negotiate",
       "fontSize": 24,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "rpk-body",
+      "id": "negotiate-body",
       "type": "text",
-      "x": 406,
-      "y": 316,
+      "x": 379,
+      "y": 301,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Uses your `rpk ai`\nsession and selects\na provider",
+      "text": "Protocol version\nServer capabilities\nAvailable features",
       "fontSize": 21,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "gateway-title",
+      "id": "discover-title",
       "type": "text",
-      "x": 710,
-      "y": 244,
+      "x": 684,
+      "y": 259,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "AI Gateway",
+      "text": "Discover",
       "fontSize": 24,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "gateway-body",
+      "id": "discover-body",
       "type": "text",
-      "x": 710,
-      "y": 286,
+      "x": 684,
+      "y": 301,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Authenticates caller\nRoutes native API\nApplies policy\nRecords usage",
+      "text": "Tools\nResources\nPrompts",
       "fontSize": 21,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "provider-title",
+      "id": "call-title",
       "type": "text",
-      "x": 1054,
-      "y": 274,
+      "x": 989,
+      "y": 259,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "LLM provider",
+      "text": "Run a tool",
       "fontSize": 24,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "provider-body",
+      "id": "call-body",
       "type": "text",
-      "x": 1054,
-      "y": 316,
+      "x": 989,
+      "y": 301,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Managed access,\nAWS Bedrock, or\nenterprise passthrough",
+      "text": "Form or JSON input\nJSON-RPC request\nProgress and cancel",
       "fontSize": 21,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "secrets-title",
+      "id": "result-title",
       "type": "text",
-      "x": 454,
-      "y": 599,
+      "x": 989,
+      "y": 579,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Secret store",
+      "text": "Result",
       "fontSize": 24,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "secrets-body",
+      "id": "result-body",
       "type": "text",
-      "x": 454,
-      "y": 641,
+      "x": 989,
+      "y": 621,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Provider credentials stay\nin the dataplane",
+      "text": "Formatted or raw output\nSchema and\nstructured errors",
       "fontSize": 21,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "usage-title",
+      "id": "protocol-title",
       "type": "text",
-      "x": 874,
-      "y": 599,
+      "x": 554,
+      "y": 579,
       "strokeColor": "#f8fafc",
       "roughness": 0,
-      "text": "Cost & Usage",
+      "text": "Protocol panel",
       "fontSize": 24,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     },
     {
-      "id": "usage-body",
+      "id": "protocol-body",
       "type": "text",
-      "x": 874,
-      "y": 641,
+      "x": 554,
+      "y": 621,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Tokens, requests, and\nspend roll up centrally",
+      "text": "Wire frames, timeline, logs,\nlatency, payload, and tokens",
       "fontSize": 21,
       "fontFamily": 5,
-      "createdAt": "2026-08-06T17:24:14.512Z",
-      "updatedAt": "2026-08-06T17:24:14.512Z",
+      "createdAt": "2026-08-06T17:24:55.352Z",
+      "updatedAt": "2026-08-06T17:24:55.352Z",
       "version": 1
     }
   ],

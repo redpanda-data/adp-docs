@@ -4,335 +4,191 @@
   "source": "mcp-excalidraw-server",
   "elements": [
     {
-      "id": "canvas-bg",
+      "id": "canvas",
       "type": "rectangle",
-      "x": 0,
-      "y": 0,
-      "width": 1200,
-      "height": 700,
+      "x": 10,
+      "y": 10,
+      "width": 1360,
+      "height": 800,
       "backgroundColor": "#0f172a",
       "strokeColor": "#0f172a",
-      "strokeWidth": 0,
+      "strokeWidth": 1,
       "roughness": 0,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:56:36.530Z",
-      "version": 1
-    },
-    {
-      "id": "title",
-      "type": "text",
-      "x": 48,
-      "y": 34,
-      "strokeColor": "#f8fafc",
-      "text": "One tool call, two OAuth boundaries",
-      "fontSize": 32,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:56:36.530Z",
-      "version": 1
-    },
-    {
-      "id": "subtitle",
-      "type": "text",
-      "x": 50,
-      "y": 82,
-      "strokeColor": "#cbd5e1",
-      "text": "Inbound identifies the client app; outbound identifies the user upstream",
-      "fontSize": 18,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:56:36.530Z",
-      "version": 1
-    },
-    {
-      "id": "client-zone",
-      "type": "rectangle",
-      "x": 38,
-      "y": 145,
-      "width": 300,
-      "height": 475,
-      "backgroundColor": "#0f172a",
-      "strokeColor": "#64748b",
-      "strokeWidth": 2,
-      "strokeStyle": "dashed",
-      "roughness": 0,
-      "roundness": {
-        "type": 3
-      },
-      "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:56:36.530Z",
-      "version": 1
-    },
-    {
-      "id": "client-zone-label",
-      "type": "text",
-      "x": 62,
-      "y": 166,
-      "strokeColor": "#cbd5e1",
-      "text": "External application",
-      "fontSize": 18,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:56:36.530Z",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
       "id": "client",
       "type": "rectangle",
-      "x": 78,
-      "y": 230,
-      "width": 220,
-      "height": 108,
-      "backgroundColor": "#2d3282",
-      "strokeColor": "#6172f3",
-      "strokeWidth": 2,
-      "roughness": 1,
-      "label": {
-        "text": "Claude, ChatGPT,\nGemini, or Cursor"
-      },
-      "fontSize": 20,
-      "fontFamily": 5,
-      "roundness": {
-        "type": 3
-      },
-      "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:56:36.530Z",
-      "version": 1
-    },
-    {
-      "id": "identify-label",
-      "type": "text",
-      "x": 72,
-      "y": 398,
-      "strokeColor": "#cbd5e1",
-      "text": "Client identification",
-      "fontSize": 18,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:56:36.530Z",
-      "version": 1
-    },
-    {
-      "id": "cimd",
-      "type": "rectangle",
-      "x": 62,
-      "y": 438,
-      "width": 112,
-      "height": 64,
-      "backgroundColor": "#0c4a6e",
+      "x": 50,
+      "y": 235,
+      "width": 230,
+      "height": 220,
+      "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
       "strokeWidth": 2,
       "roughness": 1,
-      "label": {
-        "text": "CIMD URL"
-      },
-      "fontSize": 16,
-      "fontFamily": 5,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:57:13.645Z",
-      "version": 2
-    },
-    {
-      "id": "dcr",
-      "type": "rectangle",
-      "x": 188,
-      "y": 438,
-      "width": 128,
-      "height": 64,
-      "backgroundColor": "#12493b",
-      "strokeColor": "#2ed3ae",
-      "strokeWidth": 2,
-      "roughness": 1,
-      "label": {
-        "text": "Dynamic\nregistration"
-      },
-      "fontSize": 14,
-      "fontFamily": 5,
-      "roundness": {
-        "type": 3
-      },
-      "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:57:13.647Z",
-      "version": 2
-    },
-    {
-      "id": "manual",
-      "type": "rectangle",
-      "x": 105,
-      "y": 525,
-      "width": 190,
-      "height": 58,
-      "backgroundColor": "#713b12",
-      "strokeColor": "#fac515",
-      "strokeWidth": 2,
-      "roughness": 1,
-      "label": {
-        "text": "Manual registration"
-      },
-      "fontSize": 14,
-      "fontFamily": 5,
-      "roundness": {
-        "type": 3
-      },
-      "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.530Z",
-      "updatedAt": "2026-08-05T15:57:13.648Z",
-      "version": 2
-    },
-    {
-      "id": "adp-zone",
-      "type": "rectangle",
-      "x": 402,
-      "y": 145,
-      "width": 400,
-      "height": 475,
-      "backgroundColor": "#0f172a",
-      "strokeColor": "#64748b",
-      "strokeWidth": 2,
-      "strokeStyle": "dashed",
-      "roughness": 0,
-      "roundness": {
-        "type": 3
-      },
-      "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
-      "id": "adp-label",
-      "type": "text",
-      "x": 430,
-      "y": 166,
-      "strokeColor": "#cbd5e1",
-      "text": "Agentic Data Plane",
-      "fontSize": 18,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "id": "inbound",
+      "type": "rectangle",
+      "x": 325,
+      "y": 205,
+      "width": 245,
+      "height": 280,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
       "id": "gateway",
       "type": "rectangle",
-      "x": 475,
-      "y": 230,
-      "width": 252,
-      "height": 108,
-      "backgroundColor": "#711e0f",
-      "strokeColor": "#e24328",
+      "x": 615,
+      "y": 205,
+      "width": 250,
+      "height": 280,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#6172f3",
       "strokeWidth": 2,
       "roughness": 1,
-      "label": {
-        "text": "AI Gateway\nOAuth client boundary"
-      },
-      "fontSize": 20,
-      "fontFamily": 5,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
-      "id": "mcp",
+      "id": "outbound",
       "type": "rectangle",
-      "x": 475,
-      "y": 430,
-      "width": 252,
-      "height": 108,
-      "backgroundColor": "#12493b",
-      "strokeColor": "#2ed3ae",
+      "x": 910,
+      "y": 205,
+      "width": 245,
+      "height": 280,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#fac515",
       "strokeWidth": 2,
       "roughness": 1,
-      "label": {
-        "text": "MCP server\ntool execution"
-      },
-      "fontSize": 21,
-      "fontFamily": 5,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
-      "version": 1
-    },
-    {
-      "id": "upstream-zone",
-      "type": "rectangle",
-      "x": 862,
-      "y": 145,
-      "width": 300,
-      "height": 475,
-      "backgroundColor": "#0f172a",
-      "strokeColor": "#64748b",
-      "strokeWidth": 2,
-      "strokeStyle": "dashed",
-      "roughness": 0,
-      "roundness": {
-        "type": 3
-      },
-      "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
-      "version": 1
-    },
-    {
-      "id": "upstream-zone-label",
-      "type": "text",
-      "x": 887,
-      "y": 166,
-      "strokeColor": "#cbd5e1",
-      "text": "Business system",
-      "fontSize": 18,
-      "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
       "id": "upstream",
       "type": "rectangle",
-      "x": 900,
-      "y": 340,
-      "width": 224,
-      "height": 118,
-      "backgroundColor": "#0c4a6e",
-      "strokeColor": "#38bdf8",
+      "x": 1200,
+      "y": 250,
+      "width": 135,
+      "height": 190,
+      "backgroundColor": "#1e293b",
+      "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
       "roughness": 1,
-      "label": {
-        "text": "GitHub, Slack,\nSalesforce, ..."
-      },
-      "fontSize": 20,
-      "fontFamily": 5,
       "roundness": {
         "type": 3
       },
       "fillStyle": "solid",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
-      "id": "client-gateway",
+      "id": "boundary1",
+      "type": "rectangle",
+      "x": 240,
+      "y": 570,
+      "width": 360,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#e24328",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "version": 1
+    },
+    {
+      "id": "boundary2",
+      "type": "rectangle",
+      "x": 780,
+      "y": 570,
+      "width": 405,
+      "height": 52,
+      "backgroundColor": "#172033",
+      "strokeColor": "#fac515",
+      "strokeWidth": 2,
+      "roughness": 0,
+      "roundness": {
+        "type": 3
+      },
+      "fillStyle": "solid",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "version": 1
+    },
+    {
+      "id": "a1",
       "type": "arrow",
-      "x": 306,
-      "y": 284,
+      "x": 288,
+      "y": 345,
+      "strokeColor": "#38bdf8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          29,
+          0
+        ]
+      ],
+      "start": {
+        "id": "client"
+      },
+      "end": {
+        "id": "inbound"
+      },
+      "endArrowhead": "arrow",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
+      "version": 1
+    },
+    {
+      "id": "a2",
+      "type": "arrow",
+      "x": 578,
+      "y": 345,
       "strokeColor": "#e24328",
       "strokeWidth": 2,
       "roughness": 1,
@@ -342,27 +198,27 @@
           0
         ],
         [
-          161,
+          29,
           0
         ]
       ],
       "start": {
-        "id": "client"
+        "id": "inbound"
       },
       "end": {
         "id": "gateway"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
-      "id": "gateway-mcp",
+      "id": "a3",
       "type": "arrow",
-      "x": 601,
-      "y": 346,
-      "strokeColor": "#cbd5e1",
+      "x": 873,
+      "y": 345,
+      "strokeColor": "#fac515",
       "strokeWidth": 2,
       "roughness": 1,
       "points": [
@@ -371,27 +227,27 @@
           0
         ],
         [
-          0,
-          76
+          29,
+          0
         ]
       ],
       "start": {
         "id": "gateway"
       },
       "end": {
-        "id": "mcp"
+        "id": "outbound"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
-      "id": "mcp-upstream",
+      "id": "a4",
       "type": "arrow",
-      "x": 734.8342137390059,
-      "y": 456.3213913191837,
-      "strokeColor": "#38bdf8",
+      "x": 1163,
+      "y": 345,
+      "strokeColor": "#2ed3ae",
       "strokeWidth": 2,
       "roughness": 1,
       "points": [
@@ -400,179 +256,220 @@
           0
         ],
         [
-          157.33157252198816,
-          -32.53815976732113
+          29,
+          0
         ]
       ],
       "start": {
-        "id": "mcp"
+        "id": "outbound"
       },
       "end": {
         "id": "upstream"
       },
       "endArrowhead": "arrow",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
-      "id": "methods-client",
-      "type": "arrow",
-      "x": 132.86081922053592,
-      "y": 430.51268035686167,
-      "strokeColor": "#38bdf8",
-      "strokeWidth": 2,
-      "strokeStyle": "dashed",
-      "roughness": 1,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          31.99879166645505,
-          -85.02536071372333
-        ]
-      ],
-      "start": {
-        "id": "cimd"
-      },
-      "end": {
-        "id": "client"
-      },
-      "endArrowhead": "arrow",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:57:13.646Z",
-      "version": 2
-    },
-    {
-      "id": "dcr-client",
-      "type": "arrow",
-      "x": 238.38633599615181,
-      "y": 430.43528898881624,
-      "strokeColor": "#2ed3ae",
-      "strokeWidth": 2,
-      "strokeStyle": "dashed",
-      "roughness": 1,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          -29.202779519185356,
-          -84.87057797763248
-        ]
-      ],
-      "start": {
-        "id": "dcr"
-      },
-      "end": {
-        "id": "client"
-      },
-      "endArrowhead": "arrow",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:57:13.647Z",
-      "version": 2
-    },
-    {
-      "id": "manual-client",
-      "type": "arrow",
-      "x": 198.35590620214535,
-      "y": 517.0078895482703,
-      "strokeColor": "#fac515",
-      "strokeWidth": 2,
-      "strokeStyle": "dashed",
-      "roughness": 1,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          -7.600701293179583,
-          -171.01577909654065
-        ]
-      ],
-      "start": {
-        "id": "manual"
-      },
-      "end": {
-        "id": "client"
-      },
-      "endArrowhead": "arrow",
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:57:13.648Z",
-      "version": 2
-    },
-    {
-      "id": "inbound-label",
+      "id": "title",
       "type": "text",
-      "x": 337,
-      "y": 238,
-      "strokeColor": "#e24328",
-      "text": "1  Inbound OAuth",
-      "fontSize": 18,
+      "x": 58,
+      "y": 46,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "One tool call can cross two OAuth boundaries",
+      "fontSize": 34,
       "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "createdAt": "2026-08-06T17:24:28.491Z",
+      "updatedAt": "2026-08-06T17:24:28.491Z",
       "version": 1
     },
     {
-      "id": "token-label",
+      "id": "subtitle",
       "type": "text",
-      "x": 498,
-      "y": 362,
+      "x": 60,
+      "y": 98,
       "strokeColor": "#cbd5e1",
-      "text": "2  access token → tool call",
-      "fontSize": 17,
+      "roughness": 0,
+      "text": "Inbound client identity and outbound upstream identity solve different authentication problems",
+      "fontSize": 20,
       "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:56:36.531Z",
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
       "version": 1
     },
     {
-      "id": "outbound-label",
+      "id": "client-title",
       "type": "text",
-      "x": 750,
-      "y": 380,
-      "strokeColor": "#38bdf8",
-      "text": "3  Outbound OAuth",
-      "fontSize": 18,
+      "x": 74,
+      "y": 259,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "External MCP\nclient",
+      "fontSize": 24,
       "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:57:13.649Z",
-      "version": 2
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
     },
     {
-      "id": "client-note",
+      "id": "client-body",
       "type": "text",
-      "x": 438,
-      "y": 566,
-      "strokeColor": "#e24328",
-      "text": "OAuth client: who may enter?",
-      "fontSize": 17,
+      "x": 74,
+      "y": 331,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Claude, ChatGPT,\nGemini, Cursor,\nor another client",
+      "fontSize": 21,
       "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:57:13.650Z",
-      "version": 2
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
     },
     {
-      "id": "provider-note",
+      "id": "inbound-title",
       "type": "text",
-      "x": 884,
-      "y": 566,
-      "strokeColor": "#38bdf8",
-      "text": "OAuth provider: how ADP acts upstream",
-      "fontSize": 15,
+      "x": 349,
+      "y": 229,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Inbound OAuth\nclient",
+      "fontSize": 24,
       "fontFamily": 5,
-      "createdAt": "2026-08-05T15:56:36.531Z",
-      "updatedAt": "2026-08-05T15:57:13.652Z",
-      "version": 2
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
+    },
+    {
+      "id": "inbound-body",
+      "type": "text",
+      "x": 349,
+      "y": 301,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Identifies app\nChecks redirect URI\nAuthorizes access\nto AI Gateway",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-title",
+      "type": "text",
+      "x": 639,
+      "y": 229,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "AI Gateway\nand MCP",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
+    },
+    {
+      "id": "gateway-body",
+      "type": "text",
+      "x": 639,
+      "y": 301,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Authenticates user\nInvokes the tool\nApplies access policy\nRecords the call",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
+    },
+    {
+      "id": "outbound-title",
+      "type": "text",
+      "x": 934,
+      "y": 229,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Outbound OAuth\nprovider",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
+    },
+    {
+      "id": "outbound-body",
+      "type": "text",
+      "x": 934,
+      "y": 301,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "Acts for user\nat upstream system\nwhen delegated OAuth\nis configured",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
+    },
+    {
+      "id": "upstream-title",
+      "type": "text",
+      "x": 1224,
+      "y": 274,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Upstream",
+      "fontSize": 24,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
+    },
+    {
+      "id": "upstream-body",
+      "type": "text",
+      "x": 1224,
+      "y": 316,
+      "strokeColor": "#cbd5e1",
+      "roughness": 0,
+      "text": "GitHub\nSlack\nSalesforce",
+      "fontSize": 21,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
+    },
+    {
+      "id": "boundary1-text",
+      "type": "text",
+      "x": 258,
+      "y": 583,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Inbound: client \u2192 AI Gateway",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
+    },
+    {
+      "id": "boundary2-text",
+      "type": "text",
+      "x": 798,
+      "y": 583,
+      "strokeColor": "#f8fafc",
+      "roughness": 0,
+      "text": "Outbound: AI Gateway \u2192 upstream",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "createdAt": "2026-08-06T17:24:28.492Z",
+      "updatedAt": "2026-08-06T17:24:28.492Z",
+      "version": 1
     }
   ],
   "appState": {
-    "viewBackgroundColor": "#ffffff",
+    "viewBackgroundColor": "#0f172a",
     "gridSize": null
   }
 }
