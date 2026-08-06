@@ -1,4 +1,5 @@
 = rpk ai version
+:description: pass:q[Print `rpk ai version` and commit.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-version.adoc[tag=single-source]

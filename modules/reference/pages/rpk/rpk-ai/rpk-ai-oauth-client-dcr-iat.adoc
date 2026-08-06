@@ -1,4 +1,5 @@
 = rpk ai oauth-client dcr iat
+:description: Manage Initial Access Tokens (IATs): one-shot bearer credentials a caller presents to the public registration endpoint when the tenant's admission mode is initial-access-token. The plaintext is printed exactly once on mint; only a hash is stored.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client-dcr-iat.adoc[tag=single-source]

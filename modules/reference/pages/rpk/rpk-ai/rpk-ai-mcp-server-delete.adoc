@@ -1,5 +1,6 @@
 = rpk ai mcp-server delete
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-delete.adoc
+:description: Delete an MCP server.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-delete.adoc[tag=single-source]

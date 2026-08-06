@@ -1,4 +1,5 @@
 = rpk ai oauth-provider apply
+:description: Reconcile OAuth providers from one or more YAML manifests. For each manifest: create the resource if absent, otherwise update only the fields that are present in the manifest AND differ from the live resource.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-provider-apply.adoc[tag=single-source]

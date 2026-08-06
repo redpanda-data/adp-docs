@@ -1,4 +1,5 @@
 = rpk ai agent get
+:description: Get an agent.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-get.adoc[tag=single-source]

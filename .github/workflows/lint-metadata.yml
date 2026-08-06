@@ -1,0 +1,64 @@
+name: Lint page metadata
+
+# Runs on every PR (no paths filter) so it can be a required status check:
+# a required check that is skipped by a paths filter leaves PRs stuck pending.
+# It passes fast when no pages are affected.
+on: pull_request
+
+jobs:
+  page-metadata:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: "Require :description: on every page"
+        run: |
+          # Style guide: every page needs a :description: (search results, link
+          # previews, and AI discoverability all read it). Generated rpk stubs
+          # get theirs from the stub generator in docs-extensions-and-macros
+          # (tools/rpk-docs/generate-plugin-stubs.js).
+          #
+          # The check is header-scoped: it stops at the first blank line,
+          # because that is where Antora's page-metadata parse stops. A
+          # :description: below the header never reaches <meta> and the page
+          # silently ships the generic site-wide description instead.
+          #
+          # Two header shapes are valid. A literal attribute, or a
+          # single-source stub that inherits the description from its partial
+          # with include::<partial>[tag=meta]. Generated rpk stubs use the
+          # include form; hand-written pages and stubs whose upstream partial
+          # predates the meta tag region use the literal.
+          missing=0
+          while IFS= read -r f; do
+            if ! awk '
+                  /^$/ { exit }
+                  /^:description: .+/ { found = 1 }
+                  /^include::.*\[tag=meta\]/ { found = 1 }
+                  END { exit !found }
+                ' "$f"; then
+              echo "::error file=$f::No :description: in the page header. Add the attribute above the first blank line, or include::<partial>[tag=meta] for a single-source stub."
+              missing=1
+            fi
+          done < <(find modules/*/pages -name '*.adoc' -type f)
+          exit $missing
+
+      - name: Warn on over-length descriptions (changed files only)
+        run: |
+          # Style guide recommends under 155 chars (search snippet cutoff).
+          # Warn-only, and only for files this PR touches, so pre-existing
+          # long descriptions don't spam every PR. Header-scoped like the
+          # check above, and silent for stubs that inherit their description
+          # through a meta include: the text lives upstream, so warning here
+          # would point a reader at a file they cannot edit.
+          git diff --name-only "${{ github.event.pull_request.base.sha }}".."${{ github.event.pull_request.head.sha }}" \
+            | grep -E '^modules/.*/pages/.*\.adoc$' | while IFS= read -r f; do
+            [ -f "$f" ] || continue
+            desc=$(awk '/^$/ { exit } /^:description: / { sub(/^:description: /, ""); print; exit }' "$f")
+            if [ -n "$desc" ] && [ "${#desc}" -gt 155 ]; then
+              echo "::warning file=$f::Description is ${#desc} chars; style guide recommends under 155"
+            fi
+          done

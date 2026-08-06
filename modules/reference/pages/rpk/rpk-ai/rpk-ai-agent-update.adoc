@@ -1,4 +1,5 @@
 = rpk ai agent update
+:description: Update an agent.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-update.adoc[tag=single-source]

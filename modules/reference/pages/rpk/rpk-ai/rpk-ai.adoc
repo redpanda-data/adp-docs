@@ -1,5 +1,6 @@
 = rpk ai
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/index.adoc
+:description: Manage the Redpanda AI Gateway.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai.adoc[tag=single-source]

@@ -1,4 +1,5 @@
 = rpk ai oauth-client
+:description: Manage OAuth clients registered with the AI gateway's OAuth Authorization Server. An OAuth client is an external tool (such as Claude AI, ChatGPT, or Cursor) that requests access tokens for an MCP server.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-client.adoc[tag=single-source]

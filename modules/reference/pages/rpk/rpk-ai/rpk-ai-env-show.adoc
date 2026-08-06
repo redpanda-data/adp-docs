@@ -1,4 +1,5 @@
 = rpk ai env show
+:description: Show the effective resolved environment as YAML (tokens redacted).
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-env-show.adoc[tag=single-source]

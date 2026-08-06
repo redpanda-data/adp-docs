@@ -1,3 +1,4 @@
 = rpk profile validate
+:description: Validate profile configuration and detect common issues.
 
 include::streaming:reference:rpk/rpk-profile/rpk-profile-validate.adoc[tag=single-source]

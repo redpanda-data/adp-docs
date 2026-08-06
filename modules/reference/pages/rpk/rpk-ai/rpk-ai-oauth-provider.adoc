@@ -1,4 +1,5 @@
 = rpk ai oauth-provider
+:description: Manage OAuth authorization-server configurations registered with the Redpanda AI gateway. OAuth providers describe third-party authorization servers that user-facing MCP servers can authenticate against via the device-consent flow.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-provider.adoc[tag=single-source]

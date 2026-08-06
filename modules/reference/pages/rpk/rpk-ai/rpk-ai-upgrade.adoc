@@ -1,4 +1,5 @@
 = rpk ai upgrade
+:description: Upgrade to the latest Redpanda AI CLI version.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-upgrade.adoc[tag=single-source]

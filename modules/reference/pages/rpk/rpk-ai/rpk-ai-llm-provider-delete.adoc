@@ -1,5 +1,6 @@
 = rpk ai llm-provider delete
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-llm-delete.adoc
+:description: Delete an LLM provider.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-llm-provider-delete.adoc[tag=single-source]

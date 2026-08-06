@@ -1,3 +1,4 @@
 = rpk profile delete
+:description: pass:q[Delete an rpk profile. Deleting a profile removes it from the `rpk.yaml` file.]
 
 include::streaming:reference:rpk/rpk-profile/rpk-profile-delete.adoc[tag=single-source]

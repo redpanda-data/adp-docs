@@ -1,4 +1,5 @@
 = rpk ai env add
+:description: pass:q[Add a manual `rpk` ai environment with explicit URLs.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-env-add.adoc[tag=single-source]

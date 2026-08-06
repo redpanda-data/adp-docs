@@ -1,4 +1,5 @@
 = rpk ai agent transcript get
+:description: Get a single conversation transcript with its turns.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-transcript-get.adoc[tag=single-source]

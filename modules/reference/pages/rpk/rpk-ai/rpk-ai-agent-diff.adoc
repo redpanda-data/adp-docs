@@ -1,4 +1,5 @@
 = rpk ai agent diff
+:description: Dry-run of apply for agents. Prints, per manifest, whether apply would create, update (and which fields), or leave the resource unchanged.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-diff.adoc[tag=single-source]

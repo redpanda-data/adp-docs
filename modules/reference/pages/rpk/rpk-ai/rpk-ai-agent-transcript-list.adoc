@@ -1,4 +1,5 @@
 = rpk ai agent transcript list
+:description: List an agent's conversation transcripts.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-transcript-list.adoc[tag=single-source]

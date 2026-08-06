@@ -1,4 +1,5 @@
 = rpk ai connection
+:description: List and revoke the OAuth connections you hold to third-party providers. A connection is your personal grant to a provider (created by signing in through the consent flow) that lets user_oauth MCP servers act on your behalf.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-connection.adoc[tag=single-source]

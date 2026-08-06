@@ -1,4 +1,5 @@
 = rpk ai agent list
+:description: List agents.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-list.adoc[tag=single-source]

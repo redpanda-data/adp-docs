@@ -1,4 +1,5 @@
 = rpk ai agent a2a task cancel
+:description: Ask the agent to cancel a running task and print the task's resulting state. Cancellation is cooperative; the agent may already have finished, in which case the terminal state is returned unchanged.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-a2a-task-cancel.adoc[tag=single-source]

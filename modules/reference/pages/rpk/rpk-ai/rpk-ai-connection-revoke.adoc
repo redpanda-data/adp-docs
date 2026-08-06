@@ -1,4 +1,5 @@
 = rpk ai connection revoke
+:description: Revoke your connection to the named OAuth provider: the stored tokens are invalidated and the provider's revocation endpoint is called best-effort. This affects only your own connection, not other users'.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-connection-revoke.adoc[tag=single-source]

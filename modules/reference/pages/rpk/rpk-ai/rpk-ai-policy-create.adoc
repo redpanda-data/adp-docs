@@ -1,4 +1,5 @@
 = rpk ai policy create
+:description: Create a Cedar authorization policy: the allow/deny gate that decides WHETHER a principal may call a tool.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-policy-create.adoc[tag=single-source]

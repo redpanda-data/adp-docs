@@ -1,5 +1,6 @@
 = rpk ai mcp-server create
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-mcp-create.adoc
+:description: Create an MCP server. Choose the backend by setting flags from one group; the group you use selects it: remote, managed.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-mcp-server-create.adoc[tag=single-source]

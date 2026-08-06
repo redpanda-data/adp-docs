@@ -1,4 +1,5 @@
 = rpk ai policy
+:description: pass:q[Manage Cedar authorization policies (`create`, get, list, update, delete).]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-policy.adoc[tag=single-source]

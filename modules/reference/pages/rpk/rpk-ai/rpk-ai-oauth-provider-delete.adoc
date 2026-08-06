@@ -1,4 +1,5 @@
 = rpk ai oauth-provider delete
+:description: Delete an OAuth provider.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-oauth-provider-delete.adoc[tag=single-source]

@@ -1,4 +1,5 @@
 = rpk ai policy delete
+:description: Delete a policy.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-policy-delete.adoc[tag=single-source]

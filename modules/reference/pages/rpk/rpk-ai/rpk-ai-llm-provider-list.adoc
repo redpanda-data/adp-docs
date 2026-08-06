@@ -1,5 +1,6 @@
 = rpk ai llm-provider list
 :page-preview: true
 :page-aliases: reference:rpk/rpk-ai/rpk-ai-llm-list.adoc
+:description: List LLM providers.
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-llm-provider-list.adoc[tag=single-source]

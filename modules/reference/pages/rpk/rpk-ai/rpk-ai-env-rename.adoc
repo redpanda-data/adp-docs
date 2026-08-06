@@ -1,4 +1,5 @@
 = rpk ai env rename
+:description: Rename a manual environment.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-env-rename.adoc[tag=single-source]

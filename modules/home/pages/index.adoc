@@ -1,4 +1,5 @@
 = Run agents on all your data, safely.
+:description: Redpanda Agentic Data Plane: an AI Gateway, managed MCP servers, declarative agents, and built-in governance for running AI agents on your data.
 :page-layout: component-home-v3
 :page-hero-description: An AI Gateway, MCP servers, declarative agents, and built-in governance: one platform so your team can move from prototype to production without rebuilding the foundations every time.
 :page-stats: Single|gateway for all LLM providers;;Unified|dashboard for spend and activity;;Per-user|OAuth identity on every call;;Managed|MCP servers out of the box

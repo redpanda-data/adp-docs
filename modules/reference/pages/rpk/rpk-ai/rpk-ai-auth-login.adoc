@@ -1,4 +1,5 @@
 = rpk ai auth login
+:description: pass:q[Run the OAuth 2.0 device authorization grant against Redpanda Cloud, persist the resulting credentials, and prompt to select an environment whose AI Gateway URL becomes the active profile's dataplane URL. Credentials are stored in the `rpk ai` credentials file with `0600` permissions, keyed by organization.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-auth-login.adoc[tag=single-source]

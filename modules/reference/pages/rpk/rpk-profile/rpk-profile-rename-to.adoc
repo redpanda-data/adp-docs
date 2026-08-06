@@ -1,3 +1,4 @@
 = rpk profile rename-to
+:description: pass:q[Rename the current `rpk profile`. This command renames the currently active profile to the specified name.]
 
 include::streaming:reference:rpk/rpk-profile/rpk-profile-rename-to.adoc[tag=single-source]

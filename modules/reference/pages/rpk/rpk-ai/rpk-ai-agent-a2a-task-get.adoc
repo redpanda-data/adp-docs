@@ -1,4 +1,5 @@
 = rpk ai agent a2a task get
+:description: pass:q[Fetch a task's current state, status message, artifacts and (optionally truncated) message history. Use `-o json` for the full task object.]
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-agent-a2a-task-get.adoc[tag=single-source]
