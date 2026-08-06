@@ -4,6 +4,7 @@
 :page-topic-type: how-to
 :personas: platform_engineer, agent_builder
 // Legacy gateway-object-model pages (gateway-quickstart.adoc, gateway-architecture.adoc, admin/setup-guide.adoc, builders/discover-gateways.adoc) were archived to gateway/partials/archived-ai-gateway-pages.adoc and removed from the nav. aggregation.adoc was reframed and renamed to code-mode.adoc ("Code Mode"), a current page that was kept (old URL redirects via :page-aliases: on code-mode.adoc). Old cloud URLs redirect via :page-aliases: on gateway/overview.adoc.
+// Create-form labels re-verified against apps/adp-ui/src on cloudv2 origin/main, 2026-08-06: the Identity section shows only Display name (the resource ID is derived silently and never rendered on the create form); the Credential section is a choicebox of existing keys plus "Bring a new API key reference" (Key name + API key + Save key); the Existing/New tabs, Secret value field, and Create secret button exist only on the edit page's API key reference field; the Models picker starts with the full catalog selected; deleting requires typing "delete" to confirm.
 :learning-objective-1: Create an LLM provider for OpenAI, Anthropic, Google AI, AWS Bedrock, or an OpenAI-compatible endpoint
 :learning-objective-2: Select the models you want to expose through the provider
 :learning-objective-3: Verify the provider is reachable using the built-in Test connection control
@@ -19,7 +20,7 @@ After reading this page, you will be able to:
 == Prerequisites
 
 * An API key (or AWS credentials for Bedrock) for the upstream provider you want to configure.
-* One or more secrets already created in your dataplane's secret store for the provider's credentials. Secret references must use `UPPER_SNAKE_CASE`. For example: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `AWS_ACCESS_KEY_ID`.
+* Optional: Secrets already created in your dataplane's secret store for the provider's credentials. The create form can also store a new API key inline, so you don't have to prepare a secret first. Secret identifiers use `UPPER_SNAKE_CASE`. For example: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `AWS_ACCESS_KEY_ID`.
 +
 // TODO: xref the secrets-management page for Agentic Data Plane once confirmed.
 
@@ -29,28 +30,15 @@ After reading this page, you will be able to:
 . Open *LLM Providers* in the sidebar.
 . Click *Add provider*.
 
-== Fill in the provider card
+== Fill in the identity fields
 
-The first card on the page collects identity fields. Enter a `Display name`; the form auto-derives the `Resource ID` from it as you type.
+The Identity section collects the provider's name. Enter a `Display name`: a human-readable label shown in dashboards and model selectors, up to 253 characters.
 
-[cols="1,1,3"]
-|===
-|Field |Required |Notes
-
-|`Display name`
-|Yes
-|Human-readable label shown in dashboards and model selectors. Up to 253 characters. The form auto-derives the `Resource ID` from this value.
-
-|`Resource ID`
-|Yes
-|Machine identifier used in API calls and CLI commands. Lowercase letters, numbers, and hyphens only (`^[a-z][a-z0-9-]*$`), up to 63 characters. Immutable after creation. Appears in the proxy URL (`/llm/v1/providers/<resource-id>/...`). Auto-derived from the `Display name`; edit it if you want something different.
-|===
-
-The Summary panel labels the `Resource ID` as `Name`.
+Agentic Data Plane derives the provider's resource ID from the display name in the background; the create form doesn't show it. The resource ID is the machine identifier used in API calls and CLI commands: lowercase letters, numbers, and hyphens only (`^[a-z][a-z0-9-]*$`), up to 63 characters, and immutable after creation. It appears in the proxy URL (`/llm/v1/providers/<resource-id>/...`).
 
 == Choose a provider type
 
-The Provider type card shows five cards. Pick the one that matches your upstream.
+In the Provider type section, pick the type that matches your upstream.
 
 [cols="1,3"]
 |===
@@ -76,7 +64,9 @@ Selecting a type reveals the type-specific configuration fields.
 
 == Fill in the type-specific configuration
 
-Each `API key reference` and credential field points at a secret-store entry, not the secret value itself. Use the *Existing* tab to pick a secret already in your dataplane's secret store, or the *New* tab to create one inline.
+Each `API key reference` and credential field points at a secret-store entry, not the secret value itself. On the create form, the Credential section lists the keys already in your dataplane's secret store: pick one, or select `Bring a new API key reference` to store a new key inline. Enter a `Key name` and the `API key` value, then click *Save key*. Agentic Data Plane stores the key in the secret store under an identifier derived from the key name, shown under the field; the value is stored encrypted and can't be viewed again after saving.
+
+When you edit a provider later, the `API key reference` field offers an *Existing* tab to pick a stored secret and a *New* tab to create one inline.
 
 [tabs]
 ======
@@ -191,9 +181,9 @@ For the OpenAI, Google AI, and AWS Bedrock provider types, AI Gateway validates 
 [[select-models]]
 == Select models
 
-Models you select on this form become the catalog the provider exposes. Leave the list empty to allow every model the upstream catalog returns.
+Models you select on this form become the catalog the provider exposes.
 
-For *OpenAI*, *Anthropic*, *Google AI*, and *AWS Bedrock*, the form shows a picker backed by the provider's catalog. Each model in the picker shows its input and output price per million tokens. Pick from the list, or type a model identifier the catalog doesn't show. For *OpenAI-compatible*, the form takes a freeform list: type the exact identifiers your upstream serves.
+For *OpenAI*, *Anthropic*, *Google AI*, and *AWS Bedrock*, the form shows a picker backed by the provider's catalog, with the full catalog selected by default. Keep the default, or deselect models to narrow what the provider exposes. Each model in the picker shows its input and output price per million tokens. Pick from the list, or type a model identifier the catalog doesn't show. For *OpenAI-compatible*, the form takes a freeform list: type the exact identifiers your upstream serves.
 
 Redpanda maintains the catalog of available models in the picker. When an upstream provider publishes a new model, it usually appears in the picker within a day or two; admins don't have to wait for a Redpanda release. New models aren't enabled automatically: an admin still selects the model in the catalog to make it callable through this provider.
 
@@ -303,11 +293,11 @@ NOTE: Changing a toggle takes effect for new requests. Transcripts already captu
 
 == Save and verify
 
-. Click *Create provider*. The button activates after `Name` and `Type` are both set. The Summary panel checks them off as you fill them in.
-. On the provider's detail page, the Connection card shows your `Proxy URL`, `Discovery` URL, `Base URL`, and `API key ref`. Copy the `Proxy URL`: this is where your applications point.
+. Click *Create provider*. Until the form is complete, the button stays disabled and the hint next to it tells you what's still needed (for example, saving the new key).
+. On the provider's detail page, the Connection card shows the provider type, `Status`, `Proxy URL`, `Base URL`, and `API key reference`. Copy the `Proxy URL`: this is where your applications point.
 . Click *Test connection*. The result appears as a pass or fail message.
 +
-// TODO: re-verify this save-and-verify flow end to end. The Test connection button now lives on the provider edit page with no model picker, no "Verify connection" section heading, and no "Show commands" disclosure; confirm where the docs should send readers after create, and whether the Connection card fields listed above still match.
+// TODO: re-verify this save-and-verify flow end to end. The Test connection button now lives on the provider edit page with no model picker, no "Verify connection" section heading, and no "Show commands" disclosure; confirm where the docs should send readers after create.
 . To wire up an application, open *Connect your app* further down the page or follow xref:gateway:connect-agent.adoc[Connect your app to AI Gateway].
 
 A successful *Test connection* result confirms that the provider's credentials, region (Bedrock), and network path are all correct. If the call fails, see <<troubleshooting>>.
@@ -444,7 +434,7 @@ The *Cost & Usage* page under *Governance* tracks spend, request volume, and tok
 
 * *Edit*: Click *Edit* on the detail page. You can change any field *except* `Name` and `Type`, which are immutable. Model lists, credential references, and the enabled state can all change.
 * *Disable*: Click *Disable* on the detail page. The provider remains in the list, but requests to its proxy URL are rejected until you enable it again. Use this when you want to pause traffic without losing configuration.
-* *Delete*: Scroll to the Delete this provider section at the bottom of the detail page and click *Delete*. The action is permanent. In-flight requests fail and downstream clients receive errors until reconfigured.
+* *Delete*: Scroll to the Delete this provider section at the bottom of the detail page, click *Delete*, and type `delete` to confirm. The action is permanent. In-flight requests fail and downstream clients receive errors until reconfigured.
 
 [[troubleshooting]]
 == Troubleshooting
