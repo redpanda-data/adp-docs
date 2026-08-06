@@ -6,6 +6,12 @@
 
 The latest updates to the Agentic Data Plane. For the in-product summary, open *What's new* from the top bar.
 
+== v0.2.36 (2026-08-06)
+
+=== Improvements
+
+Security:: This release includes general security and stability improvements.
+
 == v0.2.35 (2026-08-06)
 
 === Features
