@@ -25,9 +25,9 @@
     {
       "id": "tools",
       "type": "rectangle",
-      "x": 55,
+      "x": 25,
       "y": 280,
-      "width": 245,
+      "width": 275,
       "height": 170,
       "backgroundColor": "#1e293b",
       "strokeColor": "#e24328",
@@ -312,7 +312,7 @@
     {
       "id": "tools-title",
       "type": "text",
-      "x": 79,
+      "x": 49,
       "y": 304,
       "strokeColor": "#f8fafc",
       "roughness": 0,
@@ -326,7 +326,7 @@
     {
       "id": "tools-body",
       "type": "text",
-      "x": 79,
+      "x": 49,
       "y": 346,
       "strokeColor": "#cbd5e1",
       "roughness": 0,

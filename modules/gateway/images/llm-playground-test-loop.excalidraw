@@ -340,7 +340,7 @@
     {
       "id": "gateway-title",
       "type": "text",
-      "x": 729,
+      "x": 719,
       "y": 269,
       "strokeColor": "#f8fafc",
       "roughness": 0,
@@ -354,7 +354,7 @@
     {
       "id": "gateway-body",
       "type": "text",
-      "x": 729,
+      "x": 719,
       "y": 311,
       "strokeColor": "#cbd5e1",
       "roughness": 0,

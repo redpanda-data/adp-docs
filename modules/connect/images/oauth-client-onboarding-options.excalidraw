@@ -25,9 +25,9 @@
     {
       "id": "client",
       "type": "rectangle",
-      "x": 55,
+      "x": 30,
       "y": 270,
-      "width": 240,
+      "width": 265,
       "height": 190,
       "backgroundColor": "#1e293b",
       "strokeColor": "#38bdf8",
@@ -370,7 +370,7 @@
     {
       "id": "client-title",
       "type": "text",
-      "x": 79,
+      "x": 54,
       "y": 294,
       "strokeColor": "#f8fafc",
       "roughness": 0,
@@ -384,7 +384,7 @@
     {
       "id": "client-body",
       "type": "text",
-      "x": 79,
+      "x": 54,
       "y": 336,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
@@ -416,7 +416,7 @@
       "y": 221,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
-      "text": "Client ID is an HTTPS URL\nGateway reads\nredirect URIs\nNo stored registration",
+      "text": "HTTPS URL as client ID\nGateway reads\nredirect URIs\nNo stored registration",
       "fontSize": 21,
       "fontFamily": 5,
       "createdAt": "2026-08-06T17:26:53.608Z",
@@ -482,7 +482,7 @@
     {
       "id": "authorize-title",
       "type": "text",
-      "x": 814,
+      "x": 800,
       "y": 294,
       "strokeColor": "#f8fafc",
       "roughness": 0,
@@ -496,7 +496,7 @@
     {
       "id": "authorize-body",
       "type": "text",
-      "x": 814,
+      "x": 800,
       "y": 336,
       "strokeColor": "#cbd5e1",
       "roughness": 0,
