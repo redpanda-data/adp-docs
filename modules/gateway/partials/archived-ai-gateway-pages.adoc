@@ -289,7 +289,7 @@ To add external tools (for example, Slack, GitHub), add their MCP server endpoin
 
 === Deferred tool loading
 
-When many tools are aggregated, listing all tools upfront can consume significant tokens. With deferred tool loading, the MCP gateway initially returns only:
+When many tools are aggregated, listing all tools upfront can consume significant tokens. With deferred tool loading, the MCP Gateway initially returns only:
 
 * A tool search capability
 * The MCP Orchestrator
@@ -804,7 +804,7 @@ The MCP orchestrator is a built-in MCP server that enables programmatic tool cal
 
 Example: A workflow requiring 47 file reads can be reduced from 49 round trips to just 1 round trip using the orchestrator.
 
-The orchestrator is pre-configured when you initialize the MCP gateway. Its server configuration (Server ID, Display Name, Transport, Command, and Timeout) is system-managed and cannot be modified.
+The orchestrator is pre-configured when you initialize the MCP Gateway. Its server configuration (Server ID, Display Name, Transport, Command, and Timeout) is system-managed and cannot be modified.
 
 You can configure blocked tool patterns to prevent specific tools from being called through the orchestrator:
 

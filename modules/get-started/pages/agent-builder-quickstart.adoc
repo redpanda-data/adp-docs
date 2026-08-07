@@ -10,6 +10,7 @@
 // MCP and agent labels follow the canonical docs: connect:create-server.adoc, connect:managed/openapi.adoc, and connect:create-agent.adoc. The agent detail tab list mirrors connect:create-agent.adoc. Keep this page consistent with those at PR time.
 // Markup convention: bold for click targets (buttons, tabs, sidebar/nav); monospace for field labels, option values, toggles, and status values; plain text for UI regions (cards, badges, panes).
 // Model ID (claude-sonnet-4-6) verified against the live model catalog. Re-verify at PR time; identifiers shift quarterly.
+// UI labels re-verified against apps/adp-ui/src on cloudv2 origin/main, 2026-08-06: the agent detail Connect tab is gone (Permissions added, feature-gated); the model picker is a single list where picking a model also picks its provider; the Tools search box renders only when the workspace has more than 8 servers; Overview sections save with "Save", not "Save changes"; deletes require typing "delete"; Home shows glance metrics, not resource counts.
 
 This quickstart takes you from zero to a working agent: you sign in, explore the agents your organization already runs, then build your own that turns a natural-language question into a real API call. By the end, you have an agent you can test, tune, and share with your team.
 
@@ -43,7 +44,7 @@ After the agent works, you replay one of its runs turn-by-turn on its *Transcrip
 
 == Sign in and look around
 
-Sign in to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^]. You land on the Home page: a snapshot of items that need your attention, recent request and spend activity, budget status, and counts of your Agentic Data Plane resources. Start every task in this guide from the sidebar.
+Sign in to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^]. You land on the Home page: a snapshot of items that need your attention, recent gateway traffic, month-to-date spend and token totals, budget status, and quick actions for common tasks. Start every task in this guide from the sidebar.
 
 == Explore existing agents
 
@@ -58,6 +59,7 @@ Before you build anything, see what already exists. Your organization may run ag
 * *Playground*: An interactive chat surface for testing the agent.
 * *Cost & Usage*: The agent's budget status and its spend and request volume, broken down by LLM provider.
 * *Transcripts*: A record of every conversation against the agent.
+* *Permissions*: Who can act on the agent and what the agent can access. This tab appears when access policies, a preview capability, are enabled for your organization.
 
 . (Optional) Open the *Playground* tab of an existing agent and send it a prompt to see how it behaves.
 
@@ -74,7 +76,7 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 
 . In the sidebar, open *MCP Servers* and click *Add MCP server*.
 
-. Search for and select the `OpenAPI` card from the marketplace picker.
+. Search for and select the *OpenAPI* card from the marketplace picker.
 +
 image::create-mcp-server-picker.png[The Create MCP Server marketplace picker filtered by a search for openAPI, showing the Remote (Proxied) card and the OpenAPI card]
 
@@ -83,6 +85,8 @@ image::create-mcp-server-picker.png[The Create MCP Server marketplace picker fil
 . `Description`: Enter `Public PetStore API exposed as MCP tools for quickstart testing`. Optional, but helps you find the server later.
 
 . Leave the `Enable Code Mode` toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools. The PetStore catalog is small enough that you don't need it for this quickstart.
+
+. Leave the Output format section at its defaults.
 
 . `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`.
 
@@ -123,12 +127,9 @@ NOTE: The other option, `I host it myself`, registers an agent you run on your o
 * `Name`: Enter `pet-store-assistant`. This name appears in the agent registry list and the detail header. Agentic Data Plane derives the agent's resource ID from it when you create the agent; you don't enter the ID directly, and it can't be changed after creation.
 * `Description`: Enter `Quickstart agent that answers questions about the PetStore inventory`.
 
-. For *Model*, open the picker and choose the model:
+. For *Model*, open the picker and select `claude-sonnet-4-6`. It handles multi-step tool use reliably, which is what an agent needs. The picker is a single searchable list of every model your organization's configured providers expose, with the provider that serves each model shown next to it. Selecting the model also selects its provider; for this quickstart that's the `anthropic-quickstart` provider your administrator configured. When more than one provider serves the same model, each pairing is its own entry, so pick the one that names `anthropic-quickstart`. If the picker is empty, no provider exists yet; ask your administrator to complete the xref:get-started:adp-quickstart.adoc[administrator quickstart].
 +
-* Select `claude-sonnet-4-6`. It handles multi-step tool use reliably, which is what an agent needs. The models listed come from your organization's configured providers. If the picker is empty, no provider exists yet; ask your administrator to complete the xref:get-started:adp-quickstart.adoc[administrator quickstart].
-* Select the `anthropic-quickstart` provider your administrator configured. The picker lists every provider that offers the model you chose.
-+
-NOTE: These names assume the Anthropic provider from the administrator quickstart. If your organization configured a different provider, select that provider instead and pick any model it offers that supports tool use.
+NOTE: These names assume the Anthropic provider from the administrator quickstart. If your organization configured a different provider, pick any model it offers that supports tool use.
 
 . For *Instructions*, paste in the following system prompt:
 +
@@ -152,7 +153,7 @@ Rules:
   delete pets.
 ----
 
-. For *Tools*, type `petstore-quickstart` in the *Search MCP servers* box and select its checkbox. (Don't click *Add MCP server* on the left. That builds a new server, and you already have one.) The agent discovers the server's tools at runtime; you don't pre-select individual tools, and the system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
+. For *Tools*, select the `petstore-quickstart` checkbox in the server list. If your organization runs many MCP servers, a *Search MCP servers* box appears above the list; use it to find the server. (Don't click *Add MCP server* on the left. That builds a new server, and you already have one.) The agent discovers the server's tools at runtime; you don't pre-select individual tools, and the system prompt's "stick to read operations" rule constrains behavior. You can change this list at any time.
 
 . Leave the *Advanced* area collapsed. The quickstart uses a single agent with no subagents or tags.
 
@@ -192,15 +193,15 @@ If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet
 
 Agent configuration isn't fixed after you create it. Edit the system prompt or model, save, and re-test in the Playground to see how behavior changes.
 
-. On the agent detail page, open the *Overview* tab. The tab shows the agent's full configuration as an editable form.
+. On the agent detail page, open the *Overview* tab. The tab shows the agent's full configuration, organized into sections that you edit and save one at a time.
 
-. Adjust the `System prompt` to change how the agent responds. For example:
+. In the System prompt section, select the edit icon and adjust the prompt to change how the agent responds. For example:
 +
 * Add a constraint: `Never call more than one tool per response.`
 * Change the output format: `Always format pet details as a bulleted list.`
 * Add a confirmation step: `Before answering, restate which tool you plan to call and why.`
 
-. Click *Save changes*.
+. Click *Save*.
 
 . Open the *Playground* tab, click *Clear context*, and re-send one of the earlier prompts to compare the agent's behavior against your change.
 
@@ -246,7 +247,7 @@ Your agent isn't limited to the Agentic Data Plane UI. After it's running, you c
 
 If this was a one-off exercise, delete the resources you created so they don't continue to count against your organization.
 
-. Delete the agent (`pet-store-assistant`) first. Open the agent detail page, scroll to the delete section, and click *Delete*.
+. Delete the agent (`pet-store-assistant`) first. Open the agent detail page, scroll to the Delete this agent section, click *Delete*, and type `delete` to confirm.
 
 . Delete the MCP server (`petstore-quickstart`). Same pattern.
 

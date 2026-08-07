@@ -12,6 +12,7 @@
 // Markup convention: bold for click targets (buttons, tabs, sidebar/nav); monospace for field labels, option values, toggles, and status values; plain text for UI regions (cards, badges, panes).
 // Model ID (claude-sonnet-4-6) verified against the live model catalog. Re-verify at PR time; identifiers shift quarterly.
 // DOC-2342 split: the builder half of the original combined quickstart now lives in get-started:agent-builder-quickstart.adoc.
+// UI labels re-verified against apps/adp-ui/src on cloudv2 origin/main, 2026-08-06: the create form's credential UI is a Credential section (choicebox of existing keys plus "Bring a new API key reference" -> Key name + API key + Save key; the secret ID is derived from the key name). The Existing/New tabs, Secret value field, and Create secret button exist only on the provider EDIT page. The resource ID is derived silently and never shown on the create form. The Models catalog starts fully selected. Deletes require typing "delete".
 
 This quickstart sets up Redpanda Agentic Data Plane for your organization. An administrator configures a glossterm:large language model (LLM)[] provider. This is a one-time task. Until a provider exists, no one in your organization can build glossterm:AI agent[,agents] against the platform.
 
@@ -35,7 +36,7 @@ After reading this page, you will be able to:
 . *Anthropic API key*. Created in the Anthropic console and stored in the Agentic Data Plane secret store, so the raw key never has to live on a builder's machine.
 . *Anthropic LLM provider*. An organization-level resource that routes Claude API calls through Agentic Data Plane so credentials, usage, and glossterm:transcript[,transcripts] stay on the platform. Configure it once, and every builder can select it when they create agents.
 
-When you sign in to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^], you land on the Home page: a snapshot of items that need your attention, recent request and spend activity, budget status, and counts of your Agentic Data Plane resources. Start the tasks in this guide from the sidebar.
+When you sign in to Agentic Data Plane at https://ai.redpanda.com[ai.redpanda.com^], you land on the Home page: a snapshot of items that need your attention, recent gateway traffic, month-to-date spend and token totals, budget status, and quick actions for common tasks. Start the tasks in this guide from the sidebar.
 
 == Get an Anthropic API key
 
@@ -70,27 +71,25 @@ Now point Agentic Data Plane at Anthropic. Agentic Data Plane references provide
 
 . Click *Add provider*.
 
-. `Display name`: Enter `anthropic-quickstart`. This label appears in dashboards and model selectors.
-
-. Leave the auto-derived `Resource ID`. Agentic Data Plane generates it from the display name, using lowercase letters, numbers, and hyphens. The ID is used in API calls and CLI commands and can't be changed after creation.
+. `Display name`: Enter `anthropic-quickstart`. This label appears in dashboards and model selectors. Agentic Data Plane derives the provider's resource ID from it in the background, using lowercase letters, numbers, and hyphens; the ID is used in API calls and CLI commands and can't be changed after creation.
 
 . `Provider type`: Select `Anthropic`.
 
-. `API key reference`: Switch to the *New* tab and create the secret inline:
+. In the Credential section, select `Bring a new API key reference` and add the key inline:
 +
-* Name the secret `ANTHROPIC_API_KEY`. Use UPPER_SNAKE_CASE (uppercase letters, numbers, and underscores); a secret's name can't be changed after you create it.
-* After you enter the name, a `Secret value` field appears. Leave the *Text* tab selected and paste the `sk-ant-` key you copied from Anthropic.
-* Click *Create secret*.
+* `Key name`: Enter `Anthropic API key`. Agentic Data Plane stores the key in the platform secret store under an identifier derived from this name (`ANTHROPIC_API_KEY`), shown under the field. The identifier can't be changed later.
+* `API key`: Paste the `sk-ant-` key you copied from Anthropic.
+* Click *Save key*.
 +
-The secret value is write-only: Agentic Data Plane can't show it again after creation, so if you mistype the key, create a new secret. New secrets get the AI Gateway scope automatically, which makes them usable across the platform: LLM providers, MCP servers, and agents. To create secrets ahead of time or manage them later, open *Secrets Store* in the sidebar.
+The key is stored encrypted and can't be viewed again after saving, so if you mistype it, save a new key. New keys get the AI Gateway scope automatically, which makes them usable across the platform: LLM providers, MCP servers, and agents. To create secrets ahead of time or manage them later, open *Secrets Store* in the sidebar.
 
 . Leave `Authorization passthrough` off. This quickstart uses one shared key, not per-user OAuth.
 
 . Leave the default `Base URL` in place. The form prefills the standard Anthropic endpoint.
 
-. `Models`: Select `claude-sonnet-4-6` from the catalog. It's a good default for agents and handles multi-step tool use reliably.
+. In the Models section, keep the default selection and confirm `claude-sonnet-4-6` is selected. It's a good default for agents and handles multi-step tool use reliably.
 +
-The catalog of available models is maintained by Redpanda. Models you select here become the catalog this provider exposes to agents and applications; you can change the list later from the provider detail page.
+The catalog of available models is maintained by Redpanda and starts fully selected. The models you leave selected become the catalog this provider exposes to agents and applications; you can change the list later from the provider detail page.
 
 . For Transcripts, turn on `Record inputs` and `Record outputs`. Both are off by default, which limits transcripts to token counts, latency, and tool calls. Turning them on lets your builders replay full conversations, including prompts, responses, and tool arguments. This setting applies to every agent on the provider, so leave it off for providers that carry regulated or sensitive data. See xref:gateway:configure-provider.adoc#transcript-logging[Configure transcript logging].
 
@@ -112,19 +111,19 @@ Access policies are a preview capability. If they aren't enabled for your organi
 
 . Send them the xref:get-started:agent-builder-quickstart.adoc[agent builder quickstart]. It assumes exactly what you just set up: a signed-in user who can create agents, and an active LLM provider.
 
-Builders select the provider by its display name (`anthropic-quickstart`) in the agent form's *Model* section. They don't see or handle the API key.
+Builders pick a model in the agent form's *Model* section, where the provider's display name (`anthropic-quickstart`) appears next to the models it serves. They don't see or handle the API key.
 
 == Clean up
 
 If you set this provider up only as a test, delete it so it doesn't continue to count against your account.
 
-. Delete the LLM provider (`anthropic-quickstart`). Open the provider detail page, scroll to the delete section, and click *Delete*. Note that the underlying secret (`ANTHROPIC_API_KEY`) is not deleted automatically.
+. Delete the LLM provider (`anthropic-quickstart`). Open the provider detail page, scroll to the Delete this provider section, click *Delete*, and type `delete` to confirm. Note that the underlying secret (`ANTHROPIC_API_KEY`) is not deleted automatically.
 
 . (Optional) Delete the secret. Open *Secrets Store*, click `ANTHROPIC_API_KEY`, then *Delete*.
 
 . (Optional, on the Anthropic side) Revoke the API key. Open https://platform.claude.com[platform.claude.com^], navigate to *Manage* > *API keys* in the workspace where you created the key, find `adp-quickstart` in the list, and revoke it from the row's action menu.
 
-If you want to keep the provider but rotate the key, edit the provider and change the `API key` reference to a new secret.
+If you want to keep the provider but rotate the key, edit the provider and change the `API key reference` to a new secret.
 
 == Next steps
 
