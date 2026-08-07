@@ -1,18 +1,18 @@
 = Draw Charts from an Agent
-:description: Make an agent render inline bar and line charts in the Inspector by emitting a chart code block that follows the Agentic Data Plane chart contract.
+:description: Make an agent render inline bar and line charts in the Playground by emitting a chart code block that follows the Agentic Data Plane chart contract.
 :page-topic-type: how-to
 :personas: agent_builder
 :learning-objective-1: Instruct an agent to draw a bar or line chart by emitting a chart code block
 :learning-objective-2: Migrate an earlier chart prompt to the Agentic Data Plane chart contract
 :learning-objective-3: Diagnose a chart that renders as an error or stays a placeholder
 
-// Source: cloudv2 `apps/adp-ui/src/components/agents/inspector/components/chart-block.tsx`, `chart-block-renderer.tsx`, and `ai-elements/response.tsx` on origin/main. Verified 2026-07-28.
+// Source: cloudv2 `apps/adp-ui/src/components/agents/inspector/components/chart-block.tsx`, `chart-block-renderer.tsx`, and `ai-elements/response.tsx` on origin/main. Verified 2026-07-28; the agent interaction tab is now labeled Playground (route `?tab=playground`), re-verified 2026-08-07.
 
 An agent draws a chart by emitting a fenced code block tagged `chart` whose body is strict JSON that follows the Agentic Data Plane chart contract.
-The Inspector renders the data with the Agentic Data Plane chart components.
+The Playground renders the data with the Agentic Data Plane chart components.
 The fence body contains data, not Recharts component code.
-The agent's *Inspector* tab renders that block with Chart, Data, and Code views.
-This is a rendering convention: the agent decides when a chart helps and writes the data, and the Inspector draws it.
+The agent's *Playground* tab renders that block with Chart, Data, and Code views.
+This is a rendering convention: the agent decides when a chart helps and writes the data, and the Playground draws it.
 No tool call or application setup is required.
 
 [IMPORTANT]
@@ -39,14 +39,14 @@ After reading this page, you will be able to:
 
 == How chart rendering works
 
-When the agent's response contains a fenced code block tagged `chart`, the Inspector parses the block body as a chart configuration and draws the chart in place of the code.
+When the agent's response contains a fenced code block tagged `chart`, the Playground parses the block body as a chart configuration and draws the chart in place of the code.
 Every other code block renders as plain code, so a `chart` block is the agent's only departure from ordinary output.
 
 The renderer supplies the visual presentation.
 A valid configuration renders as a responsive SVG chart with the Redpanda theme, a tooltip, and a legend.
 The agent supplies the chart type, optional title, labels, series names, and numeric values.
 
-Agentic Data Plane draws a `chart` block wherever it shows the agent's response: the agent's *Inspector* tab and the *Transcripts* tab.
+Agentic Data Plane draws a `chart` block wherever it shows the agent's response: the agent's *Playground* tab and the *Transcripts* tab.
 When an external application calls the agent, whether that application draws the chart depends on how it renders the agent's output.
 
 == Write the chart block
@@ -57,15 +57,15 @@ Unsupported chart types or invalid values show an error.
 * Tag the fence `chart`.
 The opening fence is three backticks followed by the word `chart`, with no other language tag.
 * Write the body as strict JSON.
-The Inspector parses the body with a JSON parser, not a JavaScript evaluator, so use double-quoted keys and strings, unquoted numbers, no trailing commas, no comments, and no JavaScript expressions, functions, or callbacks.
+The Playground parses the body with a JSON parser, not a JavaScript evaluator, so use double-quoted keys and strings, unquoted numbers, no trailing commas, no comments, and no JavaScript expressions, functions, or callbacks.
 * Set the top-level `type` to `bar` or `line`.
 * Add a top-level `data` object with `labels` and `datasets` arrays.
 Each dataset contains a `data` array and can include a `label`.
-Without a `label`, the Inspector names the series `Series 1`, `Series 2`, and so on.
+Without a `label`, the Playground names the series `Series 1`, `Series 2`, and so on.
 Values in a dataset must be finite numbers or `null`.
 * To display a title, add a top-level `title` string.
 * Do not add renderer-specific `options`, plugins, scales, animations, or color properties.
-The Inspector controls those presentation details.
+The Playground controls those presentation details.
 
 A bar chart:
 
@@ -121,7 +121,7 @@ Rules for the chart block:
   "data" array and can include a "label".
 - Do not emit renderer-specific options, plugins, scales, animations, or colors.
 - Put a brief plain-text explanation (1 or 2 sentences) before the chart block.
-  Do not also paste a data table; the Inspector has a built-in Data view.
+  Do not also paste a data table; the Playground has a built-in Data view.
 
 Example response to "show last quarter's orders by month":
 
@@ -143,21 +143,21 @@ Orders peaked in February:
 
 For prompt-writing patterns that make this output reliable, see xref:connect:system-prompts.adoc#output-formatting[Output formatting].
 
-== Test the chart in the Inspector
+== Test the chart in the Playground
 
-. Open the agent and switch to the *Inspector* tab.
+. Open the agent and switch to the *Playground* tab.
 . Enter a prompt that calls for a chart, such as `Show the broker count for the demo cluster over the last 3 months as a bar chart`.
 . Wait for the agent to finish its response.
 The chart appears in place of the `chart` block.
 
-image::connect:agent-chart-rendered.png[alt="The Inspector rendering a bar chart titled Broker count / demo cluster / 3 months, with a Chart, Data, and Code view selector above bars for January, February, and March."]
+image::connect:agent-chart-rendered.png[alt="The Playground rendering a bar chart titled Broker count / demo cluster / 3 months, with a Chart, Data, and Code view selector above bars for January, February, and March."]
 
 Use the view selector to switch between:
 
 * *Chart*: The responsive bar or line chart.
 Hover over the chart to inspect values.
 * *Data*: The chart's values as a table, reconstructed from the configuration.
-* *Code*: The JSON configuration the Inspector parsed.
+* *Code*: The JSON configuration the Playground parsed.
 
 Zoom, pan, and PNG export are not available.
 
@@ -186,7 +186,7 @@ Convert other chart types to `bar` or `line`.
 
 |`options`, `plugins`, `scales`, animations, or colors
 |Remove them.
-The Inspector supplies the presentation.
+The Playground supplies the presentation.
 
 |Zoom, pan, or PNG export instructions
 |Remove them.
@@ -256,7 +256,7 @@ Common causes include invalid JSON, a missing `type` field, a missing `data` obj
 For migration guidance, see <<migrate-chart-js-prompt>>.
 
 |A Building chart… placeholder remains visible
-|The placeholder shows while the `chart` block streams in, because the Inspector cannot parse the configuration until the closing fence arrives.
+|The placeholder shows while the `chart` block streams in, because the Playground cannot parse the configuration until the closing fence arrives.
 The chart replaces the placeholder when the agent finishes the response.
 If the response finishes and the body cannot be parsed, the Failed to render chart error replaces the placeholder.
 If the placeholder remains after the agent stops responding, instruct the agent to emit one complete `chart` block with a closing fence.

@@ -1,9 +1,9 @@
 = Monitor Agent Activity
 :page-aliases: cloud-data-platform:ai-agents:observability/monitor-agents.adoc, cloud-data-platform:ai-agents:agents/monitor-agents.adoc
-:description: Monitor agent execution, inspect available MCP tools, analyze conversation history, track token usage, and debug issues using Inspector and Transcripts.
+:description: Monitor agent execution, inspect available MCP tools, analyze conversation history, track token usage, and debug issues using Playground and Transcripts.
 :page-topic-type: how-to
 :personas: agent_builder, platform_engineer, domain_evaluator
-:learning-objective-1: pass:q[Verify agent behavior and review its MCP capabilities using the *Inspector* tab]
+:learning-objective-1: pass:q[Verify agent behavior and review its MCP capabilities using the *Playground* tab]
 :learning-objective-2: Track token usage and performance metrics
 :learning-objective-3: Debug agent execution using transcripts
 
@@ -73,31 +73,31 @@ Example: GPT-5.2 with 4,302 input tokens and 1,340 output tokens at $0.00000175 
 
 For cost optimization strategies, see xref:connect:concepts.adoc#cost-calculation[Cost calculation].
 
-== Test agent behavior with Inspector
+== Test agent behavior with Playground
 
-The *Inspector* tab provides real-time conversation testing. Use it to test agent responses interactively and verify behavior before deploying changes.
+The *Playground* tab provides real-time conversation testing. Use it to test agent responses interactively and verify behavior before deploying changes.
 
-=== Access Inspector
+=== Access Playground
 
 . Open *Agents* in the sidebar.
 . Click your agent name.
-. Open the *Inspector* tab.
+. Open the *Playground* tab.
 . Enter test queries and review responses.
 . Check the conversation panel to see tool calls.
 . Start a new session to test fresh conversations or click *Clear context* to reset history.
 
 === Review MCP tools
 
-For a managed agent, the Inspector composer includes a *Tools* control. Use it to review the MCP servers and related capabilities available to the agent before you send a test message.
+For a managed agent, the Playground composer includes a *Tools* control. Use it to review the MCP servers and related capabilities available to the agent before you send a test message.
 
-. Open the agent's *Inspector* tab.
+. Open the agent's *Playground* tab.
 . Click *Tools* in the composer.
 . Under Direct MCP servers, expand a server to see its type, description, and exposed tools. Each tool entry shows its name and description when the server provides one.
 . Under Subagents, review the subagents this agent can delegate to and the MCP servers configured on each subagent.
 
 The list reflects the agent's current configuration and the tools each direct MCP server exposes. It does not guarantee that a later tool call succeeds. Server availability, access policy, or an external connection can still affect a call at runtime.
 
-Some remote MCP servers require you to connect your own account before their tools are shown. Expand the server and click *Connect*, complete the authorization in the new browser tab, then return to Inspector. The list refreshes when you return. If it does not, click *Refresh tools*.
+Some remote MCP servers require you to connect your own account before their tools are shown. Expand the server and click *Connect*, complete the authorization in the new browser tab, then return to Playground. The list refreshes when you return. If it does not, click *Refresh tools*.
 
 Use the status shown under a server to resolve common issues:
 
@@ -128,7 +128,7 @@ For models that aren't in the catalog, such as OpenAI-compatible providers or ha
 
 === Long-running tasks
 
-The Inspector live view streams a test run as it happens. If a task is still running after about five minutes, Inspector stops the live view and shows a *Still running* notice: the task keeps running in the background, so you don't need to hold the Inspector open. Follow it to completion on the *Activity* tab of the *Cost & Usage* page under *Governance*.
+The Playground live view streams a test run as it happens. If a task is still running after about five minutes, Playground stops the live view and shows a *Still running* notice: the task keeps running in the background, so you don't need to hold the Playground open. Follow it to completion on the *Activity* tab of the *Cost & Usage* page under *Governance*.
 
 === Testing best practices
 
