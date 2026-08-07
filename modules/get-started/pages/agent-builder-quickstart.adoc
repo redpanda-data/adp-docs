@@ -4,7 +4,7 @@
 :personas: agent_builder
 :learning-objective-1: Find and evaluate the agents that already run in your organization
 :learning-objective-2: Build an agent that combines an LLM provider with tools from an MCP server
-:learning-objective-3: Test, iterate on, and verify agent behavior with the Inspector and Transcripts tabs
+:learning-objective-3: Test, iterate on, and verify agent behavior with the Playground and Transcripts tabs
 
 // Source: extracted from the combined adp-quickstart.adoc (PR #71 lineage) as part of the DOC-2342 quickstart split. Builder flow verified end-to-end on the live environment 2026-07-20 via rpk ai: OpenAPI MCP server creation from the PetStore spec, tool generation, live tool calls through the gateway, and A2A agent responses.
 // MCP and agent labels follow the canonical docs: connect:create-server.adoc, connect:managed/openapi.adoc, and connect:create-agent.adoc. The agent detail tab list mirrors connect:create-agent.adoc. Keep this page consistent with those at PR time.
@@ -54,13 +54,12 @@ Before you build anything, see what already exists. Your organization may run ag
 . Select an agent to open its detail page. The tabs give you a complete picture of the agent:
 +
 * *Overview*: The agent's full configuration, including its model, system prompt, and tools.
-* *Connect*: The endpoint and code examples for calling the agent from other software.
 * *Triggers*: Schedules and event sources that invoke the agent.
-* *Inspector*: An interactive chat surface for testing the agent.
+* *Playground*: An interactive chat surface for testing the agent.
 * *Cost & Usage*: The agent's budget status and its spend and request volume, broken down by LLM provider.
 * *Transcripts*: A record of every conversation against the agent.
 
-. (Optional) Open the *Inspector* tab of an existing agent and send it a prompt to see how it behaves.
+. (Optional) Open the *Playground* tab of an existing agent and send it a prompt to see how it behaves.
 
 If an existing agent already covers your use case, you can stop here and use it. Otherwise, continue to build your own.
 
@@ -161,11 +160,11 @@ Rules:
 
 . Wait for the agent status to change from `Starting` to `Running`.
 
-== Test the agent in the Inspector
+== Test the agent in the Playground
 
-The *Inspector* tab is a chat surface for the agent. Type a prompt into the input at the bottom of the page and click the paper-plane icon in the input's bottom-right corner to send. Each prompt creates a Task card in the conversation that walks through the agent's execution turn-by-turn: TaskStatusUpdate entries (`Submitted` -> `Working` -> `Completed`) with token counts, individual tool-call cards showing the tool name and latency, and an Artifact card holding the final response. *Clear context* (at the bottom of the input) resets the conversation between tests.
+The *Playground* tab is a chat surface for the agent. Type a prompt into the input at the bottom of the page and click the paper-plane icon in the input's bottom-right corner to send. Each prompt creates a Task card in the conversation that walks through the agent's execution turn-by-turn: TaskStatusUpdate entries (`Submitted` -> `Working` -> `Completed`) with token counts, individual tool-call cards showing the tool name and latency, and an Artifact card holding the final response. *Clear context* (at the bottom of the input) resets the conversation between tests.
 
-. On the agent detail page, open the *Inspector* tab.
+. On the agent detail page, open the *Playground* tab.
 
 . Send the first prompt:
 +
@@ -191,7 +190,7 @@ If a tool card shows an HTTP 500 error and the Artifact apologizes about the pet
 
 == Iterate on your agent
 
-Agent configuration isn't fixed after you create it. Edit the system prompt or model, save, and re-test in the Inspector to see how behavior changes.
+Agent configuration isn't fixed after you create it. Edit the system prompt or model, save, and re-test in the Playground to see how behavior changes.
 
 . On the agent detail page, open the *Overview* tab. The tab shows the agent's full configuration as an editable form.
 
@@ -203,19 +202,19 @@ Agent configuration isn't fixed after you create it. Edit the system prompt or m
 
 . Click *Save changes*.
 
-. Open the *Inspector* tab, click *Clear context*, and re-send one of the earlier prompts to compare the agent's behavior against your change.
+. Open the *Playground* tab, click *Clear context*, and re-send one of the earlier prompts to compare the agent's behavior against your change.
 
 For system prompt patterns and anti-patterns, see xref:connect:system-prompts.adoc[Write effective system prompts].
 
 == See what your agent did
 
-Every conversation with the agent is recorded as a glossterm:transcript[] you can replay turn-by-turn. Your Inspector tests are already there.
+Every conversation with the agent is recorded as a glossterm:transcript[] you can replay turn-by-turn. Your Playground tests are already there.
 
 NOTE: The *Chat* view and the tool arguments and results depend on message recording, which the LLM provider controls with the `Record inputs` and `Record outputs` toggles, both off by default. The paired xref:get-started:adp-quickstart.adoc[administrator quickstart] turns them on. If your administrator left them off, transcripts still capture token counts, latency, and tool calls, but the message text is empty. For details, see xref:gateway:configure-provider.adoc#transcript-logging[Configure transcript logging].
 
 . On the agent detail page, open the *Transcripts* tab. The tab lists the agent's recent conversations, one row per conversation, with its start time, duration, turn count, status, and token total.
 
-. Select the conversation from your Inspector test.
+. Select the conversation from your Playground test.
 
 . Toggle between the two views:
 +

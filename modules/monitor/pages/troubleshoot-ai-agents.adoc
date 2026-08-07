@@ -194,7 +194,7 @@ Review conversation history in transcripts to identify problematic patterns:
 
 **Analysis workflow:**
 
-. Use *Inspector* to reproduce the issue.
+. Use *Playground* to reproduce the issue.
 . Review full conversation including tool invocations.
 . Identify where agent behavior diverged from expected.
 . Check system prompt for missing guidance.
@@ -218,7 +218,7 @@ Diagnose and fix issues related to agent speed and resource consumption.
 **Solution:**
 
 . Use a faster, lower-latency model tier for simple queries and reserve larger models for complex reasoning.
-. Review conversation history in the *Inspector* tab to identify unnecessary tool calls.
+. Review conversation history in the *Playground* tab to identify unnecessary tool calls.
 . Optimize tool implementations:
 .. Add caching where appropriate
 .. Reduce query complexity
@@ -267,7 +267,7 @@ Efficiency guidelines:
 ----
 
 . Switch to a more cost-effective model for simple queries.
-. Clear conversation history periodically in the *Inspector* tab.
+. Clear conversation history periodically in the *Playground* tab.
 
 **Prevention:**
 

@@ -204,7 +204,7 @@ For Bedrock, the picker exposes inference profiles, not raw foundation-model IDs
 Redpanda stores models as structured `ProviderModel` entries (one entry per model, with the model name as the only required field). Each model can carry custom pricing overrides that replace the catalog rates for that model in cost reporting; see <<pricing-overrides>>. The legacy flat `models` field still works on writes for backward compatibility.
 ====
 
-Beyond pricing, the catalog carries each model's capabilities and context-window limits. The model discovery API (the `ListModels` and `GetModel` methods on `ModelService`) reports `max_input_tokens` (the largest context the model accepts) and `max_output_tokens` (the most it can generate in a single response) for each model. Both are read-only catalog metadata: a limit the catalog doesn't declare stays unset rather than reported as zero. Clients read `max_input_tokens` to show how full an agent's context window is, such as the context-window indicator on the agent's *Inspector* tab.
+Beyond pricing, the catalog carries each model's capabilities and context-window limits. The model discovery API (the `ListModels` and `GetModel` methods on `ModelService`) reports `max_input_tokens` (the largest context the model accepts) and `max_output_tokens` (the most it can generate in a single response) for each model. Both are read-only catalog metadata: a limit the catalog doesn't declare stays unset rather than reported as zero. Clients read `max_input_tokens` to show how full an agent's context window is, such as the context-window indicator on the agent's *Playground* tab.
 
 [[pricing-overrides]]
 === Override per-model pricing
