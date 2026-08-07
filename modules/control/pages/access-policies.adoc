@@ -7,7 +7,7 @@
 :learning-objective-2: Write policy conditions that read tags and ownership safely
 :learning-objective-3: Manage access policies from the CLI
 
-// Action ids, entity types, attribute-bearing types, and validation rules verified against the generated Cedar schema and the ADP UI on 2026-07-30. Action ids are entity-qualified (`Agent.get`) and are not interchangeable with role permission strings.
+// Action ids, entity types, attribute-bearing types, and validation rules verified against the generated Cedar schema and the Agentic Data Plane UI on 2026-07-30. Action ids are entity-qualified (`Agent.get`) and are not interchangeable with role permission strings.
 // Action reference resynced with the generated Cedar schema on 2026-08-05: added CIMDSettings, and put the entity rows in the schema's own alphabetical order so the two can be diffed in one pass. The verbs within each row stay in reading order (read, then write, then destroy) rather than alphabetical. AgentTrigger.report_health is deliberately omitted: the policy editor never offers it.
 
 Use access policies to express rules that roles can't: deny a group access to production-tagged agents, or let only a resource's creator modify one. Each policy permits or forbids specific actions, with conditions evaluated on every request.
