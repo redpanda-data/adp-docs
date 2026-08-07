@@ -59,7 +59,7 @@ Before you build anything, see what already exists. Your organization may run ag
 * *Playground*: An interactive chat surface for testing the agent.
 * *Cost & Usage*: The agent's budget status and its spend and request volume, broken down by LLM provider.
 * *Transcripts*: A record of every conversation against the agent.
-* *Permissions*: The access policies that apply to the agent as a principal.
+* *Permissions*: Who can act on the agent and what the agent can access. This tab appears when access policies, a preview capability, are enabled for your organization.
 
 . (Optional) Open the *Playground* tab of an existing agent and send it a prompt to see how it behaves.
 
@@ -76,7 +76,7 @@ PetStore is a public demo that Swagger hosts for testing and is occasionally una
 
 . In the sidebar, open *MCP Servers* and click *Add MCP server*.
 
-. Search for and select the `OpenAPI` card from the marketplace picker.
+. Search for and select the *OpenAPI* card from the marketplace picker.
 +
 image::create-mcp-server-picker.png[The Create MCP Server marketplace picker filtered by a search for openAPI, showing the Remote (Proxied) card and the OpenAPI card]
 
@@ -86,7 +86,7 @@ image::create-mcp-server-picker.png[The Create MCP Server marketplace picker fil
 
 . Leave the `Enable Code Mode` toggle off. Code mode adds search and execute tools that let agents run sandboxed code against the server's tools. The PetStore catalog is small enough that you don't need it for this quickstart.
 
-. Leave the Response format section at its defaults.
+. Leave the Output format section at its defaults.
 
 . `Spec`: Enter `https://petstore3.swagger.io/api/v3/openapi.json`.
 
