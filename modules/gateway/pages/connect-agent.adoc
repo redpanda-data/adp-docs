@@ -64,7 +64,7 @@ Update later with xref:reference:rpk/rpk-ai/rpk-ai-upgrade.adoc[`rpk ai upgrade`
 rpk ai auth login
 ----
 
-. Select the Agentic Data Plane environment whose AI Gateway you want to target. The `rpk ai env use` command accepts an environment name or ID and repoints the active profile in place:
+. Select the Agentic Data Plane environment whose AI Gateway you want to target. The `rpk ai env use` command accepts an environment name or ID and switches the active environment:
 +
 [source,bash]
 ----

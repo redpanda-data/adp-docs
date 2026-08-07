@@ -8,7 +8,7 @@
 :learning-objective-2: Manage Agentic Data Plane resources from the terminal: LLM providers, MCP servers, OAuth providers and clients, and agents
 :learning-objective-3: Format command output for scripts and pipelines
 
-// Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface + persistent flags), `apps/rpai/internal/cmd/env/cmd.go`, and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Connect/auth model: rpk ai is self-contained (its own `auth login` device flow + Agentic Data Plane environment selection), not tied to the rpk cloud session. Verified against origin/main 2026-06-29.
+// Source: cloudv2 `apps/rpai/README.md`, `apps/rpai/internal/cmd/root.go` (plugin-mode command surface + persistent flags), `apps/rpai/internal/cmd/env/cmd.go`, and `rpk ai <command> --help`, cross-referenced against `modules/gateway/pages/connect-agent.adoc` and `modules/reference/pages/rpk/rpk-ai/`. Connect/auth model: rpk ai is self-contained (its own `auth login` device flow + Agentic Data Plane environment selection), not tied to the rpk cloud session. Verified against origin/main 2026-06-29. Env-selection wording re-verified 2026-08-07 against `apps/rpai/internal/cmd/env/cmd.go` on origin/main: `env use` records an environment selection (the environments rework removed the profile concept), so do not describe it as repointing a profile in place.
 
 The Agentic Data Plane command-line interface, `rpk ai`, manages glossterm:Agentic Data Plane[] resources from your terminal. It drives the same control surface as the Agentic Data Plane UI: glossterm:large language model (LLM)[] providers, glossterm:Model Context Protocol (MCP)[] servers, OAuth providers and clients, and agents. Because every action is a command, you can script it and run it in continuous integration.
 
@@ -50,7 +50,7 @@ rpk ai env list
 rpk ai env use <environment>
 ----
 +
-In these commands, `<environment>` is the name or ID of an Agentic Data Plane environment. `rpk ai env use` repoints the active profile at that environment's AI Gateway in place. Inspect the resolved environment and token state at any time with `rpk ai env show` and `rpk ai auth status`.
+In these commands, `<environment>` is the name or ID of an Agentic Data Plane environment. `rpk ai env use` switches the active environment, pointing the CLI at that environment's AI Gateway. Inspect the resolved environment and token state at any time with `rpk ai env show` and `rpk ai auth status`.
 
 . Verify the connection:
 +

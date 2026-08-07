@@ -46,10 +46,11 @@ The tool list shows every tool the server returned from `tools/list`. Select a t
 
 // TODO: screenshot of a successful tool call (use a SQL `query` against a sample table on the live environment).
 
+// Result-card tabs and binary-resource rendering verified 2026-08-07 against adp-ui inspector-tools-panel-cards.tsx (the Raw JSON-RPC envelope carries both the request and the response) and inspector-resources-panel.tsx (binary payloads render a size note, no download link) on origin/main.
 The response appears in a tabbed result card:
 
 * *Result*: The tool's output. Toggle between *Formatted* (pretty-printed JSON) and *Raw* (the exact response text).
-* *Raw JSON-RPC*: The reconstructed request envelope, matching the method and parameters the server sees.
+* *Raw JSON-RPC*: The reconstructed request and response envelopes, with the method and parameters exactly as the server sees them.
 * *Output schema*: The tool's declared output schema, shown when the tool provides one.
 
 A status indicator reports whether the call succeeded and how long it took. Copy actions let you copy the input, the output, or the JSON-RPC envelope. If the tool returns an error, the result card shows the structured error detail. See <<errors>> for what each common error means.
@@ -67,7 +68,7 @@ When the server exposes resources through `resources/list`, a *Resources* panel 
 If your server does expose resources:
 
 . Click a resource to load its content into the pane.
-. The Inspector renders text, JSON, and binary types differently; binary types show a download link.
+. The Inspector renders text, JSON, and binary types differently; for a binary payload, it reports the size and tells you to decode the content with a client SDK.
 
 == Inspect prompts
 

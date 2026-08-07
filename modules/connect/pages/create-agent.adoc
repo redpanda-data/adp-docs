@@ -177,34 +177,9 @@ Change a managed agent's configuration at any time after you create it, either i
 
 Updates roll out without interrupting the agent. Redpanda starts the new version and waits for it to become ready before it stops the old one, so in-flight and new requests keep reaching a running instance throughout the change.
 
-// HUMAN DECISION PENDING: There is no A2A tab in the current UI. A2A identity and
-// skill metadata are surfaced through the agent card at /.well-known/agent-card.json,
-// but the UI does not expose a form to edit it. Confirm with the documentation team
-// whether to cut the section below or reframe it as API-only before publishing.
-== Configure A2A discovery metadata (optional)
-
-A2A discovery metadata lets external systems find and invoke the agent through capability-based discovery.
-
-For agent card design guidance, see link:https://agent2agent.info/docs/guides/create-agent-card/[Create an Agent Card^].
-
-Configure identity and provider fields for the agent card:
-
-* *Icon URL*: A publicly accessible image URL (recommended: 256x256 PNG or SVG).
-* *Documentation URL*: Link to comprehensive agent documentation.
-* *Organization*: Your organization or team name.
-* *URL*: Website or contact URL.
-
-Add *Skills* to describe what the agent can do for capability-based discovery. For each skill:
-
-* *Skill ID* (required): Lowercase letters, digits, and hyphens (for example, `fraud-analysis`).
-* *Skill name* (required): Human-readable name displayed in agent directories.
-* *Description* (required): What the skill does and when to use it. Be specific about inputs, outputs, and use cases.
-* *Tags* (optional): Categorization terms (for example, `fraud`, `security`, `finance`).
-* *Examples* (optional): Sample queries demonstrating how to invoke this skill.
-
-The metadata is published at `\https://<your-agent-url>/.well-known/agent-card.json`.
-
-For more about agent cards and how they're consumed, see xref:connect:a2a-concepts.adoc#agent-cards[Agent cards].
+// Decision (Michele, 2026-08-07): the "Configure A2A discovery metadata" section was cut.
+// The UI exposes no form to edit A2A identity or skill metadata; the agent card is served
+// at /.well-known/agent-card.json. Do not re-add unless the product ships an editing surface.
 
 [[test-your-agent]]
 == Test your agent
