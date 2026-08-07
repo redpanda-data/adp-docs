@@ -1,5 +1,5 @@
 = rpk ai env use
-:description: Switch to a manual environment, or select an ADP environment by name or id.
+:description: Switch to a manual environment, or select an Agentic Data Plane environment by name or id.
 :page-preview: true
 
 include::streaming:reference:partial$rpk-ai/rpk-ai-env-use.adoc[tag=single-source]

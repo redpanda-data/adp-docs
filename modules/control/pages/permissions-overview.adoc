@@ -7,7 +7,7 @@
 :learning-objective-3: Grant a user, a group, or a service account the access it needs
 
 // Source: `cloudv2` `pkg/permissions/permissions_constants.go`, `apps/aigw/internal/llm/authz.go`, `apps/aigw/internal/mcp/authz.go`, and `apps/ai-agent/internal/agent/authorization.go` on origin/main, verified 2026-05-18.
-// Admin-only scoping of ADP permissions verified against `pkg/permissions/adp_role_permissions_test.go`, `pkg/permissions/permissions_constants.go` (writerRolePermissions, readRolePermissions), and `apps/backoffice-worker/internal/workflows/organization/builtin_roles.go` on origin/main, 2026-07-31.
+// Admin-only scoping of Agentic Data Plane permissions verified against `pkg/permissions/adp_role_permissions_test.go`, `pkg/permissions/permissions_constants.go` (writerRolePermissions, readRolePermissions), and `apps/backoffice-worker/internal/workflows/organization/builtin_roles.go` on origin/main, 2026-07-31.
 // TODO: confirm screenshots of the role-binding flow in the Cloud UI once UX-790 (Console-side fine-grained authZ) ships.
 
 Redpanda Agentic Data Plane decides who can do what with xref:control:access-policies.adoc[access policies]. A policy names a principal, an action, and a resource, and either permits or forbids. That's the authorization model: policies are what you write, and policy evaluation is what every API call resolves against.

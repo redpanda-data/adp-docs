@@ -83,7 +83,7 @@ Use *Download full report* when you need the whole dataset rather than the chart
 
 The *Activity* tab answers a different question from the report: instead of what something cost, it shows what's running right now. It ranks the agents with traffic over a window of the last hour (the default), the last 24 hours, or the last 7 days, and shows each agent's change against the previous window. Select an agent to see its recent requests and open a conversation.
 
-The Inspector's live view also hands off to this tab: when an agent task is still running after several minutes, the Inspector points you here to follow it to completion.
+The Playground's live view also hands off to this tab: when an agent task is still running after several minutes, the Playground points you here to follow it to completion.
 
 == Next steps
 
