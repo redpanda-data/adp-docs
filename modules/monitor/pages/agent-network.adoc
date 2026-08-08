@@ -8,6 +8,7 @@
 :learning-objective-3: Inspect an agent, LLM provider, MCP server, or tool to check usage, cost, and errors
 
 // Facts verified against the AgentNetworkService API and the Agentic Data Plane UI on 2026-07-31.
+// Monitor health section re-verified against apps/adp-ui/src/components/network/{network-view.tsx,network-status.ts,network-metrics.ts,network-detail-panel.tsx} on origin/main, 2026-08-08: the attention strip now surfaces every MCP server in error, not only credential failures. Each row names the cause (an authorization failure, or a percentage of tool calls failing in the window), how many agents are affected, and how many calls failed. Feature-gated preview, enabled per organization.
 
 The *Agent Network* view is a live map of your Agentic Data Plane: every agent, the glossterm:large language model (LLM)[,LLM] providers it calls, and the glossterm:MCP server[,MCP servers] and tools it uses, drawn as a graph with usage, cost, and health for the time window you choose. Use it to see at a glance what your agents are actually doing, which models and tools carry the most traffic, and where errors are clustering.
 
@@ -67,7 +68,7 @@ Selecting a node opens a detail panel:
 
 Each node carries a health state derived from its error rate in the window: healthy, degraded, or error. Use the *Status* filter to isolate nodes with errors.
 
-When an MCP server's credentials fail to resolve, for example an expired or missing user connection, the view surfaces the failure as an alert that names the affected agents, so you can fix the connection before more calls fail. See xref:connect:user-delegated-oauth.adoc[] for managing user connections.
+The view flags every MCP server that needs attention, whether its credentials fail to resolve (for example, an expired or missing user connection) or its tool calls are failing on their own. Each alert names the cause, how many agents are affected, and how many calls failed, so you can act before more calls fail. For a credential failure, reconnect the user connection; see xref:connect:user-delegated-oauth.adoc[] for managing user connections.
 
 == Next steps
 

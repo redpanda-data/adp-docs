@@ -8,6 +8,7 @@
 :learning-objective-3: Preview the composed effect of a server's data policies before saving
 
 // Source: cloudv2 proto/public/cloud/redpanda/api/adp/v1alpha1/data_policy.proto and mcp_server.proto (PreviewDataPolicies, PreviewToolResponse); enforcement in apps/aigw/internal/mcp/data_policy_hook.go and apps/aigw/internal/services/mcpserver/{service,preview}.go; UI in apps/adp-ui/src/components/mcp-servers/tools-tab*. Verified against origin/main on 2026-07-29.
+// Tools rail re-verified against apps/adp-ui/src/components/mcp-servers/tools-tab/tool-sidebar.tsx and tool-rail-card.tsx on origin/main, 2026-08-08: the rail now carries a "Filter tools" box (shown when the server exposes more than one tool) that matches on name, title, and description with a live "N of M" count, and a footer legend that counts the tools in each status. Long generated tool names wrap in full rather than truncating. Status-dot colors (green protected / yellow potential findings / gray no policy) are unchanged (lib/tool-status.ts STATUS_DOT).
 
 Data policies shape the data an MCP server exposes. Use them to mask, drop, or hash sensitive fields in the results a glossterm:tool[] returns, restrict the argument values a caller can send, and filter whole records out of list results, all before the model sees the data. Sensitive data stays protected without turning tools off.
 
@@ -41,7 +42,9 @@ You need an MCP server with discovered tools. To create one, see xref:connect:cr
 . Select a server.
 . Open the *Data Policies* tab.
 
-The *Tools* list shows every tool the server exposes, with a count of how many are protected. A colored dot marks each tool's status: green when at least one data policy shapes it, yellow when the tool handles data but no policy covers it, and gray when there is nothing to protect.
+The *Tools* list shows every tool the server exposes. A colored dot marks each tool's status: green when at least one data policy shapes it, yellow when the tool handles data but no policy covers it, and gray when there is nothing to protect. A legend at the bottom of the list counts the tools in each status.
+
+When a server exposes many tools, use the *Filter tools* box to narrow the list by tool name, title, or description; the count next to *Tools* shows how many tools match.
 
 == Create a data policy
 
